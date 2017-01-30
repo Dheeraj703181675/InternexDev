@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>HTML Past Due Notification</name>
+    <style>none</style>
+    <subject>Past Due Notification from  {!Organization.Name}</subject>
+    <textOnly>Good morning {!Contact.Name},
+We appreciate and value your business. Thank you for allowing {!Organization.Name} the opportunity to serve your needs.
+
+A review of our records indicates there is an open balance on your account. Attached is the details of this balance.
+
+We request that you review your file and process the open balance for payment. If it has been paid, please provide payment information.
+
+When issuing payment, please include the invoice number on the payment remittance advice. Payment remittance should be addressed and mailed to:
+
+{!Organization.Address}
+
+Should you have any questions, we are available to discuss and answer any invoice concerns. Our contact information is as follows:
+
+Phone: {!Account.OwnerEmail}
+Email: {!Account.Owner}
+
+
+Thank you for your assistance in resolving this matter.
+
+Sincerely,
+{!Account.Owner}
+{!Organization.Name}
+Credit &amp; Collections
+
+
+{!Organization.Name}
+ {!Organization.Address} | {!Organization.Phone}</textOnly>
+    <type>custom</type>
+</EmailTemplate>

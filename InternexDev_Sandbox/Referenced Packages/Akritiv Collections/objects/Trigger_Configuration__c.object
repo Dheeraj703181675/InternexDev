@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Trigger Configuration</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>After_Change_Account_Owner__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>After Change Account Owner</description>
+        <externalId>false</externalId>
+        <label>After Change Account Owner</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>After_Create_PaymentLine__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>After Create Payment Line</description>
+        <externalId>false</externalId>
+        <label>After Create PaymentLine</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>After_Insert_Full_DataLoad_Batch__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>After Insert Full DataLoad Batch</description>
+        <externalId>false</externalId>
+        <label>After Insert Full DataLoad Batch</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Before_Insert_UserPreference__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Before Insert UserPreference</description>
+        <externalId>false</externalId>
+        <label>Before Insert UserPreference</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Create_Note_On_BrokenPromise__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Create Note On Broken Promise</description>
+        <externalId>false</externalId>
+        <label>Create Note On BrokenPromise</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Enable_Daily_Notes__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Enable Daily Notes</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Handle_Reserve_Transaction_Trigger__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Handle Reserve Transaction Trigger</description>
+        <externalId>false</externalId>
+        <label>Handle Reserve Transaction Trigger</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Manage_Account_Key_Trigger__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Manage Account Key Trigger</description>
+        <externalId>false</externalId>
+        <label>Manage Account Key Trigger</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PopulateTaskWithARDetail__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Validate Transaction Batch</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Update_Account_ContactLog_Details__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Update Account ContactLog Details</description>
+        <externalId>false</externalId>
+        <label>Update Account ContactLog Details</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Update_Transaction_Disputed_Amount__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Update Transaction Disputed Amount</description>
+        <externalId>false</externalId>
+        <label>Update Transaction Disputed Amount</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Zero_AR_Account_Trigger__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Zero AR Account Trigger</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Zero_Balance_Transaction_Trigger__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Zero Balance Transaction Trigger</description>
+        <externalId>false</externalId>
+        <label>Zero Balance Transaction Trigger</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Trigger Configuration</label>
+    <visibility>Public</visibility>
+</CustomObject>

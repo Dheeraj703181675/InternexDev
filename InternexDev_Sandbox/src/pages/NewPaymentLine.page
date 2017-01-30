@@ -1,0 +1,30 @@
+<apex:page standardController="akritiv__Payment_Line__c" id="pg" action="{!if($Profile.Name !='System Administrator' && $Profile.Name !='Internex Admin Sys' , null, URLFOR($Action.akritiv__Payment_Line__c.edit, akritiv__Payment_Line__c.Id, [retURL=URLFOR($Action.akritiv__Payment_Line__c.View, akritiv__Payment_Line__c.Id)], true))}">
+<apex:sectionHeader title="Payment Line Edit" subtitle="New Payment line"/>
+<apex:form id="form">
+<apex:pagemessages ></apex:pagemessages>
+   <apex:pageBlock title="Payment line Edit" id="pb">
+           <apex:pageBlockButtons >
+               <apex:commandButton value="Save" action="{!Save}"/>
+               <apex:commandButton value="Cancel" action="{!Cancel}"/>
+           </apex:pageBlockButtons>
+       
+       <apex:pageBlockSection title="Payment Line Information" columns="2" id="pbs1">
+            <apex:outputField value="{!akritiv__Payment_Line__c.Name}"/>
+            <apex:outputField value="{!akritiv__Payment_Line__c.akritiv__Applied_Amount__c}"/>
+            <apex:outputField value="{!akritiv__Payment_Line__c.akritiv__Payment__c}"/>
+            <apex:outputField value="{!akritiv__Payment_Line__c.akritiv__Transaction_Date__c}"/>
+            <apex:outputField value="{!akritiv__Payment_Line__c.akritiv__Applied_To__c}"/><br/>
+            <apex:outputField value="{!akritiv__Payment_Line__c.Document_Status__c}"/>
+            <apex:outputField value="{!akritiv__Payment_Line__c.Transaction_Type__c}"/>
+            <apex:outputField value="{!akritiv__Payment_Line__c.Source__c}"/><br/>
+            <apex:outputField value="{!akritiv__Payment_Line__c.Approval_Status__c}"/>
+        </apex:pageBlockSection>
+       <apex:pageBlockSection title="Integration" columns="2" id="pbs2">
+          <apex:outputField value="{!akritiv__Payment_Line__c.Portal_External_ID__c}"/>
+           <apex:outputField value="{!akritiv__Payment_Line__c.Invoice_Portal_External_ID__c}"/>
+           <apex:outputField value="{!akritiv__Payment_Line__c.associated__c}"/>
+           <apex:outputField value="{!akritiv__Payment_Line__c.Payment_Portal_External_ID__c}"/>
+        </apex:pageBlockSection>
+   </apex:pageBlock>
+    </apex:form>
+</apex:page>

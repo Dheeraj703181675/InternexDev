@@ -1,0 +1,100 @@
+<apex:page controller="akritiv.UserSearchController" showHeader="false" sidebar="false">
+    <script type="text/javascript">
+        function startSplash() {
+            var divObj = document.getElementById('splashDiv');
+            divObj.style.display='block';
+        }
+        
+        
+        function endSplash(){
+            document.getElementById('splashDiv').style.display='none';
+        }
+
+
+
+      
+       
+        var temp = false;
+        var submit = false;
+        function decideAndSubmit(){
+            //alert('submit '+submit);
+            if(temp) {
+                if(!submit){
+                    //submit=true;
+                    return false;
+                } else {
+                    temp = false;
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        }
+       
+        function submitOnKeyPress(e) {
+            if(e.keyCode == 13) {
+                submit = true;
+                temp = true;
+            } else {
+                submit = false;
+            }
+        }
+       
+        function keyPressComplete() {
+            submit = false;
+        }
+       
+        function setSubmit() {
+            submit = true;
+            temp = true;
+        }
+       
+        function unsetSubmit() {
+            submit = false;
+        }
+       
+        function child_to_parent(actId,actName)
+        {
+         var url =  document.location.href;
+         url = url.split('=');
+         url = url[1];
+         
+         if(url == 'pg:fm:pb:img1'){
+                top.window.opener.SetUserLink(actId,actName);
+            }
+            else{
+                 top.window.opener.SetUserLink2(actId,actName);
+            }
+           
+              window.close();
+            
+        }
+       
+    </script>
+    <apex:form id="formId" onsubmit="return decideAndSubmit();">
+        
+       
+
+       
+        <apex:pageBlock id="pgBlock" title="{!$Label.Label_User_Search}">
+            <apex:inputText value="{!userName}">
+                <apex:actionSupport event="onkeypress" action="{!searchUser}" onsubmit="submitOnKeyPress(event)" oncomplete="keyPressComplete()" reRender="resultPanel" status="splashStatus"/>
+            </apex:inputText>
+            <apex:commandButton value="{!$Label.Label_Search}" action="{!searchUser}" onclick="setSubmit()" oncomplete="unsetSubmit()" reRender="resultPanel" status="splashStatus"/>
+           <div id="splashDiv" style="display:none;color:red;font-weight:bold;padding-bottom:4px;border: 0px;">
+           {!$Label.Label_Please_Wait_Loading}
+            </div>
+             <apex:actionStatus id="splashStatus" onstart="startSplash();" onstop="endSplash(); "/>
+            <br/><br/>
+             
+            <apex:outputPanel id="resultPanel" >
+                <apex:pageBlockTable value="{!ur}" var="a" columns="1" width="300px" columnsWidth="300px" >
+                <apex:column headervalue="{!$Label.Label_User_Name}">
+           <apex:commandLink value="{!a.Name}" onclick="javascript:child_to_parent('{!a.Id}','{!a.Name}');" oncomplete="window.close();"/>
+             </apex:column>
+                    
+                </apex:pageBlockTable>
+            </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

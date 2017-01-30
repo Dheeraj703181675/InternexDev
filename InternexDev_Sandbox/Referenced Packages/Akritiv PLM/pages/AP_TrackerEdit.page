@@ -1,0 +1,1062 @@
+<apex:page id="page" cache="false" standardController="akritivtlm__AP_Tracker__c" extensions="akritivtlm.TrackerEdit" action="{!accesscontrol}" >
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__EXT,'/css/ext-all.css')}"/> 
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__editRec, '/editResource/editstyle.css')}"/>
+<!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script -->
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__EXT, '/js/ext.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+
+<script>
+    var fieldsArr=new Array();
+    var globalMsg = '';
+    var fieldsToId = {};
+    var allIds = new Array();
+    var allColSpanTR = new Array();
+</script>
+
+
+<script>
+
+//open doc
+var showducument={!$User.Show_Document__c};
+var showducumentinnewtab={!$User.Show_Document_In_New_Tab__c};
+var attachmentid='{!JSENCODE(invoiceattachid)}';
+var urlstring='{!JSENCODE(primarypopupurl)}';
+var newwindow;
+
+if(!showducument && attachmentid!='')
+{    
+    if(showducumentinnewtab){
+       var xAxis=0;   
+       if(window.screen.width!=undefined)
+           xAxis = window.screen.width;
+            
+       newwindow=window.open(urlstring+attachmentid,'PrimaryDocument','channelmode=yes,scrollbars=yes,resizable=yes,left='+xAxis);
+       window.onunload=function(){
+           if(newwindow){
+              newwindow.close();
+           }
+       }
+    }
+}
+//open doc
+
+function onvaluechageaction(input){
+    
+    if(input != null && input != '' ){
+        var finalMap = {};
+        for(var cnt = 0 ; cnt < fieldsArr.length ; cnt++ ) {
+             try {
+                //finalMap[fieldsArr[cnt]] = document.querySelector('.'+fieldsArr[cnt]).value;
+                finalMap[fieldsArr[cnt]] = document.getElementById(fieldsToId[fieldsArr[cnt]]).value; 
+            }catch(e) {}
+        }
+        try {
+            finalMap['{!JSENCODE(prefix)}'+'User_Actions__c'] = document.getElementById('page:frm:jobTrackerPageBlock0:closurefieldsBlock:user_action').value; }    //page:frm:dtTable:0:jobTrackerPageBlock0:closurefieldsBlock:user_action
+        catch(e) {}
+        var str = JSON.stringify(finalMap);
+        //alert(str);
+         processFV(str);
+    }
+}
+
+function onChnageUserAction(input){
+        var finalMap = {};
+        for(var cnt = 0 ; cnt < fieldsArr.length ; cnt++ ) {
+            try {
+                finalMap[fieldsArr[cnt]] = document.getElementById(fieldsToId[fieldsArr[cnt]]).value; 
+            } catch(e) {
+            }
+        }
+        try { finalMap['{!JSENCODE(prefix)}'+'User_Actions__c'] = document.getElementById('page:frm:jobTrackerPageBlock0:closurefieldsBlock:user_action').value; }
+        catch(e) { 
+        }
+        var str = JSON.stringify(finalMap);
+        processFV(str);
+}
+
+function removeoption(){
+    var optionslist=document.getElementsByTagName('option');
+    for(var i=0;i<optionslist.length;i++) {
+        var val = optionslist[i].value;
+        if($.trim(val) == '__'){
+            optionslist[i].parentNode.removeChild(optionslist[i]);
+            break;
+        }
+    }
+    endProcessForEdit();
+}
+    function removedeletelink(){
+        try {
+            //IE 8 Compatible Code
+            var c=document.getElementById('page:noteslist');
+            var c1=document.querySelectorAll('.actionColumn');
+            var a=document.getElementById('page:noteslist');
+            var a1=document.querySelectorAll('.actionLink');
+            for (var i=0; i<a1.length; i++){
+                if(a1[i].innerHTML.indexOf('Del') !== -1){
+                    a1[i].parentNode.removeChild(a1[i]);
+                }
+            }
+            for (var i=0; i<a1.length; i++){
+                if(a1[i].innerHTML.indexOf('Edit') !== -1){
+                    a1[i].parentNode.removeChild(a1[i]);
+                }
+            }
+            for (var i=0; i<c1.length; i++){
+                var d=c1[i].innerHTML.replace("\|","");
+                c1[i].innerHTML =d;
+                d=c1[i].innerHTML.replace("\|","");
+                c1[i].innerHTML=d;
+            }
+            var b=document.getElementById('page:noteslist');
+            var b1=b.getElementsByTagName("a");
+            for (var i=0; i<b1.length; i++){
+                if(b1[i].innerHTML.indexOf('View') == -1){
+                    if(b1[i].innerHTML != '') {
+                        var content = b1[i].innerHTML;
+                        b1[i].parentNode.innerHTML = content;
+                    }
+                }
+            }
+        } catch(e) {}
+    }
+
+   /* function userActionChange(){
+        var ret = makeavailableflag();
+        if(ret) {
+           var finalMap = {};
+            for(var cnt = 0 ; cnt < fieldsArr.length ; cnt++ ) {
+                try { finalMap[fieldsArr[cnt]] = document.querySelector('.'+fieldsArr[cnt]).value; }
+                catch(e) {}
+            }
+            try { finalMap['{!JSENCODE(prefix)}'+'User_Actions__c'] = document.getElementById('page:frm:jobTrackerPageBlock0:closurefieldsBlock:user_action').value; }
+            catch(e) { 
+            }
+            var str = JSON.stringify(finalMap);
+            //alert(str);
+            processFV(str);
+        }else{
+            endProcessForEdit();
+        }
+    }*/
+
+    function makeavailableflag(){
+        var k=document.getElementById('page:frm:jobTrackerPageBlock0:closurefieldsBlock:user_action');
+        var flag;
+        if(k.value=='Make Available'){
+            flag=confirm("Are you Sure ?");
+            if (flag){
+                return true;
+            }else{
+                k.selectedIndex = 0;
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function removeelement(){
+        var a =document.getElementById('page:frm:jobTrackerPageBlock0:pageBlockButtonsTop').parentNode;    //page:frm:dtTable:0:jobTrackerPageBlock0:pageBlockButtonsTop
+        var a1=document.getElementById('page:frm:jobTrackerPageBlock0:pageBlockButtonsBottom:bottom').parentNode;
+        var noofcolumns='{!noofcolums}';
+        if (noofcolumns!=2){
+            var c=document.getElementById('page:frm:jobTrackerPageBlock0:pageBlockButtonsTop');
+            var c1=document.getElementById('page:frm:jobTrackerPageBlock0:pageBlockButtonsBottom:bottom');    // page:frm:dtTable:0:jobTrackerPageBlock0:pageBlockButtonsBottom:bottom
+            var sp=c.getElementsByTagName("input");
+            var sp1=c1.getElementsByTagName("input");
+            for(i=0;i<sp.length;i++){
+                sp[i].setAttribute("style","font-size:0.75em");
+            }
+            for(i=0;i<sp1.length;i++){
+                sp1[i].setAttribute("style","font-size:0.75em");
+            }
+            var b=a.childNodes[0];
+            var b1=a1.childNodes[0];
+            //a.removeChild(b);
+            //a1.removeChild(b1);
+            if(b.getAttribute('class') == 'pbTitle')
+                a.removeChild(b);
+            if(b1.getAttribute('class') == 'pbTitle')
+                a1.removeChild(b1);
+        }
+    }
+    
+    function setVatValue(perCls,netAmtCls,vatAmtCls,index) {
+          var per = document.querySelector('.'+perCls).value;
+          per = per.replace("%","");
+          var netAmt = document.querySelector('.'+netAmtCls);
+          var vatAmt = document.querySelector('.'+vatAmtCls);
+         
+           if(per != null && isNaN(per)){
+                          per = "0";
+           }
+           if(per != null && per != undefined && netAmt != null && netAmt != undefined) {
+                 if(per != '' && netAmt.value != '') {
+                     //vatAmt.value = (( parseFloat(netAmt.value) * parseFloat(per) ) / 100).toFixed(2);
+                   startProcessForEdit();
+                    jscalculateRate(index);
+                 } else {
+                      vatAmt.value = "0.00";
+                 }
+          }
+      }
+    
+    function checkBlock1Value(ordNo) {
+        var per = document.querySelector('.'+ordNo);
+        if(per != null && per != undefined) {
+            if($.trim(per.value) == '') {
+                alert("Please enter order number");
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    function validateVatSection(perCls,netAmtCls) {
+        var per = document.querySelector('.'+perCls);
+        var netAmt = document.querySelector('.'+netAmtCls);
+        
+        if(per != null && per != undefined && netAmt != null && netAmt != undefined) {
+            if(per.value === '') {
+                alert('Please select {!$Label.Label_Block2_Field1}');
+                return false;
+            }
+            
+            if(netAmt.value === '') {
+                alert('Please enter {!$Label.Label_Block2_Field2}');
+                return false;
+            }
+        }
+        
+        return true;
+    }
+</script>
+
+<style>
+    .messageblock{
+        font-size:11px;
+        border-radius: 4px;
+        border-color: #c00;
+        background-color: #ffc;
+        border-style: solid;
+        border-width: 1px;
+        color: #000;
+    }
+</style>
+
+<script>
+    function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+    function closeMessage() {
+        $('#messagebox').hide();   
+    }
+    function closeMessage1() {
+        $('#stdInfoMsg').hide();   
+    }
+</script>
+
+<apex:outputpanel rendered="{!(invoiceattachid != null && invoiceattachid != '' && $User.Show_Document__c)}"> 
+    <script>
+        function displayMessage(type,msg,interval) {
+            var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:40%;margin-left: 75%;margin-top: 15%;z-index:100 !important;">'+
+                   '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+                   '</div>';
+            if(document.getElementById('messagebox') != null && document.getElementById('messagebox') != undefined) {
+                document.getElementById('messagebox').innerHTML = m;
+                animateMessageBox('messagebox',interval);
+            }
+        }
+    </script>
+</apex:outputpanel>
+<!-- For single row without pdf -->
+<apex:outputpanel rendered="{!(NOT(invoiceattachid != null && invoiceattachid != '' && $User.Show_Document__c))}"> 
+    <script>
+        function displayMessage(type,msg,interval) {
+            var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:50%;margin: 0 auto;margin-top: 15%;z-index:100 !important;">'+
+                   '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+                   '</div>';
+            if(document.getElementById('messagebox') != null && document.getElementById('messagebox') != undefined) {
+                document.getElementById('messagebox').innerHTML = m;
+                animateMessageBox('messagebox',interval);
+            }
+        }
+    </script>
+</apex:outputpanel>
+
+<apex:outputpanel id="messagepanel" style="Display:None">
+    <apex:messages id="msg1"  style="Display:None" />
+    <script>
+        if(document.getElementById('{!$Component.msg1}') != null && document.getElementById('{!$Component.msg1}') != undefined) {
+        var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('li');
+        var msg='';
+        for(var i=0;i<obj.length;i++) {
+            if(i==0)
+            msg += '\n';
+            msg += obj[i].innerHTML + '\n';
+        }
+        var isIncludePage = {!showIncludePage};
+
+        if((msg != '' && !isIncludePage) || (msg != '' && globalMsg == '' && isIncludePage)) {
+            globalMsg = msg;
+            alert(msg);
+        } 
+        
+    }
+    </script>
+</apex:outputpanel>
+
+<script type="text/javascript">
+    //var d = sfdcPage.dialogs['MyCoolDialog'], close;
+    var returnValGlobal ='';
+    var isFirstTime = true;
+    var uid;
+    var win;
+    function startProcessForEdit(){
+        document.getElementById("{!$Component.page.frm.loading}").style.display = 'block';       
+        document.getElementById('filter').style.display = 'block';
+    }
+    function endProcessForEdit(){
+       document.getElementById("{!$Component.page.frm.loading}").style.display = 'none';
+       document.getElementById('filter').style.display = 'none'; 
+    }
+    function callApproveReject(assigneeEmail,status){
+        //to assign value to hidden
+        document.getElementById('{!$Component.page.frm.assignEmail}').value = assigneeEmail;
+        document.getElementById('{!$Component.page.frm.trackerStatus}').value = status;
+        return true;
+    }
+    function openApprovalHistory(histId) {
+        var left = 150;
+        var top = 150;
+        var urlString = '/apex/ApprovalHistory?recordID='+histId;
+        if ( win != undefined && win != null)
+        win.close();
+        win = window.open (urlString ,"ApprovalHistory","toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width=900,height=800, top="+top+",left="+left );
+        return false;
+    }
+</script>
+
+<apex:outputPanel id="actRegion" >
+    <script type="text/javascript">
+        var win;
+        function popup() {
+            if({!isCustomApprovalProcess} && {!openAppProcessWindow}) {
+                var left = 150;
+                var top = 150;
+                var urlString = '/apex/Approvalprocess?recordID={!JSENCODE(childObject.id)}&objectName={!JSENCODE(childobjectname)}';
+                if ( win != undefined && win != null)
+                win.close();
+                win = window.showModalDialog(urlString ,'Approvalprocess','dialogWidth:800px; dialogHeight:700px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');
+                return false;
+            }
+        }
+    </script>
+</apex:outputPanel>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__editRec, '/editResource/editjs.js')}"/>
+<div id="messagebox" style="z-index:10 !important;position:fixed !important;width:50% !important;top:20%;left:30%;" ></div>
+
+<apex:outputPanel id="stdInfoMsgOuterOp">
+    <!-- for two panel -->
+    <apex:outputpanel id="stdInfoMsgOp" rendered="{!IF(stdInfoMsg != null && stdInfoMsg != '', true, false)}">
+        <script>
+            alert('{!JSENCODE(stdInfoMsg)}');
+        </script>
+    </apex:outputpanel>
+</apex:outputPanel>
+
+
+<script>
+    function callSelectAttachment(){
+        CreateAndOpenExtWindow('selectAttachment', 'selectAttachment' , '800' , '700' , '/apex/emailAttachmentSelection?recordID={!childObject['Id']}&childObjectName={!childObjectName}','','','');
+    }
+    function callExternalHookup(fieldAPIname,fieldid){
+        //alert(APIname);
+        //alert(APIid);
+        //newwindow=window.open('/apex/ExternalHookupPage?openFrom='+fieldAPIname+'&fieldId='+fieldid+'&resourceURL='+'{!JSENCODE(externalhookuppageurl)}&isdtp=vw','ExternalHookup','height=400,width=800,left=100,top=100,scrollbars=yes,toolbar=no,status=no');
+        //newwindow.focus();
+        CreateAndOpenExtWindow('ExternalPopUp', 'Search' , '800' , '700' , '/apex/ExternalHookupPage?openFrom='+fieldAPIname+'&fieldId='+fieldid+'&resourceURL='+'{!JSENCODE(externalhookuppageurl)}&isdtp=vw','','','');
+    }
+    Ext.useShims = true;
+    function CreateAndOpenExtWindow(windowId,windowTitle,width,height,src,parametersStr,fromWhere,action){
+        var width = parseInt(width);
+        var height = parseInt(height);
+        var clientHeight = parseInt(window.parent.document.body.parentElement.clientHeight);
+        if((clientHeight - height) < 30) {
+           height = clientHeight - 100;
+         }       
+        if (!(parametersStr == '' || parametersStr == undefined || parametersStr == null)){
+              src = src + parametersStr;
+        }
+        var panal1 = new Ext.Panel({
+            id          :'panal1',
+            collapsible :false,
+            labelWidth  :80,
+            width   :width+10,
+            height  :height+10,
+            bodyStyle:{"background-color":"white"}, 
+            html    :'<iframe name="Panal" style="overflow:auto; width:'+width+'px; height:'+height+'px;" frameborder="0"  src="'+src+'">'
+        });                        
+        var win = new Ext.Window({
+            id : windowId,
+            title: windowTitle,
+            closable:true,
+            modal : true,
+            width:width+35,
+            height:height+58,
+            //border:false,
+            resizable: false,
+            shim: true,
+            plain:true,
+            items:[panal1],
+            listeners:{
+                 'close':function(win){
+                  }
+            }
+        });
+        win.show(this);
+    }
+    function displayMessageAndClosePopUp(type,msg,popUpId) {
+        Ext.getCmp(popUpId).close();
+    }
+    function setAttachmentIds(msg,popUpId) {
+        Ext.getCmp(popUpId).close();
+        startProcessForEdit();
+        setSelectedAttachmentsCalled(msg);
+    }
+</script>
+
+
+<apex:form id="frm" rendered="{!form_render}">
+    <!-- for providing loading -->
+    <apex:inputHidden id="SelectedAttachId" value="{!selectedAttachmentIds}" />
+    <div id="filter" style= "display:none;"></div>
+    <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+    <script>
+            function hidepicker(){
+                var datepicker=document.querySelectorAll('.datePicker');
+                for (var i = 0, length = datepicker.length; i < length; i++) {
+                    datepicker[i].style.display = 'none';
+                }
+            }
+    </script>
+
+     <apex:actionRegion immediate="true" id="aR1" >
+         <table class="" id="page:frm:dtTable" style="height:100%;" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td class="" colspan="1" style="resize:verticle;width:auto;diplay:{!IF(invoiceattachid != null && invoiceattachid != '' && $User.Show_Document__c,'block','none')}">            <!-- apex:column id="column1" style="resize:verticle;width:auto;" rendered="{!(invoiceattachid != null && invoiceattachid != '' && $User.Show_Document__c)}"  -->
+                    <apex:outputpanel rendered="{!(invoiceattachid != null && invoiceattachid != '' && $User.Show_Document__c)}" >
+                    <c:WFpdf_attachment_viewer value="{!invoiceattachid}" name="{!invoiceattachname}" width="{!imageWidth}" height="{!imageHeight}" objectName="{!childobjectname}"/>
+                    </apex:outputpanel>
+                </td>
+                <td class="" colspan="1" width="100%">
+                    <div style="{!IF( (invoiceattachid != null && invoiceattachid != '' && $User.Show_Document__c) , "overflow:auto;height:800px;position:relative;" , "position:relative;" )}" onscroll="hidepicker();">
+                        <apex:pageBlock title="{!childObject['Name']}"  id="jobTrackerPageBlock0">
+                        <apex:actionFunction name="setSelectedAttachmentsCalled" id="setSelectedAttachmentsCalled" action="{!setSelectedAttachments}" reRender="pgMsgs" immediate="true" oncomplete="endProcessForEdit();">
+                            <apex:param name="firstParam" value="" assignTo="{!selectedAttachmentIds}"/>
+                        </apex:actionFunction>
+                            <div style="display:none;visibility:hidden;">
+                                <apex:repeat id="repeat1011" value="{!standardEditableList}" var="stdRO">
+                                    <apex:inputHidden >
+                                        <apex:inputField rendered="{!IF(stdRO == childNamespace+'Current_State__c',true,false)}" value="{!childObject[stdRO]}" ></apex:inputField>
+                                    </apex:inputHidden>
+                                </apex:repeat>
+
+                                <apex:repeat id="repeat111" value="{!dependentFieldsList}" var="strt" >
+                                    <apex:inputHidden >
+                                        <apex:inputField rendered="{!IF( strt.isParent && NOT(strt.inRender) , true, false )}" value="{!childObject[strt.apiName]}" />
+                                    </apex:inputHidden>
+                                </apex:repeat>
+                            </div>
+                            <apex:pageblockButtons id="pageBlockButtonsTop" location="top" >
+                                <apex:outputlabel value="{!childObject['Name']}" rendered="{!noofcolums!=2}"  style="color: #000000;font-size: 1.3em;font-family: 'Arial','Helvetica',sans-serif;font-weight: bold;" ></apex:outputlabel>  
+                                <br style="{!if(noofcolums!=2,"display:block;","display:none;")}" /> 
+                                <br style="{!if(noofcolums!=2,"display:block;","display:none;")}" />  
+                                <apex:actionStatus id="saveStatus1">
+                                    <apex:facet name="stop">
+                                        <apex:commandButton action="{!saveFunction}" value="{!$Label.Label_Save}" rendered="{!save_display}" reRender="messagepanel,jobTrackerPageBlock0,stdInfoMsgOuterOp" status="saveStatus1" onclick="disabling();globalMsg='';startProcessForEdit();" oncomplete="enabling();removeelement();resetLayout();endProcessForEdit();" /><!--try {saveIncludedPage();} catch(e) {endProcessForEdit();}  -->
+                                    </apex:facet>
+                                    <apex:facet name="start">
+                                        <apex:commandButton value="{!$Label.Label_Save}..." disabled="true" status="saveStatus1"  />
+                                    </apex:facet>
+                                </apex:actionStatus>
+                                <apex:actionStatus id="saveStatus2">
+                                    <apex:facet name="stop">
+                                        <!-- <apex:commandButton action="{!savefd}" value="{!$Label.Label_Submit}" onclick="if(!checkUserAction()){return};disabling();globalMsg='';startProcessForEdit();" reRender="jobTrackerPageBlock0" status="saveStatus2" oncomplete="endProcessForEdit();"/><!-- onSubmit();  -->
+                                        <apex:commandButton action="{!savefd}" value="Submit" onclick="if(!checkUserAction()){return};disabling();globalMsg='';startProcessForEdit();" reRender="messagepanel,jobTrackerPageBlock0" status="saveStatus2" oncomplete="resetLayout();endProcessForEdit();"/>
+                                    </apex:facet>
+                                    <apex:facet name="start">
+                                        <apex:commandButton value="{!$Label.Label_Submit}..." disabled="true" status="saveStatus2" />
+                                    </apex:facet>
+                                </apex:actionStatus>
+                                <apex:actionStatus id="saveStatus3">
+                                    <apex:facet name="stop">
+                                        <apex:commandButton action="{!SendforApproval}" value="{!$Label.Label_Submit_For_Approval}" disabled="{!NOT(save_display)}" reRender="messagepanel,actRegion,jobTrackerPageBlock0" rendered="{!CONTAINS(submitforapproval, 'Submit For Approval') && LEN(submitforapproval) > 0}" status="saveStatus3" onclick="startProcessForEdit();disabling();globalMsg='';" oncomplete="enabling();removeelement();resetLayout();endProcessForEdit();return popup();" />
+                                    </apex:facet>
+                                    <apex:facet name="start">
+                                        <apex:commandButton value="{!$Label.Label_Submit_For_Approval}..." disabled="true" status="saveStatus3" />
+                                    </apex:facet>
+                                </apex:actionStatus>
+                                <apex:actionStatus id="saveStatus4">
+                                    <apex:facet name="stop">
+                                        <apex:commandButton action="{!SendforMail}" value="{!$Label.Label_Send_Email}" reRender="messagepanel,jobTrackerPageBlock0,startflds1" disabled="{!NOT(save_display)}" rendered="{!CONTAINS(sendmail, 'Send Email') && LEN(sendmail) > 0}" status="saveStatus4" onclick="startProcessForEdit();disabling();globalMsg='';" oncomplete="enabling();removeelement();resetLayout();endProcessForEdit();" />
+                                    </apex:facet>
+                                    <apex:facet name="start">
+                                        <apex:commandButton value="{!$Label.Label_Send_Email}..." disabled="true" status="saveStatus4" />
+                                    </apex:facet>
+                                </apex:actionStatus>
+                                <apex:actionStatus id="saveStatus41">
+                                    <apex:facet name="stop">
+                                        <apex:commandButton action="{!sendEmailAndClose}" value="{!$Label.Label_Send_Email_And_Close}" reRender="messagepanel,jobTrackerPageBlock0,startflds1" disabled="{!NOT(save_display)}" rendered="{!CONTAINS(sendmailandclose, 'Send Email And Close') && LEN(sendmailandclose) > 0}" status="saveStatus4" onclick="startProcessForEdit();disabling();globalMsg='';" oncomplete="enabling();removeelement();resetLayout();endProcessForEdit();" />
+                                    </apex:facet>
+                                    <apex:facet name="start">
+                                        <apex:commandButton value="{!$Label.Label_Send_Email_And_Close}..." disabled="true" status="saveStatus41" />
+                                    </apex:facet>
+                                </apex:actionStatus>
+                                <apex:actionStatus id="saveStatus5">
+                                    <apex:facet name="stop">
+                                        <apex:commandButton action="{!cancel}" value="{!$Label.Label_Cancel}" rerender="messagepanel,jobTrackerPageBlock0" status="saveStatus5" onclick="disabling();if(newwindow != null && newwindow.top != null) newwindow.top.close();globalMsg='';" oncomplete="enabling();" />
+                                    </apex:facet>
+                                    <apex:facet name="start">
+                                        <apex:commandButton value="{!$Label.Label_Cancel}..." disabled="true" status="saveStatus5" />
+                                    </apex:facet>
+                                </apex:actionStatus>
+                            </apex:pageblockButtons>
+        
+                            <apex:pageblockButtons id="pageBlockButtonsBottom" location="bottom" >
+                                <apex:actionStatus id="saveStatus1">
+                                    <apex:facet name="stop">
+                                        <apex:commandButton action="{!saveFunction}"  value="{!$Label.Label_Save}" rendered="{!save_display}" rerender="messagepanel,jobTrackerPageBlock0,stdInfoMsgOuterOp" status="saveStatus1" onclick="disabling();globalMsg='';startProcessForEdit();" oncomplete="enabling();removeelement();resetLayout();endProcessForEdit();"/><!-- try {saveIncludedPage();} catch(e) {endProcessForEdit();}  -->
+                                    </apex:facet>
+                                    <apex:facet name="start">
+                                        <apex:commandButton value="{!$Label.Label_Save}..." disabled="true" status="saveStatus1" />
+                                    </apex:facet>
+                                </apex:actionStatus>
+                                <apex:actionStatus id="saveStatus2">
+                                    <apex:facet name="stop">
+                                        <!-- <apex:commandButton action="{!savefd}" value="{!$Label.Label_Submit}" onclick="if(!checkUserAction()){return};disabling();globalMsg='';startProcessForEdit();" reRender="jobTrackerPageBlock0" status="saveStatus2" oncomplete="endProcessForEdit();" /><!-- onSubmit(); -->
+                                        
+                                        <apex:commandButton action="{!savefd}" value="Submit" onclick="if(!checkUserAction()){return};disabling();globalMsg='';startProcessForEdit();" reRender="messagepanel,jobTrackerPageBlock0" status="saveStatus2" oncomplete="resetLayout();endProcessForEdit();"/>
+                                    </apex:facet>
+                                    <apex:facet name="start">
+                                        <apex:commandButton value="{!$Label.Label_Submit}..." disabled="true" status="saveStatus2" />
+                                    </apex:facet>
+                                </apex:actionStatus>
+                                <apex:actionStatus id="saveStatus3">
+                                    <apex:facet name="stop">
+                                        <apex:commandButton action="{!SendforApproval}" value="{!$Label.Label_Submit_For_Approval}" disabled="{!NOT(save_display)}" reRender="messagepanel,actRegion,jobTrackerPageBlock0" rendered="{!CONTAINS(submitforapproval, 'Submit For Approval') && LEN(submitforapproval) > 0}" status="saveStatus3" onclick="startProcessForEdit();disabling();globalMsg='';" oncomplete="enabling();removeelement();resetLayout();endProcessForEdit();return popup();" />
+                                    </apex:facet>
+                                    <apex:facet name="start">
+                                        <apex:commandButton value="{!$Label.Label_Submit_For_Approval}..." disabled="true" status="saveStatus3" />
+                                    </apex:facet>
+                                </apex:actionStatus>
+                                <apex:actionStatus id="saveStatus4">
+                                    <apex:facet name="stop">
+                                        <apex:commandButton action="{!SendforMail}" value="{!$Label.Label_Send_Email}" reRender="messagepanel,jobTrackerPageBlock0,startflds1" disabled="{!NOT(save_display)}" rendered="{!CONTAINS(sendmail, 'Send Email') && LEN(sendmail) > 0}" status="saveStatus4" onclick="startProcessForEdit();disabling();globalMsg='';" oncomplete="enabling();removeelement();resetLayout();endProcessForEdit();" />
+                                    </apex:facet>
+                                    <apex:facet name="start">
+                                        <apex:commandButton value="{!$Label.Label_Send_Email}..." disabled="true" status="saveStatus4" />
+                                    </apex:facet>
+                                </apex:actionStatus>
+                                <apex:actionStatus id="saveStatus41">
+                                    <apex:facet name="stop">
+                                        <apex:commandButton action="{!sendEmailAndClose}" value="{!$Label.Label_Send_Email_And_Close}" reRender="messagepanel,jobTrackerPageBlock0,startflds1" disabled="{!NOT(save_display)}" rendered="{!CONTAINS(sendmailandclose, 'Send Email And Close') && LEN(sendmailandclose) > 0}" status="saveStatus4" onclick="startProcessForEdit();disabling();globalMsg='';" oncomplete="enabling();removeelement();resetLayout();endProcessForEdit();" />
+                                    </apex:facet>
+                                    <apex:facet name="start">
+                                        <apex:commandButton value="{!$Label.Label_Send_Email_And_Close}..." disabled="true" status="saveStatus41" />
+                                    </apex:facet>
+                                </apex:actionStatus>
+                                <apex:actionStatus id="saveStatus5">
+                                    <apex:facet name="stop">
+                                        <apex:commandButton action="{!cancel}" value="{!$Label.Label_Cancel}" rerender="messagepanel,jobTrackerPageBlock0" status="saveStatus5" onclick="disabling();if(newwindow != null && newwindow.top != null) newwindow.top.close();globalMsg='';" oncomplete="enabling();" />
+                                    </apex:facet>
+                                    <apex:facet name="start">
+                                        <apex:commandButton value="{!$Label.Label_Cancel}..." disabled="true" status="saveStatus5" />
+                                    </apex:facet>
+                                </apex:actionStatus>
+                            </apex:pageblockButtons>
+        
+                            <apex:pageBlockSection columns="{!noofcolums}" title="{!$Label.Label_Case_Details}" id="fieldsPageBlock" collapsible="true" >
+                                
+                                <!-- StandardEditable -->
+                                <apex:repeat id="repeat101" value="{!standardEditableList}" var="stdRO">
+                                    <apex:inputField value="{!childObject[stdRO]}" rendered="{!IF(stdRO != childNamespace+'Current_State__c',true,false)}" required="{!stdRO.required}" />    
+                                    <apex:outputField value="{!childObject[stdRO]}" rendered="{!IF(stdRO == childNamespace+'Current_State__c',true,false)}" />   
+                                </apex:repeat>
+        
+                                <!-- StandardReadOnly -->
+                                <apex:repeat id="repeat111" value="{!standardReadOnlyList}" var="stdRO">
+                                    <apex:outputField value="{!childObject[stdRO]}" rendered="true" />    
+                                </apex:repeat>
+        
+                                <!-- StandardTracker -->
+                                <apex:repeat id="repeat1111" value="{!standardTrackerList}" var="stdRO">
+                                    <apex:outputField value="{!parentObject[stdRO]}" rendered="true" />    
+                                </apex:repeat>
+                            </apex:pageBlockSection>
+        
+                            <apex:repeat id="repeat5" value="{!dependentFieldsList}" var="strt"> 
+                                    <script>
+                                        fieldsArr.push('{!JSENCODE(strt.apiName)}');
+                                    </script>
+                            </apex:repeat>
+                            <apex:actionRegion id="startflds1">
+                                <apex:pageBlockSection columns="{!noofcolums * 2}" title="{!$Label.Label_Processing_Fields}" collapsible="true">
+                                    <apex:repeat id="repeat10" value="{!dependentFieldsList}" var="strt">
+                                        <apex:inputField styleClass="{!strt.apiName}" ID="inputField" value="{!childObject[strt.apiName]}" rendered="{!strt.inRender}" required="{!strt.inMandatory}" onchange="{!IF( AND(contains(onchangefieldlist, strt.apiName), childObject[prefix+'Current_State__c'] == 'Ready For Indexing'),'startProcessForEdit();onvaluechageaction(this.value);return false;','')}" >
+                                                <apex:outputpanel id="lookupiconid" rendered="{!IF(contains(externalHookupfieldlist, strt.apiName) ,true,false)}"><!-- &quot; -->
+                                                    <a href="javascript:void(0);" id="a{!strt.apiName}" >
+                                                        <img title="{!$Label.Hookup_External_Page_URL}" onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" onfocus="this.className = 'lookupIconOn';" onblur="this.className = 'lookupIcon';" class="lookupIcon" alt="Search" src="/s.gif" />
+                                                    </a>
+                                                    <script>
+                                                        document.getElementById("a{!JSENCODE(strt.apiName)}").onclick = function() {
+                                                            callExternalHookup('{!JSENCODE(strt.apiName)}','{!$Component.inputField}');
+                                                        }
+                                                    </script>
+                                                </apex:outputpanel>
+                                        </apex:inputField>
+
+                                        <apex:outputpanel id="tempContainer" rendered="{!OR(strt.inRender,strt.ouRender)}">
+                                            <script>
+                                                fieldsToId['{!JSENCODE(strt.apiName)}'] = '{!$Component.inputField}';
+                                                allIds.push('{!$Component.tempContainer}');
+                                            </script>
+                                        </apex:outputpanel>
+                                        <apex:outputField value="{!childObject[strt.apiName]}" rendered="{!strt.ouRender}" />
+                                    </apex:repeat>
+                                    <apex:inputfield id="requestorEmail" value="{!parentObject.akritivtlm__Requestor_Email_Id__c}" rendered="{!requestorEmail.inRender}" required="{!requestorEmail.inMandatory}" />
+                                    <apex:outputfield id="requestorEmail1" value="{!parentObject.akritivtlm__Requestor_Email_Id__c}" rendered="{!requestorEmail.ouRender}" />
+                                    <apex:outputpanel id="tempContainer1">
+                                        <script>
+                                            allIds.push('{!$Component.tempContainer1}');
+                                        </script>
+                                    </apex:outputpanel>
+
+                                    <apex:commandLink id="AuditFormId" onclick="CreateAndOpenExtWindow('AuditForm', 'Audit Form' , '400' , '400' , '/apex/AuditForm?id={!childObject.Id}&code={!nameCode}','','','')" value="Audit Form Link" rendered="{!isAuditFormVisible}" reRender="AuditFormId" immediate="true" />
+                                    <apex:outputpanel id="tempContainer2" rendered="{!isAuditFormVisible}">
+                                        <script>
+                                            allIds.push('{!$Component.tempContainer2}');
+                                            var auditId = '{!$Component.AuditFormId}';
+                                            var auditTr = document.getElementById(auditId).parentNode;
+                                            var newTd = document.createElement('td');
+                                            newTd.setAttribute('id','tempTd');
+                                            auditTr.parentNode.insertBefore(newTd,auditTr);
+                                            allColSpanTR.push(auditTr);
+                                        </script>
+                                    </apex:outputpanel>
+
+                                    <apex:commandLink id="selectAttachId" onclick="callSelectAttachment();return false;" value="Select the attachment to be emailed" reRender="selectAttachId" immediate="true" rendered="{!isSelectAttachLinkVisible}" />
+                                    <apex:outputpanel id="tempContainer3" rendered="{!isSelectAttachLinkVisible}">
+                                        <script>
+                                            allIds.push('{!$Component.tempContainer3}');
+                                            var selAttId = '{!$Component.selectAttachId}';
+                                            var selAttTr = document.getElementById(selAttId).parentNode;
+                                            var newTd = document.createElement('td');
+                                            newTd.setAttribute('id','tempTd1');
+                                            selAttTr.parentNode.insertBefore(newTd,selAttTr);
+                                            allColSpanTR.push(selAttTr);
+                                        </script>
+                                    </apex:outputpanel>
+                                </apex:pageBlockSection>
+                            </apex:actionRegion>
+                        <apex:actionRegion >
+                            <apex:actionFunction action="{!removeBlock1}" name="jsRemoveBlock1" rerender="pgMsgs,pgBlckSec4,pgBlckTbl1" oncomplete="removeoption();endProcessForEdit();"> <!--pgMsgs,pgBlckSec4,pgBlckTbl1,  jobTrackerPageBlock0,startflds1,messagepanel  -->
+                                <apex:param name="firstParam3" assignTo="{!removeCount}" value="" />
+                            </apex:actionFunction> 
+                            
+                            <apex:actionFunction action="{!addMoreBlock1}" name="jsAddMoreBlock1" rerender="pgMsgs,pgBlckSec4,pgBlckTbl1" oncomplete="removeoption();endProcessForEdit();"> <!--pgMsgs,pgBlckSec4,pgBlckTbl1,  jobTrackerPageBlock0,startflds1,messagepanel  -->
+                            </apex:actionFunction>
+                            
+                            <apex:pageBlockSection title="{!$Label.Label_Delivery_Detail}" id="pgBlckSec4" columns="1" rendered="{!showBlock1}">
+                                <apex:pageBlockSectionItem >
+                                    <apex:pageblockTable value="{!block1List}" var="v" id="pgBlckTbl1" style="width:100% !important;">
+                                        <apex:column headerValue="{!$Label.Label_Block1_Field1}" style="width:33% !important;">
+                                            <apex:inputfield value="{!childObject[v.delNum]}" id="deliveryNo" required="false" rendered="{!v.orderIndex == 1}" />
+                                            <apex:outputfield value="{!childObject[v.delNum]}" id="deliveryNo1" rendered="{!v.orderIndex != 1}" />
+                                            <apex:outputPanel style="display:none;" rendered="{!IF(v.orderIndex == 1,true,false)}">
+                                                <script>
+                                                    if(!{!block1Addmore}) {
+                                                        document.getElementById('{!$Component.deliveryNo}').setAttribute("disabled","disabled");
+                                                    }
+                                                </script>
+                                            </apex:outputPanel>
+                                        </apex:column>
+                                        <apex:column headerValue="{!$Label.Label_Block1_Field2}" style="width:33% !important;">
+                                            <apex:inputfield styleClass="{!v.ordNum}" value="{!childObject[v.ordNum]}" id="orderNo" required="{!v.index == 1 && block1Mandatory}" rendered="{!v.orderIndex == 1}" />
+                                            <apex:outputPanel style="display:none;" rendered="{!IF(v.orderIndex == 1,true,false)}">
+                                                <script>
+                                                    if(!{!block1Addmore}) {
+                                                        document.getElementById('{!$Component.orderNo}').setAttribute("disabled","disabled");
+                                                    }
+                                                </script>
+                                            </apex:outputPanel>
+                                            <apex:outputfield value="{!childObject[v.ordNum]}" id="orderNo1" rendered="{!v.orderIndex != 1}" />
+                                        </apex:column>
+                                        <apex:column headerValue="" style="width:33% !important;">
+                                            <apex:commandButton id="addMoreBtnId" value="{!$Label.Label_Add_More}" onclick="if(checkBlock1Value('{!v.ordNum}')){jsAddMoreBlock1();}return false;" rerender="messagepanel" rendered="{!IF(v.orderIndex == 1,true,false)}"  disabled="{!NOT(block1Addmore)}" />
+                                            <apex:commandButton id="removeBtnId" value="Remove" onclick="jsRemoveBlock1('{!v.index}');return false;"  rerender="messagepanel" rendered="{!IF(v.orderIndex != 1,true,false)}" />                                                               
+                                        </apex:column>
+                                    </apex:pageblockTable>
+                                </apex:pageBlockSectionItem>
+                            </apex:pageBlockSection>
+                        
+                        </apex:actionRegion>
+
+                        <apex:actionRegion >
+                            <apex:actionFunction action="{!addMoreBlock2}" name="jsAddMoreBlock2" rerender="pgMsgs,pgBlckSec5,pgBlckTbl2" oncomplete="removeoption();endProcessForEdit();"> 
+                            </apex:actionFunction>
+                            <apex:actionFunction action="{!removeBlock2}" name="jsRemoveBlock2" rerender="pgMsgs,pgBlckSec5,pgBlckTbl2" oncomplete="removeoption();endProcessForEdit();"> 
+                                <apex:param name="firstParam4" assignTo="{!removeCount}" value="" />
+                            </apex:actionFunction>
+                            <apex:actionFunction action="{!calculateRate}" name="jscalculateRate" rerender="pgMsgs,pgBlckSec5,pgBlckTbl2" oncomplete="removeoption();endProcessForEdit();"> 
+                                <apex:param name="firstParam6" assignTo="{!currIndex}" value="" />
+                            </apex:actionFunction>
+                            <apex:actionFunction action="{!calculateTotal}" name="jscalculateTotal" rerender="pgMsgs,pgBlckSec5,pgBlckTbl2" oncomplete="removeoption();endProcessForEdit();"> 
+                            </apex:actionFunction>
+                            
+                            <apex:pageBlockSection title="{!$Label.Label_Vat_Detail}" id="pgBlckSec5" columns="1" rendered="{!showBlock2}" >
+                                <apex:pageBlockSectionItem >
+                                    <apex:pageblockTable value="{!block2List}" var="v" id="pgBlckTbl2"   style="width:100% !important;" >
+                                        <apex:column headerValue="{!$Label.Label_Block2_Field1}" style="width:25% !important;">
+                                            <apex:inputfield value="{!childObject[v.vatRate]}" id="vatRate" styleclass="{!v.vatRate}" onchange="setVatValue('{!v.vatRate}','{!v.netValue}','{!v.vatValue}','{!v.index}')" rendered="{!IF(v.orderIndex == 1,true,false)}" required="{!IF(v.index == 1 && block2Mandatory,true,false)}" />
+                                            
+                                            <apex:outputPanel style="display:none;" rendered="{!IF(v.orderIndex == 1,true,false)}">
+                                                <script>
+                                                    if(!{!block2Addmore}) {
+                                                        document.getElementById('{!$Component.vatRate}').disabled = true;
+                                                    }
+                                                </script>
+                                            </apex:outputPanel>
+                                            
+                                            <apex:outputPanel rendered="{!IF(v.orderIndex > 1,true,false)}">
+                                                <span style="font-weight: bold !important;">
+                                                    <apex:outputField value="{!childObject[v.vatRate]}" id="vatRate2" styleclass="{!v.vatRate}" rendered="{!IF(v.orderIndex != block2List.size,true,false)}" style="font-weight: bold !important;" />
+                                                    <apex:outputText value="Total : " id="vatRate3" styleclass="{!v.vatRate}" rendered="{!IF(v.orderIndex == block2List.size,true,false)}" style="font-weight: bold !important;" />
+                                                </span>
+                                            </apex:outputPanel>
+                                            
+                                        </apex:column>
+                                        <apex:column headerValue="{!$Label.Label_Block2_Field2}" style="width:25% !important;">
+                                            <apex:inputfield value="{!childObject[v.netValue]}" id="netValue" styleclass="{!v.netValue}" onchange="setVatValue('{!v.vatRate}','{!v.netValue}','{!v.vatValue}','{!v.index}')" rendered="{!IF(v.orderIndex == 1,true,false)}" required="{!IF(v.index == 1 && block2Mandatory,true,false)}" />
+                                            <apex:outputPanel style="display:none;" rendered="{!IF(v.orderIndex == 1,true,false)}">
+                                                <script>
+                                                    if(!{!block2Addmore}) {
+                                                        document.getElementById('{!$Component.netValue}').setAttribute("disabled","disabled");
+                                                    }
+                                                </script>
+                                            </apex:outputPanel>
+                                            <apex:inputField value="{!childObject[v.netValue]}" id="netValue21" rendered="{!IF(v.orderIndex == block2List.size,true,false)}" onchange="startProcessForEdit();jscalculateTotal();" />
+                                            <apex:outputPanel rendered="{!IF(v.orderIndex > 1 && v.orderIndex != block2List.size,true,false)}">
+                                                <span style="font-weight: bold !important;">
+                                                    <apex:outputField value="{!childObject[v.netValue]}" id="netValue2" styleclass="{!v.netValue}" rendered="{!IF(v.orderIndex > 1,true,false)}" style="font-weight: bold !important;" />
+                                                </span>
+                                            </apex:outputPanel>
+                                            
+                                        </apex:column>
+                                        
+                                        <apex:column headerValue="{!$Label.Label_Block2_Field3}" style="width:25% !important;">
+                                            <apex:inputfield value="{!childObject[v.vatValue]}" id="vatValue" styleclass="{!v.vatValue} vat-amount" rendered="{!IF(v.orderIndex == 1,true,false)}" required="{!IF(v.index == 1 && block2Mandatory,true,false)}" />
+                                            <apex:outputPanel rendered="{!IF(v.orderIndex > 1 && v.orderIndex != block2List.size,true,false)}">
+                                                <span style="font-weight: bold !important;">
+                                                    <apex:outputField value="{!childObject[v.vatValue]}" id="vatValue2" styleclass="{!v.vatValue}" rendered="{!IF(v.orderIndex > 1,true,false)}" style="font-weight: bold !important;" />
+                                                </span>
+                                            </apex:outputPanel>
+                                            <apex:inputField value="{!childObject[v.vatValue]}" id="netValue211" rendered="{!IF(v.orderIndex == block2List.size,true,false)}" onchange="startProcessForEdit();jscalculateTotal();" />
+                                        </apex:column>
+                                        
+                                        <apex:column headerValue="" style="width:25% !important;">
+                                            <apex:commandButton id="addMoreBtnId" value="{!$Label.Label_Add_More}" onclick="if(!validateVatSection('{!v.vatRate}','{!v.netValue}')){return false;}jsAddMoreBlock2();return false;" rerender="block2ActionRegion" rendered="{!IF(v.orderIndex == 1,true,false)}"  disabled="{!NOT(block2Addmore)}" />
+                                            <apex:commandButton id="removeBtnId" value="Remove" onclick="jsRemoveBlock2('{!v.index}');return false;"  rerender="messagepanel" rendered="{!IF(v.orderIndex > 1 && v.orderIndex != block2List.size,true,false)}" />                                                               
+                                            <apex:outputPanel rendered="{!IF(v.orderIndex > 1 && v.orderIndex == block2List.size,true,false)}">
+                                                <span style="font-weight: bold !important;">
+                                                    Gross Value : <apex:inputField value="{!childObject[grossTotalField]}" id="vatValue3" styleclass="{!v.vatValue}" rendered="{!IF(v.orderIndex > 1 && v.orderIndex == block2List.size,true,false)}" />
+                                                </span>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel style="display:none;">
+                                                <script>
+                                                    //document.querySelector('.vat-amount').setAttribute("readonly","readonly");
+                                                </script>
+                                            </apex:outputPanel>
+                                        </apex:column>
+                                        
+                                    </apex:pageblockTable>
+                                </apex:pageBlockSectionItem>
+                            </apex:pageBlockSection>
+                        </apex:actionRegion>
+                        
+                            <!-- QC Parameter Start -->
+                            <apex:pageBlockSection id="QCparameterBlock" title="{!$Label.Label_QC_Fields}"  columns="{!noofcolums}" rendered="{!newFlag}">
+                                <apex:repeat value="{!DynamicFieldlist}" var="dfs" >
+                                    <apex:inputField id="QCinputfieldID" value="{!QCParameter[dfs]}" rendered="{!newFlag}" />
+                                    <apex:outputField id="QCinputfieldID1" value="{!QCParameter[dfs]}" rendered="{!NOT(newflag)}" />    
+                                </apex:repeat>
+                            </apex:pageBlockSection>
+                            <!-- QC Parameter End -->
+        
+                            <apex:pageBlockSection columns="{!noofcolums}" title="{!$Label.Label_Closure_Fields}" id="closurefieldsBlock" collapsible="true" >
+                                <apex:inputField id="comments" value="{!childObject['Comments__c']}" rendered="{!IF(comment.inRender && NOT(longComments),true,false)}" required="{!comment.inMandatory}" style="height:80px; width:220px;" /> 
+                                 <apex:outputfield id="comments1" value="{!childObject['Comments__c']}" rendered="{!IF(comment.ouRender && NOT(longComments),true,false)}" />
+                                 
+                                 <apex:inputField id="commentsnew" value="{!childObject['Long_Comments__c']}" rendered="{!IF(longcomment.inRender && longComments,true,false)}" required="{!longcomment.inMandatory}" style="height:80px; width:220px;" /> 
+                                 <apex:outputfield id="comments1new" value="{!childObject['Long_Comments__c']}" rendered="{!IF(longcomment.ouRender && longComments,true,false)}" /> 
+                                
+                                <!--
+                                <apex:inputField id="comments" value="{!childObject[childNamespace+'Comments__c']}" rendered="{!comment.inRender}" required="{!comment.inMandatory}" style="height:80px; width:220px;" /> 
+                                <apex:outputfield id="comments1" value="{!childObject[childNamespace+'Comments__c']}" rendered="{!comment.ouRender}" />
+                                -->
+                                <apex:inputfield id="user_action" value="{!childObject[childNamespace+'User_Actions__c']}" rendered="{!userAct.inRender}" onchange="startProcessForEdit();if(!makeavailableflag()) {endProcessForEdit();return;} onChnageUserAction(this.value);" />
+                                <apex:outputfield id="user_action1" value="{!childObject[childNamespace+'User_Actions__c']}" rendered="{!userAct.ouRender}" />  
+                                <apex:inputTextarea readonly="true" id="user_commenthistory" value="{!childObject['Comment_History__c']}" rendered="true"  style="overflow: auto;height:80px; width:220px;"/>
+                            </apex:pageBlockSection>
+                            <script>
+                                uid='{!$Component.jobTrackerPageBlock0.closurefieldsBlock.user_action}';
+                                if( document.getElementById(uid) == null )
+                                    uid='{!$Component.jobTrackerPageBlock0.closurefieldsBlock.user_action1}';
+                            </script>
+                        </apex:pageblock>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    
+        <apex:actionFunction action="{!processFV}" name="processFV" rerender="jobTrackerPageBlock0,startflds1,messagepanel" immediate="true" oncomplete="removeoption();resetLayout();endProcessForEdit();removeelement();" >
+            <apex:param name="firstParam3" assignTo="{!jsonmap}" value="" />
+        </apex:actionFunction>
+        
+        <apex:actionFunction action="{!recallStdApprovalProcess}" name="actFuncRecallStandardApprovalProcess" rerender="histBlock" oncomplete="resetLayout();endProcessForEdit();location.reload();" ></apex:actionFunction> 
+        </apex:actionRegion>
+        
+        <apex:actionFunction action="{!savefd}" name="submitFunction" rerender="messagepanel,jobTrackerPageBlock0" oncomplete="removeelement();resetLayout();endProcessForEdit();enabling();" >
+    </apex:actionFunction>
+
+    <!-- this is for custom approval process -->
+    <apex:actionregion rendered="{!IF(isCustomApprovalProcess && showApprovalBlock,true,false)}" >
+        <!-- for recall approval request -->
+        <apex:actionFunction action="{!recallApprovalProcess}" name="recallApprovalProcess" rerender="histBlock" oncomplete="resetLayout();endProcessForEdit();location.reload();" >
+        </apex:actionFunction>
+        <!-- for recall approval request -->
+        
+        <apex:inputhidden value="{!assigneeEmail}" id="assignEmail" />
+        <apex:inputhidden value="{!trackerStatus}" id="trackerStatus" />
+        <apex:pageBlock id="histBlock">
+            <apex:facet name="header">
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td class="pbTitle">
+                                <h2 class="mainTitle">{!$Label.Label_Approval_History}</h2>
+                            </td>
+                            <td class="pbButton"  >
+                                <input type="button" class="btn" value="{!$Label.Label_Recall_Approval_Request}" onclick="if(confirm('are you sure ?')){startProcessForEdit();recallProcess(); return true;} else {return false;}" style="display:{!IF(trckerHistoryLst.size > 0 && currUserId == submitter,'','none')};" />
+                                <!-- apex:commandButton action="{!recallApprovalProcess}" value="Recall Approval Process" / -->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </apex:facet>
+            <apex:pageBlockSection id="ApprovalProcess" title="{!$Label.Label_Approval_Detail}" columns="1"  collapsible="true" > 
+                <apex:pageBlockTable columns="8" value="{!trckerHistoryLst}" var="trackhistry" title="Approval Detail" id="jobtrackerSysInfo" style="width:100% important!">
+                    <apex:column id="buttenlinkid" headerValue="{!$Label.Label_Action}" >
+                        <apex:commandLink value="{!$Label.Label_Approve}" onclick="if(confirm('are you sure ?')){startProcessForEdit();callApproveReject('{!JSENCODE(trackhistry.assignee)}','A');} else {return false;}"  action="{!statusChange}" reRender="histBlock" oncomplete="endProcessForEdit();location.reload();" rendered="{!IF(((trackhistry.status == 'Pending' ) && (prof['Name'] == 'System Administrator' || currUserEmail == trackhistry.assignee || currUserId == submitter)),true,false)}" />
+                        <apex:outputPanel rendered="{!IF(((trackhistry.status == 'Pending' ) && (prof['Name'] == 'System Administrator' || currUserEmail == trackhistry.assignee || currUserId == submitter)),true,false)}" > | </apex:outputPanel> 
+                        <apex:commandLink value="{!$Label.Label_Reject}"  style="padding-left:2px" onclick="if(confirm('are you sure ?')){startProcessForEdit();callApproveReject('{!JSENCODE(trackhistry.assignee)}','R');} else {return false;}" action="{!statusChange}" reRender="histBlock" oncomplete="endProcessForEdit();location.reload();" rendered="{!IF(((trackhistry.status == 'Pending' ) && (prof['Name'] == 'System Administrator' || currUserEmail == trackhistry.assignee || currUserId == submitter)),true,false)}" />
+                    </apex:column>
+                    <apex:column id="Levelid" headerValue="{!$Label.Label_Approval_Level}" value="{!trackhistry.level}" />
+                    <apex:column id="Entryid" headerValue="Entry Date"><apex:outputLabel value=" {!trackhistry.entryDate}" /></apex:column>
+                    <apex:column id="Statusid" headerValue="{!$Label.Label_Status}" value="{!trackhistry.status}" />
+                    <apex:column id="Assigneeid" headerValue="{!$Label.Label_Assignee}" value="{!trackhistry.assignee}" />
+                    <apex:column id="Compeltionid" headerValue="Completion Date"><apex:outputLabel value=" {!trackhistry.completionDate}" /></apex:column>
+                    <apex:column id="Commentid" headerValue="{!$Label.Label_Comment}" >
+                        <apex:outputPanel rendered="{!IF(trackhistry.status != 'Pending',true,false)}" >{!trackhistry.comments}</apex:outputPanel> 
+                        <apex:inputTextarea rendered="{!IF(((trackhistry.status == 'Pending' ) && (prof.Name == 'System Administrator' || currUserEmail == trackhistry.assignee || currUserId == submitter)),true,false)}" value="{!trackhistry.comments}" rows="1" cols="30" />
+                    </apex:column>
+                    <apex:column id="unreachedMailId" headerValue="{!$Label.Label_Unreached_Mail}" >
+                        <apex:inputCheckbox value="{!trackhistry.unreachedFlag}" disabled="true"/>
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection id="ApprovalHistory" title="{!$Label.Label_Approval_History}" columns="1"  collapsible="true" > 
+                <apex:pageBlockTable columns="8" value="{!trckerHistoryDtl}" var="trackhistry" title="Approval History " id="jobtrackerSysInfo" style="width:100% important!">
+                    <apex:column headerValue="{!$Label.Label_History_Name}" >
+                        <!-- a href="/{!trackhistry['Id']}" target="_BLANK">{!trackhistry['Name']}</a -->
+                        <a href="javascript:void(0);" onclick="openApprovalHistory('{!trackhistry['Id']}')" >{!trackhistry['Name']}</a>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Approval_Type}" >
+                        <apex:outputPanel >{!trackhistry[prefix+'Approval_Type__c']}</apex:outputPanel>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Approval_Level}" >
+                        <apex:outputPanel >{!trackhistry[prefix+'Approval_level__c']}</apex:outputPanel>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Status}" >
+                        <apex:outputPanel >{!trackhistry[prefix+'Status__c']}</apex:outputPanel>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Created_Date}" >
+                        <apex:outputLabel value=" {!trackhistry['CreatedDate']}" />
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Completion_Date}" >
+                        <apex:outputLabel value=" {!trackhistry['Completion_Date__c']}" />
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_No_Of_Days}" >
+                        <apex:outputPanel >{!trackhistry[prefix+'No_Of_Days__c']}</apex:outputPanel>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Created_By}" value="{!trackhistry['CreatedBy']['Name']}" />            
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:actionregion>
+    <!-- this is for custom approval process -->
+</apex:form>
+
+<!-- this is for QC  -->
+<apex:form rendered="{!form_render && visibleflag && (NOT(newflag) || (QCist.size > 0)) }" >
+    <apex:pageBlock >
+        <apex:pageBlockSection id="QCparameterBlock" title="{!$Label.Label_Failed_QC_Parameters}" columns="2" >
+            <apex:repeat value="{!QCist}"  var="list">
+                <apex:repeat value="{!QCParameterFields}" var="QCprm" >
+                    <apex:outputField value="{!list[QCprm]}" />
+                </apex:repeat>
+            </apex:repeat>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form>
+<!-- this is for QC  -->
+
+<!-- this is for standard approval process  -->
+<apex:relatedList pageSize="10" list="ProcessSteps" subject="{!trackerid}" rendered="{!form_render && IF(NOT(isCustomApprovalProcess) && showApprovalBlock,true,false)}" >
+    <apex:facet name="header">
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td class="pbTitle">
+                        <h2 class="mainTitle">{!$Label.Label_Approval_History}</h2>
+                    </td>
+                    <td class="pbButton" style="display:{!IF(isApprovalSubmitted && currUserId == submitter,'','none')};">
+                        <input value="{!$Label.Label_Recall_Approval_Request}" class="btn" name="recallApprovalProcess" onclick="if(confirm('are you sure ?')){startProcessForEdit();recallStandardApprovalProcess(); return true;} else {return false;}" title="{!$Label.Label_Recall_Approval_Request}" type="button" />
+                    </td>
+                <td>&nbsp;
+                </td></tr>
+            </tbody>
+        </table>
+    </apex:facet>
+</apex:relatedList>
+<!-- this is for standard approval process  -->
+
+<c:TrackerHistory subject="{!trackerId}" ChildObjectparameter="{!childobjectname}" rendered="{!IF(form_render && showShowTrackerHistoryBlock,true,false)}"></c:TrackerHistory>
+<apex:relatedList pageSize="20"  id="noteslist" list="NotesAndAttachments" subject="{!trackerid}" rendered="{!form_render && showNotesAndAttachmentBlock}" />
+<apex:relatedList id="openActivitylist" list="OpenActivities" subject="{!trackerid}" rendered="{!form_render && showOpenActivityBlock}" />
+<script>
+    function moveToViewPage() {
+        window.location.href = '{!JSENCODE(viewlink)}id={!JSENCODE(trackerId)}';
+    }
+    function moveToListViewPage() {
+        window.location.href = '{!JSENCODE(listviewlink)}';
+    }
+    removeelement();
+    //removedeletelink();
+    
+   
+</script>
+<!-- For remove default date selection in date time -->
+<style>
+.dateFormat {
+    display : none !important;
+}
+</style>
+
+<!-- ========================Custom Attachment block SFDC==================================== -->
+<!-- apex:form id="linkId1" rendered="{!If(globalConfig.Enable_Annotation__c,true,false)}">
+
+<apex:inputhidden value="{!sfdcAttId}" id="sfdcAttachId"/>
+<apex:inputhidden value="{!sfdcAttName}" id="sfdcAttachName"/>
+
+<apex:pageBlock title="Attachments" id="AttachmentSfdc" rendered="{!if(attachmentAnnote != null && attachmentAnnote.size != 0,true,false)}">
+    <apex:pageBlockSection columns="1">
+        <apex:pageBlockTable var="a" value="{!attachmentAnnote}">
+            <apex:column headerValue="Name" >
+                <apex:commandLink action="{!createAdditionFdfSfdc}" onclick="return createAdditionDocumentsfdc('{!a.Id}','{!a.Name}');" value="View" target="_blank" /> 
+            </apex:column>
+            <apex:column value="{!a.Name}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlockSection>
+
+</apex:pageBlock>
+</apex:form>
+<!-- ========================================================= -->
+
+<!-- =============Annotation pdf========== -->
+<apex:form id="frmDel">
+    <!-- for remove document this is commeted as request of praveen (3-Dec-2014) -->
+    <!-- apex:actionFunction action="{!deleteDocument}" name="deleteDocument1" rerender="frmDel" / -->
+    <!-- for remove document this is commeted as request of praveen (3-Dec-2014) -->
+
+</apex:form>
+<!-- ==================== -->
+<script>
+// ========Annotation fdf =====
+var AnnotationEnable = {!globalConfig.akritivtlm__Enable_Annotation__c}
+    /*if (AnnotationEnable == true) {
+        deleteDocument1();
+    }*/
+    /*function createAdditionDocument2(link,name){
+        //alert(link);
+        
+        document.getElementById('{!$Component.page.linkId.attachlinkId}').value = link;
+        document.getElementById('{!$Component.page.linkId.attachNameId}').value = name;
+        return true;
+    }*/
+    
+    /*function createAdditionDocumentsfdc(attId,attName){
+        //alert(link);
+        
+        document.getElementById('{!$Component.page.linkId1.sfdcAttachId}').value = attId;
+        document.getElementById('{!$Component.page.linkId1.sfdcAttachName}').value = attName;
+       
+        return true;
+    }*/
+
+function submitParentFunction() {
+        //alert('in parent function');
+         submitFunction();
+}
+
+/*
+function onSubmit(){
+    //alert('--In Submit');
+    if({!showIncludePage}){
+        //alert('--if include page');
+        try { submitIncludedPage(); } catch(e) {
+            //alert(e);
+        }
+    } else {
+        //alert('--else include page');
+        submitParentFunction();
+    }
+        
+}*/
+
+function resetLayout() {
+    for( var i = 0; i < allIds.length; i++ ) {
+        //alert('allIds[i] : ' + allIds[i]);
+        try {
+            var ele = document.getElementById(allIds[i]);
+            ele.parentNode.parentNode.removeChild(ele.parentNode);
+        } catch (e) {
+        }
+    }
+    for( var i = 0; i < allColSpanTR.length; i++ ) {
+        try {
+            allColSpanTR[i].setAttribute("colspan","1");
+        } catch (e) {
+            //alert(allIds[i] + 'e : ' + e );
+        }
+    }
+    allColSpanTR = [];
+    allIds = [];
+}
+resetLayout();
+</script>
+<!-- For remove default date selection in date time -->
+</apex:page>

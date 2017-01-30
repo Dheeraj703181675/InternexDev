@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>DBA Name</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>DBA Names</value>
+    </caseValues>
+    <fields>
+        <label><!-- Client Portal ID --></label>
+        <name>Client_Portal_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- DBA Name --></label>
+        <name>DBA_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Debtor Portal ID --></label>
+        <name>Debtor_Portal_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Debtor --></label>
+        <name>Debtor__c</name>
+        <relationshipLabel><!-- DBA Names --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Grade External ID --></label>
+        <name>Grade_External_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Portal External ID --></label>
+        <name>Portal_External_ID__c</name>
+    </fields>
+    <layouts>
+        <layout>DBA Name Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,1 @@
+<apex:page contentType="application/vnd.ms-excel#EmailCaseHistory.csv" standardController="akritivtlm__AP_Tracker__c" cache="true" language="Application/csv" extensions="akritivtlm.EmailCaseHistoryCSV" sidebar="false" showheader="false" action="{!ExportToCSV}" standardStylesheets="false" readOnly="true"  >{!finalstring}</apex:page>

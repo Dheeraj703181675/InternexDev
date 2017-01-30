@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>WebCash Batch</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>WebCash Batches</value>
+    </caseValues>
+    <fields>
+        <label><!-- BackOut Comment --></label>
+        <name>BackOut_Comment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Account Name --></label>
+        <name>Client_Account_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Name --></label>
+        <name>Client_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current Job Id --></label>
+        <name>Current_Job_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current Job Message --></label>
+        <name>Current_Job_Message__c</name>
+    </fields>
+    <fields>
+        <label><!-- BackOut --></label>
+        <name>IsBackOut__c</name>
+    </fields>
+    <fields>
+        <label><!-- No of Applied Records --></label>
+        <name>No_of_Applied_Records__c</name>
+    </fields>
+    <fields>
+        <label><!-- No of Credit Records --></label>
+        <name>No_of_Credit_Records__c</name>
+    </fields>
+    <fields>
+        <label><!-- No of Records --></label>
+        <name>No_of_Records__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reason --></label>
+        <name>Reason__c</name>
+    </fields>
+    <fields>
+        <label><!-- Records Not To Be Processed --></label>
+        <name>Records_Not_To_Be_Processed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Records To Be Processed --></label>
+        <name>Records_To_Be_Processed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Source System --></label>
+        <name>Source_System__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Tomorrow date --></label>
+        <name>Tomorrow_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Processed Records --></label>
+        <name>Total_Processed_Records__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>WebCash_Batch_Status__c</name>
+    </fields>
+    <layouts>
+        <layout>WebCash Batch Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>WebCash Load Batch Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Back_out_Webcash_Batch --></label>
+        <name>Back_out_Webcash_Batch</name>
+    </webLinks>
+    <workflowTasks>
+        <name>New_Invoice_Batch_Uploaded_in_Akritiv</name>
+        <subject><!-- New Invoice Batch Uploaded in Akritiv --></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

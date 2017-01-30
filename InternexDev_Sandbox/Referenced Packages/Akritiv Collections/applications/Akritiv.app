@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>standard-home</defaultLandingTab>
+    <description>Akritiv module one.</description>
+    <label>Akritiv</label>
+    <tab>standard-Account</tab>
+    <tab>standard-Contact</tab>
+    <tab>Dispute__c</tab>
+    <tab>standard-report</tab>
+    <tab>standard-Dashboard</tab>
+    <tab>Treatments</tab>
+    <tab>standard-Console</tab>
+    <tab>Transaction__c</tab>
+    <tab>Administration</tab>
+    <tab>My_Tasks</tab>
+    <tab>Payment__c</tab>
+    <tab>Custom_List_View__c</tab>
+    <tab>Data_Load_Batch__c</tab>
+    <tab>Dispute_Lines__c</tab>
+    <tab>Line_Item__c</tab>
+    <tab>Brand__c</tab>
+    <tab>Client_Account__c</tab>
+    <tab>Debtor__c</tab>
+    <tab>Fees__c</tab>
+    <tab>Monthly_Interest_Application__c</tab>
+    <tab>Product__c</tab>
+    <tab>Pricing__c</tab>
+    <tab>Invoice_Authorization</tab>
+    <tab>Draw_Request__c</tab>
+    <tab>Custom_Notifications__c</tab>
+    <tab>Batch_Execution</tab>
+    <tab>Quickbook_Customer_Mapping</tab>
+    <tab>QB_Customer__c</tab>
+    <tab>QB_Invoice__c</tab>
+    <tab>Invoice_Modification</tab>
+    <tab>WF_FH__c</tab>
+    <tab>WF_BH__c</tab>
+    <tab>WF_PR__c</tab>
+    <tab>Lockbox_Image__c</tab>
+    <tab>Partner__c</tab>
+    <tab>AccountPayableEntry</tab>
+</CustomApplication>

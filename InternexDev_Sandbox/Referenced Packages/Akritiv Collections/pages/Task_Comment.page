@@ -1,0 +1,26 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/*
+ *  Page used to see the email content in proper formatting 
+ *  that has been send when contacted the customer.
+ *  Page will be inlined into the task detail page.
+ */
+--> 
+<apex:page standardController="Task" showHeader="false" sidebar="false">
+    <style>
+body {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 75%;
+}
+</style>
+    <apex:outputText value="{!Task.Description}" escape="false"
+        styleClass="dataCol" />
+</apex:page>

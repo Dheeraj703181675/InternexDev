@@ -1,0 +1,359 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/*
+ *  This page is going to override the standard detail page for the
+ *  account. It will contain another 2 pages 1.
+ *  EnhancedTransactionListView (Tab for related transactions) 2.
+ *  NotesView (Tab for related notes)
+ *  The page has the functionality to remember the last tab visited
+ *  by the user. (To save user preferences there is a separate
+ *  object User_Preferences__c)
+ */
+-->
+<apex:page standardController="Account" extensions="akritiv.AccountDetailExt"
+    tabStyle="Account" id="acdetailpage"   action="{!chackAndRedirect}" >
+    <apex:sectionHeader title="{!account.Name}" />
+    <script src="/soap/ajax/10.0/connection.js" type="text/javascript"></script>
+    <script src="/soap/ajax/10.0/apex.js" type="text/javascript"></script>
+ <!-- *   <link  rel="stylesheet" type="text/css" href="{!URLFOR($Resource.YUI2_8,'YUI2_8/build/container/assets/container.css')}"></link> -->
+    <script type="text/javascript" src="{!URLFOR($Resource.jquery,'Jquery.js')}"></script>
+
+   <!-- <script type="text/javascript" src="{!URLFOR($Resource.flexigrid,'jquery-1.4.2.min.js')}"></script> -->
+    <script type="text/javascript" src="{!URLFOR($Resource.Jeditable,'jeditable.js')}"></script>
+   <!-- <script type="text/javascript" src="{!URLFOR($Resource.Jeditable,'jquery.corner.js')}"></script>    -->
+   
+
+    <style>
+          .rich-tabpanel-content{background:none;}
+         /* .bDetailBlock{margin-top:100px;}*/
+        #filter{
+            display: none;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index:10;
+            opacity:0.6;
+            filter: alpha(opacity=50);
+        }
+        
+        .bPageBlock .detailList .labelCol{
+           font-family: 'Arial', 'Helvetica', sans-serif;
+           font-size: 1em;
+           font-weight:bold;
+           line-height:normal;
+           margin:0 auto;
+        }
+        
+        .bPageBlock .detailList .dataCol col02{
+           font-family: 'Arial', 'Helvetica', sans-serif;
+           font-size: 1em;
+           line-height:normal;
+           margin:0 auto;
+        }
+    </style>
+    
+   <script type="text/javascript">
+    function updateStickyNoteLevel ( level ) {
+     sforce.connection.defaultNamespace = '{!JSENCODE($Setup.SysConfig_Singlec__c.NameSpace__c)}';
+     sforce.connection.sessionId = '{!$Api.Session_ID}';
+     var config = new sforce.SObject("Account"); 
+     config.akritiv__Sticky_Note_Level__c = level;
+     //update
+    
+     config.Id = "{!Account.Id}";
+     var res = sforce.connection.update([config]);
+    
+   }
+   
+   function updateStickyNote ( note ) {
+   
+
+     sforce.connection.defaultNamespace = '{!JSENCODE($Setup.SysConfig_Singlec__c.NameSpace__c)}';
+     sforce.connection.sessionId = '{!$Api.Session_ID}';
+     var config = new sforce.SObject("Account");         
+     config.akritiv__Sticky_Note__c = note;
+     
+     //update
+     config.Id = "{!Account.Id}";
+     var res = sforce.connection.update([config]);           
+    }
+   
+    var $jq  = jQuery.noConflict();
+    
+    function changelevel ( box ) {
+        
+        var bgColor = box.css('background-color');
+        $jq('#stickynote').css('background-color', bgColor );        
+        //update note color
+        updateStickyNoteLevel (box.attr('id'));
+        
+    }  
+    
+    function levelOnLoad ( ) {
+    
+        var box  =$jq('#{!JSENCODE(stickyNoteLevel)}');
+        
+        var boxNote  =$jq('#stickynote');
+        var note  = "{!HTMLENCODE(stickyNote)}";
+        
+        boxNote.html(boxNote.text());
+        if ( note == ''|| note == null) {
+        
+            note ="{!$Label.Label_Add_Account_Note}" ;
+        } 
+          
+        if(box == null || box == ''){ 
+            box = $jq('#Normal');
+          
+        }
+        var bgColor = box.css('background-color'); 
+       
+        $jq('#stickynote').css('background-color', bgColor ); 
+                     
+          
+    }
+    
+               $jq(document).ready(function(){
+               
+                $jq('.note-color').click(
+                    function() {                         
+                        var box = jQuery(this);
+                        changelevel(box);
+                        
+                    }
+                );
+                               
+                $jq('#stickynote').css('height','auto');
+                var editableArea = $jq('#stickynote').editable(
+                    function(value, settings) {
+                   //    var newValue = value.replace(/\n/gi, '<br/>');
+                    
+                       var newValue = value.replace(/\</g,"&lt;");
+
+                        if (value != settings._LFR_.oldText) {
+                            //update note
+                        }
+                        
+                        if (newValue == ''){
+                                 
+                                newValue = "{!$Label.Label_Add_Account_Note}";
+                               // alert(newValue);
+                                updateStickyNote (newValue);
+                                //alert('called');
+                        }else{
+                        
+                          
+                           // updateStickyNote (Value);
+                            updateStickyNote (newValue);
+                        }
+                      
+                        editableArea.css( 'height', 'auto');
+                        
+                        return newValue;
+                    },
+                    {
+                        data: function(value, settings) {
+                        
+                           
+                            var newValue = value.replace(/<br[\s\/]?>/gi, '\n');
+                            newValue = newValue.replace(/<br>/gi, '\n');
+                            settings._LFR_ = {};
+                            settings._LFR_.oldText = newValue;
+                            
+                            return newValue;
+                        },
+                        onblur: 'submit',
+                        type: 'textarea',
+                        select: true,
+                        submit: ''
+                    }
+                );
+                
+               levelOnLoad();
+            }
+        );
+        
+        function startProcess(){
+      
+           document.getElementById("{!$Component.accpgb.loadingdetail}").style.display = 'block'; 
+        
+           document.getElementById('filter').style.display = 'block';
+
+       }
+       
+       function endProcess(){
+       
+           document.getElementById("{!$Component.accpgb.loadingdetail}").style.display = 'none';
+           document.getElementById('filter').style.display = 'none'; 
+       } 
+        
+        
+                
+    </script>
+    
+    
+    <apex:pageBlock id="accpgb">
+        <div id="filter"></div>
+        <apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loadingdetail" style="display:none;position:fixed;top:50%;left:50%;z-index:10;"/>
+
+        <apex:outputPanel id="stickynotepanel" >
+        
+              <div>    
+                <table border="0" cellpadding="2" cellspacing="0" width="90%">
+                    <tr>
+                       <td width="91%" >
+                       
+                            <div id="stickynote" style="margin:3px;padding:5px;word-wrap: break-word;width:100%;overflow:hidden;" onkeyup="" rows="2">{!stickyNote}</div> 
+         
+                       </td>
+                        <td width="1%" >&nbsp;</td>
+                        
+                        <td width="8%" style="padding-left:5px;padding-top:8px;text-align:right;" id="demo">
+                            <span id="Normal" class="note-color" style="widht:10px;background-color: #ffeb9c;border-color: #C0C; margin-left: 0;cursor:pointer;" title="Normal" >&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span id="Low" class="note-color" style="widht:10px;background-color: #c6efce;border-color: #0c0;cursor:pointer;" title="Low" >&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span id="High" class="note-color" style="widht:10px;background-color: #ffc7ce;border-color: #309;cursor:pointer;" title="High">&nbsp;&nbsp;&nbsp;&nbsp;</span>                            
+                        </td>
+                        <script>
+                   // $("#demo span[title]").tooltip();
+                    </script>
+                       
+                    </tr>
+                    
+                </table>
+              </div>
+              
+                 
+                
+        </apex:outputPanel> 
+     
+     </apex:pageBlock>     
+    
+    <apex:tabPanel switchType="client" id="acctb" value="{!selectedTab}">
+
+                <!-- Account Tab : Display Account Detail layout -->
+                <apex:tab id="accountTab" name="accountTab"
+                    label="{!$Label.Label_AccountDetails}"
+                    ontabenter="setCurrentTab(1);startProcess();" oncomplete="endProcess();">
+                    
+                    <apex:outputPanel rendered="{!CONTAINS(selectedTab,'accountTab')}">
+                    
+                        <apex:detail subject="{!account.Id}" relatedList="true"  showChatter="true" inlineEdit="true" title="false" />
+                        
+                    </apex:outputPanel>
+                    
+                </apex:tab>
+
+                <!-- Related Transaction Tab : Display Transactions Of Account -->
+                <apex:tab id="txTab" name="txTab"
+                    label="{!$Label.Label_RelatedTransactions}"
+                     ontabenter="setCurrentTab(2);startProcess();" rendered="{!NOT(isPortalUser)}" oncomplete="endProcess();">
+                    
+                    <apex:outputPanel rendered="{!CONTAINS(selectedTab,'txTab')}">
+                    
+                        <apex:include pageName="akritiv__EnhancedTransactionListView" >                  
+                            <apex:param name="taskId" value="{!taskId}"/>
+                            
+                        </apex:include>
+                        
+                    </apex:outputPanel>
+                </apex:tab>
+                
+                <!-- Disputes Tab : Display Disputes on Transactions of this Account -->
+                <apex:tab id="disputesTab" name="disputesTab"
+                    label="{!$Label.Label_Dispute}" ontabenter="setCurrentTab(3);startProcess();"
+                    rendered="{!NOT(isPortalUser)}" oncomplete="endProcess();">
+                    
+                    <apex:outputPanel rendered="{!CONTAINS(selectedTab,'disputesTab')}">
+                        <apex:include pageName="akritiv__EnhancedDisputeListView"  />
+                    </apex:outputPanel>
+                    
+                </apex:tab>
+
+                <!-- Notes Tab : Display Notes on Transactions of this Account -->                     
+                <apex:tab label="{!$Label.Label_Notes}" id="notesTab"
+                    name="notesTab" ontabenter="setCurrentTab(4);startProcess();"
+                    rendered="{!NOT(isPortalUser)}" oncomplete="endProcess();" reRender="notesTab" >
+                    
+                    <apex:outputPanel rendered="{!CONTAINS(selectedTab,'notesTab')}">
+                        <apex:include pageName="akritiv__NotesView" id="ntb" />
+                    </apex:outputPanel>                  
+                </apex:tab>
+            </apex:tabPanel>
+        
+  
+
+<script>
+    
+    //Get selected tab from controller. Value of selected tab will be the value of 
+    //"SelectedTab__c" field of user preferences.
+    var v = '{!JSENCODE(selectedTab)}';
+    
+    //Method will be called when user clicks on tab.
+    //Using Ajax API , update user preference "SelectedTab__c" so when next time user
+    //opens "AccountDetailPage" this tab will be selected by default 
+    function setCurrentTab( tabNo){  
+      
+        //sforce.connection.defaultNamespace = '{!JSENCODE($Setup.SysConfig_Singlec__c.NameSpace__c)}';
+        sforce.connection.sessionId = '{!$Api.Session_ID}';
+        var config = new sforce.SObject("akritiv__User_Preference__c"); 
+        config.Name = '{!$User.Username}';
+        config.akritiv__SelectedTab__c =tabNo ;
+        config.akritiv__User__c = '{!$User.Id}';
+     
+        if("{!JSENCODE(objId)}" !=null && "{!JSENCODE(objId)}" !=''){
+            //update
+            config.Id = "{!JSENCODE(objId)}";
+            var res = sforce.connection.update([config]);
+        }else{
+            //insert 
+            var res = sforce.connection.create([config]); 
+        }
+        
+        var ur = 'https://'+window.location.host+'/apex/AccountDetailPage?id={!Account.Id}&sfdc.override=1&tabsel='+tabNo;
+        window.location = ur;
+    }
+    
+    //returns tab number from tabname
+    function getTabNo(  tabname ) {
+    
+        
+        if(tabname == 'accountTab') {    
+            
+           return 1;
+           
+       }else if(tabname == 'txTab') {
+        
+           return 2;
+           
+       }else if(tabname == 'disputesTab') {
+         
+            return 3;
+            
+       }else if(tabname == 'notesTab') {
+       
+             return 4;  
+             
+       } else {
+       
+            //default selected tab is "Account Detail" tab.
+            return 1;
+       }         
+           
+           
+ }
+  
+ </script>
+ 
+
+</apex:page>

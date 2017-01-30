@@ -1,0 +1,348 @@
+<apex:page standardController="akritivtlm__Tracker__c" extensions="akritivtlm.Approvalprocess"  sidebar="false" showHeader="false" id="page">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+
+<style>
+    .messageblock{
+        font-size:11px;
+        border-radius: 4px;
+        border-color: #c00;
+        background-color: #ffc;
+        border-style: solid;
+        border-width: 1px;
+        color: #000;
+    }
+</style> 
+
+<script>
+    function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+    
+    function resetblksize() {
+        //var $jq  = jQuery.noConflict();
+        $(document).ready(function(){
+        
+             var curr_width = $('.vfLabelColTextWrap ').width();
+                 
+                 //for reminder
+                 var sidebardivwidth = $('.labeloutputs').width();
+                 var curr_widthRem = curr_width - sidebardivwidth ;
+                 $('.blankdivs').css({ width: curr_widthRem});
+                 $('.blankdivs').css({ width: (curr_widthRem)});
+                 
+                 //for escalation
+                 var sidebardivwidth1 = $('.labeloutputs2').width();
+                 var curr_widthEsc = curr_width - sidebardivwidth1 ;
+                 $('.blankdivs2').css({ width: (curr_widthEsc-5)});
+                 $('.blankdivs2').css({ width: (curr_widthEsc-5)});
+                 
+        });
+    }
+    
+    function closeMessage() {
+        $('#messagebox').hide();   
+    }
+
+    function displayMessage(type,msg,interval) {
+    
+        var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:50%;margin: 0 auto;margin-top: 5px;">'+
+            '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+'</div>';
+                    //&& document.getElementById('messagebox') != undefined
+        if(document.getElementById('messagebox') != null ) {
+            document.getElementById('messagebox').innerHTML = m;
+            animateMessageBox('messagebox',interval);
+        }
+        animateMessageBox('messagebox',interval);
+   }
+</script>
+
+<apex:outputpanel id="messagepanel" style="Display:None">
+    <apex:messages id="msg1"  style="Display:None" />
+    <script type="text/javascript">
+        if(document.getElementById('{!$Component.msg1}') != null ) {
+            var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('li');
+            var msg='';
+            for(var i=0;i<obj.length;i++) {
+                if(i==0) 
+                msg += '<br />';
+                msg += obj[i].innerHTML + '<br />';
+            }
+            if(msg != '') {
+                setTimeout(function() {displayMessage('error',msg,10000);},1000);
+            }
+        }
+    </script>
+</apex:outputpanel>
+
+    <script> 
+    
+        function Approvallevel(val){
+           alert(val);
+            var level = val;
+            Approvallevel1(level);
+        }
+        function Closepopup(){
+            window.opener.document.location.reload(true);
+            window.close();   
+            //return false;
+        }
+        function submit1(){
+            callSubmit();
+        }
+        function toggleLevel(id){
+            alert(id);
+        }
+        function showhide(lookUpId,textId,obj){
+            //    alert(lookUpId);
+            if(obj.checked) {
+                document.getElementById(lookUpId).style.display = 'none';
+                document.getElementById(textId).style.display = '';
+            } else {
+                document.getElementById(lookUpId).style.display = '';
+                document.getElementById(textId).style.display = 'none';
+            }
+        }
+        function onchangeChk(cnt,frm) {
+            var chkObj = document.getElementById('frm:fm:blk:OutputPageblockSection:approvalId:'+cnt+':chkApproval');            
+            if(chkObj.checked) {
+                document.getElementById('forUser'+cnt).style.display = 'none';
+                document.getElementById('forEmail'+cnt).style.display = '';
+            } else {
+                document.getElementById('forUser'+cnt).style.display = '';
+                document.getElementById('forEmail'+cnt).style.display = 'none';          
+            }
+            document.getElementById('page:frm:blk:OutputPageblockSection:approvalId:'+cnt+':j_id60').value = "";
+            document.getElementById('page:frm:blk:OutputPageblockSection:approvalId:'+cnt+':approvalUsr').value = "";
+        }
+        function onchangeChkEsc(cnt,frm) {
+            var chkObj = document.getElementById('frm:fm:blk:OutputPageblockSection:esacId:'+cnt+':chkEscalation');   
+            if(chkObj.checked) {
+                document.getElementById('forEscUser'+cnt).style.display = 'none';
+                document.getElementById('forEscEmail'+cnt).style.display = '';
+            } else {
+                document.getElementById('forEscUser'+cnt).style.display = '';
+                document.getElementById('forEscEmail'+cnt).style.display = 'none';          
+            }
+            document.getElementById('page:frm:blk:OutputPageblockSection:esacId:'+cnt+':j_id84').value = "";
+            document.getElementById('page:frm:blk:OutputPageblockSection:esacId:'+cnt+':escalationUsr').value = "";
+        }
+        function changeLevel(val) {
+            Approvallevel1(val);
+        }
+        function resetCode() {
+            resetCodeFunc();
+        }
+    </script>
+<apex:outputPanel id="jsPanel">
+    <script>
+    var win;
+    function openEmailPopUp(componentId,lvl) {
+        //alert('componentId : ' + document.getElementById(componentId).value);
+        //alert('processingCode : ' + '{!JSENCODE(code)}');
+        var left = 150;
+        var top = 150;
+        var urlString = '/apex/CustomLookUp?componentId='+componentId+'&code={!JSENCODE(code)}&level='+lvl+'&childObjectName={!JSENCODE(childObjectName)}&trackerId={!JSENCODE(trackerid)}';
+        if ( win != undefined && win != null)
+        win.close();
+        win = window.open (urlString ,"CustomLookUp","toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width=900,height=800, top="+top+",left="+left );
+        return false;
+    }
+    </script>
+</apex:outputPanel>
+
+<div id="messagebox" style="z-index:10 !important;position:fixed !important;width:50% !important;top:30%;left:20%;" ></div>
+
+<!--<apex:pageMessages id="msg"/>-->
+<apex:form id="frm" rendered="{!isPageRendered}" >
+      <!-- apex:sectionHeader title="{!$Label.Label_Approval_Process_Edit}" subtitle="{!$Label.Label_New_Approval_Process}" / -->
+        <apex:pageBlock title="{!$Label.Label_Approval_Process}" id="blk">
+            <apex:actionFunction name="Approvallevel1" rerender="panelid,messagepanel,frm" action="{!ApprovalLevelval}"  oncomplete="endProcessForEdit();resetblksize();">
+                <apex:param assignTo="{!appLevel}" name="level" value=""/> 
+            </apex:actionFunction>  
+
+            <!-- code for reset code -->
+            <apex:actionFunction name="resetCodeFunc" rerender="jsPanel,messagepanel,frm" action="{!resetCodeFunc}" ></apex:actionFunction>  
+            <apex:actionFunction name="callSubmit" action="{!Submit}" reRender=""  /> 
+
+            <apex:pageBlockButtons >
+                <apex:commandButton Value="{!$Label.Label_Submit}" action="{!Submit}" onclick="startProcessForEdit()" reRender="OutputPageblockSection,messagepanel,windowCloseId" oncomplete="endProcessForEdit();resetblksize();" /> 
+                <apex:commandButton Value="{!$Label.Label_Cancel}" action="{!cancel1}"  /> 
+                <!-- onclick="submit1();"  oncomplete="Closepopup();" </apex:commandButton>  -->
+            </apex:pageBlockButtons>
+
+             <apex:pageblockSection id="processingFieldBlockSection" title="{!$Label.Label_Processing_Fields}" columns="2">
+                 <apex:repeat value="{!processingField}" var="pField">
+                     <apex:pageBlockSectionItem >
+                         <apex:outputLabel value="{!$ObjectType[childObjectName].fields[pField].label}" for="ap0"/>
+                         <apex:outputPanel >
+                         <apex:outputPanel styleClass="" layout="block" rendered="{!IF(childObject[pField]=='',true,false)}">
+                            <apex:outputPanel styleClass="" layout="block"/>
+                            <apex:inputField id="procFieldComponent"  value="{!childObject[pField]}" />
+                            <script>
+                                 document.getElementById('{!$Component.procFieldComponent}').onchange = function() {
+                                     //for reset approval type
+                                     document.getElementById('page:frm:blk:InputPageblockSection:j_id40:ap0').value = '';
+                                     document.getElementById('page:frm:blk:InputPageblockSection:j_id44:ap1').value = '';
+                                     //and reset approvallevel
+                                     startProcessForEdit();
+                                     resetCode();
+                                     changeLevel('');
+                                 }
+                             </script>
+                         </apex:outputPanel>
+                         <apex:outputPanel styleClass="" layout="block" rendered="{!IF(childObject[pField]=='',false,true)}" >
+                            <apex:outputPanel styleClass="" layout="block"/>
+                            <apex:outputField id="procFieldComponentOutput" value="{!childObject[pField]}" />
+                         </apex:outputPanel>
+                         </apex:outputPanel>
+                     </apex:pageBlockSectionItem>
+                 </apex:repeat>
+             </apex:pageblockSection>
+
+             <apex:pageblockSection id="InputPageblockSection" title="{!$Label.Label_Information}" columns="2">
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="{!$Label.Label_Approval_Type}" for="ap0"/>
+                     <apex:outputPanel styleClass="requiredInput" layout="block">
+                        <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+                        <apex:inputField id="ap0"  value="{!tracker[prefix+'Approval_Type__c']}" />
+                     </apex:outputPanel>  
+                 </apex:pageBlockSectionItem>
+
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="{!$Label.Label_Approval_Level}" for="ap1"/>
+                     <apex:outputPanel styleClass="requiredInput" layout="block">
+                        <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+                        <apex:inputField id="ap1"  value="{!tracker[prefix+'Approval_level__c']}" onchange="startProcessForEdit();changeLevel(this.value);" >
+                        </apex:inputField>
+                     </apex:outputPanel>
+                 </apex:pageBlockSectionItem>
+
+             </apex:pageblockSection>   
+             <!-- apex:actionFunction name="abc" action="{!ApprovalLevelval}" rendered="panelid,msg1" / -->
+
+            <apex:actionRegion >
+            <apex:outputpanel id="panelid">
+            <apex:pageblockSection id="OutputPageblockSection" title="{!$Label.Label_User_Information}" columns="2" rendered="{!IF((apiApproval.size > 0),true,false)}"  > 
+              <apex:outputPanel >
+                  <!-- for aprroval style="display:none;" -->
+                   <apex:variable var="cnt" value="{!0}" />   
+                   <table>
+                       <apex:repeat value="{!approvalField}" var="user" id="approvalId" >
+                           <tr>
+                                <td>
+                                    <apex:outputPanel >
+                                        <table id="forEmail{!cnt}" >
+                                            <tr>
+                                                <td class="blankdivs" > <!-- style="width:150px !important;" -->
+                                                    <b><apex:outputLabel ></apex:outputLabel></b> <!-- style="color:#4a4a56 !important;" -->
+                                                </td>
+                                                <td class="labeloutputs">
+                                                    <b><apex:outputLabel style="color:#4a4a56 !important;" > {!$Label.Label_Approval_Email} {!cnt + 1} &nbsp; </apex:outputLabel></b>
+                                                </td>
+                                                <td>
+                                                     <apex:outputPanel styleClass="requiredInput" layout="block"  >
+                                                        <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+                                                        <apex:inputField value="{!trackerGui[user.emailFieldApi]}" id="txtAppMail" />
+                                                        <a href="javascript:void(0);" onClick="javascript:openEmailPopUp('{!$Component.txtAppMail}','{!cnt + 1}');">
+                                                            <img title="Email Lookup (New Window)" onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" onfocus="this.className = 'lookupIconOn';" onblur="this.className = 'lookupIcon';" class="lookupIcon" alt="Email Lookup (New Window)" src="/s.gif" />
+                                                        </a>
+                                                     </apex:outputPanel>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                         <script>
+                                             if(!{!canEdit}) {
+                                                 document.getElementById('page:frm:blk:OutputPageblockSection:approvalId:'+{!cnt}+':txtAppMail').readOnly =true;
+                                             }
+                                         </script>
+                                    </apex:outputPanel> 
+                                </td>
+                                <apex:variable var="cnt" value="{!cnt + 1}"/>
+                            </tr>
+                      </apex:repeat>
+                  </table>
+              </apex:outputPanel>
+
+              <apex:outputPanel >
+                  <!-- for reminder and escalation -->
+                  <apex:variable var="cnt1" value="{!0}" />  
+                   <table> 
+                       <apex:repeat value="{!escalationField}" var="esac" id="esacId" >
+                           <tr>
+                                <td>
+                                    <apex:outputPanel >
+                                        <table id="forEscEmail{!cnt1}" >
+                                            <tr>
+                                                <td class="blankdivs2">
+                                                    <b><apex:outputLabel ></apex:outputLabel></b> 
+                                                </td>
+                                                <td class="labeloutputs2">
+                                                    <b><apex:outputLabel style="color:#4a4a56 !important;" > {!$Label.Label_Escalation_Email} {!cnt1 + 1} &nbsp; </apex:outputLabel></b>
+                                                </td>
+                                                <td>
+                                                     <apex:outputPanel styleClass="requiredInput" layout="block"  >
+                                                        <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+                                                        <apex:inputField value="{!trackerGui[esac.emailFieldApi]}" id="txtEscMail" />
+                                                        <a href="javascript:void(0);" onClick="javascript:openEmailPopUp('{!$Component.txtEscMail}','{!cnt1 + 1}');">
+                                                            <img title="Email Lookup (New Window)" onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" onfocus="this.className = 'lookupIconOn';" onblur="this.className = 'lookupIcon';" class="lookupIcon" alt="Email Lookup (New Window)" src="/s.gif" />
+                                                        </a>
+                                                     </apex:outputPanel>
+                                                </td>
+                                            </tr>
+                                         </table>
+                                         <script>
+                                             if(!{!canEdit}) {
+                                                 document.getElementById('page:frm:blk:OutputPageblockSection:esacId:'+{!cnt1}+':txtEscMail').readOnly =true;
+                                             }
+                                         </script>
+                                    </apex:outputPanel> 
+                                </td>
+                                <apex:variable var="cnt1" value="{!cnt1 + 1}"/>
+                            </tr>
+                      </apex:repeat>
+                  </table>
+              </apex:outputPanel>            
+        </apex:pageblockSection>   
+        </apex:outputpanel>
+        </apex:actionRegion>
+
+    <!-- /apex:pageblock> 
+    <apex:pageblock title="Email Section" -->
+    
+        <c:WFEmail_Editor supportedLocale="{!supportLocale}"
+                contactId="{!emailTargetToContactId}" 
+                emailToAddresses="{!ToAddresses}"               
+                emailCcAddresses="{!ccAddresses}"
+                emailBccAddresses="{!bccAddresses}"                
+                mailingSubject="{!emailSubject}" 
+                emailBody="{!emailTemplateBody}"
+                contactMethod="{!contactMethod}"
+                emailtemplatecategory="{!templatecategory}"                                                 
+                emailAttachmentIds="{!attachmentIds}"
+                emailAttachmentName="{!attachmentName}"
+                pendingReason="{!pendingReason}"
+                VFpage="Approvalprocess"                                            
+                objectName="{!childObjectName}"
+                id="emaileditor"
+                emailFromAddresses=""
+                templateId="{!emailTemplateId}" 
+                hasEscEmail="{!isEscalationRequired}"/>
+                
+    </apex:pageblock>
+    <apex:outputPanel id="windowCloseId">
+        <script type="text/javascript" >
+            if({!windowClose}) {
+                //window.opener.startProcessForEdit();
+                window.opener.moveToListViewPage();
+                window.close();
+            } 
+        </script>
+    </apex:outputPanel>
+
+    </apex:form>
+
+</apex:page>

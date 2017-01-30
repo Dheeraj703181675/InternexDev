@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Client_Account__c$Client__c</field>
+    </columns>
+    <columns>
+        <field>Client_Account__c$Name</field>
+    </columns>
+    <columns>
+        <field>Client_Account__c$Funding_Limit__c</field>
+    </columns>
+    <columns>
+        <field>Client_Account__c$IUF_Reserve_Amount__c</field>
+    </columns>
+    <columns>
+        <field>Client_Account__c$IUF_Reserve_Retained__c</field>
+    </columns>
+    <columns>
+        <field>Client_Account__c$Additional_IUF_Required__c</field>
+    </columns>
+    <columns>
+        <field>Client_Account__c.IUFs__r$Date__c</field>
+    </columns>
+    <currency>USD</currency>
+    <filter>
+        <criteriaItems>
+            <column>Client_Account__c$Additional_IUF_Required__c</column>
+            <operator>lessThan</operator>
+            <value>USD 0</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Clients with Negative IUF</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Client_account_with_IUF__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>Client_Account__c.IUFs__r$Date__c</dateColumn>
+        <interval>INTERVAL_LAST7</interval>
+    </timeFrameFilter>
+</Report>

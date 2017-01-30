@@ -1,0 +1,234 @@
+<!--
+/*
+ *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ *This software is the confidential and proprietary information
+ *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ *disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/*
+ * Internal Messaging Page.That is placed on the sidebar. The page is 
+ * used to make contact with the system users internally. The same 
+ * internal message can be created through buttons on detail pages of account and Transaction.
+ */
+-->
+<apex:page showHeader="false" sidebar="false"
+    Controller="akritiv.QuickNoteController" standardStylesheets="true" id="pg">
+    <style>
+body {
+    background-color: #FFFFFF;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 10px;
+}
+
+.labelCol {
+    font-weight: bold;
+}
+</style>
+
+    <apex:form >
+        <!--* <c:Base_Comp_YUI_ModalLoader />-->
+
+        <!--  ALL ACTION FUNCTIONS  -->
+       <!--* <apex:actionFunction name="deleteMessage"
+            action="{!deleteWallMessage}" rerender="MessagesPanel"
+            status="loadStatus" oncomplete="YUIHideLoading();">
+            <apex:param name="msgId" assignTo="{!msgPageToDeleteId}" value="" />
+        </apex:actionFunction> 
+        
+        <apex:actionFunction name="replyToMessage"
+            action="{!prepareReplyMessage}" status="loadStatus"
+            rerender="MessagesPanel,createOrReplyMsgPanel"
+            oncomplete="YUIHideLoading();">
+            <apex:param name="firstParam" assignTo="{!replyToPageId}" value="" />
+        </apex:actionFunction>
+
+        <apex:actionFunction name="addMessageTask" action="{!addMessageTask}"
+            status="taskStatus" rerender="MessagesPanel"
+            oncomplete="YUIHideLoading();">
+            <apex:param name="firstParam" assignTo="{!addTaskPageId}" value="" />
+        </apex:actionFunction>
+
+        <apex:actionFunction name="markMessageVisited"
+            action="{!markMessageVisited}" status="loadStatus"
+            oncomplete="refreshMessages();" reRender="">
+            <apex:param name="firstParam" assignTo="{!markMsgVisitedPageId}"
+                value="" />
+        </apex:actionFunction>
+
+        <apex:actionFunction name="refreshMessages"
+            action="{!getMessagesRefreshed}" rerender="MessagesPanel"
+            oncomplete="YUIHideLoading();" /> -->
+            
+            <apex:actionFunction name="deleteMessage"
+            action="{!deleteWallMessage}" rerender="MessagesPanel"
+            status="loadStatus" oncomplete="">
+            <apex:param name="msgId" assignTo="{!msgPageToDeleteId}" value="" />
+        </apex:actionFunction> 
+        
+        <apex:actionFunction name="replyToMessage"
+            action="{!prepareReplyMessage}" status="loadStatus"
+            rerender="MessagesPanel,createOrReplyMsgPanel"
+            oncomplete="">
+            <apex:param name="firstParam" assignTo="{!replyToPageId}" value="" />
+        </apex:actionFunction>
+
+        <apex:actionFunction name="addMessageTask" action="{!addMessageTask}"
+            status="taskStatus" rerender="MessagesPanel"
+            oncomplete="">
+            <apex:param name="firstParam" assignTo="{!addTaskPageId}" value="" />
+        </apex:actionFunction>
+
+        <apex:actionFunction name="markMessageVisited"
+            action="{!markMessageVisited}" status="loadStatus"
+            oncomplete="refreshMessages();" reRender="">
+            <apex:param name="firstParam" assignTo="{!markMsgVisitedPageId}"
+                value="" />
+        </apex:actionFunction>
+
+        <apex:actionFunction name="refreshMessages"
+            action="{!getMessagesRefreshed}" rerender="MessagesPanel"
+            oncomplete="" />
+
+        <apex:actionStatus startStyle="font-weight:Bold;color:#cc0000"
+            startText="{!$Label.Label_Please_Wait}" stopText="" id="loadStatus" />
+
+
+        <apex:actionStatus startStyle="font-weight:Bold;color:#cc0000"
+            startText="Adding Task" stopText="" id="taskStatus" />
+        <br />
+        <!-- END OF ACTION FUNCTIONS -->
+        <apex:outputPanel id="createOrReplyMsgPanel">
+            <apex:outputPanel rendered="{!IF(showMasseges=true, FALSE, TRUE)}">
+                <div
+                    style="height: 17px; width: 160px; background-color: #888888; padding-left: 5px;">
+                <apex:outputLabel value="{!quickNoteTitleMsg}"
+                    style="font-weight:bold; color:#FFFFFF;" /></div>
+                <br />
+                <span class="labelCol">{!$Label.Label_To}</span>
+                <apex:selectList value="{!selectedToUserIds}" size="3" id="ToUser"
+                    multiselect="true">
+                    <apex:selectOptions value="{!allUsers}"></apex:selectOptions>
+                </apex:selectList>
+            &nbsp;&nbsp;
+           <apex:outputPanel rendered="{!NOT(ISNULL(newOrReplyMsg.akritiv__Related_Objects__c))}">
+                    <span class="labelCol">{!$Label.Label_Add_To_Note}</span>
+                    <apex:inputField value="{!newOrReplyMsg.akritiv__Add_To_Note__c}" />
+                </apex:outputPanel>
+                <br />
+                <apex:inputField value="{!newOrReplyMsg.akritiv__Message_Body__c}"
+                    style="height:90px; width:160px;" />
+
+                <br />
+                <br />
+                <apex:commandButton value="{!$Label.Label_Send}"
+                    action="{!createWallMessage}" />
+                <apex:commandButton value="{!$Label.Label_Cancel}"
+                    action="{!cancel}" immediate="true" />
+            </apex:outputPanel>
+        </apex:outputPanel>
+
+        <apex:outputPanel id="MessagesPanel">
+            <apex:outputPanel rendered="{!IF(showMasseges=true, TRUE, FALSE)}">
+                <!--* <apex:commandButton value="{!$Label.Label_New}"
+                    action="{!prepareNewMessage}"
+                    rerender="MessagesPanel,createOrReplyMsgPanel"
+                    onclick="YUIShowLoading();" oncomplete="YUIHideLoading();" />
+                <span>&nbsp;&nbsp;&nbsp;</span> -->
+               
+                <apex:commandButton value="{!$Label.Label_New}"
+                    action="{!prepareNewMessage}"
+                    rerender="MessagesPanel,createOrReplyMsgPanel"
+                    onclick="" oncomplete="" />
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <apex:outputPanel id="newMsgStatus">
+                    <img src="{!URLFOR($Resource.iconset, 'iconset/1_2.png')}"
+                        height="14" width="14" title="{!$Label.Label_New_Messages}" />&nbsp;<apex:outputLabel value="[{!totalUnreadMessage}]" style="font-weight:bold;" />
+                </apex:outputPanel>
+
+
+                <apex:outputPanel id="allMessages">
+                    <apex:repeat value="{!wallWrapperMsgs}" var="msg">
+                        <hr />
+                        <div style=""><apex:outputLabel value="{!msg.createddateStr}:" /> <apex:outputPanel rendered="{!IF(AND(msg.isReply=true,msg.fromUserId=currentUserId),FALSE,TRUE)}">
+                            <span class="labelCol"></span>
+                            <a href="/{!msg.fromUserId}" target="blank">{!msg.fromUserName}</a>
+                        </apex:outputPanel> <apex:outputPanel rendered="{!IF(AND(msg.isReply=true,msg.fromUserId=currentUserId),TRUE,FALSE)}">
+                            <span class="labelCol">{!$Label.Label_To}</span>
+                            <a href="/{!msg.replyToUserId}" target="blank">{!msg.replyToUserName}</a>
+                        </apex:outputPanel> <apex:outputPanel rendered="{!IF(msg.relatedObjList.size >0, TRUE, FALSE)}">
+                            <br />
+                            <img src="{!URLFOR($Resource.iconset, 'iconset/1_18.png')}"
+                                id="about" height="14" width="14" title="{!$Label.Label_About}" />
+                            <apex:repeat value="{!msg.relatedObjList}" var="relatedObj">
+                                <a href="/{!relatedObj.ObjId}" target="blank">{!relatedObj.objName}</a>
+                            </apex:repeat>
+                        </apex:outputPanel> <br />
+                        {!msg.msgBody} <br />
+                        <br />
+                     <!--*   <apex:outputPanel rendered="{!IF(AND(msg.isReply=true,msg.fromUserId=currentUserId),FALSE,TRUE)}">
+                            <apex:commandLink onclick="YUIShowLoading(); replyToMessage(id); return false;"
+                                id="replyToMsgId">
+                                <img src="{!URLFOR($Resource.iconset, 'iconset/3_26.png')}"
+                                    height="14" width="14" title="{!$Label.Label_Reply}" />
+                            </apex:commandLink> &nbsp;
+                    </apex:outputPanel> <apex:outputPanel >
+                            <apex:commandLink onclick="YUIShowLoading(); addMessageTask(id); return false;"
+                                id="addTaskPageId">
+                                <img src="{!URLFOR($Resource.iconset, 'iconset/2_2.png')}"
+                                    height="14" width="14" title="{!$Label.Label_Add_Task}" />
+                            </apex:commandLink>&nbsp;
+                    </apex:outputPanel> <apex:commandLink onclick="YUIShowLoading(); deleteMessage(id); return false;"
+                            id="deleteMessageId">
+                            <img src="{!URLFOR($Resource.iconset, 'iconset/3.png')}"
+                                height="14" width="14" title="{!$Label.Label_Delete}" />
+                        </apex:commandLink> <apex:outputPanel rendered="{!IF(msg.isVisited = false, TRUE, FALSE)}">
+                    &nbsp;
+                    <apex:commandLink onclick="YUIShowLoading(); markMessageVisited(id); return false;"
+                                id="markAsReadMessageId">
+                                <img src="{!URLFOR($Resource.iconset, 'iconset/1_2.png')}"
+                                    height="14" width="14" title="{!$Label.Label_Mark_As_Read}" />
+                            </apex:commandLink>
+                        </apex:outputPanel>-->
+                           
+                          <apex:outputPanel rendered="{!IF(AND(msg.isReply=true,msg.fromUserId=currentUserId),FALSE,TRUE)}">
+                            <apex:commandLink onclick="replyToMessage(id); return false;"
+                                id="replyToMsgId">
+                                <img src="{!URLFOR($Resource.iconset, 'iconset/3_26.png')}"
+                                    height="14" width="14" title="{!$Label.Label_Reply}" />
+                            </apex:commandLink> &nbsp;
+                    </apex:outputPanel> <apex:outputPanel >
+                            <apex:commandLink onclick="addMessageTask(id); return false;"
+                                id="addTaskPageId">
+                                <img src="{!URLFOR($Resource.iconset, 'iconset/2_2.png')}"
+                                    height="14" width="14" title="{!$Label.Label_Add_Task}" />
+                            </apex:commandLink>&nbsp;
+                    </apex:outputPanel> <apex:commandLink onclick="deleteMessage(id); return false;"
+                            id="deleteMessageId">
+                            <img src="{!URLFOR($Resource.iconset, 'iconset/3.png')}"
+                                height="14" width="14" title="{!$Label.Label_Delete}" />
+                        </apex:commandLink> <apex:outputPanel rendered="{!IF(msg.isVisited = false, TRUE, FALSE)}">
+                    &nbsp;
+                    <apex:commandLink onclick="markMessageVisited(id); return false;"
+                                id="markAsReadMessageId">
+                                <img src="{!URLFOR($Resource.iconset, 'iconset/1_2.png')}"
+                                    height="14" width="14" title="{!$Label.Label_Mark_As_Read}" />
+                                </apex:commandLink>
+                            </apex:outputPanel>
+                        </div>
+                    </apex:repeat>
+                </apex:outputPanel>
+            </apex:outputPanel>
+        </apex:outputPanel>
+
+
+        <script>
+  var timer=setInterval("refreshMessages()",10000);   
+</script>
+
+    </apex:form>
+
+</apex:page>

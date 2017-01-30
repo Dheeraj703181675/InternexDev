@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Forecasting Configuration</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Forecasting Configuration</value>
+    </caseValues>
+    <fields>
+        <label><!-- Buckets On Base --></label>
+        <name>BucketsOnBase__c</name>
+    </fields>
+    <fields>
+        <label><!-- Default Currency --></label>
+        <name>Default_Currency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Forecast Filter --></label>
+        <name>Forecast_Filter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Freeze Date --></label>
+        <name>FreezeDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Multi Currency --></label>
+        <name>Is_Multi_Currency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Name Space --></label>
+        <name>NameSpace__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Funding_Transaction__c.Funding_Transaction_Date__c</field>
+    </columns>
+    <columns>
+        <field>Case.Client_Name__c</field>
+    </columns>
+    <columns>
+        <field>Case.Client_Account__c</field>
+    </columns>
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>Case.Applied_Origination_Fee__c</field>
+    </columns>
+    <columns>
+        <field>Case.Applied_Draw_Fee__c</field>
+    </columns>
+    <columns>
+        <field>Funding_Transaction__c.Funds_to_be_Transferred__c</field>
+    </columns>
+    <columns>
+        <field>Case.Funding_Requested__c</field>
+    </columns>
+    <currency>USD</currency>
+    <format>Tabular</format>
+    <name>Daily Funding Transaction Report V1.0</name>
+    <params>
+        <name>units</name>
+        <value>h</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CaseCustomEntity$Funding_Transaction__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATEONLY</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

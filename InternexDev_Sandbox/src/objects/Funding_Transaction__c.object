@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Applied_Draw_Fee__c</fullName>
+        <externalId>false</externalId>
+        <formula>Funding_Request__r.Applied_Draw_Fee__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Applied Draw Fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Applied_Fee__c</fullName>
+        <externalId>false</externalId>
+        <formula>Funding_Request__r.Applied_Draw_Fee__c + Funding_Request__r.Applied_Origination_Fee__c + IF( Funding_Request__r.Wire_Mode__c == True,Funding_Request__r.Wire_Fee__c,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Applied Fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Applied_Origination_Fee__c</fullName>
+        <externalId>false</externalId>
+        <formula>Funding_Request__r.Applied_Origination_Fee__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Applied Origination Fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Applied_Partner_Draw_Fee__c</fullName>
+        <externalId>false</externalId>
+        <formula>Funding_Request__r.Actual_Partner_Draw_Fee__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Applied Partner Draw Fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Applied_Partner_Origination_Fee__c</fullName>
+        <externalId>false</externalId>
+        <formula>Funding_Request__r.Actual_Partner_Origination_Fee__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Applied Partner Origination Fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Bank_Details__c</fullName>
+        <externalId>false</externalId>
+        <label>Bank Details</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Created_Time__c</fullName>
+        <externalId>false</externalId>
+        <formula>LastModifiedDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Created Time</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Deal_Acceptance_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>CP Funded Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Discount_Interest_Rate__c</fullName>
+        <externalId>false</externalId>
+        <label>Discount/Interest Rate</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Drawal_Fee_Percentage__c</fullName>
+        <externalId>false</externalId>
+        <formula>Funding_Request__r.Client_Account__r.Drawal_Fee_Percentage__c</formula>
+        <label>Draw Fee Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Drawal_Fee__c</fullName>
+        <defaultValue>true</defaultValue>
+        <externalId>false</externalId>
+        <label>Draw Fee</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Fund__c</fullName>
+        <externalId>false</externalId>
+        <label>Funding Allotted</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Funding_Provider__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Funding Provider</label>
+        <referenceTo>Capital_Provider__c</referenceTo>
+        <relationshipLabel>Funding Transactions</relationshipLabel>
+        <relationshipName>Funding_Transactions</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Funding_Request__c</fullName>
+        <externalId>false</externalId>
+        <label>Funding Request</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Case.Status</field>
+                <operation>equals</operation>
+                <value>Fully Funded, Funds Transferred</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Case</referenceTo>
+        <relationshipLabel>Funding Transactions</relationshipLabel>
+        <relationshipName>Funding_Transactions</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Funding_Transaction_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Funding Transaction Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Funding_provider_Name__c</fullName>
+        <defaultValue>&apos;InterNex&apos;</defaultValue>
+        <externalId>false</externalId>
+        <label>Funding provider Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Funds_to_be_Transferred__c</fullName>
+        <externalId>false</externalId>
+        <formula>Funding_Request__r.Funding_Requested__c - Applied_Fee__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Funds to be Transferred</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MP_External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>MP External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Minimum_Drawal_fee__c</fullName>
+        <externalId>false</externalId>
+        <formula>Funding_Request__r.Client_Account__r.Minimum_Drawal_Fee__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Minimum Draw fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Minimum_Origination_Fee__c</fullName>
+        <externalId>false</externalId>
+        <formula>Funding_Request__r.Client_Account__r.Minimum_Origination_Fee__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Minimum Origination Fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Origination_Fee_Applicable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Origination Fee Applicable</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Origination_Fee_Percentage__c</fullName>
+        <externalId>false</externalId>
+        <formula>Funding_Request__r.Client_Account__r.Origination_Fee_Percentage__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Origination Fee Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Origination_Fee__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Origination Fee</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Portal_External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>Portal External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Sync_with_Grade__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Sync with Grade</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sync_with_Market_Place__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Sync with Market Place</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sync_with_Portal__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Sync with Portal</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Draw</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Remittance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <label>Funding Transaction</label>
+    <nameField>
+        <displayFormat>FT-{00000}</displayFormat>
+        <label>Funding Transaction Name</label>
+        <trackHistory>true</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Funding Transactions</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Funding_Transaction_Date_Validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>$Setup.BusinessTransactionDate__c.Business_Transaction_Date__c
+&lt; Datevalue(Funding_Transaction_Date__c)</errorConditionFormula>
+        <errorMessage>Please enter the Valid Date.Transaction Date must be Less than or Equal to Business Transaction Date.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Validation_on_Alloted_Funding_amount</fullName>
+        <active>true</active>
+        <errorConditionFormula>OR(AND(ISNEW(),Funding_Request__r.Funds_Released__c + Fund__c &gt; Funding_Request__r.Funding_Requested__c), (Funding_Request__r.Funds_Released__c - PRIORVALUE(Fund__c)) + Fund__c &gt; Funding_Request__r.Funding_Requested__c)</errorConditionFormula>
+        <errorDisplayField>Fund__c</errorDisplayField>
+        <errorMessage>Please enter valid Amount. You can not give more than Requested amount.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Validation_on_Funding_Transaction_Count</fullName>
+        <active>true</active>
+        <errorConditionFormula>ISNEW() &amp;&amp; Funding_Request__r.Funding_Transaction_Count__c &gt;= 1</errorConditionFormula>
+        <errorMessage>Only One Funding Transaction allowed for one Funding Request</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Send_to_Portal</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send to Portal</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
+
+
+
+var callResult =sforce.apex.execute(&apos;TPSSF.TPConnectorService&apos;,&apos;SubmitExt&apos;,{sforceObjectType:&apos;Funding_Transaction__c&apos;,sforceObjectId:&apos;{!Funding_Transaction__c.Id}&apos;,queryString:&apos;&apos;,externalObjectId:&apos;&apos;,action:&apos;sendtoportal&apos;,profileKey:&apos;&apos;,profile:&apos;&apos;,userId:&apos;{!$User.Id}&apos;,sessionId:&apos;{!$Api.Session_ID}&apos;,partnerUrl:&apos;{!$Api.Partner_Server_URL_220}&apos;,username:&apos;{!$User.Username}&apos;, event:&apos;&apos;,clientId:&apos;&apos;,additionalData:&apos;&apos;}); 
+
+window.alert(callResult[0]); 
+window.location.reload(); 
+
+/* 
+window.alert(&apos;Under Construction!&apos;); 
+window.location.reload(); 
+*/</url>
+    </webLinks>
+</CustomObject>

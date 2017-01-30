@@ -1,0 +1,276 @@
+<apex:page id="pgId" standardController="akritivtlm__AP_Tracker__c" sidebar="false" extensions="akritivtlm.advanceSearchCtrl">
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__EXT,'/js/ext.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__EXT, '/css/ext-all.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__EXT, '/css/xtheme-gray.css')}" />
+<style>
+.refreshListButton {
+    background: url("/img/alohaSkin/sync.png") !important;
+    height: 20px;
+    vertical-align: bottom;
+    width: 22px;
+}
+</style>
+<script>
+    var arry = new Array();
+    var start = 0;
+    var isFirstTime=true;
+    <apex:repeat value="{!tmpWrapper}" var="w">
+        var tmp = {};
+        tmp['header'] = "{!JSENCODE(w.header)}";
+        tmp['width'] = {!JSENCODE(w.width)};
+        tmp['sortable'] = {!JSENCODE(w.sortable)}; 
+        tmp['hidden'] = {!JSENCODE(w.hidden)};
+        tmp['dataIndex'] = "{!JSENCODE(w.dataIndex)}";
+        arry.push(tmp);
+    </apex:repeat>
+
+    function taskLabelRenderer(value, metadata, record, rowIndex, colIndex, store){
+        var recordId = store.getAt(rowIndex).get('Id');
+        var redirectString = '{!JSENCODE(redirectEditLink)}id='+recordId;
+        //return '<input type="button" value="{!$Label.Label_Edit}" onclick="window.location.href=window.location.href.replace(\'/apex/advanceSearchPage\',\''+redirectString+'\')" />';
+        return '<input type="button" value="{!$Label.Label_Edit}" onclick="startProcess();callEditBtn(\''+recordId+'\');" />';
+    }
+    
+    function callEditBtn(recordId) {
+        searchObj['start'] = start;
+        var searchData = JSON.stringify(searchObj);
+        var gridObj = Ext.getCmp('summaryGrid');
+        var store = gridObj.getStore();
+        editBtnClicked(recordId,searchData);
+    }
+    var storeJSON = [
+        <apex:repeat value="{!storeJSONLst}" var="s">
+            {"name" : "{!JSENCODE(s)}"},
+        </apex:repeat>
+    ];
+    var columnJSON = [
+        {
+            "header" : "Edit",
+            "width" : 50,
+            "sortable" : true,
+            "renderer" : taskLabelRenderer,
+            "dataIndex" : "edit_block"
+        }
+    ];
+    for(var i =0; i < arry.length ; i++){
+        columnJSON.push(arry[i]);
+    }
+</script>
+
+<apex:pageMessages id="pgMsgs"></apex:pageMessages>
+
+<apex:form id="frmId">
+
+    <!-- for providing loading -->
+    <div id="filter" style= "display:none;"></div> 
+    <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES, 'img/loading.gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+    <!-- for providing loading -->
+
+    <!--<apex:actionFunction action="{!updateRecords}"  name="updateRecords1" reRender="bulkPageBlock" oncomplete="createSearchButton();">
+        <apex:param name="firstParam"  assignTo="{!TrackerIds}" value=""/>
+        <apex:param name="secoundParam" assignTo="{!SelectedUserId}" value=""/>
+    </apex:actionFunction>-->
+
+    <apex:actionFunction id="editBtnClicked" name="editBtnClicked" action="{!editBtnClicked}" oncomplete="endProcess();" reRender="pgMsgs" immediate="true" ><!--  immediate="true" -->
+        <apex:param name="firstParam" value="" assignTo="{!selectedCaseId}"/>
+        <apex:param name="secondParam" value="" assignTo="{!searchParam}"/>
+    </apex:actionFunction>
+
+    <apex:pageBlock id="pgBlckId">
+        <div style="padding-left:9%;">
+            <label for="pgId:frmId:pgBlckId:viewsList" style="color:#4a4a56;padding-top:0px;padding-bottom:0px;width:20%;text-align: right;padding-left: 0px;font-size: 94%;font-weight: bold;">List View </label>
+            <apex:selectList id="viewsList" size="1" value="{!filterId}" onchange="getListViews();" style="margin-left:10px;">
+                <apex:selectOptions value="{!listViewOptionsFinal}"/>
+            </apex:selectList>
+            <input type="button" class="refreshListButton" value="" onclick="getListViews();" id="btnRefresh" title="Refresh"/>
+        </div><br/>
+        <apex:dynamicComponent componentValue="{!dynamicForm}"/>
+    </apex:pageBlock>
+</apex:form>
+
+<script type="text/javascript">
+    function startProcess(){
+       document.getElementById("pgId:frmId:loading").style.display = 'block';       
+       document.getElementById('filter').style.display = 'block';
+    }
+    function endProcess(){
+       document.getElementById("pgId:frmId:loading").style.display = 'none';
+       document.getElementById('filter').style.display = 'none';
+    }
+
+    function getListViews(){
+        searchObj = {};
+        //var selectElement = document.getElementById('pgId:frmId:pgBlckId:selectOptionsId');
+        //selectElement.value = '';
+        var gridObj = Ext.getCmp('summaryGrid');
+        var store = gridObj.getStore();
+        var filterId,name;
+        if(document.getElementById('pgId:frmId:pgBlckId:viewsList') != null){
+            filterId = document.getElementById('pgId:frmId:pgBlckId:viewsList').value;
+            name = document.getElementById('pgId:frmId:pgBlckId:viewsList').options[document.getElementById("pgId:frmId:pgBlckId:viewsList").selectedIndex].text;
+        }
+        store.setBaseParam('filterId',filterId);
+        searchObj['filterId'] = filterId;
+        store.setBaseParam('filterName',name);
+        searchObj['filterName'] = name;
+        store.setBaseParam('childObjectName',childObjName);
+        searchObj['childObjectName'] = childObjName;
+        start = 0;
+        //alert('searchObj : ' + JSON.stringify(searchObj));
+        var startNum=0;
+        if(isFirstTime) {
+            startNum = {!start};
+            isFirstTime = false;
+        }
+        store.load({params: {start : startNum , limit:15}});
+    }
+
+    var childObjName = '';
+    var searchObj = {};
+    function getCases(){
+       searchObj = {};
+       var CommaList = '{!JSENCODE(commaSepFields)}';
+       var array = CommaList.split(',');
+       var gridObj = Ext.getCmp('summaryGrid');
+       var store = gridObj.getStore();
+       for(var i=0;i<array.length;i++){
+           store.setBaseParam(array[i],"");
+           var type = document.getElementById('pgId:frmId:pgBlckId:pgBlckSec1:'+array[i]).type;
+           var value = '';
+           if(type != null && type.toUpperCase() == 'CHECKBOX') {
+               if(document.getElementById('pgId:frmId:pgBlckId:pgBlckSec1:'+array[i]).checked) {
+                   value = 'true';
+               } else {
+                   value = 'false';
+               }
+           } else {
+               value = document.getElementById('pgId:frmId:pgBlckId:pgBlckSec1:'+array[i]).value;      
+           }
+           var isDisabled = document.getElementById('pgId:frmId:pgBlckId:pgBlckSec1:'+array[i]).disabled;
+           if(isDisabled){
+               store.setBaseParam(array[i],"");
+               searchObj[array[i]] = "";
+           }else if(value != null && value != ''){
+               store.setBaseParam(array[i],value);
+               searchObj[array[i]] = value;
+           }
+       }
+       var userSelect = document.getElementById('userSelect').options[document.getElementById('userSelect').selectedIndex].text;
+       if (userSelect == '--None--'){
+           store.setBaseParam('userSelect','');
+           searchObj['userSelect'] = '';
+       }else{
+           store.setBaseParam('userSelect',userSelect);
+           searchObj['userSelect'] = userSelect;
+       }
+       store.setBaseParam('childObjectName',childObjName);
+       searchObj['childObjectName'] = childObjName;
+       var filterId = '';
+        if(document.getElementById('pgId:frmId:pgBlckId:viewsList') != null){
+            filterId = document.getElementById('pgId:frmId:pgBlckId:viewsList').value;
+        }
+       //store.setBaseParam('filterId','');
+       store.setBaseParam('filterId',filterId);
+       searchObj['filterId'] = filterId;
+       store.setBaseParam('filterName','');
+       start = 0;
+       searchObj['filterName'] = '';
+       //alert('searchObj : ' + JSON.stringify(searchObj));
+       var startNum=0;
+       if(isFirstTime) {
+           startNum = {!start};
+           isFirstTime = false;
+       }
+       store.load({params: {start : startNum , limit:15}});
+    }
+    function createSearchButton(){
+        var panelDiv = document.getElementById('pgId:frmId:pgBlckId:pgBlckSec1');
+        var pBody = panelDiv.getElementsByTagName('DIV')[0];
+        var searchButton = document.createElement("INPUT");
+        searchButton.value = "Search";
+        searchButton.type = "button";
+        searchButton.setAttribute('onclick','getCases();');
+        pBody.appendChild(searchButton);
+    }
+    Ext.onReady(function(){
+        childObjName = '{!JSENCODE(childObjectName)}';
+        createSearchButton();
+        //document.getElementById('dataGrid').innerHTML = '';
+        //var select = document.getElementById("pgId:frmId:pgBlckId:pgBlckSec1:userSelect");
+        var pageSize =15;
+
+        gridStore = new Ext.data.JsonStore({
+            root: 'data',
+            idProperty: 'gsId',
+            totalProperty: 'totalCount',
+            remoteSort: true,
+            fields: storeJSON,
+            viewConfig : {
+                forceFit: true,
+                scrollOffset : 0
+            },
+            successProperty: 'success',        
+            proxy : new Ext.data.HttpProxy({
+                url : 'advanceSearchJSONPage'
+            })
+        });
+        grid =  new Ext.grid.GridPanel({
+            id : 'summaryGrid',
+            store:gridStore,
+            //selModel :searchCheckBx,
+            viewConfig : {
+                forceFit: true
+            },
+            loadMask: true,
+            height : 400,
+            autoWidth: true,
+            columns: columnJSON,
+            bbar: new Ext.PagingToolbar({   
+                items :[
+
+                ],   
+                store: gridStore,      
+                pageSize: 15,
+                emptyMsg: '',        
+                displayInfo: true,
+                displayMsg:'Displaying records {0} - {1} of {2}',
+                listeners: {
+                    beforechange: function(pagingtoolbar, page, eOpts) {
+                        start = page.start;
+                        //alert('start : ' + start);
+                    }
+                }
+            }),
+            renderTo: 'dataGrid'
+        });
+        <apex:repeat value="{!readOnlyFields}" var="apiName">
+            document.getElementById('pgId:frmId:pgBlckId:pgBlckSec1:{!apiName}').value='{!JSENCODE(readOnlyFieldsValue[apiName])}';
+        </apex:repeat>
+        if('{!JSENCODE(caseName)}' != '') {
+            document.getElementById('pgId:frmId:pgBlckId:pgBlckSec1:Name').value='{!JSENCODE(caseName)}';
+        }
+        if('{!JSENCODE(filterId)}' == 'true') {
+            if('{!JSENCODE(filterId)}' != '') {
+                document.getElementById('pgId:frmId:pgBlckId:viewsList').value = '{!JSENCODE(filterId)}';
+            }
+            getListViews();
+        } else if('{!JSENCODE(filterId)}' == 'false' && '{!JSENCODE(filterId)}' != '') {
+            document.getElementById('pgId:frmId:pgBlckId:viewsList').value = '{!JSENCODE(filterId)}';
+            getCases();
+        } else {
+            getCases();
+        }
+    });
+    
+</script>
+<style type="text/css">
+.td-padding {
+    padding-right:10px;
+ }
+</style>
+     <apex:form id="bulkForm1">
+
+         <div id="dataGrid"></div>
+           <!--input id="searchCase" type="button" value="Search" onclick="getCases();"/-->
+     </apex:form>
+</apex:page>

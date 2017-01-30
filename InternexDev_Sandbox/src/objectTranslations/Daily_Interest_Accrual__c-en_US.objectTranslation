@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Daily Interest Accrual</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Daily Interest Accruals</value>
+    </caseValues>
+    <fields>
+        <label><!-- Active --></label>
+        <name>Active__c</name>
+    </fields>
+    <fields>
+        <label><!-- Applied --></label>
+        <name>Applied__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business Transaction Date --></label>
+        <name>Business_Transaction_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Account --></label>
+        <name>Client_Account__c</name>
+    </fields>
+    <fields>
+        <help><!-- Min Utilization (%) * Client Funding Limit --></help>
+        <label><!-- Min Utilization Amount --></label>
+        <name>Commitment_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unused Line Amount for UL fee --></label>
+        <name>Commitment_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Min Utilization (%) --></label>
+        <name>Commitment__c</name>
+    </fields>
+    <fields>
+        <label><!-- UL Fee Accrued --></label>
+        <name>Commitment_fee_acc__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unused Line Rate --></label>
+        <name>Commitment_rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current IUF Retained --></label>
+        <name>Current_IUF_Retained__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date --></label>
+        <name>Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Eligible For Funding --></label>
+        <name>Eligible_For_Funding__c</name>
+    </fields>
+    <fields>
+        <label><!-- FIU Outstanding ( Derived ) --></label>
+        <name>FIU_Outstanding_Formula__c</name>
+    </fields>
+    <fields>
+        <label><!-- Balance --></label>
+        <name>FIU_Outstanding__c</name>
+    </fields>
+    <fields>
+        <label><!-- Flag for Last Day of the Month --></label>
+        <name>Flag_for_Last_Day_of_the_Month__c</name>
+    </fields>
+    <fields>
+        <label><!-- Funding Limit --></label>
+        <name>Funding_Limit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Gross Availability --></label>
+        <name>Gross_Availability__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ineligibles Amount --></label>
+        <name>Ineligibles_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interest Base Rate --></label>
+        <name>Interest_Base_Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interest Base --></label>
+        <name>Interest_Base__c</name>
+        <picklistValues>
+            <masterLabel>Citi Prime</masterLabel>
+            <translation><!-- Citi Prime --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Internex base</masterLabel>
+            <translation><!-- Internex base --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LIBOR</masterLabel>
+            <translation><!-- LIBOR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WS Prime</masterLabel>
+            <translation><!-- WS Prime --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Interest Rate Applied --></label>
+        <name>Interest_Rate_Applied__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interest Spread --></label>
+        <name>Interest_Spread__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interest Accrued --></label>
+        <name>Interest__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice Amount --></label>
+        <name>Invoice_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Day of the Month --></label>
+        <name>Last_Day_of_the_Month__c</name>
+    </fields>
+    <fields>
+        <label><!-- Method --></label>
+        <name>Method__c</name>
+        <picklistValues>
+            <masterLabel>30 / 360</masterLabel>
+            <translation><!-- 30 / 360 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ACTUAL / 360</masterLabel>
+            <translation><!-- ACTUAL / 360 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ACTUAL / ACTUAL</masterLabel>
+            <translation><!-- ACTUAL / ACTUAL --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Min Utilization Amount --></label>
+        <name>MinCommitmentAmount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Monthly Interest Application --></label>
+        <name>Monthly_Interest_Application__c</name>
+        <relationshipLabel><!-- Daily Interest Accruals --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Monthly Interest --></label>
+        <name>Monthly_Interest__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Availability --></label>
+        <name>Net_Availability__c</name>
+    </fields>
+    <fields>
+        <label><!-- No of Days --></label>
+        <name>No_of_Days__c</name>
+    </fields>
+    <fields>
+        <label><!-- Non-Accrual --></label>
+        <name>Non_performing_asset__c</name>
+    </fields>
+    <fields>
+        <label><!-- Principal for interest --></label>
+        <name>Prin_for_intt__c</name>
+    </fields>
+    <layouts>
+        <layout>Daily Interest Accrual Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Financial Information --></label>
+            <section>Financial Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Internex-All</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Financial Information --></label>
+            <section>Financial Information</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

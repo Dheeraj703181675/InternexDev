@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Interest Calculation Status</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Interest Calculation Status</value>
+    </caseValues>
+    <fields>
+        <label><!-- Business Transaction Date --></label>
+        <name>Business_Transaction_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Account --></label>
+        <name>Client_Account__c</name>
+        <relationshipLabel><!-- Interest Calculation Status --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Comments --></label>
+        <name>Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Failed</masterLabel>
+            <translation><!-- Failed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Successful</masterLabel>
+            <translation><!-- Successful --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Interest Calculation Status Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

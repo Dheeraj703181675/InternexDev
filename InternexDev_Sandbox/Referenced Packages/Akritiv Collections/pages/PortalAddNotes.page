@@ -1,0 +1,55 @@
+<!--
+/*
+ *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ *This software is the confidential and proprietary information
+ *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ *disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+    /*
+     * The page is related to Customer Portal.Page that provides the functionality
+     * to add a note for a dispute on customer portal.
+     */
+-->
+<apex:page standardController="akritiv__Dispute__c"
+    extensions="akritiv.PortalAddNotesController">
+    <apex:sectionHeader title="{!$Label.Label_Edit_Note}"
+        subtitle="{!akritiv__Dispute__c.Name}" />
+    <apex:form >
+        <apex:pageBlock mode="Edit">
+
+            <apex:pageMessages id="validationMsg">
+            </apex:pageMessages>
+
+            <apex:pageBlockButtons >
+                <apex:commandButton value="{!$Label.Label_Save}" action="{!SaveNew}"
+                    reRender="validationMsg" />
+                <apex:commandButton value="{!$Label.Label_Cancel}"
+                    action="{!Cancel}" />
+            </apex:pageBlockButtons>
+
+            <apex:pageBlockSection columns="1">
+
+                <!--                <apex:inputField style="width:400px;" value="{!newNote.Title}"/>    -->
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Title}:" />
+                    <apex:inputText value="{!noteTitle}" maxlength="70"
+                        style="width:400px;" />
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+
+                <apex:inputField style="width:450px; height:250px;"
+                    value="{!newNote.Body}" />
+
+            </apex:pageBlockSection>
+
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

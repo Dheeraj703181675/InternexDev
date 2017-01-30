@@ -1,0 +1,161 @@
+<apex:page id="pageId" controller="akritivtlm.HDAddAttachmentController" sidebar="false" showHeader="false" tabStyle="akritivtlm__Conversation__c">
+
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+
+<style>
+    #filter
+    {
+        display: block;
+        position: fixed;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-repeat:no-repeat;
+        background-position:center;
+        background-color: #ffffff;
+        z-index:10;
+        opacity:0.6;
+        filter: alpha(opacity=50);
+    }
+</style>
+<script>
+function startProcessForEdit(){
+   document.getElementById('{!$Component.pageId.frmId.loading}').style.display = 'block';       
+   document.getElementById('filter').style.display = 'block';
+}
+
+function endProcessForEdit(){
+   document.getElementById('{!$Component.pageId.frmId.loading}').style.display = 'none';
+   document.getElementById('filter').style.display = 'none'; 
+}
+function closeWindow(){
+    endProcessForEdit();
+    if({!closeFlag}){
+        var returnValue = ('{!JSENCODE(attachmentidlist)}');
+        window.parent.displayMessageAndClosePopUp("info",returnValue,"HDAddAttachment");
+    }else{
+        window.resizeBy(0,0);
+    }
+}
+function closeWindow1() {
+    window.parent.displayMessageAndClosePopUp("info","","HDAddAttachment");
+}
+function dummy(){
+    document.getElementById('pageId:frmId:pgBlck1:pgBlckSec1:file').disabled = 'disabled';
+}
+
+function splitHTML(string){
+    var str = string.split(';');
+    var e = document.createElement('div');
+    var msg = '';
+    for(var i=0;i<str.length;i++){
+        msg += str[i] + '<br/>';
+    }
+    document.getElementById('infoMsg').innerHTML = msg;
+}
+</script>
+
+
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+
+<style>
+    .messageblock{
+        font-size:11px;
+        border-radius: 4px;
+        border-color: #c00;
+        background-color: #ffc;
+        border-style: solid;
+        border-width: 1px;
+        color: #000;
+    }
+</style>
+
+<script>
+    function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+
+    function closeMessage() {
+        $('#messagebox').hide();   
+    }
+
+    function displayMessage(type,msg,interval) {
+        var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:50%;margin: 0 auto;margin-top: 5px;">'+
+                '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+                '</div>';
+        if(document.getElementById('messagebox') != null && document.getElementById('messagebox') != undefined) {
+                document.getElementById('messagebox').innerHTML = m;
+                animateMessageBox('messagebox',interval);
+        }
+        animateMessageBox('messagebox',interval);
+    }
+</script>
+
+<apex:outputpanel id="messagepanel" style="Display:None">
+    <apex:messages id="msg1"  style="Display:None" />
+    <script>
+        if(document.getElementById('{!$Component.msg1}') != null && document.getElementById('{!$Component.msg1}') != undefined) {
+        var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('li');
+        var msg='';
+        for(var i=0;i<obj.length;i++) {
+            if(i==0) 
+            msg += '<br />';
+            msg += obj[i].innerHTML + '<br />';
+        }
+        if(msg != '') {
+           setTimeout(function(){displayMessage('error',msg,10000);},1000);
+        }
+    }
+    </script>
+</apex:outputpanel>
+
+<div id="messagebox" style="z-index:10 !important;position:fixed !important;width:100% !important;top:30%;left:0%;" ></div>
+
+<div class="alert alert-warning alert-dismissable" style="width:100%;margin:2px;margin-top: 0px;">
+    <img src="/img/msg_icons/info24.png" width="16" height="16" />
+    <strong><b>Info</b></strong>
+    <div id="infoMsg"></div>
+</div>
+
+<apex:form id="frmId">
+    <!-- for providing loading -->
+    <div id="filter" style= "display:none;"></div> 
+    <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+    <!-- for providing loading -->
+
+    <apex:pageBlock id="pgBlck1" title="{!$Label.Label_Attach_File}">
+        <apex:pageBlockSection id="pgBlckSec1">
+            <apex:outputPanel layout="block">
+                <apex:inputFile id="file" value="{!attachment.body}" filename="{!attachment.name}" fileSize="{!attachment.BodyLength}" contentType="{!attachment.ContentType}" style="width:100%;"/>                   
+                <br/><br/>
+                <apex:actionStatus id="saveStatus1">
+                    <apex:facet name="stop">
+                        <apex:commandButton id="cmdBtn" value="{!$Label.Label_Add_Attachment}" onclick="startProcessForEdit();" action="{!uploadAttachment}" />
+                    </apex:facet>
+                    <apex:facet name="start">
+                        <apex:commandButton value="{!$Label.Label_Add_Attachment}..." disabled="true" status="saveStatus1"/>
+                    </apex:facet>
+                </apex:actionStatus>
+                <apex:actionStatus id="saveStatus2">
+                    <apex:facet name="stop">
+                        <apex:commandButton id="cnclBtn" value="{!$Label.Label_Cancel}" onclick="closeWindow1();" rerender="pageId,messagepanel,msg"/>
+                    </apex:facet>
+                    <apex:facet name="start">
+                        <apex:commandButton value="{!$Label.Label_Cancel}..." disabled="true" status="saveStatus2"/>
+                    </apex:facet>
+                </apex:actionStatus>
+                <!--<apex:commandButton id="cmdBtn" value="{!$Label.Label_Add_Attachment}" onclick="startProcessForEdit();" action="{!uploadAttachment}" />
+                <apex:commandButton id="cnclBtn" value="{!$Label.Label_Cancel}" onclick="window.returnValue='close';window.close();" rerender="pageId"/>-->
+            </apex:outputPanel>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form>
+<script>
+closeWindow();
+splitHTML('{!JSENCODE(infoMessage)}');
+</script>
+</apex:page>

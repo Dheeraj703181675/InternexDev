@@ -1,0 +1,175 @@
+<apex:page id="pg"  controller="akritivtlm.AttachmentSelection" sidebar="false" showHeader="false">
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<style>
+    .messageblock{
+        font-size:11px;
+        border-radius: 4px;
+        border-color: #c00;
+        background-color: #ffc;
+        border-style: solid;
+        border-width: 1px;
+        color: #000;
+    }
+</style> 
+
+<script>
+    function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+
+    function closeMessage() {
+        $('#messagebox').hide();   
+    }
+    function closeMessage1() {
+        $('#stdInfoMsg').hide();   
+    }
+
+    function displayMessage(type,msg,interval) {
+     var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:50%;margin: 0 auto;margin-top: 5px;">'+
+            '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+            '</div>';
+    if(document.getElementById('messagebox') != null && document.getElementById('messagebox') != undefined) {
+            document.getElementById('messagebox').innerHTML = m;
+            animateMessageBox('messagebox',interval);
+        }
+    animateMessageBox('messagebox',interval);
+}
+</script>
+
+<apex:outputpanel id="messagepanel" style="Display:None">
+    <apex:messages id="msg1"  style="Display:None" />
+    <script>
+    
+        if(document.getElementById('{!$Component.msg1}') != null && document.getElementById('{!$Component.msg1}') != undefined) {
+        var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('li');
+        var msg='';
+        for(var i=0;i<obj.length;i++) {
+            if(i==0) 
+            msg += '<br />';
+            msg += obj[i].innerHTML + '<br />';
+        }
+        if(msg != '') {
+            setTimeout(function() {displayMessage('error',msg,10000);},1000);
+        }
+    }
+    </script>
+</apex:outputpanel>
+
+<div id="messagebox" style="z-index:10 !important;position:fixed !important;width:50% !important;top:30%;left:20%;" ></div>
+
+<script>
+    selectedRec = '';
+    function setattachmentid(obj,val){
+        //alert('Value'+val);
+        var allChk = document.getElementsByName("chkAttach");
+        
+        for(var i=0;i<allChk.length;i++) {
+        
+            if(allChk[i].checked){
+                selectedRec = selectedRec +','+allChk[i].value;
+            }else{
+                if(selectedRec.match(allChk[i].value)){
+                        var rem = ','+allChk[i].value;
+                        selectedRec = selectedRec.replace(rem,'');
+                }
+            }
+        }
+        //alert(selectedRec);
+        document.getElementById('pg:frm:SelectedId').value = selectedRec;
+        //alert(document.getElementById('pg:frm:SelectedId').value);
+        //newaction(selectedRec);
+    }
+    
+    function splitHTML(string){
+        var str = string.split(';');
+        var e = document.createElement('div');
+        var msg = '';
+        for(var i=0;i<str.length;i++){
+            msg += str[i] + '<br/>';
+        }
+        document.getElementById('infoMsg').innerHTML = msg;
+    }
+</script>
+
+<div class="alert alert-warning alert-dismissable" style="width:100%;margin:2px;margin-top: 0px;">
+    <img src="/img/msg_icons/info24.png" width="16" height="16" />
+    <strong><b>Info</b></strong>
+    <div id="infoMsg"></div>
+</div>
+
+<apex:outputpanel id="stdInfoMsgOp" rendered="{!IF(stdInfoMsg == null , false, true)}">
+    <div id="stdInfoMsg" class="alert messageblock alert-warning alert-dismissable" style="z-index:10 !important;position:fixed !important;width:80% ;top:30%;left:20%;width:50%;margin: 0 auto;margin-top: 5px;">
+        <img src="/img/msg_icons/info24.png" width="16" height="16" />
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage1();">&times;</button>
+        <strong><b>Info</b></strong>
+        <div id="stinfoMsg">{!JSENCODE(stdInfoMsg)}</div>
+    </div>
+    <script>animateMessageBox('stdInfoMsg',5000);</script>
+</apex:outputpanel>
+
+<!-- <apex:pagemessages id="msgId1" />  -->
+<apex:form id="frm">
+
+    <apex:inputHidden id="SelectedId" value="{!SelectedID}" />
+    <apex:actionFunction name="newaction" action="{!checkattachment}" reRender="">
+            <apex:param name="parameter" assignTo="{!selectedattachmentid}" value="" /> 
+    </apex:actionFunction>
+    <!--<apex:actionFunction name="newaction" action="{!getchechboxvalue}" rerender="pb">
+                 <apex:param name="parameter" assignTo="{!selectedattachmentid}" value="" /> 
+         </apex:actionFunction>-->
+    <apex:pageBlock id="pb" title="{!$Label.Label_Select_Files}" >
+        <apex:pageBlockTable columns="3" value="{!attachmentsList}"  var="attachlist" id="pbtable">
+            <!--<apex:inputCheckbox value="{!c.selected}">
+            <apex:actionSupport action="{!showTotalCount}" event="onclick" rerender="TotalSelectContacts">
+            <apex:param assignTo="{!selectedId}" value="{c.con.id}" name="selectedI"/>
+            </apex:actionsupport>--> 
+
+            <apex:column >
+                <apex:outputPanel rendered="{!IF( AND( CONTAINS(prevSelectedId,attachlist.id), NOT(ISBLANK( TRIM( prevSelectedId )) ) ),true,false)}" >
+                    <input type = "checkbox" checked="checked" name="chkAttach" value="{!attachlist.id}" />
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!NOT(CONTAINS(prevSelectedId,attachlist.id))}">
+                    <input type = "checkbox" name="chkAttach" value="{!attachlist.id}" />
+                </apex:outputPanel>
+            </apex:column>
+
+
+            <apex:column value="{!attachlist.Name}"></apex:column>
+            <apex:column value="{!attachlist.BodyLength}"></apex:column>
+        </apex:pageBlockTable>
+
+        <apex:outputPanel id="oppanel">
+            <script>
+                function callaftersave(){
+                    if(!{!windowClose}) {
+                        top.window.opener.setEmailAttachmentsIds('{!JSENCODE(attachmentsIds)}', '{!JSENCODE(attachmentFileNames)}');
+                        window.close(); 
+                    }
+                }
+            </script>
+        </apex:outputPanel>
+
+        <apex:commandButton value="{!$Label.Label_Save_And_Close}" onclick="setattachmentid();" oncomplete="callaftersave();" action="{!checkattachment}" reRender="messagepanel,oppanel,frm"></apex:commandButton>
+        <!-- <apex:commandButton value="OK" action="{!checkattachment}" reRender="pbtable" id="okBtn"></apex:commandButton>
+            <div style="padding-left:200px;">
+                <apex:commandButton value="Attach" onclick="saveAndClose();" />
+            </div>
+         <apex:actionFunction name="saveAndClose" action="{!checkattachment}"     oncomplete="callaftersave();" reRender="oppanel" />-->
+    </apex:pageBlock>
+
+</apex:form>
+
+<apex:form id="frm1" enctype="multipart/form-data">
+    <apex:pageBlock id="attachment" title="{!$Label.Label_Attach_File}" >
+        <apex:inputFile value="{!attachment.Body}"  filename="{!attachment.Name}" contentType="{!attachment.ContentType}" fileSize="{!attachment.BodyLength}" id="file"/>
+        <apex:commandButton value="{!$Label.Label_Attach_File}" action="{!attachFile}"  ></apex:commandButton>
+    </apex:pageBlock>
+</apex:form>
+<script>
+splitHTML('{!JSENCODE(infoMessage)}');
+</script>
+</apex:page>

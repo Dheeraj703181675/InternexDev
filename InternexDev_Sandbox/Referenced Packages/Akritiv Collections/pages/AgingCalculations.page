@@ -1,0 +1,73 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/*
+ *  *** CAN BE DELETED **** This page is an alternative to run the
+ *  aging batch job for all the accounts. This page was implemented
+ *  as the BatchAgingJob was not running on subscriber org.
+ *  The main page to run the aging job is ./apex/CalculateAging.
+ */
+-->
+<apex:page Controller="akritiv.AgingCalculations" tabStyle="akritiv__Data_Load_Batch__c">
+
+    <script>
+        var timer;
+        
+        function startRefreshTimer() {
+            timer=setInterval("updateAccount()",400);
+        }
+    </script>
+
+    <apex:sectionHeader title="{!$Label.Label_Batch_Aging_Calculations}" />
+    <apex:form >
+        <apex:pageBlock >
+            <apex:actionFunction name="updateAccount"
+                action="{!executeCalculations}"
+                reRender="executeBtn, progressStatus, updateInfo"
+                oncomplete="continueUpdateTx();" />
+
+            <apex:pageMessages >
+            </apex:pageMessages>
+            <apex:actionStatus startStyle="font-weight:Bold;color:#cc0000"
+                startText="{!$Label.Label_Please_Wait}" stopText="" id="loadStatus" />
+
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.Label_Start_Batch}"
+                    action="{!changeIsAgingProcess}" oncomplete="updateAccount();"
+                    disabled="{!IF(enableBtn = true, false, true)}" id="executeBtn" />
+            </apex:pageBlockButtons>
+
+            <apex:pageBlockSection columns="1">
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Status}" />
+                    <apex:outputText value="{!IF(enableBtn = true,'{!$Label.Label_Completed}','{!$Label.Label_In_Progress}')}"
+                        id="progressStatus" />
+                </apex:pageBlockSectionItem>
+                <apex:outputPanel id="updateInfo">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="{!$Label.Label_Total_Accounts_updated}{!accUpdated}" />
+                        <script>
+                 //if('{!enableBtn}' == 'true') {
+                 //    clearInterval(timer);
+                 //}
+                 function continueUpdateTx() {
+                     if('{!enableBtn}' == 'false') {
+                         updateAccount();
+                     }
+                 }
+             </script>
+                    </apex:pageBlockSectionItem>
+                </apex:outputPanel>
+
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

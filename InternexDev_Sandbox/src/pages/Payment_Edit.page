@@ -1,0 +1,47 @@
+<apex:page standardController="akritiv__Payment__c" extensions="SaveAndNew" id="pg" action="{!if($Profile.Name !='System Administrator', null, URLFOR($Action.akritiv__Payment__c.edit, akritiv__Payment__c.Id, [retURL=URLFOR($Action.akritiv__Payment__c.View, akritiv__Payment__c.Id)],true))}"> 
+<apex:sectionHeader title="Payment Edit" subtitle="Payment edit"/>
+<apex:form >
+<apex:pageBlock title="Payment Edit" id="pb">
+<apex:pageBlockButtons >
+<apex:commandButton value="Save" action="{!Save}"/>
+<apex:commandButton value="Save & New" action="{!saveNew}"/>
+<apex:commandButton value="Cancel" action="{!Cancel}"/>
+</apex:pageBlockButtons>
+<apex:pageBlockSection title="Information" columns="2" id="pbs1">
+<apex:outputField value="{!akritiv__Payment__c.Name}"/>
+<apex:outputField value="{!akritiv__Payment__c.Client_Account__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.akritiv__Payment_Date__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.Debtor__c}" rendered="{!if($Profile.Name =='InterNex Accounting Manager',True,False)}"/>
+<apex:inputField value="{!akritiv__Payment__c.Debtor__c}" rendered="{!if($Profile.Name =='Internex Admin Sys',True,False)}"/>
+<apex:outputField value="{!akritiv__Payment__c.akritiv__Amount__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.akritiv__Account__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.akritiv__Payment_Type__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.Bank_Account__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.Transaction_Type__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.Payment_Status__c}"/>
+<apex:inputField value="{!akritiv__Payment__c.Resolved__c}" rendered="{!if($Profile.Name =='Internex Admin Sys',True,False)}"/>
+<apex:outputField value="{!akritiv__Payment__c.Resolved__c}" rendered="{!if($Profile.Name =='InterNex Accounting Manager',True,False)}"/>
+</apex:pageBlockSection>
+<apex:pageBlockSection title="Lockbox Information" columns="2" id="pbs2">
+<apex:outputField value="{!akritiv__Payment__c.Routing_Number__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.Wells_Fargo_reference_number__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.Source_Bank_Account_No__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.Deposit_settlement_date__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.Credit_Debit__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.Payment_effective_date__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.Standard_Entry_Class_code__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.Transaction_processing_date_time__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.Standard_Payment_Reference_No__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.Additional_currency_code__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.Processing_System_Reference_No__c}"/>
+</apex:pageBlockSection>
+<apex:pageBlockSection title="Integration Information" columns="1" id="pbs3">
+<apex:outputField value="{!akritiv__Payment__c.External_Id__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.Portal_External_Id__c}"/>
+<apex:outputField value="{!akritiv__Payment__c.Portal_Transaction_Id__c}"/>
+</apex:pageBlockSection>
+        <!--  VF Page  -->
+
+    </apex:pageBlock>
+    </apex:form>  
+</apex:page>

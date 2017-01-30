@@ -1,0 +1,134 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<apex:page controller="akritiv.AutoDunningTasksController" sidebar="false" showHeader="false" id="pg" > 
+    <script>  
+    window.onload=function(){
+    callprepareTasks();};
+        function displayImage() {      
+            var statusvar = document.getElementById('pg:fm:pb:hiddenstatus').value;
+            if ( statusvar != 'Completed'){         
+                document.getElementById('pg:fm:pb:loading').style.display = 'block';
+                executefunction();
+            } else {            
+                document.getElementById('pg:fm:pb:loading').style.display = 'none';          
+            }
+            document.getElementById('pg:fm:pb:pb1:btn').value = "{!$Label.Label_Execute}";          
+        }
+        
+        function disableButton() {      
+            document.getElementById('pg:fm:pb:pb1:btn').value = "{!$Label.Label_Executing}";
+            document.getElementById('pg:fm:pb:pb1:btn').disabled = true;
+        }
+        
+        function monitorStatus() {     
+            var statusvar = document.getElementById('pg:fm:pb:hiddenstatus').value;
+            if ( statusvar == 'Completed'){      
+                document.getElementById('pg:fm:pb:loading').style.display = 'none';               
+            } else {     
+                executefunction();             
+            }
+        }
+    </script>
+    <apex:form id="fm">
+        <apex:actionFunction name="callprepareTasks" action="{!prepareTasks}" reRender="msg"/>        
+        <apex:pageBlock id="pb" >
+        <apex:pageMessages id="msg"></apex:pageMessages>
+            <apex:pageBlockButtons id="pb1" location="top">
+                <apex:actionFunction name="executefunction"  reRender="btn,opt1,msg,hiddenstatus,processedtsk,errortsk" action="{!execute}" oncomplete="monitorStatus();"/>
+                <apex:actionFunction name="fixfunction" reRender="opt1,processedtsk,errortsk" action="{!fixedTasks}"  />
+                   <apex:commandButton id="btn" value="{!$Label.Label_Execute}" disabled="{!buttonDisabled}" onClick="disableButton();" action="{!execute}" reRender="btn,opt1,msg,hiddenstatus,processedtsk,errortsk" oncomplete="displayImage()" />
+                   <apex:commandButton id="stp" value="{!$Label.Label_Stop}"  action="{!stop}"  />           
+            </apex:pageBlockButtons>
+            <apex:outputPanel id="opt1">           
+               <b> {!$Label.Label_Tasks_Processed} &nbsp;</b>{!pid}&nbsp;&nbsp;<b> {!$Label.Label_Email_Sent} &nbsp;</b>{!e}  &nbsp;&nbsp;<b> {!$Label.Label_Status_Colon} &nbsp;</b>{!status}
+            </apex:outputPanel>
+            <apex:inputHidden id="hiddenstatus" value="{!status}" ></apex:inputHidden>
+            <b/>
+            <apex:image url="https://na7.salesforce.com/img/loading32.gif" id="loading" style="display:none"/>            
+              <!-- Process Task/ Completed Task -->
+              <apex:pageBlockSection columns="1" showHeader="true" title="{!$Label.Label_Completed_Task}" id="pgsct">
+              <apex:pageBlockTable var="tsk" value="{!processedList}" id="processedtsk" title="{!$Label.Label_Process_Task}">
+                <apex:column headerValue="{!$Label.Label_Account}">
+                    <apex:outputText value="{!tsk.Account.Name}">
+                    </apex:outputText>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Label_Subject}">
+                    <apex:outputText value="{!tsk.Subject}">
+                    </apex:outputText>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Label_Type}">
+                    <apex:outputText value="{!tsk.Type}">
+                    </apex:outputText>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Label_Due_Date}">
+                    <apex:outputText value="{0,date,MM/dd/yy}">
+                            <apex:param name="Due Date" value="{!tsk.ActivityDate}"/>
+                    </apex:outputText>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Label_Notes}">
+                    <apex:outputText value="{!tsk.akritiv__Notes__c}">
+                    </apex:outputText>
+                </apex:column>
+               <apex:column headerValue="{!$Label.Label_Description}">
+                    <apex:outputText value="{!tsk.Description}">
+                    </apex:outputText>
+                </apex:column> 
+                <apex:column headerValue="{!$Label.Label_Priority}">
+                    <apex:outputText value="{!tsk.Priority}">
+                    </apex:outputText>
+                </apex:column> 
+                <apex:column headerValue="{!$Label.Label_Status}">
+                    <apex:outputText value="{!tsk.status}">
+                    </apex:outputText>
+                </apex:column>         
+              </apex:pageBlockTable>
+              </apex:pageBlockSection>
+              
+              <!-- Error Task/ Not Completed Task -->
+              <apex:pageBlockSection columns="1" showHeader="true" title="{!$Label.Label_Not_Completed_Task}" id="pgsnct" >
+              <apex:pageBlockTable var="etsk" value="{!errorList}" id="errortsk" title="{!$Label.Label_Error_Task}">
+                <apex:column headerValue="{!$Label.Label_Account}">
+                    <apex:outputText value="{!etsk.Account.Name}">
+                    </apex:outputText>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Label_Subject}">
+                    <apex:outputText value="{!etsk.Subject}">
+                    </apex:outputText>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Label_Type}">
+                    <apex:outputText value="{!etsk.Type}">
+                    </apex:outputText>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Label_Due_Date}">
+                    <apex:outputText value="{0,date,MM/dd/yy}">
+                            <apex:param name="Due Date" value="{!etsk.ActivityDate}"/>
+                    </apex:outputText>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Label_Notes}">
+                    <apex:outputText value="{!etsk.akritiv__Notes__c}">
+                    </apex:outputText>
+                </apex:column>
+      
+                <apex:column headerValue="{!$Label.Label_Status}">
+                    <apex:outputText value="{!etsk.status}">
+                    </apex:outputText>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Label_Dunning_Error}">
+                    <apex:outputText value="{!etsk.akritiv__Auto_Dunning_Error__c}">
+                    </apex:outputText>
+                </apex:column>
+                 <apex:column headerValue="{!$Label.Label_Error_Fix_URL}">                   
+                     <a href="{!etsk.Dunning_Error_Fix_URL__c}" target="_blank" onClick="fixfunction()">{!$Label.Label_Fix_This}</a>                 
+                </apex:column>
+              </apex:pageBlockTable>
+              </apex:pageBlockSection>       
+        </apex:pageBlock>
+    </apex:form>         
+</apex:page>

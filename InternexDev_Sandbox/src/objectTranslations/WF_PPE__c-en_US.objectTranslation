@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>WF_PPE</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>WF_PPE</value>
+    </caseValues>
+    <fields>
+        <label><!-- Name(PPE01) --></label>
+        <name>Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Postal code(PPE11) --></label>
+        <name>Postal_code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record ID --></label>
+        <name>Record_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- WF_PR --></label>
+        <name>WF_PR__c</name>
+        <relationshipLabel><!-- WF_PPE --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>WF_PPE Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

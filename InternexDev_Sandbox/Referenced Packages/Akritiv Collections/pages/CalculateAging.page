@@ -1,0 +1,216 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/* 
+ * This is the main page to run the batch calculations. It runs the
+ * following batch jobs: 
+ *       1. Aging Calculation Batch Job 
+ *       2. SetParentAccount Batch Job 
+ *       3. DataLoad Batch Job.
+ */
+-->
+<apex:page controller="akritiv.ExecuteBatchController" id="pg">
+
+ <!-- *   <link rel="stylesheet" type="text/css"
+        href="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/slider/assets/skins/sam/slider.css')}" />
+    <link rel="stylesheet" type="text/css"
+        href="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/progressbar/assets/skins/sam/progressbar.css')}" />
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/yuiloader/yuiloader-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/dom/dom-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/event/event-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/animation/animation-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/dragdrop/dragdrop-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/slider/slider-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/element/element-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/progressbar/progressbar-min.js')}"></script>
+-->
+
+
+    
+
+    <apex:sectionHeader title="{!$Label.Label_Batch_Jobs}" />
+    <apex:form id="frm">
+      <!-- *  <c:Base_Comp_YUI_ModalLoader />  -->
+        <apex:actionFunction name="checkJobStatus"
+            action="{!refreshJobStatus}" rerender="JobStatusPanel,pbButtons" />
+        <apex:actionFunction name="refreshInputSection"
+            rerender="Lastrun,DataLoadBatchInput" />
+
+        <apex:pageBlock id="pb">
+        <apex:outputPanel id="pageMsgs">
+                <apex:pageMessages ></apex:pageMessages>
+            </apex:outputPanel>
+
+
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:pageblockButtons location="bottom">
+                <apex:outputPanel id="pbButtons">
+                    <!-- * <apex:commandButton value="Execute" action="{!executeBatchUpdate}"
+                        onclick="YUIShowLoading();"
+                        oncomplete="startRefreshTimer();YUIHideLoading()"
+                        disabled="{!IF(isInProgress ,TRUE, FALSE)}"
+                        rerender="JobStatusPanel,pbButtons" />
+                        
+                   -->
+                    <apex:commandButton value="{!$Label.Label_Execute}" action="{!executeBatchUpdate}"
+                         onclick=""
+                        oncomplete="startRefreshTimer();"
+                        disabled="{!IF(isInProgress ,TRUE, FALSE)}"
+                        rerender="JobStatusPanel,pbButtons,pageMsgs" />
+                </apex:outputPanel>
+            </apex:pageblockButtons>
+            
+            <apex:outputPanel id="Lastrun">
+                <apex:pageblockSection Title="{!$Label.Label_Last_Agging_Run}" id="Lastrun1" rendered="{!IF(selectedBatchJob == 'AgingCalculationBatchJob', TRUE, FALSE)}">  
+                    <apex:pageblockSectionItem >
+                        <apex:outputLabel value="{!$Label.Label_Last_Agging_Date}" />
+                        <apex:outputText value="{!Lastdate}" />
+                    </apex:pageblockSectionItem> 
+                </apex:pageblockSection> 
+            </apex:outputPanel>
+            
+            <apex:outputPanel id="JobStatusPanel">
+            
+                <apex:pageblockSection Title="{!$Label.Label_Job_Status}" id="pbs">
+                    <apex:pageblockSectionItem >
+                        <apex:outputLabel value="{!$Label.Label_Batch_Jobs} {!isInProgress}" />
+                        <apex:selectList value="{!selectedBatchJob}" size="1"
+                            onchange="refreshInputSection();" multiselect="false">
+                            <apex:selectOptions value="{!batchJobs}"></apex:selectOptions>
+                        </apex:selectList>
+                    </apex:pageblockSectionItem>
+                    <apex:outputField value="{!aaj.Status}" />
+                    <apex:outputField value="{!aaj.JobItemsProcessed}" />
+                    <apex:outputField value="{!aaj.TotalJobItems}" />
+                    <apex:outputField value="{!aaj.NumberOfErrors}" />
+                    <apex:inputHidden value="{!aaj.Status}" id="jobStatus" />
+                   <apex:pageBlockSectionItem id="pbsi">
+                   <apex:outputLabel >{!$Label.Label_Progress}</apex:outputLabel>
+                    <apex:outputText value="{!progress}%" id="jobProgress" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageblockSection>
+            </apex:outputPanel>
+
+            <apex:pageblockSection id="progresspbs">
+                <apex:pageBlockSectionItem id="progress_pbsi">
+                   <!-- <apex:outputText value="{!progress}" id="jobProgress1" />-->
+                    <div id="basic"></div>
+                </apex:pageBlockSectionItem>
+            </apex:pageblockSection>
+
+            <apex:outputPanel id="DataLoadBatchInput">
+                <apex:pageBlocksection title="{!$Label.Label_Data_Load_Inputs}" columns="1"
+                    rendered="{!IF(selectedBatchJob == 'DataLoadBatchJob', TRUE, FALSE)}">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="{!$Label.Label_Batch_Number}" />
+                        <apex:inputText value="{!batchNumber}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="{!$Label.Label_Source_System}" />
+                        <apex:inputText value="{!sourceSystem}" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlocksection>
+
+                <apex:pageBlocksection title="{!$Label.Label_Dispute_Data_Load_Inputs}" columns="1"
+                    rendered="{!IF(selectedBatchJob == 'DisputeDataLoadBatchJob', TRUE, FALSE)}">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="{!$Label.Label_Batch_Number}" />
+                        <apex:inputText value="{!batchNumber}" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlocksection>
+                
+                 <apex:pageBlocksection title="{!$Label.Label_Mass_Delete_Transaction}" columns="1"
+                    rendered="{!IF(selectedBatchJob == 'PurgeOldClosedTransactions', TRUE, FALSE)}">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="{!$Label.Label_Number_Of_Days}" />
+                        <apex:inputText value="{!daysPast}" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlocksection>
+                
+                <apex:pageBlocksection columns="1" title="Data Load Inputs"
+                    rendered="{!IF(selectedBatchJob == 'AgingCalculationBatchJob', TRUE, FALSE)}">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Source System" />
+                        <apex:inputText value="{!sourceSystem}" />    
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlocksection>
+                
+                <apex:pageBlocksection columns="1" title="Data Load Inputs"
+                    rendered="{!IF(selectedBatchJob == 'ADPDCalculationBatchJob', TRUE, FALSE)}">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Source System" />
+                        <apex:inputText value="{!sourceSystem}" />    
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlocksection>
+
+            </apex:outputPanel>
+
+
+        </apex:pageBlock>
+
+
+        <script>
+        var timer; 
+        
+        
+        /*YAHOO.util.Event.onDOMReady( function () {
+            var Dom = YAHOO.util.Dom; Event = YAHOO.util.Event;
+            pb = new YAHOO.widget.ProgressBar({value:0,minValue:0,maxValue:100}).render('basic');
+            pb.set('anim', true);
+        });*/
+        
+        function startRefreshTimer() {
+            
+           //document.getElementById('pg:frm:pb:pbs:jobProgress').value=0;
+            document.getElementById('pg:frm:pb:pbs:jobStatus').value= '';
+           var timer = setInterval("refreshStatus()",2000);
+            
+        }
+        
+        function refreshStatus() {
+           
+            checkJobStatus();
+           
+           
+            var statusValue = document.getElementById('{!$Component.frm.pb.pbs.jobStatus}').value;
+           
+         
+            if(statusValue == 'Completed'){
+               
+                clearInterval(timer);}
+                 increamentPBar();
+                 
+        }
+        
+        function increamentPBar() {
+           
+          var progressValue = document.getElementById('{!$Component.frm.pb.pbs.pbsi.jobProgress}').value;
+         // var progressValue = document.getElementById('pg:frm:pb:progresspbs:progress_pbsi:jobProgress1').value;
+            // alert('progressvalue-------->'+progressValue);
+            if(progressValue == 'undefined'){
+            
+                progressValue = 0;
+                }
+             //var pbt;  
+         //   pbt.set('value', parseInt(progressValue));
+           // alert('pbt'+pbt);
+        }
+    </script>
+
+    </apex:form>
+</apex:page>

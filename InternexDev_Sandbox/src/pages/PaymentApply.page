@@ -1,0 +1,377 @@
+<apex:page controller="PaymentApply" id="pg">
+<style>
+ #filter
+{
+    display: none;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-image:url({!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}); 
+    background-repeat:no-repeat;
+    background-position:center;
+    background-color: #ffffff;
+    z-index:10;
+    opacity:0.6;
+    filter: alpha(opacity=50);
+}
+
+</style>
+    <script>
+        function ShowPaymentLine(paymentId){
+            document.getElementById('pg:frm:paymentId').value = paymentId;
+            ShowPaymentLines();
+        }
+   
+    function startProcess(){
+        document.getElementById("{!$Component.pg.frm.loading}").style.display = 'block';
+        document.getElementById('filter').style.display = 'block';
+    }
+               
+    function endProcess(){
+       
+        document.getElementById("{!$Component.pg.frm.loading}").style.display = 'none';
+        document.getElementById('filter').style.display = 'none'; 
+    }
+    
+    function DisableTransType(){
+     
+        var v = document.getElementById('pg:frm:pb:InvoiceId').value;
+        //alert('This is List size-->>'+v);
+        for(var i =0; i <= v; i++)
+        {
+            //alert('Loop Index--->'+i); 
+            document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+i+':TrType').disabled = 'true';
+        }
+        
+     }
+    function showInvoices(paymentId){
+        document.getElementById('pg:frm:paymentId').value = paymentId;
+       
+        showInvoicess();
+        
+        //DisableTransType();
+    }
+     function DisableTransType(){
+     
+        var v = document.getElementById('pg:frm:pb:InvoiceId').value;
+        //alert('This is List size-->>'+v);
+        for(var i =0; i <= v; i++)
+        {
+            //alert('Loop Index--->'+i); 
+            document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+i+':TrType').disabled = 'true';
+        }
+        
+     }
+
+    function chkPaymentAmount(size,unapplieBal){
+        var selectedAmt = 0;
+        var v3 = 0;
+        var isNoneChecked = true;
+       var smallAmt = 0;   
+        var rate = 0;
+        var totalSize = document.getElementById('pg:frm:pb:InvoiceId').value;
+    //    alert('size : '+totalSize);
+        for (var i=0; i<totalSize; i++){     
+              if(document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+i+':chk').checked == true){
+        //              alert('Selected Index : '+i);
+                  v3 = parseFloat((document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+i+':Bal').value).split(",").join(""));
+        //          alert('v3 : '+v3);
+        //----------------------------------------------//
+           //       if(v3 == 0){
+           //        alert('Please select applied amount properly');
+           //           alert('Applied amount should not be zero');
+           //           return false;
+           //       }
+        //--------------------------------------------------//          
+          //        alert('selectedAmt : '+selectedAmt);
+                  selectedAmt += v3 ;
+                  isNoneChecked = false;
+              }
+        }
+    //    alert('isNoneChecked : '+isNoneChecked);
+        if(isNoneChecked == true){
+            var msg = '{!$Label.Please_select_atleast_one_invoice}';
+            alert(msg);
+            return false;
+        }
+   //     alert('selectedAmt : '+selectedAmt+'\nunapplieBal : '+unapplieBal+'\nsmallAmt : '+smallAmt)
+   //----------------------------------------------------------------------------------//
+   /*     if((parseFloat(selectedAmt) > (parseFloat(unapplieBal) + parseFloat(smallAmt))) || selectedAmt == 0){
+            var msg = '{!$Label.Please_enter_valid_Applied_amount}';
+            alert(msg);
+            return false;
+   //----------------------------------------------------------------------------------//         
+        }else{ */
+     //    alert('TRUE****');
+            ApplyPaymentForTx();
+            return false;
+     //   }
+    }
+    
+    function chkLineSelected(size){
+         var isNoneChecked = true;
+         var isReasonCodeFlag = false;
+         for ( var i=0; i< size; i++){     
+             if(document.getElementById('pg:frm:pb:PaymentLineBlock:PaymentLineTable:'+i+':chk').checked == true){
+                 isNoneChecked = false;
+                  if(document.getElementById('pg:frm:pb:PaymentLineBlock:PaymentLineTable:'+i+':ResCode').value == null || document.getElementById('pg:frm:pb:PaymentLineBlock:PaymentLineTable:'+i+':ResCode').value == ''){
+                   isReasonCodeFlag = true;
+                 }   
+              }
+          }
+          
+          if(isNoneChecked == true){
+              var msg = '{!$Label.Please_select_atleast_one_Payment_Line}';
+              alert(msg);
+              return false;
+         }else if(document.getElementById('pg:frm:pb:CommentBlock:CommentText').value == null || document.getElementById('pg:frm:pb:CommentBlock:CommentText').value == ''){
+            var msg = '{!$Label.Please_enter_comments}';
+            alert(msg);
+            return false;
+        }else if(isReasonCodeFlag == true){
+            alert('Please select Reason Code') ;
+            return false;
+        }else{
+             return true;
+         }
+    }
+    //---- for making it to zero---- because amount will get update from Portal-----------//
+    function checkamount(v,size,paymentBal)
+    {
+        if( document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':chk').checked == true)
+        {
+            document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value = 0.0;
+            document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').disabled = true;
+            return true;
+        }
+        else
+        {
+            document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value = 0.0;
+            document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').disabled = false;
+             return true;
+        }
+
+    }
+    //-----------------------------------------------------------------------------------//
+ 
+     function CheckPaymentAmount(v,size,paymentBal){
+ //        alert('---CheckPaymentAmount--- called.. - '+v+'\n--- Size ------- - '+size+'\n------- Payment Bal - '+paymentBal);
+         try{
+           
+            var balStr = document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Balance').innerHTML;
+      //    alert('=====InvBalance======'+balStr.substring(1,balStr.length));
+            var find = ',';
+            var re = new RegExp(find, 'g');
+            balStr = balStr.replace(re, '').substring(3,balStr.length);
+//          balStr = balStr.replace(",", "").substring(1,balStr.length);
+  //        alert('-----balStr-----'+balStr);
+     //     var invBalance = parseFloat(((document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Balance').innerHTML).replace("$", ""))); //.split(" ")[1]).split(",").join(" ")) ;
+            var invBalance = parseFloat(balStr);
+    //      alert('------invBalance--------'+invBalance);
+            var writeOffamt = parseFloat((document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value).split(",").join("")) ;
+    //      alert('------writeOffamt----'+writeOffamt+'\n--------invBalance-----'+invBalance);
+            var unapplied = parseFloat((document.getElementById('pg:frm:pb:InvoiceSec:PaymentSec:PaymentSubSec:UnappliedBal').innerHTML).split("+").join(""));
+             
+                   
+   //       alert('unapplied : '+unapplied+'\n invBalance : '+invBalance+'\n writeOffamt : '+writeOffamt);
+    //       alert(unapplied);
+           var amt1 = unapplied ;
+            //alert('New unapplied balance...'+);
+            if(writeOffamt > invBalance || writeOffamt < 0){
+                alert('Please select valid amount');
+  //              var unapplied = parseFloat((document.getElementById('pg:frm:pb:InvoiceSec:PaymentSec:PaymentSubSec:UnappliedBal').innerHTML).split(",").join(""));
+//              alert('invBalance : '+invBalance+'\nunapplied : '+unapplied);
+                if(invBalance > unapplied ){
+                      document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value = unapplied ;
+                  //  document.getElementById('pg:frm:pb:InvoiceSec:PaymentSec:PaymentSubSec:UnappliedBal').innerHTML = 0;
+                }else{
+                    document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value = 0.0;
+                    document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':chk').checked = false;
+                }
+                return false;
+            }
+
+            var selectedAmt = 0;
+            var previosBal = 0;
+            var currRate = 0;
+    //          alert('---Checked-----'+document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':chk').checked);
+                var appliedAmt = parseFloat(document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value || 0) ;
+                if(appliedAmt == 0){
+    //              document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value = invBalance;
+                    appliedAmt = invBalance;
+                }
+//              selectedAmt = appliedAmt;
+//              alert('======appliedAmt======='+appliedAmt);
+                v3 = parseFloat((document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value).split(",").join(""));
+//               alert('====v3=== '+v3);
+                //v3 = v3 * currRate ;
+                selectedAmt += v3;    
+                    
+              //  alert('selectedAmt : '+selectedAmt+'\npaymentBal : '+paymentBal+'\nappliedAmt : '+appliedAmt+'\nUnapplied : '+unapplied);
+            //  alert('fixed...'+unapplied.toFixed(2));
+              
+          // alert('cal... '+parseFloat((document.getElementById('pg:frm:pb:InvoiceSec:PaymentSec:PaymentSubSec:UnappliedBal').value  = (unapplied - appliedAmt).toFixed(2))));
+                           
+                if(document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':chk').checked == true){
+                    if(appliedAmt > unapplied){
+    /*                  if(paymentBal > previosBal){
+                            document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value = (paymentBal - previosBal); // parseFloat((document.getElementById('pg:frm:pb:InvoiceSec:outerPBSectionCurr:innerPBSectionCurr:CurrRate').value).split(",").join("")) ;
+                            selectedAmt = (paymentBal - previosBal);
+                            appliedAmt = document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value;
+                        }else{
+                            document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value = 0;
+                            document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':chk').checked = false;
+                        }*/
+                        if(paymentBal - previosBal == 0){
+                            document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':chk').checked = false;
+                        }
+                      //alert('Applied Amt : '+appliedAmt+'\nUnapplied : '+unapplied);
+                        if(appliedAmt > unapplied){
+                            if(unapplied == 0){
+                                alert('Applied Amount exceeded');
+                                document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value = 0.0;
+                                appliedAmt = 0.0;
+                                document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').disabled = false;
+                                document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':chk').checked = false;
+                                return false;
+                            }else{
+        //                      alert('ELSE 1111111 : '+unapplied.toFixed(2));
+                                document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value = unapplied.toFixed(2);
+                                appliedAmt = unapplied.toFixed(2);
+                                selectedAmt = unapplied.toFixed(2);
+                            }
+                        }else{
+                            if(unapplied==0){
+    //                          alert('Applied Amount exceeded - Unapplied Balance - 0');
+                                document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value = 0.0;
+                                appliedAmt = 0;
+                                document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':chk').checked = false;
+                                document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').disabled = false;
+                                return false;
+                            }else{
+//                              alert('**** 22222 Applied Amt : '+appliedAmt);
+                                document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value = appliedAmt; //unapplied.toFixed(2);
+                            }
+                        }
+                    }else{
+                        document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value = appliedAmt;
+                    }
+                    previosBal += v3;
+                    document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').disabled = true;
+                    document.getElementById('pg:frm:pb:InvoiceSec:PaymentSec:PaymentSubSec:UnappliedBal').innerHTML = (unapplied - appliedAmt).toFixed(2);
+                }else{
+                    v3 = parseFloat((document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value).split(",").join(""));
+                    selectedAmt = v3;
+           //       alert('--unchecked--'+v3);
+                    document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').value = 0.0;
+                    document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+v+':Bal').disabled = false;
+                    document.getElementById('pg:frm:pb:InvoiceSec:PaymentSec:PaymentSubSec:UnappliedBal').innerHTML = (unapplied + appliedAmt).toFixed(2);
+                }
+        }catch(e){
+         
+        }
+    }
+     
+    function checkPaymentDate(v,rowNum,flag){
+     
+           var today = new Date();
+           var dd = today.getDate();
+           var mm = today.getMonth();
+           var year = today.getFullYear();
+           var t1 =  new Date(year,mm,dd);
+           var dmonth = v.split('/')[0];
+           var ddate = v.split('/')[1];
+           var dyear = v.split('/')[2];
+           var t2 = new Date(dyear,dmonth-1,ddate);
+           if(v != null && v != ''){
+                if(t2 > t1){
+                    if(flag == 'paymentdate'){
+                        alert('Payment date can not be future date');
+                        document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+rowNum+':PayDate').value =  ("0" + (mm+1)).slice(-2) +'/' + ("0" + dd).slice(-2) + '/' + year;
+                    }else{
+                        alert('Document date can not be future date');
+                        document.getElementById('pg:frm:pb:InvoiceSec:InvoiceTable:'+rowNum+':DocDate').value =  ("0" + (mm+1)).slice(-2) +'/' + ("0" + dd).slice(-2) + '/' + year;
+                    }
+                    return false;
+                }
+            }
+     }
+     
+    
+
+    </script>
+    <apex:form id="frm">
+<apex:actionFunction action="{!ApplyPaymentForTx}" name="ApplyPaymentForTx" reRender="pb" status="filterChangeStatus"/>
+
+    <apex:pageBlock id="pb">
+    <apex:inputHidden value="{!InvoiceListSize}" id="InvoiceId"/>
+        <apex:outputPanel id="InvoiceSection" >
+           <apex:pageblockSection columns="1" id="InvoiceSec" title="Payment Details" >
+         <apex:pageBlockSection columns="1">
+            <apex:outputPanel ><b>Client Account</b> &nbsp;<apex:outputField value="{!Deb.Client_Account__c}"/>&nbsp; ( {!Deb.Client_Account__r.Client_Account__c} ) </apex:outputPanel>
+            <apex:outputPanel ><b>Debtor</b> &nbsp; <apex:outputLink value="/{!Deb.Id}">{!Deb.Name}</apex:outputLink> &nbsp;( {!Deb.Client_Product_Counterparty__c} )</apex:outputPanel>
+          </apex:pageBlockSection>
+      
+                 <apex:pageBlockSection columns="2" id="PaymentSec">
+                    <apex:pageBlockSection columns="3" id="PaymentSubSec" >
+                        <apex:outputField value="{!Payment.Name}"/>    
+                        <apex:outputText value="{!Payment.Unapplied_Amount_internex__c}" id="UnappliedBal" label="Unapplied Balance"/>
+                            <apex:actionStatus id="filterChangeStatus">
+                        <apex:facet name="start">
+                            <apex:image value="/img/loading.gif"/>
+                        </apex:facet>
+                        <apex:facet name="stop">
+                             <apex:commandButton id="btnApplyPayment" value="{!$Label.Apply_Payment}" onclick="return chkPaymentAmount('{!TransactionWrapperList.size}','{!Payment.akritiv__Unapplied_Balance__c}');return false;"/>
+                        </apex:facet>
+
+                </apex:actionStatus> 
+                   Payment Date (MM/DD/YYYY) :<apex:outputText value="{0,date,MM/dd/YYYY}"> <apex:param value="{!Payment.akritiv__Payment_Date__c}" /> </apex:outputText>      
+                    </apex:pageBlockSection>
+                </apex:pageBlockSection>
+          <!--      
+                <apex:pageblock id="pb1">
+                    <div style="white-space:nowrap">
+                        <apex:pageBlockSection title="Invoice Search" columns="5" > 
+                            <c:SearchFunctionality id="searchComponent"  ObjName="{!objNamechk}" getListContents="{!SearchInvoice}" TempKey="{!objtempchk}"/>
+                        </apex:pageblockSection>
+                    </div>
+                </apex:pageblock>
+           -->  
+                <apex:pageMessages ></apex:pageMessages>   
+                <apex:variable value="{!0}" var="rowNum"/>
+                <apex:pageBlockTable value="{!TransactionWrapperList}" var="trans" id="InvoiceTable">
+                    <apex:column id="chkCol" >
+                        <apex:inputcheckbox value="{!trans.selected}" id="chk" onchange="return checkamount('{!trans.rowCount}','{!TransactionWrapperList.size}','{!Payment.akritiv__Unapplied_Balance__c}');" /> <!-- onchange="return CheckPaymentAmount('{!trans.rowCount}','{!TransactionWrapperList.size}','{!Payment.akritiv__Unapplied_Balance__c}');" -->
+                    </apex:column>             
+                    <apex:column headerValue="Invoice #">
+                        <a href="/{!trans.tx.Id}" style="text-decoration: underline;cursor: pointer; cursor: hand;" title="Open Transaction">{!trans.tx.Name}</a>   
+                    </apex:column> 
+                    <apex:column headerValue="{!$Label.Balance}" id="Invoicebalance">
+                        <apex:outputfield value="{!trans.tx.Balance_Internex__c}" id="Balance"/>&nbsp;   
+                    </apex:column>  
+                    <apex:column headerValue="{!$Label.Due_Date}">
+                        <apex:outputfield value="{!trans.tx.Invoice_Due_Date__c}"/>&nbsp;   
+                    </apex:column> 
+                    <apex:column headerValue="Created Date">
+                        <apex:outputField value="{!trans.tx.akritiv__Create_Date__c}" id="PayDate" />&nbsp;   <!-- onchange="checkPaymentDate(this.value,'{!trans.rowCount}','paymentdate');" -->
+                    </apex:column> 
+                    <apex:column headerValue="{!$Label.Applied_Amount}">
+                        <apex:inputText value="{!trans.AppliedAmount}" id="Bal"/> <!-- onchange="return CheckPaymentAmount('{!trans.rowCount}','{!TransactionWrapperList.size}','{!Payment.akritiv__Unapplied_Balance__c}');" id="Bal" /-->&nbsp;   
+                    </apex:column> 
+                    <apex:column headerValue="Transaction Date">
+                        <apex:outputField value="{!trans.PaymentLine.akritiv__Transaction_Date__c}" id="DocDate" />&nbsp;  <!-- onchange="checkPaymentDate(this.value,'{!trans.rowCount}','documentdate');" -->
+                    </apex:column>
+                    <div id="TransType" styleClass="disabler">
+                    <apex:column headerValue="{!$Label.Transaction_Type}">
+                        <apex:outputField value="{!trans.tx.Cash_Transaction_Type__c}" id="TrType"/>&nbsp;
+                    </apex:column> 
+                    </div>
+                      <apex:variable var="rowNum" value="{!rowNum + 1}"/>  
+                </apex:pageBlockTable>
+            </apex:pageblockSection>
+         </apex:outputPanel>
+     </apex:pageBlock>
+    </apex:form>
+</apex:page>

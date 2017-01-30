@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>17.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>*** NEED TO BE DELETED *** The Page can be deleted as this
+                account rating part is done through the a component
+                &quot;Star_Rating_Component&quot;.</description>
+    <label>AccountRating</label>
+</ApexPage>

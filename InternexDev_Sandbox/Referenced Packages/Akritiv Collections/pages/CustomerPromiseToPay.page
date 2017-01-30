@@ -1,0 +1,378 @@
+<!--
+ /*
+  *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+  *This software is the confidential and proprietary information
+  *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+  *disclose or use Confidential Information without the express written
+  *agreement of Akritiv Technologies, Inc.
+  */
+-->
+<!--
+    /*
+     * Page to provide the interface for Promise To Pay functionality.
+     * The page creates promise for the user to pay on some / selected
+     * transaction with specified amount. The same email sending 
+     * functionality is there as it is on ContactCustomer page. User
+     * can select pdf/excel details about the transaction and can attach
+     * additional documents to send across the customer. User can select
+     * a particular email-template from existing templates in the system
+     * to send it to the user.The conact methods are Phone, Fax, Email
+     * and Print for the page.
+     */
+-->
+<apex:page controller="akritiv.CustomerPromiseToPayController" id="pg"
+    tabstyle="Account">
+
+    <script src="/soap/ajax/10.0/connection.js" type="text/javascript"></script>
+    <script src="/soap/ajax/10.0/apex.js" type="text/javascript"></script>
+   <!-- * <c:Base_Comp_YUI_ModalLoader /> -->
+    <script type="text/javascript" src="{!URLFOR($Resource.jquery,'Jquery.js')}"></script>
+    <style>
+.headerRow {
+    font-size: 12px;
+    font-weight: bold;
+}
+    
+    #filter
+{
+    display: block;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-image:url({!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')});
+    background-repeat:no-repeat;
+    background-position:center;
+    background-color: #ffffff;
+   // z-index:10;
+    opacity:0.6;
+    filter: alpha(opacity=50);
+}
+
+
+</style>
+
+    <script>
+    // Show loading on page load
+    // * YUIShowLoading();
+    $(window).load(function() {
+        
+        $('#filter').hide();
+    
+      });
+    function startProcess(){
+      
+       document.getElementById("{!$Component.pg.frm.loading}").style.display = 'block'; 
+       document.getElementById('filter').style.display = 'block'; 
+
+       }
+       
+       function endProcess(){
+       
+       document.getElementById("{!$Component.pg.frm.loading}").style.display = 'none';
+       document.getElementById('filter').style.display = 'none';
+       } 
+
+
+</script>
+
+    <apex:form id="frm">
+        <apex:sectionHeader title="{!$Label.Label_Promise_To_Pay} {!$Label.Label_For} {!accName}" />
+         <div id="filter"></div><apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;"/>
+
+        <apex:pageBlock id="pb">
+            <apex:outputPanel id="pageMsgs">
+                <apex:pageMessages ></apex:pageMessages>
+            </apex:outputPanel>
+
+            <apex:pageBlockButtons location="bottom">
+                <apex:actionStatus id="mySaveStatus1">
+                    <apex:facet name="stop">
+                        <apex:commandButton action="{!execute}" status="mySaveStatus1" value="{!$Label.Label_Create}" onclick="beforeSubmit();startProcess();" disabled="false" rerender="pageMsgs" immediate="false" oncomplete="endProcess();"/>
+                    </apex:facet>
+                    <apex:facet name="start">
+                        <apex:commandButton action="{!execute}" status="mySaveStatus1" value="{!$Label.Label_Executing}" disabled="true"/> 
+                    </apex:facet>
+                </apex:actionStatus>
+            
+                <apex:outputPanel id="pbButtons">
+                   <!-- * <apex:commandButton value="{!$Label.Label_Create}"
+                        action="{!execute}" onclick="YUIShowLoading(); beforeSubmit();"
+                        rerender="pageMsgs" immediate="false"
+                        oncomplete="YUIHideLoading();" />
+                     
+                      <apex:commandButton value="{!$Label.Label_Create}"
+                        action="{!execute}" onclick="beforeSubmit();"
+                        rerender="pageMsgs" immediate="false" /> -->
+                    <apex:commandButton value="{!$Label.Label_Cancel}"
+                        action="{!cancel}" />
+                </apex:outputPanel>
+            </apex:pageBlockButtons>
+
+            <apex:actionStatus startStyle="font-weight:Bold;color:#cc0000"
+                startText="{!$Label.Label_Please_Wait}" stopText=""
+                id="loadingStatus" />
+
+            <apex:pageBlockSection title="{!$Label.Label_Transactions}"
+                columns="1" id="transPbs">
+                <apex:pageBlockTable value="{!txList}" var="twx" id="pbTable">
+                    <apex:column >
+                        <apex:facet name="header">
+                            <input type="checkbox" id="chkUnchkAll" selected="false"
+                                onclick="checkAll(this);" />
+                        </apex:facet>
+                        <apex:inputCheckbox value="{!twx.selected}" id="selectedTx"
+                            onclick="getSelected(this,'{!JSINHTMLENCODE(twx.tx.Id)}')" />
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Transaction_Number}">
+                        <a href="/{!HTMLENCODE(twx.tx.Id)}">{!twx.tx.Name}</a>
+                    </apex:column>
+                    <apex:column value="{!twx.tx.akritiv__Amount__c}" />
+                    <apex:column value="{!twx.tx.akritiv__Balance__c}" />
+                    <apex:column value="{!twx.tx.akritiv__Due_Date__c}" />
+                    <apex:column headerValue="{!$Label.Label_Promise_Amount}">
+                        <apex:inputField value="{!twx.tx.akritiv__Promised_Amount__c}" />
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Promise_Date}"
+                        id="promiseDateHeader">
+                        <apex:inputField value="{!twx.tx.akritiv__Promise_Date__c}"
+                            id="promiseDate" />&nbsp;
+                        
+                        <apex:outputPanel onclick="updateAll(this,'{!twx.tx.akritiv__Promise_Date__c}','{!txList.size}');">
+                        <apex:commandLink immediate="true" value="{!$Label.Update_All}" onclick="return false;" 
+                             id="updateAll"/>&nbsp; 
+                         </apex:outputPanel>
+                             
+                        <apex:outputPanel onclick="addDaysToDate(this,5);">
+                            <apex:commandLink immediate="true" id="cl5" value="5"
+                                onclick="return false;" />&nbsp;
+                        </apex:outputPanel>
+                        <apex:outputPanel onclick="addDaysToDate(this,10);">
+                            <apex:commandLink immediate="true" id="cl10" value="10"
+                                onclick="return false;" />&nbsp;
+                        </apex:outputPanel>
+                        <apex:outputPanel onclick="addDaysToDate(this,15);">
+                            <apex:commandLink immediate="true" id="cl15" value="15"
+                                onclick="return false;" />&nbsp;
+                        </apex:outputPanel>
+                    </apex:column>
+                </apex:pageBlockTable>
+
+                <!--<apex:pageBlockSectionItem >
+
+                    <apex:outputPanel >
+                        <apex:inputCheckbox value="{!attachPDF}" />
+                        <apex:outputLabel value="{!$Label.Label_Attach_PDF_for_selected_documents}" />
+                        <apex:commandLink action="{!openTxDetailPage}" target="blank"
+                            value="Preview PDF" immediate="true" />
+                        <apex:outputLabel value="{!$Label.Label_With}" />
+                        <apex:selectList onchange="return changeListView();" size="1"
+                            value="{!selectedList}" title="{!$Label.Label_Choose_a_ListView}">
+                            <apex:selectOptions value="{!listViewOptions}" />
+                        </apex:selectList>
+                        <apex:outputLabel value="{!$Label.Label_List_View}" />
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>--->
+                 <apex:pageBlockSectionItem >
+
+                    <apex:outputPanel >
+                        <apex:inputCheckbox value="{!attachPDF}" />
+                        <apex:outputLabel value="{!$Label.Label_Attach} " />
+                        <apex:selectList size="1" value="{!selectedType}"
+                            title="{!$Label.Label_Choose_a_Document}">
+                            <apex:selectOptions value="{!attachTypes}" />
+                        </apex:selectList> &nbsp;&nbsp;
+                        <apex:commandLink action="{!openTxDetailPage}" target="blank"
+                            value="{!$Label.Label_Preview_Document}" />
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection columns="1"
+                title="{!$Label.Label_Customer_Rating}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Collection_Rating}" />
+                    <c:Star_Rating_Component updatable="true"
+                        initRating="{!activityRating}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+            <c:Email_Editor supportLocale="{!supportLocale}"
+                accountId="{!accountId}"
+                contactId="{!emailTargetToContactId}" faxId="{!emailTargetToFaxId}"
+                emailCcAddresses="{!ccAddresses}"
+                emailAddToAddresses="{!addtoAddresses}"
+                emailBccAddresses="{!bccAddresses}"
+                copyToSender="{!currUserPref.akritiv__BCC_Emails_To_Me__c}"
+                mailingSubject="{!emailSubject}" emailBody="{!emailTemplateBody}"
+                contactMethod="{!contactMethod}" 
+                templatecategory="{!templatecategory}"
+                contactNoteTitle="{!contactNoteTitle}" contactNote="{!contactNote}"
+                emailTemplateId="{!templateIdSelected}"
+                emailAttachmentIds="{!attachmentIds}"
+                selectedTxList="{!transactionsCollectionObject}"
+                listView="{!selectedList}"
+                orgWideEmailAddressId="{!currUserPref.akritiv__Org_Wide_Email__c}"
+                id="emaileditor" />
+
+            <br />
+            <apex:pageBlockSection columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="" />
+                    <apex:outputPanel >
+                        <apex:inputCheckbox value="{!isFollowUp}" />
+                        <apex:outputLabel value="{!$Label.Label_Create_follow_up_after}" />
+                        <apex:inputText size="1" maxlength="4" value="{!followUpDays}" />
+                        <apex:outPutLabel value="{!$Label.Label_Days_With_Note}" />&nbsp;
+                       
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="noteSection">
+                <apex:outputLabel >{!$Label.Label_Note_Title}</apex:outputLabel>
+                <apex:outputPanel >
+                    <apex:inputText value="{!NoteFollowupTitle}" style="width:400px"
+                        id="followupNoteTitle" maxlength="80" /> &nbsp;&nbsp;
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+    
+            <apex:pageBlockSectionItem id="commentSection">
+                <apex:outputLabel >{!$Label.Label_Note_Body}</apex:outputLabel>
+                <apex:inputTextArea value="{!comments}" style="width:400px; height:50px;" id="followNotecomment" />
+            </apex:pageBlockSectionItem>
+
+
+            </apex:pageBlockSection>
+
+
+            <apex:inputHidden id="hiddenkey" value="{!hiddenKey}" />
+            <apex:inputHidden id="hiddenNoteBody" value="{!contactNote}" />
+        </apex:pageBlock>
+
+    </apex:form>
+    <script>
+        
+        // activate the phone contact method initially
+        var contactMethod = 'Email'; // initially
+        var selectedID = '';
+        init();
+    
+        function getSelected(obj,id) { 
+            if(obj.checked) {
+                if(selectedID == '') {
+                    selectedID = id+','; 
+                }else{
+                    selectedID = selectedID +  id + ',';                
+                }
+            }
+            else {
+                if(selectedID.match(id)) {
+                    selectedID = selectedID.replace(id,'');
+                }   
+            }
+        }
+        
+        function init() {
+            var keyCheckElem = document.getElementById('chkUnchkAll');
+            keyCheckElem.checked = true;
+            checkAll(keyCheckElem);
+            
+            //removeTodayLinkFromPromiseDate();
+        }
+        
+         function setConfig(){ 
+            try{
+               sforce.connection.defaultNamespace = '{!JSENCODE($Setup.akritiv__SysConfig_Singlec__c.akritiv__NameSpace__c)}';
+               
+                sforce.connection.sessionId = '{!$Api.Session_ID}';
+                var config = new sforce.SObject("Temp_Object_Holder__c"); 
+                var user = sforce.connection.getUserInfo() ; 
+                var timest = sforce.connection.getServerTimestamp(); 
+                var key = '{!$User.Username}' + timest.timestamp ; 
+                config.Key__c =key ; 
+                config.Value__c = selectedID; 
+                
+                var res = sforce.connection.create([config]); 
+                document.getElementById("pg:frm:pb:hiddenkey").value = key ;
+            }catch(e){
+              alert(e);
+            }
+            
+         }
+  
+        function beforeSubmit() {
+         document.getElementById("pg:frm:pb:hiddenNoteBody").value = document.getElementById('pg:frm:pb:emaileditor:emailComp:notesec:sib:contactNote').value ;
+            setConfig();
+            return true;
+        }
+        
+        function checkAll(selectAll) {
+           
+            if(selectAll.checked ){               
+                selectedID = "{!JSINHTMLENCODE(selectedTransactions)}" ;
+                
+            }
+            else{
+                selectedID ='';
+            }
+            
+            var inputElem = document.getElementsByTagName("input");
+            for(var i=0; i<inputElem.length; i++){
+                if(inputElem[i].id.indexOf("selectedTx")!=-1)
+                inputElem[i].checked = selectAll.checked;
+            }
+        }  
+        
+        function removeTodayLinkFromPromiseDate() {
+            var inputElem = document.getElementsByTagName("input");
+            
+            for(var i=0; i<inputElem.length; i++){
+                if(inputElem[i].type.toLowerCase() == 'text' && inputElem[i].id.indexOf("promiseDate")!=-1) {
+                    //alert(inputElem[i].nextSibling.innerHTML);
+                }
+                    
+            }
+        }
+        
+        function addDaysToDate(linkObj, days) {
+            var counterIdTokens = (linkObj.id).split(':');
+            //id will look like 'pg:frm:pb:transPbs:pbTable:'+counter+':promiseDate' so we are getting 6th token to get the counter
+            var counter = counterIdTokens[5];
+           
+           // var dateTxt = document.getElementById('pg:frm:pb:transPbs:pbTable:'+counter+':promiseDate').value;
+             var now = new Date();
+            now.setDate(now.getDate()+ days);
+           
+              document.getElementById('pg:frm:pb:transPbs:pbTable:'+counter+':promiseDate').value = DateUtil.getDateStringFromUserLocale(now);
+           // document.getElementById('pg:frm:pb:transPbs:pbTable:'+counter+':promiseDate').value = now.getMonth() + 1 +'/'+now.getDate()+'/'+now.getFullYear();
+        }
+         function updateAll(linkObj, days,size) {
+        
+        
+            var counterIdTokens = (linkObj.id).split(':');
+            
+   
+  
+            //id will look like 'pg:frm:pb:transPbs:pbTable:'+counter+':promiseDate' so we are getting 6th token to get the counter
+            var counter = counterIdTokens[5];
+            
+            
+            var dateTxt = document.getElementById('pg:frm:pb:transPbs:pbTable:'+counter+':promiseDate').value;
+            
+            for (i=0; i<size; i++)
+            {
+               document.getElementById('pg:frm:pb:transPbs:pbTable:'+i+':promiseDate').value =  dateTxt;
+               
+            }
+  
+           
+        }
+
+    </script>
+    <script>
+    // Hide loading whn page completely loaded
+    // * YUIHideLoading();
+</script>
+</apex:page>

@@ -1,0 +1,351 @@
+<apex:page controller="akritiv.SendBillingStatementController" id="pg"
+    tabstyle="Account">
+    <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style>
+                @page {
+                    /* Landscape orientation */
+                size:landscape;
+            }
+            </style>
+     </head>
+    <script type="text/javascript" src="{!URLFOR($Resource.jquery,'Jquery.js')}"></script>
+    <style>
+        #filter
+{
+    display: block;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-image:url({!URLFOR($Resource.LoadingImage,'ajax-loader(4).gif')});
+    background-repeat:no-repeat;
+    background-position:center;
+    background-color: #ffffff;
+   // z-index:10;
+    opacity:0.6;
+    filter: alpha(opacity=50);
+}
+
+
+    </style>
+
+    <!--* <c:Base_Comp_YUI_ModalLoader /> -->
+
+    <script>
+   //* YUIShowLoading();
+   
+         $(window).load(function() {
+        
+            $('#filter').hide();
+    
+      });
+
+    function startProcess(){
+      
+       document.getElementById("{!$Component.pg.frm.loading}").style.display = 'block'; 
+       document.getElementById('filter').style.display = 'block'; 
+       }
+       
+       function endProcess(){
+       
+       document.getElementById("{!$Component.pg.frm.loading}").style.display = 'none';
+       document.getElementById('filter').style.display = 'none'; 
+
+
+       }
+</script>
+
+    <apex:sectionHeader title="{!$Label.Label_Send_Billing_Statement} {!$Label.Label_For} {!acc.Name}" />
+
+    <apex:form id="frm">
+    <div id="filter"></div>
+        <apex:pageBlock id="pb">
+            <apex:outputPanel id="pageMsgs">
+                <apex:pageMessages ></apex:pageMessages>
+            </apex:outputPanel>
+
+            <apex:pageBlockButtons location="bottom">
+               <apex:commandButton value="{!$Label.Label_Send}" action="{!execute}" onclick="beforeSubmit();"  />
+                <apex:commandButton value="{!$Label.Label_Cancel}" action="{!cancel}" />
+            </apex:pageBlockButtons>
+            
+            <!-- <apex:pageBlockButtons location="bottom">
+                    <apex:actionStatus id="mySaveStatus1">
+
+                        <apex:facet name="stop">
+                        
+                        <apex:commandButton action="{!execute}" status="mySaveStatus1" value="{!$Label.Label_Send}" onclick="beforeSubmit();startProcess();" disabled="false" rerender="pageMsgs" oncomplete="endProcess();" immediate="false"/>
+                        
+                        </apex:facet>
+                        
+                        <apex:facet name="start">
+                        
+                        <apex:commandButton action="{!execute}" status="mySaveStatus1" value="Executing..." disabled="true"/> </apex:facet>
+                       
+                        </apex:actionStatus>
+                         <apex:commandButton value="{!$Label.Label_Cancel}" action="{!cancel}" onclick="startProcess();" oncomplete="endProcess();"/>
+                        
+              </apex:pageBlockButtons>-->
+
+            <apex:actionStatus startStyle="font-weight:Bold;color:#cc0000"
+                startText="{!$Label.Label_Please_Wait}" stopText="" id="loadingStatus" />
+
+            <apex:pageBlockSection columns="1" title="{!$Label.Label_Preferences}" id="prefPBS"
+                rendered="{!IF(isTransactionLevelOperation = true,FALSE,TRUE)}">
+                <apex:inputField value="{!currUserPref.akritiv__Exclude_Disputed_Tx__c}" onchange="InsertTempObjectKeyValue();startProcess();"/>
+                <apex:inputField value="{!currUserPref.akritiv__Exclude_Credited_Tx__c}" onchange="InsertTempObjectKeyValue();startProcess();"/>
+                <apex:inputField value="{!currUserPref.akritiv__Exclude_Current_Tx__c}" onchange="InsertTempObjectKeyValue();startProcess();"/>
+                
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel >Exclude Promised</apex:outputLabel>
+                         <apex:outputPanel >
+                             <apex:actionFunction name="InsertTempObjectKeyValue" action="{!prepareCofigSharingForPDFGen}" oncomplete="endProcess();" />
+                             <apex:inputCheckbox value="{!IsExcludePromised}" onchange="InsertTempObjectKeyValue();startProcess();"/ >
+                         </apex:outputPanel>   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!$Setup.SysConfig_Singlec__c.Display_Child_Account_Invoice__c}" >
+                 <apex:outputLabel >Include Child</apex:outputLabel>
+                     <apex:outputPanel >
+                         <apex:actionFunction name="InsertTempObjectKeyValue" action="{!prepareCofigSharingForPDFGen}" oncomplete="endProcess();" />
+                         <apex:inputCheckbox value="{!isIncludeChild}" onchange="InsertTempObjectKeyValue();startProcess();"/>
+                     </apex:outputPanel>
+                  </apex:pageBlockSectionItem>
+                  
+                     <apex:pageBlockSectionItem >
+                        
+                <apex:outputLabel value="Select View"></apex:outputLabel>
+                      <apex:outputPanel >
+                          <apex:actionFunction name="InsertTempObjectKeyValue" action="{!prepareCofigSharingForPDFGen}" oncomplete="endProcess();" />
+                          <apex:selectList value="{!selectedList}" title="{!$Label.Label_Choose_a_ListView}" size="1" onchange="InsertTempObjectKeyValue();startProcess();"> 
+                              <apex:selectOptions value="{!listViewContents}"/>
+                          </apex:selectList>
+                      </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+
+                <!--   <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="List View"></apex:outputLabel>
+                    <apex:selectList onchange="return changeListView();" size="1"
+                        value="{!selectedList}" title="Choose a ListView">
+                        <apex:selectOptions value="{!listViewOptions}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>  -->
+                
+                <!-- Commented for Multiple Invoice Template Functionality........ Start -->
+                    <!-- <apex:pageBlockSectionItem >
+                        <apex:outputLabel >{!$Label.Label_Attachment}</apex:outputLabel>
+                        <apex:outputPanel >
+                            <apex:selectRadio value="{!currUserPref.akritiv__AttachmentTypes__c}">
+                                <apex:selectOptions value="{!attachmentTypes}" />
+                            </apex:selectRadio>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+    
+    
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel />
+                       
+                        <apex:commandLink action="{!previewTemplateAttachment}"  target="blank" value="{!$Label.Label_Preview}"/>
+                    </apex:pageBlockSectionItem> -->
+                <!-- Commented for Multiple Invoice Template Functionality........ End -->
+                
+                <!-- AKTPROD-428 // For Invoice Template Functionality // start Here -->
+              <apex:outputPanel id="StandardTemplateShow" rendered="{!StandardTemplateShow}">
+                    <apex:pageBlockSectionItem >
+                        <!-- <apex:outputLabel >{!$Label.Label_Attachment}</apex:outputLabel> -->
+                        <apex:outputPanel >
+                            <!--<apex:outputLabel >{!$Label.Label_Attachment}</apex:outputLabel> -->
+                                <apex:inputCheckbox value="{!attachPDF}" style="margin-left: 10%;"/>
+                                <apex:outputLabel style="color:#4a4a56!Important;text-align:right!Important;font-size:91%!Important;font-weight:bold!Important;padding-left: 1%;"> Attach</apex:outputLabel>
+                            <apex:selectRadio value="{!currUserPref.akritiv__AttachmentTypes__c}" style="margin-left:17%;margin-right:740px;margin-top:-22px;">
+                                <apex:selectOptions value="{!attachmentTypes}" />
+                            </apex:selectRadio>
+                            <apex:commandLink action="{!previewTemplateAttachment}"
+                            target="blank" value="{!$Label.Label_Preview}" style="float: right;margin-top: -25px;padding-right: 66%;"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+    
+                    <!-- <apex:pageBlockSectionItem >
+                        <apex:outputLabel />
+                        <apex:commandLink action="{!previewTemplateAttachment}"
+                            target="blank" value="{!$Label.Label_Preview}"/>
+                    </apex:pageBlockSectionItem> -->
+                    
+             </apex:outputPanel>
+             <!-- AKTPROD-428 // For Invoice Template Functionality // End Here -->
+            
+             <!-- AKTPROD-428 // For Invoice Template Functionality // start Here -->
+             <apex:outputPanel id="InvTemplateShow" rendered="{!InvTemplateShow}">
+             <apex:pageBlockSectionItem id="sel1">
+                        <apex:outputPanel id="sel2">
+                            <!-- <apex:inputCheckbox value="{!attachPDF}" /> -->
+                            <!-- <apex:outputLabel value="{!$Label.Label_Attach} " style="padding-left:140px;padding-right:18px"/> -->
+                            <apex:inputCheckbox value="{!attachPDF}" style="margin-left: 10%;"/>
+                            <apex:outputLabel style="color:#4a4a56!Important;text-align:right!Important;font-size:91%!Important;font-weight:bold!Important;padding-left:1%;"> Attach</apex:outputLabel>
+                            <apex:selectList size="1" value="{!selectedType}"
+                                title="{!$Label.Label_Choose_a_Document}" id="sel3" style="margin-left: 2.5%;">
+                                <apex:selectOptions value="{!attachTypes}" id="selType" />
+                            </apex:selectList>
+                           <!-- <apex:commandLink action="{!openTxDetailPage}" target="_blank" 
+                         value="{!$Label.Label_Preview_Document}" onclick="checkAttachmentType();" /> -->
+                        </apex:outputPanel>
+             </apex:pageBlockSectionItem>
+             
+                <apex:pageBlockSectionItem >
+                            <apex:outputLabel />
+                            <apex:commandLink action="{!previewTemplateAttachment}"
+                                target="blank" value="{!$Label.Label_Preview}" style="padding-left:2%;"/>
+                </apex:pageBlockSectionItem>
+            </apex:outputPanel>
+            <!-- AKTPROD-428 // For Invoice Template Functionality // End Here -->
+                
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="{!$Label.Label_Transactions}" columns="1" id="transPbs"
+                rendered="{!IF(isTransactionLevelOperation = true,TRUE,FALSE)}">
+                <apex:pageBlockTable value="{!txWrapperList}" var="txw">
+                   <!--* <apex:column >
+                        <apex:facet name="header">
+                            <input type="checkbox" id="chkUnchkAll" checked="true"
+                                onclick="checkUncheckAll(this);YUIShowLoading();changeTemplate();" />
+                        </apex:facet>
+                        <apex:inputCheckbox id="selectedTx" value="{!txw.selected}"
+                            onclick="YUIShowLoading();changeTemplate();" />
+                    </apex:column>-->
+                    <apex:column >
+                        <apex:facet name="header">
+                            <input type="checkbox" id="chkUnchkAll" checked="true"
+                                onclick="checkUncheckAll(this);changeTemplate();" />
+                        </apex:facet>
+                        <apex:inputCheckbox id="selectedTx" value="{!txw.selected}"
+                            onclick="changeTemplate();" />
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Transaction_Number}">
+                        <a href="/{!txw.tx.Id}">{!txw.tx.Name}</a>
+                    </apex:column>
+                    <apex:column value="{!txw.tx.akritiv__Po_Number__c}" />
+                    <apex:column value="{!txw.tx.akritiv__So_Number__c}" />
+                    <apex:column value="{!txw.tx.akritiv__Due_Date__c}" />
+                    <apex:column value="{!txw.tx.akritiv__Amount__c}" />
+                    <apex:column value="{!txw.tx.akritiv__Balance__c}" />
+                </apex:pageBlockTable>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_List_View}"></apex:outputLabel>
+                    <apex:selectList onchange="return  changeListView();" size="1"
+                        value="{!selectedList}" title="{!$Label.Label_Choose_a_ListView}">
+                        <apex:selectOptions value="{!listViewOptions}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apeX:outputLabel >{!$Label.Label_Attachment}</apeX:outputLabel>
+                    <apex:outputPanel >
+                        <apex:selectRadio value="{!currUserPref.akritiv__AttachmentTypes__c}">
+                            <apex:selectOptions value="{!attachmentTypes}" />
+                        </apex:selectRadio>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel />
+                    <apex:commandLink action="{!previewTemplateAttachment}"
+                                                target="blank" value="{!$Label.Label_Preview_Attachment}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection columns="1" title="{!$Label.Label_Customer_Rating}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Collection_Rating}" />
+                    <c:Star_Rating_Component updatable="true"
+                        initRating="{!activityRating}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+            <c:Email_Editor supportLocale="{!supportLocale}"
+                accountId="{!accountId}"
+                contactId="{!emailTargetToContactId}" faxId="{!emailTargetToFaxId}"
+                emailCcAddresses="{!ccAddresses}"
+                emailBccAddresses="{!bccAddresses}"
+                emailAddToAddresses="{!addtoAddresses}"
+                copyToSender="{!currUserPref.akritiv__BCC_Emails_To_Me__c}"
+                mailingSubject="{!emailSubject}" emailBody="{!emailTemplateBody}"
+                contactMethod="{!contactMethod}"
+                templatecategory="{!templatecategory}"
+                contactNoteTitle="{!contactNoteTitle}" 
+                contactNote="{!contactNote}"
+                emailTemplateId="{!templateIdSelected}"
+                emailAttachmentIds="{!attachmentIds}"
+                selectedTxList="{!transactionsCollectionObject}"
+                listView="{!selectedList}"
+                orgWideEmailAddressId="{!currUserPref.akritiv__Org_Wide_Email__c}"
+                id="emaileditor" />           
+            <br />
+            
+            <apex:pageBlockSection columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="" />
+                    <apex:outputPanel >
+                        <apex:inputCheckbox value="{!isFollowUp}" />
+                        <apex:outputLabel value="{!$Label.Label_Create_follow_up_after}" />
+                        <apex:inputText size="1" maxlength="4" value="{!followUpDays}" />
+                        <apex:outPutLabel value="{!$Label.Label_Days_With_Note}" />&nbsp;
+                       <!-- <apex:inputTextarea id="comments" rows="1"
+                            style="width:400px;" value="{!followupNote}" />-->
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+               
+             <apex:pageBlockSectionItem id="noteSection">
+                <apex:outputLabel >{!$Label.Label_Note_Title}</apex:outputLabel>
+                <apex:outputPanel >
+                    <apex:inputText value="{!NoteFollowupTitle}" style="width:400px"
+                        id="followupNoteTitle" maxlength="80" /> &nbsp;&nbsp;
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+    
+            <apex:pageBlockSectionItem id="commentSection">
+                <apex:outputLabel >{!$Label.Label_Note_Body}</apex:outputLabel>
+                <apex:inputTextArea value="{!comments}" style="width:400px; height:50px;" id="followNotecomment" />
+            </apex:pageBlockSectionItem>
+                
+
+            </apex:pageBlockSection>
+            <apex:inputHidden id="hiddenNoteBody" value="{!contactNote}" />
+        </apex:pageBlock>
+ 
+        <script>
+        // activate the phone contact method initially
+        var contactMethod = 'Email'; // initially
+
+        function checkUncheckAll(mainChkbx) {
+            var inputElem = document.getElementsByTagName("input");
+            for(var i=0; i<inputElem.length; i++){
+                if(inputElem[i].id.indexOf("selectedTx")!=-1)
+                    inputElem[i].checked = mainChkbx.checked;
+            }
+        }
+        
+        function beforeSubmit()
+        {
+           
+           // alert(document.getElementById('pg:frm:pb:emaileditor:emailComp:contactDetailPbs:sib:contactNote').value);
+            document.getElementById("pg:frm:pb:hiddenNoteBody").value = document.getElementById('pg:frm:pb:emaileditor:emailComp:notesec:sib:contactNote').value ;
+       // alert('xxxx');
+        
+        }
+    </script>
+    <!-- AKTPROD-428 // For Invoice Template Functionality // start Here -->
+    </apex:form>
+    <apex:form id="frm2">
+        <apex:actionFunction name="TempObjInsert" action="{!prepareCofigSharingForPDFGen}" reRender="frm2"/>
+        
+    </apex:form>
+    <script>
+       //* YUIHideLoading();
+          var flag = '{!isMultiInvoiceTemplates}'; 
+          //alert(flag);
+          TempObjInsert();
+    <!-- AKTPROD-428 // For Invoice Template Functionality  // End Here  -->  
+</script>
+
+</apex:page>

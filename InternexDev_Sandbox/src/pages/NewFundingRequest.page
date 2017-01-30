@@ -1,0 +1,53 @@
+<apex:page standardController="case"  id="pg" action="{!if($Profile.Name !='System Administrator', null, URLFOR($Action.case.edit, case.Id, [retURL=URLFOR($Action.case.View, case.Id)], true))}">
+<apex:sectionHeader title="Funding Request Edit" subtitle="New Funding Request"/>
+<apex:form id="form">
+<apex:pagemessages ></apex:pagemessages>
+   <apex:pageBlock title="Funding Request Edit" id="pb">
+           <apex:pageBlockButtons >
+               <apex:commandButton value="Save" action="{!Save}"/>
+               <apex:commandButton value="Cancel" action="{!Cancel}"/>
+           </apex:pageBlockButtons>
+            
+       <apex:pageBlockSection title="Funding Request Information" columns="2" id="pbs1">
+            <apex:outputField value="{!case.Client_Account__c}"/>
+            <apex:outputField value="{!case.Funding_Requested__c}"/>
+            <apex:outputField value="{!case.Business_Transaction_Date__c}"/>
+              <apex:outputField value="{!case.ownerId}"/>
+            <apex:inputField value="{!case.Deal_Acceptance_Date__c}"/>
+           <apex:outputField value="{!case.Status}"/>
+         <!--    <apex:selectList size="1" value="{!case.Status}">
+                <apex:selectOption itemValue="Pending" itemLabel="Pending"></apex:selectOption>
+                 <apex:selectOption itemValue="Fully Funded" itemLabel="Fully Funded"></apex:selectOption>
+                </apex:selectList> -->
+            <apex:outputField value="{!case.CurrencyIsoCode}"/>
+       </apex:pageBlockSection>
+       
+       <apex:pageBlockSection title="Funding Request Information" columns="2" id="pbs2">
+            <apex:outputField value="{!case.Grade_Id__c}"/>
+            <apex:outputField value="{!case.Sync_with_Grade__c}"/>
+            <apex:outputField value="{!case.Portal_External_Id__c}"/>
+            <apex:outputField value="{!case.Sync_with_Portal__c}"/>
+            <apex:outputField value="{!case.MP_External_Id__c}"/>
+            <apex:outputField value="{!case.Sync_with_Market_Place__c}"/>
+       </apex:pageBlockSection>
+       
+        <apex:pageBlockSection title="Additional Information" columns="2" id="pbs3">
+            <apex:outputField value="{!case.Origin}"/>
+            <apex:outputField value="{!case.ContactId}"/>
+            <apex:outputField value="{!case.Priority}"/>
+        </apex:pageBlockSection>
+        
+          <apex:pageBlockSection title="Description Information" columns="1" id="pbs4">
+            <apex:outputField value="{!case.Subject}"/>
+             <apex:outputField value="{!case.Description}"/>
+             <!-- <apex:pageBlockTable value="{!case.casecomments}" var="c">
+            <apex:column value="{!c.commentbody}"/> 
+        </apex:pageBlockTable>-->
+          
+        </apex:pageBlockSection>
+       
+   
+       
+   </apex:pageBlock>     
+</apex:form>
+</apex:page>

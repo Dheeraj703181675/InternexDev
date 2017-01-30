@@ -1,0 +1,268 @@
+<apex:page controller="akritiv.ChildAccountController" id="pg" sidebar="false" showHeader="false">
+
+<style>
+        #filter
+        {
+            display: none;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+           <!-- background-image:url({!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}); -->
+            background-repeat:no-repeat;
+            background-position:center;
+            background-color: #ffffff;
+            z-index:10;
+            opacity:0.6;
+            filter: alpha(opacity=50);
+        }
+        .strLabel{
+                    color: #333333;
+            font-size: 91%;
+            font-weight: bold;
+            text-align: right;
+        }
+     
+    </style>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"/>
+<script>
+
+
+ function closeLookUpWindow()
+    {
+        var j$ = jQuery.noConflict();
+        var idString;
+        var idString2 = '';
+        var checkBoxElements;
+
+        
+         checkBoxElements = j$(".tansCheckbox:checked");
+            var flag = 'false';
+            var v2 = '';
+           
+            //Find all selected check boxes and add Account Id to comma seperated string 
+            checkBoxElements.each(function(e){
+                idString2 += j$(this).attr('data-id').split(' ')[0] + ',';
+           
+           });
+           
+        
+        if(idString2 == '' || idString2 == null){
+            alert('{!$Label.Label_Please_select_atleast_one_Account}');
+            return false;
+        }else{
+        top.window.opener.CloseLookupWindow(idString2);
+        }
+    }
+    
+       function checkAll(sel){
+  
+            var inputElem = document.getElementsByTagName("input");
+          
+            var i;                        
+        
+            for(i=0 ; i < inputElem.length ; i++){
+            
+                if(inputElem[i].id.indexOf("chk") != -1){
+                      inputElem[i].checked = sel.checked;
+                }
+            }
+        }  
+        
+      function changeRecPerPage(){
+        totalBalance = 0.00;
+        totalSelectedTx = 0;
+       //* YUIShowLoading();
+       startProcess();
+        changeRec();
+     
+        
+     }
+  
+    
+    //paging controll next page action
+    function nextpg(){
+
+       totalBalance = 0.00;
+       totalSelectedTx = 0;
+      //* YUIShowLoading();
+      startProcess();
+        nextpage();
+        return false;
+    }
+    //paging controll first page action
+    function firstpg(){
+       totalBalance = 0.00;
+       totalSelectedTx = 0;
+      //* YUIShowLoading();
+      startProcess();
+        firstpage();
+        return false;
+    }
+    
+    //paging controll last page action
+    function lastpg(){
+        totalBalance = 0.00;
+        totalSelectedTx = 0;
+       //* YUIShowLoading();
+       startProcess();
+        lastpage();
+        return false;
+    }
+    //paging controll previous page action
+    function prevpg(){
+        totalBalance = 0.00;
+        totalSelectedTx = 0;
+       //* YUIShowLoading();
+       startProcess();
+        previouspage();
+   }
+   
+  function startProcess(){
+            document.getElementById("{!$Component.pg.frm.loadingdetail2}").style.display = 'block'; 
+            document.getElementById('filter').style.display = 'block'; 
+        }  
+          
+        function endProcess(){
+            document.getElementById("{!$Component.pg.frm.loadingdetail2}").style.display = 'none';
+            document.getElementById('filter').style.display = 'none'; 
+        }   
+           
+  function searchAccount(e){
+        
+        var keynum;
+        if(window.event) // IE
+        {
+            keynum = e.keyCode;
+        }else{
+            keynum = e.which;
+        }
+        
+        if(keynum == 13) { 
+            var btn = document.getElementById('{!$Component.pg:frm:btnSearch}');
+            if (btn != null){ 
+               btn.click();
+               if(window.event){
+                   event.keyCode = 0;
+               }else{
+                   e.which = 0;
+               }
+            }
+            return false; 
+        } 
+    }     
+    
+
+</script>
+
+    <apex:form id="frm">
+     <div id="filter"></div>
+        <apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loadingdetail2" style="display:none;position:fixed;top:50%;left:50%;z-index:10;"/>
+    
+     <table style="align:center;width:40%"><tr><td>
+     <apex:outputLabel ><b>{!$Label.Label_Account_Name}</b></apex:outputLabel></td><td>
+    <apex:inputText id="SearchAccount" value="{!searchText}" onkeypress="return searchAccount(event);" /></td><td>
+                <apex:commandButton id="btnSearch" value="{!$Label.Label_Search}" action="{!doSearch}"/></td></tr></table>
+        <apex:pageBlock >
+                               
+             <apex:actionFunction name="nextpage" action="{!next}" reRender="panel3,panel2" oncomplete="endProcess();"/>  
+            <apex:actionFunction name="firstpage" action="{!first}" reRender="panel3,panel2" oncomplete="endProcess();"/>
+            <apex:actionFunction name="lastpage" action="{!last}" reRender="panel3,panel2" oncomplete="endProcess();"/> 
+            <apex:actionFunction name="previouspage" action="{!previous}" reRender="panel3,panel2" oncomplete="endProcess();"/>
+             <apex:actionFunction name="changeRec" action="{!changeRecPerPage}" reRender="panel3,panel2" oncomplete="endProcess();"/>
+            
+              <!--  <apex:pageBlockTable Value="{!accWrapList}" var="aw" id="ptable">
+                
+                <apex:column >
+                   <input type="checkbox" data-id="{!aw.acc.Id}" id="selectedTx"  class="tansCheckbox" />
+               </apex:column>
+                    <apex:column value="{!aw.acc.Name}"/>
+                    <apex:column value="{!aw.acc.AccountNumber}"/>
+                   
+                    
+                </apex:pageBlockTable> -->
+                
+                  <apex:outputPanel id="panel2" >
+        <table><tr><td>
+         <a href="#"><img src="{!URLFOR($Resource.iconset, 'iconset/3_37.png')}" onClick=" if('{!pageNumber}'!=1)return firstpg();else return false;"   title="{!$Label.Label_First}" /></a>&nbsp;
+         </td><td><a href="#"><img src="{!URLFOR($Resource.iconset, 'iconset/3_31.png')}" onClick="if('{!hasPrevious}'=='true') return prevpg();else return false;"   title="{!$Label.Label_Previous}" /></a>&nbsp;
+         </td><td><apex:outPutLabel value="{!pageDetail}" /> &nbsp;
+         </td><td><a href="#"><img src="{!URLFOR($Resource.iconset, 'iconset/3_30.png')}"  onClick="if('{!hasNext}'=='true') return nextpg();else return false;"    title="{!$Label.Label_Next}" /></a>&nbsp;
+         </td><td><a href="#"><img src="{!URLFOR($Resource.iconset, 'iconset/3_36.png')}" onClick="if('{!hasNext}'=='true')return lastpg();else return false;"  title="{!$Label.Label_Last}" /></a>&nbsp;
+         
+         </td>
+         <td>&nbsp;&nbsp;&nbsp;</td><td><apex:outputLabel value="{!$Label.Label_Total_Records}" />&nbsp;&nbsp;<apex:outputLabel id="trec" value="{!displayTotalRec}" />
+         </td>
+         <td>&nbsp;&nbsp;&nbsp;</td><td><apex:outputLabel value="{!$Label.Label_Records_Page}"></apex:outputLabel>&nbsp;&nbsp;
+            </td><td><apex:selectList onchange="changeRecPerPage();" size="1"  value="{!recPerPage}" title="{!$Label.Label_Choose_Record_per_Page}"> 
+             <apex:selectOptions value="{!recPerPageOptions}"/>
+             </apex:selectList> 
+         </td>
+          <td>&nbsp;&nbsp;&nbsp;</td><td><apex:outputLabel ></apex:outputLabel>&nbsp;&nbsp;
+            </td>
+         <td><!--<apex:inputcheckbox value = "{!childAccount}" onchange="childAccount('{!controllerAccount}');return false;" /> -->
+        
+         </td>
+         </tr></table>
+         <apex:actionStatus startStyle="font-weight:Bold;color:#cc0000" startText="{!$Label.Label_Please_Wait}" stopText="" id="loadingStatus"  />
+        
+       </apex:outPutPanel>
+       
+        <apex:outputPanel id="panel3" >
+                
+          <table style="border-collapse:collapse;padding:0px; border:1px solid gray; font-family:verdana;" >
+            <thead >
+            <tr >
+         <th style="background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;">
+                 <apex:inputCheckbox id="chk" selected="false" onclick="checkAll(this);" /> 
+              
+            </th>
+            <!-- <th  valign="top" style="background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;" /> -->
+                 <apex:repeat value="{!lstOfLabels}" var="list">
+                     <th valign="top" style="background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;">
+                         <apex:commandLink value="{!list.fieldValue}"  action="{!toggleSort}" rerender="panel3">
+                             <apex:param name="sortField" value="{!list.fieldName}" assignTo="{!sortField}"/>
+                         </apex:commandLink>
+                         <apex:image value="{!IF(list.fieldName = sortField  ,IF(sortDir  == 'asc', '/img/sort_asc_arrow.gif','/img/sort_desc_arrow.gif'),'/s.gif')}"/>
+                     
+                    </th>
+                </apex:repeat>
+                 
+            </tr>
+            </thead>
+            <tbody>
+            <apex:repeat value="{!wrapList2}" var="wrapList">
+             <apex:repeat value="{!wrapList}" var="nextitem">
+                
+                <tr>
+                    <td style=" text-align:left;width:auto;border: solid 1px gray;padding-left: 3px;padding-right: 3px;white-space:nowrap;">
+                  <!--  <apex:inputCheckbox value="{!nextitem.selected}" selected="false"  id="checked"  /> -->
+                   <input type="checkbox" data-id="{!nextitem.txObject.Id}" id="chk"  class="tansCheckbox"  />
+                </td>
+                   
+                    <apex:repeat value="{!nextitem.txValues}" var="item">
+                         
+                         <td style="text-align:left;width:auto;border: solid 1px gray;padding-left: 3px;padding-right: 3px;white-space:nowrap;" >
+                               
+                                <apex:outPutLabel value="{!item.fieldValue}" escape="false"> </apex:outPutLabel>
+                         </td>
+                    </apex:repeat> 
+                </tr>
+            </apex:repeat>
+        </apex:repeat>
+            </tbody>
+        </table>
+        
+               </apex:outPutPanel>
+                
+                <apex:pageBlockButtons >
+                <apex:commandButton value="{!$Label.Label_Submit}"  onclick="return closeLookUpWindow();"/>
+                <apex:commandButton value="{!$Label.Label_Cancel}"  onclick="window.close();" />
+                </apex:pageBlockButtons>
+        </apex:pageBlock>
+    
+    </apex:form>
+     
+</apex:page>

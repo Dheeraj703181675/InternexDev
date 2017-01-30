@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>QB Payment</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>QB Payments</value>
+    </caseValues>
+    <fields>
+        <label><!-- CurrencyRef --></label>
+        <name>CurrencyRef__c</name>
+    </fields>
+    <fields>
+        <label><!-- CustomerRef --></label>
+        <name>CustomerRef__c</name>
+    </fields>
+    <fields>
+        <label><!-- DepositToAccountRef --></label>
+        <name>DepositToAccountRef__c</name>
+    </fields>
+    <fields>
+        <label><!-- Line Amount --></label>
+        <name>Line_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Line Transaction ID --></label>
+        <name>Line_Transaction_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Line Transaction Open Balance --></label>
+        <name>Line_Transaction_Open_Balance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Line Transaction ReferenceNumber --></label>
+        <name>Line_Transaction_ReferenceNumber__c</name>
+    </fields>
+    <fields>
+        <label><!-- ProcessPayment --></label>
+        <name>ProcessPayment__c</name>
+    </fields>
+    <fields>
+        <label><!-- QB CreateTime --></label>
+        <name>QB_CreateTime__c</name>
+    </fields>
+    <fields>
+        <label><!-- QB LastUpdatedTime --></label>
+        <name>QB_LastUpdatedTime__c</name>
+    </fields>
+    <fields>
+        <label><!-- SyncToken --></label>
+        <name>SyncToken__c</name>
+    </fields>
+    <fields>
+        <label><!-- TotalAmt --></label>
+        <name>TotalAmt__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transaction Date --></label>
+        <name>Transaction_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- UnappliedAmt --></label>
+        <name>UnappliedAmt__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>LBI and PR</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>LBI and PRS</value>
+    </caseValues>
+    <fields>
+        <label><!-- Lockbox Image --></label>
+        <name>Lockbox_Image__c</name>
+        <relationshipLabel><!-- LBI and PRS --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Payment --></label>
+        <name>Payment__c</name>
+        <relationshipLabel><!-- LBI and PRS --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- WF_PR --></label>
+        <name>WF_PR__c</name>
+        <relationshipLabel><!-- LBI and PRS --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

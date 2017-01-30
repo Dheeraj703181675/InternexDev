@@ -1,0 +1,173 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/*
+ * Creates Disputes for transaction. 
+ * This page will be access by Customer Portal users.
+ */
+-->
+<apex:page controller="akritiv.PortalGenerateTransactionDisputes" id="pg"
+    tabStyle="Account">
+
+   <!--* <link rel="stylesheet" type="text/css"
+        href="{!URLFOR($Resource.YUI2_8,'YUI2_8/build/editor/assets/skins/sam/simpleeditor.css')}"></link>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/yuiloader/yuiloader-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/event/event-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/dom/dom-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/element/element-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/container/container_core-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/button/button-min.js')}"></script>
+
+    <c:Base_Comp_YUI_ModalLoader /> -->
+    <script>
+          function startProcess(){
+      
+       document.getElementById("{!$Component.pg.frm.loading}").style.display = 'block'; 
+       
+       }
+       
+       function endProcess(){
+       
+       document.getElementById("{!$Component.pg.frm.loading}").style.display = 'none';
+       } 
+    </script>
+
+    <apex:sectionHeader title="{!$Label.Label_Create_Dispute_for_Transaction}" />
+    <apex:form id="frm">
+        <apex:pageMessages ></apex:pageMessages>
+
+        <apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;"/>
+
+        <apex:outputPanel rendered="{!IF(NOT(disputesCreated), TRUE, FALSE)}">
+            <apex:pageBlock id="pb" mode="edit">
+                <apex:pageBlockButtons >
+                    <!--<apex:commandButton value="{!$Label.Label_Create_Dispute}" action="{!execute}" onclick="startProcess();" oncomplete="endProcess();" />-->
+                    <apex:commandButton value="{!$Label.Label_Create_Dispute}" action="{!execute}"/>
+                    <apex:commandButton value="{!$Label.Label_Cancel}" action="{!goBackToAccount}"
+                        immediate="true" onclick="startProcess();" oncomplete="endProcess();"/>
+                </apex:pageBlockButtons>
+
+                <apex:pageBlockSection id="pbs1" title="{!$Label.Label_Dispute_Details}" columns="1">
+                    <apex:pageBlockTable value="{!disputesWithTxList}" var="disputeTx"
+                        id="disputeItemsTable">
+                        <apex:column >
+                            <apex:facet name="header">
+                                <input type="checkbox" id="chkUnchkAll" selected="false"
+                                    onclick="checkAll(this);" />
+                            </apex:facet>
+                            <apex:inputCheckbox value="{!disputeTx.selected}" id="selectedTx" />
+                        </apex:column>
+                        <apex:column value="{!disputeTx.dispute.akritiv__Transaction__c}"
+                            headerValue="{!$Label.Label_Transaction_Number}" />
+                        <apex:column value="{!disputeTx.tx.akritiv__Amount__c}"
+                            headerValue="{!$Label.Label_Transaction_Amount}" />
+                        <apex:column headerValue="{!$Label.Label_Dispute_Type}">
+                            <apex:selectList size="1" multiselect="false"
+                                value="{!disputeTx.dispute.akritiv__Type__c}">
+                                <apex:selectOptions value="{!disputeTypes}"></apex:selectOptions>
+                            </apex:selectList>
+                        </apex:column>
+                        <apex:column headerValue="{!$Label.Label_Dispute_Amount}">
+                            <apex:inputField value="{!disputeTx.dispute.akritiv__Amount__c}" />
+                        </apex:column>
+                    </apex:pageBlockTable>
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection id="disputeNoteSection" title="{!$Label.Label_Dispute_Note}"
+                    columns="1">
+                    <apex:pageBlockSectionItem id="si2">
+                        <apex:outputLabel >{!$Label.Label_Note_Title}</apex:outputLabel>
+                        <apex:outputPanel >
+                            <apex:inputText value="{!contactNoteTitle}" style="width:400px"
+                                id="contactNoteTitle" maxlength="80" /> &nbsp;&nbsp;
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+
+                    <apex:pageBlockSectionItem id="sib">
+                        <apex:outputLabel id="pbsiNoteBodyLabel">{!$Label.Label_Note_Body}</apex:outputLabel>
+                        <apex:inputTextArea value="{!contactNote}"
+                            style="width:400px; height:100px;" id="contactNote" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+
+
+
+            </apex:pageBlock>
+
+
+
+        </apex:outputPanel>
+
+        <apex:outputPanel rendered="{!IF(NOT(disputesCreated), FALSE, TRUE)}">
+            <apex:pageBlock >
+                <apex:commandButton value="{!$Label.Label_Ok}" action="{!goBackToAccount}" />
+            </apex:pageBlock>
+        </apex:outputPanel>
+
+        <script>
+
+        initMe();
+        
+        function initMe() {
+            var checkelem = document.getElementById('chkUnchkAll');
+            checkelem.checked = true;
+            checkAll(checkelem);
+        }
+        
+        function checkAll(selectAll) {
+            var inputElem = document.getElementsByTagName("input");
+            for(var i=0; i<inputElem.length; i++){
+                if(inputElem[i].id.indexOf("selectedTx")!=-1)
+                inputElem[i].checked = selectAll.checked;
+            }
+        }
+        
+        
+    
+        
+    </script>
+    </apex:form>
+
+    <script>
+        var flagToggleNBVisibility = false;
+    function addNoteBody(dialogText){
+    alert('******** addnote');
+        var visibleVal = "";
+        try {
+            if (!flagToggleNBVisibility)
+            {
+                visibleVal = "block";
+                flagToggleNBVisibility = true;
+            }
+            else
+            {
+                visibleVal = "none";
+                flagToggleNBVisibility = false;
+            }
+            alert ('ele '+document.getElementById('pg:frm:pb:pbs1:disputeNoteSection:sib.pbsiNoteBodyLabel'));
+            alert ('ele '+document.getElementById('pg:frm:pb:disputeNoteSection:sib.pbsiNoteBodyLabel'));
+                
+            //document.getElementById("{!$Component.disputeNoteSection.sib.pbsiNoteBodyLabel}").style.display = visibleVal;
+            //document.getElementById("{!$Component.disputeNoteSection.sib.contactNote}").style.display = visibleVal;
+        }
+        catch(e) {
+            alert(e);
+        }
+        return false;
+    }
+    </script>
+
+</apex:page>

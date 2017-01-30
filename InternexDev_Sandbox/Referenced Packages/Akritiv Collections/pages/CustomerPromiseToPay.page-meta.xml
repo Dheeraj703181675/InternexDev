@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>17.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Page to provide the interface for Promise To Pay functionality. The page creates promise for the user to pay on some / selected transaction with specified amount. 
+
+The same email sending functionality is there as it is on ContactCustomer page. User can select pdf/excel details about the transaction and can attach additional documents to send across the customer. User can select a particular email-template from existing templates in the system to send it to the user.
+
+The conact methods are Phone, Fax, Email and Print for the page.</description>
+    <label>CustomerPromiseToPay</label>
+</ApexPage>

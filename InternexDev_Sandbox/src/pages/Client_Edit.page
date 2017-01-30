@@ -1,0 +1,57 @@
+<apex:page standardController="akritiv__Brand__c" extensions="ClientSaveAndNew" id="pg" action="{!if($Profile.Name =='InterNex Accounting Manager' || $Profile.Name =='Internex Admin Sys', null, URLFOR($Action.akritiv__Brand__c.edit, akritiv__Brand__c.Id, [retURL=URLFOR($Action.akritiv__Brand__c.View, akritiv__Brand__c.Id)],true))}"> 
+<apex:sectionHeader title="Client Edit" subtitle="Client edit"/> 
+<apex:form >
+<apex:pageBlock title="Client Edit" id="pb">
+<apex:pageMessages />
+<apex:pageBlockButtons >
+<apex:commandButton value="Save" action="{!Save}"/>
+<apex:commandButton value="Save & New" action="{!saveAndNew}"/>
+<apex:commandButton value="Cancel" action="{!Cancel}"/>
+</apex:pageBlockButtons>
+<apex:pageBlockSection title="Information" columns="2" id="pbs1">
+<apex:outputField value="{!akritiv__Brand__c.Name}"/>
+<apex:outputField value="{!akritiv__Brand__c.CurrencyIsoCode}"/>
+<apex:outputField value="{!akritiv__Brand__c.CounterParty__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.Application_Number__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.Active__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.Application_Name__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.Funding_Limit__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.Referal_Source__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.Accounting_System_Type__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.Account_Package_ID__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.QB_Realm__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.QB_AccessTokenSecret__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.QB_ConsumerKey__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.QB_ConsumerSecret__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.QB_OauthToken__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.Referral_Name__c}"/>
+<apex:selectList value="{!akritiv__Brand__c.Status__c}" multiselect="false" size="1" > <!-- disabled="{!IF($Profile.Name =='Internex Admin Sys',true,false)}" -->
+<apex:selectOption itemValue="{!akritiv__Brand__c.Status__c}" itemLabel="{!akritiv__Brand__c.Status__c}"/>
+<apex:selectOption itemValue="Default" itemLabel="Default" rendered="{!IF(akritiv__Brand__c.Status__c == 'Default',false,true)}"/>
+<apex:selectOption itemValue="Impaired" itemLabel="Impaired" rendered="{!IF(akritiv__Brand__c.Status__c == 'Impaired',false,true)}"/>
+<apex:selectOption itemValue="Closed" itemLabel="Closed" rendered="{!IF(akritiv__Brand__c.Status__c == 'Closed',false,true)}"/>
+</apex:selectList>
+<apex:selectList value="{!akritiv__Brand__c.Default_Reason__c}" multiselect="false" size="1" > <!-- disabled="{!IF($Profile.Name =='Internex Admin Sys',true,false)}" -->
+<apex:selectOption itemValue="N/A" itemLabel="N/A"/>
+<apex:selectOption itemValue="Missed Payment" itemLabel="Missed Payment"/>
+<apex:selectOption itemValue="Missing Reports" itemLabel="Missing Reports"/>
+<apex:selectOption itemValue="Bankruptcy" itemLabel="Bankruptcy"/>
+<apex:selectOption itemValue="Fraud" itemLabel="Fraud"/>
+</apex:selectList>
+
+<apex:inputField value="{!akritiv__Brand__c.Watch_List__c}" rendered="{!IF(akritiv__Brand__c.Watch_List__c == false || $Profile.Name =='Internex Admin Sys',true,false)}"/>
+<apex:outputField value="{!akritiv__Brand__c.Watch_List__c}" rendered="{!IF(akritiv__Brand__c.Watch_List__c == true && $Profile.Name =='InterNex Accounting Manager',true,false)}"/>
+</apex:pageBlockSection>
+<apex:pageBlockSection title="Integration" columns="2" id="pbs2">
+<apex:outputField value="{!akritiv__Brand__c.External_Id__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.Sync_with_Grade__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.Portal_External_Id__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.Sync_with_Portal__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.MP_External_Id__c}"/>
+<apex:outputField value="{!akritiv__Brand__c.Sync_with_Market_Place__c  }"/>
+<apex:outputField value="{!akritiv__Brand__c.Business_Transaction_Date__c}"/>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+ 
+</apex:page>

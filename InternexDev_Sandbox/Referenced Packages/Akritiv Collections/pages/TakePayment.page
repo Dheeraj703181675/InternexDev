@@ -1,0 +1,677 @@
+<!--
+ /*
+  *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+  *This software is the confidential and proprietary information
+  *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+  *disclose or use Confidential Information without the express written
+  *agreement of Akritiv Technologies, Inc.
+  */
+-->
+
+<!--
+    /*
+     * Page to provide the interface for Take Payment functionality.
+     * The page use for payement from the UTA
+     */
+-->
+<apex:page controller="akritiv.UTAProcesser" id="pg" tabstyle="Account" >
+    <script src="/soap/ajax/10.0/connection.js" type="text/javascript"></script>
+    <script src="/soap/ajax/10.0/apex.js" type="text/javascript"></script>
+   <!-- * <c:Base_Comp_YUI_ModalLoader /> -->
+    <script type="text/javascript" src="{!URLFOR($Resource.jquery,'Jquery.js')}"></script>
+    <style>
+        .headerRow {
+            font-size: 12px;
+            font-weight: bold;
+        }
+    
+        #filter{
+            display: block;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-image:url({!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')});
+            background-repeat:no-repeat;
+            background-position:center;
+            background-color: #ffffff;
+            opacity:0.6;
+            filter: alpha(opacity=50);
+        }
+        .txtalign{
+        
+            text-align: right;
+        }
+    </style>
+
+    <script>
+        // Show loading on page load
+        // * YUIShowLoading();
+        $(window).load(function() {
+            $('#filter').hide();
+          });
+    
+        function startProcess(){
+            document.getElementById("{!$Component.pg.frm.loading}").style.display = 'block'; 
+            document.getElementById('filter').style.display = 'block'; 
+        }
+        
+        function endProcess(){
+            document.getElementById("{!$Component.pg.frm.loading}").style.display = 'none';
+            document.getElementById('filter').style.display = 'none';
+        } 
+           
+        function changePaymentType(){
+            changePaymentType2();
+        }
+           
+        function checkAll(selectAll) {
+            if(selectAll.checked ){               
+                selectedID = "{!JSINHTMLENCODE(selectedTransactions)}" ;
+            }
+            else{
+                selectedID ='';
+            }
+                
+            var inputElem = document.getElementsByTagName("input");
+            for(var i=0; i<inputElem.length; i++){
+                if(inputElem[i].id.indexOf("selectedTx")!=-1)
+                inputElem[i].checked = selectAll.checked;
+            }
+        }  
+        
+        function tokenFn(token){
+            var tok = token;
+            tokenValue(tok);
+        }
+       
+        function openpopup(){
+            
+            document.getElementById('termsCond').style.visibility = 'visible';
+            return false;
+        }
+
+        function changeListView(){
+            changeList(); 
+            return false;
+         }
+         
+        function totalAmountchanged(){
+            var v = {!countTotal}
+            var currencycode ='{!JSENCODE(currencyIsoCode)}';
+            var total = 0.00;
+           
+            
+            for (i=0; i<v; i++){
+                if(document.getElementById('pg:frm:pb:TransactionsList:transPbs:pbTable:'+i+':utaAmount').value != null && document.getElementById('pg:frm:pb:TransactionsList:transPbs:pbTable:'+i+':utaAmount').value != ''){
+                   var payamt = parseFloat(document.getElementById('pg:frm:pb:TransactionsList:transPbs:pbTable:'+i+':utaAmount').value.split(",").join(""));
+                 
+                   var bal = document.getElementById('pg:frm:pb:TransactionsList:transPbs:pbTable:'+i+':utabalance').innerHTML.replace(/[^\d.ex-]+/gi, '');
+
+                   //document.getElementById('pg:frm:pb:TransactionsList:transPbs:pbTable:'+i+':utabalance').innerHTML = parseFloat(bal).toFixed(2);
+                  
+                   if(payamt > bal ){
+                       alert('Payment amount has exceeded the balance');
+                       document.getElementById('pg:frm:pb:TransactionsList:transPbs:pbTable:'+i+':utaAmount').value = parseFloat(bal).toFixed(2);
+                   }
+                   total = total + parseFloat(document.getElementById('pg:frm:pb:TransactionsList:transPbs:pbTable:'+i+':utaAmount').value.split(",").join("")) ;
+                }
+            }
+          //  document.getElementById('pg:frm:pb:TransactionsList:transPbs:pbitem:totalPaymentTxAmount11').innerHTML = total;
+            
+            //totalDisputedAmount();           
+            totalPaymentBalance(total);
+        
+        }
+        
+    </script>
+
+   
+    <div id="filtercomp"></div>
+    <apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loadingcomp" style="display:none;position:fixed;top:50%;left:50%;z-index:10;"/> 
+    <apex:form id="frm">
+        <apex:actionFunction name="changeTemplateAsPerLocale" reRender="emailTemplate" oncomplete="endProcess();"/>
+        <apex:actionFunction name="totalPaymentTxAmount" action="{!totalPaymentAmount1}" reRender="emailTemplate" oncomplete="endProcess();"/>
+            <apex:inputHidden value="{!contactId}" id="hiddenToContactId" />
+            <apex:inputHidden value="{!targetContactId}" id="hiddenTargetContactId" />
+            <apex:inputHidden id="hiddenkey" value="{!hiddenKey}" />
+            <apex:inputHidden id="hiddenNoteBody" value="{!contactNote}" />
+            <apex:actionFunction name="changePaymentType2" action="{!changePaymentType1}" rerender="Payment" status="status"/>  
+            <apex:actionFunction name="tokenValue" action="{!tokenValuePass}" rerender="Payment" status="status">  
+            <apex:param name="tokenValueId" assignTo="{!tokenValueId}" value="" />
+        </apex:actionFunction>
+         <apex:actionFunction name="totalPaymentBalance" action="{!setPaymentTotal}" rerender="totalPaymentTxAmount11">  
+            <apex:param name="totalPaymentBal" assignTo="{!totalPaymentBal}" value="" />
+        </apex:actionFunction>
+        <apex:sectionHeader title="{!$Label.Label_Take_Payment_For} {!accName}" />
+        
+        <apex:actionStatus onstart="startProcess();" onstop="endProcess();" id="status" /> 
+            
+        <div id="filter"></div>
+        <apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;"/> 
+        <apex:pageBlock id="pb" rendered="{!showMainScreen}">
+            <apex:outputPanel id="pageMsgs">
+                <apex:pageMessages ></apex:pageMessages>
+            </apex:outputPanel>
+            <div style="display:none;" id="validationonamount"><apex:outputLabel style="color:red;" value="{!$Label.Label_amount_exceeded}e"></apex:outputLabel></div>
+            <apex:pageBlock id="TransactionsList">
+                <apex:pageBlockSection title="{!$Label.Label_Transactions}" columns="1" id="transPbs">
+                    <apex:pageBlockTable value="{!txList}" var="twx" id="pbTable" width="100%;">
+                        
+                        <apex:column headerValue="{!$Label.Label_Transaction_Number}" width="20%" style="text-align: left">
+                            <a href="/{!HTMLENCODE(twx.tx.Id)}">{!twx.tx.Name}</a>
+                        </apex:column>
+                        <apex:column value="{!twx.tx.akritiv__Due_Date__c}" width="20%" style="text-align: left" />
+                      <apex:column headerValue="{!$Label.Label_Amount}" style="text-align: right" headerClass="txtalign" width="20%" >
+                        <apex:outputText value="{0, number, ###,###,###.00}"  > {!currencyIsoCode} 
+                         <apex:param value="{!twx.tx.akritiv__Amount__c}" /> 
+                         </apex:outputtext>
+                        </apex:column>
+                        <apex:column headerValue="{!$Label.Label_Balance}" style="text-align: right" headerClass="txtalign" width="20%" >                                                    
+                           <apex:outputText value="{0, number, ###,###,###.00}"  id="utabalance" > {!currencyIsoCode} 
+                         <apex:param value="{!twx.tx.akritiv__Balance__c}" /> 
+                         </apex:outputtext>
+                          
+                        </apex:column> 
+                        <apex:column headerValue="{!$Label.Label_Payment_Amount}" width="20%" headerClass="txtalign" style="text-align: right;" >
+                        
+                         <apex:inputText value="{!twx.PaymentAmount}" style="text-align: right" onchange="totalAmountchanged();" id="utaAmount"></apex:inputText>
+                            <script>
+                            
+                            var listOftx = '{!txList.size}';
+                            
+                            for (i=0; i<listOftx ;i++){
+                             if(document.getElementById('pg:frm:pb:TransactionsList:transPbs:pbTable:'+i+':utaAmount').value != null && document.getElementById('pg:frm:pb:TransactionsList:transPbs:pbTable:'+i+':utaAmount').value != ''){
+                               var temp = parseFloat(document.getElementById('pg:frm:pb:TransactionsList:transPbs:pbTable:'+i+':utaAmount').value.split(",").join(""));
+                               temp = temp.toFixed(2);
+                              
+                               document.getElementById('pg:frm:pb:TransactionsList:transPbs:pbTable:'+i+':utaAmount').value= temp ;
+                                }
+                            }
+                            
+                            </script>
+                        
+                        </apex:column>
+                       <apex:facet name="footer">
+                           <apex:outputPanel style="float:right;" id="pbitem" >
+                                <apex:outputLabel ><b>{!$Label.Label_Total}</b> &nbsp;</apex:outputLabel> 
+                                <apex:outputText value="{0, number, ###,###,###.00}"  id="totalPaymentTxAmount11">
+                                  {!currencyIsoCode}   
+                                  <apex:param value="{!totalPaymentAmount}" /> 
+                                </apex:outputText>
+                            </apex:outputPanel>
+                        </apex:facet>
+                    </apex:pageBlockTable>
+                  <!--  <apex:pageblockSectionItem id="pbitem" >
+                        <apex:outputLabel style="padding-left:811px;">{!$Label.Label_Total}</apex:outputLabel>
+                        <apex:outputText value="{!currencyIsoCode}{!totalPaymentAmount}"  id="totalPaymentTxAmount11" ></apex:outputText>
+                    </apex:pageblockSectionItem>-->
+                </apex:pageBlockSection>
+                <div style="padding-left:500px;">
+                   <!-- <apex:commandButton value="Email Payment Link" action="{!sendEmailRendered}" reRender="frm"  onclick="startProcess();" oncomplete="endProcess();"/> -->
+                    <apex:commandButton value="{!$Label.Label_Take_Payment}" action="{!takepaymentRendered}" reRender="frm"  onclick="startProcess();" oncomplete="endProcess();" />
+                </div>
+            </apex:pageBlock>
+             
+           <apex:pageBlock id="sendEmail" rendered="{!sendEmailRendered1}">
+                <apex:pageBlockButtons location="bottom" >
+                    <apex:commandButton action="{!execute1}" value="{!$Label.Label_Send_Email}"/>     
+                    <apex:commandButton value="{!$Label.Label_Cancel}" action="{!CancelAccount}" /> 
+                </apex:pageBlockButtons>
+      
+                <apex:outputPanel id="emailSectionOP">
+                    <apex:pageBlockSection id="emailComponentPbs" columns="1">
+                        <apex:pageBlockSectionItem id="toSi">
+                            <apex:commandlink onclick="ShowContactLookup(document.getElementById('{!$Component.emailComponentPbs.toSi.toAddresses}').id, '{!accountId}', 'To', 'Email'); return false;">{!$Label.Label_To}</apex:commandlink>
+                            <apex:inputText id="toAddresses" disabled="true" style="width:400px;" value="{!toAddresses}" />
+                        </apex:pageBlockSectionItem>
+    
+                        <apex:pageBlockSectionItem id="ccSi">
+                            <apex:commandlink onclick="ShowContactLookup(document.getElementById('{!$Component.emailComponentPbs.ccSi.ccAddresses}').id, '{!accountId}', 'CC', 'Email'); return false;">{!$Label.Label_CC}</apex:commandlink>
+                            <apex:inputTextarea id="ccAddresses" rows="1" style="width:400px;" value="{!ccAddresses}" />
+                        </apex:pageBlockSectionItem>
+                        
+                        <apex:pageBlockSectionItem id="bccSi">
+                            <apex:commandlink onclick="ShowContactLookup(document.getElementById('{!$Component.emailComponentPbs.bccSi.bccAddresses}').id, '{!accountId}', 'BCC', 'Email'); return false;">{!$Label.Label_BCC}</apex:commandlink>
+                            <apex:inputTextarea id="bccAddresses" rows="1" style="width:400px;" value="{!bccAddresses}" />
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                </apex:outputPanel>
+    
+                <apex:inputHidden id="hiddenkey" value="{!hiddenKey}" />
+                <apex:inputHidden id="hiddenNoteBody" value="{!contactNote}" />
+            </apex:pageBlock>
+            
+            <apex:pageBlockSection columns="2" rendered="{!takePaymentRendered1}">
+                <apex:pageBlockSection columns="1" title="{!$Label.Label_Payment_Information}" id="Payment">
+                    <apex:selectList value="{!selectedPaymentType}" size="1" style="width:130px;"  id="selectedPaymentType" onchange="changePaymentType();" label="{!$Label.Label_Payment_Type}" >  
+                        <apex:selectOptions value="{!PaymentType}" /> 
+                    </apex:selectList> 
+                
+                    <apex:pageBlockSection columns="2" title="{!$Label.Label_Payment_Type_Details}">
+                        <apex:outputPanel >
+                            <apex:pageBlockSection columns="2">
+                            
+                                <apex:selectList value="{!CheckCCType}" size="1" id="CheckCCType" label="{!CheckCCTypeLabel}" style="width:100px" >  
+                                    <apex:selectOptions value="{!CheckCCType1}" /> 
+                                </apex:selectList> 
+                                
+                                <apex:inputText value="{!CheckWriterName}" id="CheckWriterName" label="{!CheckWirterLabel}" style="width:100px" />
+                                <apex:outputtext rendered="{!ShowCG}"></apex:outputtext>
+                                <apex:inputfield value="{!accountRecord.akritiv__Token__c}" id="token" rendered="{!ShowCCtoken}" onchange="tokenFn(this.value)" style="width:100px" />  
+                                <apex:inputText value="{!AccountNumber}" id="AccountNumber" label="{!AccountNumberLabel}" style="width:100px" />  
+                                
+                            </apex:pageBlockSection>  
+                        </apex:outputPanel>
+                                          
+                        <apex:outputPanel >
+                            <apex:pageBlockSection rendered="{!ShowCC}" columns="1" > 
+                                <apex:selectList value="{!ExpMM}" size="1" style="width:80px;"  id="selMonId"  label="{!$Label.Label_Exp_Month}" >   
+                                    <apex:selectOptions value="{!EXPMonth}" /> 
+                                </apex:selectList> 
+                                <apex:selectList value="{!ExpYY}" size="1" style="width:80px;"  id="selYearId"  label="{!$Label.Label_Exp_Year}" >   
+                                    <apex:selectOptions value="{!EXPYear}" /> 
+                                </apex:selectList> 
+                                <apex:inputText value="{!CVV2}" id="CVV2" label="CVV2" style="width:80px;"/>
+                            </apex:pageBlockSection> 
+        
+                            <apex:pageBlockSection rendered="{!ShowCG}" columns="1"> 
+                                <apex:inputText value="{!ABANumber}" id="ABANumber" label="{!$Label.Label_Routing_Transit}" style="width:80px;"/>
+                                <apex:inputText value="{!CheckNo}" id="CheckNo" label="{!$Label.Label_Check}" style="width:80px;"/>
+                            </apex:pageBlockSection> 
+                        </apex:outputPanel>
+                    </apex:pageBlockSection>
+                </apex:pageBlockSection>
+                
+                <apex:pageblockSection columns="1" title="Address Information">
+                    <apex:inputfield value="{!accountRecord.BillingStreet}" id="Address" style="width:200px"/>
+                    <apex:inputfield value="{!accountRecord.BillingCity}" id="City" style="width:200px" />
+                    <apex:inputfield value="{!accountRecord.BillingState}" id="State" style="width:200px" />
+                    <apex:inputfield value="{!accountRecord.BillingPostalCode}" id="ZipCode" style="width:200px" />  
+                </apex:pageblockSection>
+
+                <div style="text-align:center">
+                    <apex:commandButton value="Continue" action="{!Save}"  onclick="startProcess();" oncomplete="endProcess();" reRender="frm" />
+                </div>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+       
+              
+        <apex:pageBlock id="pgblock1" rendered="{!showOK}">
+            <apex:outputPanel id="pageMsgs1">
+                <apex:pageMessages ></apex:pageMessages>
+            </apex:outputPanel>
+               
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="{!$Label.Label_Confirm_Payment}" action="{!execute}"  onclick="startProcess();" oncomplete="endProcess();" reRender="frm" />
+                <apex:commandButton value="{!$Label.Label_Go_Back}" action="{!goBack}"  onclick="startProcess();" oncomplete="endProcess();" reRender="frm" />
+                  <apex:commandButton value="{!$Label.Label_Cancel}" action="{!cancel}"  onclick="startProcess();" oncomplete="endProcess();" reRender="frm" />
+                </apex:pageBlockButtons>
+           
+                <apex:pageBlockSection title="{!$Label.Label_Payment_Summary}" columns="1" id="transPbs1">
+                <apex:pageBlockTable value="{!txList}" var="twx" id="pbTable1">
+               
+                <apex:column headerValue="{!$Label.Label_Transaction_Number}">
+                    <a href="/{!HTMLENCODE(twx.tx.Id)}">{!twx.tx.Name}</a>
+                </apex:column>
+
+                <apex:column value="{!twx.tx.akritiv__Balance__c}" />
+                    <apex:column headerValue="{!$Label.Label_Payment_Amount}">
+                    
+                    <apex:outputtext value="{!currencyIsoCode}{0, number, ###,###,###.00}">
+                        <apex:param value="{!twx.PaymentAmount}" />
+                    </apex:outputtext>
+                </apex:column>
+                
+                <apex:column headerValue="{!$Label.Label_Payment_Type}">
+                    <apex:outputText value="{!selectedPaymentType}"/> 
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+      
+    <apex:pageBlock id="pgblock2" rendered="{!showApproved}">
+        <apex:outputPanel id="pageMsgs1">
+            <apex:pageMessages ></apex:pageMessages>
+        </apex:outputPanel>
+        <apex:pageBlockButtons location="bottom" rendered="{!showEmailButton}">
+            <apex:commandButton value="{!$Label.Label_Go_To_Payment}" action="{!goBackToPayment}" />
+            <apex:commandButton value="{!$Label.Label_Go_To_Account}" action="{!goBackToSourcePage}" />
+            <apex:commandButton value="{!$Label.Label_Send_Ack}" action="{!sendEmail}" />
+        </apex:pageBlockButtons> 
+               
+        <apex:pageBlockSection id="pbsNewContact" title="{!$Label.Label_New_Contact}" rendered="{!renderNewContactSection}" columns="2">
+                        <apex:inputField id="Salutation" value="{!newContact.Salutation}" />
+                        <apex:inputField id="FirstName" value="{!newContact.FirstName}" />
+                        <apex:inputField id="LastName" value="{!newContact.LastName}" />
+                        <apex:inputField id="Phone" value="{!newContact.Phone}" />
+                        <apex:inputField id="FAX" value="{!newContact.FAX}" />
+                        <apex:inputField id="Email" value="{!newContact.Email}" />-->
+                      <!--  <apex:pageBlockSectionItem >
+                            <apex:outputLabel >{!$Label.Label_Default}</apex:outputLabel>
+                            <apex:inputCheckbox value="{!newContact.Default__c}" />
+                        </apex:pageBlockSectionItem>-->
+
+                    </apex:pageBlockSection>
+                    
+                    <apex:pageBlockButtons location="bottom">
+                        <apex:commandButton id="btnSave"
+                                value="{!$Label.Label_Save}"
+                                rendered="{!renderNewContactSection}" action="{!Savecontact}" /> 
+                        
+                        <apex:commandButton id="btnCancelNew" immediate="true" value="{!$Label.Label_Cancel}"
+                                rendered="{!renderNewContactSection}" action="{!cancelContact}" /> 
+                                
+                        </apex:pageBlockButtons>
+               
+      </apex:pageBlock>
+           
+        <script>
+        // activate the phone contact method initially
+        var contactMethod = 'Email'; // initially
+         var selectedID = '';
+         
+        init();
+ 
+    function getSelected(obj,id, isselected)
+    { 
+        if(obj.checked)
+        {
+               if(selectedID == ''){
+                    selectedID = id+','; 
+                   
+                }else{
+                    selectedID = selectedID +  id + ',';   
+                }
+        }
+        else
+        {    if(selectedID.match(id))
+                        {
+                            selectedID = selectedID.replace(id,'');
+                            
+                        }  
+                     }
+     
+    }
+             
+         function setConfig(){
+            try{
+            
+         sforce.connection.defaultNamespace = '{!JSENCODE($Setup.SysConfig_Singlec__c.NameSpace__c
+        )}';
+            sforce.connection.sessionId = '{!$Api.Session_ID}';
+            var config = new sforce.SObject("Temp_Object_Holder__c"); 
+            var user = sforce.connection.getUserInfo() ; 
+            var timest = sforce.connection.getServerTimestamp(); 
+            var key = '{!$User.Username}' + timest.timestamp ; 
+            config.Key__c =key ; 
+            config.Value__c = selectedID; 
+           
+            var res = sforce.connection.create([config]); 
+            
+            document.getElementById("pg:frm:pb:hiddenkey").value = key ;
+           
+            }catch (e){
+              //alert(e);
+            }
+            
+         }
+         
+        function init() {
+        
+         
+        }
+
+        function beforeSubmit() {
+        
+            
+            document.getElementById("pg:frm:pb:hiddenNoteBody").value = document.getElementById('pg:frm:pb:contactDetailPbs:sib:contactNote').value ;
+          
+            setConfig();
+            
+        }
+        
+         function ShowContactLookup(ctrlid,accountid,addressType,contactMethod)
+        {
+            lookupwindow = window.open('/apex/ContactLookUpView?usefor=Contact&AccountID='+accountid+'&ctrlid='+ctrlid+'&addressType='+addressType+'&contactMethod='+ contactMethod,'ContactCustomLookup','width=750,height=600,resizable=no,toolbar=no, menubar=no,top=100,left=300,scrollbars=yes')
+        }
+  
+        //Closes the lookup window              
+        function CloseLookupWindowX(CtrlID)
+        {   
+            lookupwindow.close();
+            var v = document.getElementById('{!$Component.pg.frm.pb.emailComponentPbs.toSi.toAddresses}').id;   
+            if(v == CtrlID)
+            {   
+                changeTemplate();
+                reloadLocale();
+            }
+        }
+        
+        function CloseLookupWindow()
+        {  
+            lookupwindow.close();
+        }
+ 
+        //Set the contact details in the box    
+        function SetContact(CtrlId, AddressType, selectedContactAddresses) {
+            document.getElementById(CtrlId).value = selectedContactAddresses;
+        }
+        
+        //Set the contact details in the box    
+        function SetContactOnLink(CtrlId, AddressType, ContactID, ContactName, Phone, Fax, Email) {
+            if(AddressType == 'To')
+            {
+                handleToAddress(CtrlId, ContactID, ContactName, Phone, Fax, Email);
+              var ContactDetails = Email;
+            if(contactMethod =='Email')
+            { 
+                ContactDetails = Email;
+                changeLocale(ContactID);
+                
+            }
+           
+            }
+            else if ( AddressType == 'CC')
+            {
+                handleCCAddresses(CtrlId, ContactID, ContactName, Phone, Fax, Email);
+            
+            }
+            else if (AddressType == 'BCC')
+            {
+                handleBCCAddresses(CtrlId, ContactID, ContactName, Phone, Fax, Email);
+            }
+        }        
+        
+            
+        function handleToAddress(CtrlId, ContactID, ContactName, Phone, Fax, Email)
+        {   
+            var ContactDetails = Email;
+            if(contactMethod=='Email')
+            { 
+                ContactDetails = Email;
+            }
+            
+                
+            document.getElementById(CtrlId).value = ContactDetails;
+            document.getElementById('{!$Component.hiddenToContactId}').value = ContactID;
+            document.getElementById("{!$Component.hiddenTargetContactId}").value = ContactID;            
+          
+        }    
+        
+        function handleBCCAddresses(CtrlId, ContactID, ContactName, Phone, Fax, Email) {
+            handleOtherAddresses(CtrlId, ContactID, ContactName, Phone, Fax, Email);
+        }
+        
+        //common function for cc and bcc
+        function handleOtherAddresses(CtrlId, ContactID, ContactName, Phone, Fax, Email) {
+            var ContactDetails = Email;
+            if(contactMethod=='Email') { 
+                ContactDetails = Email;
+            }
+           
+        
+            document.getElementById(CtrlId).value = ContactDetails;
+        }   
+        
+        function handleCCAddresses(CtrlId, ContactID, ContactName, Phone, Fax, Email) {
+            handleOtherAddresses(CtrlId, ContactID, ContactName, Phone, Fax, Email);
+        }
+        
+      
+       function changeLocale( CtrlID ){
+
+            var support = document.getElementById("{!$Component.hiddenSupportLocale}").value;
+            
+            if ( support == 'false' ){
+            
+                
+                return ;
+            }
+            sforce.connection.defaultNamespace = '{!JSENCODE($Setup.SysConfig_Singlec__c.NameSpace__c)}';
+            sforce.connection.sessionId = '{!$Api.Session_ID}';
+    
+            var result = sforce.connection.query("select id,Locale__c  from contact where id='"+CtrlID+"'");
+            var localename = '';
+            var records = result.getArray("records");
+            localename = records[0].Locale__c;
+            
+            if ( localename == null ) {
+                
+                localename = '';
+            }
+    
+            document.getElementById('pg:frm:pb:emailComponentPbs:localesection:locale').value = localename ;
+            
+        }
+          function reloadLocale() {
+             startProcess();
+             var support = document.getElementById("{!$Component.hiddenSupportLocale}").value;
+            
+             if ( support == 'false' ){
+            
+                
+                return ;
+             }
+             
+             changeTemplateAsPerLocale();
+        }
+  
+           var flagToggleNBVisibility = false;
+            function addNoteBody(dialogText){
+                var visibleVal = "";
+                try {
+                    if (!flagToggleNBVisibility)
+                    {
+                        visibleVal = "block";
+                        flagToggleNBVisibility = true;
+                    }
+                    else
+                    {
+                        visibleVal = "none";
+                        flagToggleNBVisibility = false;
+                    }
+                        
+                    document.getElementById("{!$Component.pg.frm.pb.contactDetailPbs.sib.pbsiNoteBodyLabel}").style.display = visibleVal;
+                    document.getElementById("{!$Component.pg.frm.pb.contactDetailPbs.sib.contactNote}").style.display = visibleVal;
+                }
+                catch(e) {
+                    alert(e);
+                }
+                return false;
+            }
+    
+    
+            function closeAndSaveWindow(){
+                
+                 return false; 
+            }
+     
+             function closeWindow(){
+             
+                 document.getElementById('{!$Component.contactNote}').value='';        
+                 return false; 
+             }
+
+          function getSelectedEmailTemplateId(){
+            var selIndex = document.getElementById('{!$Component.emailComponentPbs.emailTemplateSi.emailTemplate}').selectedIndex;
+            return document.getElementById('{!$Component.emailComponentPbs.emailTemplateSi.emailTemplate}').options[selIndex].value;
+          }
+          
+          function setTemplateBody(){
+           
+            var innerHtml = ''+document.getElementById('{!$Component.pb.emailComponentPbs.hiddenEmailBody}').value;
+           
+            document.getElementById("{!$Component.hiddenEmailTemplateId}").value = getSelectedEmailTemplateId();
+           
+         }
+     
+      function setDefaultContact() {
+            
+            var counter = 1;
+            var firstDefaultContact = '';
+            var firstDefaultContactId = '';
+            var otherDefaultContact = '';
+            <apex:repeat value="{!defaultContacts}" var="con">
+                if(counter == 1) {
+                    firstDefaultContact = '{!con.Email}';                   
+                    firstDefaultContactPhone = '{!con.Phone}';
+                    firstDefaultContactId = '{!con.Id}';
+                    firstDefaultContactFax= '{!con.Fax}';
+                    
+                    firstDefaultContactLocale='{!con.akritiv__Locale__c}';
+                    
+                }
+                else {
+                    otherDefaultContact = otherDefaultContact + '{!con.Email};';
+                }
+                counter++;
+            </apex:repeat>
+            if(firstDefaultContact != null && firstDefaultContact != '')
+                document.getElementById("{!$Component.pg.frm.pb.sendemail.emailComponentPbs.toSi.toAddresses}").value = firstDefaultContact;
+           
+            if(otherDefaultContact != null && otherDefaultContact != '')
+                        document.getElementById("{!$Component.pg.frm.pb.sendemail.emailComponentPbs.ccSi.ccAddresses}").value = otherDefaultContact;
+
+            if(firstDefaultContactId != null && firstDefaultContactId != ''){
+                        document.getElementById("{!$Component.pg.frm.hiddenToContactId}").value = firstDefaultContactId;
+                        document.getElementById("{!$Component.pg.frm.hiddenTargetContactId}").value = firstDefaultContactId;
+            }
+           
+            
+            if ( firstDefaultContactLocale == null) {
+    
+                firstDefaultContactLocale = '';
+            }
+            if(firstDefaultContactLocale != null && firstDefaultContactLocale != '') 
+                document.getElementById('pg:frm:pb:emailComponentPbs:localesection:locale').value = firstDefaultContactLocale;
+               
+                
+            }
+
+         var initContactAttributeValue = document.getElementById("{!$Component.pg.frm.hiddenToContactId}").value;
+        var initContactLocalevalue ;
+         if(initContactAttributeValue == null || initContactAttributeValue == ''){
+        
+          setDefaultContact();
+        }
+      else if(initContactAttributeValue != null || initContactAttributeValue != '') {
+          
+            
+            <apex:repeat value="{!allContacts}" var="con">
+                if(initContactAttributeValue.substring(0,15) == '{!con.id}'.substring(0,15)) {
+                
+                    document.getElementById("{!$Component.pg.frm.pb.sendemail.emailComponentPbs.toSi.toAddresses}").value = '{!con.email}';
+                }
+            </apex:repeat>            
+            document.getElementById("{!$Component.pg.frm.hiddenTargetContactId}").value = initContactAttributeValue;
+            changeLocale( initContactAttributeValue );
+            
+        }
+
+    </script>
+      
+</apex:form>
+   
+</apex:page>

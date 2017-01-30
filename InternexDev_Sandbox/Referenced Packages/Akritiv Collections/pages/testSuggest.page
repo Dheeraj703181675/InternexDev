@@ -1,0 +1,27 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<apex:page >
+    <script>
+      function defineSchemaArray()
+          {
+              odsSchema[0] = "name";
+              odsSchema[1] = "id";
+              odsSchema[2] = "field1";
+          }
+      function formatResultSchema(oResultData)
+          {
+              formatResult = "<div class=\"result\"><span class=\"name\">" + oResultData.name + ' ' + "</span><span class=\"field1\">" + oResultData.field1 + "</span></div>";
+          }    
+  </script>
+    <apex:form >
+       <!--* <c:Base_Comp_YUI_ModalLoader id="YUILoader" />-->
+        <c:YUIAutoComplete DataSourceName="ContactMultiColumn" />
+    </apex:form>
+</apex:page>

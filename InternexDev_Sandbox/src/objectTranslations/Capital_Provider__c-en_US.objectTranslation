@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Capital Provider</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Capital Providers</value>
+    </caseValues>
+    <fields>
+        <label><!-- Business Transaction Date --></label>
+        <name>Business_Transaction_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- External Id --></label>
+        <name>External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- MP External Id --></label>
+        <name>MP_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Portal External Id --></label>
+        <name>Portal_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Grade --></label>
+        <name>Sync_with_Grade__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Market Place --></label>
+        <name>Sync_with_Market_Place__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Portal --></label>
+        <name>Sync_with_Portal__c</name>
+    </fields>
+    <layouts>
+        <layout>Capital Provider Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Integration --></label>
+            <section>Integration</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Capital Provider Layout for Client</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>InterNex AM Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Integration --></label>
+            <section>Integration</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

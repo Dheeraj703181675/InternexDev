@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>17.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Functionality to send a customer billing statement for the selected invoices(Transaction Level) or for all invoices related to an account (Account Level).</description>
+    <label>SendBillingStatement</label>
+</ApexPage>

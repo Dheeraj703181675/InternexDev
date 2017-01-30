@@ -1,0 +1,679 @@
+<apex:page id="pg" controller="akritiv.DetailController" action="{!prepareAccounts}" showHeader="false" sidebar="false">
+   <script src="/soap/ajax/10.0/connection.js" type="text/javascript"></script>
+   <script src="/soap/ajax/10.0/apex.js" type="text/javascript"></script>
+   
+    <style>
+        .rich-tabpanel-content{background:white;}
+        
+        #filter
+        {
+            display: none;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index:10;
+            opacity:0.6;
+            filter: alpha(opacity=50);
+        }
+        
+        .divbck{
+           background-image:url('{!URLFOR($Resource.LoadingImage, 'bg2.gif')}');
+           background-repeat:repeat;
+        }
+        
+        .bPageBlock .detailList .labelCol{
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-size: 1em;
+            font-weight:bold;
+            line-height:normal;
+            margin:0 auto;
+        }
+        
+        .bPageBlock .detailList .dataCol col02{
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-size: 1em;
+            line-height:normal;
+            margin:0 auto;
+        }
+        
+        body .bPageBlock, body #bodyCell .bResource .secondaryPalette, body .secondaryPalette.bPageBlock, body .overlayDialog .secondaryPalette.bPageBlock, body .individualPalette .secondaryPalette.bPageBlock, body .bodyDiv .genericTable, body .genericPageBlockTable, body .bodyDiv .bSubBlock, body .bComponentBlock .bPageBlock, body .bMyDashboard .bPageBlock, body.rlHoverFrame .bPageBlock, body.subjectSelectionPopup div.choicesBox, body.lookupTab .secondaryPalette.bPageBlock, body.popupTab .secondaryPalette.bPageBlock, body.UserTagStatsPage .secondaryPalette.bPageBlock {
+            -moz-border-radius: 4px 4px 4px 4px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #ffffff;
+            border-left: 1px solid #ffffff;
+            border-right: 1px solid #ffffff;
+        }
+       
+        .accountTab .secondaryPalette, .individualPalette .accountBlock .secondaryPalette {
+             background-color: #ffffff;
+             border-color: #ffffff;
+        }
+      
+       /* .activeTab {background-color: #236FBD; color:#ffffff; background-image:none}
+        .inactiveTab { background-color: lightgrey; color:#000000; background-image:none}
+      */
+       .bPageBlock .detailList .labelCol{
+           font-family: 'Arial', 'Helvetica', sans-serif;
+           font-size: 1em;
+           font-weight:bold;
+           line-height:normal;
+           margin:0 auto;
+        }
+       
+        .bPageBlock .detailList .dataCol col02{
+           font-family: 'Arial', 'Helvetica', sans-serif;
+           font-size: 1em;
+           line-height:normal;
+           margin:0 auto;
+        }
+        
+       
+        
+    </style>
+    
+   
+   <apex:outputpanel id="scriptspanel">
+   
+    <script>
+         var left = (screen.width);
+         var top = (screen.height);
+         var pwidth= (screen.width)/2;
+         var pheight= (screen.height)/2 + 200; 
+       
+       function chkselected(){
+           
+           if(document.getElementById('pg:frm:tempobj').value == ''){
+               alert('{!$Label.Label_Please_Select_Trans}');
+               
+           }else{High_Past_Due_Tx__c
+
+               generatedispute();
+           }
+
+       }
+        
+       function contactcustomer(){
+           // alert('---');
+            var inputElem = document.getElementsByTagName("input");
+        
+            var c = 0;
+            for(var i=0; i<inputElem.length; i++){
+                if(inputElem[i].id.indexOf("selectedTx")!=-1 ){
+                    if(inputElem[i].checked ==true){
+                      c++;
+                    }
+                }
+            }
+            //alert(c);
+            if ( c == 0 ) {
+            
+                alert('{!$Label.Message_No_Selected_Transactions}');
+                return;
+            }
+           var v = document.getElementById('pg:frm:tempobj').value;
+          // alert(v);
+           var str = "{!JSENCODE(contactcustomer)}&sendallinvoice=0"+"&txIds="+v+"&title1=ContactCustomer";
+           //alert(str);
+           window.open(str ,"{!$Label.Label_Contact_Customer}","toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width="+pwidth+",height="+pheight+", top="+top+",left="+left );            
+           
+          // alert('---');
+           
+        }
+        
+         function generatedispute(){
+            var inputElem = document.getElementsByTagName("input");
+        
+            var c = 0;
+            for(var i=0; i<inputElem.length; i++){
+            
+                
+                if(inputElem[i].id.indexOf("selectedTx")!=-1 ){
+                
+                            
+                            if(inputElem[i].checked ==true){
+                              c++;
+                            }
+                               
+               }
+            
+            }
+            
+            if ( c == 0 ) {
+            
+                alert('{!$Label.Message_No_Selected_Transactions}');
+                return;
+            }
+               //alert(c);
+               var v = document.getElementById('pg:frm:tempobj').value;
+               var str = "{!JSENCODE(generateDispute)}"+"&txIds="+v;
+               window.open(str ,"{!$Label.Label_GenerateDispute}","toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width="+pwidth+",height="+pheight+", top="+top+",left="+left ); 
+              
+          
+        }
+         function promisetopay(){
+                 var inputElem = document.getElementsByTagName("input");
+        
+            var c = 0;
+            for(var i=0; i<inputElem.length; i++){
+                if(inputElem[i].id.indexOf("selectedTx")!=-1 ){
+                    if(inputElem[i].checked ==true){
+                      c++;
+                    }
+                }
+            }
+        
+        if ( c == 0 ) {
+        
+            alert('{!$Label.Message_No_Selected_Transactions}');
+            return;
+        }
+           var v = document.getElementById('pg:frm:tempobj').value;
+           var str = "{!JSENCODE(customerPromiseToPay)}"+"&txIds="+v;
+                     
+          window.open(str ,"{!$Label.Label_PromiseToPay}","toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width="+pwidth+",height="+pheight+", top="+top+",left="+left ); 
+        }
+        
+         function sendstatement(){
+           
+           var v = document.getElementById('pg:frm:tempobj').value;
+           //alert(v);
+           var str = "{!JSENCODE(contactcustomer)}&sendallinvoice=1&title1=SendStatement";
+           //alert(str);
+           window.open(str ,"SendStatement","toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width="+pwidth+",height="+pheight+", top="+top+",left="+left );            
+           
+           //alert('---');
+           
+        }
+       
+        function accountdetail(){
+           var winW = 630, winH = 460;
+            if (document.body && document.body.offsetWidth) {
+            winW = document.body.offsetWidth;
+            winH = document.body.offsetHeight;
+            }
+            if (document.compatMode=='CSS1Compat' &&
+            document.documentElement &&
+            document.documentElement.offsetWidth ) {
+            winW = document.documentElement.offsetWidth;
+            winH = document.documentElement.offsetHeight;
+            }
+            if (window.innerWidth && window.innerHeight) {
+            winW = window.innerWidth;
+            winH = window.innerHeight;
+            } 
+           var str = "{!JSENCODE(accountdetail)}";
+           window.open(str ,"{!$Label.Label_AccountDetails}","toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width="+winW +",height="+winH +", top="+top+",left="+left ); 
+        }
+
+        function startProcess(){
+            document.getElementById("{!$Component.frm.acctDetails.loadingdetail}").style.display = 'block'; 
+            document.getElementById('filter').style.display = 'block'; 
+        }
+       
+        function endProcess(){
+            document.getElementById("{!$Component.frm.acctDetails.loadingdetail}").style.display = 'none';            
+            document.getElementById("{!$Component.frm.calltyp}").value = '{!$Label.Label_List_None}';
+            document.getElementById("{!$Component.frm.comt}").value = '';
+
+        }
+        function checkAll(selectAll) {
+        
+            var inputElem = document.getElementsByTagName("input");
+            
+            totalBalance = 0.00; 
+            
+            for(var i=0; i<inputElem.length; i++)
+            {
+                if(inputElem[i].id.indexOf("selectedTx")!=-1){
+                inputElem[i].checked = selectAll.checked;
+            }
+        }              
+     } 
+     
+     function addNotecontent(){
+         document.getElementById("pg:frm:TrxsDetails:inputtext1").value = '';
+         document.getElementById("pg:frm:TrxsDetails:inputtext2").value = '';
+         
+         document.getElementById('dialog1').style.display = 'block';
+        
+         return false;
+     }
+     
+     function addNoteTrxcontent(){
+         document.getElementById("pg:frm:TrxsDetails:inputtexttrx").value = '';
+         document.getElementById("pg:frm:TrxsDetails:inputtextcommenttrx").value ;
+     
+          document.getElementById('dialog2').style.display = 'block';
+          
+          return false;
+     }
+     
+     function close_fn_trx(){
+    
+        document.getElementById('dialog2').style.display = 'none';
+       // clos.close();
+        return false;
+    }
+     
+     function close_fn(){
+    
+        document.getElementById('dialog1').style.display = 'none';
+       // clos.close();
+        return false;
+    }
+    
+    
+    
+    //save note data
+    function saveData() { 
+         
+            var isTitle = document.getElementById("pg:frm:TrxsDetails:inputtext1").value ;
+
+            isTitle = trim(isTitle) ;
+        document.getElementById('dialog1').style.display = 'none';
+        
+            if(isTitle !=null && isTitle !=''){
+             
+            //*  YUIShowLoading();
+           
+             
+              updateNote();
+            }
+             return false;
+    }
+    
+    function disabledButton(){
+        //alert(document.getElementById("pg:frm:promisetopay").disabled);
+        document.getElementById("pg:frm:promisetopay").disabled = true;
+        document.getElementById("pg:frm:dispute").disabled = true;
+        document.getElementById("pg:frm:conCustomer").disabled = true;
+        //alert(document.getElementById("pg:frm:promisetopay").disabled);
+    }
+    
+    //save note data
+    function saveData_trx() { 
+         
+            var isTitle1 = document.getElementById("pg:frm:TrxsDetails:inputtexttrx").value ;
+            
+            isTitle1 = trim(isTitle1) ;
+            document.getElementById('dialog2').style.display = 'none';
+        
+            if(isTitle1 !=null && isTitle1 !=''){
+        
+              updateNotetrx();
+            }
+             return false;
+    }
+     
+    </script>
+    </apex:outputpanel>
+   
+   <apex:form id="frm" >
+   
+    <apex:actionFunction name="updateNote" action="{!updateNote}" id="afUpdateData"  reRender="addnote">  </apex:actionFunction>
+     <apex:actionFunction name="updateNotetrx" action="{!updateNotetrx}" id="afUpdateDatatrx"  reRender="addnotetrx"></apex:actionFunction>
+   
+   
+   <div class="divbck">
+       <div id="tskdiv" style="float:left;padding-top:10px;">
+           <apex:outputPanel id="TaskDetails">
+           <table id="tbl">
+              <tr>
+                <td style="font-size:14px;font-weight:bold;color:#a9ddee">{!$Label.Label_Subject_Colon} </td>
+                <td style="font-size:12px;color:#fff;font-weight:bold;">{!taskId.subject}</td>
+                <td style="font-size:14px;font-weight:bold;color:#a9ddee">{!$Label.Label_Status_Colon} </td>
+                <td style="font-size:12px;color:#fff;font-weight:bold;">{!taskId.Status}</td>
+                <td style="font-size:14px;font-weight:bold;color:#a9ddee">{!$Label.Label_Priority_Colon}</td>
+                <td style="font-size:12px;color:#fff;font-weight:bold;">{!taskId.Priority}</td>
+                <td style="font-size:14px;font-weight:bold;color:#a9ddee">{!$Label.Label_Contact_Method_Colon}</td>
+                <td style="font-size:12px;color:#fff;font-weight:bold;">{!taskId.akritiv__Contact_Method__c}</td>  
+                <td style="font-size:14px;font-weight:bold;color:#a9ddee">{!$Label.Label_Contact_Type_Colon}</td>
+                <td style="font-size:12px;color:#fff;">{!taskId.akritiv__Contact_Type__c}</td>                
+              </tr>
+         </table>
+            
+       </apex:outputPanel>
+     
+    </div>
+   
+    <div id="btngrp" align="right" style="padding-top:10px;padding-right:10px">
+        <apex:outputPanel id="ct"><span id="ct" style="padding-right:10px;font-size:14px;font-weight:bold;color:#a9ddee">{!proccedtask + 1} / {!totaltask}</span></apex:outputPanel>
+        <apex:commandButton id="btnclose" value="{!$Label.Label_Complete_GO_TO_Next}" disabled="{!buttonDisabled}"  action="{!completenext}" onclick="startProcess();" oncomplete="endProcess();return false;" rerender="acctDetails,TrxsDetails,txs,acname,acnote,hpd,btn,msg,btnclose,txnote,rtrx,scriptspanel,TaskDetails,tbl,otp,btngrp,ct" />
+        <apex:commandButton id="btn" value="{!$Label.Label_GO_TO_Next}" disabled="{!buttonDisabled}"  action="{!next}" onclick="startProcess();" oncomplete="endProcess();return false;" rerender="acctDetails,TrxsDetails,txs,acname,hpd,btn,btnclose,msg,txnote,acnote,rtrx,scriptspanel,TaskDetails,tbl,otp,btngrp,ct" />
+    </div>
+    
+    </div>
+    <div style="padding-top:5px;">
+        <div style="float:left;width:60%;height:300px; overflow:scroll;">
+        
+        <apex:pageBlock id="acctDetails">
+        <div id="filter"></div>
+        <apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loadingdetail" style="display:none;position:fixed;top:50%;left:50%;z-index:10;"/>
+        <div id="acname" style="font-size:16px;font-weight:bold;text-align:center">{!$Label.Label_Account_Colon} <a href="#" onclick="accountdetail();" >{!accId.Name}</a></div><br/> 
+        <div id="acsticky" style="font-size:12px;background-color:green;color:white">{!accId.akritiv__Sticky_Note__c}</div><br/>       
+              
+              <apex:tabPanel switchType="client" id="acctb" tabClass="activeTab" inactiveTabClass="inactiveTab">
+
+                <!-- Account General Detail -->
+                <apex:tab id="accountTab1" name="accountTab" label="{!$Label.Label_General_Detail}">
+                    <apex:pageBlockSection columns="2">
+                        <apex:repeat value="{!$ObjectType.Account.FieldSets.akritiv__General_Detail}" var="ac">
+                            <apex:outputField value="{!accId[ac]}"/>       
+                        </apex:repeat>
+                    </apex:pageBlockSection>
+                </apex:tab>
+
+                <!-- Account Aging Detail -->
+                  <apex:tab id="accountTab2" name="accountTab2" label="{!$Label.Label_Aging_Detail}">
+                    <apex:pageBlockSection columns="2">
+                        <apex:repeat value="{!$ObjectType.Account.FieldSets.akritiv__Bucket_Details}" var="ac" >
+                            <apex:outputField value="{!accId[ac]}" />       
+                        </apex:repeat>
+                    </apex:pageBlockSection>
+                </apex:tab>
+                 
+                <!-- Account Risk Detail -->
+                <apex:tab id="accountTab3" name="accountTab3" label="{!$Label.Label_Risk_Detail}">
+                    <apex:pageBlockSection columns="2" >             
+                        <apex:repeat value="{!$ObjectType.Account.FieldSets.akritiv__Risk_Set}" var="ac">
+                             <apex:outputPanel rendered="{!AND($ObjectType.Account.Fields[ac].type=='string', CONTAINS(accId[ac], '<img'))}">
+                               <apex:outputLabel value="{!$ObjectType.Account.Fields[ac].label}"/>
+                               <apex:outputText value="{!accId[ac]}" escape="false"/>
+                             </apex:outputPanel>
+                             <apex:outputField value="{!accId[ac]}" rendered="{!NOT(AND($ObjectType.Account.Fields[ac].type=='string', CONTAINS(accId[ac], '<img')))}"/>
+                        </apex:repeat>
+                    </apex:pageBlockSection>
+                </apex:tab>
+                
+                 <!-- Transaction General Detail -->
+                <apex:tab id="trxTab1" name="trxTab" label="{!$Label.Label_High_Past_Due_Invoice}">
+                   <apex:pageBlockSection columns="2">
+                       <apex:repeat value="{!$ObjectType.akritiv__Transaction__c.FieldSets.akritiv__General_Detail}" var="tx">
+                            <apex:outputField value="{!oldesttrxId[tx]}"/>       
+                       </apex:repeat>
+                  </apex:pageBlockSection>
+                </apex:tab>
+                
+                 <!-- Account Contact Detail -->
+                <apex:tab id="contab" name="contab" label="{!$Label.Label_Contact_Details}" >
+
+                    <apex:pageBlockTable value="{!con}" var="contact" id="contab1" >
+                    
+                        <apex:column headerValue="Name" value="{!contact.Name}"/>
+                        <apex:column headerValue="Title" value="{!contact.Title}"/>
+                        <apex:column headerValue="Email" value="{!contact.Email}"/>
+                        <apex:column headerValue="Phone" value="{!contact.Phone}"/>
+                        <apex:column headerValue="Fax" value="{!contact.Fax}"/>
+                        <apex:column headerValue="Locale" value="{!contact.akritiv__Locale__c}"/>
+                        <apex:column headerValue="Default" value="{!contact.akritiv__Default__c}"/>
+                        
+                    </apex:pageBlockTable>
+    
+                </apex:tab>
+                
+                  <!-- Account Open Activities Detail -->
+                <apex:tab id="Opentsktab" name="Opentsktab" label="{!$Label.Label_Open_Activities}" >
+
+                    <apex:pageBlockTable value="{!openTask}" var="Opentsk" id="Opentsk" >
+                    
+                        <apex:column headerValue="{!$Label.Label_Subject}" value="{!Opentsk.Subject}"/>
+                        <apex:column headerValue="{!$Label.Label_Status}" value="{!Opentsk.Status}"/>
+                        <apex:column headerValue="{!$Label.Label_Name}" value="{!Opentsk.WhoId}"/>
+                        <apex:column headerValue="{!$Label.Label_Priority}" value="{!Opentsk.Priority}"/>
+                        <apex:column headerValue="{!$Label.Label_Type}" value="{!Opentsk.Type}"/>
+                        <apex:column headerValue="{!$Label.Label_Activity_Date}" value="{!Opentsk.ActivityDate}"/>
+                        
+                    </apex:pageBlockTable>
+    
+                </apex:tab>
+                  <!-- Account Activity History Detail -->
+                <apex:tab id="ActivityHistorytab" name="ActivityHistorytab" label="{!$Label.Label_Activity_History}" >
+
+                    <apex:pageBlockTable value="{!activityTask}" var="History" id="ActivityHistorytb" >
+                    
+                        <apex:column headerValue="{!$Label.Label_Subject}" value="{!History.Subject}"/>
+                        <apex:column headerValue="{!$Label.Label_Status}" value="{!History.Status}"/>
+                        <apex:column headerValue="{!$Label.Label_Name}" value="{!History.WhoId}"/>
+                        <apex:column headerValue="{!$Label.Label_Priority}" value="{!History.Priority}"/>
+                        <apex:column headerValue="{!$Label.Label_Type}" value="{!History.Type}"/>
+                        <apex:column headerValue="{!$Label.Label_Activity_Date}" value="{!History.ActivityDate}"/>
+                       
+                    </apex:pageBlockTable>
+    
+                </apex:tab>
+
+                
+                
+                
+            </apex:tabPanel>
+              
+              
+         </apex:pageBlock>
+     
+    </div>
+    
+    <div style="width:40%;height:300px; overflow:scroll">
+        <apex:pageBlock id="TrxsDetails" >
+         <!-- <div id="hpd" style="font-size:16px;font-weight:bold;text-align:center">High Past Due Invoice# {!oldesttrxId.Name}</div><br/> -->   
+              
+               <apex:tabPanel switchType="client" id="trxtb" tabClass="activeTab" inactiveTabClass="inactiveTab">
+                
+                  <!-- Account Note -->
+                  <apex:tab id="accountTab4" name="accountTab4" label="{!$Label.Label_Notes}">
+                      <apex:commandlink onclick="addNotecontent();return false;">{!$Label.Label_Add_Note}</apex:commandlink>
+                      
+                      <apex:outputPanel id="addnote">
+                          <div id="dialog1" style="display:none;border:#CCC medium solid;background-color:white;width:300px;" align="center" >
+                            <div class="hd" id="hed1" Style="background-color:#3D77CB;color:white;font-weight:bold;height:20px;text-align:left;padding-left:3px;padding-top:2px;">{!$Label.Label_Add_New_Note}</div> 
+                            <div class="bd" id="body1" > 
+                                <table width="200px" id="notes_tb">
+                                    <tr>
+                                        <td><label for="title" > {!$Label.Label_Note_Title} </label></td>
+                                        <td ><apex:inputText style="width:100px;" value="{!notetitle}" id="inputtext1"  maxlength="80" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="Description" >{!$Label.Label_Note_Body} </label></td>
+                                        <td><apex:inputTextArea style="height:30px;" value="{!noteBody}" id="inputtext2"  /></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <apex:commandButton value="{!$Label.Label_Save}"  onclick="saveData();return false;"  id="savebtn"   />
+                                            <apex:commandButton value="{!$Label.Label_Cancel}"  onclick="close_fn();return false;"   />
+                                        </td>
+                                    </tr>  
+                                </table>
+                            </div>
+                        </div> 
+                      
+                      
+                      
+                      <apex:pageBlockTable value="{!AccountNotes}" var="acn" id="acnote"  >
+                 
+                        <apex:column headerValue="{!$Label.Label_Title_Without_Sign}" value="{!acn.Title}"/> 
+                        <apex:column headerValue="{!$Label.Label_Body}" value="{!acn.Body }"/> 
+                        <apex:column headerValue="{!$Label.Label_Created_Date}" value="{!acn.CreatedDate}"/> 
+                        
+                     </apex:pageBlockTable>
+                     </apex:outputPanel>
+                </apex:tab>  
+            </apex:tabPanel>
+              
+         </apex:pageBlock>
+    
+    </div>
+    </div>
+    <div>&nbsp;</div>
+          <apex:outputPanel id="TrxsNoteDetails">
+        
+                <!-- Related Transaction General Detail -->
+              
+                 <div style="height:300px; overflow:scroll">
+             
+                 <apex:outputPanel id="otp" >
+                
+                    <table style="border-collapse:collapse;padding:0px; border:1px solid gray; font-family:verdana;width:100%;" >
+                        <!-- Table Header Start -->                    
+                        <thead >
+                            <tr>
+                                <th style="background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;">
+                                     <apex:inputCheckbox id="chk" selected="false" onclick="checkAll(this);" />
+                                 </th>
+                                 <th valign="top" style="background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;" />
+                                 
+                                 <apex:variable value="{!0}" var="count"/>
+                                 
+                                 <apex:repeat value="{!lstOfLabels}" var="list">
+                                     <apex:variable value="{!count + 1}" var="count"/>
+                                     <th  valign="top" style="{! IF(list.fieldType = 'Schema.DisplayType.CURRENCY' || list.fieldType = 'Schema.DisplayType.DOUBLE' ,'background-color:#E6EAE9;border:1px solid gray;text-align: right;padding: 6px 6px 6px 3px;','background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;')}">
+                                         
+                                             <B>{!list.fieldValue}</B>
+                                        
+                                       
+                                     </th>
+                                 </apex:repeat>
+                                 
+                                 <th  valign="top"  style="background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;">
+                                     <B>{!$Label.Label_Notes}</B>    
+                                 </th>
+                                 
+                                 <th valign="top" style="background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;" >
+                                     <B>{!$Label.Label_Note_Date}</B>
+                                 </th>
+                             </tr>
+                        </thead>
+                        <!-- Table Header End -->   
+                        <!-- Table Records starts -->                 
+                      
+                        <tbody>
+                            <apex:repeat value="{!wrapList}" var="nextitem">
+                            <tr>
+                                
+                                <td style=" text-align:left;width:auto;border: solid 1px gray;padding-left: 3px;padding-right: 3px;white-space:nowrap;">
+                                    <apex:inputCheckbox value="{!nextitem.selected}" selected="false"  id="selectedTx"  />
+                                </td>
+                                
+                                <td style=" text-align:left;width:auto;border: solid 1px gray;padding-left: 3px;padding-right: 3px;white-space:nowrap;">
+                                    <apex:outPutLabel value="{!JSENCODE(nextitem.txObject.akritiv__Indicator_Icons__c)}" />
+                                </td>
+                                
+                                <apex:repeat value="{!nextitem.txValues}" var="item">
+                                <td style="{! IF(item.fieldType = 'Schema.DisplayType.CURRENCY' || item.fieldType = 'Schema.DisplayType.DOUBLE' ,'text-align:right;width:auto;border: solid 1px gray;padding-left: 3px;padding-right: 3px;white-space:nowrap;','text-align:left;width:auto;border: solid 1px gray;padding-left: 3px;padding-right: 3px;white-space:nowrap;')}">
+                                    <a href="#"><img src="{!URLFOR($Resource.iconset, 'iconset/1_41.png')}" title="{!$Label.Label_Add_Note}" onClick="addNoteOnSingleTx('{!JSENCODE(nextitem.transId)}');" style="display: {! IF(OR(item.fieldType = 'notetype1',item.fieldType = 'notetype2'),'inline','none')};" /></a>
+                                   
+                                        <apex:outPutLabel value="{!item.fieldValue}" escape="false" > </apex:outPutLabel> 
+                                 
+                                </td>
+                                </apex:repeat> 
+                                
+                                <td  style="display:none;">
+                                    <apex:outputlabel id="txBalance" value="{!nextitem.txBalance}" />
+                                </td>
+                            </tr>
+                            </apex:repeat>
+                        </tbody>
+                      
+                        <!-- Table Records Ends -->  
+                 </table>
+                </apex:outputPanel>
+             </div>
+          
+          </apex:outputPanel>
+
+          <apex:actionStatus id="mySaveStatus1">
+
+            <apex:facet name="stop">
+            
+                <apex:commandButton action="{!prepareselected}" status="mySaveStatus1" value="{!$Label.Label_Contact_Customer}" disabled="false" rerender="tempobj" immediate="false" onComplete="contactcustomer(); return false;" id="concustomer"/>
+            
+            </apex:facet>
+            
+            <apex:facet name="start">
+            
+                <apex:commandButton action="{!prepareselected}" status="mySaveStatus1" value="{!$Label.Label_Contact_Customer}" disabled="true"  rerender="tempobj"/>
+                
+            </apex:facet>
+         
+         </apex:actionstatus>
+         <apex:actionStatus id="mySaveStatus2">   
+         
+            <apex:facet name="stop">
+            
+                <apex:commandButton action="{!prepareselected}" status="mySaveStatus2" value="{!$Label.Label_Create_Disputes}" disabled="false" rerender="tempobj" immediate="false" onComplete="generatedispute(); return false;" id="dispute"/>
+            
+            </apex:facet>
+            
+            <apex:facet name="start">
+            
+                <apex:commandButton action="{!prepareselected}" status="mySaveStatus2" value="{!$Label.Label_Create_Disputes}" disabled="true"  rerender="tempobj"/>
+                
+            </apex:facet>
+            
+         </apex:actionstatus>   
+         <apex:actionStatus id="mySaveStatus3">
+         
+            <apex:facet name="stop">
+            
+                <apex:commandButton action="{!prepareselected}" status="mySaveStatus3" value="{!$Label.Label_Promise_To_Pay}"  disabled="false" rerender="tempobj" immediate="false" onComplete="promisetopay(); return false;" id="promisetopay"/>
+            
+            </apex:facet>
+            
+            <apex:facet name="start">
+            
+                <apex:commandButton action="{!prepareselected}" status="mySaveStatus3" value="{!$Label.Label_Promise_To_Pay}" disabled="true"  rerender="tempobj"/>
+                
+            </apex:facet>
+        
+        </apex:actionStatus>
+         <apex:actionStatus id="mySaveStatus4">
+
+            <apex:facet name="stop">
+            
+                <apex:commandButton action="{!prepareselected}" status="mySaveStatus4" value="Send Statement" disabled="false" rerender="tempobj" immediate="false" onComplete="sendstatement(); return false;" id="sendstm"/>
+            
+            </apex:facet>
+            
+            <apex:facet name="start">
+            
+                <apex:commandButton action="{!prepareselected}" status="mySaveStatus4" value="Send Statement" disabled="true"  rerender="tempobj"/>
+                
+            </apex:facet>
+         
+         </apex:actionstatus>
+        <!--<apex:commandButton value="{!$Label.Label_Contact_Customer}"  action="{!prepareselected}" reRender="tempobj" onclick="disabledButton();"  onComplete="contactcustomer(); return false;" id="conCustomer" disabled="false"/>
+        <apex:commandButton value="{!$Label.Label_Create_Disputes}" action="{!prepareselected}" reRender="tempobj"  onclick="disabledButton();" onComplete="generatedispute(); return false;" id="dispute" disabled="false"/>
+        <apex:commandButton value="{!$Label.Label_Promise_To_Pay}" action="{!prepareselected}" reRender="tempobj"   onclick="disabledButton();" onComplete="promisetopay(); return false;" id="promisetopay" disabled="false"/>-->
+        <apex:inputHidden id="tempobj" value="{!txIdsForURL}" />
+       
+        <apex:pageMessages id="msg"></apex:pageMessages>
+        <div style="padding-top:15px;float:right;padding-right:15px;">
+           <table>
+              <tr>
+                <td valign="top" style="font-size:14px;font-weight:bold;">{!$Label.Label_Call_Result_Colon} </td>
+                <td valign="top"> <apex:selectList id="calltyp" value="{!callresult}" multiselect="false" size="1" >
+                        <apex:selectOption itemvalue="{!$Label.Label_List_None}" itemLabel="{!$Label.Label_List_None}"   id="none"></apex:selectOption>
+                        <apex:selectOption itemvalue="{!$Label.Label_Left_A_Msg}" itemLabel="{!$Label.Label_Left_A_Msg}"   id="lam"></apex:selectOption>
+                        <apex:selectOption itemvalue="{!$Label.Label_Was_Able_To_Connect}" itemLabel="{!$Label.Label_Was_Able_To_Connect}"  id="atc"></apex:selectOption>
+                        <apex:selectOption itemvalue="{!$Label.Label_Sent_Email}" itemLabel="{!$Label.Label_Sent_Email}"  id="se"></apex:selectOption>
+                        <apex:selectOption itemvalue="{!$Label.Label_Call_Back}" itemLabel="{!$Label.Label_Call_Back}"  id="cb"></apex:selectOption>
+                        <apex:selectOption itemvalue="{!$Label.Label_Promise_To_Pay}" itemLabel="{!$Label.Label_Promise_To_Pay}"  id="pp"></apex:selectOption>
+                        <apex:selectOption itemvalue="{!$Label.Label_Dispute}" itemLabel="{!$Label.Label_Dispute}"  id="disp"></apex:selectOption>
+                </apex:selectList></td>
+              </tr>
+              <tr>
+                <td valign="top" style="font-size:14px;font-weight:bold;">{!$Label.Label_Note} </td>
+                <td valign="top"><apex:inputTextarea value="{!comments}" id="comt" rows="1" cols="50"  /></td>
+              </tr>
+           </table>    
+        </div>
+        
+        
+    </apex:form>
+    
+    
+    
+    
+</apex:page>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>20.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Page  is used to generate disputes over the selected transactions with contacting to the customer or without.
+User can select the disputed amount and type for the disputes which are being created.</description>
+    <label>GenerateTransactionDisputes</label>
+</ApexPage>

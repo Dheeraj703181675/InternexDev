@@ -1,0 +1,786 @@
+<!--
+ /*
+  *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+  *This software is the confidential and proprietary information
+  *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+  *disclose or use Confidential Information without the express written
+  *agreement of Akritiv Technologies, Inc.
+  */
+-->
+<!--
+    /*
+     * Page to provide the interface for Promise To Pay functionality.
+     * The page creates promise for the user to pay on some / selected
+     * transaction with specified amount. The same email sending 
+     * functionality is there as it is on ContactCustomer page. User
+     * can select pdf/excel details about the transaction and can attach
+     * additional documents to send across the customer. User can select
+     * a particular email-template from existing templates in the system
+     * to send it to the user.The conact methods are Phone, Fax, Email
+     * and Print for the page.
+     */
+-->
+<apex:page controller="akritiv.ConsolePromiseToPay" id="pg" tabstyle="Account" showHeader="false" sidebar="false">
+
+    <script src="/soap/ajax/10.0/connection.js" type="text/javascript"></script>
+    <script src="/soap/ajax/10.0/apex.js" type="text/javascript"></script>
+    <head>
+        <title>Promise to Pay for {!accName}</title>
+    </head>
+        <style>
+        
+    .headerRow {
+        font-size: 12px;
+        font-weight: bold;
+    }
+    
+     #filtercomp
+        {
+            display: none;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            opacity:0.6;
+            filter: alpha(opacity=50);
+        }
+
+       </style>
+
+    <script>
+    // Show loading on page load
+    // * YUIShowLoading();
+    function startProcess(){
+          
+           document.getElementById("{!$Component.pg.loadingcomp}").style.display = 'block'; 
+           document.getElementById('filtercomp').style.display = 'block'; 
+        }
+       
+       function endProcess(){
+       
+           document.getElementById("{!$Component.pg.loadingcomp}").style.display = 'none';
+           document.getElementById('filtercomp').style.display = 'none'; 
+
+       } 
+       function changeContactMethod(elem){
+            contactMethod = elem;
+       }
+       
+
+    </script>
+    
+     <div id="filtercomp"></div><apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loadingcomp" style="display:none;position:fixed;top:50%;left:50%;z-index:10;"/> 
+
+    <apex:form id="frm">
+        <apex:actionFunction name="changeTemplate" action="{!changeTemplate}" reRender="emailSubject,templateBodyText"
+                    oncomplete="endProcess();setTemplateBody();"/>
+    
+        <apex:actionFunction name="changeTemplatefax" action="{!changeTemplate}"
+        reRender="faxemailSubject,faxtemplateBodyText"
+        oncomplete="endProcess();setTemplateBodyfax();" />
+    
+        <apex:actionFunction name="changeTemplateAsPerLocaleFax" 
+            reRender="faxemailTemplate" oncomplete="endProcess();"/>
+    
+        <apex:actionFunction name="changeTemplateAsPerLocale" reRender="emailTemplate" oncomplete="endProcess();"/>
+    
+        <apex:actionFunction name="hideOtherSections"
+        reRender="emailSectionOP,phoneSectionOP,faxSectionOP,printSectionOP,phoneSectionJsOP,faxSectionJsOP" oncomplete="endProcess();"/>
+    
+        <apex:inputHidden value="{!contactId}" id="hiddenToContactId" />
+        <apex:inputHidden value="{!targetContactId}" id="hiddenTargetContactId" />
+        <apex:inputHidden value="{!supportLocale}" id="hiddenSupportLocale" />
+        <apex:inputHidden id="hiddenkey" value="{!hiddenKey}" />
+        <apex:inputHidden value="{!templateIdSelected}" id="hiddenEmailTemplateId" />
+        
+        <apex:actionFunction id="changefn" name="changeList"
+            action="{!updateUserPreference}" rerender="changefn" />
+        
+        <apex:pageBlock id="pb">
+            <apex:outputPanel id="pageMsgs">
+                <apex:pageMessages ></apex:pageMessages>
+            </apex:outputPanel>
+
+            <apex:pageBlockButtons location="bottom">
+                <apex:actionStatus id="mySaveStatus1">
+                    <apex:facet name="stop">
+                        <apex:commandButton action="{!execute}" status="mySaveStatus1" value="{!$Label.Label_Create}" disabled="false" rerender="pageMsgs" />
+                    </apex:facet>
+                    <apex:facet name="start">
+                        <apex:commandButton action="{!execute}" status="mySaveStatus1" value="{!$Label.Label_Executing}" disabled="true"/> 
+                    </apex:facet>
+                </apex:actionStatus>
+            
+                <apex:outputPanel id="pbButtons">
+                  
+                    <apex:commandButton value="{!$Label.Label_Cancel}"
+                        onclick="window.close();" />
+                </apex:outputPanel>
+               
+
+            </apex:pageBlockButtons>
+
+            <apex:actionStatus startStyle="font-weight:Bold;color:#cc0000"
+                startText="{!$Label.Label_Please_Wait}" stopText=""
+                id="loadingStatus" />
+
+            <apex:pageBlockSection title="{!$Label.Label_Transactions}"
+                columns="1" id="transPbs" collapsible="true">
+                <apex:pageBlockTable value="{!txList}" var="twx" id="pbTable">
+                    <apex:column >
+                        <apex:facet name="header">
+                            <input type="checkbox" id="chkUnchkAll" selected="false"
+                                onclick="checkAll(this);" />
+                        </apex:facet>
+                        <apex:inputCheckbox value="{!twx.selected}" id="selectedTx"
+                            onclick="getSelected(this,'{!JSINHTMLENCODE(twx.tx.Id)}')" />
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Transaction_Number}">
+                        <a href="/{!HTMLENCODE(twx.tx.Id)}">{!twx.tx.Name}</a>
+                    </apex:column>
+                    <apex:column value="{!twx.tx.akritiv__Amount__c}" />
+                    <apex:column value="{!twx.tx.akritiv__Balance__c}" />
+                    <apex:column value="{!twx.tx.akritiv__Due_Date__c}" />
+                    <apex:column headerValue="{!$Label.Label_Promise_Amount}">
+                        <apex:inputField value="{!twx.tx.akritiv__Promised_Amount__c}" />
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Promise_Date}"
+                        id="promiseDateHeader">
+                        <apex:inputField value="{!twx.tx.akritiv__Promise_Date__c}"
+                            id="promiseDate" />&nbsp;
+                        <apex:outputPanel onclick="addDaysToDate(this,5);">
+                            <apex:commandLink immediate="true" id="cl5" value="5"
+                                onclick="return false;" />&nbsp;
+                        </apex:outputPanel>
+                        <apex:outputPanel onclick="addDaysToDate(this,10);">
+                            <apex:commandLink immediate="true" id="cl10" value="10"
+                                onclick="return false;" />&nbsp;
+                        </apex:outputPanel>
+                        <apex:outputPanel onclick="addDaysToDate(this,15);">
+                            <apex:commandLink immediate="true" id="cl15" value="15"
+                                onclick="return false;" />&nbsp;
+                        </apex:outputPanel>
+                    </apex:column>
+                </apex:pageBlockTable>
+                <apex:outputPanel >
+                    <apex:inputCheckbox value="{!attachPDF}" />
+                    <apex:outputLabel value="{!$Label.Label_Attach} " />
+                    <apex:selectList size="1" value="{!selectedType}"
+                        title="{!$Label.Label_Choose_a_Document}">
+                        <apex:selectOptions value="{!attachTypes}" />
+                    </apex:selectList>
+                </apex:outputPanel>
+            </apex:pageblockSection>
+            <apex:pageBlockSection columns="1" title="{!$Label.Label_Contact_Details}" id="contactDetailPbs">
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$Label.Label_Contact_Method}</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:selectRadio value="{!contactMethod}"
+                            onclick="changeContactMethod(this.value);hideOtherSections();startProcess();">
+                            <apex:selectOptions value="{!contactMethods}" />
+                        </apex:selectRadio>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="si2">
+                    <apex:outputLabel >{!$Label.Label_Note_Title}</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:inputText value="{!contactNoteTitle}" style="width:400px" 
+                            id="contactNoteTitle" maxlength="80" /> &nbsp;&nbsp;
+                        <apex:commandlink onclick="return addNoteBody('Note');return false;">{!$Label.Label_Enter_Note_Body}</apex:commandlink>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+            
+                <apex:pageBlockSectionItem id="sib">
+                    <apex:outputLabel id="pbsiNoteBodyLabel" style="display:none">{!$Label.Label_Note_Body}</apex:outputLabel>
+                    <apex:inputTextArea value="{!contactNote}" style="width:400px; height:100px; display:none" id="contactNote" />
+                </apex:pageBlockSectionItem>
+        
+            </apex:pageBlockSection>
+            <apex:outputPanel id="emailSectionOP">
+                <apex:pageBlockSection columns="1" title="Email Section" id="emailComponentPbs" collapsible="true" rendered="{!IF(contactMethod=='Email',TRUE,FALSE)}">
+                    <apex:pageBlockSectionItem id="toSi">
+                            <apex:commandlink onclick="ShowContactLookup(document.getElementById('{!$Component.pb.emailComponentPbs.toSi.toAddresses}').id, '{!accountId}', 'To', 'Email'); return false;" id="linkTo">{!$Label.Label_To}</apex:commandlink>
+                            <apex:inputText id="toAddresses" disabled="true"
+                                style="width:400px;" />
+                    </apex:pageBlockSectionItem>
+            
+                    <apex:pageBlockSectionItem id="ccSi">
+                        <apex:commandlink onclick="ShowContactLookup(document.getElementById('{!$Component.pb.emailComponentPbs.ccSi.ccAddresses}').id, '{!accountId}', 'CC', 'Email'); return false;" id="linkCC">{!$Label.Label_CC}</apex:commandlink>
+                        <apex:inputTextarea id="ccAddresses" rows="1" style="width:400px;"
+                            value="{!ccAddresses}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem id="bccSi">
+                        <apex:commandlink onclick="ShowContactLookup(document.getElementById('{!$Component.pb.emailComponentPbs.bccSi.bccAddresses}').id, '{!accountId}', 'BCC', 'Email'); return false;" id="linkBCC">{!$Label.Label_BCC}</apex:commandlink>
+                        <apex:inputTextarea id="bccAddresses" rows="1" style="width:400px;"
+                            value="{!bccAddresses}" />
+                    </apex:pageBlockSectionItem>
+                   
+                    <apex:pageBlockSectionItem id="copySendor">
+                        <apex:outputLabel >{!$Label.Label_Include_me_in_BCC}</apex:outputLabel>
+                        <apex:inputCheckbox id="includeSender" value="{!copyToSender}" />
+                    </apex:pageBlockSectionItem>
+        
+        
+                    <apex:pageBlockSectionItem id="attachments">
+                        <apex:outputLabel >{!$Label.Label_Attachment}</apex:outputLabel>
+        
+                        <apex:outputPanel id="attaches">
+                            <apex:commandLink value="{!$Label.Label_Attach_Files}"
+                                target="blank" action="{!goToAttachmentPage}" />
+                            <br />
+                            <div id="attachedDocs"></div>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem id="localesection" rendered="{!supportLocale}">
+                        <apex:outputLabel >Locale</apex:outputLabel>
+                        <apex:selectList value="{!selectedLocale}" size="1"
+                            multiselect="false" onchange="reloadLocale();" 
+                            id="locale" >
+                            <apex:selectOptions value="{!locales}"/>
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem id="emailTemplateSi">
+                        
+                        <apex:outputLabel >{!$Label.Label_Email_Template}</apex:outputLabel>
+                    
+                         <apex:selectList value="{!selectedTemplateId}" size="1"
+                            multiselect="false" onchange="changeTemplate();startProcess();"
+                            id="emailTemplate" >                
+                            <apex:selectOptions value="{!emailTemplates}"></apex:selectOptions>
+                        </apex:selectList>
+                        
+                    </apex:pageBlockSectionItem>
+        
+                    <apex:pageBlockSectionItem id="emailSubSi">
+                        <apex:outputLabel >{!$Label.Label_Email_Subject}</apex:outputLabel>
+                        <apex:inputText id="emailSubject" value="{!emailSubject}"
+                            style="width:400px;" onchange="return setSubject();" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageblockSection> 
+                
+            </apex:outputPanel>       
+            <apex:outputPanel id="phoneSectionOP">
+                <apex:pageBlockSection title="{!$Label.Label_Phone_Section}"
+                    columns="1" rendered="{!IF(contactMethod=='Phone',TRUE,FALSE)}"
+                    id="phoneSectionPbs">
+                    <apex:pageBlockSectionItem id="si1">
+                        <apex:commandlink onclick="ShowContactLookup(document.getElementById('{!$Component.pb.phoneSectionPbs.si1.callToContact}').id, '{!accountId}', 'To', 'Phone'); return false;">{!$Label.Label_Contact_Called}</apex:commandlink>
+                        <apex:inputText id="callToContact" disabled="true" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+        
+            <apex:outputPanel id="printSectionOP">
+                <apex:pageBlockSection title="{!$Label.Label_Print_Section}"
+                    columns="1" rendered="{!IF(contactMethod=='Print',TRUE,FALSE)}" id="printSectionPbs">
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+        
+            <apex:outputPanel id="faxSectionOP">
+                <apex:pageBlockSection title="{!$Label.Label_Fax_Section}" columns="1"
+                    rendered="{!IF(contactMethod=='Fax',TRUE,FALSE)}" id="faxSectionPbs">
+                    <apex:pageBlockSectionItem id="sifax">
+                        <apex:commandlink onclick="ShowContactLookup(document.getElementById('{!$Component.pb.faxSectionPbs.sifax.faxToContact}').id, '{!accountId}', 'To', 'Fax'); return false;">Fax</apex:commandlink>
+                        
+                        <apex:outputPanel >
+                            <apex:inputText id="faxToContact" value="{!targetfaxId}" style="width:200px;" /> 
+                            <apex:outputLabel rendered="{!If(faxServiceType == 'interFax',true,false)}" > &nbsp; {!$Label.Label_Formate} </apex:outputLabel>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                
+                    <apex:pageBlockSectionItem id="faxlocalesection" rendered="{!supportLocale}">
+                        <apex:outputLabel >Locale</apex:outputLabel>
+                        <apex:selectList value="{!selectedLocale}" size="1"
+                            multiselect="false" onchange="reloadLocaleFax();" 
+                            id="faxlocale">
+                            <apex:selectOptions value="{!locales}"/>
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+                
+                    <apex:pageBlockSectionItem id="faxemailTemplateSi">
+                        <apex:outputLabel >{!$Label.Label_Email_Template}</apex:outputLabel>
+                        <apex:selectList value="{!selectedTemplateId}" size="1" multiselect="false" onchange="changeTemplatefax(); startProcess(); " id="faxemailTemplate">
+                            <apex:selectOptions value="{!emailTemplates}"></apex:selectOptions>
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem id="faxemailSubSi">
+                        <apex:outputLabel >{!$Label.Label_Email_Subject}</apex:outputLabel>
+                            <apex:inputText id="faxemailSubject" value="{!emailSubject}" style="width:400px;" onchange="return setSubjectfax();" />
+                    </apex:pageBlockSectionItem>
+                    
+                   <!--  <apex:pageBlockSectionItem id="faxemailBodySi">
+                            <apex:outputPanel id="faxtemplateBodyText">
+                                <apex:inputHidden value="{!emailTemplateBody}" id="faxhiddenEmailBody" />
+                            </apex:outputPanel>
+                            <textarea id="tinymceEditor" name="tinymceEditor" rows="20"
+                            cols="80" style="width: 80%">{!emailTemplateBody}</textarea>
+                    </apex:pageBlockSectionItem>-->
+                
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+            <apex:outputPanel id="templateBodyText">
+                <apex:inputHidden value="{!emailTemplateBody}" id="hiddenEmailBody" />
+            </apex:outputPanel>
+         
+            <apex:pageBlockSection columns="1">
+                <apex:pageBlockSectionItem id="daysSection" >
+                    <apex:outputLabel value="" />
+                    <apex:outputPanel >
+                        <apex:inputCheckbox value="{!isFollowUp}" />
+                        <apex:outputLabel value="{!$Label.Label_Create_follow_up_after}" />
+                        <apex:inputText size="1" maxlength="4" value="{!followUpDays}" />
+                        <apex:outPutLabel value="{!$Label.Label_Days_With_Note}" />&nbsp;
+                       
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="noteSection">
+                <apex:outputLabel >{!$Label.Label_Note_Title}</apex:outputLabel>
+                <apex:outputPanel >
+                    <apex:inputText value="{!NoteFollowupTitle}" style="width:400px"
+                        id="followupNoteTitle" maxlength="80" /> &nbsp;&nbsp;
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+    
+            <apex:pageBlockSectionItem id="commentSection">
+                <apex:outputLabel >{!$Label.Label_Note_Body}</apex:outputLabel>
+                <apex:inputTextArea value="{!comments}" style="width:400px; height:50px;" id="followNotecomment" />
+            </apex:pageBlockSectionItem>
+
+
+            </apex:pageBlockSection>
+
+
+            <apex:inputHidden id="hiddenkey" value="{!hiddenKey}" />
+            
+        </apex:pageBlock>
+
+    </apex:form>
+    <script>
+        
+        // activate the phone contact method initially
+        var contactMethod = 'Email'; // initially
+        var selectedID = '';
+        init();
+        
+        var flagToggleNBVisibility = false;
+            function addNoteBody(dialogText){
+                var visibleVal = "";
+                try {
+                    if (!flagToggleNBVisibility)
+                    {
+                        visibleVal = "block";
+                        flagToggleNBVisibility = true;
+                    }
+                    else
+                    {
+                        visibleVal = "none";
+                        flagToggleNBVisibility = false;
+                    }
+                        
+                    document.getElementById("pg:frm:pb:contactDetailPbs:sib:pbsiNoteBodyLabel").style.display = visibleVal;
+                    document.getElementById("pg:frm:pb:contactDetailPbs:sib:contactNote").style.display = visibleVal;
+                }
+                catch(e) {
+                    alert(e);
+                }
+                return false;
+            }
+
+          function closeAndSaveWindow(){
+                
+                 return false; 
+            }
+     
+             function closeWindow(){
+             
+                 document.getElementById('{!$Component.contactNote}').value='';        
+                 return false; 
+             }
+
+          function getSelectedEmailTemplateId(){
+            var selIndex = document.getElementById('{!$Component.emailComponentPbs.emailTemplateSi.emailTemplate}').selectedIndex;
+            return document.getElementById('{!$Component.emailComponentPbs.emailTemplateSi.emailTemplate}').options[selIndex].value;
+          }
+          
+          function setTemplateBody(){
+            var innerHtml = ''+document.getElementById('{!$Component.emailComponentPbs.emailBodySi.hiddenEmailBody}').value;
+           
+           
+            document.getElementById("{!$Component.hiddenEmailTemplateId}").value = getSelectedEmailTemplateId();
+         }
+
+        
+        
+        function getSelected(obj,id) { 
+            if(obj.checked) {
+                if(selectedID == '') {
+                    selectedID = id+','; 
+                }else{
+                    selectedID = selectedID +  id + ',';                
+                }
+            }
+            else {
+                if(selectedID.match(id)) {
+                    selectedID = selectedID.replace(id,'');
+                }   
+            }
+        }
+        
+        function init() {
+            var keyCheckElem = document.getElementById('chkUnchkAll');
+            keyCheckElem.checked = true;
+            checkAll(keyCheckElem);
+            
+            //removeTodayLinkFromPromiseDate();
+        }
+        
+         function setConfig(){ 
+            try{
+               sforce.connection.defaultNamespace = '{!JSENCODE($Setup.SysConfig_Singlec__c.NameSpace__c)}';
+               
+                sforce.connection.sessionId = '{!$Api.Session_ID}';
+                var config = new sforce.SObject("Temp_Object_Holder__c"); 
+                var user = sforce.connection.getUserInfo() ; 
+                var timest = sforce.connection.getServerTimestamp(); 
+                var key = '{!$User.Username}' + timest.timestamp ; 
+                config.Key__c =key ; 
+                config.Value__c = selectedID; 
+                
+                var res = sforce.connection.create([config]); 
+                document.getElementById("pg:frm:pb:hiddenkey").value = key ;
+            }catch(e){
+              alert(e);
+            }
+            
+         }
+         
+         function reloadLocale() {
+        
+            
+            startProcess();
+
+             var support = document.getElementById("{!$Component.hiddenSupportLocale}").value;
+            
+             if ( support == 'false' ){
+            
+                
+                return ;
+             }
+             
+             changeTemplateAsPerLocale();
+             
+             
+            // endProcess();
+         }
+        
+         function reloadLocaleFax() {
+        
+            
+            startProcess();
+
+             var support = document.getElementById("{!$Component.hiddenSupportLocale}").value;
+            
+             if ( support == 'false' ){
+            
+                
+                return ;
+             }
+             
+             changeTemplateAsPerLocaleFax();
+             
+             
+            // endProcess();
+         }
+         
+         //Closes the lookup window              
+       /* function CloseLookupWindowX(CtrlID)
+        {   
+            lookupwindow.close();
+            var v = document.getElementById('{!$Component.pg.frm.pb.contactDetailPbs.toSi.toAddresses}').id;   
+            if(v == CtrlID)
+            {   
+                changeTemplate();
+                reloadLocale();
+            }
+        }*/
+        
+        function CloseLookupWindow()
+        {  
+            lookupwindow.close();
+        }
+
+         
+        function reloadLocale() {
+             startProcess();
+             var support = '{!supportLocale}';//document.getElementById("{!$Component.hiddenSupportLocale}").value;
+             
+             if ( support == 'false' ){
+                 return ;
+             }
+             changeTemplateAsPerLocale();
+        }
+        
+        function ShowContactLookup(ctrlid,accountid,addressType,contactMethod)
+        {
+            //alert('-------ctrlid---------->'+ctrlid);
+            lookupwindow = window.open('/apex/ContactLookUpView?usefor=Contact&AccountID='+accountid+'&ctrlid='+ctrlid+'&addressType='+addressType+'&contactMethod='+ contactMethod,'{!$Label.Label_ContactCustomLookup}','width=750,height=600,resizable=no,toolbar=no, menubar=no,top=100,left=300,scrollbars=yes')
+        }
+
+        
+        function beforeSubmit() {
+         document.getElementById("pg:frm:hiddenNoteBody").value = document.getElementById('pg:frm:pb:contactDetailPbs:sib:contactNote').value ;
+            //setConfig();
+            
+            return false;
+        }
+        
+         //Set the contact details in the box    
+        function SetContact(CtrlId, AddressType, selectedContactAddresses) {
+            document.getElementById(CtrlId).value = selectedContactAddresses;
+        }
+        
+        //Set the contact details in the box    
+        function SetContactOnLink(CtrlId, AddressType, ContactID, ContactName, Phone, Fax, Email,FaxServiceType) {
+            if(AddressType == 'To')
+            {
+               handleToAddress(CtrlId, ContactID, ContactName, Phone, Fax, Email,FaxServiceType);
+               var ContactDetails = Email;
+               if(contactMethod =='Email')
+               { 
+                   ContactDetails = Email;
+                   changeLocale(ContactID);
+                   
+               }
+           
+            }
+            else if ( AddressType == 'CC')
+            {
+                handleCCAddresses(CtrlId, ContactID, ContactName, Phone, Fax, Email);
+            
+            }
+            else if (AddressType == 'BCC')
+            {
+                handleBCCAddresses(CtrlId, ContactID, ContactName, Phone, Fax, Email);
+            }
+        } 
+        
+        function changeLocale( CtrlID ){
+
+            var support = '{!supportLocale}';// document.getElementById("{!$Component.hiddenSupportLocale}").value;
+            
+            if ( support == 'false' ){
+            
+                
+                return ;
+            }
+            sforce.connection.defaultNamespace = '{!JSENCODE($Setup.SysConfig_Singlec__c.NameSpace__c)}';
+              
+            sforce.connection.sessionId = '{!$Api.Session_ID}';
+    
+            var result = sforce.connection.query("select id,Locale__c  from contact where id='"+CtrlID+"'");
+            var localename = '';
+            var records = result.getArray("records");
+            localename = records[0].Locale__c;
+            
+            if ( localename == null ) {
+                
+                localename = '';
+            }
+    
+            document.getElementById('pg:frm:pb:contactDetailPbs:localesection:locale').value = localename ;
+            
+        }
+
+        
+        function checkAll(selectAll) {
+           
+            if(selectAll.checked ){               
+                selectedID = "{!JSINHTMLENCODE(selectedTransactions)}" ;
+                
+            }
+            else{
+                selectedID ='';
+            }
+            
+            var inputElem = document.getElementsByTagName("input");
+            for(var i=0; i<inputElem.length; i++){
+                if(inputElem[i].id.indexOf("selectedTx")!=-1)
+                inputElem[i].checked = selectAll.checked;
+            }
+        }  
+        
+        function handleToAddress(CtrlId, ContactID, ContactName, Phone, Fax, Email,FaxServiceType)
+        {   
+             var ContactDetails = Email;
+            if(contactMethod =='Email')
+            { 
+                ContactDetails = Email;
+            }
+            else if(contactMethod =='Phone')
+            {
+                ContactDetails = Phone;
+            }
+            else if(contactMethod == 'Fax')
+            {
+                ContactDetails = Fax;
+            }
+                
+            document.getElementById(CtrlId).value = ContactDetails;
+            document.getElementById('{!$Component.pg.frm.hiddenToContactId}').value = ContactID;
+            document.getElementById("{!$Component.pg.frm.hiddenTargetContactId}").value = ContactID;  
+            
+            if(contactMethod == 'Fax'){
+                if(ContactDetails != ''){
+                 //   if(FaxServiceType == 'interFax'){     
+                         if(ContactDetails.indexOf('+') == 0){
+                             document.getElementById("{!$Component.pg.frm.pb.faxSectionPbs.sifax.faxToContact}").value = ContactDetails;
+                         }else{
+                             document.getElementById("{!$Component.pg.frm.pb.faxSectionPbs.sifax.faxToContact}").value = '+'+ContactDetails;
+                         }
+                   /* }else{
+                        document.getElementById("{!$Component.pb.faxSectionPbs.sifax.faxToContact}").value = ContactDetails;
+                    }*/
+                }
+            }        
+           
+        }    
+        
+        function handleBCCAddresses(CtrlId, ContactID, ContactName, Phone, Fax, Email) {
+            handleOtherAddresses(CtrlId, ContactID, ContactName, Phone, Fax, Email);
+        }
+        
+        //common function for cc and bcc
+        function handleOtherAddresses(CtrlId, ContactID, ContactName, Phone, Fax, Email) {
+            var ContactDetails = Email;
+            if(contactMethod=='Email') { 
+                ContactDetails = Email;
+            }
+           
+        
+            document.getElementById(CtrlId).value = ContactDetails;
+        }   
+        
+        function handleCCAddresses(CtrlId, ContactID, ContactName, Phone, Fax, Email) {
+            handleOtherAddresses(CtrlId, ContactID, ContactName, Phone, Fax, Email);
+        }
+
+        
+        function removeTodayLinkFromPromiseDate() {
+            var inputElem = document.getElementsByTagName("input");
+            
+            for(var i=0; i<inputElem.length; i++){
+                if(inputElem[i].type.toLowerCase() == 'text' && inputElem[i].id.indexOf("promiseDate")!=-1) {
+                    //alert(inputElem[i].nextSibling.innerHTML);
+                }
+                    
+            }
+        }
+        
+        function addDaysToDate(linkObj, days) {
+            var counterIdTokens = (linkObj.id).split(':');
+            //id will look like 'pg:frm:pb:transPbs:pbTable:'+counter+':promiseDate' so we are getting 6th token to get the counter
+            var counter = counterIdTokens[5];
+            
+            //var dateTxt = document.getElementById('pg:frm:pb:transPbs:pbTable:'+counter+':promiseDate').value;
+            var now = new Date();
+            now.setDate(now.getDate()+days);
+            document.getElementById('pg:frm:pb:transPbs:pbTable:'+counter+':promiseDate').value = now.getMonth()+1+'/'+now.getDate()+'/'+now.getFullYear();
+        }
+         function setDefaultContact() {
+            
+            var counter = 1;
+            var firstDefaultContact = '';
+            var firstDefaultContactId = '';
+            var otherDefaultContact = '';
+            <apex:repeat value="{!defaultContacts}" var="con">
+                if(counter == 1) {
+                    firstDefaultContact = '{!con.Email}';                   
+                    firstDefaultContactPhone = '{!con.Phone}';
+                    firstDefaultContactId = '{!con.Id}';
+                    firstDefaultContactFax = '{!con.Fax}';
+                    
+                    firstDefaultContactLocale='{!con.akritiv__Locale__c}';
+                    
+                }
+                else {
+                    otherDefaultContact = otherDefaultContact + '{!con.Email};';
+                }
+                counter++;
+            </apex:repeat>
+            document.getElementById("{!$Component.pg.frm.pb.emailComponentPbs.toSi.toAddresses}").value = firstDefaultContact;
+           
+            document.getElementById("{!$Component.pg.frm.pb.emailComponentPbs.ccSi.ccAddresses}").value = otherDefaultContact;
+            document.getElementById("{!$Component.pg.frm.hiddenToContactId}").value = firstDefaultContactId;
+            document.getElementById("{!$Component.pg.frm.hiddenTargetContactId}").value = firstDefaultContactId;
+            
+            if ( firstDefaultContactLocale == null) {
+    
+                firstDefaultContactLocale = '';
+            }
+                
+                document.getElementById('pg:frm:pb:contactDetailPbs:localesection:locale').value = firstDefaultContactLocale;
+               
+                
+            }
+
+         var initContactAttributeValue = document.getElementById("{!$Component.pg.frm.hiddenToContactId}").value;
+        var initContactLocalevalue ;
+         if(initContactAttributeValue == null || initContactAttributeValue == ''){
+        
+          setDefaultContact();
+        }
+      else if(initContactAttributeValue != null || initContactAttributeValue != '') {
+          
+            
+            <apex:repeat value="{!allContacts}" var="con">
+                if(initContactAttributeValue.substring(0,15) == '{!con.id}'.substring(0,15)) {
+                
+                    document.getElementById("{!$Component.contactDetailPbs.toSi.toAddresses}").value = '{!con.email}';
+                }
+            </apex:repeat>            
+            document.getElementById("{!$Component.pg.frm.hiddenTargetContactId}").value = initContactAttributeValue;
+            changeLocale( initContactAttributeValue );
+            
+        }
+        //Closes the lookup window
+        function CloseLookupWindowX(CtrlID)
+        {              
+            lookupwindow.close(); 
+//            alert('--------------'); 
+            if(contactMethod =='Email'){           
+            var v = document.getElementById('{!$Component.emailComponentPbs.toSi.toAddresses}').id;  
+            
+            if(v == CtrlID)
+            {   
+                reloadLocale();
+                changeTemplate();  
+            }
+            }
+            if(contactMethod =='Fax'){
+            var v2 = document.getElementById('{!$Component.faxSectionPbs.sifax.faxToContact}').id;
+            if(v2 == CtrlID )
+            {   
+                reloadLocaleFax();
+              //  changeTemplate();  
+                changeTemplatefax();
+            }
+            }
+        }
+        function CloseLookupWindow()
+        {  
+            lookupwindow.close();
+        }
+
+
+    </script>
+    <script>
+    // Hide loading whn page completely loaded
+    // * YUIHideLoading();
+</script>
+
+</apex:page>

@@ -1,0 +1,352 @@
+<!--
+ /*
+  *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+  *This software is the confidential and proprietary information
+  *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+  *disclose or use Confidential Information without the express written
+  *agreement of Akritiv Technologies, Inc.
+  */
+-->
+<!--
+    /*
+     * Display Notes Tab on account detail page.The tab have the functionality
+     * to search for notes related to account and transaction. Additionally It
+     * has multiple filter criteria to search for the notes.
+     */
+-->
+<apex:page controller="akritiv.NotesController" tabstyle="Account" id="pg"
+    showHeader="false" sidebar="false">
+ 
+
+    <apex:form id="frm">
+    
+
+        <apex:pageBlock id="pbck">
+            <apex:inputHidden value="{!entityId}" id="hiddenId" />
+
+
+            <apex:pageMessages />
+
+            <apex:actionFunction name="handleGo2" action="{!setNotesList}"
+                status="{!$Label.Label_loadingStatus}" rerender="panel2" />
+
+            <apex:actionFunction name="handleAttachments"
+                action="{!setNotesList}" status="{!$Label.Label_loadingStatus}" rerender="panel2" />
+
+            <apex:actionFunction name="handleDisputeNotes"
+                action="{!setNotesList}" status="{!$Label.Label_loadingStatus}" rerender="panel2" />
+
+            <apex:actionFunction name="handleAccountNotes"
+                action="{!setNotesList}" status="{!$Label.Label_loadingStatus}" rerender="panel2" />
+
+            <apex:actionFunction name="handleTransactionNotes"
+                action="{!setNotesList}" status="{!$Label.Label_loadingStatus}" rerender="panel2" />
+                
+                  <apex:actionFunction name="handleTransactionNotes1"
+                action="{!setNotesList}" status="{!$Label.Label_loadingStatus}" rerender="panel2" />
+
+            <apex:actionFunction name="handleZeroBalanceTxNotes"
+                action="{!setNotesList}" status="{!$Label.Label_loadingStatus}" rerender="panel2" />
+
+
+            <apex:actionFunction status="{!$Label.Label_loadingStatus}"
+                name="handlePreviousNotes1" action="{!getPreviousNotes}"
+                reRender="linkpanel,linkpanel2,panel2"/>
+
+            <apex:actionFunction status="{!$Label.Label_loadingStatus}" name="handleNextNotes1"
+                action="{!getNextNotes}" reRender="linkpanel,linkpanel2,panel2"/>
+
+
+            <!-- panel 0 start -->
+            <apex:outputPanel id="panel0">
+
+                <apex:outputLabel style="font-weight:bold;">{!$Label.Label_Search}</apex:outputLabel>&nbsp;
+
+                <apex:inputText id="txtSearch2" value="{!searchText}"
+                    onkeydown="return checkEnter2(event)" />&nbsp;
+            
+                                    
+            <apex:commandButton id="btnGo2" value="{!$Label.Label_Go}"
+                    status="{!$Label.Label_loadingStatus}" action="{!setNotesList}" rerender="panel2" />
+
+                <apex:commandButton id="btnNew2" value="{!$Label.Label_New}"
+                    status="{!$Label.Label_loadingStatus}"
+                    onClick="showNativeNewNotesUI(); return false;" />
+
+                <apex:commandButton id="btnAddAttachment"
+                    value="{!$Label.Label_Attach_Files}" status="{!$Label.Label_loadingStatus}"
+                    onClick="showAddAttachmentNotesUI(); return false;" />
+
+                <apex:actionStatus startStyle="font-weight:Bold;color:#cc0000"
+                    startText="{!$Label.Label_Please_Wait}" stopText=""
+                    id="loadingStatus" onstart="startProcessNote();" onstop="endProcessNote();"/>
+
+
+                <br />
+                <apex:outputLabel >{!$Label.Label_Search_Message}</apex:outputLabel>
+
+                <br />
+                <br />
+
+            </apex:outputPanel>
+
+            <!-- panel 0 end-->
+
+            <!-- panel panelcheckbox start -->
+            <apex:outputPanel id="panelcheckbox1"
+                style="overflow:auto;width:800px;"
+                rendered="{!IF(isTransactionLevelOperation = true,FALSE,TRUE)}">
+
+                <apex:inputCheckbox value="{!showAttachments}" id="attachments1"
+                    onClick="handleAttachments();" />
+                <apex:outputLabel value="{!$Label.Label_Show_Attachments}"
+                    for="attachments1" />
+
+                <br />
+
+                <apex:outputLabel value="{!$Label.Label_Show_notes_on}:" />
+
+                <apex:inputCheckbox value="{!showAccountNotes}" id="account"
+                    onClick="handleAccountNotes();"/>
+                <apex:outputLabel value="{!$Label.Label_Account}" for="account" />&nbsp;&nbsp;&nbsp;&nbsp;
+                
+            <apex:inputCheckbox value="{!showTransactionNotes}" id="tx"
+                    onClick="handleTransactionNotes();" />
+                <apex:outputLabel value="{!$Label.Label_Open_Transaction}" for="tx" />&nbsp;&nbsp;&nbsp;&nbsp;
+            
+            <apex:inputCheckbox value="{!showZeroBalanceTxNotes}"
+                    id="zeroBalTx" onClick="handleZeroBalanceTxNotes();" />
+                <apex:outputLabel value="{!$Label.Label_Closed_Transaction}"
+                    for="zeroBalTx" />&nbsp;&nbsp;&nbsp;&nbsp;
+            
+            <apex:inputCheckbox value="{!showDisputes}" id="disputesAcc"
+                    onClick="handleDisputeNotes();" />
+                <apex:outputLabel value="{!$Label.Label_Dispute}" for="disputes" />&nbsp;&nbsp;&nbsp;&nbsp;
+                
+                
+            </apex:outputPanel>
+
+            <!-- panel panelcheckbox end-->
+
+            <apex:outputPanel id="panelcheckbox2"
+                style="overflow:auto;width:800px;"
+                rendered="{!IF(isTransactionLevelOperation = true,TRUE,FALSE)}">
+
+                <apex:inputCheckbox value="{!showAttachments}" id="attachments2"
+                    onClick="handleAttachments();" />
+                <apex:outputLabel value="{!$Label.Label_Show_Attachments}"
+                    for="attachments2" />&nbsp;&nbsp;&nbsp;&nbsp;
+                
+            
+            <apex:inputCheckbox value="{!showTransactionNotes}" id="tx2"
+                    onClick="handleTransactionNotes1();" />
+                <apex:outputLabel value="{!$Label.Label_Transaction}" for="tx" />&nbsp;&nbsp;&nbsp;&nbsp;
+            
+            <apex:inputCheckbox value="{!showDisputes}" id="disputesTx"
+                    onClick="handleDisputeNotes();" />
+                <apex:outputLabel value="{!$Label.Label_Dispute}" for="disputes" />&nbsp;&nbsp;&nbsp;&nbsp;
+                
+                
+                
+            </apex:outputPanel>
+            <br />
+            <br />
+
+           
+            <!-- panel panel1 start-->
+            <apex:outputPanel layout="block" style="overflow:auto;width:800px;"
+                id="panel1">
+
+                <!-- panel panel2 start -->
+                <apex:outputPanel id="panel2">
+                 <!-- panel linkpanel start -->
+            <apex:outputPanel layout="block" style="overflow:auto;width:800px;"
+                id="linkpanel">
+
+                <table>
+                    <tr>
+                        <td align="right"><apex:commandLink value="{!$Label.Label_Previous}"
+                            onClick="if('{!hasPreviousNotes}' == 'true') return prevNotesPage1();else return false;" />
+                        &nbsp; <apex:commandLink value="{!$Label.Label_Next}"
+                            onClick="if('{!hasNextNotes}' == 'true') return nextNotesPage1();else return false;" />
+                        &nbsp;</td>
+                    </tr>
+
+                </table>
+            </apex:outputPanel>
+
+            <!-- panel linkpanel end -->
+
+
+                    <!-- panel pgblocktable start -->
+                    <apex:pageBlockTable value="{!notesList}" var="item" id="pbtLookup">
+                        <apex:column >
+                            <img id="theImage"
+                                src="{!URLFOR($Resource.iconset, 'iconset/1_41.png')}"
+                                title="{!$Label.Label_Attachment}"
+                                onclick="return viewAttachment('{!JSINHTMLENCODE(item.note.id)}'); return false;"
+                                style="display: block;" />
+                        </apex:column>
+
+                        <apex:column headerValue="{!$Label.Label_Number}">
+                            <a href="/{!item.entity.entityId}">{!item.entity.entityValue}</a>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">{!$Label.Label_Title}</apex:facet>
+                            <a href="/{!item.note.id}">{!item.note.name}</a>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">{!$Label.Label_Body}</apex:facet>
+                            <div>{!item.note.body}</div>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">{!$Label.Label_Last_Modification_Date}</apex:facet>
+                            {!item.note.lastModifiedDate}
+                        </apex:column>
+
+                        <br />
+
+
+
+
+                    </apex:pageBlockTable>
+
+                    <!-- panel pgblocktable end-->
+
+                    <!-- panel linkpanel2 start -->
+                    <apex:outputPanel layout="block" style="overflow:auto;width:800px;"
+                        id="linkpanel2">
+
+                        <table>
+                            <tr>
+                                <td align="right"><apex:commandLink value="{!$Label.Label_Previous}"
+                                    onClick="if('{!hasPreviousNotes}' == 'true') return prevNotesPage1();else return false;" />
+                                &nbsp; <apex:commandLink value="{!$Label.Label_Next}"
+                                    onClick="if('{!hasNextNotes}' == 'true') return nextNotesPage1();else return false;"  />
+                                &nbsp;</td>
+                            </tr>
+
+                        </table>
+                        <!-- panel linkpanel2 end -->
+                    </apex:outputPanel>
+
+                    <!-- panel panel2 end -->
+                </apex:outputPanel>
+
+                <!-- panel panel1 start-->
+            </apex:outputPanel>
+
+
+        </apex:pageBlock>
+
+        <script type="text/javascript">
+      function startProcessNote(){
+      
+           document.getElementById("{!$Component.acdetailpage.accpgb.loadingdetail}").style.display = 'block'; 
+           document.getElementById('filter').style.display = 'block'; 
+    
+       }
+       
+       function endProcessNote(){
+       
+           document.getElementById("{!$Component.acdetailpage.accpgb.loadingdetail}").style.display = 'none';
+           document.getElementById('filter').style.display = 'none'; 
+    
+       } 
+
+
+    
+    function nextNotesPage1(){
+       
+        
+       // alert('called next');
+        handleNextNotes1();
+        //alert('over');
+       
+        return false;
+    }
+    
+    function prevNotesPage1(){
+        
+        
+        //alert('called prevNotesPage1');
+        handlePreviousNotes1();
+       // alert('over');
+        
+        return false;
+        
+    }    
+//#AKTPROD-193 - By Twinkle Shah
+function viewAttachment(attachmentId)
+{
+    var checkId = attachmentId;
+        var res = checkId.substring(0,4);
+        
+        if(res.match("00PA")){
+            window.open('/'+checkId);
+           //window.open('/servlet/servlet.FileDownload?file=' + checkId, '{!$Label.Label_View_Attachment}','width=400,height=200,toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,copyhistory=yes,resizable=yes');
+            return false;
+        }
+        else{
+            window.open('/'+checkId);
+            return false;
+        }  
+}   
+     
+function showNativeNewNotesUI()
+{
+var x = document.getElementById("{!$Component.pg.frm.pbck.hiddenId}");
+var accId = x.value;  
+var splitAccId = accId.substring(0,15);
+var url = '/002/e?parent_id='+splitAccId+'&retURL=/'+splitAccId;
+window.location.href = url;
+return false;
+}    
+
+function showAddAttachmentNotesUI()
+{
+var x = document.getElementById("{!$Component.pg.frm.pbck.hiddenId}");
+var accId = x.value; 
+
+var splitAccId = accId.substring(0,15);
+var url = '/p/attach/NoteAttach?pid=' + splitAccId + '&retURL=/' + splitAccId;
+window.parent.location.href = url;
+return false;
+
+}    
+
+function checkEnter2(e){ //e is event object passed from function invocation
+var characterCode ;//literal character code will be stored in this variable
+
+//alert('enetered');
+if(e && e.which){ //if which property of event object is supported (NN4)
+    //alert('if');
+    e = e;
+    characterCode = e.which; //character code is contained in NN4's which property
+}
+else{
+//alert('else');
+e = event;
+characterCode = e.keyCode; //character code is contained in IE's keyCode property
+}
+//alert('CHAR CODE:' + characterCode);
+if(characterCode == 13){ //if generated character code is equal to ascii 13 (if enter key)
+    //alert('********** caling handlego');
+    handleGo2();
+    //alert('********** called handlego');
+    return false;
+}
+else{
+    //alert('********** else');
+return true;
+}
+
+}
+
+
+  </script>
+
+
+    </apex:form>
+
+</apex:page>

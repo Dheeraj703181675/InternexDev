@@ -1,0 +1,161 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/* 
+ * *** Date Forward Batch Job ***
+ * The job forward all the date type data for the transactions by mentioned
+ * days as input value.
+ */
+-->
+<apex:page controller="akritiv.ExecuteDateForwardBatchController" id="pg">
+<!-- *
+    <link rel="stylesheet" type="text/css"
+        href="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/slider/assets/skins/sam/slider.css')}" />
+    <link rel="stylesheet" type="text/css"
+        href="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/progressbar/assets/skins/sam/progressbar.css')}" />
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/yuiloader/yuiloader-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/dom/dom-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/event/event-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/animation/animation-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/dragdrop/dragdrop-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/slider/slider-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/element/element-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/progressbar/progressbar-min.js')}"></script>
+-->
+<style>
+         #filter
+    {
+        display: none;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff;
+        //z-index:10;
+        opacity:0.6;
+        filter: alpha(opacity=50);
+    }
+
+</style>
+
+    <script>
+         function startProcess(){
+      
+           document.getElementById("{!$Component.pg.frm.loading}").style.display = 'block'; 
+           document.getElementById('filter').style.display = 'block'; 
+
+
+       }
+       
+       function endProcess(){
+       
+           document.getElementById("{!$Component.pg.frm.loading}").style.display = 'none';
+           document.getElementById('filter').style.display = 'none'; 
+
+
+       } 
+
+
+    </script>
+
+    <apex:sectionHeader title="{!$Label.Label_Date_Forward}" />
+    <apex:form id="frm">
+   <!-- *     <c:Base_Comp_YUI_ModalLoader /> -->
+        <apex:actionFunction name="checkJobStatus"
+            action="{!refreshJobStatus}" rerender="JobStatusPanel" />
+        <div id="filter"></div><apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;"/>
+
+        <apex:pageBlock id="pb">
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:pageblockSection >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$Label.Label_Days_To_Fwd}</apex:outputLabel>
+                    <apex:inputText value="{!daysToForward}" id="days" />
+                </apex:pageBlockSectionItem>
+            </apex:pageblockSection>
+            <apex:pageblockButtons location="bottom">
+                <apex:outputPanel id="pbButtons">
+                   <!-- * <apex:commandButton value="Run" action="{!executeBatchUpdate}"
+                        onclick="YUIShowLoading();"
+                        oncomplete="startRefreshTimer();YUIHideLoading();"
+                        disabled="{!IF(isCompleted, FALSE, TRUE)}"
+                        rerender="JobStatusPanel,pbButtons" /> -->
+                <apex:commandButton value="{!$Label.Label_Run}" action="{!executeBatchUpdate}" 
+                        onclick="startProcess();"
+                        oncomplete="startRefreshTimer();endProcess();"
+                        disabled="{!IF(isCompleted, FALSE, TRUE)}"
+                        rerender="JobStatusPanel,pbButtons" />
+                </apex:outputPanel>
+            </apex:pageblockButtons>
+
+            <apex:outputPanel id="JobStatusPanel">
+                <apex:pageblockSection Title="{!$Label.Label_Job_Status}" id="pbs">
+                    <apex:outputField value="{!aaj.Status}" />
+                    <apex:outputField value="{!aaj.JobItemsProcessed}" />
+                    <apex:outputField value="{!aaj.TotalJobItems}" />
+                    <apex:outputField value="{!aaj.NumberOfErrors}" />
+                    <apex:inputHidden value="{!aaj.Status}" id="jobStatus" />
+                    <apex:inputHidden value="{!progress}" id="jobProgress" />
+                </apex:pageblockSection>
+            </apex:outputPanel>
+
+            <apex:pageblockSection >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Progress}" />
+                    <div id="basic"></div>
+                </apex:pageBlockSectionItem>
+            </apex:pageblockSection>
+        </apex:pageBlock>
+
+
+        <script>
+        var timer; 
+        var pb;
+        
+      //*  YAHOO.util.Event.onDOMReady( function () {
+            var Dom = YAHOO.util.Dom; Event = YAHOO.util.Event;
+            pb = new YAHOO.widget.ProgressBar({value:0,minValue:0,maxValue:100}).render('basic');
+            pb.set('anim', true);
+        });*/
+        
+        function startRefreshTimer() {
+            document.getElementById('pg:frm:pb:pbs:jobProgress').value=0;
+            document.getElementById('pg:frm:pb:pbs:jobStatus').value= '';
+            timer=setInterval("refreshStatus()",2000);
+        }
+        
+        function refreshStatus() {
+            increamentPBar();
+            checkJobStatus();
+            var statusValue = document.getElementById('pg:frm:pb:pbs:jobStatus').value;
+            if(statusValue=='Completed')
+                clearInterval(timer);
+        }
+        
+        function increamentPBar() {
+            var progressValue = document.getElementById('pg:frm:pb:pbs:jobProgress').value;
+            if(progressValue == "undefined")
+                progressValue = 0;
+            //alert(progressValue);     
+            pb.set('value', parseInt(progressValue));
+        }
+    </script>
+
+    </apex:form>
+</apex:page>

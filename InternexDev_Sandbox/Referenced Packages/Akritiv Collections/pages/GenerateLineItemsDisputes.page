@@ -1,0 +1,282 @@
+<!--
+ /*
+  *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+  *This software is the confidential and proprietary information
+  *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+  *disclose or use Confidential Information without the express written
+  *agreement of Akritiv Technologies, Inc.
+  */
+ -->
+ <!--
+ /*
+  * Page  is used to generate disputes over the selected line items with
+  * contacting to the customer or without.User can select the disputed amount
+  * and type for the disputes which are being created.
+  */
+ -->
+
+<apex:page controller="akritiv.GenerateLineItemsDisputes" id="pg" tabStyle="Account">
+<script src="/soap/ajax/10.0/connection.js" type="text/javascript"></script>
+<script src="/soap/ajax/10.0/apex.js" type="text/javascript"></script>
+<script type="text/javascript" src="{!URLFOR($Resource.jquery,'Jquery.js')}"></script>
+<style>
+    #filter
+    {
+    display: none;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    
+    background-repeat:no-repeat;
+    background-position:center;
+    background-color: #ffffff;
+    z-index:10;
+    opacity:0.6;
+    filter: alpha(opacity=50);
+    }
+</style>
+    
+<script>
+    <apex:variable var="cc" value="{!$Setup.SysConfig_Singlec__c.Enable_Dispute_Line_Sub_Type__c}"/>
+    $(window).load(function(){
+        $('#filter').hide();
+    });
+    
+    function startProcess(){
+        document.getElementById("{!$Component.pg.frm.pb.loading}").style.display = 'block';
+    }
+    
+    function endProcess(){
+        document.getElementById("{!$Component.pg.frm.pb.loading}").style.display = 'none';
+    } 
+    
+    function dispcat(val){
+        if({!cc}){
+            disputcat(val);
+        }
+    }
+    
+    function startProcess1(){
+        if({!cc}){
+            startProcess();
+        }
+    }
+    
+    function endProcess1(){
+        if({!cc}){
+            endProcess();
+        }
+    }
+    
+         
+          // UPDATE ALL SCRIPT -- Start [AKTPROD-443]
+        
+                //--updateAll---controller side--end-- 
+               //--updateAll---js side--start-- 
+               
+               var size=0;
+               var typeIsOther=false;
+               var dStype='';
+               function updateAllLinkpart1(linkObj,dsize,dtypeIsOther){
+                    size=dsize;
+                    
+                    var counterIdTokens = (linkObj.id).split(':');
+                    var counter = counterIdTokens[5];
+                    var dtype = document.getElementById('pg:frm:pb:pbs1:disputeItemsTable:'+counter+':disputeType').value;
+                    for (i=0; i<size; i++)
+                    { document.getElementById('pg:frm:pb:pbs1:disputeItemsTable:'+i+':disputeType').value = dtype;
+                      
+                    } 
+                   // alert('cc value:'+{!cc});
+                   // alert('222cc value:'+'{!cc}');
+                    if({!cc}){
+                     //  alert('---dtypeIsOther---'+dtypeIsOther);
+                       typeIsOther = dtypeIsOther; 
+                      // alert('---typeisother--'+typeIsOther);
+                       if(typeIsOther)
+                        {  dStype = document.getElementById('pg:frm:pb:pbs1:disputeItemsTable:'+counter+':disputeSubTypeOther').value;
+                        //  alert('---1-dStype--'+dStype);
+                         }
+                       else   
+                        {  
+                            dStype = document.getElementById('pg:frm:pb:pbs1:disputeItemsTable:'+counter+':disputeSubTypeNotOther').value;
+                           // alert('---2-dStype--'+dStype);
+                      
+                        }
+                      //  alert('--outside---');
+                       rerenderDepd(); 
+                    }
+                    else {
+                      //alert('else part');
+                       endProcess();
+                    }   
+               }
+               function updateAllLinkpart2(){
+                 //alert('size::'+size);
+                 // alert('typeIsother::'+typeIsOther);
+                 // alert('dStype ::'+ dStype );
+                   for (i=0; i<size; i++)
+                  {   if(typeIsOther == false){
+                   
+                      document.getElementById('pg:frm:pb:pbs1:disputeItemsTable:'+i+':disputeSubTypeNotOther').value =dStype;
+                      
+                      //alert('1value:'+i+'::'+document.getElementById('pg:frm:pb:pbs1:disputeItemsTable:'+i+':disputeSubTypeNotOther').value);
+                      
+                      } else{ 
+                      
+                        document.getElementById('pg:frm:pb:pbs1:disputeItemsTable:'+i+':disputeSubTypeOther').value = dStype;
+                       // alert(document.getElementById('pg:frm:pb:pbs1:disputeItemsTable:'+i+':disputeSubTypeOther').value);
+                      }
+                    
+                   }
+                  endProcess(); 
+               } 
+              //--updateAll---js side--end--
+                
+        // UPDATE ALL SCRIPT -AKTPROD-443- END  
+        
+</script>
+
+<apex:sectionHeader title="{!$Label.Label_Create_Dispute_Lines} {!$Label.Label_For} {!acc.Name}"/>
+<apex:form id="frm">
+    <div id="filter1"></div>
+    <apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loadingdetail" style="display:none;position:fixed;top:50%;left:50%;z-index:10;"/> 
+    <apex:pageMessages id="pgmsg" ></apex:pageMessages>
+    <apex:actionFunction name="disputcat" action="{!disputcatogary}" rerender="pbs1" oncomplete="endProcess1();" >
+    </apex:actionFunction>
+    <!-- UPDATE ALL Action Function - Start [AKTPROD-378]-->
+              <apex:actionFunction name="rerenderDepd" oncomplete="return updateAllLinkpart2();" rerender="{!$Component.frm.pb.pbs1.disputeItemsTable}" />
+   <!-- UPDATE ALL Action Function - End-->
+    <apex:pageBlock id="pb" mode="edit" rendered="{!disputesLinesItemCreated}">
+        <div id="filter"></div>
+        <apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;"/>
+        <apex:pageBlockButtons id="pbb" location="bottom">
+            <apex:actionStatus id="mySaveStatus1">
+            <apex:facet name="stop">
+                <apex:commandButton action="{!execute}" status="mySaveStatus1" value="{!$Label.Label_Create_Dispute_Lines}" onclick="beforeSubmit();startProcess();" oncomplete="endProcess();" disabled="false" reRender="frm" immediate="false"/>
+            </apex:facet>
+            <apex:facet name="start">
+                <apex:commandButton action="{!execute}" status="mySaveStatus1" value="{!$Label.Label_Executing}" disabled="true" reRender="frm"/> 
+            </apex:facet>
+            </apex:actionStatus>
+                <apex:commandButton value="{!$Label.Label_Cancel}"
+                action="{!goBackToAccount}" immediate="true" oncomplete="endProcess();" onclick="startProcess();"/>
+        </apex:pageBlockButtons>
+        
+        <apex:pageBlockSection id="pbs1" title="{!$Label.Label_Dispute_Details}" columns="1">
+            <apex:pageBlockTable value="{!disputesWithTxList}" var="disputeTx" id="disputeItemsTable">
+                
+                <apex:column value="{!disputeTx.tx.name}" headerValue="{!$Label.Label_Line_Item}"/>
+                <apex:column value="{!disputeTx.tx.akritiv__Transaction__c}" headerValue="{!$Label.Label_Transaction_Number}"/>
+                <apex:column value="{!disputeTx.tx.akritiv__Line_Total__c}" headerValue="{!$Label.Label_Line_Total}"/>
+                <!-- ------------------------------------------------------------ -->
+                <apex:column headerValue="{!$Label.Label_Dispute_Type}">
+                <!-- id="disputeType" ADDED FOR UPDATE ALL FUNCTIONALITY AKTPROD-443  -->
+                    <apex:inputfield id="disputeType" value="{!disputeTx.disputeLines.akritiv__RequestedReason__c}" onchange="dispcat(this.value);startProcess1();"/>
+                </apex:column>
+                
+                <apex:column headerValue="{!$Label.Label_Dispute_Sub_Type}" rendered="{!$Setup.SysConfig_Singlec__c.Enable_Dispute_Line_Sub_Type__c}">
+                 <!-- id="disputeSubTypeNotOther" ADDED FOR UPDATE ALL FUNCTIONALITY-AKTPROD-443  -->   
+                    <apex:inputField id="disputeSubTypeNotOther" rendered="{!disputeTx.disputeLines.akritiv__RequestedReason__c != 'Other'}" value="{!disputeTx.disputeLines.akritiv__Requested_Sub_Reason__c}" />
+                 <!-- id="disputeSubTypeOther" ADDED FOR UPDATE ALL FUNCTIONALITY-AKTPROD-443  -->   
+                    <apex:inputText id="disputeSubTypeOther" rendered="{!disputeTx.disputeLines.akritiv__RequestedReason__c == 'Other'}" value="{!disputeTx.disputeLines.akritiv__Requested_Sub_Reason__c}" />
+                </apex:column> 
+                
+                <!-- UPDATE ALL - Start [AKTPROD-443]-->                          
+                     <!-- //----update all--AKTPROD-443--start-- -->
+                     <apex:column headerValue="{!$Label.Update_All}" id="updateAllLinkHeader">
+                     <apex:variable var="cc1" value="{!disputesWithTxList.size}" />
+                         <apex:outputPanel onclick="startProcess();updateAllLinkpart1(this,'{!cc1}',{!disputeTx.disputeLines.akritiv__RequestedReason__c == 'Other'});">
+                            <apex:commandLink immediate="true" value="{!$Label.Update_All}" onclick="return false;" id="updateAll"/>&nbsp; 
+                         </apex:outputPanel>
+                     </apex:column>   
+                     <!-- //----update all--AKTPROD-443--end-- --> 
+                <!-- UPDATE ALL - Ends -->
+                
+                <apex:repeat value="{!fieldWithApiList}" var="fieldAPIName">
+                <apex:column headerValue="{!fieldAPIName.fieldName}">
+                <apex:inputField value="{!disputeTx.disputeLines[fieldAPIName.fieldApiName]}"/>
+                </apex:column>
+                </apex:repeat>
+               
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection columns="2" title="{!$Label.Label_Dispute_Owner_and_Status}">
+            <apex:inputField id="disouteowner" value="{!disputeforowner.akritiv__Owner__c}"/>
+            <apex:inputField id="disoutestatus" value="{!disputeforowner.akritiv__status__c}"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection columns="1"
+                    title="{!$Label.Label_Collection_Rating}">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="{!$Label.Label_Collection_Rating}" />
+                        <c:Star_Rating_Component updatable="true"
+                            initRating="{!activityRating}" />
+                    </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+                <c:Email_Editor supportLocale="{!supportLocale}"
+                    accountId="{!accountId}"
+                    contactId="{!emailTargetToContactId}" faxId="{!emailTargetToFaxId}"
+                    emailCcAddresses="{!ccAddresses}"
+                    emailAddToAddresses="{!addtoAddresses}"
+                    emailBccAddresses="{!bccAddresses}"
+                    copyToSender="{!currUserPref.akritiv__BCC_Emails_To_Me__c}"
+                    mailingSubject="{!emailSubject}" emailBody="{!emailTemplateBody}"
+                    contactMethod="{!contactMethod}"
+                    templatecategory="{!templatecategory}"
+                    contactNoteTitle="{!contactNoteTitle}" contactNote="{!contactNote}"
+                    emailTemplateId="{!templateIdSelected}"
+                    emailAttachmentIds="{!attachmentIds}"
+                    orgWideEmailAddressId="{!currUserPref.akritiv__Org_Wide_Email__c}"
+                    id="emaileditor"/>
+       
+            <br />
+            <apex:pageBlockSection columns="1">
+                    <apex:pageBlockSectionItem id="daysSection" >
+                        <apex:outputLabel value="" />
+                        <apex:outputPanel >
+                            <apex:inputCheckbox value="{!isFollowUp}" />
+                            <apex:outputLabel value="{!$Label.Label_Create_follow_up_after}" />
+                            <apex:inputText size="1" maxlength="4" value="{!followUpDays}" />&nbsp;
+                            <apex:outPutLabel value="{!$Label.Label_Days_With_Note}" />
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem> 
+                    
+                    
+                 <apex:pageBlockSectionItem id="noteSection">
+                    <apex:outputLabel >{!$Label.Label_Note_Title}</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:inputText value="{!NoteFollowupTitle}" style="width:400px"
+                            id="followupNoteTitle" maxlength="80" /> &nbsp;&nbsp;
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+        
+                <apex:pageBlockSectionItem id="commentSection">
+                    <apex:outputLabel >{!$Label.Label_Note_Body}</apex:outputLabel>
+                    <apex:inputTextArea value="{!comments}" style="width:400px; height:50px;" id="followNotecomment" />
+                </apex:pageBlockSectionItem>
+
+
+            </apex:pageBlockSection>
+
+
+                <apex:inputHidden id="hiddenNoteBody" value="{!contactNote}" />
+    </apex:pageBlock>
+    
+            <apex:pageBlock id="pgblock1" rendered="{!disputesLinesItemCreated1}">
+                <apex:commandButton value="{!$Label.Label_Ok}" action="{!goBackToAccount}" />
+            </apex:pageBlock>
+            
+     <script>
+         function beforeSubmit() {
+             var temp = '{!JSENCODE(contactMethod)}';
+             if(temp != 'DNC'){
+                 document.getElementById("pg:frm:pb:hiddenNoteBody").value = document.getElementById('pg:frm:pb:emaileditor:emailComp:notesec:sib:contactNote').value;
+             }
+             return true;
+        }
+     </script>       
+</apex:form>
+
+</apex:page>

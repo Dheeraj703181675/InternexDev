@@ -1,0 +1,292 @@
+<apex:component controller="SearchFunctionalityController" allowDML="true">
+<style>
+ #filterComp{
+            display: none;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index:10;
+            opacity:0.6;
+            filter: alpha(opacity=50);
+        }
+        
+</style>
+<script>
+/* function showFilter{!ObjName}(v){
+     // alert(document.getElementById('panelsection2'));
+    // alert('panelsection2{!ObjName}');
+    // alert(document.getElementById('panelsection2{!ObjName}').style.display);
+     var dis = document.getElementById('panelsection2{!ObjName}').style.display;
+     
+     if(dis=='none'){ 
+     
+         document.getElementById('panelsection2{!ObjName}').style.display = 'block';
+         var ctrl = document.getElementById(v.id);
+        //alert(ctrl.value);
+         ctrl.value = '▲';
+         ctrl.style.backgroundImage = 'none';
+         ctrl.style.backgroundColor = '#4A4747';
+           
+     }
+     else{
+         
+         document.getElementById('panelsection2{!ObjName}').style.display = 'none';  
+         var ctrl = document.getElementById(v.id);
+         ctrl.value = '▼';
+         ctrl.style.backgroundImage = '';
+         ctrl.style.backgroundColor= '';
+         
+     }
+                   
+    }
+    function hideFilter(){
+       //alert(document.getElementById('panelsection1'));
+     document.getElementById('panelsection2').style.display = 'none';                     
+    }
+    */
+
+function searchInvoice(e)
+    {
+        
+        var keynum;
+        if(window.event) // IE
+        {
+            keynum = e.keyCode;
+        }else{
+           
+            keynum = e.which;
+        }
+        
+        if(keynum == 13) 
+        { 
+           
+           // var btn = document.getElementById('pgTx:txform:txpblock:j_id34:btnsearch');
+           //  alert(document.getElementById('{!$Component.searchSection.btnsearch}'));
+            var btn = document.getElementById('{!$Component.searchSection.btnsearch}');
+          
+            //var btn = document.getElementById('pgTx:txform:j_id38:searchComponent:j_id40:searchSection:btnsearch');
+            if (btn != null)
+            { 
+                btn.click();
+                if(window.event){
+                    event.keyCode = 0;
+                }else{
+                    e.which = 0;
+                }
+            }
+            return false; 
+        } 
+    }
+    
+   function startProcessComp(){
+       
+
+       document.getElementById('{!$Component.loadingdetail}').style.display = 'block'; 
+       document.getElementById('filterComp').style.display = 'block'; 
+      
+       }
+       
+   function endProcessComp(){
+
+      document.getElementById('{!$Component.loadingdetail}').style.display = 'none';
+      document.getElementById('filterComp').style.display = 'none';
+      
+
+       }
+   /* function check(v,cnt){
+        
+        
+        alert(v);
+        document.getElementById('{!$Component.inptHdn}').value = v;
+        alert(document.getElementById('{!$Component.inptHdn}').value);
+       // pg:frm:pb:searchComponent:j_id34:searchSection:rep:6:inptHdn
+       alert('{!$Component.searchSection}'+':rep:'+cnt+':inptHdn'); 
+       alert(document.getElementById('{!$Component.searchSection}'+':rep:'+cnt+':inptHdn').value);
+        
+   
+   }*/
+   
+   
+   
+   function datechanged(v,cnt){
+   //alert(cnt);
+
+   //alert('pg:frm:pb:j_id7:j_id8:searchComponent:j_id10:searchSection:rep:'+cnt+':val1');
+   //alert(document.getElementById('pg:frm:pb:j_id7:j_id8:searchComponent:j_id10:searchSection:rep:'+cnt+':val1'));
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var year = today.getFullYear();
+    //alert(document.getElementById('pg:frm:pb:j_id7:j_id8:searchComponent:j_id10:searchSection:rep:1'));
+    //alert(document.getElementById('pg:frm:pb:panelsection1:rep:1:val1'));
+    //alert(document.getElementById('pg:frm:pb:panelsection1:j_id8:rep:1:val1'));
+    document.getElementById('{!$Component.searchSection}'+':rep:'+cnt+':val1').value = '';
+    document.getElementById('{!$Component.searchSection}'+':rep:'+cnt+':val2').value = '';
+
+      
+      
+    
+    
+        if(v == 'L30'){
+            document.getElementById('{!$Component.searchSection}'+':rep:'+cnt+':val2').value =  ("0" + mm).slice(-2) + '/' + ("0" + dd).slice(-2) + '/' + year;
+            today.setDate(today.getDate() - 30);
+           
+            dd = today.getDate();
+            mm = today.getMonth() + 1;
+            year = today.getFullYear();
+           
+            document.getElementById('{!$Component.searchSection}'+':rep:'+cnt+':val1').value =  ("0" + mm).slice(-2) + '/' + ("0" + dd).slice(-2) + '/' + year;;
+           
+        }
+         if(v == 'L60'){
+            document.getElementById('{!$Component.searchSection}'+':rep:'+cnt+':val2').value =  ("0" + mm).slice(-2) + '/' + ("0" + dd).slice(-2) + '/' + year;;
+            today.setDate(today.getDate() - 60);
+             dd = today.getDate();
+            mm = today.getMonth() + 1;
+            year = today.getFullYear();
+            document.getElementById('{!$Component.searchSection}'+':rep:'+cnt+':val1').value =   ("0" + mm).slice(-2) + '/' + ("0" + dd).slice(-2) + '/' + year;;
+           
+         }if(v == 'L90'){
+            document.getElementById('{!$Component.searchSection}'+':rep:'+cnt+':val2').value =   ("0" + mm).slice(-2) + '/' + ("0" + dd).slice(-2) + '/' + year;;
+            today.setDate(today.getDate() - 90);
+             dd = today.getDate();
+            mm = today.getMonth() + 1;
+            year = today.getFullYear();
+            document.getElementById('{!$Component.searchSection}'+':rep:'+cnt+':val1').value =  ("0" + mm).slice(-2) + '/' + ("0" + dd).slice(-2) + '/' + year;;
+           
+        }
+         if(v == 'N30'){
+         
+            document.getElementById('{!$Component.searchSection}'+':rep:'+cnt+':val1').value =   ("0" + mm).slice(-2) + '/' + ("0" + dd).slice(-2) + '/' + year;;
+            today.setDate(today.getDate() + 30);
+             dd = today.getDate();
+            mm = today.getMonth() + 1;
+            year = today.getFullYear();
+            document.getElementById('{!$Component.searchSection}'+':rep:'+cnt+':val2').value =   ("0" + mm).slice(-2) + '/' + ("0" + dd).slice(-2) + '/' + year;;
+        } if(v == 'N60'){
+       
+            document.getElementById('{!$Component.searchSection}'+':rep:'+cnt+':val1').value =   ("0" + mm).slice(-2) + '/' + ("0" + dd).slice(-2) + '/' + year;;
+             today.setDate(today.getDate() + 60);
+              dd = today.getDate();
+            mm = today.getMonth() + 1;
+            year = today.getFullYear();
+            document.getElementById('{!$Component.searchSection}'+':rep:'+cnt+':val2').value =   ("0" + mm).slice(-2) + '/' + ("0" + dd).slice(-2) + '/' + year;;
+        } if(v == 'N90'){
+        
+            document.getElementById('{!$Component.searchSection}'+':rep:'+cnt+':val1').value =   ("0" + mm).slice(-2) + '/' + ("0" + dd).slice(-2) + '/' + year;;
+            today.setDate(today.getDate() + 90);
+             dd = today.getDate();
+            mm = today.getMonth() + 1;
+            year = today.getFullYear();
+            document.getElementById('{!$Component.searchSection}'+':rep:'+cnt+':val2').value =   ("0" + mm).slice(-2) + '/' + ("0" + dd).slice(-2) + '/' + year;;
+        }
+}
+      
+</script>
+    <div id="filterComp"></div>
+    <apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loadingdetail" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+      
+    <apex:attribute required="true" assignTo="{!ObjectName}" name="ObjName" type="String" description="Object name" />    
+    <!--<apex:attribute name="objPortalFilterSOQLVar" assignTo="{!objPortalFilterSOQLVar12}" description="The save method from the parent controller" type="PortalFilterSOQLVar" required="true"/>         -->
+    <apex:attribute name="getListContents" description="The save method from the parent controller" type="ApexPages.Action" required="true"/>   
+    <apex:attribute name="TempKey" assignTo="{!TempKey12}" description="The save method from the parent controller" type="akritiv__Temp_Object_Holder__c" required="true"/>
+   <!--  <apex:attribute name="comObj" assignTo="{!obj1}" description="Instance of Object" type="sObject" required="true"/>   -->
+    
+    <apex:actionFunction name="search" action="{!searchRes}" reRender="txpblock"/>
+  
+    <apex:actionFunction name="getPagemethod" action="{!getListContents}"  onbeforedomupdate="endProcessComp();" reRender="{!reRenderStr}"/>    
+    
+  <apex:outputPanel id="panelFilter" > 
+ <!-- <div class="pbBody"> 
+         <apex:commandButton id="filterbtn" value="▼" rerender="pgmsg" onclick="showFilter{!ObjName}(this);"/><b>Filter</b>
+            
+      </div>  -->
+   
+    <div class="pbBody" id="panelsection2{!ObjName}" style="width:100%"> 
+        
+        <apex:pageBlockSection columns="5" title="{!sectionTitle}" showHeader="false"  id="searchSection" >
+             <apex:outputLabel ></apex:outputLabel> <apex:outputLabel ></apex:outputLabel><apex:outputLabel ></apex:outputLabel> <apex:outputLabel ></apex:outputLabel> 
+             <apex:variable var="cnt" value="{!0}" /> 
+            
+            <apex:repeat value="{!searchListLabel}" var="label" id="rep" >                                        
+                        <apex:outputLabel ><div >{!label.fieldLabel}</div></apex:outputLabel>
+                        
+                        <apex:outputLabel rendered="{!IF(!OR(label.fieldType = 'DATE',label.fieldType == 'Schema.DisplayType.Date',label.fieldType = 'DOUBLE',label.fieldType == 'Schema.DisplayType.Double',label.fieldType = 'CURRENCY',label.fieldType == 'Schema.DisplayType.Currency',label.fieldAPI == 'C_Form_Required__c',label.fieldAPI == 'C_Form_Received__c'),'true','false')}"/>
+                        
+                        <apex:outputLabel rendered="{!IF(!OR(label.fieldType = 'DATE',label.fieldType == 'Schema.DisplayType.Date',label.fieldType = 'CURRENCY',label.fieldType == 'Schema.DisplayType.Currency',label.fieldType = 'PICKLIST',label.fieldType == 'Schema.DisplayType.Picklist',label.fieldType = 'DOUBLE',label.fieldType == 'Schema.DisplayType.Double',label.fieldType = 'BOOLEAN',label.fieldType == 'Schema.DisplayType.Boolean', label.fieldAPI == 'C_Form_Required__c',label.fieldAPI == 'TDS_Required__c' ),'true','false')}" >
+                         <apex:inputText onkeypress="return searchInvoice(event);" value="{!label.fieldValue1}" style="width:200px" ></apex:inputText>  
+                         </apex:outputLabel> 
+                       
+                        <apex:outputLabel rendered="{!IF(OR(label.fieldAPI == 'C_Form_Required__c',label.fieldAPI == 'C_Form_Received__c'),'true','false')}" >
+                            <apex:selectList size="1" value="{!label.SelectedForm}" id="CFormType" onkeypress="return searchInvoice(event);" style="width:200px">  
+                                <apex:selectOptions value="{!FormType}"  /> 
+                            </apex:selectList> 
+                        </apex:outputLabel> 
+                    
+                        <apex:outputLabel rendered="{!IF(OR(label.fieldAPI == 'C_Form_Required__c',label.fieldAPI == 'TDS_Required__c'),'true','false')}" >
+                            <apex:selectList size="1" value="{!label.fieldValue1}" id="CFormReq" onkeypress="return searchInvoice(event);" style="width:200px">  
+                                <apex:selectOptions value="{!CFormReq}"  /> 
+                            </apex:selectList>
+                        </apex:outputLabel>
+                         
+                        <apex:outputPanel rendered="{!IF(OR(label.fieldType = 'BOOLEAN',label.fieldType == 'Schema.DisplayType.Boolean'),'true','false')}"> 
+                            <apex:selectList size="1" value="{!label.fieldValue1}" id="booleanValue"  style="width:200px">  
+                                <apex:selectOptions value="{!booleanPicklist}"  /> 
+                            </apex:selectList> 
+                        </apex:outputPanel>
+                         
+                        <!-- <apex:outputLabel rendered="{!IF(OR(label.fieldType = 'CURRENCY',label.fieldType == 'Schema.DisplayType.Currency'),'true','false')}" >
+                         <apex:inputText onkeypress="return searchInvoice(event);" value="{!label.fieldValue1}"  ></apex:inputText>  
+                         </apex:outputLabel> -->
+                         
+                        <apex:outputPanel rendered="{!IF(OR(label.fieldType = 'DOUBLE',label.fieldType == 'Schema.DisplayType.Double',label.fieldType = 'CURRENCY',label.fieldType == 'Schema.DisplayType.Currency'),'true','false')}"> 
+                            <apex:selectList size="1" value="{!label.SelectedOperator1}" id="invoiceamnt"  style="width:200px">  
+                                <apex:selectOptions value="{!Operator}"  /> 
+                            </apex:selectList> 
+                        </apex:outputPanel> 
+                         
+                        <apex:outputLabel rendered="{!IF(OR(label.fieldType = 'DOUBLE',label.fieldType == 'Schema.DisplayType.Double',label.fieldType = 'CURRENCY',label.fieldType == 'Schema.DisplayType.Currency'),'true','false')}">
+                        <apex:inputText onkeypress="return searchInvoice(event);"  value="{!label.fieldValue1}" style="width:200px" ></apex:inputText> 
+                        </apex:outputLabel> 
+                         
+                         <apex:outputLabel rendered="{!IF(OR(label.fieldType = 'PICKLIST',label.fieldType == 'Schema.DisplayType.Picklist'),'true','false')}">
+                         <!--<apex:inputfield value="{!obj1[label.fieldAPI]}" id="picklistVal" style="width:200px" onkeypress="return searchInvoice(event);" ></apex:inputfield> -->
+                        
+                            <apex:selectList id="pickVal" value="{!label.fieldValue1}" size="1" onkeypress="return searchInvoice(event);">
+                            
+                            <apex:selectOptions value="{!picklistMap[label.fieldAPI]}"/>
+                            </apex:selectList>
+                         </apex:outputLabel>
+                        
+                         <apex:outputPanel rendered="{!IF(OR(label.fieldType = 'DATE',label.fieldType == 'Schema.DisplayType.Date'),'true','false')}"> 
+                            <apex:selectList size="1"  onchange="datechanged(this.value,'{!cnt}');" id="inquirydate3" style="width:200px" onkeypress="return searchInvoice(event);" >  
+                                <apex:selectOptions value="{!DateRange}" /> 
+                             </apex:selectList> 
+                         </apex:outputPanel> 
+                                       
+                         <apex:inputText id="val1"  value="{!label.fieldValue1}" rendered="{!IF(!OR(label.fieldType = 'DATE',label.fieldType == 'Schema.DisplayType.Date'),'false','true')}" onfocus="DatePicker.pickDate(false, this, false);" style="width:200px" onkeypress="return searchInvoice(event);" ></apex:inputText>
+                          
+                         <apex:inputText id="val2"  value="{!label.fieldValue2}" rendered="{!IF(!OR(label.fieldType = 'DATE',label.fieldType == 'Schema.DisplayType.Date'),'false','true')}" onfocus="DatePicker.pickDate(false, this, false);" style="width:200px" onkeypress="return searchInvoice(event);" ></apex:inputText>
+                         
+                         <apex:outputText rendered="{!IF(!OR(label.fieldType = 'DATE',label.fieldType == 'Schema.DisplayType.Date'),'true','false')}" ></apex:outputText>
+                         <apex:variable var="cnt" value="{!cnt+1}"/>
+            </apex:repeat>  
+           
+           <div id="btnDiv">
+            <apex:outputPanel >
+                <!-- <apex:commandButton id="btnsearch" value="Search" action="{!searchRes}" style="font-size: 12px; margin-left:20%;" onclick="startProcess();" oncomplete="getPage();"/>
+                    <input type="button" class="btn" value="Cancel" onclick="hideFilter();" style="font-size: 12px;" /> -->
+                 <apex:commandButton id="btnsearch" value="Search" action="{!searchRes}" style="font-size: 12px; margin-left:50%;" onclick="startProcessComp();" oncomplete="getPagemethod();" reRender="pgmsg1"/>
+                 
+            </apex:outputPanel> 
+            </div>
+             
+        </apex:pageBlockSection>
+     </div>
+  </apex:outputPanel>
+ 
+ 
+</apex:component>

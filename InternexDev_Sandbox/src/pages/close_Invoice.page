@@ -1,0 +1,43 @@
+<apex:page standardController="akritiv__Transaction__c" extensions="TRController" showHeader="false" sidebar="false" id="pg">
+<apex:form id="frm">
+
+<script>
+function RefreshParent1(str)
+    {
+   //  alert(str); 
+     if(str == 'T')
+     { 
+       //  alert('{!$CurrentPage.parameters.id}');
+          //    window.parent.location.href ="/"+parentid;
+         //   window.open('/'+parentid,'mydialog','width=900,height=600,scrollbars=yes,resizable=false');
+         //   window.opener.location.href="/{!$CurrentPage.parameters.id}";
+          window.top.close();
+      //   return True;
+     }//else False;
+
+    }
+    function close_page()
+    {
+         window.top.close();
+    }
+</script>
+
+
+
+<apex:pageBlock id="Pb">
+<apex:pageMessages id="pms"></apex:pageMessages>
+<apex:pageBlockButtons id="pbs1">
+<apex:commandButton value="Close" action="{!SaveTR}" reRender="pms" oncomplete="RefreshParent1('{!JSENCODE(strmsg)}')"/><!--oncomplete="RefreshParent1('{!JSENCODE(InvoiceId)}')"  -->
+<apex:commandButton value="Cancel" onclick="close_page();"/>
+</apex:pageBlockButtons>
+<apex:actionFunction name="refreshSection" reRender="pbs2" />
+<apex:pageBlockSection id="pbs2" columns="1">
+
+<apex:inputField label="Closing Reasons" value="{!akritiv__Transaction__c.Closing_Reasons__c}" onchange="refreshSection();"/>
+<apex:inputField label="Other Comments"  value="{!akritiv__Transaction__c.Other_Comments__c}" rendered="{!IF(akritiv__Transaction__c.Closing_Reasons__c=='Other',True,False)}"/>
+</apex:pageBlockSection>
+
+</apex:pageBlock>
+</apex:form>
+
+</apex:page>

@@ -1,0 +1,54 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/* 
+ * This is an inline page to show all the transaction associated
+ *  with the task (follow-up task, contact customer , promise to pay
+ *  or dispute creation task). Everytime when the task is created
+ *  using code it also create a Transaction_Activity__c record to
+ *  maintain the transactions that are the part of contact/followup
+ *  task.
+ */
+-->
+<apex:page standardcontroller="Task"
+    extensions="akritiv.ActivityTransactionController" showheader="false"
+    id="RelTransactionsPage">
+    <style>
+body {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 75%;
+}
+</style>
+
+    <apex:outputPanel rendered="{!IF(txDetailList.size >0,true,false)}">
+        <table width="100%" class="detailList">
+
+            <tr>
+                <apex:repeat value="{!txHeaders}" var="nextHeader">
+                    <td class="headerRow"><b> {!nextHeader} </b></td>
+                </apex:repeat>
+            </tr>
+
+            <apex:repeat value="{!txDetailList}" var="nextList">
+                <apex:repeat value="{!nextList}" var="nexttrans">
+                    <tr>
+                        <apex:repeat value="{!nexttrans}" var="item">
+                            <td><apex:outPutLabel value="{!item}" /></td>
+                        </apex:repeat>
+                    </tr>
+                </apex:repeat>
+            </apex:repeat>
+        </table>
+    </apex:outputPanel>
+    <br />
+    <apex:outPutLabel value="{!$Label.Label_No_Records_Found}"
+        rendered="{!IF(txDetailList.size >0,false,true)}" />
+
+</apex:page>

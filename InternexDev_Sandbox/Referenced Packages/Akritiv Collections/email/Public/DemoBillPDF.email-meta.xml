@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <description>DemoBillPDF</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>DemoBillPDF</name>
+    <style>none</style>
+    <subject>Configurable Billing Statement Pdf</subject>
+    <textOnly>@page { size:landscape;@bottom-right {content: &quot;Page &quot; counter(page);}}
+.billing {solid 1px black;padding:0px;border-collapse: collapse; font-family:verdana;}
+.billing th, .billing td{text-align:center; border: solid 1px black; padding:3px 5px; white-space:nowrap;}
+.billing th {font-weight:bolder; text-align:center; background-color:#DDD;}
+.billing .odd {background-color:#EEE;}
+.billing .even{background-color:#FFF;}
+
+.orgname{font-family: Arial,verdana; font-weight: bolder; font-style: normal; font-size: 18px; text-align: left;}
+.orgaddress{font-family: Arial,verdana; font-weight: bolder; font-style: normal; font-size: 14px; }
+.orgconlabel{font-family: Arial,verdana; font-weight: bolder; font-style: normal; font-size: 14px; }
+
+.orgStatement{font-family: Arial,verdana; font-weight: bolder; font-style: normal; font-size: 22px; }
+
+
+.blankborder {line-height: 0.5px; background-color: #000000 }
+
+
+
+
+
+ 
+ 
+ 
+ {!Organization.Name} 
+ 
+ 
+ Statement 
+ 
+ 
+ 
+ 
+ {!Organization.Street} 
+ 
+ 
+ Customer# : {!Account.AccountNumber}
+ 
+ 
+ 
+ 
+ {!Organization.City}, {!Organization.PostalCode} 
+ 
+ 
+ Customer Name :{!Account.Name}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Phone:
+ 
+ 
+ {!Organization.Phone}
+ 
+ 
+ Fax:
+ 
+ 
+ {!Organization.Fax}
+ 
+ 
+ 
+
+ 
+	 
+ Date: {!Date.Today}
+ 
+ 
+ 
+  
+
+ 
+ 
+
+ 
+ 
+ 
+	Bill To:
+	{!Account.Name} 
+ 
+ Ship To:
+ {!Account.Name} 
+	
+ 
+ 
+	 
+	 
+	 {!Account.BillingStreet} 
+	 
+	 
+	 {!Account.BillingStreet}
+ 
+ 
+ 
+	 
+	 {!Account.BillingCity}, {!Account.BillingPostalCode} 
+	 
+	 
+	 {!Account.BillingCity}, {!Account.BillingPostalCode} 
+	 
+ 
+ 
+
+
+
+
+
+ {!Transactions.Summary}
+ 
+	
+	{!Transactions.TotalBalance}
+	
+ 
+
+ 
+ 
+	 
+ Reminder: Please include the statement number on your check.
+ 
+ 
+ 
+ Terms: Balance due in 30 days.
+ 
+
+ 
+ 
+ 
+ 
+ 
+	 
+	 
+	 
+	 
+ REMMITANCE 
+
+	 
+	 
+	 
+	 Customer Name:                         
+	 {!Account.Name}
+	 
+	 
+
+	 Customer Id:
+	 {!Account.AccountNumber}
+	 
+	 
+	 Date:
+	 {!Date.Today}
+	 
+
+	 
+	 Amount Due:
+	 {!Transactions.TotalBalance}
+	 
+	 
+	 Amount Enclosed:
+	  </textOnly>
+    <type>custom</type>
+</EmailTemplate>

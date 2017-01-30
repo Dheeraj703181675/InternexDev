@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>SYSTEM_BillingStatementExcel</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>SYSTEM_BillingStatementExcel</name>
+    <style>none</style>
+    <subject>Configurable Billing Statement Excel</subject>
+    <textOnly>table#TxTableStyle {
+ background-color:#FFFFFF;
+ border: solid #000 3px;
+}
+
+
+ 
+ 
+ 
+ {!Organization.Name} 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ {!Organization.Street} {!Organization.City}, {!Organization.State}, {!Organization.Country}, {!Organization.PostalCode} 
+ 
+ 
+
+ 
+ 
+ 
+ Phone:
+ 
+ 
+ {!Organization.Phone}
+ 
+ 
+
+ 
+ 
+ Fax:
+ 
+ 
+ {!Organization.Fax}
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ Statement 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ BillTo:
+
+ 
+ 
+ {!Account.Name} {!Account.BillingStreet} {!Account.BillingCity}, {!Account.BillingState}, {!Account.BillingCountry} {!Account.BillingPostalCode}
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ Date :
+ 
+ 
+ {!Date.Today}
+ 
+
+ 
+ 
+ 
+ Customer ID :
+ 
+ 
+ {!Account.AccountNumber}
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+
+ {!Transactions.Summary}
+ 
+ 
+{!Transactions.TotalBalance}
+ 
+ 
+ 
+ 
+
+ Reminder: Please include the statement number on your check.
+ 
+ 
+ Terms: Balance due in 30 days.
+ 
+ 
+
+ 
+ 
+ 
+ 
+	 
+	 
+	 
+	 
+ REMMITANCE 
+
+	 
+	 
+	 
+	 Customer Name: &amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp
+	 {!Account.Name}
+	 
+	 
+
+	 Customer Id:
+	 {!Account.AccountNumber}
+	 
+	 
+	 Date:
+	 {!Date.Today}
+	 
+
+	 
+	 Amount Due:
+	 {!Transactions.TotalBalance}
+	 
+	 
+	 Amount Enclosed:
+	 &amp;nbsp;</textOnly>
+    <type>custom</type>
+</EmailTemplate>

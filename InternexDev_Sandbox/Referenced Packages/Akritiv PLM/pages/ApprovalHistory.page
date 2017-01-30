@@ -1,0 +1,29 @@
+<apex:page controller="akritivtlm.ApprovalHistoryController" sidebar="false" showHeader="false">
+
+    <apex:form id="fm" >
+        <apex:sectionHeader title="{!histObj['Name']}" subtitle="{!$Label.Label_Approval_History}" />
+        <apex:pageBlock title="{!$Label.Label_Approval_Detail}" id="blk">
+
+            <apex:pageblockSection id="generalDetail" title="{!$Label.Label_General_Detail}" columns="2">
+                <apex:outputField value="{!histObj['Name']}"/>
+                <apex:outputField value="{!histObj[prefix+'Tracker_Id__c']}"/>
+                <apex:outputField value="{!histObj[prefix+'Approval_Type__c']}"/>
+                <apex:outputField value="{!histObj[prefix+'Approval_Level__c']}"/>
+                <apex:outputField value="{!histObj[prefix+'Status__c']}"/>
+                <apex:outputField value="{!histObj[prefix+'No_Of_Days__c']}"/>
+                <apex:outputField value="{!histObj[prefix+'Process__c']}"/>
+            </apex:pageblockSection> 
+
+            <apex:repeat value="{!approvalStepDetail}" var="hist">
+                <apex:pageblockSection id="levelDtl" title="{!$Label.Label_Approval_Level} {!hist.level} Detail" columns="2">
+                    <apex:outputText value="{!hist.approvalEmail}" label="{!$Label.Label_Approver_Email}" />    
+                    <apex:outputText value="{!hist.escalationEmail}" label="{!$Label.Label_Escalation_Email}" />
+                    <apex:outputText value="{!hist.status}" label="{!$Label.Label_Status}" />
+                    <apex:outputText value="{!hist.comment}" label="{!$Label.Label_Comment}" />
+                    <apex:outputText value="{!hist.entryDate}" label="{!$Label.Label_Entry_date}"/>
+                    <apex:outputText value="{!hist.completionDate}" label="{!$Label.Label_Completion_Date}" />
+                </apex:pageblockSection>
+            </apex:repeat>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

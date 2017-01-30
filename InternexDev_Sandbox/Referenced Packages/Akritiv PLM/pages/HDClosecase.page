@@ -1,0 +1,276 @@
+<apex:page id="pageId" controller="akritivtlm.HDCloseCase" sidebar="false" showChat="false" showHeader="false" standardStylesheets="true" tabStyle="akritivtlm__Conversation__c">
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__editRec, '/editResource/editjs.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__editRec,'/editResource/editstyle.css')}"/>
+
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+<style>
+html{
+    scrollbar-face-color: #E6E6E6;
+    scrollbar-shadow-color: #E6E6E6;
+    scrollbar-highlight-color:#E6E6E6;
+    scrollbar-3dlight-color: #ADADAD;
+    scrollbar-darkshadow-color: #ADADAD;
+    scrollbar-track-color: #ADADAD;
+    scrollbar-arrow-color: #000000;
+}
+span.tab{
+    padding: 0 23px; /* Or desired space*/
+}
+
+.messageblock{
+    font-size:11px;
+    border-radius: 4px;
+    border-color: #c00;
+    background-color: #ffc;
+    border-style: solid;
+    border-width: 1px;
+    color: #000;
+}
+</style> 
+
+<script>
+    function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+
+    function closeMessage() {
+        $('#messagebox').hide();   
+    }
+
+    function displayMessage(type,msg,interval) {
+     var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:50%;margin: 0 auto;margin-top: 5px;">'+
+            '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+            '</div>';
+    document.getElementById('messagebox').innerHTML = m;
+    animateMessageBox('messagebox',interval);
+}
+</script>
+
+<apex:outputpanel id="messagepanel" style="Display:None">
+    <apex:messages id="msg1"  style="Display:None" />
+    <script>
+        if(document.getElementById('{!$Component.msg1}') != null && document.getElementById('{!$Component.msg1}') != undefined) {
+            var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('li');
+            var msg='';
+            for(var i=0;i<obj.length;i++) {
+                if(i==0) 
+                msg += '<br />';
+                msg += obj[i].innerHTML + '<br />';
+            }
+            if(msg != '') {
+                displayMessage('error',msg,10000);
+            }
+        }
+    </script>
+</apex:outputpanel>
+
+<script>
+    function moveTO() {
+        var obj1 = document.getElementById('multiPickList');
+        if(obj1.selectedIndex == -1) {
+            alert('{!$Label.Label_Please_Select_Email_to_Move}');
+        } else {
+            var arr = new Array();
+            var len = obj1.length;
+            for(var i=len-1; i>=0; i--) {
+                if(obj1.options[i].selected) {
+                    var childNode = obj1.options[i];
+                    arr.push(obj1.options[i].value);
+                    childNode.parentNode.removeChild(childNode);
+                    //obj1.remove(i);
+                }
+            }
+
+            //add to text area
+            var toAddress = document.getElementById('pageId:frm:pb:pgBlckSec1:pgBlckSecItemId3:toEmail');
+
+            for(var i=0; i<arr.length; i++) {
+                toAddress.value += arr[i] + '\n';
+            }                
+        }
+    }
+    function moveCC() {
+        var obj1 = document.getElementById('multiPickList');
+        if(obj1.selectedIndex == -1) {
+            alert('{!$Label.Label_Please_Select_Email_to_Move}');
+        } else {
+            var arr = new Array();
+            var len = obj1.length;
+            for(var i=len-1; i>=0; i--) {
+                if(obj1.options[i].selected) {
+                    var childNode = obj1.options[i];
+                    arr.push(obj1.options[i].value);
+                    childNode.parentNode.removeChild(childNode);
+                    //obj1.remove(i);
+                }
+            }
+
+            //add to text area
+            var ccAddress = document.getElementById('pageId:frm:pb:pgBlckSec1:pgBlckSecItemId3:ccEmail');
+            for(var i=0; i<arr.length; i++) {
+                ccAddress.value += arr[i] + '\n';
+            }                
+        }
+    }
+
+    function startProcess(){
+       document.getElementById("pageId:frm:loading").style.display = 'block';       
+       document.getElementById('filter').style.display = 'block';
+    }
+
+    function endProcess(){
+       document.getElementById("pageId:frm:loading").style.display = 'none';
+       document.getElementById('filter').style.display = 'none';
+    }
+</script>
+
+<div id="messagebox" style="z-index:10 !important;position:fixed !important;width:50% !important;top:30%;left:20%;" ></div>
+
+    <apex:form id="frm">
+        <!-- for providing loading -->
+        <div id="filter" style= "display:none;"></div> 
+        <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+        <!-- for providing loading -->
+        <script>startProcess();</script>
+
+        <div style="display:none;visibility:hidden;">
+            <apex:inputHidden >
+                <apex:inputField id="conversationMailBoxDisplayName" value="{!conversationObj.akritivtlm__Mail_Box_Display_Name__c}" rendered="true" />
+                <apex:inputField id="childObjProcess" value="{!childObj[implNameSpace+'Process__c']}" />
+                <apex:inputField id="childObjCountry" value="{!childObj[implNameSpace+'Country__c']}" />
+                <apex:inputField id="childObjMailBoxDisplayName" value="{!childObj[implNameSpace+'Mail_Box_Display_Name__c']}" />
+            </apex:inputHidden>
+        </div>
+
+        <apex:pageBlock id="pb" >
+            <apex:pageblockSection id="pgBlckSec1" columns="3">
+                <apex:pageBlockSectionItem id="pgBlckSecItemId1" dataStyle="width:20%; !important;height:220px !important;">
+                    <apex:outputLabel value="Email Ids " ></apex:outputLabel>
+                    <apex:outputPanel >
+                        <select id="multiPickList" multiple="multiple" size="13" style="width:230px !important;overflow-x:scroll !important;overflow-y:scroll !important;">
+                            <optgroup label="{!$label.Label_Sender_Email_Id}" style="background-color:#6986DB;font-style:normal;border: 2px solid #FFFFFF">
+                                <option value="{!senderEmail}" style="background-color:white;border-style:none;overflow:hidden;word-wrap:break-word;width:50px;">{!senderEmail}</option>
+                            </optgroup>
+                            <optgroup label="{!$Label.Label_To_Email_Id}" style="background-color:#6986DB;font-style:normal;border: 2px solid #FFFFFF">
+                                <apex:repeat value="{!toEmail}" var="v">
+                                    <option value="{!v}" style="background-color:white;border-style:none;overflow:hidden;word-wrap:break-word;width:50px !important;">{!v}</option>
+                                </apex:repeat>
+                            </optgroup>
+                            <optgroup label="{!$Label.Lable_CC_Email_Id}" style="background-color:#6986DB;font-style:normal;border: 2px solid #FFFFFF">
+                                <apex:repeat value="{!ccEmail}" var="v">
+                                    <option value="{!v}" style="background-color:white;border-style:none;overflow:hidden;word-wrap:break-word;width:50px;">{!v}</option>
+                                </apex:repeat>
+                            </optgroup>
+                        </select>
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+
+            <apex:pageBlockSectionItem id="pgBlckSecItemId2" dataStyle="width:8.3%; !important;height:220px !important;">
+               <apex:outputPanel >
+                    <br/><br/>
+                    <a onclick="moveTO();"><img title="Add" class="rightArrowIcon" alt="Add" src="/s.gif" /></a>
+                    <br/><br/><br/><br/>
+                    <a onclick="moveCC();"><img title="Add" class="rightArrowIcon" alt="Add" src="/s.gif" /></a>
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+
+            <apex:pageBlockSectionItem id="pgBlckSecItemId3" dataStyle="width:300px; height:220px !important; text-align:left; !important;">
+                <apex:outputPanel >
+                    <span class="tab"></span>
+                    <b><apex:outputLabel value="{!$Label.Label_TO} " ></apex:outputLabel>&nbsp;</b> 
+                    <span style="display: inline-block !important;padding-bottom:10px;">
+                        <apex:outputPanel styleClass="{!IF(conversationLst.size == 1,'requiredInput','')}" layout="block">
+                            <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+                            <apex:inputTextarea value="{!pageTo}" id="toEmail" title="{!$Label.Label_To_Address}" label="{!$Label.Label_TO}" cols="40" rows="4" /> <br />
+                            <script>
+                                document.getElementById('{!$Component.toEmail}').readOnly =true;
+                            </script>
+                        </apex:outputPanel> 
+                    </span>
+
+                    <br/>
+                    <span class="tab"></span>
+                    <span style="display: inline-block !important;padding-bottom:10px;">
+                    <b><apex:outputLabel value="{!$Label.Label_CC}" ></apex:outputLabel>&nbsp;&nbsp;</b>
+                    <apex:inputTextarea value="{!pageCC}" id="ccEmail" title="{!$Label.Label_CC_Address}" label="{!$Label.Label_CC}" cols="40" rows="4" /><br />
+                    <script>
+                            document.getElementById('{!$Component.ccEmail}').readOnly =true;
+                    </script>
+                    </span>
+                    <span class="tab"></span>
+                    <span style="display: inline-block !important;padding-bottom:0px;padding-left:0px;">
+                    <b><apex:outputLabel value="{!$Label.Label_Additional_CC}" ></apex:outputLabel>&nbsp;&nbsp;</b>
+                    <apex:inputTextarea value="{!pageAdditionalCC}" id="additionalCCEmail" title="{!$Label.Label_Additional_CC}" label="{$Label.Label_Additional_CC}" cols="40" rows="4"/>
+                    <script>
+                        document.getElementById('{!$Component.additionalCCEmail}').placeholder="{!$Label.Label_Enter_Email_ids_to_be_CCed}";
+                    </script>
+                    </span>
+
+                </apex:outputPanel>
+             </apex:pageBlockSectionItem>   
+
+            </apex:pageblockSection>
+
+            <apex:pageblockSection id="pgBlckSec2" columns="3">
+
+                <apex:pageBlockSectionItem id="pgBlckSecItemId1" dataStyle="width:20%;!important;">
+                     <apex:outputLabel value="{!$Label.Label_Close_Reason}" ></apex:outputLabel>
+                     <apex:outputPanel styleClass="requiredInput" layout="block">
+                        <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+                         <apex:inputField id="closeReasonId" value="{!conversationObj.akritivtlm__Close_Reason__c}" label="{!$Label.Label_Close_Reason}" />
+                         <script>
+                             setTimeout(function() {
+                                 document.getElementById('{!$Component.closeReasonId}').selectedIndex = 0;
+                                 endProcess();
+                             },2000);
+                         </script>
+                     </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem dataStyle="width:10%;  !important;">
+                    <apex:outputLabel value=" " ></apex:outputLabel>
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem dataStyle="width: 0px; padding-left: 84px;">
+                    <apex:outputPanel >
+                        <b><apex:outputLabel value="Comments " ></apex:outputLabel>&nbsp;&nbsp;</b>
+                        <apex:inputTextarea value="{!comments}" id="comments" rows="4" cols="40"/>
+                        <script>
+                            document.getElementById('{!$Component.comments}').placeholder="{!$Label.Label_Enter_Comments_for_case_closure}";
+                        </script>
+                    </apex:outputPanel>
+
+                </apex:pageBlockSectionItem>
+
+            </apex:pageblockSection>
+            <apex:pageBlockButtons location="bottom">
+                <apex:actionStatus id="saveStatus1">
+                    <apex:facet name="stop">
+                        <apex:commandButton action="{!submit}" value="{!$Label.Label_Submit}" onclick="startProcess();disabling();" oncomplete="enabling();endProcess();" reRender="messagepanel,closeWindowPanel" />
+                    </apex:facet>
+                    <apex:facet name="start">
+                        <apex:commandButton value="{!$Label.Label_Submit}..." disabled="true" status="saveStatus1"/>
+                    </apex:facet>
+                </apex:actionStatus>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+        
+        <apex:outputpanel id="closeWindowPanel">
+            <script>
+            if({!closedWindow}) {
+                if({!conversationLst.size} == 1) {
+                    window.parent.displayMessageAndClosePopUp('info','Conversation {!JSENCODE(conversationObj.Name)} closed.','closeCaseWin'); 
+                } else {
+                    window.parent.displayMessageAndClosePopUp('info','Selected Conversations closed.','closeCaseWin'); 
+                }
+            } 
+            </script>
+        </apex:outputpanel>
+    </apex:form>
+
+<script>
+//endProcess();
+</script>
+</apex:page>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Linked Account Type</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Linked Account Types</value>
+    </caseValues>
+    <fields>
+        <label><!-- Portal External ID --></label>
+        <name>Portal_External_ID__c</name>
+    </fields>
+    <layouts>
+        <layout>Linked Account Type Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

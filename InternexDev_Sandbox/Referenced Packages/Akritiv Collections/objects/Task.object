@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldSets>
+        <fullName>Task_Update_FieldSet</fullName>
+        <description>Fieldset for mass update task fields.</description>
+        <displayedFields>
+            <field>Type</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Status</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>ActivityDate</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Description</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>OwnerId</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Notes__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>WhoId</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Contact_Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>WhatId</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Task Update FieldSet</label>
+    </fieldSets>
+    <webLinks>
+        <fullName>Assign</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Assign Owner</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>var HiddenHTML =document.getElementById(&quot;HiddenDiv&quot;).innerHTML; 
+var ListButtonHTML = document.getElementById(&quot;j_id0:task_listButtons&quot;).innerHTML; 
+document.getElementById(&quot;j_id0:task_listButtons&quot;).innerHTML= ListButtonHTML .substring(0,ListButtonHTML .length - 5) +&apos;&lt;li&gt;&apos;+ HiddenHTML+&apos;&lt;/ul&gt;&lt;/li&gt;&apos;; 
+
+//document.getElementsByName(&quot;akritiv__assign&quot;)[0].className =&quot;btnDisabled&quot;; 
+document.getElementsByName(&quot;akritiv__assign&quot;)[0].style.display=&quot;none&quot;;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Close</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Close</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/apex.js&quot;)} 
+
+
+sforce.connection.defaultNamespace = &apos;{!$Setup.SysConfig_Singlec__c.NameSpace__c}&apos;; 
+
+/* 
+Gets the list of selected records and prepares a URL to update the suppliers and their related information 
+*/ 
+
+//Fetch the list 
+var records = {!GETRECORDIDS($ObjectType.Task)}; 
+var strIDs=&apos;&apos;; 
+
+
+/* 
+Check if the user has selected at least one record and display a message 
+*/ 
+
+
+
+if (records[0] == null) 
+{ 
+alert(&apos;{!$Label.Label_Please_Select_atleast_one_task}&apos;);  
+} 
+else 
+{ 
+
+for (var n=0; n&lt;records.length; n++) 
+{ 
+if(strIDs == &apos;&apos;) 
+strIDs = records[n]; 
+else 
+strIDs = strIDs + &quot;,&quot; + records[n]; 
+} 
+
+if(strIDs !=null &amp;&amp; strIDs !=&apos;&apos;){ 
+
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;; 
+var config = new sforce.SObject(&quot;akritiv__Temp_Object_Holder__c&quot;); 
+var user = sforce.connection.getUserInfo() ; 
+var timest = sforce.connection.getServerTimestamp(); 
+var key = &apos;{!$User.Username}&apos; + timest.timestamp ; 
+config.akritiv__Key__c =key ; 
+config.akritiv__Value__c = strIDs; 
+
+var res = sforce.connection.create([config]); 
+
+var loc = window.location.href ; 
+
+var pro = window.location.protocol; 
+var host = window.location.host; 
+
+
+var url = &apos;/apex/akritiv__CloseTask?key=&apos;+ key + &apos;&amp;location=&apos; + loc ; 
+
+
+var left = (screen.width)-650; 
+var top = (screen.height)-450; 
+
+
+window.open (url ,&quot;CloseTask&quot;,&quot;toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width=350,height=105, top=&quot;+top+&quot;,left=&quot;+left ); 
+
+} 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Contact_Customer</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Contact Customer</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)} 
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;;
+sforce.connection.defaultNamespace = &apos;{!$Setup.SysConfig__c.NameSpace__c}&apos;;
+
+try{
+	var config = new sforce.SObject(&quot;Temp_Object_Holder__c&quot;); 
+	var user = sforce.connection.getUserInfo() ; 
+	var timest = sforce.connection.getServerTimestamp(); 
+	var key = &apos;{!$User.Username}&apos; + timest.timestamp ; 
+	config.Key__c =key; 
+	config.Value__c = &apos;&apos;; 
+	var res = sforce.connection.create([config]);
+	var accountId = &apos;{!Account.Id}&apos;;
+	var contactId = &apos;{!Contact.Id}&apos;;
+	//alert(&apos;Account Id:&apos;+accountId+&apos; ContactId:&apos;+contactId);
+	window.location.href = &apos;/apex/ContactCustomerPage?accId=&apos;+accountId+&apos;&amp;txIds=&apos;+key+&apos;&amp;contactId=&apos;+contactId;
+}
+catch(e) {
+	alert(&apos;Exception:&apos;+e);
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Execute</fullName>
+        <availability>online</availability>
+        <description>Auto Dunning On Task</description>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Execute</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/apex.js&quot;)} 
+
+
+sforce.connection.defaultNamespace = &apos;{!$Setup.SysConfig_Singlec__c.NameSpace__c}&apos;; 
+
+/* 
+Gets the list of selected records and prepares a URL to update the suppliers and their related information 
+*/ 
+
+//Fetch the list 
+var records = {!GETRECORDIDS($ObjectType.Task)}; 
+var strIDs=&apos;&apos;; 
+
+
+/* 
+Check if the user has selected at least one record and display a message 
+*/ 
+
+
+
+if (records[0] == null) 
+{ 
+alert(&apos;{!$Label.Label_Please_Select_atleast_one_task}&apos;); 
+} 
+else 
+{ 
+
+for (var n=0; n&lt;records.length; n++) 
+{ 
+if(strIDs == &apos;&apos;) 
+strIDs = records[n]; 
+else 
+strIDs = strIDs + &quot;,&quot; + records[n]; 
+} 
+
+if(strIDs !=null &amp;&amp; strIDs !=&apos;&apos;){ 
+
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;; 
+var config = new sforce.SObject(&quot;Temp_Object_Holder__c&quot;); 
+var user = sforce.connection.getUserInfo() ; 
+var timest = sforce.connection.getServerTimestamp(); 
+var key = &apos;{!$User.Username}&apos; + timest.timestamp ; 
+config.Key__c =key ; 
+config.Value__c = strIDs; 
+var res = sforce.connection.create([config]); 
+
+var loc = window.location.href ; 
+var urlString = &apos;/apex/akritiv__AutoDunningTasks?key=&apos;+ key + &apos;&amp;location=&apos; + loc ; 
+
+
+var left = (screen.width)-650; 
+var top = (screen.height)-450; 
+
+window.open (urlString ,&quot;ProcessingTasks&quot;,&quot;toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width=650,height=450, top=&quot;+top+&quot;,left=&quot;+left ); 
+
+} 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Perform</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Perform</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>try{
+var taskId = &apos;{!Task.Id}&apos;;
+var urlString = &apos;&apos;;
+
+var enableButton ={!IF( ISPICKVAL(Task.Status , &apos;Completed&apos;) , false, true) } ;
+
+
+if(enableButton)
+{
+
+
+urlString = &apos;/{!Task.What}?taskId=&apos; + taskId ; 
+
+window. location.href = urlString;
+}
+else
+{
+alert(&apos;{!$Label.Label_Perform_Only_on_Followup_Tasks}&apos;);
+}
+
+}
+catch(e) {
+alert(&apos;Exception:&apos;+e);
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Re_Evaluate_Auto_Dunning</fullName>
+        <availability>online</availability>
+        <description>Re Evaluate Auto Dunning</description>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Re Evaluate Auto Dunning</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+
+
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/apex.js&quot;)} 
+
+
+sforce.connection.defaultNamespace = &apos;{!$Setup.SysConfig_Singlec__c.NameSpace__c}&apos;; 
+
+/* 
+Gets the list of selected records and prepares a URL to update the suppliers and their related information 
+*/ 
+
+//Fetch the list 
+var records = {!GETRECORDIDS($ObjectType.Account)}; 
+var strIDs=&apos;&apos;; 
+
+
+/* 
+Check if the user has selected at least one record and display a message 
+*/ 
+
+
+
+if (records[0] == null) 
+{ 
+alert(&apos;{!$Label.Label_Please_Select_atleast_one_task}&apos;); 
+} 
+else 
+{ 
+
+for (var n=0; n&lt;records.length; n++) 
+{ 
+if(strIDs == &apos;&apos;) 
+strIDs = records[n]; 
+else 
+strIDs = strIDs + &quot;,&quot; + records[n]; 
+} 
+
+if(strIDs !=null &amp;&amp; strIDs !=&apos;&apos;){ 
+
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;; 
+var config = new sforce.SObject(&quot;Temp_Object_Holder__c&quot;); 
+var user = sforce.connection.getUserInfo() ; 
+var timest = sforce.connection.getServerTimestamp(); 
+var key = &apos;{!$User.Username}&apos; + timest.timestamp ; 
+config.Key__c =key ; 
+config.Value__c = strIDs; 
+var res = sforce.connection.create([config]); 
+
+var loc = window.location.href ; 
+var urlString = &apos;/apex/akritiv__AutomaticReevaluateTask?key=&apos;+ key + &apos;&amp;location=&apos; + loc ; 
+
+var left = 150; 
+var top = 150; 
+
+window.open (urlString ,&quot;ReEvaluateAutoDunningProcess&quot;,&quot;toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width=400,height=100, top=&quot;+top+&quot;,left=&quot;+left ); 
+
+} 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Start_Working</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Start Working</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>/*
+* Copyright (c) 2009-2010 Akritiv Technologies, Inc. All Rights Reserved.
+* This software is the confidential and proprietary information
+* (Confidential Information) of Akritiv Technologies, Inc. You shall not
+* disclose or use Confidential Information without the express written
+* agreement of Akritiv Technologies, Inc.
+*/
+
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/apex.js&quot;)}
+
+
+sforce.connection.defaultNamespace = &apos;{!$Setup.SysConfig_Singlec__c.NameSpace__c}&apos;;
+
+/*
+Gets the list of selected records and prepares a URL to update the suppliers and their related information
+*/
+
+//Fetch the list
+var records = {!GETRECORDIDS($ObjectType.Task)};
+var strIDs=&apos;&apos;;
+
+
+/*
+Check if the user has selected at least one record and display a message
+*/
+
+
+if (records[0] == null)
+{
+alert(&apos;{!$Label.Label_Please_Select_atleast_one_task}&apos;); 
+}
+else
+{
+
+for (var n=0; n&lt;records.length; n++)
+{
+if(strIDs == &apos;&apos;)
+strIDs = records[n];
+else
+strIDs = strIDs + &quot;,&quot; + records[n];
+}
+
+if(strIDs !=null &amp;&amp; strIDs !=&apos;&apos;){
+
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;;
+var config = new sforce.SObject(&quot;Temp_Object_Holder__c&quot;);
+var user = sforce.connection.getUserInfo() ;
+var timest = sforce.connection.getServerTimestamp();
+var key = &apos;{!$User.Username}&apos; + timest.timestamp ;
+config.Key__c =key ;
+config.Value__c = strIDs;
+var res = sforce.connection.create([config]);
+
+var urlString = &apos;/apex/DetailPage?key=&apos;+ key;
+
+var winW = 630, winH = 460;
+if (document.body &amp;&amp; document.body.offsetWidth) {
+ winW = document.body.offsetWidth;
+ winH = document.body.offsetHeight;
+}
+if (document.compatMode==&apos;CSS1Compat&apos; &amp;&amp;
+    document.documentElement &amp;&amp;
+    document.documentElement.offsetWidth ) {
+ winW = document.documentElement.offsetWidth;
+ winH = document.documentElement.offsetHeight;
+}
+if (window.innerWidth &amp;&amp; window.innerHeight) {
+ winW = window.innerWidth;
+ winH = window.innerHeight;
+}
+
+/*alert(&apos;Window width = &apos;+winW);
+alert(&apos;Window height = &apos;+winH);
+
+alert(&quot;ProcessingTasks toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,height=&quot;+winH+&quot;,width=&quot;+winW ); */
+
+window.open (urlString ,&quot;ProcessingTasks&quot;,&quot;toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,height=&quot;+winH+&quot;,width=&quot;+winW ); 
+
+
+}
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Update_Task</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Update Task</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)}
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;;
+
+var records = {!GETRECORDIDS($ObjectType.Task)};
+
+
+if (records[0] == null) {alert(&apos;Please select at least one task&apos;);
+
+}else{
+var strIDs = &apos;&apos;;
+for (var n=0; n&lt;records.length; n++)
+{
+if(strIDs == &apos;&apos;)
+strIDs = records[n];
+else
+strIDs = strIDs + &quot;,&quot; + records[n];
+}
+
+if(strIDs !=null &amp;&amp; strIDs !=&apos;&apos;){
+
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;;
+var config = new sforce.SObject(&quot;akritiv__Temp_Object_Holder__c&quot;);
+var user = sforce.connection.getUserInfo() ;
+var timest = sforce.connection.getServerTimestamp();
+var key = &apos;{!$User.Username}&apos; + timest.timestamp ;
+config.akritiv__Key__c =key ;
+config.akritiv__Value__c = strIDs;
+
+var res = sforce.connection.create([config]);
+
+var UrlLoc = window.location;
+var strHost = UrlLoc.host;
+var strProtocol = UrlLoc.protocol;
+strHost = strHost.replace(&quot;akritiv.&quot;,&quot;c.&quot;);
+var loc = window.location.href ;
+
+var urlString = strProtocol +&apos;//&apos;+strHost+&apos;/apex/akritiv__MassUpdateTaskDynamic?key=&apos;+ key+ &apos;&amp;location=&apos; + loc;
+
+var left = (screen.width/2)-400;
+var top = (screen.height/2)-300;
+
+
+window.open (urlString,&quot;CloseTask&quot;,&quot;toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width=800,height=600,top=&quot;+top+&quot;,left=&quot;+left);
+}
+}</url>
+    </webLinks>
+</CustomObject>

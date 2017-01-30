@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>WF_MR</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>WF_MR</value>
+    </caseValues>
+    <fields>
+        <label><!-- Claim status code(MR02) --></label>
+        <name>Claim_status_code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Claim submitter’s ID(MR01) --></label>
+        <name>Claim_submitter_s_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Paid amount(MR04) --></label>
+        <name>Paid_amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record ID --></label>
+        <name>Record_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitted charges(MR03) --></label>
+        <name>Submitted_charges__c</name>
+    </fields>
+    <fields>
+        <label><!-- WF_PR --></label>
+        <name>WF_PR__c</name>
+        <relationshipLabel><!-- WF_MR --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>WF_MR Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

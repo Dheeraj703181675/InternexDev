@@ -1,0 +1,24 @@
+<!--
+/*
+ *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ *This software is the confidential and proprietary information
+ *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ *disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+    /*
+     * Page is used to generate Transactions detail pdf for the invoices 
+     * related to his account. 
+     */
+-->
+<apex:page standardController="akritiv__Transaction__c"
+    extensions="akritiv.PortalTransactionPdfGenerator">
+    <apex:form >
+        <apex:actionfunction name="getPdf" action="{!getTxPdf}" />
+    </apex:form>
+    <script>
+getPdf();
+</script>
+</apex:page>

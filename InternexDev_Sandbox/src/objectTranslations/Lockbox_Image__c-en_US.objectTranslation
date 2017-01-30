@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Lockbox Image</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Lockbox Images</value>
+    </caseValues>
+    <fields>
+        <label><!-- Date processed --></label>
+        <name>Date_processed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Image Name --></label>
+        <name>Image_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Image Name formula --></label>
+        <name>Image_Name_formula__c</name>
+    </fields>
+    <fields>
+        <label><!-- Image extension --></label>
+        <name>Image_extension__c</name>
+    </fields>
+    <fields>
+        <label><!-- Image path --></label>
+        <name>Image_path__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment --></label>
+        <name>Payment__c</name>
+        <relationshipLabel><!-- Payment Images URL --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Portal External Id --></label>
+        <name>Portal_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- WF_PR --></label>
+        <name>WF_PR__c</name>
+        <relationshipLabel><!-- Lockbox Images --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Zip File Name --></label>
+        <name>Zip_File_Name__c</name>
+    </fields>
+    <layouts>
+        <layout>Lockbox Image Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

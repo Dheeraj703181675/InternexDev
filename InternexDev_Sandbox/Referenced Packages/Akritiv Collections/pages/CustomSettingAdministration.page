@@ -1,0 +1,184 @@
+<!--
+ /*
+  *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+  *This software is the confidential and proprietary information
+  *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+  *disclose or use Confidential Information without the express written
+  *agreement of Akritiv Technologies, Inc.
+  */
+-->
+<!--
+    /*
+     * Page to setup the Custom Setting for Risk_Config__c 
+     * and Sys_Config__c.
+     */
+-->
+<apex:page controller="akritiv.CustomSettingAdministrationController">
+    <style>
+.bPageBlock .labelCol {
+    font-size: 100%;
+}
+</style>
+
+    <apex:tabPanel id="tabPane">
+        <apex:tab name="Risk Config" switchType="client" label="{!$Label.Label_Risk_Config}"
+            title="{!$Label.Label_Risk_Config}">
+            <apex:form >
+
+                <apex:pageBlock mode="edit" title="{!$Label.Label_Risk_Config}">
+
+                    <apex:pageMessages id="pgm1">
+                    </apex:pageMessages>
+
+                    <apex:pageBlockButtons >
+                        <apex:commandButton action="{!saveRiskConfig}" value="{!$Label.Label_Submit}"
+                            rerender="pgm1" />
+                    </apex:pageBlockButtons>
+
+                    <apex:outputPanel id="risksSectionOP">
+                        <apex:pageBlockSection >
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="{!$Label.Label_Avg_DPD_Range1}" />
+                                <apex:inputField value="{!riskConfObj.akritiv__Avg_DPD_Range1__c}" />
+                            </apex:pageBlockSectionItem>
+
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="{!$Label.Label_Avg_DPD_Range2}" />
+                                <apex:inputField value="{!riskConfObj.akritiv__Avg_DPD_Range2__c}" />
+                            </apex:pageBlockSectionItem>
+
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="{!$Label.Label_Contact_Risk_Range1}" />
+                                <apex:inputField value="{!riskConfObj.akritiv__Contact_Risk_Range1__c}" />
+                            </apex:pageBlockSectionItem>
+
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="{!$Label.Label_Contact_Risk_Range2}" />
+                                <apex:inputField value="{!riskConfObj.akritiv__Contact_Risk_Range2__c}" />
+                            </apex:pageBlockSectionItem>
+
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="{!$Label.Label_Credit_Range1}" />
+                                <apex:inputField value="{!riskConfObj.akritiv__Credit_Range1__c}" />
+                            </apex:pageBlockSectionItem>
+
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="{!$Label.Label_Credit_Range2}" />
+                                <apex:inputField value="{!riskConfObj.akritiv__Credit_Range2__c}" />
+                            </apex:pageBlockSectionItem>
+
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="{!$Label.Label_High_Past_Due_Range1}" />
+                                <apex:inputField value="{!riskConfObj.akritiv__High_Past_Due_Range1__c}" />
+                            </apex:pageBlockSectionItem>
+
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="{!$Label.Label_High_Past_Due_Range2}" />
+                                <apex:inputField value="{!riskConfObj.akritiv__High_Past_Due_Range2__c}" />
+                            </apex:pageBlockSectionItem>
+
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="{!$Label.Label_Oldest_Age_Range1}" />
+                                <apex:inputField value="{!riskConfObj.akritiv__Oldest_Age_Range_1__c}" />
+                            </apex:pageBlockSectionItem>
+
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="{!$Label.Label_Oldest_Age_Range2}" />
+                                <apex:inputField value="{!riskConfObj.akritiv__Oldest_Age_Range_2__c}" />
+                            </apex:pageBlockSectionItem>
+
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="{!$Label.Label_Percent_Disputed_Range1}" />
+                                <apex:inputField value="{!riskConfObj.akritiv__Percent_Disputed_Range1__c}" />
+                            </apex:pageBlockSectionItem>
+
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="{!$Label.Label_Percent_Disputed_Range2}" />
+                                <apex:inputField value="{!riskConfObj.akritiv__Percent_Disputed_Range2__c}" />
+                            </apex:pageBlockSectionItem>
+
+
+                        </apex:pageBlockSection>
+                    </apex:outputPanel>
+                </apex:pageBlock>
+            </apex:form>
+        </apex:tab>
+
+        <apex:tab name="System Config" switchType="client"
+            label="{!$Label.Label_System_Config}" title="{!$Label.Label_System_Config}">
+            <apex:form >
+                <apex:pageBlock title="{!$Label.Label_System_Config}" mode="edit">
+
+                    <apex:pageMessages id="pgm2">
+                    </apex:pageMessages>
+
+                    <apex:pageBlockButtons id="pbbsc">
+                        <apex:commandButton action="{!saveSysConfig}" value="{!$Label.Label_Submit}"
+                            rerender="pgm2, pbbsc" />
+                    </apex:pageBlockButtons>
+
+                    <apex:pageBlockSection >
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="{!$Label.Label_Billing_Stat_Pdf_Temp}" />
+                            <apex:inputField value="{!sysConfObj.akritiv__Billing_Statement_Pdf_Template__c}" />
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="{!$Label.Label_Batch_Notify_Email}" />
+                            <apex:inputField value="{!sysConfObj.akritiv__Batch_Job_Notification_Email__c}" />
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="{!$Label.Label_Billing_Stat_Excel}" />
+                            <apex:inputField value="{!sysConfObj.akritiv__Billing_Statement_Excel_page__c}" />
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="{!$Label.Label_Trans_Invoice_PDF}" />
+                            <apex:inputField value="{!sysConfObj.akritiv__contact_Customer_Pdf__c}" />
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="{!$Label.Label_Billing_Stat_Excel_Temp}" />
+                            <apex:inputField value="{!sysConfObj.akritiv__Billing_Statement_Excel_Template__c}" />
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="{!$Label.Label_Org_Logo}" />
+                            <apex:inputField value="{!sysConfObj.akritiv__Org_Logo__c}" />
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="{!$Label.Label_Billing_PDF_Rows_In_First_Page}" />
+                            <apex:inputField value="{!sysConfObj.akritiv__Billing_PDF_Rows_In_First_Page__c}" />
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="{!$Label.Label_Billing_Stat_PDF}" />
+                            <apex:inputField value="{!sysConfObj.akritiv__Billing_Statement_PDF_page__c}" />
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="{!$Label.Label_Billing_PDF_Rows_Subsequent}" />
+                            <apex:inputField value="{!sysConfObj.akritiv__Billing_PDF_Rows_in_Subsequent_Pages__c}" />
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="{!$Label.Label_Name_Space}" />
+                            <apex:inputField value="{!sysConfObj.akritiv__NameSpace__c}" />
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="{!$Label.Label_Enable_Invoice_PDF}" />
+                            <apex:inputField value="{!sysConfObj.akritiv__EnableInvoiceDetailPDF__c}" />
+                        </apex:pageBlockSectionItem>
+
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+
+            </apex:form>
+        </apex:tab>
+    </apex:tabPanel>
+
+</apex:page>

@@ -1,0 +1,1053 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/*
+ * This page creates generic configurable table for transactions. Users can create their own view by selecting columns
+ * and filters. Page handles, paging, sorting, list selection, excel export and other actions. Controller used is 
+ * Extended from base Account controller.
+ */
+-->
+<apex:page standardController="Account" tabstyle="Account" Extensions="akritiv.EnhancedTransactionListViewController"  
+                                                    id="pgTx" showHeader="false" sidebar="false" readOnly="false">
+
+<script src="/soap/ajax/27.0/connection.js"></script>
+
+ <script>
+    
+    var isPageLoad = true;
+    var showEditWin = null;
+    var txId ='';
+    var totalBalance = 0.00;
+    var totalSelectedTx = 0; 
+    var filtercurrency = new Array();
+    var allcurrency = new Array();
+    var allBalance = new Array();
+    var newArr = new Array();
+    var selectListID ='';
+    
+    function chkvalue(TransId){
+         
+          txId='';
+          //open dialog box 
+          
+          txId = TransId ;
+          
+                    
+            var v = {!useReasonCode};
+          
+           
+           if(v == false){
+            //   document.getElementById('body2').style.visibility= 'hidden';
+             document.getElementById('body2').style.display= 'none';
+                   if(document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext1}").value != null)
+              document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext1}").value='';
+         
+          if(document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext2}").value != null)
+              document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext2}").value='';
+        addNotes();
+         return false;
+             // document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext1}").value='test'
+          } 
+          
+          if(document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext1}").value != null)
+              document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext1}").value='';
+         
+          if(document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext2}").value != null)
+              document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext2}").value='';
+              
+          if(document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext3}").value != null)
+          document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext3}").value='';
+          
+          if(document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext4}").value != null)
+          document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext4}").value='';
+          
+          if(document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext5}").value != null)
+          document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext5}").value='';
+          
+          if(document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext6}").value != null)
+          document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext6}").value='';
+          
+        addNotes();
+         return false;
+        
+    } 
+       function chkvalue1(TransId){
+         
+          txId='';
+       
+          //open dialog box 
+          
+          
+       
+        updateReason1();
+        
+         return false;
+        
+    } 
+
+       function startProcess(){
+      
+       document.getElementById("{!$Component.acdetailpage.accpgb.loadingdetail}").style.display = 'block'; 
+       document.getElementById('filter').style.display = 'block'; 
+
+       }
+       
+       function endProcess(){
+       
+       document.getElementById("{!$Component.acdetailpage.accpgb.loadingdetail}").style.display = 'none';
+       document.getElementById('filter').style.display = 'none'; 
+
+       } 
+
+    function addNotes(){
+      var inputElem = document.getElementsByTagName("input");
+        
+        var c = 0;
+        for(var i=0; i<inputElem.length; i++){
+        
+            
+            if(inputElem[i].id.indexOf("selectedTx")!=-1 ){
+            
+                        
+                        if(inputElem[i].checked ==true){
+                          c++;
+                        }
+                           
+           }
+        
+        }
+        
+        if ( c == 0 ) {
+        
+            alert('{!$Label.Message_No_Selected_Transactions}');
+            return;
+        }
+
+
+        document.getElementById('dialog1').style.visibility = 'visible';
+          // Popup.show('dialog1');
+          return false;
+       
+    }
+    function updateReason1(){
+      var inputElem = document.getElementsByTagName("input");
+        
+        var c = 0;
+        for(var i=0; i<inputElem.length; i++){
+        
+            
+            if(inputElem[i].id.indexOf("selectedTx")!=-1 ){
+            
+                        
+                        if(inputElem[i].checked ==true){
+                          c++;
+                        }
+                           
+           }
+        
+        }
+        
+        if ( c == 0 ) {
+        
+            alert('{!$Label.Message_No_Selected_Transactions}');
+            return;
+        }
+            <!-- updateReason(); -->
+
+        document.getElementById('dialog2').style.visibility = 'visible';
+          // Popup.show('dialog1');
+          return false;
+       
+    }
+    function close_fn(){
+    
+        document.getElementById('dialog1').style.visibility = 'hidden';
+        //clos.close();
+        return false;
+    }
+    function close_fn1(){
+    
+        document.getElementById('dialog2').style.visibility = 'hidden';
+        //clos.close();
+        return false;
+    }
+    //Closes Note Window
+    function closeEditWindow(){
+    
+              if(showEditWin)
+                  showEditWin.close();
+    }
+    //string trim function          
+    function trim(str, chars){ 
+    
+        return ltrim(rtrim(str, chars), chars); 
+    } 
+        
+    function ltrim(str, chars){ 
+    
+        chars = chars || "\\s"; 
+        return str.replace(new RegExp("^[" + chars + "]+", "g"), ""); 
+    } 
+        
+    function rtrim(str, chars){ 
+    
+        chars = chars || "\\s"; 
+        return str.replace(new RegExp("[" + chars + "]+$", "g"), ""); 
+    }
+   
+    //save note data
+    function saveData() { 
+           
+            var isTitle = document.getElementById("{!$Component.pgTx.txForm.txpblock.inputtext1}").value ;
+
+            isTitle = trim(isTitle) ;
+           document.getElementById('dialog1').style.visibility = 'hidden';
+       //     if(isTitle !=null && isTitle !=''){
+             
+            //*  YUIShowLoading();
+              startProcess();
+              //alert(txId);
+              updateNote(txId);
+         //    }
+             return false;
+    }
+   
+   
+    function saveData1() { 
+           document.getElementById('dialog2').style.visibility = 'hidden';
+           startProcess();
+           updateReason(txId);
+    }
+    
+  
+  
+  
+    //This will be called when user changes aging bucket
+     function updatefilter(){
+        totalBalance = 0.00;
+       //* YUIShowLoading();
+        startProcess();
+        changeListRecords();
+     }
+          
+    function reloadWindow(){
+    
+            location.href = location.href;
+    }
+    //select all transactions and calculate balance
+    function checkAll(selectAll) {
+              
+             filtercurrency = new Array();
+             allcurrency = new Array();
+             allBalance = new Array();
+             newArr = new Array();
+          
+             var inputElem = document.getElementsByTagName("input");
+            
+             totalBalance = 0.00;
+             totalSelectedTx = 0; 
+            
+             for(var i=0; i<inputElem.length; i++)
+                {
+                    if(inputElem[i].id.indexOf("selectedTx")!=-1){
+                        inputElem[i].checked = selectAll.checked;
+                        if(selectAll.checked ==true)
+                            getBalance(inputElem[i]);
+                    }
+                    if(selectAll.checked == false){
+                           var tr = inputElem[i].parentNode.parentNode;
+                           tr.style.backgroundColor =  "";
+                     }
+                }
+                
+                if(selectAll.checked == false) { 
+                    totalBalance = 0.00; 
+                    totalSelectedTx = 0;
+                    document.getElementById('totalbalance').innerHTML = totalBalance.toString();
+                    document.getElementById('totalselectedTx').innerHTML = totalSelectedTx.toString();
+                 }
+                
+     } 
+        
+     //refresh balance. This will be called when transaction is selected
+     function refreshbalance() {
+          refershbal();
+     }
+     //This will be called when user changes aging bucket
+     function changeBucket(){
+        totalBalance = 0.00;
+        totalSelectedTx = 0;
+       //* YUIShowLoading();
+       startProcess();
+        changeBucketValue();
+     }
+     
+     //This will be called when user changes list view
+     function changeListView(selectviewId){
+        totalBalance = 0.00;
+        totalSelectedTx = 0;
+       //* YUIShowLoading();
+       selectListID = selectviewId;
+       startProcess();
+        changeList();
+     }
+     
+     //This will be called when user changes records per page setting
+     function changeRecPerPage(){
+        totalBalance = 0.00;
+        totalSelectedTx = 0;
+       //* YUIShowLoading();
+       startProcess();
+        changeRec();
+     }
+    function refershPage(isdel){
+        totalBalance = 0.00;
+        totalSelectedTx = 0;
+        //instead of using below line we use next line to prevent dom injection
+        //var  str = window.location.href.split('&');
+        var  str = encodeURI(window.location.href).split('%26');
+        window.location.href = str[0];
+    }
+    
+    //paging controll next page action
+    function nextpg(){
+       totalBalance = 0.00;
+       totalSelectedTx = 0;
+      //* YUIShowLoading();
+      startProcess();
+        nextpage();
+        return false;
+    }
+    //paging controll first page action
+    function firstpg(){
+       totalBalance = 0.00;
+       totalSelectedTx = 0;
+      //* YUIShowLoading();
+      startProcess();
+        firstpage();
+        return false;
+    }
+    
+    //paging controll last page action
+    function lastpg(){
+        totalBalance = 0.00;
+        totalSelectedTx = 0;
+       //* YUIShowLoading();
+       startProcess();
+        lastpage();
+        return false;
+    }
+    //paging controll previous page action
+    function prevpg(){
+        totalBalance = 0.00;
+        totalSelectedTx = 0;
+       //* YUIShowLoading();
+       startProcess();
+        previouspage();
+        return false;
+    }
+        //Display msg according to permission 
+        //Jira #AKTPROD-76
+        //By Kruti Tandel
+     function deleteViewAccordingToOwner(){
+            var CtrlID = '' ;
+               if(selectListID != '' && selectListID != null){
+                  
+                   CtrlID = selectListID ;
+               }else{
+                    CtrlID = '{!JSENCODE(selectedList)}';
+               }
+             //  alert(CtrlID);
+
+            sforce.connection.defaultNamespace = '{!JSENCODE($Setup.SysConfig_Singlec__c.NameSpace__c)}';
+               // sforce.connection.defaultNamespace = '{!JSENCODE($Setup.SysConfig_Singlec__c.NameSpace__c)}';
+                sforce.connection.sessionId = '{!$Api.Session_ID}';
+               
+                var result = sforce.connection.query("select akritiv__Object_Fields__c,akritiv__Is_Global__c from akritiv__Custom_List_View__c where Id='"+CtrlID+"'");   
+                
+                var localename = ''; 
+                var records = result.getArray("records");
+                localename = records[0].akritiv__Is_Global__c;
+               // alert(localename );
+                        
+     if('{!$ObjectType.akritiv__Custom_List_View__c.Deletable}' == 'true' && localename  == 'false'){
+      
+        if(!confirm('{!$Label.Message_Are_You_Sure}')){ return false;}
+        else {return deleteList();}
+        
+    }else {
+        alert('{!$Label.Label_No_Permission_To_Del}');
+        return false;
+    }
+    return false;
+    }
+    //paging controll delete list view action
+    function deleteList(){
+        totalBalance = 0.00;
+        totalSelectedTx = 0;
+      //*  YUIShowLoading();
+      startProcess();
+        delList();
+        return false;
+    }
+    //sort function to sort transaction table.
+    function  sortToDoData(e, columnNo){
+     
+    var ctrlPressed=0;
+    if (parseInt(navigator.appVersion)>3) {
+          var evt = navigator.appName=="Netscape" ? e:event;
+            if (navigator.appName=="Netscape" && parseInt(navigator.appVersion)==4) {
+           // NETSCAPE 4 CODE
+           var mString =(e.modifiers+32).toString(2).substring(3,6);
+           //shiftPressed=(mString.charAt(0)=="1");
+           ctrlPressed =(mString.charAt(1)=="1");
+           //altPressed  =(mString.charAt(2)=="1");
+          }
+          else {
+           // NEWER BROWSERS [CROSS-PLATFORM]
+           //shiftPressed =evt.shiftKey;
+           //altPressed  =evt.altKey;
+            ctrlPressed =evt.ctrlKey;
+          }
+          if (ctrlPressed) {
+            totalBalance = 0.00;
+            totalSelectedTx = 0;
+         //*   YUIShowLoading();
+             startProcess();
+            sortSecondaryColData(columnNo);
+          }
+          else {
+            totalBalance = 0.00;
+            totalSelectedTx = 0;
+          //*  YUIShowLoading();
+          startProcess();
+            sortColData(columnNo);
+          }
+    }
+  }
+  
+  //function to round numbers
+  function round_decimals(original_number, decimals) {
+    var result1 = original_number * Math.pow(10, decimals)
+    var result2 = Math.round(result1)
+    var result3 = result2 / Math.pow(10, decimals)
+    return pad_with_zeros(result3, decimals)
+ }
+
+ function pad_with_zeros(rounded_value, decimal_places) {
+
+    // Convert the number to a string
+    var value_string = rounded_value.toString()
+    
+    // Locate the decimal point
+    var decimal_location = value_string.indexOf(".")
+
+    // Is there a decimal point?
+    if (decimal_location == -1) {
+        
+        // If no, then all decimal places will be padded with 0s
+        decimal_part_length = 0
+        
+        // If decimal_places is greater than zero, tack on a decimal point
+        value_string += decimal_places > 0 ? "." : ""
+    }
+    else {
+
+        // If yes, then only the extra decimal places will be padded with 0s
+        decimal_part_length = value_string.length - decimal_location - 1
+    }
+    
+    // Calculate the number of decimal places that need to be padded with 0s
+    var pad_total = decimal_places - decimal_part_length
+    
+    if (pad_total > 0) {
+        
+        // Pad the string with 0s
+        for (var counter = 1; counter <= pad_total; counter++) 
+            value_string += "0"
+        }
+    return value_string
+} 
+//currency formating function
+function CurrencyFormatted(amount)
+{
+
+    var separator ='.'; 
+    
+    //alert(separator); 
+    var i = parseFloat(amount);
+    if(isNaN(i)) { i = 0.00; }
+    var minus = '';
+    if(i < 0) { minus = '-'; }
+    i = Math.abs(i);
+    i = parseInt((i + .005) * 100);
+    i = i / 100;
+    //alert('i ' + i);
+    s = new String(i);
+    if(s.indexOf(separator) < 0) 
+    { 
+    s += separator + '00';
+    //alert('s ' + s);
+     
+    }
+    if(s.indexOf(separator) == (s.length - 2)) 
+    { 
+    s += '0';
+    //alert('s 2 :  ' + s);
+     
+    }
+    s = minus + s;
+    //alert('s 3 : ' + s);
+    
+    return s;
+}
+//to comma format value of amount/balance
+function CommaFormatted(amount, locale)
+{   
+    //alert('aa ' + amount + ' : ' + locale);
+    //default for en_US
+    var delimiter = ',';
+    var separator = '.';
+    
+    //for brazil 
+    if(locale == 'pt_BR')
+    {
+        //alert('locale is pt br');
+        delimiter = '.'; // replace comma if desired
+        separator = ',';
+    }
+//    alert('delimiter ' +delimiter  + 'separator ' +separator);
+    var a = amount.split('.',2)
+ //   alert(' split a ' + a);
+    var d = a[1];
+  //  alert('d ' + d);
+    var i = parseInt(a[0]);
+    if(isNaN(i)) { return ''; }
+    var minus = '';
+    if(i < 0) { minus = '-'; }
+    i = Math.abs(i);
+    var n = new String(i);
+    var a = [];
+    while(n.length > 3)
+    {
+        var nn = n.substr(n.length-3);
+     //  alert(' nn ' +  nn);
+        a.unshift(nn);
+  //      alert(' a  ' + a );
+        n = n.substr(0,n.length-3);
+    //    alert(' n  ' + n );
+    }
+    if(n.length > 0) { 
+        a.unshift(n); 
+    }
+    n = a.join(delimiter);
+ //   alert(' join a ' +a +  ' n ' +n  + ' amount ' + amount);
+    if(d.length < 1) { 
+        amount = n; 
+    }
+    else 
+    { 
+        //amount = n + ',' + d;
+        amount = n + separator + d; 
+    }
+        
+    amount = minus + amount;
+    return amount;
+}
+
+ 
+ //this function gets balance of selected transaction
+ function  getBalance(checkBoxObj){
+     var tr = checkBoxObj.parentNode.parentNode;
+      tr.style.backgroundColor = (checkBoxObj.checked) ? "#DBF2F7" : "";
+      //alert('rr');
+      var locale = document.getElementById("{!$Component.pgTx.txForm.txpblock.localeKey}");
+     // alert (locale.value); 
+        var checboxId = checkBoxObj.id ;
+        
+        
+        var hiddenElem =checboxId.replace('selectedTx','txBalance'); //checboxId.substring(0,checboxId.length -8) ;
+       
+        var  hiddenElemId =hiddenElem;  //hiddenElem + 'txBalance';
+        var hiddenElementVal = document.getElementById(hiddenElemId).innerHTML;
+     
+          filtercurrency = hiddenElementVal.split(' ');
+       
+        allcurrencybal = 0.00;
+     //   alert(hiddenElementVal );
+      if(checkBoxObj.checked == false){
+           
+            filtercurrency[1] =( - 1 * parseFloat(filtercurrency[1])) + '';
+
+        }
+        if ( allcurrency.length == 0 ){
+        
+            allcurrency.push( filtercurrency[0]);
+            allBalance.push(parseFloat(filtercurrency[1]));
+        } else {
+        
+       // alert(allcurrency.length);
+        var found = false;
+        var locat = -1;
+        for(var i = 0; i < allcurrency.length; i++){
+        
+            if(filtercurrency [0] == allcurrency[i]){ 
+            
+                found  = true;
+                locat = i;
+                
+                
+            } 
+           
+         }
+         
+         if (found){
+         
+             allBalance[locat] = allBalance[locat ] + parseFloat(filtercurrency[1]);
+             
+             
+         } else {
+         
+             allcurrency.push(filtercurrency[0]);
+             allBalance.push(parseFloat(filtercurrency[1]));
+         }
+        }
+             
+        
+       var v = '';
+       for(var i = 0; i < allcurrency.length; i++){
+            
+            if(allcurrency.length == 1){
+                 v = v+ ' ' + allcurrency[ i] + ' : ' + round_decimals(allBalance[i],2);
+                 //alert(v);
+             }     
+             else{
+                 v = v+ ' ' + allcurrency[ i] + ' : ' + round_decimals(allBalance[i],2)+ ','; 
+             }    
+        }
+        
+        if(v.substr(v.length-1,v.length)==','){
+            v =v.substr(0,v.length-1);
+        }
+        
+
+            //alert(v);
+        if(checkBoxObj.checked ==true){
+        
+            totalSelectedTx = totalSelectedTx +1;
+        //add balance
+           // totalBalance = totalBalance + parseFloat(hiddenElementVal) ;
+            //document.getElementById('totalbalance').innerHTML = CommaFormatted(CurrencyFormatted(round_decimals(totalBalance,2)), locale ).toString() ;
+            
+             document.getElementById('totalbalance').innerHTML = v;
+             document.getElementById('totalselectedTx').innerHTML = totalSelectedTx;
+        }else{
+        //subtract balance
+         // totalBalance = totalBalance - parseFloat(hiddenElementVal) ;
+          // document.getElementById('totalbalance').innerHTML =CommaFormatted(CurrencyFormatted(round_decimals(totalBalance,2)), locale ).toString() ;
+            totalSelectedTx = totalSelectedTx - 1;    
+            //alert(v);
+     
+          document.getElementById('totalbalance').innerHTML = v;
+          document.getElementById('totalselectedTx').innerHTML = totalSelectedTx;
+        }
+       
+     
+    }
+    
+    function clearArray(){
+     filtercurrency = new Array();
+     allcurrency = new Array();
+     allBalance = new Array();
+     newArr = new Array();
+     
+     document.getElementById('totalbalance').innerHTML = '0.00';
+     document.getElementById('totalselectedTx').innerHTML = '0';
+     totalBalance = 0.00;
+     totalSelectedTx = 0;
+     return false;
+     
+     
+ } 
+  function childAccount(accountId){
+        var urlString ='/apex/ShowChildAccount?id='+accountId ; 
+        lookupwindow = window.open (urlString,"ShowChildAccount","toolbar=0,location=0, directories=0, status=0, menubar=0,width=1200,height=600,scrollbars=1");
+
+
+      // lookupwindow = window.open('/apex/ShowChildAccount?id='+accountId);
+
+ }
+ 
+ function CloseLookupWindow(IdString){  
+           
+           
+              startProcess();
+              addAccount(IdString);
+              lookupwindow.close();
+             
+        }
+</script>  
+<!-- <body class="yui-skin-sam"> -->
+<body>
+<apex:form id="txform" >
+
+<apex:pageMessages id="pgmsg" />
+<!-- *<c:Base_Comp_YUI_ModalLoader /> -->
+
+  <!-- Action Function for primary sort  -->
+<!-- *  <apex:actionFunction action="{!sortData}" name="sortColData"  oncomplete="YUIHideLoading();" rerender="panel3,panel2,balanceSection"> -->
+   
+   <apex:actionFunction action="{!getTransactionFieldsType}" name="getTypeOfSelectedFilter" reRender="filterpanel" oncomplete="endProcess();" />
+   <apex:actionFunction action="{!sortData}" name="sortColData" rerender="panel3,panel2,balanceSection" oncomplete="clearArray();endProcess();">
+                <apex:param name="sortField" assignTo="{!columnToSort}" value="" />
+  </apex:actionFunction>
+  
+ <!-- <apex:actionFunction action="{!updateReason}" name="updateReason" rerender="panel3,panel2,balanceSection" oncomplete="clearArray();endProcess();">
+               <apex:param name="sortField" assignTo="{!columnToSort}" value="" />
+  </apex:actionFunction> -->
+  
+  <!-- Action Function for secondary sort  -->
+<!-- *  <apex:actionFunction action="{!secondarySortData}" name="sortSecondaryColData"  oncomplete="YUIHideLoading();" rerender="panel3,loadableHeader,loadableBody,panel2,balanceSection"> -->
+  <apex:actionFunction action="{!secondarySortData}" name="sortSecondaryColData"  rerender="panel3,loadableHeader,loadableBody,panel2,balanceSection" oncomplete="clearArray();endProcess();">
+                <apex:param name="sortField" assignTo="{!secondaryColumnToSort}" value="" />
+  </apex:actionFunction>
+ 
+  <!-- Action Function to update notes  -->
+<!-- *  <apex:actionFunction name="updateNote" action="{!updateNote}" id="afUpdateData"  reRender="panel3,loadableHeader,loadableBody,balanceSection,pgmsg" oncomplete="YUIHideLoading();" > -->
+    <apex:actionFunction name="updateNote" action="{!updateNote}" id="afUpdateData"  reRender="panel3,loadableHeader,loadableBody,balanceSection,pgmsg" oncomplete="clearArray();endProcess();">
+                <apex:param name="value1" value="" assignTo="{!TransId}"/>
+  </apex:actionFunction>
+  
+    <apex:actionFunction name="addAccount" action="{!addAccountIds}" id="addaccId"  reRender="panel2,panel3,loadableHeader,loadableBody,balanceSection,pgmsg" oncomplete="clearArray();endProcess();">
+                <apex:param name="value1" value="" assignTo="{!selectedAccountIds}"/>
+  </apex:actionFunction>
+  
+  
+ <!-- Action Function to update Filter  -->
+ <apex:actionFunction name="changeListRecords" action="{!updatefilter}" id="UpdatefilterData"  reRender="panel2,panel3,loadableHeader,loadableBody,balanceSection,pgmsg" oncomplete="clearArray();endProcess();"  /> 
+  
+  <!-- Action Function to calculate total balance  -->
+  <apex:actionFunction name="getTotalBalance" action="{!addBalance}" id="afAddBalance" reRender="balanceSection,pgmsg" status="loadingStatus"/>
+  
+  <!-- Action Function to delete selected custom list view  -->
+ <!-- * <apex:actionFunction name="delList"  action="{!deleteListView}"  rerender="pgmsg"   oncomplete="YUIHideLoading();refershPage('{!isViewDeleted}');" />  -->
+  <apex:actionFunction name="delList"  action="{!deleteListView}"  rerender="pgmsg"   oncomplete="clearArray();refershPage('{!isViewDeleted}');endProcess();" />  
+  
+  <!-- Action Function to refresh balance  -->    
+  <apex:actionFunction name="refershbal"  reRender="balanceSection" /> 
+  <!-- Action Function for next page action of paging control  -->
+<!-- *  <apex:actionFunction name="nextpage" action="{!next}" reRender="panel3,panel2,loadableHeader,loadableBody,balanceSection" oncomplete="YUIHideLoading();"  />  -->
+ <apex:actionFunction name="nextpage" action="{!next}" reRender="panel3,panel2,loadableHeader,loadableBody,balanceSection" oncomplete="clearArray();endProcess();"/>  
+  
+  <!-- Action Function for first page action of paging control  -->
+<!-- *  <apex:actionFunction name="firstpage" action="{!first}" reRender="panel3,panel2,loadableHeader,loadableBody,balanceSection" oncomplete="YUIHideLoading();"  />  -->
+    <apex:actionFunction name="firstpage" action="{!first}" reRender="panel3,panel2,loadableHeader,loadableBody,balanceSection" oncomplete="clearArray();endProcess();"/>
+  
+  <!-- Action Function for last page action of paging control  -->
+<!-- *  <apex:actionFunction name="lastpage" action="{!last}" reRender="panel3,panel2,loadableHeader,loadableBody,balanceSection"  oncomplete="YUIHideLoading();" />  -->
+    <apex:actionFunction name="lastpage" action="{!last}" reRender="panel3,panel2,loadableHeader,loadableBody,balanceSection" oncomplete="clearArray();endProcess();"/> 
+  
+  <!-- Action Function for previous page action of paging control  -->
+<!-- * <apex:actionFunction name="previouspage" action="{!previous}" reRender="panel3,panel2,loadableHeader,loadableBody,balanceSection" oncomplete="YUIHideLoading();"  /> -->
+     <apex:actionFunction name="previouspage" action="{!previous}" reRender="panel3,panel2,loadableHeader,loadableBody,balanceSection" oncomplete="clearArray();endProcess();"/>
+  
+  <!-- Action Function to change list view  -->
+<!-- *  <apex:actionFunction name="changeList" action="{!changeListView}" reRender="panel3,panel2,loadableHeader,loadableBody,balanceSection" oncomplete="YUIHideLoading();"  /> -->
+  <apex:actionFunction name="changeList" action="{!changeListView}" reRender="panel3,panel2,loadableHeader,loadableBody,balanceSection" oncomplete="clearArray();endProcess();"/>
+  <!-- Action Function to change records per page on paging control-->
+<!-- *  <apex:actionFunction name="changeRec" action="{!changeRecPerPage}" reRender="panel3,panel2,loadableHeader,loadableBody,balanceSection" oncomplete="YUIHideLoading();" /> -->
+ <apex:actionFunction name="changeRec" action="{!changeRecPerPage}" reRender="panel3,panel2,loadableHeader,loadableBody,balanceSection" oncomplete="clearArray();endProcess();"/>
+ 
+ <!-- Action Function to change aging bucket option -->
+<!-- * <apex:actionFunction name="changeBucketValue" action="{!getFilteredTx}" rerender="panel3,loadableHeader,loadableBody,panel2,balanceSection" oncomplete="YUIHideLoading();" />
+ 
+ <apex:actionFunction name="handleZeroBalanceTx" action="{!getFilteredTx}" rerender="panel3,loadableHeader,loadableBody,panel2,balanceSection" oncomplete="YUIHideLoading();" />
+ <apex:actionFunction name="handleCreditBalanceTx" action="{!getFilteredTx}" rerender="panel3,loadableHeader,loadableBody,panel2,balanceSection" oncomplete="YUIHideLoading();" />
+ 
+ <apex:actionFunction name="handleDisputedTx" action="{!getFilteredTx}" rerender="panel3,loadableHeader,loadableBody,panel2,balanceSection" oncomplete="YUIHideLoading();" />
+ <apex:actionFunction name="handlePromisedTx" action="{!getFilteredTx}"  rerender="panel3,loadableHeader,loadableBody,panel2,balanceSection" oncomplete="YUIHideLoading();" />
+ <apex:actionFunction name="handleOtherTx" action="{!getFilteredTx}"  rerender="panel3,loadableHeader,loadableBody,panel2,balanceSection" oncomplete="YUIHideLoading();" />
+-->
+
+ <apex:actionFunction name="changeBucketValue" action="{!getFilteredTx}" rerender="panel3,loadableHeader,loadableBody,panel2,balanceSection" oncomplete="clearArray();endProcess();"/>
+ 
+ <apex:actionFunction name="handleZeroBalanceTx" action="{!getFilteredTx}" rerender="panel3,loadableHeader,loadableBody,panel2,balanceSection" oncomplete="clearArray();endProcess();"/>
+ <apex:actionFunction name="handleCreditBalanceTx" action="{!getFilteredTx}" rerender="panel3,loadableHeader,loadableBody,panel2,balanceSection" oncomplete="clearArray();endProcess();"/>
+ 
+ <apex:actionFunction name="handleDisputedTx" action="{!getFilteredTx}" rerender="panel3,loadableHeader,loadableBody,panel2,balanceSection"  oncomplete="clearArray();endProcess();"/>
+ <apex:actionFunction name="handlePromisedTx" action="{!getFilteredTx}"  rerender="panel3,loadableHeader,loadableBody,panel2,balanceSection" oncomplete="clearArray();endProcess();"/>
+ <apex:actionFunction name="handleOtherTx" action="{!getFilteredTx}"  rerender="panel3,loadableHeader,loadableBody,panel2,balanceSection" oncomplete="clearArray();endProcess();"/>
+
+<apex:pageBlock title="" id="txpblock"  >
+    <apex:inputHidden id="localeKey" value="{!locale}" />
+        <apex:outputPanel id="panel1" >
+        <apex:outputLabel value="{!$Label.Label_View}"></apex:outputLabel>&nbsp;&nbsp;
+        <apex:selectList onchange="changeListView(this.value);" size="1"  value="{!selectedList}" title="{!$Label.Label_Choose_a_ListView}"> 
+        <apex:selectOptions value="{!listViewOptions}"/>
+        </apex:selectList>  &nbsp;&nbsp;
+   
+        <apex:commandLink value="{!$Label.Label_Create_View}" action="{!newListView}"/> &nbsp;&nbsp;
+        <apex:commandLink id="editbtn" value="{!$Label.Label_Edit}"  action="{!editListView}" rerender="pgmsg"  /> &nbsp;&nbsp;
+        <apex:commandLink value="{!$Label.Label_Delete}" onclick="deleteViewAccordingToOwner();return false;" /> 
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        
+        <apex:outputLabel value="{!$Label.Label_Select_Aging_Bucket}"></apex:outputLabel>&nbsp;&nbsp;
+        <apex:selectList onchange="changeBucket();" size="1"  value="{!selectedBucket}" title="{!$Label.Label_Choose_Aging_bucket}">
+        <apex:selectOptions value="{!bucketOptions}"/>
+        </apex:selectList>  &nbsp;&nbsp;
+        
+        <br/><br/>
+        
+        <apex:outputPanel id="filterpanel">
+            <b> <apex:outputLabel value="{!$Label.Label_Quick_Filter}"></apex:outputLabel></b>
+            <apex:selectList value="{!selectedFilterfield}" multiselect="false" size="1">
+                <apex:selectOptions value="{!transactionFields}" />
+            </apex:selectList>&nbsp;
+
+            <apex:selectList value="{!selectedFilterOp}" multiselect="false" size="1">
+                <apex:selectOptions value="{!operators}" />
+            </apex:selectList>&nbsp;
+
+            <apex:inputText value="{!filterByValue}" id="filtervalue" />
+           
+        </apex:outputPanel>
+        <apex:commandButton value="{!$Label.Label_Ok}" onclick="updatefilter();return false; "/>
+        <apex:outputPanel id="filterCriteria">
+                <ul>
+                    <li>{!$Label.Label_List_View_Date_Help}</li>
+                </ul>
+            </apex:outputPanel>
+
+        
+        <apex:commandButton value="{!$Label.Label_Add_Notes}" onclick="chkvalue('');return false;" />
+        <apex:commandButton value="{!$Label.Label_Contact_Customer}" action="{!contactCustomer}" rerender="pgmsg" />
+        <apex:commandButton value="{!$Label.Label_Create_Disputes}" action="{!createDisputes}" rerender="pgmsg" />
+        <apex:commandButton value="{!$Label.Label_Promise_To_Pay}" action="{!promiseToPay}" rerender="pgmsg" />
+        <apex:commandButton value="{!$Label.Label_Take_Payment}" action="{!takePayment}" rerender="pgmsg" rendered="{!isTakePayment}" />
+        <apex:commandButton value="Mark Reserve" action="{!markReserve}" rerender="pgmsg" rendered="{!isMarkReserve}" />
+         <apex:commandButton value="{!$Label.Label_Select_Child_Account}" onclick="childAccount('{!controllerAccount}');return false;" rendered="{!showChildTransactoin}" />
+        <apex:commandButton id="exportSelBtn" value="{!$Label.Label_Export_Selected}" action="{!exportSelected}" rerender="pgmsg"/>
+       <apex:commandButton id="exportAllBtn" value="{!$Label.Label_Export_All}" action="{!exportAll}" reRender="exportAllBtn" />&nbsp;
+      
+       </apex:outputPanel>
+       
+       <br/>
+        <div id="dialog1" style="visibility:hidden; position: absolute;border:#CCC medium solid;background-color:white;width:400px;" align="center" >
+        <div class="hd" id="hed1" Style="background-color:#3D77CB;color:white;font-weight:bold;height:20px;text-align:left;padding-left:3px;padding-top:2px;">{!$Label.Label_Add_New_Note}</div> 
+        <div class="bd" id="body1" > 
+            <table width="100%" id="notes_tb">
+                <tr>
+                    <td><label for="title" > {!$Label.Label_Title} </label></td>  
+                    <td align = "Center"><apex:inputText style="width:200px;" value="{!notes}" id="inputtext1"  maxlength="80" /></td>
+                </tr>
+                <tr>
+                    <td><label for="Description" >{!$Label.Label_Body} </label></td>
+                    <td align = "Center"><apex:inputTextArea style="width:200px;height:100px;" value="{!noteBody}" id="inputtext2"  /></td>
+                </tr>
+            </table>
+             </div>
+             <div class="bd" id="body2" > 
+            <table width="100%" id="notes_tbl">
+                <tr>
+                    <td align = "Left"><label for="Reason Code"  > {!$Label.Label_Reason_Code} </label></td>
+                    <td align = "Left"><apex:inputField value="{!tx.akritiv__Reason_Code__c}" id="inputtext3"  /></td>
+                </tr>
+                <tr>
+                    <td align = "Left"><label for="Sub Reason Code" >{!$Label.Label_Sub_Reason_Code} </label></td>
+                    <td align = "Left"><apex:inputField value="{!tx.akritiv__Sub_Reason_Code__c}" id="inputtext4"  /></td>
+                </tr>
+                
+                
+                <tr>
+                    <td align = "Left"><label for="Next Follow up date" >{!$Label.Label_Next_Follow_up_Date} </label></td>
+                    <td align = "Left"><apex:inputField value="{!tx.akritiv__Next_Follow_up_Date__c}" id="inputtext5"  /></td>
+                </tr>
+                <tr>
+                    <td align = "Left"><label for="Next Follow up task" >{!$Label.Label_Next_Follow_up_Task} </label></td>
+                    <td align = "Left"><apex:inputField value="{!tx.akritiv__Next_Follow_up_Task__c}" id="inputtext6"  /></td>
+                </tr>
+                
+                                
+                <tr>
+                    <td></td>
+                    <td>
+                <!--        <apex:commandButton value="{!$Label.Label_Save}"  onclick="saveData();"  id="savebtn" oncomplete="closeWindow();"  />
+                        <apex:commandButton value="{!$Label.Label_Cancel}"  onclick="close_fn();return false;"   /> -->
+                    </td>
+                </tr>  
+            </table>
+             </div>
+              <table width="100%" id="notes_tbl">
+              <tr>
+                    <td></td>
+                    <td align = "Center">
+                        <apex:commandButton value="{!$Label.Label_Save}"  onclick="saveData();"  id="savebtn" oncomplete="closeWindow();"  />
+                        <apex:commandButton value="{!$Label.Label_Cancel}"  onclick="close_fn();return false;"   />
+                    </td>
+                </tr> 
+             </table> 
+       
+    </div> 
+   <!-- <div id="dialog2" style="visibility:hidden; position: absolute;border:#CCC medium solid;background-color:white;width:400px;" align="center" >
+        <div class="hd" id="hed1" Style="background-color:#3D77CB;color:white;font-weight:bold;height:20px;text-align:left;padding-left:3px;padding-top:2px;">Update Reason and Sub Reason Code</div> 
+        <div class="bd" id="body1" > 
+            <table width="100%" id="notes_tb">
+                <tr>
+                    <td><label for="title" > Reason Code </label></td>
+                    <td ><apex:inputField value="{!tx.akritiv__Reason_Code__c}" id="inputfield1"  /></td>
+                </tr>
+                <tr>
+                    <td><label for="Description" >Sub Reason Code </label></td>
+                    <td><apex:inputField value="{!tx.akritiv__Sub_Reason_Code__c}" id="inputfield2"  /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <apex:commandButton value="{!$Label.Label_Save}"  onclick="saveData1();"  id="savebtn1" oncomplete="closeWindow();"  />
+                        <apex:commandButton value="{!$Label.Label_Cancel}"  onclick="close_fn1();return false;"   />
+                    </td>
+                </tr>  
+            </table>
+        </div>
+    </div> -->
+       
+        <br/><br/>
+        
+        <apex:outputPanel id="panel2" >
+        <table><tr><td>
+         <a href="#"><img src="{!URLFOR($Resource.iconset, 'iconset/3_37.png')}" onClick=" if('{!pageNumber}'!=1)return firstpg();else return false;"   title="{!$Label.Label_First}" /></a>&nbsp;
+         </td><td><a href="#"><img src="{!URLFOR($Resource.iconset, 'iconset/3_31.png')}" onClick="if('{!hasPrevious}'=='true') return prevpg();else return false;"   title="{!$Label.Label_Previous}" /></a>&nbsp;
+         </td><td><apex:outPutLabel value="{!pageDetail}" /> &nbsp;
+         </td><td><a href="#"><img src="{!URLFOR($Resource.iconset, 'iconset/3_30.png')}"  onClick="if('{!hasNext}'=='true') return nextpg();else return false;"    title="{!$Label.Label_Next}" /></a>&nbsp;
+         </td><td><a href="#"><img src="{!URLFOR($Resource.iconset, 'iconset/3_36.png')}" onClick="if('{!hasNext}'=='true')return lastpg();else return false;"  title="{!$Label.Label_Last}" /></a>&nbsp;
+         
+         </td>
+         <td>&nbsp;&nbsp;&nbsp;</td><td><apex:outputLabel value="{!$Label.Label_Total_Records}" />&nbsp;&nbsp;<apex:outputLabel id="trec" value="{!displayTotalRec}" />
+         </td>
+         <td>&nbsp;&nbsp;&nbsp;</td><td><apex:outputLabel value="{!$Label.Label_Records_Page}"></apex:outputLabel>&nbsp;&nbsp;
+            </td><td><apex:selectList onchange="changeRecPerPage();" size="1"  value="{!recPerPage}" title="{!$Label.Label_Choose_Record_per_Page}"> 
+             <apex:selectOptions value="{!recPerPageOptions}"/>
+             </apex:selectList> 
+         </td>
+          <td>&nbsp;&nbsp;&nbsp;</td><td><apex:outputLabel ></apex:outputLabel>&nbsp;&nbsp;
+            </td>
+         <td>
+        
+         </td>
+         </tr></table>
+         <apex:actionStatus startStyle="font-weight:Bold;color:#cc0000" startText="{!$Label.Label_Please_Wait}" stopText="" id="loadingStatus"  />
+        
+       </apex:outPutPanel>
+       
+       <br/>
+          
+ <apex:outputPanel id="panel3" >
+        <table style="border-collapse:collapse;padding:0px; border:1px solid gray; font-family:verdana;" >
+            <thead >
+            <tr >
+         <th style="background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;">
+                 <apex:inputCheckbox id="chk" selected="false" onclick="checkAll(this);" />
+              
+            </th>
+            <th  valign="top" style="background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;" />
+
+                <apex:variable value="{!0}" var="count"/>
+                <apex:repeat value="{!lstOfLabels}" var="list">
+                <apex:variable value="{!count + 1}" var="count"/>
+                
+                    <th  valign="top" style="{! IF(list.fieldType = 'Schema.DisplayType.CURRENCY' || list.fieldType = 'Schema.DisplayType.DOUBLE' ,'background-color:#E6EAE9;border:1px solid gray;text-align: right;padding: 6px 6px 6px 3px;','background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;')}">
+                  
+                        <apex:outputLink value="javascript:void(0);" onclick="sortToDoData(event, {!count});" rendered="{! IF(OR(list.fieldType = 'TEXTAREA',list.fieldType = 'Schema.DisplayType.TEXTAREA'),'false','true')}"> 
+                            <B>{!list.fieldValue}</B>
+                        </apex:outputLink>
+                        <apex:outputText rendered="{! IF(OR(list.fieldType = 'TEXTAREA',list.fieldType = 'Schema.DisplayType.TEXTAREA'),'true','false')}">{!list.fieldValue}</apex:outputText>
+                       <img src="{!IF(columnToSort = count  ,IF(isAsc == true, '/img/sort_asc_arrow.gif','/img/sort_desc_arrow.gif'),'/s.gif')}"  />
+                        <img  src="{!IF(secondaryColumnToSort = count  ,IF(secondaryOrderType = 'ASC', URLFOR($Resource.iconset, 'iconset/3_33.png'), URLFOR($Resource.iconset, 'iconset/3_32.png')),'/s.gif')}"  />
+                     
+                    </th>
+                </apex:repeat>
+                  <th  valign="top"  style="background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;">
+                  
+                  <B>{!$Label.Label_Notes}</B>    
+                  
+                  </th>
+                   <th  valign="top" style="background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;" >
+                  
+                    <B>{!$Label.Label_Note_Date}</B>
+                 
+                  </th>
+            </tr>
+            </thead>
+            <tbody>
+            <apex:repeat value="{!wrapList}" var="nextitem">
+                
+                <tr>
+                    <td style=" text-align:left;width:auto;border: solid 1px gray;padding-left: 3px;padding-right: 3px;white-space:nowrap;">
+                    <apex:inputCheckbox value="{!nextitem.selected}" selected="false"  id="selectedTx" onclick="getBalance(this);" />
+                </td>
+                    <td style=" text-align:left;width:auto;border: solid 1px gray;padding-left: 3px;padding-right: 3px;white-space:nowrap;">
+                    <apex:outPutLabel value="{!nextitem.txObject.akritiv__Indicator_Icons__c}" escape="false"/>
+                </td>
+                    <apex:repeat value="{!nextitem.txValues}" var="item">
+                         
+                      <!--  <td style="{! IF(item.fieldType = 'Schema.DisplayType.CURRENCY' || item.fieldType = 'Schema.DisplayType.DOUBLE' ,'text-align:right;width:auto;border: solid 1px gray;padding-left: 3px;padding-right: 3px;white-space:nowrap;','text-align:left;width:auto;border: solid 1px gray;padding-left: 3px;padding-right: 3px;white-space:nowrap;')}{!IF(OR(item.fieldType = 'TEXTAREA',item.fieldType = 'Schema.DisplayType.TEXTAREA'),'width:200px;word-wrap:break-word;','')}" > -->
+                          <td style="{!IF(item.fieldType = 'Schema.DisplayType.CURRENCY' || item.fieldType = 'Schema.DisplayType.DOUBLE' ,'text-align:right;width:auto;border: solid 1px gray;padding-left: 3px;padding-right: 3px;white-space:nowrap;','text-align:left;width:auto;border: solid 1px gray;padding-left: 3px;padding-right: 3px;white-space:nowrap;')}" >
+                                <a href="#"><img src="{!URLFOR($Resource.iconset, 'iconset/1_41.png')}" title="{!$Label.Label_Add_Note}" onClick="chkvalue('{!JSENCODE(nextitem.transId)}');" style="display: {! IF(OR(item.fieldType = 'notetype1',item.fieldType = 'notetype2'),'inline','none')};" /></a>
+                                
+                                
+                                
+                                <!--apex:outPutLabel value="{!item.fieldValue}" escape="{!IF(item.fieldType = 'notetype1', false, true)}"> </apex:outPutLabel-->
+                                <apex:outPutLabel value="{!item.fieldValue}" escape="{!IF(OR(item.fieldType = 'notetype1', item.fieldType = 'Schema.DisplayType.STRING'), false, true)}"> </apex:outPutLabel>
+                                
+                                
+                         </td>
+                    </apex:repeat> 
+                <td  style="display:none;">
+                  <apex:outputlabel id="txBalance" value="{!nextitem.txBalance}" />
+                </td>
+                
+                </tr>
+            </apex:repeat>
+            </tbody>
+        </table>
+        
+        </apex:outPutPanel>
+       
+       
+       
+        
+         <br/>
+         <apex:outPutPanel id="balanceSection" >
+         <apex:pageBlockSection columns="1">
+            <!--  <apex:pageBlockSectionItem dataStyle="text-style:right;"> <b> Total Balance : </b>&nbsp;${!strTotal} </apex:pageBlockSectionItem>  -->
+          <!--  <label>{!$Label.Label_Total_Balance} {!$Label.Label_CurrencyCode}</label> -->
+              <label>{!$Label.Label_Total_Balance}</label>
+              <label id="totalbalance" > 0.00 </label>
+              
+              <br/>
+              
+               <label>{!$Label.Label_Selected_Transactions}</label>
+              <label id="totalselectedTx" >0</label>
+            
+            
+            
+          </apex:pageBlockSection> 
+         </apex:outPutPanel>
+    </apex:pageBlock> 
+    
+    </apex:form>
+    
+    <script type="text/javascript">
+    </script>
+    
+    </body>     
+    
+    
+</apex:page>

@@ -1,0 +1,275 @@
+<apex:page standardController="akritivtlm__Conversation__c" extensions="akritivtlm.HDCreateCaseCtrl" id="pageId" sidebar="false" showHeader="false">
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__editRec, '/editResource/editstyle.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__editRec, '/editResource/editjs.js')}"/>
+
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+<style>
+    html{
+        scrollbar-face-color: #E6E6E6;
+        scrollbar-shadow-color: #E6E6E6;
+        scrollbar-highlight-color:#E6E6E6;
+        scrollbar-3dlight-color: #ADADAD;
+        scrollbar-darkshadow-color: #ADADAD;
+        scrollbar-track-color: #ADADAD;
+        scrollbar-arrow-color: #000000;
+	}
+    .messageblock{
+        font-size:11px;
+        border-radius: 4px;
+        border-color: #c00;
+        background-color: #ffc;
+        border-style: solid;
+        border-width: 1px;
+        color: #000;
+    }
+    #filter{
+        display: block;
+        position: fixed;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        /* background-image:url('{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}'); */
+        background-repeat:no-repeat;
+        background-position:center;
+        background-color: #ffffff;
+        z-index:10;
+        opacity:0.6;
+        filter: alpha(opacity=50);
+    }
+</style> 
+<script>
+    function startProcess(){
+       document.getElementById("{!$Component.pageId.frm.loading}").style.display = 'block';       
+       document.getElementById('filter').style.display = 'block';
+    }
+    function endProcess(){
+       document.getElementById("{!$Component.pageId.frm.loading}").style.display = 'none';
+       document.getElementById('filter').style.display = 'none'; 
+    }
+    function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+    function closeMessage() {
+        $('#messagebox').hide();   
+    }
+    function displayMessage(type,msg,interval) {
+        var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:50%;margin: 0 auto;margin-top: 5px;">'+
+                '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+                '</div>';
+        if(document.getElementById('messagebox') != null && document.getElementById('messagebox') != undefined) {
+                document.getElementById('messagebox').innerHTML = m;
+                animateMessageBox('messagebox',interval);
+        }
+        animateMessageBox('messagebox',interval);
+    }
+</script>
+
+<apex:outputpanel id="messagepanel" style="Display:None">
+    <apex:messages id="msg1"  style="display:none;" />
+    <script>
+        if(document.getElementById('{!$Component.msg1}') != null && document.getElementById('{!$Component.msg1}') != undefined) {
+        var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('li');
+        var msg='';
+        for(var i=0;i<obj.length;i++) {
+            if(i==0)
+            	msg += '<br />';
+            msg += obj[i].innerHTML + '<br />';
+        }
+        if(msg != '') {
+            setTimeout(function() {displayMessage('error',msg,10000);},1000);
+        }
+    }
+    </script>
+</apex:outputpanel>
+
+<div id="messagebox" style="z-index:10 !important;position:fixed !important;width:50% !important;top:30%;left:20%;" ></div>
+
+<apex:form id="frm">
+
+    <div id="filter" style= "display:none;"></div>
+    <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+
+    <apex:actionFunction name="jsGetCusDetails"  action="{!loadContactInformation}" oncomplete="endProcess();"  rerender="CustomerfieldsPB" immediate="true"  >
+        <apex:param assignTo="{!contactDetails}" value="" id="contactDetails" name="cusval" />
+    </apex:actionFunction>
+
+    <apex:actionFunction name="jsSetMailboxVal"  action="{!loadChildFieldSet}" oncomplete="refresh();endProcess();"  rerender="jspanel,hiddenOP,ClaQrybkfieldsPB,messagepanel" immediate="true"  >
+        <apex:param assignTo="{!mailBoxDisplayName}" value="" id="selMailboxVal" name="maiVal"/>
+    </apex:actionFunction>
+
+	<apex:actionFunction name="loadCountryFunction1"  action="{!getcountries}"  rerender="countryField,hiddenOP" immediate="true" oncomplete="endProcess();resetCountry();resetMailBox();" >
+        <apex:param assignTo="{!processName}" value="" id="selProcess" name="processVal"  />
+    </apex:actionFunction>
+
+    <apex:actionFunction name="loadMailBoxFunction1"  action="{!getMailBoxes}"  rerender="mailBoxField,hiddenOP" immediate="true" oncomplete="endProcess();resetMailBox();" >
+        <apex:param assignTo="{!countryName}" value="" id="selCountry" name="countryVal"  />
+        <apex:param assignTo="{!processName}" value="" id="selProcess1" name="processVal"  />
+    </apex:actionFunction> 
+
+<apex:outputPanel id="jspanel">
+<script>
+function refresh(){
+	var blockvisi={!displayChildObjectFieldSet};
+	if(blockvisi){
+		document.getElementById('blockvisible').style.display = 'block';
+		document.getElementById('pageId:frm:HDPageBlock0:ClaQrybkfieldsPB').style.display = 'block';
+	}
+	else{
+		document.getElementById('blockvisible').style.display = 'none';
+		document.getElementById('pageId:frm:HDPageBlock0:ClaQrybkfieldsPB').style.display = 'none';
+	}
+	//removescript();
+}
+function removescript(){
+	var ele = document.getElementById('scriptDiv');
+	var td = ele.parentNode;
+	var tr;
+	if(td != null){
+		tr= td.parentNode;
+	}
+	if(tr != null){
+		tr.style.display = 'none';
+	}
+}
+</script>
+</apex:outputPanel>
+
+<script>
+   function setMailboxVal(mailboxname){
+       jsSetMailboxVal(mailboxname);
+   }
+   function loadCountry(obj) {
+       loadCountryFunction1(obj);
+   }
+   function loadMailBox(country) {
+		var processName = ''
+       if(document.getElementById('{!$Component.pageId.frm.HDPageBlock0.ProcessfieldsPB.ProcessfieldsPBSec.processField}') != null) {
+           processName = document.getElementById('{!$Component.pageId.frm.HDPageBlock0.ProcessfieldsPB.ProcessfieldsPBSec.processField}').value;
+       }
+       loadMailBoxFunction1(country,processName);
+   }
+   function fetchCustDetails(customerid,bool){
+        if(bool){
+			startProcess();
+            jsGetCusDetails(customerid.value);
+        }
+   }
+   function resetCountry() {
+       document.getElementById('{!$Component.pageId.frm.HDPageBlock0.ProcessfieldsPB.CountryfieldsPBSec.countryField}').selectedIndex = 0;
+   }
+   function resetMailBox() {
+       document.getElementById('{!$Component.pageId.frm.HDPageBlock0.ProcessfieldsPB.MailboxfieldsPBSec.mailBoxField}').selectedIndex = 0;
+   }
+</script>
+
+<apex:outputPanel id="opCloseId">
+    <script>
+        function closeWin(){
+            if({!isCloseWindow}) {
+                var returnValue = 'Conversation {!conversation.Name} created successfully';
+                window.parent.displayMessageAndClosePopUp("info",returnValue,"newCaseCreateWin");
+            }
+        }
+    </script>
+</apex:outputPanel>
+
+<apex:pageBlock title="{!$Label.Create_Case}" id="HDPageBlock0">
+
+    <apex:pageBlockButtons id="buttonblock" location="both" >
+        <apex:commandButton id="create" action="{!createCase}" value="{!$Label.Create}" onclick="startProcess();" onComplete="closeWin();endProcess();" reRender="opCloseId,HDPageBlock0,messagepanel"/>
+        <apex:commandButton action="{!createAndCloseCase}" value="{!$Label.Create_and_Close}" onclick="startProcess();" onComplete="closeWin();endProcess();" reRender="opCloseId,HDPageBlock0,messagepanel"/>
+        <apex:commandButton value="{!$Label.Cancel}" onclick="window.parent.Ext.getCmp('newCaseCreateWin').close();" immediate="true"/>
+        <apex:commandButton value="{!$Label.Reset}" onclick="if(confirm('Are you sure?')){window.location.href='/apex/HDNewCaseCreation';}return false;" immediate="true" />
+    </apex:pageBlockButtons>
+
+    <apex:pageBlockSection columns="2" title="{!$Label.Process_Mapping}" id="ProcessfieldsPB" collapsible="false" rendered="true" >
+
+        <apex:repeat id="repeat0" value="{!CaseAssignList}" var="stdRO">
+            <apex:inputField value="{!conversation[stdRO]}" rendered="true" />
+        </apex:repeat>
+
+        <apex:pageBlockSectionItem id="ProcessfieldsPBSec" >
+            <apex:outputLabel >Process</apex:outputLabel>
+            <apex:actionRegion immediate="true">
+                <apex:outputPanel layout="block" styleClass="requiredInput" id="ProcessfieldsPBSecOP">
+                    <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+                    <apex:selectList size="1" label="Process" value="{!objChildSObject[implNameSpace+'Process__c']}" required="true"  id="processField" onchange="startProcess();loadCountry(this.value);loadMailBox('');"   >
+                        <apex:selectOptions value="{!processLst}" />
+                    </apex:selectList>
+                </apex:outputPanel>
+            </apex:actionRegion>
+        </apex:pageBlockSectionItem>
+
+        <apex:pageBlockSectionItem id="CountryfieldsPBSec">
+            <apex:outputLabel >Country</apex:outputLabel>
+            <apex:actionRegion immediate="true">  
+                <apex:outputPanel layout="block" styleClass="requiredInput" id="CountryfieldsPBSecOP">
+                    <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+                    <apex:selectList size="1" label="Country" value="{!objChildSObject[implNameSpace+'Country__c']}" required="true" onchange="startProcess();loadMailBox(this.value);" id="countryField" disabled="{!disabledFlag}" >
+                        <apex:selectOptions value="{!countryLst}" id="countryOptions" />
+                    </apex:selectList>
+                </apex:outputPanel>
+            </apex:actionRegion>
+        </apex:pageBlockSectionItem>
+
+        <apex:pageBlockSectionItem id="MailboxfieldsPBSec">
+            <apex:outputLabel >Mailbox Display Name</apex:outputLabel>
+            <apex:actionRegion immediate="true">
+                <apex:outputPanel layout="block" styleClass="requiredInput" id="MailboxfieldsPBSecOP">
+                    <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+                    <apex:selectList label="Mailbox Display Name" size="1" value="{!objChildSObject[implNameSpace+'Mail_Box_Display_Name__c']}" required="true" onchange="startProcess();setMailboxVal(this.value);" id="mailBoxField" disabled="{!disabledFlag}" >
+                        <apex:selectOptions value="{!mailBoxLst}" />
+                    </apex:selectList>
+                </apex:outputPanel>
+            </apex:actionRegion>
+        </apex:pageBlockSectionItem>
+
+        <apex:repeat id="repeat11" value="{!ProcessmappingList}" var="stdRO">
+            <apex:inputField value="{!conversation[stdRO]}" required="{!OR(stdRO.required, stdRO.dbrequired)}"  />
+        </apex:repeat>
+    </apex:pageBlockSection>
+
+    <div id="blockvisible" style="display:none;">
+        <apex:outputPanel id="hiddenOP">
+            <apex:actionRegion >
+            <div style="display:none;visibility:hidden;">
+                <apex:inputHidden >
+                    <apex:inputField id="childObjProcess" value="{!objChildSObject[implNameSpace+'Process__c']}" />
+                </apex:inputHidden>
+                <apex:inputHidden >
+                    <apex:inputField id="childObjCountry" value="{!objChildSObject[implNameSpace+'Country__c']}" />
+                </apex:inputHidden>
+                <apex:inputHidden >
+                    <apex:inputField id="childObjMailBoxDisplayName" value="{!objChildSObject[implNameSpace+'Mail_Box_Display_Name__c']}"/>
+                </apex:inputHidden>
+            </div>
+            </apex:actionRegion>
+        </apex:outputPanel>
+        <apex:pageBlockSection columns="2" title="{!$Label.Classification_Query}" id="ClaQrybkfieldsPB" collapsible="false">
+            <apex:repeat id="repeat4" value="{!ChildObjectFields}" var="stdRO">
+                <apex:inputField value="{!objChildSObject[stdRO]}" required="{!OR(stdRO.required, stdRO.dbrequired)}" />
+            </apex:repeat>
+            <!-- <div style="display:none;visibility:hidden;" id="scriptDiv"><script>refresh();</script></div> -->
+        </apex:pageBlockSection>
+    </div>
+
+    <apex:pageBlockSection columns="2" title="{!$Label.Customer_Information}" id="CustomerfieldsPB" collapsible="false" >
+        <apex:repeat id="repeat2" value="{!fields}" var="stdRO">
+			<apex:inputField value="{!conversation[stdRO]}" required="{!OR(stdRO.required, stdRO.dbrequired)}" onchange="fetchCustDetails(this,{!IF(CONTAINS(stdRO, defaultNamespace+'Customer_Id__c'),true,false)});" rendered="true"  />
+        </apex:repeat>
+    </apex:pageBlockSection>
+
+     <apex:pageBlockSection columns="2" title="{!$Label.CallBack_Information}" id="CallbkfieldsPB" collapsible="false" >
+        <apex:repeat id="repeat3" value="{!CallBackFunctionList}" var="stdRO">
+            <apex:inputField value="{!conversation[stdRO]}" required="{!OR(stdRO.required, stdRO.dbrequired)}" />
+        </apex:repeat>
+     </apex:pageBlockSection>
+	<script>
+		refresh();
+	</script>
+</apex:pageblock>
+</apex:form>
+</apex:page>

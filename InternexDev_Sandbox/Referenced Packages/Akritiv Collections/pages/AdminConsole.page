@@ -1,0 +1,111 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/* 
+ * Page provides the links to navigate to all the configuration
+ * setup pages in the application. So user/administrator can
+ * directly visit these pages.
+ */
+-->
+<apex:page controller="akritiv.AdminConsoleController">
+    <apex:form >
+        <apex:sectionHeader title="{!$Label.Label_Admin_Console}" />
+        <apex:pageBlock >
+            <apex:pageBlockSection title="{!$Label.Label_Strategy}" columns="1">
+                <apex:PageBlockSectionItem >
+                    <apex:outputLink value="{!URLFOR('/01Q')}">{!$Label.Label_Account_Assignment_Rules}</apex:outputLink>
+                    </apex:pageBlockSectionItem>
+                    <apex:PageBlockSectionItem >
+                        <apex:outputLink value="{!URLFOR('/p/own/BulkTransfer?ent=Account')}">{!$Label.Label_Account_Mass_Transfer_Accounts}</apex:outputLink>
+                        </apex:pageBlockSectionItem>
+                        <apex:PageBlockSectionItem >
+                            <apex:outputLink value="{!URLFOR('/01Q')}">{!$Label.Label_Portfolio_Treatment}</apex:outputLink>
+                            </apex:pageBlockSectionItem>
+                            <apex:PageBlockSectionItem >
+                                <apex:outputLink value="{!URLFOR('/00X')}">{!$Label.Label_Email_And_Script_Templates}</apex:outputLink>
+                                </apex:pageBlockSectionItem>
+                                <apex:PageBlockSectionItem >
+                                    <apex:outputLink value="{!URLFOR('/01Q')}">{!$Label.Label_Workflows}</apex:outputLink>
+                                    </apex:pageBlockSectionItem>
+                                    <apex:PageBlockSectionItem >
+                                        <apex:outputLink value="{!invoicetemplate}">{!$Label.Label_Invoice_PDF_Templates}</apex:outputLink>
+                                        </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+
+            <apex:pageBlockSection title="{!$Label.Label_Customize}" columns="1">
+                <apex:PageBlockSectionItem >
+                    <apex:outputLink value="{!TrxObjUrl}">{!$Label.Label_Account_Transactions}</apex:outputLink>
+                    </apex:pageBlockSectionItem>
+                    <apex:PageBlockSectionItem >
+                        <apex:outputLink value="{!LineItemObjUrl}">{!$Label.Label_Line_Item}</apex:outputLink>
+                        </apex:pageBlockSectionItem>
+                        <apex:PageBlockSectionItem >
+                            <apex:outputLink value="{!URLFOR('/003/o')}">{!$Label.Label_Contact}</apex:outputLink>
+                            </apex:pageBlockSectionItem>
+                            <apex:PageBlockSectionItem >
+                                <apex:outputLink value="{!DisObjUrl}">{!$Label.Label_Dispute}</apex:outputLink>
+                                </apex:pageBlockSectionItem>
+                                <apex:PageBlockSectionItem >
+                                    <apex:outputLink value="{!URLFOR('/home/home.jsp')}">{!$Label.Label_Calendar}</apex:outputLink>
+                                    </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="{!$Label.Label_System_Administration}" columns="1">
+                <apex:PageBlockSectionItem >
+                    <apex:outputLink value="{!URLFOR('/apex/CustomSettingAdministration')}">{!$Label.Label_Custom_Setting}</apex:outputLink>
+                </apex:PageBlockSectionItem>
+                <apex:PageBlockSectionItem >
+                    <apex:outputLink value="{!URLFOR('/005/e?retURL=/005')}">{!$Label.Label_Add_User}</apex:outputLink>
+                </apex:PageBlockSectionItem>
+                <apex:PageBlockSectionItem >
+                    <apex:outputLink value="{!URLFOR('/005')}">{!$Label.Label_User_Management}</apex:outputLink>
+                </apex:PageBlockSectionItem>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="{!$Label.Label_IT_Management}" columns="1">
+                <apex:PageBlockSectionItem >
+                    <apex:outputLink value="{!URLFOR('/apex/AgingBucketConfiguration')}">{!$Label.Label_Edit_Aging_buckets}</apex:outputLink>
+                </apex:pageBlockSectionItem>
+                <apex:PageBlockSectionItem >
+                     <apex:outputLink value="{!URLFOR('/setup/cur/currencylist.jsp')}">{!$Label.Label_Currency_Codes}</apex:outputLink>
+                </apex:pageBlockSectionItem>
+                <apex:PageBlockSectionItem >
+                     <apex:outputLink value="{!URLFOR('/apex/CalculateAging')}">{!$Label.Label_Start_Aging_Calculation_Job}</apex:outputLink>
+                </apex:pageBlockSectionItem>
+                <apex:PageBlockSectionItem >
+                     <apex:outputLink value="{!URLFOR('/apex/CalculateAging?job=pcagingcalc')}">{!$Label.Label_Start_Parent_Child_Aging_Calc_Job}</apex:outputLink>
+                </apex:pageBlockSectionItem>
+                <apex:PageBlockSectionItem >
+                     <apex:outputLink value="{!URLFOR('/apex/CalculateAging?job=caladpd')}">{!$Label.Label_Start_Average_DPD_Calculation_Job}</apex:outputLink>
+                </apex:pageBlockSectionItem>
+                <apex:PageBlockSectionItem >
+                      <apex:outputLink value="{!URLFOR('/apex/CalculateAging?job=dataload')}">{!$Label.Label_Start_Data_Load_Job}</apex:outputLink>
+                </apex:pageBlockSectionItem>
+                 <apex:PageBlockSectionItem >
+                      <apex:outputLink value="{!URLFOR('/apex/CalculateAging?job=taskdetail')}">{!$Label.Label_Populate_Task_Level_Field}</apex:outputLink>
+                </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+            <apex:outputLink value="{!URLFOR('/apex/CalculateAging?job=autodunning')}">{!$Label.Label_Auto_Dunning_Job}</apex:outputLink>   
+        </apex:pageBlockSectionItem>
+                <apex:PageBlockSectionItem >
+                      <apex:outputLink value="{!URLFOR('/apexpages/setup/listAsyncApexJobs.apexp')}">{!$Label.Label_Monitor_Jobs}</apex:outputLink>
+                </apex:pageBlockSectionItem>
+                <apex:PageBlockSectionItem >
+                    <apex:outputLink value="{!URLFOR('/apex/MassTransferAccount')}">{!$Label.Label_Mass_Transfer_Accounts}</apex:outputLink>
+                </apex:pageBlockSectionItem>
+                <apex:PageBlockSectionItem >
+                    <apex:outputLink value="{!URLFOR('/apex/CalculateAging?job=deletetxs')}">{!$Label.Label_Purge_Old_Closed_Transactions}</apex:outputLink>
+                </apex:pageBlockSectionItem>                
+            </apex:pageBlockSection>
+
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

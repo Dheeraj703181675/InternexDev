@@ -1,0 +1,43 @@
+<apex:page id="pageId" standardController="akritivtlm__AP_Tracker__c" extensions="akritivtlm.AuditFormController" showHeader="false" sidebar="false">
+
+<apex:outputPanel id="closeOP">
+    <script>
+        function startProcess(){
+            document.getElementById("{!$Component.pageId.formId.loading}").style.display = 'block';       
+            document.getElementById('filter').style.display = 'block';
+        }
+        function endProcess(){
+            document.getElementById("{!$Component.pageId.formId.loading}").style.display = 'none';
+            document.getElementById('filter').style.display = 'none'; 
+        }
+        if({!closeWindow}){
+            window.parent.displayMessageAndClosePopUp("info","","AuditForm");
+        }
+    </script>
+</apex:outputPanel>
+<apex:pageMessages id="msgId"></apex:pageMessages>
+<apex:form id="formId">
+    <!-- for providing loading -->
+    <div id="filter" style= "display:none;"></div>
+    <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+    <!-- for providing loading -->
+
+    <apex:pageBlock id="pgBlckId">
+        <apex:pageBlockButtons id="pgBlckBtnsId">
+            <apex:commandButton id="saveBtnId" value="Save" action="{!saveClicked}" onclick="startProcess();" oncomplete="endProcess();" reRender="msgId,closeOP"/>
+            <apex:commandButton id="closeBtnId" value="Close" onclick="startProcess();window.parent.displayMessageAndClosePopUp('info','','AuditForm');" oncomplete="endProcess();" immediate="true" />
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection id="pgBlckSecId" columns="1">
+            <apex:repeat id="repeatId" value="{!fieldsToDisplay}" var="fld">
+                <apex:inputField id="inputFldId" value="{!childObj[fld]}" />
+            </apex:repeat>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form>
+<script>
+    var obj = document.querySelectorAll(".vfLabelColTextWrap");
+    for(var i=0;i<obj.length;i++) {
+        obj[i].className = obj[i].className.replace("vfLabelColTextWrap","");
+    }
+</script>
+</apex:page>

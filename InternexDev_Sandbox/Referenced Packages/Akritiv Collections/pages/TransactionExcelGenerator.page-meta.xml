@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>17.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Page is used to generate Excel sheet data containing transaction detail when user click in Export button on related Transaction tab at Account detail page.</description>
+    <label>TransactionExcelGenerator</label>
+</ApexPage>

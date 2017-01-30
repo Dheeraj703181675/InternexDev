@@ -1,0 +1,36 @@
+<!--
+ /*
+  *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+  *This software is the confidential and proprietary information
+  *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+  *disclose or use Confidential Information without the express written
+  *agreement of Akritiv Technologies, Inc.
+  */
+-->
+<apex:page standardController="Account"
+    extensions="akritiv.DeleteThisControllerTest" tabStyle="Account" id="acpage">
+    <apex:form >
+        <table>
+            <tr>
+                <td>{!controllerAccount.name}</td>
+                <td><apex:inputField value="{!controllerAccount.akritiv__Total_AR__c}" />
+                </td>
+            </tr>
+        </table>
+
+        <!--  <apex:pageBlock title="My Content">
+            <apex:pageBlockSection title="My Content Section" columns="2">
+                <apex:inputField value="{!controllerAccount.name}"/>
+                <apex:inputField value="{!controllerAccount.akritiv__Total_AR__c}"/>
+                <apex:inputField value="{!controllerAccount.akritiv__Total_AR__c}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Test apex label" columns="1" id="transPbs">
+                <apex:pageBlockTable value="{!accList}" var="acc" id="pbTable">
+                     <apex:column value="{!acc.Total_AR__c}" />
+                </apex:pageBlockTable>
+                </apex:pageBlockSection     
+        </apex:pageBlock>
+        -->
+    </apex:form>
+</apex:page>

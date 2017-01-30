@@ -1,0 +1,6 @@
+{!UPPER(Debtor__c.Client_Name_for_email_alert__c)} ({!Debtor__c.Client_Account__c}) confirmed "{!UPPER(Debtor__c.Counterparty__c)}" as a customer and therefor ({!Debtor__c.Name}) is Pending Verification. <br></br>
+
+  
+Debtor ID: <a href="{!Debtor__c.Link}">{!Debtor__c.Name}</a><br>
+Due Date: {!Debtor__c.Tomorrow_date__c}<br>
+Priority: Normal

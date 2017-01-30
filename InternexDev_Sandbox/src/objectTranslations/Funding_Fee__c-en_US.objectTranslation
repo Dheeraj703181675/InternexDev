@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Funding Fee</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Funding Fees</value>
+    </caseValues>
+    <fields>
+        <label><!-- Applied Draw Fee --></label>
+        <name>Applied_Drawal_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Applied Origination Fee --></label>
+        <name>Applied_Origination_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Account --></label>
+        <name>Client_Account__c</name>
+        <relationshipLabel><!-- Funding Fees --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Draw Fee Percentage --></label>
+        <name>Drawal_Fee_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Funding Limit --></label>
+        <name>Funding_Limit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Funding Request --></label>
+        <name>Funding_Request__c</name>
+        <relationshipLabel><!-- Funding Fees --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Funding Requested --></label>
+        <name>Funding_Requested__c</name>
+    </fields>
+    <fields>
+        <label><!-- Funding Transaction --></label>
+        <name>Funding_Transaction__c</name>
+    </fields>
+    <fields>
+        <label><!-- Minimum Draw fee --></label>
+        <name>Minimum_Drawal_fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Minimum Origination Fee --></label>
+        <name>Minimum_origination_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Origination Fee Percentage --></label>
+        <name>Origination_Fee_Percentage__c</name>
+    </fields>
+    <layouts>
+        <layout>Funding Fee Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Funding Fee Layout for Client</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

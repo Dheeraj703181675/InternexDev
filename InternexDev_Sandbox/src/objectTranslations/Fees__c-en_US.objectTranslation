@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Fees</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Fees</value>
+    </caseValues>
+    <fields>
+        <label><!-- Business Transaction Date --></label>
+        <name>Business_Transaction_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Account --></label>
+        <name>Client_Account__c</name>
+        <relationshipLabel><!-- Fees --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Date Incurred --></label>
+        <name>Date_Incurred__c</name>
+    </fields>
+    <fields>
+        <label><!-- External Id --></label>
+        <name>External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fee Amount --></label>
+        <name>Fee_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fee Balance --></label>
+        <name>Fee_Balance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fee Date --></label>
+        <name>Fee_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fee Description --></label>
+        <name>Fee_description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fee Status --></label>
+        <name>Fee_status__c</name>
+        <picklistValues>
+            <masterLabel>PAID</masterLabel>
+            <translation><!-- PAID --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>UNPAID</masterLabel>
+            <translation><!-- UNPAID --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Fee Type --></label>
+        <name>Fee_type__c</name>
+        <picklistValues>
+            <masterLabel>Lender Expense</masterLabel>
+            <translation><!-- Lender Expense --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Servicer Fee</masterLabel>
+            <translation><!-- Servicer Fee --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Fees Due --></label>
+        <name>Fees_Due__c</name>
+    </fields>
+    <fields>
+        <label><!-- Frequency --></label>
+        <name>Frequency__c</name>
+    </fields>
+    <fields>
+        <label><!-- MP External Id --></label>
+        <name>MP_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Portal External Id --></label>
+        <name>Portal_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Source --></label>
+        <name>Source__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Grade --></label>
+        <name>Sync_with_Grade__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Market Place --></label>
+        <name>Sync_with_Market_Place__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Portal --></label>
+        <name>Sync_with_Portal__c</name>
+    </fields>
+    <layouts>
+        <layout>Fees Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Integarion --></label>
+            <section>Integarion</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- You can not change the Fee Amount,Client-Account,Fee Date and Fee Type. --></errorMessage>
+        <name>Validation_on_Updation</name>
+    </validationRules>
+</CustomObjectTranslation>

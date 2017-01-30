@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>WF_RMH</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>WF_RMH</value>
+    </caseValues>
+    <fields>
+        <label><!-- Envelope Number --></label>
+        <name>Envelope_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- PR Envelope No --></label>
+        <name>PR_Envelope_No__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record ID --></label>
+        <name>Record_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance sequence number(RMH01) --></label>
+        <name>Remittance_sequence_number__c</name>
+    </fields>
+    <fields>
+        <label><!-- WF_PR --></label>
+        <name>WF_PR__c</name>
+        <relationshipLabel><!-- WF_RMH --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>WF_RMH Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

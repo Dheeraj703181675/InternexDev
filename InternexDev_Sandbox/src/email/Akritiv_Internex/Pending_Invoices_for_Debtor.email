@@ -1,0 +1,4 @@
+{!UPPER(Debtor__c.Counterparty__c)} (<a href="{!Debtor__c.Link}">{!Debtor__c.Name}</a>) has been underwritten. Please take action on pending invoices. <br></br>
+
+Due Date: {!Debtor__c.LastModifiedDate}<br>
+Priority: Urgent

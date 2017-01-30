@@ -1,0 +1,206 @@
+<!--
+/*
+* Copyright (c) 2009-2010 Akritiv Technologies, Inc. All Rights Reserved.
+* This software is the confidential and proprietary information
+* (Confidential Information) of Akritiv Technologies, Inc. You shall not
+* disclose or use Confidential Information without the express written
+* agreement of Akritiv Technologies, Inc.
+*/
+
+/*
+*   Usage : This page is use to Attach Attachment for manual case creation with 5 mb validation and if attachment primary document.
+    Author : Hiren Soni.
+
+*/
+standardController="AR_Tracker__c" extensions="AttachmentController"
+controller="AttachmentController" tabStyle="AP_Tracker__c"
+-->
+
+<apex:page controller="akritivtlm.AttachmentController" tabStyle="akritivtlm__AP_Tracker__c" >
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<style>
+    .messageblock{
+        font-size:11px;
+        border-radius: 4px;
+        border-color: #c00;
+        background-color: #ffc;
+        border-style: solid;
+        border-width: 1px;
+        color: #000;
+        
+
+    }
+</style> 
+
+<script>
+    function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+
+    function closeMessage() {
+        $('#messagebox').hide();   
+    }
+    function closeMessage1() {
+        $('#stdInfoMsg').hide();   
+    }
+
+    function displayMessage(type,msg,interval) {
+     var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:50%;margin: 0 auto;margin-top: 5px;">'+
+            '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+            '</div>';
+    if(document.getElementById('messagebox') != null && document.getElementById('messagebox') != undefined) {
+            document.getElementById('messagebox').innerHTML = m;
+            animateMessageBox('messagebox',interval);
+        }
+    animateMessageBox('messagebox',interval);
+}
+</script>
+
+<apex:outputpanel id="messagepanel" style="Display:None">
+    <apex:messages id="msg1"  style="Display:None" />
+    <script>
+    
+        if(document.getElementById('{!$Component.msg1}') != null && document.getElementById('{!$Component.msg1}') != undefined) {
+        var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('li');
+        var msg='';
+        for(var i=0;i<obj.length;i++) {
+            if(i==0) 
+            msg += '<br />';
+            msg += obj[i].innerHTML + '<br />';
+        }
+        if(msg != '') {
+            setTimeout(function() {displayMessage('error',msg,10000);},1000);
+        }
+    }
+    </script>
+</apex:outputpanel>
+
+<apex:sectionHeader subtitle="{!$Label.Label_Attachment_File_To_Tracker}  {!trackname}"  />
+
+<script>
+    function splitHTML(string){
+        var str = string.split(';');
+        var e = document.createElement('div');
+        var msg = '';
+        for(var i=0;i<str.length;i++){
+            msg += str[i] + '<br/>';
+        }
+        document.getElementById('infoMsg').innerHTML = msg;
+    }
+</script>
+
+<div id="filter"></div>
+<div class="alert alert-warning alert-dismissable" style="width:70%;margin:2px;margin-top: 0px;">
+    <img src="/img/msg_icons/info24.png" width="16" height="16" />
+    <strong><b>Info</b></strong>
+    <div id="infoMsg"></div>
+</div>
+<apex:outputpanel id="stdInfoMsgOp" rendered="{!IF(stdInfoMsg == null , false, true)}">
+    <div id="stdInfoMsg" class="alert messageblock alert-warning alert-dismissable" style="z-index:10 !important;position:fixed !important;top:30%;left:30%;width:30% !important;margin: 0 auto;margin-top: 5px;">
+        <img src="/img/msg_icons/info24.png" width="16" height="16" />
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage1();">&times;</button>
+        <strong><b>Info</b></strong>
+        <div id="stinfoMsg">{!JSENCODE(stdInfoMsg)}</div>
+    </div>
+    <script>animateMessageBox('stdInfoMsg',5000);</script>
+</apex:outputpanel>
+
+<div id="messagebox" style="z-index:10 !important;position:fixed !important;width:50% !important;top:30%;left:20%;" ></div>
+<!-- <apex:pageMessages id="msg" rendered="{!NOT(msg_render)}" />  -->
+<apex:form id="frm1" >
+    <apex:pageBlock >
+    <apex:pageBlockSection columns="1" id="block1">
+       <apex:panelGroup >
+              <table> 
+             <tr>
+             <td><b><span>{!$Label.Label_1}</span><span>{!$Label.Label_Select_the_File_to_be_attached}</span></b></td>
+             </tr>
+             <tr>
+             <td>&nbsp;&nbsp;&nbsp;{!$Label.Label_Type_the_path_of_the_file_or_click_the_Browse_button_to_find_the_file}</td>
+             </tr>
+             </table>
+      
+      <apex:inputFile value="{!attachment.Body}"  filename="{!attachment.Name}" contentType="{!attachment.ContentType}" fileSize="{!attachment.BodyLength}" id="file"/>
+      <apex:pageMessages rendered="{!msg_render}" />
+         <table>
+         <tr>
+         <td><b><span>{!$Label.Label_2}</span><span>{!$Label.Label_Choose_whether_this_is_a_Primary_Document}</span></b></td>
+         </tr>
+         <tr>
+         <td>{!$Label.Label_If_this_file_is_a_Primary_Document_please_select_the_checkbox}</td>
+         </tr>
+         
+         </table> 
+        
+      
+        
+         <apex:actionRegion >
+            <apex:outputPanel id="checkbox">
+                 <apex:inputCheckbox disabled="{!checkboxvisible}" value="{!isInvoiceFlag}"  />
+             </apex:outputPanel>
+         </apex:actionRegion>
+      
+         <table>
+         <tr>
+         <td><b><span>{!$Label.Label_3}</span><span>{!$Label.Label_Attach_File}</span></b></td>
+         </tr> 
+         <tr>
+         <td>&nbsp;&nbsp;&nbsp;{!$Label.Label_Click_the_Attach_File_button_Repeat_steps_1_and_2_to_attach_multiple_files}
+</td>
+         </tr>
+         
+         <tr>
+         <td>&nbsp;&nbsp;&nbsp; {!$Label.Label_When_the_upload_is_complete_the_file_will_appear_below}</td>
+         </tr> 
+         </table>
+         <apex:commandButton id="UploadAttachment" action="{!saveAttachment}" value="{!$Label.Label_Attach_File}"  />
+            <apex:actionSupport event="onclick" action="{!saveAttachment}" rerender="checkbox,messagepanel,frm1" />
+         </apex:panelGroup>
+      </apex:pageBlockSection>
+
+    
+  
+    
+    
+     </apex:pageBlock>
+     
+  </apex:form>
+  
+<apex:form id="frm2">
+
+    <apex:actionFunction name="removeAttachment" action="{!removeAttachment}" rerender="frm2,checkbox" status="loadStatus1">
+        <apex:param name="firstParam" assignTo="{!attachmentNameToRemove}" value="" />
+    </apex:actionFunction> 
+
+    <apex:pageBlock title="Results">
+        <apex:pageBlockButtons location="bottom" >
+            <apex:commandButton value="{!$Label.Label_OK}" action="{!done}"></apex:commandButton>
+            <apex:commandButton value="{!$Label.Label_Cancel}" action="{!done}"></apex:commandButton>
+        </apex:pageBlockButtons>
+
+        <apex:pageBlockSection columns="1" rendered="{!IF(AttachDocList2!=null && AttachDocList2.size>0, true, false)}" >
+            <apex:pageBlockTable var="a" value="{!AttachDocList2}">
+                <apex:column >
+                    <apex:commandLink id="fileAttachment" onclick="removeAttachment('{!a.ids}'); return false;" value="Delete" immediate="TRUE" /> 
+                </apex:column> 
+                <apex:column headerValue="{!$Label.Label_File}" value="{!a.name}" /> 
+                <apex:column headerValue="{!$Label.Label_Size_in_Byte}" value="{!a.bodylength}" />   
+                <apex:column headerValue="{!$Label.Label_Type}" value="{!a.ContentType}" />
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection rendered="{!IF(AttachDocList2!=null && AttachDocList2.size>0, false, true)}" >
+            <apex:outputText value="{!$Label.Label_No_Files_Attached}" />
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+
+</apex:form>
+
+<script>
+splitHTML('{!JSENCODE(infoMessage)}');
+</script>
+
+</apex:page>

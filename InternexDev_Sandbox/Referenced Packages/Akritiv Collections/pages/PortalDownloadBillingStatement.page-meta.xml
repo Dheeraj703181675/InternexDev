@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>17.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>The page is related to Customer Portal.
+Portal user can download the billing statement from the portal directly for all the invoices associated with the account.</description>
+    <label>PortalDownloadBillingStatement</label>
+</ApexPage>

@@ -1,0 +1,263 @@
+<!--
+ /*
+  *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+  *This software is the confidential and proprietary information
+  *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+  *disclose or use Confidential Information without the express written
+  *agreement of Akritiv Technologies, Inc.
+  */
+-->
+<!--
+/*
+ * Displays a list of tasks. 
+ * User can select different views to filter task as required. 
+ * Form this page user can start working on collector's workbench.
+ */
+-->
+<!--
+<apex:page controller="akritiv.ExtMyTaskController">
+
+    <apex:sectionHeader title="My Tasks" />
+    <apex:pageMessages />
+
+    <apex:form >
+
+        <apex:outputPanel id="firstpanel">
+
+            <apex:selectList value="{!lastFilter}" multiselect="false" size="1">
+                <apex:actionSupport event="onchange" action="{!searchTasks}"
+                    rerender="table" status="loading" />
+                <apex:selectOption itemValue="Overdue" itemLabel="Overdue" />
+                <apex:selectOption itemValue="Today" itemLabel="Today" />
+                <apex:selectOption itemValue="Today + Overdue"
+                    itemLabel="Today + Overdue" />
+                <apex:selectOption itemValue="Tomorrow" itemLabel="Tomorrow" />
+                <apex:selectOption itemValue="Next 7 Days" itemLabel="Next 7 Days" />
+
+                <apex:selectOption itemValue="This Month" itemLabel="This Month" />
+                <apex:selectOption itemValue="All Open" itemLabel="All Open" />
+
+
+            </apex:selectList>
+            <apex:commandButton action="{!searchTasks}" value="GO"
+                id="searchButton" rerender="table" status="loading" />
+            <apex:commandButton action="{!createNew}" value="New Task"
+                id="newButton" />
+            <apex:actionstatus id="loading" startText="Loading..."></apex:actionstatus>
+        </apex:outputPanel>
+        <apex:pageBlock >
+
+            <apex:pageBlockTable value="{!tasks}" var="o" id="table">
+
+
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:commandLink value="Activity Date" action="{!doSort}"
+                            rerender="table" status="loading">
+                            <apex:param name="sortField" value="ActivityDate"
+                                assignTo="{!sortField}" />
+                        </apex:commandLink>
+                    </apex:facet>
+                    <apex:outputText value="{0,date,M/d/yyyy }">
+                        <apex:param value="{!o.ActivityDate}" />
+                    </apex:outputText>
+
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:commandLink value="Created Date" action="{!doSort}"
+                            rerender="table" status="loading">
+                            <apex:param name="sortField" value="CreatedDate"
+                                assignTo="{!sortField}" />
+                        </apex:commandLink>
+                    </apex:facet>
+                    <apex:outputText value="{0,date,M/d/yyyy }">
+                        <apex:param value="{!o.CreatedDate}" />
+                    </apex:outputText>
+
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:commandLink value="Subject" action="{!doSort}"
+                            rerender="table" status="loading">
+                            <apex:param name="sortField" value="Subject"
+                                assignTo="{!sortField}" />
+                        </apex:commandLink>
+                    </apex:facet>
+                    <apex:outputLabel value="{!o.Subject}"></apex:outputLabel>
+                </apex:column>
+
+
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:commandLink value="Status" action="{!doSort}"
+                            rerender="table" status="loading">
+                            <apex:param name="sortField" value="Status"
+                                assignTo="{!sortField}" />
+                        </apex:commandLink>
+                    </apex:facet>
+                    <apex:outputLabel value="{!o.Status}"></apex:outputLabel>
+                </apex:column>
+
+
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:commandLink value="Priority" action="{!doSort}"
+                            rerender="table" status="loading">
+                            <apex:param name="sortField" value="Priority"
+                                assignTo="{!sortField}" />
+                        </apex:commandLink>
+                    </apex:facet>
+                    <apex:outputLabel value="{!o.Priority}"></apex:outputLabel>
+                </apex:column>
+
+
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:commandLink value="Description" action="{!doSort}"
+                            rerender="table" status="loading">
+                            <apex:param name="sortField" value="Description"
+                                assignTo="{!sortField}" />
+                        </apex:commandLink>
+                    </apex:facet>
+                    <apex:outputLabel value="{!o.Description}"></apex:outputLabel>
+                </apex:column>
+
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:commandLink value="Account" action="{!doSort}"
+                            rerender="table" status="loading">
+                            <apex:param name="sortField" value="Account.Name"
+                                assignTo="{!sortField}" />
+                        </apex:commandLink>
+                    </apex:facet>
+                    <apex:outputLabel value="{!o.Account.Name}"></apex:outputLabel>
+                </apex:column>
+
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+
+
+</apex:page>--> 
+    
+<apex:page Controller="akritiv.ExtMyTaskController">
+
+<script>
+    var varSelectedUserId = '';
+    
+    function test(){    
+    //alert('in javascript');
+   
+    if(varSelectedUserId == '')
+    {
+        alert('{!$Label.Label_Please_Select_User_to_Assign}');
+        return false;
+   
+    }
+    //alert(varSelectedUserId ); 
+    
+    
+     var retStr = getCheckboxIds();
+     if(retStr == '')
+     {
+         alert('{!$Label.Label_Please_Select_atleast_one_task}');
+         return false;
+     }
+     retStr = retStr.substring(0,retStr.length-1);
+    // retStr = retStr.replace("'","\\'");
+    // alert('SubString= '+retStr );
+   
+    
+    
+    
+    
+    //retStr ="'00T36000002ptt9','00T36000002pttA'";
+   var updateTaskList = [];
+   var taskstrarray = retStr.split(','); 
+   var queryTask = "SELECT ID, Status,OwnerID FROM Task WHERE Id in ( "+ taskstrarray +")  ORDER BY ID";
+  // alert(queryTask );
+   
+        var queryTaskResults = sforce.connection.query(queryTask );
+       // alert('re'+ queryTaskResults );
+        //alert('queryTaskResults.size= '+queryTaskResults.size);
+        
+        var objectIterator = new sforce.QueryResultIterator(queryTaskResults );
+        
+        ////Iterate through the returned results
+        
+        
+        while (objectIterator.hasNext()) {
+       
+        var itemObj = objectIterator.next();
+        
+        itemObj.OwnerId  = varSelectedUserId ;
+       
+        updateTaskList.push(itemObj);
+        }
+        
+     
+     //alert(updateTaskList);
+     sforce.connection.update(updateTaskList);
+     //alert('Done');
+     parent.window.location.reload();
+
+    }
+    
+    function dropdownChange(myDropdown)
+    {
+    
+        if( myDropdown.value == '--Select--')
+        {
+        varSelectedUserId ='';
+        }
+        else
+        {
+           varSelectedUserId = myDropdown.value;
+        }
+    }
+    
+    function getCheckboxIds(){
+    
+      var cb = document.getElementsByTagName('input');
+       var  retStr='';
+   
+       for (var i=0; i<cb.length; i++)
+       {
+        if (cb[i].getAttribute('type') == "checkbox")
+        {
+         if (cb[i].checked)
+         {
+          retStr += '\''+ cb[i].id +'\',';
+          
+         }
+        }
+      }
+  
+  //alert("retStr = " + retStr); 
+ 
+  return retStr;
+}
+
+function onRefresh(){
+    parent.window.location.reload();    
+}
+</script>
+    
+    
+     <apex:form >
+          
+    <div id ="HiddenDiv" style="display:none">
+     <apex:selectList size="1" value="{!SelectedUser}" multiselect="false" id="ddlUserList" onchange="dropdownChange(this);" >
+            <apex:selectOptions value="{!OwnUser}"/>
+     </apex:selectList>
+      
+       <!-- <apex:commandButton value="Do Something" action="{!assignOwner}" id="Do"/> -->
+       
+      <apex:commandButton value="{!$Label.Label_Assign}" onclick="test();return false;"/>
+       <apex:commandButton value="{!$Label.Label_Cancel}" onclick="onRefresh();return false;" />
+     
+    </div>
+   </apex:form>
+    <apex:enhancedList customizable="true" height="700" id="task" type="Activity"/>
+</apex:page>

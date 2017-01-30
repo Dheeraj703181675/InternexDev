@@ -1,0 +1,18 @@
+<!--
+ /*
+  *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+  *This software is the confidential and proprietary information
+  *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+  *disclose or use Confidential Information without the express written
+  *agreement of Akritiv Technologies, Inc.
+  */
+-->
+<!--
+    /*
+     * **** NEED TO BE DELETED *** Page do not have any funcitonality.
+     */
+-->
+<apex:page standardController="Contact" sidebar="false"
+    showHeader="false">
+    <apex:detail relatedList="false" />
+</apex:page>

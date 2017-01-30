@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>17.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>*** CAN BE DELETED **** This page is an alternative to run the
+                aging batch job for all the accounts. This page was implemented
+                as the BatchAgingJob was not running on subscriber org.
+
+                The main page to run the aging job is ./apex/CalculateAging.</description>
+    <label>AgingCalculations</label>
+</ApexPage>

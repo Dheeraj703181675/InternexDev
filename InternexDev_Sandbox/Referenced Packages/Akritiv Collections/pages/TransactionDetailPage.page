@@ -1,0 +1,92 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/* 
+ * Page to override standard transaction detail page. Will contain
+ *   1) Transaction Detail Page
+ *   2) Notes search functionality
+ */
+-->
+<apex:page standardController="akritiv__Transaction__c"
+    extensions="akritiv.TransactionDetailExt" tabStyle="akritiv__Transaction__c"
+    id="txDetailPage" >
+
+
+
+
+    <script src="/soap/ajax/10.0/connection.js" type="text/javascript"></script>
+    <script src="/soap/ajax/10.0/apex.js" type="text/javascript"></script>
+
+    <style>
+          .rich-tabpanel-content{background:none;}
+       
+       .bPageBlock .detailList .labelCol{
+           font-family: 'Arial', 'Helvetica', sans-serif;
+           font-size: 1em;
+           font-weight:bold;
+           line-height:normal;
+           margin:0 auto;
+        }
+        
+        .bPageBlock .detailList .dataCol col02{
+           font-family: 'Arial', 'Helvetica', sans-serif;
+           font-size: 1em;
+           line-height:normal;
+           margin:0 auto;
+        }
+
+    </style>
+        
+        <apex:tabPanel switchType="client" id="txtb" value="{!selectedTabTx}">
+
+            <apex:tab id="transactionsTab"
+                label="{!$Label.Label_Transaction_Detail}"
+                ontabenter="setCurrentTab(1);">
+
+                <apex:detail subject="{!akritiv__Transaction__c.Id}" relatedList="true" showChatter="true" inlineEdit="true" />
+
+            </apex:tab>
+
+            <apex:tab label="{!$Label.Label_Notes}" id="txNotesTab"
+                ontabenter="setCurrentTab(2);" rendered="{!NOT(isPortalUser)}">
+                <apex:include pageName="akritiv__NotesView" id="txNote" />
+            </apex:tab>
+
+            <!--   <apex:tab label="Attachments" id="txAttachTab"  ontabenter="setCurrentTab(3);">
+              <apex:include pageName="NotesAttachmentViewTransactions" id="txAttach"/>
+           </apex:tab>
+        
+          -->
+        </apex:tabPanel>
+        <script>
+  function setCurrentTab( tabNo){
+     sforce.connection.defaultNamespace = '{!JSENCODE($Setup.SysConfig_Singlec__c.NameSpace__c)}';
+     
+     sforce.connection.sessionId = '{!$Api.Session_ID}';
+     var config = new sforce.SObject("User_Preference__c"); 
+     config.Name = '{!$User.Username}';
+     config.SelectedTabTx__c =tabNo ;
+     config.User__c = '{!$User.Id}';
+     
+    if("{!JSENCODE(objId)}" !=null && "{!JSENCODE(objId)}" !=''){
+        //update
+        config.Id = "{!JSENCODE(objId)}";
+        var res = sforce.connection.update([config]);
+      }else{
+         //insert 
+         var res = sforce.connection.create([config]); 
+      }
+    
+ }
+  
+  </script>
+
+
+</apex:page>

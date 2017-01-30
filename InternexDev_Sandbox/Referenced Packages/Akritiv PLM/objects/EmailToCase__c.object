@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>This custom setting is for defining configuration parameters for creating/promoting email cases in Akritiv workflow/helpdesk applications.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Allow_Attachment_For_Undelivered_Mail__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Allow Attachment For Undelivered Mail</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Allow_Attachment_For_Unreached_Mail__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This value states whether to attach the incoming attachments to the case. 
+In case of &apos;Promote_Case_For_Unreached_Mail&apos; being unchecked this value would be ignored.</description>
+        <externalId>false</externalId>
+        <label>Allow Attachment For Unreached Mail</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Allowed_Current_State_For_Attach_Respons__c</fullName>
+        <defaultValue>&quot;Email Response Received,Rework Incorrect Rejection,Supervisory Resolution Received,Rework QC Issues,Ready For Processing&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Allowed Current State For Attach Respons</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Allowed_Extensions_Additional_Doc__c</fullName>
+        <deprecated>false</deprecated>
+        <description>This field will contain comma separated file extensions, this field is applicable for WF and HD verticals, field values will be like .jpg,.gif etc..</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field will contain comma separated file extensions, this field is applicable for WF and HD verticals, field values will be like .jpg,.gif etc..</inlineHelpText>
+        <label>Black Listed Extensions Additional Doc</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Allowed_Extensions_Primary_Doc__c</fullName>
+        <deprecated>false</deprecated>
+        <description>This field will contains comma separated file extensions for primary documents, this field is applicable only for WF vertical, field values will be like .tif, .pdf</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field will contains comma separated file extensions for primary documents, this field is applicable only for WF vertical, field values will be like .tif, .pdf</inlineHelpText>
+        <label>Allowed Extensions Primary Doc</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Blacklisted_Sender_Domains__c</fullName>
+        <deprecated>false</deprecated>
+        <description>This field will contain comma separated sender domains like test.com, xyz.in</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field will contain comma separated sender domains like test.com, xyz.in</inlineHelpText>
+        <label>Blacklisted Sender Domains</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Case_Creation_Email_Notify_To_CC__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Case Creation Email Notify To CC</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Default_State__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Default State</label>
+        <length>100</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Discard_Multiple_Primary_Docs__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>If this field is checked and muliple primary documents are coming in email then that mail will be rejected</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If this field is checked and muliple primary documents are coming in email then that mail will be rejected</inlineHelpText>
+        <label>Discard Multiple Primary Docs</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Discard_Without_Doc__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>If this field is checked and mail is not having any attachment then mail will be discarded</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If this field is checked and mail is not having any attachment then mail will be discarded</inlineHelpText>
+        <label>Discard Without Doc</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Discard_Without_Primary_Doc__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>If this field is checked and there is no primary document available in email then that perticular mail will be rejected</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If this field is checked and there is no primary document available in email then that perticular mail will be rejected</inlineHelpText>
+        <label>Discard Without Primary Doc</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Due_Days__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Will be used for calculating due date</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Will be used for calculating due date</inlineHelpText>
+        <label>Due Days</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Interaction_Prefixes__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Comma separated prefixes will be removed temporarily for subject line and then actual subject will be matched for &lt;ignore-mail&gt; rule. like RE:,FW:,Out of office:</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Comma separated prefixes will be removed temporarily for subject line and then actual subject will be matched for &lt;ignore-mail&gt; rule. like RE:,FW:,Out of office:</inlineHelpText>
+        <label>Interaction Prefixes</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Max_Allow_Attachment_Size__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Max Allow Attachment Size</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Outbound_Email_Attachment_Size_Limit__c</fullName>
+        <deprecated>false</deprecated>
+        <description>This field will hold the value that will govern the maximum size limit for attached attachments while sending outbound emails (through HDComposeMail). The value should be specified in MBs.</description>
+        <externalId>false</externalId>
+        <label>Outbound Email Attachment Size Limit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Preindexed_Field_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Preindexed Field Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Preindexed_Field_Values__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Preindexed Field Values</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Priority_Domain_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Comma separated domain names for deciding domain specific priorities</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Comma separated domain names for deciding domain specific priorities</inlineHelpText>
+        <label>Priority - Domain Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Priority_Domain_Priority__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Comma separated domain priorities</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Comma separated domain priorities</inlineHelpText>
+        <label>Priority - Domain Priority</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Priority__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Priority</label>
+        <length>10</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Promote_Case_For_Undelivered_Mail__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Promote Case For Undelivered Mail</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Promote_Case_For_Unreached_Mail__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This field specifies whether to create/promote the case when the customer is not reached. 
+If this field is unchecked, then the attachments would not be taken into consideration whether the Allow_Attachment_For_Unreached_Mail flag is set true or not.</description>
+        <externalId>false</externalId>
+        <label>Promote Case For Unreached Mail</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Undelivered_Mail_Keyword__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Undelivered Mail Keyword</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unreached_Mail_Keyword__c</fullName>
+        <deprecated>false</deprecated>
+        <description>This field will contain a list of comma separated keywords specifying the term which denotes when the client is unreached say for eg. &apos;Out Of Office&apos;.</description>
+        <externalId>false</externalId>
+        <label>Unreached Mail Keyword</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Upload_Multiple_Primary_Docs__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>for creating multiple cases out of one email if multiple primary attachments are there in email. if this check box is not checked then only one case will be created with one primary doc and rest of the attachments willb e moved in additional docs</description>
+        <externalId>false</externalId>
+        <inlineHelpText>for creating multiple cases out of one email if multiple primary attachments are there in email. if this check box is not checked then only one case will be created with one primary doc and rest of the attachments willb e moved in additional docs</inlineHelpText>
+        <label>Upload Multiple Primary Docs</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>addInteractionInClosedCase__c</fullName>
+        <defaultValue>&quot;Y&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Add interaction in closed case
+Y--&gt;Create interaction in closed case
+N--&gt;Create new conversation
+R--&gt;Create interaction for closed case and reopens the case.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Add interaction in closed case
+Y--&gt;Create interaction in closed case
+N--&gt;Create new conversation
+R--&gt;Create interaction for closed case and reopens the case.</inlineHelpText>
+        <label>Add interaction in closed case</label>
+        <length>2</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>isAcknowledgmentRequired__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>isAcknowledgmentRequired</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isAutoReopenCase__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>if true and conversation is closed then conversation will be reopened and reopen notificaiton will be sent to reqestor and original sender of case</description>
+        <externalId>false</externalId>
+        <inlineHelpText>if true and conversation is closed then conversation will be reopened and reopen notificaiton will be sent to reqestor and original sender of case</inlineHelpText>
+        <label>isAutoReopenCase</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isCCRuleRequired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>If any configured mail box is in cc, system will accept/reject case.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If any configured mail box is in cc, system will accept/reject case.</inlineHelpText>
+        <label>isCCRuleRequired</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isCreateCaseOnClosedCase__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This field will govern whether to create a case for an incoming email on existing closed case.</description>
+        <externalId>false</externalId>
+        <label>is Create Case On Closed Case</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isIgnoreMailNotificationRequired__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>isIgnoreMailNotificationRequired</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isInboundInteractionForClosedCaseRequire__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This flag will determine whether to send notification to agent or not if interaction has been created on closed case</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This flag will determine whether to send notification to agent or not if interaction has been created on closed case</inlineHelpText>
+        <label>Not to Agent on closed conversation</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isInfoMailRuleRequired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>isInfoMailRuleRequired field has been taken so as to one code line working for Tracker and HD, for tracker this rule will be off but for HD this will be on.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>isInfoMailRuleRequired field has been taken so as to one code line working for Tracker and HD, for tracker this rule will be off but for HD this will be on.</inlineHelpText>
+        <label>isInfoMailRuleRequired</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isOutOfOfficeRequired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>If any mail comes on holiday, system should send out office notification back to customer</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If any mail comes on holiday, system should send out office notification back to customer</inlineHelpText>
+        <label>isOutOfOfficeRequired</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Email to Case</label>
+    <visibility>Public</visibility>
+</CustomObject>

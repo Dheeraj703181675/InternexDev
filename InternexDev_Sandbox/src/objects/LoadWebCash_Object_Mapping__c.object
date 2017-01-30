@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>This custom setting is used when moving data from Load Web Cash object to Web Cash Object. It is used for mapping the load web cash object fields to the web cash object fields.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Data_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Data Type</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Load_Object_API_Name__c</fullName>
+        <description>This field will have the API Names of LoadWebCash object</description>
+        <externalId>false</externalId>
+        <label>Load Object API Name</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Required__c</fullName>
+        <description>Check if field is mandatory for its object</description>
+        <externalId>false</externalId>
+        <label>Required</label>
+        <length>1</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sequence__c</fullName>
+        <description>Field sequence in custom setting</description>
+        <externalId>false</externalId>
+        <label>Sequence</label>
+        <precision>10</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>WebCash_Object_API__c</fullName>
+        <description>API name of a WebCash object to map with LoadWebCash object</description>
+        <externalId>false</externalId>
+        <label>WebCash Object API</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>LoadWebCash Object Mapping</label>
+    <visibility>Public</visibility>
+</CustomObject>

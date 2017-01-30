@@ -1,0 +1,11 @@
+<apex:page showHeader="false">
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__EXT, '/js/ext.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__EXT,'/css/ext-all.css')}"/>
+<script>
+    var openFromField='{!JSENCODE($CurrentPage.parameters.openFrom)}';   
+    var fieldId='{!JSENCODE($CurrentPage.parameters.fieldId)}';  
+</script>
+<script src="{!$CurrentPage.parameters.resourceURL}"></script>
+<div id="MainDIV"></div>   
+</apex:page>

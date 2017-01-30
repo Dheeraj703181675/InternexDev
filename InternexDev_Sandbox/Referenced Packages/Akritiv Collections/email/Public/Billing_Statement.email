@@ -1,0 +1,7 @@
+Dear {!Customer.Name}
+
+Please find attached your billing statement as of today. 
+
+Regards
+{!User.Name}
+{!User.Phone}

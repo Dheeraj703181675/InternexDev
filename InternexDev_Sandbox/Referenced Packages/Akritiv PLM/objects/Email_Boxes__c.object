@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>This custom setting will contain email boxes details</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>ACK_Noreply_EmailId__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>ACK Noreply EmailId</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Actual_Email_Id__c</fullName>
+        <deprecated>false</deprecated>
+        <description>This field will contain actual email id, from where mails are getting forwarded to sales force email id
+DUPLICATE VALUE IS NOT ALLOWED</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field will contain actual email id, from where mails are getting forwarded to sales force email id
+DUPLICATE VALUE IS NOT ALLOWED</inlineHelpText>
+        <label>Actual Email Id</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bcc_Email_Id__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Bcc Email Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Calender_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Calender Name</description>
+        <externalId>false</externalId>
+        <label>Calender Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HD_ESC_Required__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>HD ESC Required</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Object_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <description>This field will contain sObject name like AP_Tracker__C, Query_Classification__C</description>
+        <externalId>false</externalId>
+        <label>Object Name</label>
+        <length>100</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Operation__c</fullName>
+        <deprecated>false</deprecated>
+        <description>This field will contain operation to be performed, possible values are CC,CP
+CC--&gt;Case creation
+CP--&gt;Case promotion</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field will contain operation to be performed, possible values are CC,CP
+CC--&gt;Case creation
+CP--&gt;Case promotion</inlineHelpText>
+        <label>Operation</label>
+        <length>2</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Force_Email_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <description>This field will contain the email address assoicated with any email service</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field will contain the email address assoicated with any email service</inlineHelpText>
+        <label>Sales Force Email Id</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>UpdateChildObjForHD__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>UpdateChildObjForHD</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Vertical_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <description>This field will contain vertical name, possible values are WF,HD
+WF--&gt;Workflow
+HD--&gt;Helpdesk</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field will contain vertical name, possible values are WF,HD
+WF--&gt;Workflow
+HD--&gt;Helpdesk</inlineHelpText>
+        <label>Vertical Name</label>
+        <length>2</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Email Boxes</label>
+    <visibility>Public</visibility>
+</CustomObject>

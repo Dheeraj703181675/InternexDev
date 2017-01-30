@@ -1,0 +1,191 @@
+<apex:page standardController="akritivtlm__Conversation__c" extensions="akritivtlm.HDUploadFileController" sidebar="false" showHeader="false" id="pageId" standardStylesheets="true">
+    <script>
+
+    function startProcessForEdit(){
+       document.getElementById('{!$Component.pageId:pbId1:frmId:loading}').style.display = 'block';   
+       document.getElementById('filter').style.display = 'block';    
+    }
+
+    function endProcessForEdit(){
+       document.getElementById('{!$Component.pageId:pbId1:frmId:loading}').style.display = 'none';
+       document.getElementById('filter').style.display = 'none';
+    }
+   </script>
+   
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+
+<style>
+ html{
+        scrollbar-face-color: #E6E6E6;
+        scrollbar-shadow-color: #E6E6E6;
+        scrollbar-highlight-color:#E6E6E6;
+        scrollbar-3dlight-color: #ADADAD;
+        scrollbar-darkshadow-color: #ADADAD;
+        scrollbar-track-color: #ADADAD;
+        scrollbar-arrow-color: #000000;
+        }
+    .messageblock{
+        font-size:11px;
+        border-radius: 4px;
+        border-color: #c00;
+        background-color: #ffc;
+        border-style: solid;
+        border-width: 1px;
+        color: #000;
+    }
+    #filter
+    {
+        display: block;
+        position: fixed;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        /* background-image:url('{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}'); */
+        background-repeat:no-repeat;
+        background-position:center;
+        background-color: #ffffff;
+        z-index:10;
+        opacity:0.6;
+        filter: alpha(opacity=50);
+    }
+    
+</style> 
+
+<script>
+    function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+
+    function closeMessage() {
+        $('#messagebox').hide();   
+    }
+
+    function displayMessage(type,msg,interval) {
+        var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:50%;margin: 0 auto;margin-top: 5px;">'+
+                '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+                '</div>';
+        if(document.getElementById('messagebox') != null && document.getElementById('messagebox') != undefined) {
+                document.getElementById('messagebox').innerHTML = m;
+                animateMessageBox('messagebox',interval);
+        }
+        animateMessageBox('messagebox',interval);
+    }
+    function splitHTML(string){
+        var str = string.split(';');
+        var e = document.createElement('div');
+        var msg = '';
+        for(var i=0;i<str.length;i++){
+            msg += str[i] + '<br/>';
+        }
+        document.getElementById('infoMsg').innerHTML = msg;
+    }
+</script>
+
+<apex:outputpanel id="messagepanel" style="Display:None">
+    <apex:messages id="msg1"  style="Display:None" />
+    <script>
+        if(document.getElementById('{!$Component.msg1}') != null && document.getElementById('{!$Component.msg1}') != undefined) {
+            var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('li');
+            var msg='';
+            for(var i=0;i<obj.length;i++) {
+                if(i==0) 
+                msg += '<br />';
+                msg += obj[i].innerHTML + '<br />';
+            }
+            if(msg != '') {
+            setTimeout(function() {displayMessage('error',msg,10000);},1500)
+            }
+        }
+    </script>
+</apex:outputpanel>
+<apex:outputPanel id="opCloseId">
+    <script>
+        function closeWin(){
+            if({!windowClose}){
+                var returnValue = 'File uploaded successfully.';
+                window.parent.displayMessageAndClosePopUp("info",returnValue,"uploadFileWin");
+            }
+        }
+    </script>
+</apex:outputPanel>
+<div class="alert alert-warning alert-dismissable" style="width:100%;margin:2px;margin-top: 0px;">
+    <img src="/img/msg_icons/info24.png" width="16" height="16" />
+    <strong><b>Info</b></strong>
+    <div id="infoMsg"></div>
+</div>
+<div id="messagebox" style="z-index:10 !important;position:fixed !important;width:90% !important;top:30%;left:5%;" ></div>
+    <apex:pageBlock id="pbId1">
+        <apex:form enctype="multipart/form-data" id="frmId">
+            <div id="filter" style= "display:none;"></div> 
+            <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+            <apex:pageBlockSection columns="1" id="block1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Comments}" for="description" />
+                   <apex:outputPanel styleClass="requiredInput" layout="block">
+                    <apex:outputPanel styleClass="requiredBlock" layout="block"/> 
+                    <apex:inputTextarea value="{!uploadfileComments}" id="description" rows="5" cols="55"  label="{!$Label.Comments}"/>
+                     </apex:outputPanel> 
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.File}" for="file"/>
+                    <apex:outputPanel >
+                        <apex:inputFile value="{!objAttachment.Body}" filename="{!objAttachment.Name}" id="file" fileSize="{!objAttachment.BodyLength}" contentType="{!objAttachment.ContentType}"/>
+                        <apex:commandButton action="{!attachFile}" value="{!$Label.Attach_Btn}" onclick="startProcessForEdit();" />
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:inputHidden />
+                    <apex:actionRegion >
+                        <apex:actionStatus id="saveStatus1">
+                            <apex:facet name="stop">
+                                <apex:commandButton action="{!createInteraction}" value="{!$Label.Upload_Btn}" oncomplete="endProcessForEdit();closeWin();" reRender="opCloseId,messagepanel" onclick="startProcessForEdit();"/>
+                            </apex:facet>
+                            <apex:facet name="start">
+                                <apex:commandButton value="{!$Label.Upload_Btn}..." disabled="true" status="saveStatus1"/>
+                            </apex:facet>
+                        </apex:actionStatus>
+                        <apex:actionStatus id="saveStatus2">
+                            <apex:facet name="stop">
+                                <apex:commandButton value="{!$Label.Close_Btn}" onclick="window.parent.Ext.getCmp('uploadFileWin').close();"/>
+                            </apex:facet>
+                            <apex:facet name="start">
+                                <apex:commandButton value="{!$Label.Close_Btn}..." disabled="true" status="saveStatus2"/>
+                            </apex:facet>
+                        </apex:actionStatus>
+                    </apex:actionRegion>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:form>
+
+    <apex:form id="frm2">
+        <apex:actionFunction name="removeAttachment" action="{!removeAttachment}" rerender="frm2" oncomplete="endProcessForEdit();">
+            <apex:param name="firstParam" assignTo="{!attachmentNameToRemove}" value="" />
+        </apex:actionFunction> 
+
+        <apex:pageBlockSection columns="1" rendered="{!IF(attachmentList.size>0, true, false)}" >
+            <apex:pageBlockTable value="{!attachmentList}" var="attList">
+                <apex:column >
+                    <apex:image value="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/delete.gif')}" style="cursor:pointer;margin-right:5px;"  onclick="startProcessForEdit();removeAttachment('{!attList.id}');"  title="Delete" id="fileAttachment" />                   
+                </apex:column> 
+                <apex:column headerValue="{!$Label.File_Name}">
+                    <apex:outputText value="{!attList.Name}"></apex:outputText>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Description}">
+                    <apex:outputText value="{!attList.Description}"></apex:outputText>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Size}">
+                    <apex:outputText value="{!attList.BodyLength}" ></apex:outputText>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+   </apex:form>
+</apex:pageBlock>
+<script>
+splitHTML('{!JSENCODE(infoMessage)}');
+</script>
+</apex:page>

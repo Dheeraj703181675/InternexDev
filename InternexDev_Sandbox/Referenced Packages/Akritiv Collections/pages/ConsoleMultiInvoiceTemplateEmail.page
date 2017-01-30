@@ -1,0 +1,30 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<apex:page controller="akritiv.ConsoleContactCustomerController" showHeader="false"
+    sidebar="false" cache="true" standardStylesheets="false"
+    action="{!sendMultiInvoiceTemplateEmail}">
+    <html>
+    <body>
+
+
+
+
+
+    <script language="javascript">
+                
+                window.location='{!JSENCODE(redirectTo)}';
+                
+                
+        </script>
+
+
+    </body>
+    </html>
+</apex:page>

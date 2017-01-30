@@ -1,0 +1,38 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+ -->
+<apex:page standardController="Account" readOnly="true" extensions="akritiv.SearchAccountForHierarchy" id="pg" 
+            contentType="application/vnd.ms-excel#AccountHierarchy.xls"> 
+   
+   <script>              
+        function startSplash() {
+            //var divObj = document.getElementById('splashDiv');
+            document.getElementById('splashDiv').style.display="block";
+            //alert('start');
+        }
+        function checkAll(sel) {
+            var inputElem = document.getElementsByTagName("input");
+            var i;
+            for(i=0 ; i < inputElem.length ; i++){
+                if(inputElem[i].id.indexOf("selected") != -1){
+                    inputElem[i].checked = sel.checked;
+                }
+            }
+        } 
+  
+        function endSplash(){
+            //var divObj = document.getElementById('splashDiv');
+            document.getElementById('splashDiv').style.display="none";
+        }
+   </script>
+   <apex:pageMessages id="msgs1"></apex:pageMessages>
+        <apex:outputPanel id="comp">
+            <c:AccountHierarchyTreeXLS strcurrentId="{!Account.id}" id="component" />
+        </apex:outputPanel>
+</apex:page>

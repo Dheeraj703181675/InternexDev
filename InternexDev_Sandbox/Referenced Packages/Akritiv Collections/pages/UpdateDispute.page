@@ -1,0 +1,155 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/*
+ * Page provide the functionality to update a dispute
+ */
+--> 
+<apex:page controller="akritiv.UpdateDispute" showHeader="false" sidebar="false"
+    id="pg">
+
+<script>
+ function refreshWindow(isDisputesUpdate)
+ {
+   try
+   {  if(isDisputesUpdate == 'true'){
+         window.opener.location.href = '{!JSENCODE(parentLoc)}' ;
+         window.close() ;
+      }
+   }
+   catch(es)
+   {
+      alert(es) ;
+   }
+ }
+ function dispcat(val){
+           disputcat(val);
+       }
+
+ 
+ function showHideResolution(){
+    
+    changeStatus();
+ }
+ 
+ //*********************AKTPROD-297 Update Dispute - Dispute Sub Type Rendering Issue********************
+ function startProcess(){
+    if({!$Setup.SysConfig_Singlec__c.Enable_Dispute_Sub_Type__c}) {
+        document.getElementById("{!$Component.frm.loadingdetail}").style.display = 'block'; 
+        document.getElementById('filter').style.display = 'block';
+    }
+ }
+      
+ function endProcess(){
+    document.getElementById("{!$Component.frm.loadingdetail}").style.display = 'none';
+    document.getElementById('filter').style.display = 'none'; 
+ } 
+</script>
+
+    <apex:sectionHeader title="{!$Label.Label_Update_Dispute}" />
+    <apex:form id="frm" style="resizable:false;">
+        <div id="filter"></div>
+        <apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loadingdetail" style="display:none;position:fixed;top:50%;left:50%;z-index:10;"/>
+        <apex:pageMessages id="pgmsg"></apex:pageMessages>
+        <apex:actionFunction name="changeStatus" action="{!showResolution}"
+            rerender="resoSection" />
+            <apex:actionFunction name="disputcat" action="{!disputcatogary}" rerender="pbs1,otherid" oncomplete="endProcess();">
+            </apex:actionFunction> 
+        <apex:pageBlock id="pb">
+
+            <apex:pageBlockButtons >
+                <apex:commandButton value="{!$Label.Label_Update}"
+                    action="{!updateDispute}"
+                    oncomplete="refreshWindow('{!isUpdate}');" rerender="pgmsg"  />
+                <apex:commandButton value="{!$Label.Label_Cancel}"
+                    onclick="window.close();" />
+            </apex:pageBlockButtons>
+
+            <apex:pageBlockSection columns="1"
+                title="{!$Label.Label_Customer_Rating}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Rating}" />
+                    <c:Star_Rating_Component updatable="true"
+                        initRating="{!activityRating}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageblockSection columns="1"
+                title="{!$Label.Label_Update_Dispute}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputlabel value="{!$Label.Label_Status}" />
+                    <apex:selectList value="{!selectedStatus}" size="1" id="disStatus"
+                        multiselect="false" onchange="showHideResolution();">
+                        <apex:selectOptions value="{!status}"></apex:selectOptions>
+                    </apex:selectList>
+
+                </apex:pageBlockSectionItem>
+
+                
+                
+                <apex:pageBlockSection id="resoSection">
+                <apex:pageBlockSectionItem rendered="{!isShowResolution}">
+                    <apex:outputlabel value="{!$Label.Label_Resolution_Code}" />
+                    <apex:selectList value="{!selectedResolutionCode}" size="1" style="margin-right:130px"
+                        id="resCode" multiselect="false">
+                        <apex:selectOptions value="{!resolutionCodes}"></apex:selectOptions>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputlabel value="{!$Label.Label_Dispute_Type}" />
+                    <apex:inputField value="{!disputeObj.akritiv__Type__c}" onchange="dispcat(this.value);startProcess();"/>
+                </apex:pageBlockSectionItem>
+                 
+                <!-- *****PAGE BLOCKSECTION FOR DISPLAY DISPUTE SUB TYPE***** -->
+            
+                <apex:pageBlockSection rendered="{!$Setup.SysConfig_Singlec__c.Enable_Dispute_Sub_Type__c}"  id="pbs1">
+                    <apex:inputField rendered="{!disputeObj.akritiv__Type__c != 'Other'}" value="{!disputeObj.akritiv__Sub_Type__c}" label="{!$Label.Label_Dispute_Sub_Type}"></apex:inputField>
+                    <apex:inputText rendered="{!disputeObj.akritiv__Type__c == 'Other'}" value="{!disputeObj.akritiv__Sub_Type__c}" label="{!$Label.Label_Dispute_Sub_Type}" style="margin-right:200px"></apex:inputText>
+                    <br/><br/>
+                </apex:pageBlockSection>
+        
+                <apex:pageBlockSectionItem >
+        <apex:outputlabel value="Owner" />
+                    <apex:inputField value="{!disputeObj.akritiv__Owner__c}" />
+                </apex:pageBlockSectionItem>
+                
+                <!--<apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Note_Title}" />
+                    <apex:inputText style="width:300px" value="{!noteTitle}"
+                        id="noteTitle" maxlength="80" />
+                </apex:pageBlockSectionItem>-->
+
+
+                <apex:pageBlockSectionItem id="sib">
+                    <apex:outputLabel value="{!$Label.Label_Notes}" />
+                    <apex:inputTextArea value="{!noteBody}" style="width:300px; height:100px;" id="noteBody" />
+                </apex:pageBlockSectionItem>
+
+            </apex:pageblockSection>
+        </apex:pageBlock>
+    </apex:form>
+
+    <script>
+    
+        function closeAndRefreshParentWindow()
+        {
+            
+            if (window.opener && !window.opener.closed) {
+                window.opener.location.reload(false);
+                
+            } 
+
+            
+            return false;
+       }
+            </script>
+
+</apex:page>

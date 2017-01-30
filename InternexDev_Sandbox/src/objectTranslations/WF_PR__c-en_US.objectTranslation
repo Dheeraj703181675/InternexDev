@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>WF_PR</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>WF_PR</value>
+    </caseValues>
+    <fields>
+        <label><!-- Additional currency code(PR19) --></label>
+        <name>Additional_currency_code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Additional entity identifier code(PR18) --></label>
+        <name>Additional_entity_identifier_code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amount paid(PR05) --></label>
+        <name>Amount_paid__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amount_paid_formula --></label>
+        <name>Amount_paid_formula__c</name>
+    </fields>
+    <fields>
+        <label><!-- Credit/debit indicator(PR04) --></label>
+        <name>Credit_debit_indicator__c</name>
+    </fields>
+    <fields>
+        <label><!-- Currency code(PR16) --></label>
+        <name>Currency_code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Currency entity identifier code(PR15) --></label>
+        <name>Currency_entity_identifier_code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Currency market/ exchange code(PR20) --></label>
+        <name>Currency_market_exchange_code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Custom Amount 1(PR31) --></label>
+        <name>Custom_Amount_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deposit/settlement date(PR12) --></label>
+        <name>Deposit_settlement_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Exchange rate(PR17) --></label>
+        <name>Exchange_rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Gross amount(PR06) --></label>
+        <name>Gross_amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Item sequence number (PR01) --></label>
+        <name>Item_sequence_number__c</name>
+    </fields>
+    <fields>
+        <label><!-- MCA Amount Paid(PR32) --></label>
+        <name>MCA_Amount_Paid__c</name>
+    </fields>
+    <fields>
+        <label><!-- MCA Gross Amount(PR33) --></label>
+        <name>MCA_Gross_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Matching string for Image mapping --></label>
+        <name>Matching_string_for_Image_mapping__c</name>
+    </fields>
+    <fields>
+        <label><!-- ODFI RTN(PR02) --></label>
+        <name>ODFI_RTN__c</name>
+    </fields>
+    <fields>
+        <help><!-- PR03 --></help>
+        <label><!-- ODFI account number/ ACH company ID/ con --></label>
+        <name>ODFI_account_number_ACH_company_ID_con__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Status --></label>
+        <name>Payment_Status__c</name>
+        <picklistValues>
+            <masterLabel>Reversed</masterLabel>
+            <translation><!-- Reversed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Suspense</masterLabel>
+            <translation><!-- Suspense --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Valid</masterLabel>
+            <translation><!-- Valid --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Payment --></label>
+        <name>Payment__c</name>
+        <relationshipLabel><!-- WF_PR --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Payment effective date(PR13) --></label>
+        <name>Payment_effective_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment method(PR07) --></label>
+        <name>Payment_method__c</name>
+        <picklistValues>
+            <masterLabel>ACH</masterLabel>
+            <translation><!-- ACH --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ARC</masterLabel>
+            <translation><!-- ARC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BKW</masterLabel>
+            <translation><!-- BKW --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BOP</masterLabel>
+            <translation><!-- BOP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CCC</masterLabel>
+            <translation><!-- CCC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CHK</masterLabel>
+            <translation><!-- CHK --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CWT</masterLabel>
+            <translation><!-- CWT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EBA</masterLabel>
+            <translation><!-- EBA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EBC</masterLabel>
+            <translation><!-- EBC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EBD</masterLabel>
+            <translation><!-- EBD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FWT</masterLabel>
+            <translation><!-- FWT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IP</masterLabel>
+            <translation><!-- IP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LOC</masterLabel>
+            <translation><!-- LOC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PGB</masterLabel>
+            <translation><!-- PGB --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PGC</masterLabel>
+            <translation><!-- PGC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PGK</masterLabel>
+            <translation><!-- PGK --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PGP</masterLabel>
+            <translation><!-- PGP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SWT</masterLabel>
+            <translation><!-- SWT --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Payment method type code(PR08) --></label>
+        <name>Payment_method_type_code__c</name>
+        <picklistValues>
+            <masterLabel>CC</masterLabel>
+            <translation><!-- CC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CCD</masterLabel>
+            <translation><!-- CCD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CTX</masterLabel>
+            <translation><!-- CTX --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D</masterLabel>
+            <translation><!-- D --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DA</masterLabel>
+            <translation><!-- DA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>E</masterLabel>
+            <translation><!-- E --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IAT</masterLabel>
+            <translation><!-- IAT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N</masterLabel>
+            <translation><!-- N --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>O</masterLabel>
+            <translation><!-- O --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PGB</masterLabel>
+            <translation><!-- PGB --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PGC</masterLabel>
+            <translation><!-- PGC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PGK</masterLabel>
+            <translation><!-- PGK --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PGP</masterLabel>
+            <translation><!-- PGP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PPD</masterLabel>
+            <translation><!-- PPD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SG</masterLabel>
+            <translation><!-- SG --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TEL</masterLabel>
+            <translation><!-- TEL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>W</masterLabel>
+            <translation><!-- W --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Processing system reference number(PR10) --></label>
+        <name>Processing_system_reference_number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record ID --></label>
+        <name>Record_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 1(PR22B) --></label>
+        <name>Reference_1_PR22B__c</name>
+        <picklistValues>
+            <masterLabel>Account Number</masterLabel>
+            <translation><!-- Account Number --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Credit Card Issuer</masterLabel>
+            <translation><!-- Credit Card Issuer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Deposit Location Number</masterLabel>
+            <translation><!-- Deposit Location Number --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Envelope Sequence Number</masterLabel>
+            <translation><!-- Envelope Sequence Number --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expiration Date</masterLabel>
+            <translation><!-- Expiration Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IBAN</masterLabel>
+            <translation><!-- IBAN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Supporting Document Number</masterLabel>
+            <translation><!-- Supporting Document Number --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Type of Card or Account</masterLabel>
+            <translation><!-- Type of Card or Account --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Reference 1 description(PR22A) --></label>
+        <name>Reference_1_description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 1 qualifier/description(PR21) --></label>
+        <name>Reference_1_qualifier_description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 2(PR24B) --></label>
+        <name>Reference_2__c</name>
+        <picklistValues>
+            <masterLabel>Batch ID</masterLabel>
+            <translation><!-- Batch ID --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FX Contract Number</masterLabel>
+            <translation><!-- FX Contract Number --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Receiver Reference Number</masterLabel>
+            <translation><!-- Receiver Reference Number --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Short Pay Reason Code</masterLabel>
+            <translation><!-- Short Pay Reason Code --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WASAU Sequence Number</masterLabel>
+            <translation><!-- WASAU Sequence Number --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WPIC Number</masterLabel>
+            <translation><!-- WPIC Number --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Reference 2 description(PR24A) --></label>
+        <name>Reference_2_description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 2 qualifier/description(PR23) --></label>
+        <name>Reference_2_qualifier_description_PR__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 3(PR26) --></label>
+        <name>Reference_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 3 qualifier/description(PR25) --></label>
+        <name>Reference_3_qualifier_description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 4(PR28) --></label>
+        <name>Reference_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 4 qualifier/description(PR27) --></label>
+        <name>Reference_4_qualifier_description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 5(PR29) --></label>
+        <name>Reference_5__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 6(PR30) --></label>
+        <name>Reference_6__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reversal Reason Code(PR34) --></label>
+        <name>Reversal_Reason_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sender payment reference number(PR09) --></label>
+        <name>Sender_payment_reference_number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Temp BH --></label>
+        <name>Temp_BH__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transaction processing date/time(PR14) --></label>
+        <name>Transaction_processing_date_time__c</name>
+    </fields>
+    <fields>
+        <label><!-- WF_BH --></label>
+        <name>WF_BH__c</name>
+        <relationshipLabel><!-- WF_PR --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Wells Fargo reference number(PR11) --></label>
+        <name>Wells_Fargo_reference_number__c</name>
+    </fields>
+    <layouts>
+        <layout>WF_PR Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

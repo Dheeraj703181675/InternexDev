@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>17.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>This page was supposed to be inline on account detail page. But Due to the issue (inline page not appearing on subscriber org) the page is now not in use.</description>
+    <label>Rating</label>
+</ApexPage>

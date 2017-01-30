@@ -1,0 +1,74 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/*
+ * Page is used to send message to internal user 
+ * with related object as account, Transaction or Dispute.
+ * The functionality is same as quick note on the sidebar.
+ */
+-->
+<apex:page controller="akritiv.QuickNoteController" showHeader="false"
+    sidebar="false" >
+    
+    <apex:form id="testform">
+           
+        <apex:actionFunction name="callPageMethod" action="{!prepareObjectIM}"  reRender="testform" /> 
+
+ </apex:form>
+
+    <apex:form >
+        <apex:pageBlock >
+            <apex:PageBlockButtons >
+                <apex:commandButton value="{!$Label.Label_Send}"
+                    action="{!saveIMMessage}" oncomplete="window.close();" />
+                <apex:commandButton value="{!$Label.Label_Cancel}"
+                    onclick="window.close();" />
+            </apex:PageBlockButtons>
+
+            <apex:pageblockSection columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputlabel value="{!$Label.Label_To}" />
+                    <apex:selectList value="{!selectedToUserIds}" size="3" id="ToUser"
+                        multiselect="true">
+                        <apex:selectOptions value="{!allUsers}"></apex:selectOptions>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Related_Objects}" />
+                    <apex:outputPanel >
+                        <apex:repeat value="{!imRelatedObjects}" var="obj">
+                            <a href="/{!obj.objId}" target="blank">{!obj.objName}</a>
+                        </apex:repeat>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Add_To_Note}" />
+                    <apex:inputField value="{!newOrReplyMsg.akritiv__Add_To_Note__c}" />
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Message}" />
+                    <apex:inputTextArea value="{!newOrReplyMsg.akritiv__Message_Body__c}"
+                        style="width:250px; height:80px;" />
+                </apex:pageBlockSectionItem>
+
+            </apex:pageblockSection>
+        </apex:pageBlock>
+    </apex:form>
+        
+       
+     <script>
+
+      callPageMethod();
+     
+    </script>
+</apex:page>

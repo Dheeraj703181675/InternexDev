@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>17.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>The page provides the functionality to contact/followup a customer which is one of the major functionality of the application.
+
+Page allow user (mainly Collectors) to contact the customer on some transactions by email/phone/fax. User can also send an email that can contain pdf/excel data stating the detail about those transactions. User can also followup this task (Contact To Customer task) by mentioning some follow-up days on the page.</description>
+    <label>ContactCustomerPage</label>
+</ApexPage>

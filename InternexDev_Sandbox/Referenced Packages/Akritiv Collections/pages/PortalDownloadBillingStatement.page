@@ -1,0 +1,20 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/*
+ * The page is related to Customer Portal.
+ * Portal user can download the billing statement from the 
+ * portal directly for all the invoices associated with the account.
+ */
+-->
+<apex:page controller="akritiv.PortalDownloadBillingStatementController"
+    renderAs="pdf">
+    <apex:outputText value="{!pageContent}" escape="false" />
+</apex:page>

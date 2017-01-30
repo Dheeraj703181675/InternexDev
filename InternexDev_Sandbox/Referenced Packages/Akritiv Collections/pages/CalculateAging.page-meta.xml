@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>18.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>This is the main page to run the batch calculations. It runs the
+                following batch jobs: 1. Aging Calculation Batch Job 2.
+                SetParentAccount Batch Job 3. DataLoad Batch Job.</description>
+    <label>CalculateAging</label>
+</ApexPage>

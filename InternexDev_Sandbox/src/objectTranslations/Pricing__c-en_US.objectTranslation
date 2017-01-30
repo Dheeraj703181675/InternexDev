@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Pricing</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Pricing</value>
+    </caseValues>
+    <fields>
+        <label><!-- Business Transaction Date --></label>
+        <name>Business_Transaction_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Index Uniqueness --></label>
+        <name>Date_Index_Uniqueness__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Index --></label>
+        <name>Date_Index__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date --></label>
+        <name>Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- External Id --></label>
+        <name>External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Index --></label>
+        <name>Index__c</name>
+        <picklistValues>
+            <masterLabel>Citi Prime</masterLabel>
+            <translation><!-- Citi Prime --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Internex base</masterLabel>
+            <translation><!-- Internex base --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LIBOR</masterLabel>
+            <translation><!-- LIBOR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WS Prime</masterLabel>
+            <translation><!-- WS Prime --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- MP External Id --></label>
+        <name>MP_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Month --></label>
+        <name>Month__c</name>
+    </fields>
+    <fields>
+        <label><!-- Portal External Id --></label>
+        <name>Portal_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rate --></label>
+        <name>Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Source --></label>
+        <name>Source__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Grade --></label>
+        <name>Sync_with_Grade__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Market Place --></label>
+        <name>Sync_with_Market_Place__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Portal --></label>
+        <name>Sync_with_Portal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Year --></label>
+        <name>Year__c</name>
+    </fields>
+    <layouts>
+        <layout>InterNex AM Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>InterNex-Admin Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Sys-Admin Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Integration --></label>
+            <section>Integration</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Date should be less than or equal to Today --></errorMessage>
+        <name>Date_Validation_Rule</name>
+    </validationRules>
+</CustomObjectTranslation>

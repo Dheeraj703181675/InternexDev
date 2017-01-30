@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Funding Transaction</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Funding Transactions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Applied Draw Fee --></label>
+        <name>Applied_Draw_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Applied Fee --></label>
+        <name>Applied_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Applied Origination Fee --></label>
+        <name>Applied_Origination_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Applied Partner Draw Fee --></label>
+        <name>Applied_Partner_Draw_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Applied Partner Origination Fee --></label>
+        <name>Applied_Partner_Origination_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Details --></label>
+        <name>Bank_Details__c</name>
+    </fields>
+    <fields>
+        <label><!-- Created Time --></label>
+        <name>Created_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- CP Funded Date --></label>
+        <name>Deal_Acceptance_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Discount/Interest Rate --></label>
+        <name>Discount_Interest_Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Draw Fee Percentage --></label>
+        <name>Drawal_Fee_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Draw Fee --></label>
+        <name>Drawal_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- External Id --></label>
+        <name>External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Funding Allotted --></label>
+        <name>Fund__c</name>
+    </fields>
+    <fields>
+        <label><!-- Funding Provider --></label>
+        <name>Funding_Provider__c</name>
+        <relationshipLabel><!-- Funding Transactions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Funding Request --></label>
+        <name>Funding_Request__c</name>
+        <relationshipLabel><!-- Funding Transactions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Funding Transaction Date --></label>
+        <name>Funding_Transaction_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Funding provider Name --></label>
+        <name>Funding_provider_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Funds to be Transferred --></label>
+        <name>Funds_to_be_Transferred__c</name>
+    </fields>
+    <fields>
+        <label><!-- MP External Id --></label>
+        <name>MP_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Minimum Draw fee --></label>
+        <name>Minimum_Drawal_fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Minimum Origination Fee --></label>
+        <name>Minimum_Origination_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Origination Fee Applicable --></label>
+        <name>Origination_Fee_Applicable__c</name>
+    </fields>
+    <fields>
+        <label><!-- Origination Fee Percentage --></label>
+        <name>Origination_Fee_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Origination Fee --></label>
+        <name>Origination_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Portal External Id --></label>
+        <name>Portal_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Grade --></label>
+        <name>Sync_with_Grade__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Market Place --></label>
+        <name>Sync_with_Market_Place__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Portal --></label>
+        <name>Sync_with_Portal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Draw</masterLabel>
+            <translation><!-- Draw --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Remittance</masterLabel>
+            <translation><!-- Remittance --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Funding Transaction Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Integration --></label>
+            <section>Integration</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Funding Transaction Layout for Client</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Please enter the Valid Date.Transaction Date must be Less than or Equal to Business Transaction Date. --></errorMessage>
+        <name>Funding_Transaction_Date_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter valid Amount. You can not give more than Requested amount. --></errorMessage>
+        <name>Validation_on_Alloted_Funding_amount</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Only One Funding Transaction allowed for one Funding Request --></errorMessage>
+        <name>Validation_on_Funding_Transaction_Count</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Send_to_Portal --></label>
+        <name>Send_to_Portal</name>
+    </webLinks>
+</CustomObjectTranslation>

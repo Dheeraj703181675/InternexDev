@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>17.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Internal Messaging Page.  That is placed on the sidebar. The page is used to make contact with the system users internally. The same internal message can be created through buttons on detail pages of account and Transaction.</description>
+    <label>Quick Note</label>
+</ApexPage>

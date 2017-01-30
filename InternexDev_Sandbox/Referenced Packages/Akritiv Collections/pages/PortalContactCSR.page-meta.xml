@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>17.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>The page is related to Customer Portal.
+This page will be used by a customer portal user to make contact with the owner of the account.</description>
+    <label>PortalContactCSR</label>
+</ApexPage>

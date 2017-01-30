@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Line items for invoice, CM and DM.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Line Items</relationshipLabel>
+        <relationshipName>Line_Items</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>120</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Discount__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Discount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Item_Number__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Item#</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Last_Contact_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Last Contact Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Last_Contacted_By__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Last Contacted By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Line_Items</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Line_Key__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <externalId>true</externalId>
+        <label>Line Key</label>
+        <length>130</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Line_Total__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Line Total</description>
+        <externalId>false</externalId>
+        <label>Line Total</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>List_Price__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>List Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Note_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Note Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Quantity__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Quantity</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Service_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Service Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Transaction__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Transaction</label>
+        <referenceTo>Transaction__c</referenceTo>
+        <relationshipLabel>Lines Items</relationshipLabel>
+        <relationshipName>Lines_Items1</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Unit_Price__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <label>Line Item</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Item_Number__c</columns>
+        <columns>Transaction__c</columns>
+        <columns>Description__c</columns>
+        <columns>Quantity__c</columns>
+        <columns>Unit_Price__c</columns>
+        <columns>Discount__c</columns>
+        <columns>Line_Total__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Line Item #</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Line Items</pluralLabel>
+    <searchLayouts>
+        <listViewButtons>Dispute_Lines</listViewButtons>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchResultsCustomButtons>Create_Dispute</searchResultsCustomButtons>
+        <searchResultsCustomButtons>Dispute_Lines</searchResultsCustomButtons>
+    </searchLayouts>
+    <sharingModel>Read</sharingModel>
+    <webLinks>
+        <fullName>Create_Dispute</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Create Dispute</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>// Rajeev 23/11/2009 Original 
+// 
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/apex.js&quot;)} 
+
+sforce.connection.defaultNamespace = &apos;{!$Setup.SysConfig__c.NameSpace__c}&apos;;
+
+/* 
+Gets the list of selected records and prepares a URL to update the suppliers and their related information 
+*/ 
+
+//Fetch the list 
+var records = {!GETRECORDIDS($ObjectType.Line_Item__c)}; 
+var strIDs=&apos;&apos;; 
+
+/* 
+Check if the user has selected at least one record and display a message 
+*/ 
+
+
+
+if (records[0] == null) 
+{ 
+
+var TransId = &apos;{!Transaction__c.Id}&apos; ;
+var dispAmt = 0 ;
+parent.location.href = &apos;/apex/GenerateTransactionDisputes?txid=&apos;+TransId+&apos;&amp;dispamt=&apos;+dispAmt+&apos;&amp;orderby=name&amp;ordertype=desc&apos;;
+} 
+else 
+{ 
+for (var n=0; n&lt;records.length; n++) 
+{ 
+if(strIDs == &apos;&apos;) 
+strIDs = &quot;&apos;&quot;+records[n]+&quot;&apos;&quot;; 
+else 
+strIDs = strIDs + &quot;,&apos;&quot; + records[n]+&quot;&apos;&quot;; 
+} 
+
+if(strIDs !=null &amp;&amp; strIDs !=&apos;&apos;){ 
+
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;; 
+var config = new sforce.SObject(&quot;akritiv__Temp_Object_Holder__c&quot;); 
+var user = sforce.connection.getUserInfo() ; 
+var timest = sforce.connection.getServerTimestamp(); 
+var key = &apos;{!$User.Username}&apos; + timest.timestamp ; 
+config.akritiv__Key__c =key ; 
+config.akritiv__Value__c = strIDs; 
+var res = sforce.connection.create([config]); 
+
+var queryResult = sforce.connection.query(&quot;Select  akritiv__Line_Total__c  from akritiv__Line_Item__c   where Id in (&quot;+ strIDs+&quot;) &quot;) ;
+
+records = queryResult.getArray(&quot;records&quot;);
+var amt = 0 ;
+  for(var temp = 0 ; temp &lt; records.length ; temp++)
+  {
+      amt = amt + parseFloat(records[temp].Line_Total__c)  ;
+  }
+
+var TransId = &apos;{!Transaction__c.Id}&apos; ;
+var dispAmt = amt ;
+parent.location.href = &apos;/apex/akritiv__GenerateTransactionDisputes?txid=&apos;+TransId+&apos;&amp;dispamt=&apos;+dispAmt+&apos;&amp;orderby=name&amp;ordertype=desc&apos;;
+
+} 
+
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Dispute_Lines</fullName>
+        <availability>online</availability>
+        <description>This button is to create dispute on line items</description>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Dispute Lines</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/apex.js&quot;)}
+
+sforce.connection.defaultNamespace = &apos;{!$Setup.SysConfig__c.NameSpace__c}&apos;;
+
+/*
+Gets the list of selected records and prepares a URL to update the suppliers and their related information
+*/
+
+//Fetch the list
+var records = {!GETRECORDIDS($ObjectType.Line_Item__c)};
+var strIDs=&apos;&apos;;
+var transId = &apos;{!Transaction__c.Id}&apos;;
+var accId = &apos;{!Account.Id}&apos;;
+/*
+Check if the user has selected at least one record and display a message
+*/
+
+if (records[0] == null)
+{
+alert(&apos;Please select at least 1 Line Item&apos;);
+}
+else
+{
+for (var n=0; n&lt;records.length; n++)
+{
+if(strIDs == &apos;&apos;){
+strIDs =records[n];
+}else{
+strIDs = strIDs + &quot;,&quot; + records[n];
+}
+}
+
+if(strIDs !=null &amp;&amp; strIDs !=&apos;&apos;){
+
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;;
+var config = new sforce.SObject(&quot;akritiv__Temp_Object_Holder__c&quot;);
+var user = sforce.connection.getUserInfo() ;
+var timest = sforce.connection.getServerTimestamp();
+var key = &apos;{!$User.Username}&apos; + timest.timestamp ;
+config.akritiv__Key__c =key ;
+config.akritiv__Value__c = strIDs;
+var res = sforce.connection.create([config]);
+
+parent.location.href = &apos;/apex/akritiv__GenerateLineItemsDisputes?txid=&apos;+transId+&apos;&amp;lineItemIds=&apos;+strIDs+&apos;&amp;orderby=name&amp;ordertype=desc&amp;tempKey=&apos;+key+&apos;&amp;accId=&apos;+accId;
+
+}
+}</url>
+    </webLinks>
+</CustomObject>

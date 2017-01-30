@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This is a generic template for Custom Object.  With this template, you may adjust the default elements and values and add new elements and values.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Batch_Number__c</fullName>
+        <description>Batch Number - getting updated by a workflow</description>
+        <externalId>false</externalId>
+        <label>Batch Number</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Check_Amount__c</fullName>
+        <description>Amount of the check received in the file</description>
+        <externalId>false</externalId>
+        <label>Check Amount</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Check_Number__c</fullName>
+        <description>Check Number of the payment</description>
+        <externalId>false</externalId>
+        <label>Check Number</label>
+        <length>200</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DD_Account__c</fullName>
+        <defaultValue>&apos;-&apos;</defaultValue>
+        <externalId>false</externalId>
+        <label>DD Account #</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Deposit_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Deposit Date</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>File_Batch_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>File Batch Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>File_Number__c</fullName>
+        <description>Unique number will be assigned to a file, that is uploaded</description>
+        <displayFormat>WC-{000}</displayFormat>
+        <externalId>false</externalId>
+        <label>File Number</label>
+        <trackTrending>false</trackTrending>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>Invoice_Amount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Invoice Amount for a Invoice number</description>
+        <externalId>false</externalId>
+        <label>Invoice Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Invoice_Number__c</fullName>
+        <description>Invoice Number against a check number</description>
+        <externalId>false</externalId>
+        <label>Invoice Number</label>
+        <length>200</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Item_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Item Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Load_key__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Used to store unique combination of each record in bank file.</description>
+        <externalId>false</externalId>
+        <label>Load key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>LockBox_Number__c</fullName>
+        <defaultValue>&apos;-&apos;</defaultValue>
+        <description>Lockbox number will be loaded from a file</description>
+        <externalId>false</externalId>
+        <label>LockBox Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lockbox_Site__c</fullName>
+        <defaultValue>&apos;-&apos;</defaultValue>
+        <externalId>false</externalId>
+        <label>Lockbox Site</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Remitter_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Remitter Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Transit_Routing__c</fullName>
+        <defaultValue>&apos;-&apos;</defaultValue>
+        <externalId>false</externalId>
+        <label>Transit Routing #</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>isProcessed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To check if record is processed already</description>
+        <externalId>false</externalId>
+        <label>isProcessed</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>LoadWebCash</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>Batch_Number__c</columns>
+        <columns>Deposit_Date__c</columns>
+        <columns>Company_Number__c</columns>
+        <columns>Company_Name__c</columns>
+        <columns>Lockbox_Site__c</columns>
+        <columns>LockBox_Number__c</columns>
+        <columns>Item_Number__c</columns>
+        <columns>Check_Amount__c</columns>
+        <columns>Check_Number__c</columns>
+        <columns>Remitter_Name__c</columns>
+        <columns>Invoice_Number__c</columns>
+        <columns>Invoice_Amount__c</columns>
+        <columns>Load_key__c</columns>
+        <columns>Transit_Routing__c</columns>
+        <columns>DD_Account__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All1</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>LoadWebCashes</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Batch_Number__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Check_Number__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Check_Amount__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Invoice_Number__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Invoice_Amount__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>LockBox_Number__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Load_key__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>isProcessed__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATED_DATE</customTabListAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

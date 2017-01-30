@@ -1,0 +1,1845 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <content>ClientAccountEdit</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>AP_16_30__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>16-30</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>AP_1_15__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>1-15</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>AP_31_60__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>31-60</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>AP_61_90__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>61-90</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>AP_90__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>90+</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>AP_Current__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Current</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Actual_IUF_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>Sum_of_IUF_Retained__c - Sum_of_IUF_Used__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Sum_of_IUF_Retained - Sum_of_IUF_Used</inlineHelpText>
+        <label>Actual IUF Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Actual_Interest_Initiation_Date__c</fullName>
+        <description>Removed it from logic because we received start date from Grade</description>
+        <externalId>false</externalId>
+        <formula>IF( ISBLANK(Interest_Initiation_Date__c),  DATEVALUE(CreatedDate) +  $Setup.Interest_Start_Date__c.Days_to_wait_for_Interest_calcualtion__c,Interest_Initiation_Date__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Actual Interest Initiation Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Additional_IUF_Required__c</fullName>
+        <externalId>false</externalId>
+        <formula>IUF_Reserve_Amount__c - Actual_IUF_Amount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>IUF Reserve Shortfall</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Application_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Application Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BB_Coverage__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(OR(Borrowing_Base__c &lt;= 0,FIU_Outstanding__c &lt;= 0),0, FIU_Outstanding__c / Borrowing_Base__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>BB Coverage%</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>BB_Line__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(OR(Funding_Limit__c &lt;= 0,Borrowing_Base__c &lt;= 0),0,Borrowing_Base__c / Funding_Limit__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>BB Line %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Borrowing_Base_Reserve__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Borrowing Base Reserve</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Borrowing_Base__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(MIN(Gross_Availability__c,Funding_Limit__c) - Borrowing_Base_Reserve__c &lt; 0,0,MIN(Gross_Availability__c,Funding_Limit__c) - Borrowing_Base_Reserve__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>IF(MIN(Gross_Availability,Facility Size) - Borrowing_Base_Reserve &lt; 0,0,MIN(Gross_Availability,Facility Size) - Borrowing_Base_Reserve)</inlineHelpText>
+        <label>Borrowing Base</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Business_Transaction_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Business Transaction Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Bussiness_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>$Setup.BusinessTransactionDate__c.Business_Transaction_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Business_Transaction_Date</inlineHelpText>
+        <label>Business Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Client_Account_Uniqueness_check__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>false</externalId>
+        <label>Client Account Uniqueness check</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Client_Account__c</fullName>
+        <externalId>false</externalId>
+        <formula>Client__r.Name &amp;&apos;-&apos;&amp; Product__r.Name</formula>
+        <inlineHelpText>Client Name &amp;&apos;-&apos;&amp; Product Name</inlineHelpText>
+        <label>Client Account</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Client_External_Foreign_Key__c</fullName>
+        <description>Created for mapping the Client account and</description>
+        <externalId>true</externalId>
+        <label>Client External Foreign Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Client__c</fullName>
+        <externalId>false</externalId>
+        <label>Client</label>
+        <referenceTo>akritiv__Brand__c</referenceTo>
+        <relationshipName>Client_Products</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Commitment__c</fullName>
+        <externalId>false</externalId>
+        <label>Min Utilization (%)</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Commitment_rate__c</fullName>
+        <externalId>false</externalId>
+        <label>Unused Line Rate</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Current__c</fullName>
+        <externalId>false</externalId>
+        <label>Current</label>
+        <summarizedField>Debtor__c.Current__c</summarizedField>
+        <summaryForeignKey>Debtor__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Debtor_Count__c</fullName>
+        <externalId>false</externalId>
+        <label>Debtor Count</label>
+        <summaryForeignKey>Debtor__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Debtor_Count_for_Invoices__c</fullName>
+        <externalId>false</externalId>
+        <label>Debtor Count for Invoices</label>
+        <summaryFilterItems>
+            <field>Debtor__c.Invoice_Count_for_Sending_Portal__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Debtor__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Debtor_Count_for_Payments_to_Portal__c</fullName>
+        <externalId>false</externalId>
+        <label>Debtor Count for Payments to Portal</label>
+        <summaryFilterItems>
+            <field>Debtor__c.Payment_Count_to_send_Portal_payments__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Debtor__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Debtor_Count_for_Payments_to_Trans_Grid__c</fullName>
+        <externalId>false</externalId>
+        <label>Debtor Count for Payments to Trans Grid</label>
+        <summaryFilterItems>
+            <field>Debtor__c.Payment_Count_to_send_Transaction_Grid__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Debtor__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Default_Reason__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Client__r.Default_Reason__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Default Reason</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Drawal_Fee_Percentage__c</fullName>
+        <defaultValue>$Setup.Internex_Fees__c.Drawal_Fee_Percentage__c</defaultValue>
+        <externalId>false</externalId>
+        <label>Draw Fee Percentage</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Eligible_For_Funding__c</fullName>
+        <description>Sum of All debtors Eligible for Funding ,Updated from Debtor Trigger</description>
+        <externalId>false</externalId>
+        <label>Eligible For Funding1</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Eligible_For_Funding_formula__c</fullName>
+        <externalId>false</externalId>
+        <formula>Eligible_For_Funding__c</formula>
+        <inlineHelpText>Eligible_For_Funding</inlineHelpText>
+        <label>Eligible AR</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>External_Req_Id__c</fullName>
+        <description>Created it for storing external Id of Applications(Requested by Rajinikanth to create this field)</description>
+        <externalId>true</externalId>
+        <label>External Request Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FIU_Outstanding__c</fullName>
+        <externalId>false</externalId>
+        <formula>(Sum_of_Received_funds__c - (Sum_of_Payments__c - ((Sum_of_IUF_Retained__c + Sum_of_Interest_Recovered__c + Sum_of_UL_Fee_Recovered__c + Sum_of_Fee__c))))- Payments__c - Sum_of_Manually_Created_IUF_Retained__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Formula : (Sum of Received funds - (Sum of Applied Payments - (Sum of IUF Retained + Interest Recovered + UL Fee Due Recovered + Fee)))</inlineHelpText>
+        <label>Principal Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>FIU_for_History_Tracking__c</fullName>
+        <externalId>false</externalId>
+        <label>Principal Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Flag_for_Client_Maturing_Report__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(AND(NOT(ISBLANK(Maturity_Date__c)),$Setup.BusinessTransactionDate__c.Business_Transaction_Date__c &lt;= Maturity_Date__c &amp;&amp; $Setup.BusinessTransactionDate__c.Business_Transaction_Date__c + $Setup.Configuration_for_the_Reports__c.Days_to_Calculate_for_Client_Maturing__c &gt;= Maturity_Date__c) ,True,False)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Flag for Client Maturing Report</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Funding_Limit__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Data Source: Grade or Portal</inlineHelpText>
+        <label>Facility Size</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Funding_Request_Count__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Funding Request Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Funding_Transaction_Count__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Funding Transaction Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Gross_Availability__c</fullName>
+        <externalId>false</externalId>
+        <label>Gross Availability1</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>IUF_Reserve_Amount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>IUF Reserve Target</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>IUF_Reserve_Retained__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>IUF Reserve Retained</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>IUF_from_Payment__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Updated from Payment trigger to do the IUF calculations</description>
+        <externalId>false</externalId>
+        <label>IUF from Payment</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Index_Value__c</fullName>
+        <externalId>false</externalId>
+        <label>Index Value</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Index__c</fullName>
+        <externalId>false</externalId>
+        <label>Index</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Citi Prime</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Internex base</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>LIBOR</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>WS Prime</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Ineligibles_Amount__c</fullName>
+        <description>Updated Sum of Ineligibles of related Debtor from Debtor trigger.</description>
+        <externalId>false</externalId>
+        <label>Ineligibles</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Ineligibles_Amount_formula__c</fullName>
+        <description>Showing the Ineligibles Amount in Pageblock table</description>
+        <externalId>false</externalId>
+        <formula>Ineligibles_Amount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Ineligibles_Amount</inlineHelpText>
+        <label>Ineligibles Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Interest_Due_Since__c</fullName>
+        <externalId>false</externalId>
+        <label>Interest Due Since</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Interest_Due__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Interest Due</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Interest_Initiation_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Interest_Initiation_Flag__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(AND(NOT(ISBLANK(Interest_Initiation_Date__c)),Interest_Initiation_Date__c &lt;= $Setup.BusinessTransactionDate__c.Business_Transaction_Date__c),True,False)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Interest Initiation Flag</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Interest__c</fullName>
+        <externalId>false</externalId>
+        <label>Interest</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Invoice_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Invoice Amount</label>
+        <summarizedField>Debtor__c.Invoice_Amount__c</summarizedField>
+        <summaryForeignKey>Debtor__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Invoice_Count__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Craeted for Quad-476</description>
+        <externalId>false</externalId>
+        <label>Invoice Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LOC_Percent__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(Funding_Limit__c != 0, FIU_Outstanding__c / Funding_Limit__c,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Formula: Principal Balance / Facility Size</inlineHelpText>
+        <label>Utilization %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Lockbox_Accounts_count__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Lockbox Accounts count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MP_External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>MP External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Maturity_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Maturity Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Method__c</fullName>
+        <externalId>false</externalId>
+        <label>Method</label>
+        <picklist>
+            <picklistValues>
+                <fullName>30 / 360</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ACTUAL / 360</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ACTUAL / ACTUAL</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>MinCommitmentAmount__c</fullName>
+        <externalId>false</externalId>
+        <formula>Funding_Limit__c  * (Commitment__c)</formula>
+        <inlineHelpText>Min Utilization (%) * Client Funding Limit</inlineHelpText>
+        <label>Min Utilization Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Minimum_Drawal_Fee__c</fullName>
+        <defaultValue>$Setup.Internex_Fees__c.Minimum_Drawal_Fee__c</defaultValue>
+        <externalId>false</externalId>
+        <label>Minimum Draw Fee</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Minimum_Origination_Fee__c</fullName>
+        <defaultValue>$Setup.Internex_Fees__c.Minimum_Origination_Fee__c</defaultValue>
+        <externalId>false</externalId>
+        <label>Minimum Origination Fee</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Net_Availability__c</fullName>
+        <externalId>false</externalId>
+        <formula>Borrowing_Base__c - FIU_Outstanding__c</formula>
+        <inlineHelpText>Formula : Borrowing Base - Principal Balance</inlineHelpText>
+        <label>Net Availability</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Non_Accrual_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Non-Accrual Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Non_performing_asset__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Non Accrual</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Origination_Fee_Percentage__c</fullName>
+        <defaultValue>$Setup.Internex_Fees__c.Origination_Fee_Percentage__c</defaultValue>
+        <externalId>false</externalId>
+        <label>Origination Fee Percentage</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Overline_Flag__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(FIU_Outstanding__c &gt; Funding_Limit__c,True,False)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Overline Flag</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Partner_CRM_ID__c</fullName>
+        <externalId>true</externalId>
+        <inlineHelpText>Source: Grade ( CRM )</inlineHelpText>
+        <label>Partner CRM ID</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Partner_Draw_Fee_Amount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Formula: Sum of Partner Draw Fee of all Funding Requests</inlineHelpText>
+        <label>Partner Draw Fee ($)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Partner_Draw_Fee__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Source: Grade ( CRM )</inlineHelpText>
+        <label>Partner Draw Fee (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Partner_Name__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Source: Grade ( CRM )</inlineHelpText>
+        <label>Partner Name</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Partner_Origination_Fee_Amount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Formula: Sum of Partner Origination Fee of all Funding Requests</inlineHelpText>
+        <label>Partner Origination Fee ($)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Partner_Origination_Fee__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Source: Grade ( CRM )</inlineHelpText>
+        <label>Partner Origination Fee (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Partner_Type__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Source: Grade ( CRM )</inlineHelpText>
+        <label>Partner Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Broker</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Channel</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Partner__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Partner</label>
+        <referenceTo>Partner__c</referenceTo>
+        <relationshipLabel>Client Accounts</relationshipLabel>
+        <relationshipName>Client_Accounts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Payment_balance__c</fullName>
+        <externalId>false</externalId>
+        <formula>Payments__c</formula>
+        <inlineHelpText>Payments__c</inlineHelpText>
+        <label>Payment balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payments__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Updated from payment Trigger</description>
+        <externalId>false</externalId>
+        <label>Payments</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Portal_External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>Portal External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Primary_Contact_External_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Primary Contact External ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Primary_Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Primary Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Client Accounts</relationshipLabel>
+        <relationshipName>Client_Accounts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Prior_value_of_FIU__c</fullName>
+        <externalId>false</externalId>
+        <label>Prior value of FIU</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Product_External_Foreign_Key__c</fullName>
+        <externalId>true</externalId>
+        <label>Product External Foreign Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Product__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Product</label>
+        <referenceTo>Product__c</referenceTo>
+        <relationshipName>Client_Products</relationshipName>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Profile_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>$User.Profile_Name__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>$User.Profile_Name</inlineHelpText>
+        <label>Profile Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Rate_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Rate Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Fixed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Floating</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Rate__c</fullName>
+        <externalId>false</externalId>
+        <label>Interest Rate</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Renewal_Approval_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Renewal Approval Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Renewal_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Renewal Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Secondary_Contact_External_Id__c</fullName>
+        <externalId>false</externalId>
+        <label>Secondary Contact External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Secondary_Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Secondary Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Client Accounts (Secondary Contact)</relationshipLabel>
+        <relationshipName>Client_Accounts1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Send_to_Grade__c</fullName>
+        <externalId>false</externalId>
+        <label>Send to Grade</label>
+        <summaryFilterItems>
+            <field>Debtor__c.Send_to_Grade__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Debtor__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Send_to_Portal__c</fullName>
+        <externalId>false</externalId>
+        <label>Send to Portal</label>
+        <summaryFilterItems>
+            <field>Debtor__c.Send_to_Portal__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Debtor__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Source__c</fullName>
+        <externalId>false</externalId>
+        <label>Source</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Spread__c</fullName>
+        <externalId>false</externalId>
+        <label>Spread</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Client__r.Status__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sum_of_Draw_Fees__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Sum of Draw Fees</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_Fee__c</fullName>
+        <description>Used in Principal Balance Formula</description>
+        <externalId>false</externalId>
+        <label>Sum of Fee</label>
+        <summarizedField>Fees__c.Fees_Due__c</summarizedField>
+        <summaryForeignKey>Fees__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_IUF_Retained__c</fullName>
+        <description>Sum of IUF Retained from IUF table</description>
+        <externalId>false</externalId>
+        <label>Sum of IUF Retained</label>
+        <summarizedField>IUF__c.IUF_Retained__c</summarizedField>
+        <summaryForeignKey>IUF__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_IUF_Used__c</fullName>
+        <description>Sum of IUF Used of All IUFs</description>
+        <externalId>false</externalId>
+        <label>Sum of IUF Used</label>
+        <summarizedField>IUF__c.IUF_used__c</summarizedField>
+        <summaryForeignKey>IUF__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_Interest_Recovered__c</fullName>
+        <externalId>false</externalId>
+        <label>Sum of Interest Recovered</label>
+        <summarizedField>IUF__c.Interest_Due_Recovered__c</summarizedField>
+        <summaryForeignKey>IUF__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_Manually_Created_IUF_Retained__c</fullName>
+        <externalId>false</externalId>
+        <label>Sum of Manually Created IUF Retained</label>
+        <summarizedField>IUF__c.IUF_Retained__c</summarizedField>
+        <summaryFilterItems>
+            <field>IUF__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Manual</value>
+        </summaryFilterItems>
+        <summaryForeignKey>IUF__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_Net_Availability__c</fullName>
+        <description>Showing the Gross Availability in Pageblock Table</description>
+        <externalId>false</externalId>
+        <formula>Gross_Availability__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Gross_Availability</inlineHelpText>
+        <label>Gross Availability</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_Origination_Fees__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Sum of Origination Fees</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_Payments__c</fullName>
+        <description>Getting Updated from Debtor Payments.</description>
+        <externalId>false</externalId>
+        <label>Sum of Payments</label>
+        <summarizedField>Debtor__c.Sum_of_Payments__c</summarizedField>
+        <summaryForeignKey>Debtor__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_Received_funds__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Getting Update from Funding Request Trigger</description>
+        <externalId>false</externalId>
+        <label>Sum of Amount Drawn</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_UL_Fee_Recovered__c</fullName>
+        <externalId>false</externalId>
+        <label>Sum of UL Fee Recovered</label>
+        <summarizedField>IUF__c.UL_Fee_Due_Recovered__c</summarizedField>
+        <summaryForeignKey>IUF__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_UNPAID_Fees__c</fullName>
+        <externalId>false</externalId>
+        <label>Sum of UNPAID Fees</label>
+        <summarizedField>Fees__c.Fee_Balance__c</summarizedField>
+        <summaryFilterItems>
+            <field>Fees__c.Fee_status__c</field>
+            <operation>equals</operation>
+            <value>UNPAID</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Fees__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Sync_with_Grade__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Sync with Grade</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sync_with_Market_Place__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Sync with Market Place</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sync_with_Portal__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Sync with Portal</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Total_AP_Value__c</fullName>
+        <externalId>false</externalId>
+        <formula>AP_Current__c + AP_1_15__c + AP_16_30__c + AP_31_60__c + AP_61_90__c + AP_90__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total AP Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Eligible_AR__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Eligible AR Limit</label>
+        <summarizedField>Debtor__c.Eligible_AR__c</summarizedField>
+        <summaryForeignKey>Debtor__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>UL_Fee_Due_Since__c</fullName>
+        <externalId>false</externalId>
+        <label>UL Fee Due Since</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>UL_Fee_Due__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>UL Fee Due</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Uncapped_Borrowing_Base__c</fullName>
+        <externalId>false</externalId>
+        <formula>Sum_of_Net_Availability__c - Borrowing_Base_Reserve__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Formula: Gross Availability - Borrowing Base Reserve</inlineHelpText>
+        <label>Uncapped Borrowing Base</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Unused_Line_Rate__c</fullName>
+        <externalId>false</externalId>
+        <label>Unused Line Rate (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Watch_List__c</fullName>
+        <externalId>false</externalId>
+        <formula>Client__r.Watch_List__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Watch List</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>X16_30__c</fullName>
+        <externalId>false</externalId>
+        <label>16-30</label>
+        <summarizedField>Debtor__c.X16_30__c</summarizedField>
+        <summaryForeignKey>Debtor__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>X1_15__c</fullName>
+        <externalId>false</externalId>
+        <label>1-15</label>
+        <summarizedField>Debtor__c.X1_15__c</summarizedField>
+        <summaryForeignKey>Debtor__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>X31_60__c</fullName>
+        <externalId>false</externalId>
+        <label>31-60</label>
+        <summarizedField>Debtor__c.X31_60__c</summarizedField>
+        <summaryForeignKey>Debtor__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>X61_90__c</fullName>
+        <externalId>false</externalId>
+        <label>61-90</label>
+        <summarizedField>Debtor__c.X61_90__c</summarizedField>
+        <summaryForeignKey>Debtor__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>X90__c</fullName>
+        <externalId>false</externalId>
+        <label>90+</label>
+        <summarizedField>Debtor__c.X90__c</summarizedField>
+        <summaryForeignKey>Debtor__c.Client_Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <label>Client Account</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Client_Account__c</columns>
+        <columns>Invoice_Amount__c</columns>
+        <columns>Ineligibles_Amount_formula__c</columns>
+        <columns>Eligible_For_Funding_formula__c</columns>
+        <columns>Sum_of_Net_Availability__c</columns>
+        <columns>Funding_Limit__c</columns>
+        <columns>FIU_Outstanding__c</columns>
+        <columns>Net_Availability__c</columns>
+        <columns>Borrowing_Base__c</columns>
+        <columns>Debtor_Count__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>External_Id__c</columns>
+        <columns>Portal_External_Id__c</columns>
+        <columns>Application_Number__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All1</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>CA-{00000}</displayFormat>
+        <label>Client Account Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Client Accounts</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Client_Account__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Invoice_Amount__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Eligible_For_Funding_formula__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Sum_of_Net_Availability__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Funding_Limit__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>FIU_Outstanding__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Net_Availability__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Debtor_Count__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Client_Account__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Invoice_Amount__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Funding_Limit__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>FIU_Outstanding__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Net_Availability__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Client__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Product__c</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Client__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Product__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Rate_Validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>ISPICKVAL(Rate_Type__c, &apos;Fixed&apos;) &amp;&amp;  ISNULL(Rate__c)</errorConditionFormula>
+        <errorDisplayField>Rate__c</errorDisplayField>
+        <errorMessage>Rate is mandatory if Rate type is &apos;Fixed&apos;</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Validation_on_AP_fields</fullName>
+        <active>true</active>
+        <errorConditionFormula>OR(NOT(ISBLANK(AP_1_15__c ))&amp;&amp; AP_1_15__c &lt; 0,NOT(ISBLANK(AP_16_30__c )) &amp;&amp; AP_16_30__c &lt; 0,NOT(ISBLANK(AP_31_60__c )) &amp;&amp; AP_31_60__c &lt; 0,NOT(ISBLANK(AP_61_90__c )) &amp;&amp; AP_61_90__c &lt; 0,NOT(ISBLANK(AP_90__c )) &amp;&amp; AP_90__c &lt; 0,NOT(ISBLANK(AP_Current__c)) &amp;&amp; AP_Current__c &lt; 0)</errorConditionFormula>
+        <errorMessage>All Account Payable values should be &gt;=0.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Validation_on_Picklist_Fields</fullName>
+        <active>true</active>
+        <errorConditionFormula>ISPICKVAL(Method__c,&quot;&quot;) || ISPICKVAL(Index__c,&quot;&quot;) ||ISPICKVAL( Rate_Type__c,&quot;&quot;)</errorConditionFormula>
+        <errorMessage>Please check Method,Rate Type and Index.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Send_All_Invoices</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send All Invoices</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)}
+
+var portalId = &apos;{!Client_Account__c.Portal_External_Id__c}&apos;; 
+var DebtorCount_for_sending_Invoice = &apos;{!Client_Account__c.Debtor_Count_for_Invoices__c}&apos;;
+
+if(DebtorCount_for_sending_Invoice &gt; 0 &amp;&amp; portalId != &apos;&apos;)
+{
+var callResult =sforce.apex.execute(&apos;TPSSF.TPConnectorService&apos;,&apos;SubmitExt&apos;,{sforceObjectType:&apos;Client_Account__c&apos;,sforceObjectId:&apos;{!Client_Account__c.Id}&apos;,queryString:&apos;&apos;,externalObjectId:&apos;&apos;,action:&apos;sendtoportalAllInvoices&apos;,profileKey:&apos;akritiv-inernex-user-invoices&apos;,profile:&apos;&apos;,userId:&apos;{!$User.Id}&apos;,sessionId:&apos;{!$Api.Session_ID}&apos;,partnerUrl:&apos;{!$Api.Partner_Server_URL_220}&apos;,username:&apos;{!$User.Username}&apos;, event:&apos;&apos;,clientId:&apos;&apos;,additionalData:&apos;&apos;});
+
+window.alert(callResult[0]);
+window.location.reload();
+
+/*
+window.alert(&apos;Under Construction!&apos;);
+window.location.reload();
+*/
+}
+else
+{
+if(portalId == &apos;&apos;) 
+alert(&apos;Client-Account is not moved to Portal.&apos;); 
+else if(DebtorCount_for_sending_Invoice == 0 || DebtorCount_for_sending_Invoice == &apos;&apos;) 
+alert(&apos;No Invoice to update in Portal.&apos;); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Send_All_Payments_P</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send All Payments-P</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)}
+
+var portalId = &apos;{!Client_Account__c.Portal_External_Id__c}&apos;; 
+var Debtorcount = &apos;{!Client_Account__c.Debtor_Count_for_Payments_to_Portal__c}&apos;;
+//alert(Debtorcount);
+if(Debtorcount &gt; 0 &amp;&amp; portalId != &apos;&apos;)
+{
+var callResult =sforce.apex.execute(&apos;TPSSF.TPConnectorService&apos;,&apos;SubmitExt&apos;,{sforceObjectType:&apos;Client_Account__c&apos;,sforceObjectId:&apos;{!Client_Account__c.Id}&apos;,queryString:&apos;&apos;,externalObjectId:&apos;&apos;,action:&apos;sendtoportalallpayments__p&apos;,profileKey:&apos;akritiv-inernex-user-payments&apos;,profile:&apos;&apos;,userId:&apos;{!$User.Id}&apos;,sessionId:&apos;{!$Api.Session_ID}&apos;,partnerUrl:&apos;{!$Api.Partner_Server_URL_220}&apos;,username:&apos;{!$User.Username}&apos;, event:&apos;&apos;,clientId:&apos;&apos;,additionalData:&apos;&apos;});
+
+window.alert(callResult[0]);
+window.location.reload();
+
+/*
+window.alert(&apos;Under Construction!&apos;);
+window.location.reload();
+*/
+}
+else
+{
+if(portalId == &apos;&apos;) 
+alert(&apos;Client-Account is not moved to Portal.&apos;); 
+else if(Debtorcount == 0 || Debtorcount == &apos;&apos;) 
+alert(&apos;No Payments to Update in Portal.&apos;); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Send_to_Grade</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send to Grade</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
+
+var Gradeid = &apos;{!Client_Account__c.External_Id__c}&apos;;
+var sendtograde = &apos;{!Client_Account__c.Send_to_Grade__c}&apos;; 
+//alert(sendtograde ); 
+
+if(sendtograde &gt; 0 &amp;&amp; Gradeid != &apos;&apos;) 
+{ 
+var callResult =sforce.apex.execute(&apos;TPSSF.TPConnectorService&apos;,&apos;SubmitExt&apos;,{sforceObjectType:&apos;Client_Account__c&apos;,sforceObjectId:&apos;{!Client_Account__c.Id}&apos;,queryString:&apos;&apos;,externalObjectId:&apos;&apos;,action:&apos;sendtograde&apos;,profileKey:&apos;akritiv-internex-client_account__c&apos;,profile:&apos;&apos;,userId:&apos;{!$User.Id}&apos;,sessionId:&apos;{!$Api.Session_ID}&apos;,partnerUrl:&apos;{!$Api.Partner_Server_URL_220}&apos;,username:&apos;{!$User.Username}&apos;, event:&apos;&apos;,clientId:&apos;&apos;,additionalData:&apos;&apos;}); 
+
+window.alert(callResult[0]); 
+window.location.reload(); 
+
+/* 
+window.alert(&apos;Under Construction!&apos;); 
+window.location.reload(); 
+*/ 
+} 
+else 
+{ 
+if(Gradeid == &apos;&apos;) 
+alert(&apos;Client-Account is not moved to Grade.&apos;); 
+else if(sendtograde == 0 || sendtograde == &apos;&apos;) 
+alert(&apos;No Debtors to Updated at Grade end.&apos;); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Send_to_MPBE</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send to MPBE</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
+
+var Gradeid = &apos;{!Client_Account__c.External_Id__c}&apos;;
+
+if(Gradeid != &apos;&apos;)
+{
+var callResult =sforce.apex.execute(&apos;TPSSF.TPConnectorService&apos;,&apos;SubmitExt&apos;,{sforceObjectType:&apos;Client_Account__c&apos;,sforceObjectId:&apos;{!Client_Account__c.Id}&apos;,queryString:&apos;&apos;,externalObjectId:&apos;&apos;,action:&apos;sendtompbe&apos;,profileKey:&apos;&apos;,profile:&apos;&apos;,userId:&apos;{!$User.Id}&apos;,sessionId:&apos;{!$Api.Session_ID}&apos;,partnerUrl:&apos;{!$Api.Partner_Server_URL_220}&apos;,username:&apos;{!$User.Username}&apos;, event:&apos;&apos;,clientId:&apos;&apos;,additionalData:&apos;&apos;}); 
+
+window.alert(callResult[0]); 
+window.location.reload(); 
+
+/* 
+window.alert(&apos;Under Construction!&apos;); 
+window.location.reload(); 
+*/
+}
+else 
+{ 
+if(Gradeid == &apos;&apos;) 
+alert(&apos;Client-Account is not moved to Grade.&apos;); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Send_to_Portal</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send to Portal</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
+
+var portalId = &apos;{!Client_Account__c.Portal_External_Id__c}&apos;;
+var sendtoportal = &apos;{!Client_Account__c.Send_to_Portal__c}&apos;; 
+//alert(sendtoportal); 
+
+if(sendtoportal &gt; 0 &amp;&amp; portalId != &apos;&apos;) 
+{ 
+var callResult =sforce.apex.execute(&apos;TPSSF.TPConnectorService&apos;,&apos;SubmitExt&apos;,{sforceObjectType:&apos;Client_Account__c&apos;,sforceObjectId:&apos;{!Client_Account__c.Id}&apos;,queryString:&apos;&apos;,externalObjectId:&apos;&apos;,action:&apos;sendtoportal&apos;,profileKey:&apos;akritiv-internex-client_account__c&apos;,profile:&apos;&apos;,userId:&apos;{!$User.Id}&apos;,sessionId:&apos;{!$Api.Session_ID}&apos;,partnerUrl:&apos;{!$Api.Partner_Server_URL_220}&apos;,username:&apos;{!$User.Username}&apos;, event:&apos;&apos;,clientId:&apos;&apos;,additionalData:&apos;&apos;}); 
+
+window.alert(callResult[0]); 
+window.location.reload(); 
+
+/* 
+window.alert(&apos;Under Construction!&apos;); 
+window.location.reload(); 
+*/ 
+} 
+else 
+{ 
+if(portalId == &apos;&apos;) 
+alert(&apos;Client-Account is not moved to Portal.&apos;); 
+else if(sendtoportal == 0 || sendtoportal == &apos;&apos;) 
+alert(&apos;No Debtors to Updated at Portal end.&apos;); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Send_to_Portal_All_Transactions</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send all Payments-T</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)}
+
+var portalId = &apos;{!Client_Account__c.Portal_External_Id__c}&apos;;
+var Debtorcount = &apos;{!Client_Account__c.Debtor_Count_for_Payments_to_Trans_Grid__c}&apos;;
+//alert(Debtorcount );
+if(Debtorcount &gt; 0 &amp;&amp; portalId != &apos;&apos;)
+{
+var callResult =sforce.apex.execute(&apos;TPSSF.TPConnectorService&apos;,&apos;SubmitExt&apos;,{sforceObjectType:&apos;Client_Account__c&apos;,sforceObjectId:&apos;{!Client_Account__c.Id}&apos;,queryString:&apos;&apos;,externalObjectId:&apos;&apos;,action:&apos;sendtoportalallpayments&apos;,profileKey:&apos;akritiv-inernex-user-transaction&apos;,profile:&apos;&apos;,userId:&apos;{!$User.Id}&apos;,sessionId:&apos;{!$Api.Session_ID}&apos;,partnerUrl:&apos;{!$Api.Partner_Server_URL_220}&apos;,username:&apos;{!$User.Username}&apos;, event:&apos;&apos;,clientId:&apos;&apos;,additionalData:&apos;&apos;});
+
+window.alert(callResult[0]);
+window.location.reload();
+
+/*
+window.alert(&apos;Under Construction!&apos;);
+window.location.reload();
+*/
+}
+else
+{
+if(portalId == &apos;&apos;) 
+alert(&apos;Client-Account is not moved to Portal.&apos;); 
+else if(Debtorcount == 0 || Debtorcount == &apos;&apos;) 
+alert(&apos;No Payments to Update in Portal.&apos;); 
+}</url>
+    </webLinks>
+</CustomObject>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>SearchFilterConfig</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>SearchFilterConfig</value>
+    </caseValues>
+    <fields>
+        <label><!-- RestrictedFields --></label>
+        <name>RestrictedFields__c</name>
+    </fields>
+    <fields>
+        <label><!-- SearchFields --></label>
+        <name>SearchFields__c</name>
+    </fields>
+    <fields>
+        <label><!-- reRenderBlock --></label>
+        <name>reRenderBlock__c</name>
+    </fields>
+    <fields>
+        <label><!-- sectionTitle --></label>
+        <name>sectionTitle__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

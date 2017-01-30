@@ -1,0 +1,196 @@
+<apex:page id="bulkPage" standardController="akritivtlm__AP_Tracker__c" sidebar="false" extensions="akritivtlm.DynamicPageBulkAssignment,akritivtlm.BulkAssignmentParentController">
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__EXT,'/js/ext.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__EXT, '/css/ext-all.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__EXT, '/css/xtheme-gray.css')}" />
+<style>
+    #filter
+    {
+        display: block;
+        position: fixed;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-repeat:no-repeat;
+        background-position:center;
+        background-color: #ffffff;
+        z-index:10;
+        opacity:0.6;
+        filter: alpha(opacity=50);
+    }
+</style>
+<apex:pagemessages id="pgMsgs"></apex:pagemessages>
+<div id="filter" style= "display:none;"></div> 
+<apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+<apex:form id="bulkForm">
+    <!--<apex:actionFunction action="{!updateRecords}"  name="updateRecords1" reRender="bulkPageBlock" oncomplete="createSearchButton();">
+         <apex:param name="firstParam"  assignTo="{!TrackerIds}" value=""/>
+         <apex:param name="secoundParam" assignTo="{!SelectedUserId}" value=""/>
+     </apex:actionFunction>-->
+     <apex:actionFunction id="chkBoxSelectionChange" name="chkBoxSelectionChange" action="{!chkBoxChange}" reRender="">
+         <apex:param name="firstParam" assignTo="{!showAvailable}" value="" />
+     </apex:actionFunction>
+     <apex:pageBlock id="bulkPageBlock">
+         <apex:dynamicComponent componentValue="{!dynamicForm}"/>
+     </apex:pageBlock>
+</apex:form>
+
+<script type="text/javascript">
+    var childObjName = '';
+    function startProcess(){
+        document.getElementById("bulkPage:loading").style.display = 'block';
+        document.getElementById('filter').style.display = 'block';
+    }
+    function endProcess(){
+        document.getElementById("bulkPage:loading").style.display = 'none';
+        document.getElementById('filter').style.display = 'none'; 
+    } 
+
+    function getSelectedCases(){
+         var error = '';
+         var selectedUser = document.getElementById('selectUser').options[document.getElementById('selectUser').selectedIndex].value;
+         var records = Ext.getCmp("summaryGrid").getSelectionModel().getSelections();
+         var TrackerIds = '';
+         for(var i=0; i<records.length; i++) {
+            var rec = records[i];
+            TrackerIds += rec.get("{!JSENCODE(childNamespace)}Tracker_Id__c");
+            if(i!=(records.length - 1)){
+                TrackerIds += ",";
+            }
+         }
+         if(TrackerIds == '') {
+             error = "1. Please Select Atleast 1 Case" ;
+         }
+         if(selectedUser == ''){
+             error += "\n2. Please Select one User To Assign";
+         }
+         if(error !=''){
+             alert(error);
+         }else {
+             //console.log(TrackerIds);
+             startProcess();
+             updateRecords1(TrackerIds,selectedUser);
+         }
+         
+    }
+
+    function getCases(){
+       var CommaList = '{!JSENCODE(commaSepFields)}';
+       var array = CommaList.split(',');
+       var gridObj = Ext.getCmp('summaryGrid');
+       var store = gridObj.getStore();
+       for(var i=0;i<array.length;i++){
+           var value = document.getElementById('bulkPage:bulkForm:bulkPageBlock:bulkPageBlockSection:'+array[i]).value;      
+           var isDisabled = document.getElementById('bulkPage:bulkForm:bulkPageBlock:bulkPageBlockSection:'+array[i]).disabled;
+           if(isDisabled){
+               store.setBaseParam(array[i],"");
+           }else{
+               store.setBaseParam(array[i],value);
+           }
+       }
+       var userValue = document.getElementById('userSelect').options[document.getElementById('userSelect').selectedIndex].value;
+       var status = document.getElementById('statusSelect').options[document.getElementById('statusSelect').selectedIndex].text;
+       if (userValue == null || userValue == '' || userValue == '--None--'){
+            store.setBaseParam('userSelect','');
+            alert('Please Select User.');
+            return;
+        }else{
+            store.setBaseParam('userSelect',userValue);
+        }
+        if(status == null || status == '' || status == '--None--'){
+           store.setBaseParam('showAvailable','');
+           alert('Please Select Status.');
+           return;
+       }else{
+           store.setBaseParam('showAvailable',status);
+       }
+       store.setBaseParam('childObjectName',childObjName);
+       store.load({params: {start : 0 , limit:50}});
+    }
+    function createSearchButton(){
+        var panelDiv = document.getElementById('bulkPage:bulkForm:bulkPageBlock:bulkPageBlockSection');
+        var pBody = panelDiv.getElementsByTagName('DIV')[0];
+        var searchButton = document.createElement("INPUT");
+        searchButton.value = "Search";
+        searchButton.type = "button";
+        searchButton.setAttribute('onclick','getCases();');
+        pBody.appendChild(searchButton);
+    }
+    Ext.onReady(function(){
+        childObjName = '{!JSENCODE(childObjectName)}';
+        createSearchButton();
+        //document.getElementById('dataGrid').innerHTML = '';
+        var select = document.getElementById("userSelect");
+        var pageSize =50;
+        var searchCheckBx = new Ext.grid.CheckboxSelectionModel({
+             singleSelect : false,
+             dataIndex : 'checkBoxCol'
+        });
+        var storeFields=[
+                {!storeJSON}
+            ];
+         gridStore = new Ext.data.JsonStore({
+            root: 'data',
+            idProperty: 'gsId',
+            totalProperty: 'totalCount',
+            remoteSort: true,
+            fields: storeFields,
+            viewConfig : {
+                forceFit: true,
+                scrollOffset : 0
+            },
+            successProperty: 'success',
+            proxy : new Ext.data.HttpProxy({
+                url : 'extBulkAssignment'
+            })
+        });
+        grid =  new Ext.grid.GridPanel({
+            id : 'summaryGrid',
+            //title : 'Upload Information',
+            store:gridStore,
+            selModel :searchCheckBx,
+           // sm:searchCheckBx,
+            viewConfig : {
+                forceFit: true
+            },
+            loadMask: true,
+            height : 400,
+            autoWidth: true,
+            columns: [
+                searchCheckBx,
+                {!columnJSON}
+                
+            ],
+            bbar: new Ext.PagingToolbar({
+                items :[
+                    '-',
+                    'Assign To : ',
+                    '<select id="selectUser">'+select.innerHTML+'</select>',
+                    '<input type="button" value="Go" onclick="getSelectedCases();return false;"/>'
+                ],
+                store: gridStore,
+                pageSize: 50,
+                emptyMsg: '',
+                displayInfo: true,
+                displayMsg:'Displaying records {0} - {1} of {2}'
+        }),
+        renderTo: 'dataGrid'
+        });
+        //gridStore.load({params:{start:0, limit:15}});
+    });
+</script>
+
+<style type="text/css">
+.td-padding {
+    padding-right:10px;
+ }
+</style>
+     <apex:form id="bulkForm1">
+         <div id="dataGrid"></div>
+         <apex:actionFunction action="{!updateRecords}"  name="updateRecords1" reRender="" oncomplete="getCases();endProcess();">
+             <apex:param name="firstParam"  assignTo="{!TrackerIds}" value=""/>
+             <apex:param name="secoundParam" assignTo="{!SelectedUserId}" value=""/>
+         </apex:actionFunction>
+           <!--input id="searchCase" type="button" value="Search" onclick="getCases();"/-->
+     </apex:form>
+</apex:page>

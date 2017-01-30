@@ -1,0 +1,11 @@
+Dear {!Contact.Name},
+
+
+You account is seriously pas due. If we do not receive your payment within next 14 days we will put your account on hold and initiate a legal collection action against this account. Please contact me ASAP to discuss this account. For your reference attached is the detail of the outstanding invoices  for your review.
+
+{!Transactions.Summary}
+
+Thanks,
+{!User.Name}
+{!User.Email}
+{!User.Phone}

@@ -1,0 +1,153 @@
+<apex:page standardController="akritivtlm__Conversation__c" extensions="akritivtlm.HDCommentsController" showHeader="false" sidebar="false" standardStylesheets="true">
+<script>
+    var returnValue = '';
+    function closeWin(){
+        if(returnValue != ''){
+            window.parent.displayMessageAndClosePopUp("info",returnValue,"commentsWin");
+        }
+        else
+            window.parent.Ext.getCmp('commentsWin').close();
+    }
+    function setReturnVal(){
+        returnValue = 'Comment(s) added successfully.';
+    }
+
+    function loading(loadingFlag){
+        if(loadingFlag){
+            document.getElementById('loadMask').style.display='';
+        }else{
+            document.getElementById('loadMask').style.display='none';
+        }
+    }
+</script>
+
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+
+<style>
+    html{
+        scrollbar-face-color: #E6E6E6;
+        scrollbar-shadow-color: #E6E6E6;
+        scrollbar-highlight-color:#E6E6E6;
+        scrollbar-3dlight-color: #ADADAD;
+        scrollbar-darkshadow-color: #ADADAD;
+        scrollbar-track-color: #ADADAD;
+        scrollbar-arrow-color: #000000;
+        }
+    .messageblock{
+        font-size:11px;
+        border-radius: 4px;
+        border-color: #c00;
+        background-color: #ffc;
+        border-style: solid;
+        border-width: 1px;
+        color: #000;
+    }
+</style> 
+
+<script>
+    function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+
+    function closeMessage() {
+        $('#messagebox').hide();   
+    }
+
+    function displayMessage(type,msg,interval) {
+        var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:50%;margin: 0 auto;margin-top: 5px;">'+
+                '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+                '</div>';
+        if(document.getElementById('messagebox') != null && document.getElementById('messagebox') != undefined) {
+                document.getElementById('messagebox').innerHTML = m;
+                animateMessageBox('messagebox',interval);
+        }
+        animateMessageBox('messagebox',interval);
+    }
+</script>
+
+<apex:outputpanel id="messagepanel" style="Display:None">
+    <apex:messages id="msg1"  style="Display:None" />
+    <script>
+        if(document.getElementById('{!$Component.msg1}') != null && document.getElementById('{!$Component.msg1}') != undefined) {
+        var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('li');
+        var msg='';
+        for(var i=0;i<obj.length;i++) {
+            if(i==0) 
+            msg += '<br />';
+            msg += obj[i].innerHTML + '<br />';
+        }
+        if(msg != '') {
+            //displayMessage('error',msg,10000);
+            setTimeout(function(){displayMessage('error',msg,10000);},1000);
+        }
+    }
+    </script>
+</apex:outputpanel>
+
+<style>
+.pbTable-setting{
+     width: 500px !important;
+    height: 400px !important;   
+    overflow: auto !important
+    }
+.labelCol {
+      text-align: left !important;
+      width: 1% !important;
+      max-width: 1% !important;
+      text-wrap: unrestricted;
+  }
+
+</style>
+
+
+
+<div id="messagebox" style="z-index:10 !important;position:fixed !important;width:50% !important;top:30%;left:20%;" ></div>
+<apex:form id="frmId"> 
+
+    <apex:pageBlock id="pbId">
+        <apex:outputPanel styleClass="requiredInput" layout="block">
+                        <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+           <apex:inputTextarea rows="10" cols="104" value="{!commentBody}" id="txtAreaCommentId" label="{!$Label.Comments}" required="true"/> 
+         </apex:outputPanel>             
+         <apex:outputPanel >
+           <apex:actionStatus id="loading" onstart="loading(true)" onstop="loading(false)" />
+           <div align="center">
+            <apex:actionStatus id="saveStatus1">
+                <apex:facet name="stop">
+                    <apex:commandButton value="{!$Label.Add_Comment_Btn}" action="{!addComments}" reRender="commentGridId,txtAreaCommentId,messagepanel" status="loading" oncomplete="setReturnVal();"/>
+                </apex:facet>
+                <apex:facet name="start">
+                    <apex:commandButton value="{!$Label.Add_Comment_Btn}..." disabled="true" status="saveStatus1"/>
+                </apex:facet>
+            </apex:actionStatus>
+            <apex:actionStatus id="saveStatus2">
+                <apex:facet name="stop">
+                    <apex:commandButton value="{!$Label.Close_Btn}" onclick="closeWin();" status="loading" immediate="true"/>
+                </apex:facet>
+                <apex:facet name="start">
+                    <apex:commandButton value="{!$Label.Close_Btn}..." disabled="true" status="saveStatus2"/>
+                </apex:facet>
+            </apex:actionStatus>
+       </div>
+        </apex:outputPanel>
+        <br />
+     
+     <apex:outputPanel id="commentGridId" styleClass="pbTable-setting">
+                          <apex:pageBlockTable value="{!objHDCommentsBeanList}" var="commentBeanList">
+                                <apex:column headerValue="{!$Label.Comments}" style="width:10px">
+                                            <apex:inputTextarea value="{!commentBeanList.commentBody}" cols="30" rows="2" readonly="true"/>                                            
+                               </apex:column>
+                                 <apex:column headerValue="{!$Label.Commented_By}" style="width:10px">
+                                             <apex:outputText value="{!commentBeanList.commentUser}"></apex:outputText>
+                               </apex:column>
+                                <apex:column headerValue="{!$Label.Commented_On}" style="width:10px">
+                                             <apex:outputText value=" {!commentBeanList.commentDate}"></apex:outputText>
+                               </apex:column>
+                        </apex:pageBlockTable>
+     </apex:outputPanel>        
+    </apex:pageBlock>    
+ </apex:form>  
+ <div id="loadMask" style="display:none;position:fixed;top:50%;left:50%;z-index:10;"><img src="{!URLFOR($Resource.TLMIMAGES,'img/loading.gif')}" width="20" height="20"/></div>
+</apex:page>

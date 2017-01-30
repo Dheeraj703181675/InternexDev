@@ -1,0 +1,26 @@
+<div style="width:1000px; float:center; background:#EEEEEE; padding:10px; border: 3px #CCCCCC solid; font-family:Verdana;">
+<img src="{!Organization.Logo}" alt="{!Organization.Name}"/>
+<br/>
+Dear {!Contact.Name},<br/><br/>
+	Thank you for the request to pay for the following invoices.
+<br/><br/>
+
+<table width="942">
+<tr><td width="75" ></td></tr>
+<tr>
+        <td width="800">{!Transactions.Summary}</td>
+        </tr>
+      
+
+</table>
+<br/>
+<br/>
+To make the payment of amount <b> {!Transactions.TotalBalance}</b>, please click "Pay Now"
+<br/><br/>
+ <a href="http://akritivpayment-developer-edition.na7.force.com/paynow/PayNow?paymentid=P4682"><img height="30" width="80" src="https://c.na7.content.force.com/servlet/servlet.ImageServer?id=01536000000c9V5&oid=00D36000000K03z&lastMod=1347528785000"/></a>
+<br/><br/>
+Best Regards, <br/>
+{!User.Name}<br/>
+{!User.Email}<br/>
+{!User.Phone}
+</div>

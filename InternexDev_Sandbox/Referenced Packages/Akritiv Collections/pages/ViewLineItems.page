@@ -1,0 +1,214 @@
+<apex:page controller="akritiv.ViewLineItems" showHeader="false" sidebar="false" id="pg">
+<script src="/soap/ajax/20.0/connection.js" type="text/javascript"></script>
+<script type="text/javascript" src="{!URLFOR($Resource.jquery,'Jquery.js')}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"/>
+<style>
+          .rich-tabpanel-content{background:none;}
+         /* .bDetailBlock{margin-top:100px;}*/
+        #filter{
+            display: none;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index:10;
+            opacity:0.6;
+            filter: alpha(opacity=50);
+        }
+</style>
+<script type="text/Javascript">
+     var accountId = '{!accountId}';
+     var tmpKey = '{!tempKey}';
+     var selectedLines = '';
+     function CloseLookupWindow(IdString){
+          startProcess();
+          callParentPage(IdString);
+          lookupwindow.close();
+     }
+     
+     function startProcess(){
+        document.getElementById("{!$Component.frm.pgblock.loadingdetail}").style.display = 'block'; 
+        document.getElementById('filter').style.display = 'block';
+     }
+     
+     function endProcess(){
+        document.getElementById("{!$Component.frm.pgblock.loadingdetail}").style.display = 'none';
+        document.getElementById('filter').style.display = 'none';
+     }
+     
+     function checkAll(sel){
+        var inputElem = document.getElementsByTagName("input");
+        var i;
+        for(i=0 ; i < inputElem.length ; i++){
+            if(inputElem[i].id.indexOf("parentChk") != -1){
+                  inputElem[i].checked = sel.checked;
+            }
+        }
+     }
+     
+     function childAccount(){
+        var UrlLoc = window.location;
+        var strHost = UrlLoc.host;
+        strHost = strHost.replace("akritiv.","c."); 
+        var strProtocol = UrlLoc.protocol+'//'+strHost;
+        var urlString ='/apex/akritiv__ShowAccountforLineItems?id='+accountId+'&strProtocol='+strProtocol;
+        lookupwindow = window.open(urlString,"ShowAccountforLineItems","toolbar=0,location=0, directories=0, status=0, menubar=0,width=1200,height=600,scrollbars=1");
+    }
+ 
+    function createDisputePage(){
+        var j$ = jQuery.noConflict();
+        var idString;
+        var idString2 = '';
+        var checkBoxElements;
+        checkBoxElements = j$(".tansCheckbox1:checked");
+
+        idString2 += selectedLines;
+        //Find all selected check boxes and add Account Id to comma seperated string
+        checkBoxElements.each(function(e){
+            idString2 += j$(this).attr('data-id').split(' ')[0] + ',';
+        });
+  //      alert('Please select atleast one Record' + idString2);
+        if(idString2 == ''){
+            alert('{!$Label.Label_select_atleast_one_Record}');
+            return false;
+        }
+        
+     //   var dateTxt = document.getElementById('pg:frm:mpb:mainPanel:pbTable:1:alreadyDisputed').value;
+  //      var dateTxt = $('#alreadyDisputed').get(0);
+   //     alert('Date TXT : '+dateTxt);
+        
+        addTempHolder(idString2);
+
+        idString2 = idString2.substring(0, idString2.length - 1);
+
+        var UrlLoc = window.location; 
+        var strHost = UrlLoc.host; 
+        var strProtocol = UrlLoc.protocol;
+        strHost = strHost.replace("akritiv.","c.");
+        var url = strProtocol +'//'+strHost+'/apex/akritiv__GenerateLineItemsDisputes?lineItemIds='+idString2+'&tempKey='+tmpKey+'&orderby=name&ordertype=desc&strHost='+strHost+'&parentAccountId='+accountId;
+        window.location.assign(url);
+    }
+    
+    function maintainCheckedRecords(elem, sel){
+       
+        if(!elem.checked){
+            alert('Unchecked..!'+sel);
+            if(selectedLines.indexOf(sel) == -1){
+                alert('unchecked item found');
+            }
+        }
+    }
+    
+    function nextPageCall(){
+        var j$ = jQuery.noConflict();
+        var checkBoxElements;
+ //       var checkParent = document.getElementById('pg:frm:mpb:mainPanel:pbTable:parentChkAll').value;
+ //       var checkParent = $('#parentChkAll').attr('checked');
+ //       alert('parentChecked : '+checkParent);
+        checkBoxElements = j$(".tansCheckbox1:checked");
+        //Find all selected check boxes and add Account Id to comma seperated string 
+        checkBoxElements.each(function(e){
+            selectedLines += j$(this).attr('data-id').split(' ')[0] + ',';
+        });
+//        alert('### Selected IDs : '+selectedLines);
+    }
+    
+ /*   function maintainCheckedRecords(elem, sel){
+       
+        if(elem.checked){
+            mapLineSel[sel] = elem.checked;
+        }else{
+            delete mapLineSel[sel];
+        }
+    }*/
+    
+    </script>
+<apex:form id="frm">
+<apex:actionFunction name="callParentPage" id="callParentPageId" action="{!callParentPageFunction}"  rerender="mpb" oncomplete="endProcess();">
+    <apex:param name="accid" assignTo="{!selectedAccIDs}" value=""/>
+</apex:actionFunction>
+<apex:actionFunction name="addTempHolder" id="addTempHolderId" action="{!addTempHolder}" rerender="mpb">
+    <apex:param name="lineItemIds" assignTo="{!selectedLineItemIds}" value=""/>
+</apex:actionFunction>
+<apex:actionFunction name="maintainSelectedRecords" id="maintainSelRecordsID" action="{!doNext}" rerender="">
+    <apex:param name="lineID" assignTo="{!lineSelectedMap}" value=""/>
+</apex:actionFunction>
+<apex:inputHidden id="lstaccountIds" value="{!lstaccountIds}"/>
+<apex:inputHidden id="tempKey" value="{!tempKey}" rendered="{!tempKeyBoolean}"/>
+<apex:outputLabel id="lstaccountIds1" value="{!lstaccountIds}"/>
+
+
+
+   <apex:pageBlock title="Filter Line Items" id="pgblock">
+    <div id="filter"></div>
+    <apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loadingdetail" style="display:none;position:fixed;top:50%;left:50%;z-index:10;"/>    
+        <div style="white-space:nowrap">
+           <apex:pagemessages id="pgmsg1"/>
+            <apex:pageBlockSection title="{!$Label.Label_Filter_Line_Items}" columns="5" showHeader="false" >        
+                <c:SearchFunctionality id="searchComponent"  ObjName="{!ObjName}" getListContents="{!applyFilters}" TempKey="{!objtemp}"  />
+             </apex:pageBlockSection>
+        </div> 
+    </apex:pageBlock> 
+    
+<apex:pageBlock title="Select Line Item for Disputes" id="mpb">
+    <apex:commandButton value="{!$Label.Label_Select_Child_Account}" onclick="childAccount(); return false;"/>
+    <!--apex:commandButton value="Create Dispute" onclick="createDisputePage();"/-->
+    <input type="button" onclick="createDisputePage();" value="{!$Label.Label_Create_Disputes}" class="btn" oncomplete="endProcess();"/> 
+
+    <!-- <input type="button" id="btnSearch" name="btnSearch" value="Search" onclick="childAccount()"  /> -->
+
+    <!-- next, previous and page info -->
+    <div align="center"><apex:commandLink action="{!doPrevious}" rendered="{!hasPrevious}" value="Previous" reRender="mpb" onclick="startProcessComp();" oncomplete="endProcessComp();" />
+    <apex:outputLabel rendered="{!NOT(hasPrevious)}" value="Previous" />
+    <apex:outputLabel value=" (page {!page} of {!totalPages}) | showing {!startIdx} to {!endIdx} of {!totalRecords} "/>
+    <apex:commandLink action="{!doNext}" rendered="{!hasNext}" value="Next" reRender="mpb" onclick="startProcessComp();nextPageCall();" oncomplete="endProcessComp();" />
+    <apex:outputLabel rendered="{!NOT(hasNext)}" value="Next"/></div>
+    <br/>
+    <!-- table of data -->
+    <apex:outputPanel id="mainPanel" rendered="{!isParentCalled}">
+        <apex:pageBlockTable title="Contacts" value="{!tRecords}" var="c" id="pbTable">
+        <apex:column id="colchk">
+                <apex:facet name="header">
+                    <apex:inputCheckbox id="parentChkAll" selected="false" onclick="checkAll(this);"/>
+                </apex:facet>
+                <input type="checkbox" data-id="{!c.tcontact.Id}" id="parentChk" class="tansCheckbox1"/>
+            </apex:column>
+          <!--  <apex:column id="colchk">
+                <apex:facet name="header">
+                    <apex:inputCheckbox id="parentChkAll" selected="false" onclick="checkAll(this);"/>
+                </apex:facet>
+                <input type="checkbox" data-id="{!c.tcontact.Id}" id="parentChk" class="tansCheckbox1"/>
+            </apex:column>
+            <apex:column value="{!c.tcontact.Account__r.name}" headerValue="Account Name"/>
+                        <apex:column value="{!c.tcontact.account__r.AccountNumber}" headerValue="Account Number"/>
+
+            <apex:column value="{!c.tcontact.Transaction__r.name}" headerValue="Invoice No"/>
+            <apex:column value="{!c.tcontact.Line_Key__c}" headerValue="Line#"/>
+            <apex:column value="{!c.tcontact.Description__c}" headerValue="Description"/>
+            <apex:column id="lineTotal" value="{!c.tcontact.Line_Total__c}" headerValue="Line Total"/>-->
+            
+             <apex:repeat value="{!fieldWithApiList}" var="fldApiList">
+                     
+                    <apex:column headerValue="{!fldApiList.fieldName}">
+                     
+                        <apex:outputField value="{!c.tcontact[fldApiList.fieldAPIName]}" />
+                    </apex:column>
+                </apex:repeat>
+     
+            
+        </apex:pageBlockTable>
+    </apex:outputPanel>
+    <br/>
+    <!-- next, previous and page info -->
+   <div align="center"> <apex:commandLink action="{!doPrevious}" rendered="{!hasPrevious}" value="Previous" reRender="mpb" onclick="startProcessComp();" oncomplete="endProcessComp();"/>
+    <apex:outputLabel rendered="{!NOT(hasPrevious)}" value="Previous" />
+    <apex:outputLabel value=" (page {!page} of {!totalPages}) | showing {!startIdx} to {!endIdx} of {!totalRecords} " />
+    <apex:commandLink rendered="{!hasNext}" value="Next" reRender="mpb" onclick="startProcessComp();nextPageCall();" oncomplete="endProcessComp();"/>
+    <apex:outputLabel rendered="{!NOT(hasNext)}" value="Next" /></div>
+</apex:pageBlock>
+</apex:form>
+ 
+ 
+</apex:page>

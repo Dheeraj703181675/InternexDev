@@ -1,0 +1,347 @@
+<apex:page id="bulkPage" standardController="akritivtlm__AP_Tracker__c" sidebar="false" extensions="akritivtlm.BulkStateChangeController">
+<!-- script type="text/javascript" src="https://c.ap1.visual.force.com/EXT/ext-3.2.2/ext.js"/>
+<link rel="stylesheet" type="text/css" href="https://c.ap1.visual.force.com/EXT/ext-3.2.2/resources/css/ext-all.css"/>
+<link rel="stylesheet" type="text/css" href="https://c.ap1.visual.force.com/EXT/ext-3.2.2/resources/css/xtheme-gray.css"/ -->
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__EXT,'/js/ext.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__EXT, '/css/ext-all.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__EXT, '/css/xtheme-gray.css')}" />
+<apex:includeScript value="/soap/ajax/15.0/connection.js"/>
+<style>
+    #filter
+    {
+        display: block;
+        position: fixed;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        /*background-image:url({!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')});*/
+        background-repeat:no-repeat;
+        background-position:center;
+        background-color: #ffffff;
+        z-index:10;
+        opacity:0.6;
+        filter: alpha(opacity=50);
+    }
+</style>
+<apex:pagemessages id="pgMsgs"></apex:pagemessages>
+<div id="filter" style= "display:none;"></div> 
+<apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+<apex:form id="bulkForm">
+     <apex:pageBlock id="bulkPageBlock">
+         <apex:dynamicComponent componentValue="{!dynamicForm1}"/>
+     </apex:pageBlock>
+</apex:form>
+
+<script type="text/javascript">
+    
+    //get a session id token to use the js libs
+    sforce.connection.sessionId = "{!$Api.Session_ID}";
+    
+    //describe the object we are dealing with. You'll need to change this to whatever object you are working with. Use the API name of the object.'
+    var describeResults = sforce.connection.describeSObject("{!childObjectName}"); // the object we want picklists from 
+    
+    // function to get the picklist values of a field. Finds all potential options. Simple pass it in a field id. Will return object with data in the values key.
+    function getPicklistValues(field){
+        //create return object 
+        var returnObj = new returnObject();
+        
+        try{
+            var validField = false;
+            for(var i = 0; i < describeResults.fields.length; i++){
+                var fieldList = describeResults.fields[i];
+                var fieldName = fieldList.name;
+                if(fieldName.toLowerCase() == field.toLowerCase()){
+                    validField = true;
+                    for(var j = 0; j < fieldList.picklistValues.length; j++){
+                        var newValue = new Object();
+                        newValue.label = fieldList.picklistValues[j].label;
+                        newValue.value = fieldList.picklistValues[j].value;
+                        newValue.default1 = fieldList.picklistValues[j].defaultValue;
+                        if(fieldList.picklistValues[j].hasOwnProperty('validFor')){
+                            newValue.validFor = fieldList.picklistValues[j].validFor;
+                        }
+                        returnObj.values.push(newValue);
+                    }
+                    break;
+                }
+            }
+            if(!validField){
+                throw 'Invalid field '+field+' specified for object ' + params.object;
+            }
+        }
+        catch(exception){
+            returnObj.message = exception;
+            returnObj.success = false;
+        }
+        return returnObj;
+    }
+    
+    function getDependentValues(field, value){
+        var returnObj = new returnObject();
+        try{     
+            var dependencyCode = new Array();          
+            var getValues = getPicklistValues(field);        
+            if(!getValues.success){
+                throw getValues.message;
+            }
+            var picklistValues =  getValues.values;
+            var getController = getControllerName(field);
+    
+            if(!getController.success){
+                throw getController.message;
+            }              
+            var controller = getController.values;
+    
+            // sub function to do the validFor test
+            function isDependentValue(index, validFor){
+                var base64 = new sforce.Base64Binary("");
+                var decoded = base64.decode(validFor);
+                var bits = decoded.charCodeAt(index>>3);
+                return ((bits & (0x80 >> (index%8))) != 0);
+            }
+            var controllerFields =getPicklistValues(controller);
+            for(var item = 0; item < controllerFields.values.length; item++){
+                if(controllerFields.values[item].value.toLowerCase() == value.toLowerCase()){
+                    for(var i = 0; i < picklistValues.length; i++){
+                        if(isDependentValue(item, picklistValues[i].validFor)){
+                            var newValue = new Object();
+                            newValue.label = picklistValues[i].label;
+                            newValue.value = picklistValues[i].value;
+                            newValue.default1 = picklistValues[i].defaultValue;
+                            newValue.validFor = picklistValues[i].validFor;
+                            newValue.validForName =controllerFields.values[item].value;
+                            returnObj.values.push(newValue);                                                               
+                        }
+                    }
+                }
+            }
+        }catch(exception){
+            returnObj.success = false;
+            returnObj.message = exception;
+        }
+        return returnObj;        
+    }
+    
+    
+    // get the controller field name
+    function getControllerName(field){
+        var returnObj = new returnObject();
+        try{
+            var isValid = false;
+            for(var i = 0; i < describeResults.fields.length; i++){
+                var fieldList = describeResults.fields[i];
+                var fieldName = fieldList.name;
+                if(fieldName.toLowerCase() == field.toLowerCase()){
+                    if(fieldList.controllerName == undefined){
+                        throw 'Field has no controller';
+                    }else{
+                        returnObj.values = fieldList.controllerName;
+                        isValid = true;
+                    }
+                    break;
+                }
+            }
+            if(!isValid){
+                throw 'Invalid field '+field+' specified';
+            }
+        }catch(exception){
+            returnObj.success = false;
+            returnObj.message = exception;
+        }
+        return  returnObj;
+    }
+    
+    function returnObject(){
+        this.success = true;
+        this.message = 'Operation Ran Successfully';
+        this.values = new Array();
+    }
+    
+    function setPickVals(field,optionsArray){
+         var pendingReason = document.getElementById(field);
+         pendingReason.options.length = 1;
+         for(var i = 0; i < optionsArray.length; i++){    
+             var opt = document.createElement('OPTION');
+             opt.text = optionsArray[i].label;
+             opt.value = optionsArray[i].value;
+             pendingReason.options.add(opt);
+         }   
+    }
+    
+    function loadUserAction(val) {
+        if(val != '') {
+            var thisFieldId = "{!childNamespace}User_Actions__c";
+            var controller =  getControllerName(thisFieldId);
+            var objId= "userAction";
+            //if this field is a controlled field (has a controller, then find an onchange handler to its parent)
+            if(controller.success){                
+                var currValues = getDependentValues(thisFieldId,  val); 
+                setPickVals(objId,currValues.values);
+            }
+        }
+    }
+
+    var childObjName = '';
+    function startProcess(){
+        document.getElementById("bulkPage:loading").style.display = 'block';
+        document.getElementById('filter').style.display = 'block';
+    }
+    function endProcess(){
+        document.getElementById("bulkPage:loading").style.display = 'none';
+        document.getElementById('filter').style.display = 'none'; 
+    } 
+
+    function getSelectedCases(){
+         var error = '';
+         var userAction = document.getElementById('userAction').options[document.getElementById('userAction').selectedIndex].value;
+         var records = Ext.getCmp("summaryGrid").getSelectionModel().getSelections();
+         var TrackerIds = '';
+         for(var i=0; i<records.length; i++) {
+            var rec = records[i];
+            TrackerIds += rec.get("Id");
+            if(i!=(records.length - 1)){
+                TrackerIds += ",";
+            }
+         }
+         console.log('-----TrackerIds-----'+TrackerIds);
+         if(TrackerIds == '') {
+             error = "1. Please Select Atleast 1 Case" ;
+         }
+         if(userAction == ''){
+             error += "\n2. Please Select User Action";
+         }
+         if(error !=''){
+             alert(error);
+         }else {
+             //console.log(TrackerIds);
+             startProcess();
+             updateRecords1(TrackerIds,userAction);
+         }
+         
+    }
+    function getCases(clearMsg){
+        if(clearMsg) {
+            if(document.getElementById('bulkPage:bulkForm:bulkPageBlock:bulkPageBlockSection:{!JSENCODE(childNamespace)}Current_State__c') != null) {
+                if(document.getElementById('bulkPage:bulkForm:bulkPageBlock:bulkPageBlockSection:{!JSENCODE(childNamespace)}Current_State__c').value == '' ) {
+                    alert('Please select current state');
+                    return;
+                } else {
+                    loadUserAction(document.getElementById('bulkPage:bulkForm:bulkPageBlock:bulkPageBlockSection:{!JSENCODE(childNamespace)}Current_State__c').value);
+                }
+            }
+            var CommaList = '{!JSENCODE(commaSepFields)}';
+            var array = CommaList.split(',');
+            var gridObj = Ext.getCmp('summaryGrid');
+            var store = gridObj.getStore();
+            for(var i=0;i<array.length;i++){
+                var value = document.getElementById('bulkPage:bulkForm:bulkPageBlock:bulkPageBlockSection:'+array[i]).value;      
+                var isDisabled = document.getElementById('bulkPage:bulkForm:bulkPageBlock:bulkPageBlockSection:'+array[i]).disabled;
+                if(isDisabled){
+                    store.setBaseParam(array[i],"");
+                }else{
+                    store.setBaseParam(array[i],value);
+                }
+            }    
+            store.setBaseParam('childObjectName',childObjName);
+            store.load({params: {start : 0 , limit:14}});
+            document.getElementById('bulkPage:pgMsgs').innerHTML = '';
+       } else {
+           var gridObj = Ext.getCmp('summaryGrid');
+            var store = gridObj.getStore();
+            store.removeAll();
+       }
+       //$(".pgMsgs").hide();
+    }
+    function createSearchButton(){
+        var panelDiv = document.getElementById('bulkPage:bulkForm:bulkPageBlock:bulkPageBlockSection');
+        var pBody = panelDiv.getElementsByTagName('DIV')[0];
+        var searchButton = document.createElement("INPUT");
+        searchButton.value = "Search";
+        searchButton.type = "button";
+        searchButton.setAttribute('onclick','getCases(true);');
+        pBody.appendChild(searchButton);
+    }
+    
+    var userActionCombo = '<select id="userAction">';
+    userActionCombo += '<option value="">--NONE--</option>';
+    userActionCombo += '</select>';
+                    
+    Ext.onReady(function(){
+        childObjName = '{!JSENCODE(childObjectName)}';
+        createSearchButton();
+        var pageSize =14;
+        var searchCheckBx = new Ext.grid.CheckboxSelectionModel({
+             singleSelect : false,
+             dataIndex : 'checkBoxCol'
+            
+        });
+        var storeFields=[
+                {!storeJSON}
+            ];
+         gridStore = new Ext.data.JsonStore({
+            root: 'data',
+            idProperty: 'gsId',
+            totalProperty: 'totalCount',
+            remoteSort: true,
+            fields: storeFields,
+            viewConfig : {
+                forceFit: true,
+                scrollOffset : 0
+            },
+            successProperty: 'success',
+            proxy : new Ext.data.HttpProxy({
+                url : 'ExtBulkStateChange'
+            })
+        });
+        grid =  new Ext.grid.GridPanel({
+            id : 'summaryGrid',
+            //title : 'Upload Information',
+            store:gridStore,
+            selModel :searchCheckBx,
+           // sm:searchCheckBx,
+            viewConfig : {
+                forceFit: true
+            },
+            loadMask: true,
+            height : 360,
+            autoWidth: true,
+            columns: [
+                searchCheckBx,
+                {!columnJSON}
+                
+            ],
+            bbar: new Ext.PagingToolbar({
+                items :[
+                    '-',
+                    'User Action : ',
+                    userActionCombo,
+                    '<input type="button" value="{!$Label.Go}" onclick="getSelectedCases();return false;"/>'
+                ],
+                store: gridStore,
+                //pageSize: 15,
+                pageSize: 15,
+                emptyMsg: '',
+                displayInfo: true,
+                displayMsg:'Displaying records {0} - {1} of {2}'
+        }),
+        renderTo: 'dataGrid'
+        });
+        //gridStore.load({params:{start:0, limit:15}});
+    });
+</script>
+
+<style type="text/css">
+.td-padding {
+    padding-right:10px;
+ }
+</style>
+     <apex:form id="bulkForm1">
+         <div id="dataGrid"></div>
+         <apex:actionFunction action="{!updateRecords}"  name="updateRecords1" reRender="pgMsgs" oncomplete="getCases(false);endProcess();"> <!---->
+             <apex:param name="firstParam"  assignTo="{!TrackerIds}" value=""/>
+             <apex:param name="secoundParam" assignTo="{!userAction}" value=""/>
+         </apex:actionFunction>
+     </apex:form>
+</apex:page>

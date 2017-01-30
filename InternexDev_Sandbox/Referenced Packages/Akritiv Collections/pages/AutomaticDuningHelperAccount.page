@@ -1,0 +1,88 @@
+<apex:page controller="akritiv.AutomaticDuningHelperAccount" sidebar="false" showHeader="false" id="pg" > 
+    <script>  
+    window.onload=function(){
+    callprepareTasks();};
+        function displayImage() {      
+            var statusvar = document.getElementById('pg:fm:pb:hiddenstatus').value;
+            if ( statusvar != 'Completed'){         
+                document.getElementById('pg:fm:pb:loading').style.display = 'block';
+                executefunction();
+            } else {            
+                document.getElementById('pg:fm:pb:loading').style.display = 'none';          
+            }          
+        }
+        
+        function monitorStatus() {     
+            var statusvar = document.getElementById('pg:fm:pb:hiddenstatus').value;
+            if ( statusvar == 'Completed'){      
+                document.getElementById('pg:fm:pb:loading').style.display = 'none';               
+            } else {     
+                executefunction();             
+            }
+        }
+    </script>
+    <apex:form id="fm">
+     <apex:actionFunction name="callprepareTasks" action="{!prepareAccounts}" reRender="msg"/>  
+        <apex:pageBlock id="pb" >
+        <apex:pageMessages id="msg"></apex:pageMessages>
+            <apex:pageBlockButtons location="top">
+                <apex:actionFunction name="executefunction"  reRender="opt1,btn,msg,hiddenstatus,processedtsk,errortsk" action="{!execute}" oncomplete="monitorStatus();"/>
+                
+                   <apex:commandButton id="btn" value="{!$Label.Label_Execute}" disabled="{!buttonDisabled}" action="{!execute}" reRender="opt1,btn,msg,hiddenstatus,processedtsk,errortsk" oncomplete="displayImage()" />
+                   <apex:commandButton id="stp" value="{!$Label.Label_Stop}"  action="{!stop}"  />   
+                            
+            </apex:pageBlockButtons>
+            <apex:outputPanel id="opt1">           
+               <b> {!$Label.Label_Tasks_Processed} &nbsp;</b>{!i} &nbsp;&nbsp;<b> {!$Label.Label_Email_Sent} &nbsp;</b>{!e}  &nbsp;&nbsp;<b>{!$Label.Label_Status_Colon} &nbsp;</b>{!status}
+            </apex:outputPanel>
+            <apex:inputHidden id="hiddenstatus" value="{!status}" ></apex:inputHidden>
+            <b/>
+            <apex:image url="https://na7.salesforce.com/img/loading32.gif" id="loading" style="display:none"/>            
+              <!-- Process Task/ Completed Task -->
+              <apex:pageBlockSection columns="1" showHeader="true" title="{!$Label.Label_Completed_Task}" id="pgsct">
+              <apex:pageBlockTable var="ac" value="{!processedList}" id="processedtsk" title="{!$Label.Label_Process_Task}">
+                <apex:column headerValue="{!$Label.Label_Account_Number}">
+                    <apex:outputText value="{!ac.accountNumber}">
+                    </apex:outputText>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Label_Account_Name}">
+                    <apex:outputText value="{!ac.Name}">
+                    </apex:outputText>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Label_Status}">
+                    <apex:outputText value="{!ac.akritiv__Auto_Dunning_Status__c}">
+                    </apex:outputText>
+                </apex:column>
+                         
+              </apex:pageBlockTable>
+              </apex:pageBlockSection>
+              
+              <!-- Error Task/ Not Completed Task -->
+              <apex:pageBlockSection columns="1" showHeader="true" title="{!$Label.Label_Not_Completed_Task}" id="pgsnct" >
+              <apex:pageBlockTable var="eac" value="{!errorList}" id="errortsk" title="{!$Label.Label_Account_Number}">
+                <apex:column headerValue="{!$Label.Label_Account_Number}">
+                    <apex:outputText value="{!eac.AccountNumber}">
+                    </apex:outputText>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Label_Name}">
+                    <apex:outputText value="{!eac.Name}">
+                    </apex:outputText>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Label_Status}">
+                    <apex:outputText value="{!eac.akritiv__Auto_Dunning_Status__c}">
+                    </apex:outputText>
+                </apex:column>
+               
+                <apex:column headerValue="{!$Label.Label_Dunning_Error}">
+                    <apex:outputText value="{!eac.akritiv__Auto_Dunning_Error__c}">
+                    </apex:outputText>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Label_Error_Fix_URL}">                   
+                     <a href="{!eac.akritiv__Dunning_Error_Fix_URL__c}" target="_blank">{!$Label.Label_Fix_This}</a>                 
+                </apex:column> 
+              </apex:pageBlockTable>
+              </apex:pageBlockSection>   
+             
+        </apex:pageBlock>
+    </apex:form>         
+</apex:page>

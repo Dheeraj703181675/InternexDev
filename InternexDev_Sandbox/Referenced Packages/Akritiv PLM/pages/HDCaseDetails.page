@@ -1,0 +1,148 @@
+<apex:page id="pageId" controller="akritivtlm.HDCaseDetails" showHeader="false" sidebar="false" tabStyle="akritivtlm__Conversation__c">
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+
+<script>
+    function removehyperlink(){
+        var a=document.getElementsByTagName('a');
+        var len = a.length;
+        for(var i=len-1;i>=0;i--){
+            var innerHtml = a[i].innerHTML;
+            var parent = a[i].parentNode;
+            var span1 = document.createElement("span");
+            span1.innerHTML = innerHtml;
+            parent.appendChild(span1);
+            parent.removeChild(a[i]);
+        }
+    }
+    function viewattachment(attid){
+        //var=attid;
+        location.href ='/servlet/servlet.FileDownload?file='+attid;
+    }
+</script>
+
+<style>
+    html{
+        scrollbar-face-color: #E6E6E6;
+        scrollbar-shadow-color: #E6E6E6;
+        scrollbar-highlight-color:#E6E6E6;
+        scrollbar-3dlight-color: #ADADAD;
+        scrollbar-darkshadow-color: #ADADAD;
+        scrollbar-track-color: #ADADAD;
+        scrollbar-arrow-color: #000000;
+    }
+    .messageblock{
+        font-size:11px;
+        border-radius: 4px;
+        border-color: #c00;
+        background-color: #ffc;
+        border-style: solid;
+        border-width: 1px;
+        color: #000;
+    }
+</style>
+
+<script>
+    function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+
+    function closeMessage() {
+        $('#messagebox').hide();   
+    }
+
+    function displayMessage(type,msg,interval) {
+        var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:50%;margin: 0 auto;margin-top: 5px;">'+
+                '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+                '</div>';
+        if(document.getElementById('messagebox') != null && document.getElementById('messagebox') != undefined) {
+                document.getElementById('messagebox').innerHTML = m;
+                animateMessageBox('messagebox',interval);
+        }
+        animateMessageBox('messagebox',interval);
+    }
+</script>
+
+<apex:outputpanel id="messagepanel" style="Display:None" >
+    <apex:messages id="msg1" style="Display:None" />
+    <script>
+        if(document.getElementById('{!$Component.msg1}') != null && document.getElementById('{!$Component.msg1}') != undefined) {
+        var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('li');
+        var msg='';
+        for(var i=0;i<obj.length;i++) {
+            if(i==0) 
+            msg += '<br />';
+            msg += obj[i].innerHTML + '<br />';
+        }
+        if(msg != '') {
+            setTimeout(function() {displayMessage('error',msg,10000);},1000);
+        }
+    }
+    </script>
+</apex:outputpanel>
+<div id="messagebox" style="z-index:10 !important;position:fixed !important;width:50% !important;top:30%;left:20%;" ></div>
+
+<apex:form id="formId">
+
+    <div style="display:none;visibility:hidden;">
+        <apex:inputHidden >
+            <apex:inputField id="conversationMailBoxDisplayName" value="{!conversationObj.akritivtlm__Mail_Box_Display_Name__c}" rendered="true" />
+            <apex:inputField id="childObjProcess" value="{!queryClassificationObj[implNameSpace+'Process__c']}" />
+            <apex:inputField id="childObjCountry" value="{!queryClassificationObj[implNameSpace+'Country__c']}" />
+            <apex:inputField id="childObjMailBoxDisplayName" value="{!queryClassificationObj[implNameSpace+'Mail_Box_Display_Name__c']}" />
+        </apex:inputHidden>
+    </div>
+
+    <apex:pageblock id="pgBlck">
+        <apex:pageblockButtons location="bottom" >
+            <apex:actionStatus id="saveStatus1">
+                <apex:facet name="stop">
+                    <apex:commandButton id="cnclBtn" value="{!$Label.Label_Close}" onclick="window.parent.Ext.getCmp('caseDetailWin').close();"/>
+                </apex:facet>
+                <apex:facet name="start">
+                    <apex:commandButton value="{!$Label.Label_Close}..." disabled="true" status="saveStatus1"/>
+                </apex:facet>
+            </apex:actionStatus>
+            <!--<apex:commandButton id="cnclBtn" value="Close" onclick="window.close();"/>-->
+        </apex:pageblockButtons>
+        <!--
+        <apex:pageblockSection id="pgBlckSec1" title="{!$Label.Label_Conversation_Fields}" collapsible="False">
+            <apex:repeat id="repeat1" value="{!$ObjectType.Conversation__c.FieldSets.genericFields}" var="conv">
+                <apex:outputField id="outputField1" value="{!conversationObj[conv]}"/>
+            </apex:repeat>
+        </apex:pageblockSection>
+        -->
+        
+        <apex:pageblockSection id="pgBlckSec1" title="{!$Label.Label_Conversation_Fields}" collapsible="False">
+            <apex:repeat id="repeat1" value="{!GenericFieldsList}" var="conv">
+                <apex:outputField id="outputField1" value="{!conversationObj[conv]}"/>
+            </apex:repeat>
+        </apex:pageblockSection>
+        
+        
+        <apex:pageblockSection id="pgBlckSec2" title="{!$Label.Label_Classification_Queries}" collapsible="False">
+            <apex:repeat id="repeat2" value="{!fieldListApi}" var="CQ">
+                <apex:outputField id="outputField2" value="{!queryClassificationObj[CQ]}"/>
+            </apex:repeat>
+        </apex:pageblockSection>
+        
+        <apex:pageBlockSection id="WrapperBlockId" title="{!$Label.Label_Interaction_Fields}" columns="1" collapsible="False">
+            <apex:outputPanel layout="block" style="overflow:auto;height:150px;"  >
+                <apex:pageblockTable value="{!AttachmentWithInteractionlist}" var="attint" >
+                    <apex:repeat value="{!fieldList}" var="fld">
+                        <apex:column value="{!attint.intr[fld]}" title="fld" />
+                    </apex:repeat>
+                    <apex:column headerValue="Attachments" headerClass="cssHeaderRead paddingth"  style="min-width:10px !important; text-align: left !important;overflow:auto;">
+                        <apex:repeat value="{!attint.attachmentidlist}" var="attachmentid">
+                            <a href="/servlet/servlet.FileDownload?file={!attachmentid}" title="{!attint.attachmentnmmap[attachmentid]}"  style="text-decoration:none;" target="_blank"> <img src="{!URLFOR($Resource.TLMIMAGES,'img/tlmattachment.png')}" style="cursor:pointer;margin-right:10px;" alt="{!attint.attachmentnmmap[attachmentid]}" /> </a>
+                        </apex:repeat>
+                    </apex:column> 
+                </apex:pageblockTable>
+            </apex:outputPanel>
+        </apex:pageBlockSection>
+      
+    </apex:pageBlock>
+</apex:form>
+
+</apex:page>

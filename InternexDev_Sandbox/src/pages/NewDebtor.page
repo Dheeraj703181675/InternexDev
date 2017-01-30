@@ -1,0 +1,51 @@
+<apex:page standardController="Debtor__c" id="pg"  action="{!if($Profile.Name !='System Administrator', null, URLFOR($Action.Debtor__c.edit, Debtor__c.Id, [retURL=URLFOR($Action.Debtor__c.View, Debtor__c.Id)], true))}">
+<apex:sectionHeader title="Debtor Edit" subtitle="New Debtor"/>
+<apex:form id="form">
+<apex:pagemessages ></apex:pagemessages>
+  <apex:pageBlock title="Debtor Edit" id="pb">
+           <apex:pageBlockButtons >
+            <apex:commandButton value="Save" action="{!Save}"/>
+            <apex:commandButton value="Cancel" action="{!Cancel}"/>
+           </apex:pageBlockButtons>
+      
+   <apex:pageBlockSection title="Information" columns="2" id="pbs1">
+          <apex:outputField value="{!Debtor__c.Client_Account__c}"/>
+          <apex:outputField value="{!Debtor__c.Max_Credit_Period__c}"/>
+          <apex:outputField value="{!Debtor__c.Counterparty__c}"/>
+          <apex:outputField value="{!Debtor__c.Days_Beyond_Terms__c}"/>
+          <apex:outputField value="{!Debtor__c.Dilution__c}"/>
+          <apex:outputField value="{!Debtor__c.QB_Customer__c}" id="QBC"/>
+          <apex:outputField value="{!Debtor__c.Funding_Limit__c}"/>
+          <apex:outputField value="{!Debtor__c.Industry_DBT__c}"/>
+          <apex:outputField value="{!Debtor__c.Debtor_Status__c}"/>
+
+          
+         <!--  <apex:selectList size="1" value="{!Debtor__c.Debtor_Status__c}"> 
+         
+                <apex:selectOption itemValue="Pending" itemLabel="Pending"></apex:selectOption>
+                 <apex:selectOption itemValue="Confirm" itemLabel="confirm"></apex:selectOption>
+                </apex:selectList>-->
+       <br/>
+                   
+                 <apex:outputField value="{!Debtor__c.Business_Transaction_Date__c}"/><br/>
+                <apex:outputField value="{!Debtor__c.Concentration_Limit__c}"/>  <br/>
+                <apex:outputField value="{!Debtor__c.Eligible_AR__c}"/><br/>
+                 <apex:outputField value="{!Debtor__c.Borrowing_Base_Reserve__c}"/><br/>
+                 <apex:outputField value="{!Debtor__c.Credit_Period__c}" id="CP"/>  <br/>
+                 <apex:outputField value="{!Debtor__c.CurrencyIsoCode}"/>
+          
+    </apex:pageBlockSection>
+    <apex:pageBlockSection title="Integration" columns="2" id="pbs2">
+          <apex:outputField value="{!Debtor__c.External_Id__c}"/>
+          <apex:outputField value="{!Debtor__c.Sync_with_Grade__c}"/>
+          <apex:outputField value="{!Debtor__c.Portal_External_Id__c}"/>
+          <apex:outputField value="{!Debtor__c.Sync_with_Portal__c}"/>
+          <apex:outputField value="{!Debtor__c.MP_External_Id__c}"/>
+          <apex:outputField value="{!Debtor__c.Sync_with_Market_Place__c}"/>
+     </apex:pageBlockSection>
+ </apex:pageBlock>
+ 
+  
+ 
+    </apex:form>
+</apex:page>

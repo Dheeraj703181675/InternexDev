@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Customer Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Cheques</relationshipLabel>
+        <relationshipName>Check</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Bank_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Bank Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Batch_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Batch #</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Cheque_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Instrument Amount</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Cheque_Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Instrument Comments</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Cheque_Due_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Instrument Due Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Cheque_Key__c</fullName>
+        <externalId>true</externalId>
+        <label>Cheque Key</label>
+        <length>120</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Cheque_Received_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Instrument Received Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Cheque_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Instrument Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Received &amp; Banked</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Received &amp; Sent for Banking</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Funds Received &amp; Unapplied</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Funds Received &amp; Applied</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Returned To Customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Received But Not Banked</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bounced</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Customer_Bank_Account_No__c</fullName>
+        <externalId>false</externalId>
+        <label>Customer Bank Account #</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DD_Routing__c</fullName>
+        <externalId>false</externalId>
+        <formula>Web_Cash__r.Item_Type__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>DD Routing#</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Deposit_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Deposit Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Deposit_Slip__c</fullName>
+        <externalId>false</externalId>
+        <label>Deposit Slip #</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IFSC_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>IFSC Code</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Instrument_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Instrument Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>CHEQUE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DD</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PO</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>IsPaymentCreated__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>IsPaymentCreated</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsTransactionSelected__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>IsTransactionSelected</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>MICR__c</fullName>
+        <externalId>false</externalId>
+        <label>MICR</label>
+        <length>9</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payable_At__c</fullName>
+        <externalId>false</externalId>
+        <label>Payable At</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Local</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Out Station</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Selected_Cheque_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Selected Cheque Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Suggested_Customer_Account__c</fullName>
+        <externalId>false</externalId>
+        <label>Suggested Customer Account</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Applied__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( Cheque_Amount__c =  Total_Selected_Cheque_Amount__c , True , False)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Applied</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Total_Selected_Cheque_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Selected Cheque Amount</label>
+        <summarizedField>Cheque_Invoice_Matrix__c.Applied_Balance__c</summarizedField>
+        <summaryForeignKey>Cheque_Invoice_Matrix__c.Cheque__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Value_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Value Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Web_Cash__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>To fetch other formula fields, inserted through file upload</description>
+        <externalId>false</externalId>
+        <label>Web Cash</label>
+        <referenceTo>Web_Cash__c</referenceTo>
+        <relationshipLabel>Checks</relationshipLabel>
+        <relationshipName>Checks</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Cheque</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Cheques_Due_For_Today</fullName>
+        <columns>Batch_Number__c</columns>
+        <columns>NAME</columns>
+        <columns>Cheque_Amount__c</columns>
+        <columns>Cheque_Received_Date__c</columns>
+        <columns>Account__c</columns>
+        <columns>Bank_Name__c</columns>
+        <columns>Cheque_Status__c</columns>
+        <columns>Instrument_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Cheque_Due_Date__c</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </filters>
+        <label>Cheques Due For Today</label>
+    </listViews>
+    <listViews>
+        <fullName>Cheques_with_Invoices</fullName>
+        <columns>Batch_Number__c</columns>
+        <columns>NAME</columns>
+        <columns>Cheque_Received_Date__c</columns>
+        <columns>Account__c</columns>
+        <columns>Cheque_Amount__c</columns>
+        <columns>Cheque_Due_Date__c</columns>
+        <columns>Cheque_Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IsTransactionSelected__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>Cheques with Invoices</label>
+    </listViews>
+    <listViews>
+        <fullName>Instrument_Banked_Funds_Applied</fullName>
+        <columns>Batch_Number__c</columns>
+        <columns>NAME</columns>
+        <columns>Cheque_Received_Date__c</columns>
+        <columns>Account__c</columns>
+        <columns>Cheque_Amount__c</columns>
+        <columns>Cheque_Due_Date__c</columns>
+        <columns>IsTransactionSelected__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Cheque_Status__c</field>
+            <operation>equals</operation>
+            <value>Funds Received &amp; Applied</value>
+        </filters>
+        <label>Instrument Banked &amp; Funds Applied</label>
+    </listViews>
+    <listViews>
+        <fullName>Instrument_Banked_but_Payment_Unapplied</fullName>
+        <columns>Batch_Number__c</columns>
+        <columns>NAME</columns>
+        <columns>Account__c</columns>
+        <columns>Cheque_Amount__c</columns>
+        <columns>Cheque_Received_Date__c</columns>
+        <columns>Cheque_Due_Date__c</columns>
+        <columns>Cheque_Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IsPaymentCreated__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Cheque_Status__c</field>
+            <operation>equals</operation>
+            <value>Funds Received &amp; Unapplied</value>
+        </filters>
+        <label>Instrument Banked But Payment Unapplied</label>
+    </listViews>
+    <listViews>
+        <fullName>Instrument_Received_Banked</fullName>
+        <booleanFilter>1</booleanFilter>
+        <columns>Batch_Number__c</columns>
+        <columns>NAME</columns>
+        <columns>Cheque_Received_Date__c</columns>
+        <columns>Account__c</columns>
+        <columns>Cheque_Amount__c</columns>
+        <columns>Cheque_Due_Date__c</columns>
+        <columns>IsTransactionSelected__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Cheque_Status__c</field>
+            <operation>equals</operation>
+            <value>Received &amp; Banked</value>
+        </filters>
+        <label>Instrument Received &amp; Banked</label>
+    </listViews>
+    <listViews>
+        <fullName>Instrument_Received_Not_sent_to_bank</fullName>
+        <booleanFilter>1</booleanFilter>
+        <columns>Batch_Number__c</columns>
+        <columns>NAME</columns>
+        <columns>Cheque_Received_Date__c</columns>
+        <columns>Account__c</columns>
+        <columns>Cheque_Amount__c</columns>
+        <columns>Cheque_Due_Date__c</columns>
+        <columns>Cheque_Status__c</columns>
+        <columns>IsTransactionSelected__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Cheque_Status__c</field>
+            <operation>equals</operation>
+            <value>Received But Not Banked</value>
+        </filters>
+        <label>Instrument Received &amp; Not sent to bank</label>
+    </listViews>
+    <listViews>
+        <fullName>Instrument_Received_Sent_for_Banking</fullName>
+        <booleanFilter>1</booleanFilter>
+        <columns>Batch_Number__c</columns>
+        <columns>NAME</columns>
+        <columns>Cheque_Received_Date__c</columns>
+        <columns>Account__c</columns>
+        <columns>Cheque_Amount__c</columns>
+        <columns>Cheque_Due_Date__c</columns>
+        <columns>Cheque_Status__c</columns>
+        <columns>IsTransactionSelected__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Cheque_Status__c</field>
+            <operation>equals</operation>
+            <value>Received &amp; Sent for Banking</value>
+        </filters>
+        <label>Instrument Received &amp; Sent for Banking</label>
+    </listViews>
+    <listViews>
+        <fullName>cheques_without_Invoices</fullName>
+        <columns>Batch_Number__c</columns>
+        <columns>NAME</columns>
+        <columns>Cheque_Received_Date__c</columns>
+        <columns>Account__c</columns>
+        <columns>Cheque_Amount__c</columns>
+        <columns>Cheque_Due_Date__c</columns>
+        <columns>Cheque_Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IsTransactionSelected__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>cheques without Invoices</label>
+    </listViews>
+    <nameField>
+        <label>Instrument#</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Cheques</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Account__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Cheque_Amount__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Cheque_Due_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Cheque_Received_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATED_DATE</customTabListAdditionalFields>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <listViewButtons>Select_Invoice_For_Cheque</listViewButtons>
+        <listViewButtons>Update_Cheque_Status</listViewButtons>
+        <lookupDialogsAdditionalFields>Account__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Bank_Name__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Cheque_Amount__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Customer_Bank_Account_No__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Cheque_Due_Date__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Cheque_Received_Date__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Account__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Bank_Name__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Cheque_Amount__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Customer_Bank_Account_No__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Cheque_Due_Date__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Cheque_Received_Date__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>Account__c</searchFilterFields>
+        <searchFilterFields>Bank_Name__c</searchFilterFields>
+        <searchFilterFields>Cheque_Amount__c</searchFilterFields>
+        <searchFilterFields>Customer_Bank_Account_No__c</searchFilterFields>
+        <searchFilterFields>Cheque_Due_Date__c</searchFilterFields>
+        <searchFilterFields>Cheque_Received_Date__c</searchFilterFields>
+        <searchResultsAdditionalFields>Account__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Cheque_Amount__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Cheque_Received_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Cheque_Due_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Customer_Bank_Account_No__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Bank_Name__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>The_Instrument_Number_should_be_6_Digits</fullName>
+        <active>true</active>
+        <description>The Instrument Number should be 6 Digits (mandatory). Else, an error needs to be thrown out</description>
+        <errorConditionFormula>LEN( Name ) &lt; 6</errorConditionFormula>
+        <errorDisplayField>Name</errorDisplayField>
+        <errorMessage>Instrument Number can&apos;t be less than 6 digits</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>New_Cheque</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>New Cheque</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>https://akritiv-6990--test.cs15.cloudforce.com/a03/e?retURL=%2Fa03%2Fo</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Select_Invoice</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Select Invoice</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var checkId = &apos;{!Cheque__c.Id}&apos;;
+var accId = &apos;{!Cheque__c.AccountId__c}&apos;;
+
+var checkpage = true; 
+
+var UrlLoc = window.location;
+var strHost = UrlLoc.host;
+var strProtocol = UrlLoc.protocol;
+
+strHost = strHost.replace(&quot;akritiv.&quot;,&quot;c.&quot;);
+
+var loc = window.location.href ; 
+
+
+
+
+var urlString =  strProtocol +&apos;//&apos;+strHost+&apos;/apex/InvoiceCheckPage?id=&apos;+ checkId  + &apos;&amp;accId=&apos; + accId +&apos;&amp;chk=&apos;+checkpage+ &apos;&amp;location=&apos; + loc ;  
+
+var left = (screen.width)-650;
+var top = (screen.height)-450;
+
+
+window.open (urlString ,&quot;OpenCheque&quot;,&quot;toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width=1400,height=800&quot;);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Select_Invoice_For_Cheque</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Select Invoice For Cheque</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)}
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;;
+
+var records = {!GETRECORDIDS($ObjectType.Cheque__c)};
+
+
+if (records[0] == null) {
+alert(&apos;No record is selected &apos;);
+}
+else {
+    if(records.length &gt;1){
+         alert(&apos;Please select one record only&apos;);
+    }else{
+var queryResult = sforce.connection.query(&quot;Select Id, Account__c from Cheque__c where Id in (&apos;&quot;+ records[0] +&quot;&apos;) &quot;) ;
+
+var acc = queryResult.getArray(&quot;records&quot;);
+var accId = &apos;&apos;;
+if (acc[0].Account__c != null){
+accId= acc[0].Account__c;
+}
+
+var checkpage = true;
+var loc = window.location.href ; 
+
+
+         var url = &apos;/apex/InvoiceCheckPage?id=&apos;+ records[0] + &apos;&amp;accId=&apos; + accId +&apos;&amp;chk=&apos;+checkpage + &apos;&amp;location=&apos; + loc ; 
+
+
+var left = (screen.width)-650;
+var top = (screen.height)-450;
+
+
+
+window.open (url ,&quot;OpenCheque&quot;,&quot;toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width=1400,height=800&quot;);
+    }
+
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Update_Cheque_Status</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Update Cheque Status</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)}
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;;
+
+var records = {!GETRECORDIDS($ObjectType.Cheque__c)};
+var strIDs=&apos;&apos;; 
+
+
+if (records[0] == null) {
+alert(&apos;No record is selected &apos;);
+}
+else
+{
+
+for (var n=0; n&lt;records.length; n++)
+{
+if(strIDs == &apos;&apos;)
+strIDs = records[n];
+else
+strIDs = strIDs + &quot;,&quot; + records[n];
+}
+if(strIDs !=null &amp;&amp; strIDs !=&apos;&apos;){
+
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;;
+var config = new sforce.SObject(&quot;akritiv__Temp_Object_Holder__c&quot;);
+var user = sforce.connection.getUserInfo() ;
+var timest = sforce.connection.getServerTimestamp();
+var key = &apos;{!$User.Username}&apos; + timest.timestamp ;
+config.akritiv__Key__c =key ;
+config.akritiv__Value__c = strIDs;
+var res = sforce.connection.create([config]); 
+
+
+var checkpage = true;
+var loc = window.location.href ; 
+
+
+var url = &apos;/apex/UpdateChequeDetail?key=&apos;+ key +&apos;&amp;location=&apos; + loc ; 
+
+
+var left = (screen.width)-650;
+var top = (screen.height)-450;
+
+
+
+window.open (url ,&quot;OpenCheque&quot;,&quot;toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width=550,height=250&quot;);
+}
+}</url>
+    </webLinks>
+</CustomObject>

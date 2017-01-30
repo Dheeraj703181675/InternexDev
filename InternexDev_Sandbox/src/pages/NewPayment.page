@@ -1,0 +1,85 @@
+<apex:page standardController="akritiv__Payment__c" extensions="Paymentcontroller" id="pg">
+<apex:sectionHeader title="Payment Edit" subtitle="New Payment"/>
+<apex:form id="frm">
+<!-- <apex:inputHidden value="{!DebtorID}" id="hdnDebtrId"/> -->
+<apex:pagemessages ></apex:pagemessages>
+    <apex:pageBlock title="Payment Edit" id="pb">
+        
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Save" action="{!Savepayments}"/>
+            <apex:commandButton value="Save & New" action="{!SaveandNewPayments}"/>
+            <apex:commandButton value="Cancel" action="{!Cancel}"/>
+        </apex:pageBlockButtons>
+        
+        <apex:pageBlockSection title="Information" columns="2" id="pbs">
+            <apex:inputField value="{!Payment.Name}" required="true"/>
+      <!--      <apex:inputField value="{!Payment.Instrument_tranx__c}"/> -->
+      <!--      <apex:inputField value="{!Payment.Batch_Number__c}"/> -->
+            <apex:inputField value="{!Payment.Client_Account__c}" id="ClntAccntId"  onchange="ClientaccountChange();"/>
+            <apex:inputField value="{!Payment.akritiv__Payment_Date__c}" required="true"/>
+            <apex:inputField value="{!Payment.Debtor__c}" id="debtrId" onchange="Debtorchange();"/>
+            <apex:inputField value="{!Payment.akritiv__Amount__c}" required="True"/>
+            <apex:outputField value="{!Payment.akritiv__Account__c}" id="AccId"/>
+            <apex:inputField value="{!Payment.akritiv__Payment_Type__c}"/>
+            <apex:inputField value="{!Payment.Bank_Account__c}"/> 
+            <apex:inputField value="{!Payment.Transaction_Type__c}"/> <br/>
+       <!--     <apex:inputField value="{!Payment.Transaction_Date__c}" /> -->
+            <apex:outputField value="{!Payment.Payment_Status__c}" />
+            
+            
+            
+      <!--      <apex:inputField value="{!Payment.Lock_Box_Site__c}"/> -->
+
+        <!--    <apex:inputField value="{!Payment.akritiv__Remittance_Info__c}"/> -->
+            
+        </apex:pageBlockSection>
+        <apex:actionFunction name="FillClientaccount" action="{!FillClientaccount}" reRender="pb"/> 
+    </apex:pageBlock>
+ 
+ <script language="JavaScript1.2" src="/js/functions.js"></script>
+<script src="../../soap/ajax/35.0/connection.js" type="text/javascript"></script>
+
+<script id="clientEventHandlersJS" language="javascript">
+    function Debtorchange()
+    {
+       // document.getElementById('pg:frm:hdnDebtrId').value = document.getElementById('pg:frm:pb:pbs:debtrId_lkid').value;
+       var str = "Select id,Client_Account__c,Counterparty__r.Name,Client_Account__r.Name from Debtor__c where id = '" + document.getElementById('pg:frm:pb:pbs:debtrId_lkid').value + "' limit 1";
+       try{
+           sforce.connection.sessionId = "{!$Api.Session_ID}";
+            var result = sforce.connection.query(str);
+               var records = result.getArray("records");
+         //       alert(records[0].Client_Account__r.Name);
+                document.getElementById('pg:frm:pb:pbs:ClntAccntId').value =records[0].Client_Account__r.Name;
+                document.getElementById('pg:frm:pb:pbs:AccId').value = records[0].Counterparty__r.Name;
+                FillClientaccount();
+            }
+           catch (error)
+            {
+                alert(error.faultstring);
+            } 
+            
+    }
+    function ClientaccountChange()
+    {
+      //  alert('Entered');                                                                                                        
+        var str = "Select id,Client__c,Client__r.CounterParty__r.Name from Client_Account__c where id = '" + document.getElementById('pg:frm:pb:pbs:ClntAccntId_lkid').value + "' limit 1";
+       try{
+           sforce.connection.sessionId = "{!$Api.Session_ID}";
+            var result = sforce.connection.query(str);
+               var records = result.getArray("records");
+         //       alert(records[0].Client_Account__r.Name);
+         //       document.getElementById('pg:frm:pb:pbs:ClntAccntId').value =records[0].Client_Account__r.Name;
+                document.getElementById('pg:frm:pb:pbs:AccId').value = records[0].Client__r.CounterParty__r.Name;
+                FillClientaccount();
+            }
+           catch (error)
+            {
+                alert(error.faultstring);
+            } 
+        
+    }
+   
+</script>   
+    
+</apex:form>
+</apex:page>

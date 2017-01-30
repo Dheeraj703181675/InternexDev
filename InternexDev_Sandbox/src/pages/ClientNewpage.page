@@ -1,0 +1,33 @@
+<apex:page standardController="akritiv__Brand__c" extensions="ClientController" id="Pg">
+<apex:sectionHeader title="Client Edit" subtitle="New Client"/>
+<apex:pageMessages id="msg"></apex:pageMessages>
+<apex:form id="frm">
+    <apex:inputHidden id="ih" value="{!CounterPartyId}"/>
+    <apex:pageBlock id="Pb" title="Client Edit">
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Save" action="{!SaveClient}" />
+            <apex:commandButton value="Save & New" action="{!SaveandNew}" />
+            <apex:commandButton value="Cancel" action="{!Cancel}"/>
+        </apex:pageBlockButtons>
+       <apex:pageBlockSection id="Pbs" title="Information" collapsible="false">
+          <apex:inputField value="{!Client.CounterParty__c}" label="Client" id="CPID" onchange="SelectCounterParty()"/>
+           <apex:inputField value="{!Client.Application_Name__c}"/>
+           <apex:outputField value="{!Client.Name}" id="CName"/>
+           <apex:inputField value="{!Client.Application_Number__c}"/>
+           <apex:inputField value="{!Client.Referal_Source__c}"/>
+           <apex:inputField value="{!Client.CurrencyIsoCode}"/>
+           <apex:inputField value="{!Client.Funding_Limit__c}"/>
+       </apex:pageBlockSection>
+       <apex:actionFunction name="FillClientName" action="{!FillClientName}" reRender="CName"/>
+    </apex:pageBlock>
+</apex:form>
+<Script>
+    function SelectCounterParty()
+    {
+       // alert(document.getElementById('Pg:frm:Pb:Pbs:CPID').value);
+        document.getElementById('Pg:frm:ih').value = document.getElementById('Pg:frm:Pb:Pbs:CPID').value;
+
+        FillClientName();
+    }
+</Script>
+</apex:page>

@@ -1,0 +1,22 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<apex:page controller="akritiv.TransactionReport" showHeader="false"
+    sidebar="false">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!transactionList}" var="trans">
+                <apex:column value="{!trans.akritiv__Account__c}" headerValue="{!$Label.Label_Account_Name}" />
+                <apex:column value="{!trans.akritiv__Days_Past_Due__c}"
+                    headerValue="{!$Label.Label_Days_Past_Due}" />
+                <apex:column value="{!trans.akritiv__Balance__c}" headerValue="{!$Label.Label_Balance}" />
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

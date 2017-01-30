@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>20.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Page to provide the functionality for adding additional
+                email-attachments from the email editor component on the pages
+                (ContactCustomerPage, PromiseToPay,
+                GenerateTransactrionDisputes, SenfBillingStatementPage etc..)</description>
+    <label>AddEmailAttachments</label>
+</ApexPage>

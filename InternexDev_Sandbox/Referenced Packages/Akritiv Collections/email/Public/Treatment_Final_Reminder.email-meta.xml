@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Serious reminder after 90 days past due</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Treatment:Final Reminder</name>
+    <style>none</style>
+    <subject>Final Reminder</subject>
+    <type>text</type>
+</EmailTemplate>

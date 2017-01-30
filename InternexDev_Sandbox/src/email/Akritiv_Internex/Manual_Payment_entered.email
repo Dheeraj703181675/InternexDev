@@ -1,0 +1,3 @@
+{!akritiv__Payment__c.Client_Account__c}  applied a manual payment of  <font color="Red"><b>{!akritiv__Payment__c.akritiv__Amount__c}</b></font>. Please update the status of the payment after collecting the funds from Client.<br> <br>
+
+Payment ID: <a href={!akritiv__Payment__c.Link}>{!akritiv__Payment__c.Name}</a>    <br>Due Date: {!akritiv__Payment__c.Due_date_for_email_alert__c} <br>Priority: Urgent

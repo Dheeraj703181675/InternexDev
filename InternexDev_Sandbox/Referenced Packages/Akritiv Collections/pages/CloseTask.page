@@ -1,0 +1,27 @@
+<apex:page controller="akritiv.CloseTaskController" sidebar="false" showHeader="false" id="pg" action="{!shwfirtMsg}" >  
+<script>
+    function refreshWindow()
+    {
+        try
+        {
+            window.opener.location.href = '{!JSENCODE(location)}' ;
+            window.close() ;
+        }
+        catch(es)
+        {
+            alert(es) ;
+        }
+
+    }
+</script>
+<apex:form >
+  <apex:pageBlock >     
+      <apex:pageMessages id="msg">          
+      </apex:pageMessages> 
+      <p align="center">   
+      <apex:commandButton action="{!closeTask}" oncomplete="refreshWindow();" value="Yes"/> &nbsp;&nbsp;&nbsp;&nbsp;
+      <apex:commandButton onclick="window.close();" value="{!$Label.Label_Cancel}"/>
+      </p>
+  </apex:pageBlock>
+</apex:form>  
+</apex:page>

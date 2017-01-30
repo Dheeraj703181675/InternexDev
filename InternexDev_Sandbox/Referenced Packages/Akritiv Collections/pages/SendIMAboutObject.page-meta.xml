@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>17.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Page is used to send message to internal user with related object as account, Transaction or Dispute.
+The functionality is same as quick note on the sidebar.</description>
+    <label>SendIMAboutObject</label>
+</ApexPage>

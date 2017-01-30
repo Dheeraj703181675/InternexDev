@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Funding Request</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Funding Requests</value>
+    </caseValues>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Currency</value>
+        </caseValues>
+        <name>case_currency</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Funding Request Name</value>
+        </caseValues>
+        <name>case_name</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Funding Request Number</value>
+        </caseValues>
+        <name>case_number</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <label><!-- ACH Mode --></label>
+        <name>ACH_Mode__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula : Partner Draw Fee * Funding Requested --></help>
+        <label><!-- Actual Partner Draw Fee --></label>
+        <name>Actual_Partner_Draw_Fee__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula : Partner Origination Fee * Client-Account Facility Size --></help>
+        <label><!-- Actual Partner Origination Fee --></label>
+        <name>Actual_Partner_Origination_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Applied Draw Fee --></label>
+        <name>Applied_Draw_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Applied Origination Fee --></label>
+        <name>Applied_Origination_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business Transaction Date --></label>
+        <name>Business_Transaction_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- CA Drawal Fee Percentage --></label>
+        <name>CA_Drawal_Fee_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- CA Funding Limit --></label>
+        <name>CA_Funding_Limit__c</name>
+    </fields>
+    <fields>
+        <label><!-- CA Minimum Drawal fee --></label>
+        <name>CA_Minimum_Drawal_fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- CA Minimum Origination Fee --></label>
+        <name>CA_Minimum_Origination_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- CA Origination Fee Percentage --></label>
+        <name>CA_Origination_Fee_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Account Funding Limit --></label>
+        <name>Client_Account_Funding_Limit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Account --></label>
+        <name>Client_Account__c</name>
+        <relationshipLabel><!-- Funding Requests --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Client Name --></label>
+        <name>Client_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Portal Id --></label>
+        <name>Client_Portal_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client --></label>
+        <name>Client__c</name>
+    </fields>
+    <fields>
+        <label><!-- Comments --></label>
+        <name>Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- CP Funded Date --></label>
+        <name>Deal_Acceptance_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Discount/Interest Rate --></label>
+        <name>Discount_Interest_Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Draw Fee Percentage --></label>
+        <name>Draw_Fee_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Draw Fee --></label>
+        <name>Draw_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Engineering Req Number --></label>
+        <name>Engineering_Req_Number__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: If status equal to &apos;&apos;Fully Funded&apos; or &apos;Funds Transferred&apos; then Funds Released else 0 --></help>
+        <label><!-- Funding Amount --></label>
+        <name>Funding_Amount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: Funding Requested - Funds Released --></help>
+        <label><!-- Funding Balance --></label>
+        <name>Funding_Balance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Funding Requested --></label>
+        <name>Funding_Requested__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: No of Transactions --></help>
+        <label><!-- Funding Transaction Count --></label>
+        <name>Funding_Transaction_Count__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: Sum of all Transactions. --></help>
+        <label><!-- Funds Released --></label>
+        <name>Funds_Released__c</name>
+    </fields>
+    <fields>
+        <label><!-- Grade Id --></label>
+        <name>Grade_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- MP External Id --></label>
+        <name>MP_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Minimum Draw fee --></label>
+        <name>Minimum_Draw_fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Minimum Origination Fee --></label>
+        <name>Minimum_Origination_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Origination Fee Percentage --></label>
+        <name>Origination_Fee_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Origination Fee --></label>
+        <name>Origination_Fee__c</name>
+    </fields>
+    <fields>
+        <help><!-- Source: Client-Account Partner Draw Fee --></help>
+        <label><!-- Partner Draw Fee (%) --></label>
+        <name>Partner_Draw_Fee__c</name>
+    </fields>
+    <fields>
+        <help><!-- Source: Client-Account Partner Origination Fee --></help>
+        <label><!-- Partner Origination Fee (%) --></label>
+        <name>Partner_Origination_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Portal External Id --></label>
+        <name>Portal_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Portal Facility ID --></label>
+        <name>Portal_Facility_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Potential Liability --></label>
+        <name>Potential_Liability__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Product --></label>
+        <name>Product__c</name>
+        <picklistValues>
+            <masterLabel>GC1020</masterLabel>
+            <translation><!-- GC1020 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GC1040</masterLabel>
+            <translation><!-- GC1040 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GC1060</masterLabel>
+            <translation><!-- GC1060 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GC3020</masterLabel>
+            <translation><!-- GC3020 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GC3040</masterLabel>
+            <translation><!-- GC3040 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GC3060</masterLabel>
+            <translation><!-- GC3060 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GC5020</masterLabel>
+            <translation><!-- GC5020 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GC5040</masterLabel>
+            <translation><!-- GC5040 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GC5060</masterLabel>
+            <translation><!-- GC5060 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Profile Name --></label>
+        <name>Profile_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance --></label>
+        <name>Remittance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Request Number --></label>
+        <name>Request_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- SLA Violation --></label>
+        <name>SLA_Violation__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sync with Grade --></label>
+        <name>Sync_with_Grade__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Market Place --></label>
+        <name>Sync_with_Market_Place__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Portal --></label>
+        <name>Sync_with_Portal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wire Fee --></label>
+        <name>Wire_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wire Mode --></label>
+        <name>Wire_Mode__c</name>
+    </fields>
+    <fields>
+        <label><!-- Workflow Fired? --></label>
+        <name>Workflow_Fired__c</name>
+    </fields>
+    <layouts>
+        <layout>InterNex AM Layout</layout>
+        <sections>
+            <label><!-- Draw Fees --></label>
+            <section>Draw Fees</section>
+        </sections>
+        <sections>
+            <label><!-- Integration --></label>
+            <section>Integration</section>
+        </sections>
+        <sections>
+            <label><!-- Origination Fees --></label>
+            <section>Origination Fees</section>
+        </sections>
+        <sections>
+            <label><!-- Wire &amp; ACH Fees --></label>
+            <section>Wire &amp; ACH Fees</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>InterNex-Admin Layout V2</layout>
+        <sections>
+            <label><!-- Draw Fees --></label>
+            <section>Draw Fees</section>
+        </sections>
+        <sections>
+            <label><!-- Integration --></label>
+            <section>Integration</section>
+        </sections>
+        <sections>
+            <label><!-- Origination Fees --></label>
+            <section>Origination Fees</section>
+        </sections>
+        <sections>
+            <label><!-- Wire &amp; ACH Fees --></label>
+            <section>Wire &amp; ACH Fees</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Sys-Admin Layout V1</layout>
+        <sections>
+            <label><!-- Draw Fees --></label>
+            <section>Draw Fees</section>
+        </sections>
+        <sections>
+            <label><!-- Integration --></label>
+            <section>Integration</section>
+        </sections>
+        <sections>
+            <label><!-- Origination Fees --></label>
+            <section>Origination Fees</section>
+        </sections>
+        <sections>
+            <label><!-- Wire &amp; ACH Fees --></label>
+            <section>Wire &amp; ACH Fees</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- NewChildCase --></label>
+        <name>NewChildCase</name>
+    </quickActions>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Funding Requested must be greater than 0 and Fees (If any Fee is applied) --></errorMessage>
+        <name>FR_must_be_greater_than_Origination_Fee</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can not update the Funding Request for the Client-Account which has the 0 or less Net Availability. --></errorMessage>
+        <name>Validation_Remittance_Flag</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can not apply both Origination Fee and Draw Fee for single Transaction --></errorMessage>
+        <name>Validation_on_Fees</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Funding Requested Amount must be less than or equal to FIU Balance and greater than 0. --></errorMessage>
+        <name>Validation_on_FundRequested_with_FIU</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can not select both ACH and Wire Mode. Please Select one mode. --></errorMessage>
+        <name>Validation_on_Mode_Selection</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can not change the Mode/Funding Request Information for the Funds Transferred status Funding Request. --></errorMessage>
+        <name>Validation_on_Mode_change</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can not update the Funding Request for the Client-Account which has the 0 or less Net Availability. --></errorMessage>
+        <name>Validation_on_NetAvailability_for_Update</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Partner Draw Fee should be less than the Applied Draw Fee --></errorMessage>
+        <name>Validation_on_Partner_Draw_Fee</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Partner Origination Fee should be less than the Applied Origination Fee --></errorMessage>
+        <name>Validation_on_Partner_Origination_Fee</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can not change the Client-Account,Funding Requested and you can not delete the Comments. --></errorMessage>
+        <name>Validation_on_Updation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can not change the status for this Funding Request. Please delete the Funding Transaction and change the status. --></errorMessage>
+        <name>Validation_on_Updation_of_Status</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter the Comments/Justification for the action. --></errorMessage>
+        <name>Validation_on_Updation_without_comments</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Approve --></label>
+        <name>Approve</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Reject --></label>
+        <name>Reject</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_to_MPBE --></label>
+        <name>Send_to_MPBE</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_to_Portal --></label>
+        <name>Send_to_Portal</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Transfer_Funds --></label>
+        <name>Transfer_Funds</name>
+    </webLinks>
+    <workflowTasks>
+        <description><!-- Client made a valid Draw Request. Please verify it. --></description>
+        <name>Funding_Request_Verification</name>
+        <subject><!-- Funding Request Verification --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Funding_Request_is_Fully_Funded</name>
+        <subject><!-- Funding Request is Fully Funded --></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

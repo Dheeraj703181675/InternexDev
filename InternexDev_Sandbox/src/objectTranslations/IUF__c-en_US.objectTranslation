@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>IUF</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>IUFs</value>
+    </caseValues>
+    <fields>
+        <label><!-- Applied Amount --></label>
+        <name>Applied_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Applied Fee --></label>
+        <name>Applied_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Account --></label>
+        <name>Client_Account__c</name>
+        <relationshipLabel><!-- IUFs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Closing IUF Reserve Retained --></label>
+        <name>Closing_IUF_Retained__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date --></label>
+        <name>Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Principal Balance Released --></label>
+        <name>FIU_Released__c</name>
+    </fields>
+    <fields>
+        <label><!-- IUF Reserve Retained --></label>
+        <name>IUF_Retained__c</name>
+    </fields>
+    <fields>
+        <label><!-- IUF Reserve Used --></label>
+        <name>IUF_used__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interest Paid --></label>
+        <name>Interest_Due_Recovered__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interest Accrued --></label>
+        <name>Month_Interest__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opening IUF Reserve Retained --></label>
+        <name>Opening_IUF_Retained__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Line Item --></label>
+        <name>Payment_Line_Item__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Line --></label>
+        <name>Payment_Line__c</name>
+        <relationshipLabel><!-- IUFs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Payments --></label>
+        <name>Payments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Manual</masterLabel>
+            <translation><!-- Manual --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>System</masterLabel>
+            <translation><!-- System --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- UL Fee Paid --></label>
+        <name>UL_Fee_Due_Recovered__c</name>
+    </fields>
+    <fields>
+        <label><!-- UL Fee Accrued --></label>
+        <name>Un_Used_Line_Rate__c</name>
+    </fields>
+    <layouts>
+        <layout>IUF Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Retained Amount must be equal to Sum of Interest Due Recovered and UL Fee Due Recovered. --></errorMessage>
+        <name>Validation_on_Due_Recovered_and_IUF</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Retained amount should be less than the Client-Account IUF Reserve Shortfall. --></errorMessage>
+        <name>Validation_on_IUF</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter the Positive Number --></errorMessage>
+        <name>Validation_on_Negative_number</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can not modify the existing record.Please create the new IUF. --></errorMessage>
+        <name>Validation_on_Update</name>
+    </validationRules>
+</CustomObjectTranslation>

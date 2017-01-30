@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Web Cash</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Web Cash</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Web Cash --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Amount --></label>
+        <name>Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRTN --></label>
+        <name>BRTN__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Account Id --></label>
+        <name>Bank_Account_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Account Name --></label>
+        <name>Bank_Account_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Account# --></label>
+        <name>Bank_Account__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Id --></label>
+        <name>Bank_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Name --></label>
+        <name>Bank_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Batch# --></label>
+        <name>Batch_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Check --></label>
+        <name>Check__c</name>
+        <relationshipLabel><!-- Web Cash --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Cheque Due Date --></label>
+        <name>Cheque_Due_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cheque Received Date --></label>
+        <name>Cheque_Received_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cheque# --></label>
+        <name>Cheque__c</name>
+    </fields>
+    <fields>
+        <label><!-- Company Name --></label>
+        <name>Company_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Company Number --></label>
+        <name>Company_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Bank Account # --></label>
+        <name>Customer_Bank_Account_No__c</name>
+    </fields>
+    <fields>
+        <label><!-- DD Account # --></label>
+        <name>DD_Account__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deposit Date --></label>
+        <name>Deposit_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Grey Out Field --></label>
+        <name>Grey_Out_Field__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsApplied --></label>
+        <name>IsApplied__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsSavedFromScreen --></label>
+        <name>IsSavedFromScreen__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsSelectedInvoice --></label>
+        <name>IsSelectedInvoice__c</name>
+    </fields>
+    <fields>
+        <label><!-- Item Number --></label>
+        <name>Item_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Item Type --></label>
+        <name>Item_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lockbox Number --></label>
+        <name>Lockbox_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lockbox Site --></label>
+        <name>Lockbox_Site__c</name>
+    </fields>
+    <fields>
+        <label><!-- Non AR GL --></label>
+        <name>Non_AR_GL__c</name>
+        <relationshipLabel><!-- Web Cash --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Payment Description/ BRCR --></label>
+        <name>Payment_Description_BRCR__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Mode --></label>
+        <name>Payment_Mode__c</name>
+        <picklistValues>
+            <masterLabel>CHEQUE</masterLabel>
+            <translation><!-- CHEQUE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NEFT</masterLabel>
+            <translation><!-- NEFT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NEFT/RTGS</masterLabel>
+            <translation><!-- NEFT/RTGS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OTHER</masterLabel>
+            <translation><!-- OTHER --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RTGS</masterLabel>
+            <translation><!-- RTGS --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Payment --></label>
+        <name>Payment__c</name>
+        <relationshipLabel><!-- Web Cash --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Document Date --></label>
+        <name>Posting_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Process Date --></label>
+        <name>Process_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reason --></label>
+        <name>Reason__c</name>
+        <picklistValues>
+            <masterLabel>AML Investigation/ Workflow Pending</masterLabel>
+            <translation><!-- AML Investigation/ Workflow Pending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AR</masterLabel>
+            <translation><!-- AR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Advance Payment</masterLabel>
+            <translation><!-- Advance Payment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Already Applied</masterLabel>
+            <translation><!-- Already Applied --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cash in Transit</masterLabel>
+            <translation><!-- Cash in Transit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cheque Bounce</masterLabel>
+            <translation><!-- Cheque Bounce --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Duplicate Payment</masterLabel>
+            <translation><!-- Duplicate Payment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Non AR</masterLabel>
+            <translation><!-- Non AR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Overpayment</masterLabel>
+            <translation><!-- Overpayment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Payment To Wrong Lock Box/ Entity</masterLabel>
+            <translation><!-- Payment To Wrong Lock Box/ Entity --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Refund Requested</masterLabel>
+            <translation><!-- Refund Requested --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Reviewed Credit with Customer</masterLabel>
+            <translation><!-- Reviewed Credit with Customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>UnAllocated Payment</masterLabel>
+            <translation><!-- UnAllocated Payment --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Remitter Name --></label>
+        <name>Remitter_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Selected Amount --></label>
+        <name>Selected_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>All</masterLabel>
+            <translation><!-- All --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Non Processed</masterLabel>
+            <translation><!-- Non Processed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Processed</masterLabel>
+            <translation><!-- Processed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Save</masterLabel>
+            <translation><!-- Save --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Submit To External Source --></label>
+        <name>Submit_To_External_Source__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transaction Code --></label>
+        <name>Transaction_Code__c</name>
+        <picklistValues>
+            <masterLabel>Applied On Invoice</masterLabel>
+            <translation><!-- Applied On Invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partially Paid</masterLabel>
+            <translation><!-- Partially Paid --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unapplied Payment</masterLabel>
+            <translation><!-- Unapplied Payment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unidentified Payment</masterLabel>
+            <translation><!-- Unidentified Payment --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Transaction Date --></label>
+        <name>Transaction_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transit Routing # --></label>
+        <name>Transit_Routing__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Code --></label>
+        <name>User_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Value Date --></label>
+        <name>Value_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- WebCash Unique Key --></label>
+        <name>WebCash_Unique_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- isAutoApplied --></label>
+        <name>isAutoApplied__c</name>
+    </fields>
+    <layouts>
+        <layout>Web Cash Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Payment Details --></label>
+            <section>Payment Details</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

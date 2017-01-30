@@ -1,0 +1,38 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+
+<apex:page controller="akritiv.AutoDunningTasksController" sidebar="false" showHeader="false" id="pg"  >  
+    <script>
+     window.onload=function(){
+    callprepareTasks();};
+        function refreshWindow()
+        {
+            try
+            {
+                window.opener.location.href = '{!JSENCODE(location)}' ;
+                
+                window.close() ;
+            
+            }
+            catch(es)
+            {
+                alert(es) ;
+            }
+        }
+    </script>
+    <apex:form id="frm">
+     <apex:actionFunction name="callprepareTasks" action="{!save}" reRender="msg"/>    
+        <apex:pageBlock id="pb">
+            <apex:commandButton id="Finish" value="{!$Label.Label_Finish}"  onclick="refreshWindow();"/>
+            
+            <apex:pageMessages id="msg"></apex:pageMessages>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

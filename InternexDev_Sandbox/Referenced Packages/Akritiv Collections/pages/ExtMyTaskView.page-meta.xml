@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>16.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Displays a list of tasks. User can select different views to filter task as required. Form this page user can start working on collector&apos;s workbench.</description>
+    <label>ExtMyTaskView</label>
+</ApexPage>

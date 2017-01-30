@@ -1,0 +1,60 @@
+<!--
+/*
+ *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ *This software is the confidential and proprietary information
+ *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ *disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<apex:page standardcontroller="Account"
+    extensions="akritiv.PortalContactCSRTasksController" showheader="false"
+    sidebar="false" id="RelContactCSRTasksList" tabstyle="Account">
+
+    <style>
+.bPageBlock {
+    border-top: 0;
+    padding-bottom: 0;
+    height: 0px;
+    padding: 0px 0px 0px 0px;
+    border-bottom: 0;
+}
+
+.bPageBlock .pbBody {
+    margin-right: 0;
+    padding: 0;
+}
+
+.bPageBlock .pbFooter {
+    display: none;
+}
+</style>
+
+    <apex:pageBlock title="{!$Label.Label_Contact_CSR_History}" id="taskblock"
+        tabStyle="Account">
+        <apex:dataTable width="100%" value="{!taskList}" var="task"
+            id="tasksDataTable" headerClass="headerRow" rowClasses="dataRow"
+            styleClass="list" rendered="{!IF(taskList.size >0,true,false)}">
+            <apex:column >
+                <apex:facet name="header">
+                    <b>{!$Label.Label_Subject}</b>
+                </apex:facet>
+                <apex:outputField value="{!task.Subject}" />
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">
+                    <b>{!$Label.Label_Description}</b>
+                </apex:facet>
+                <apex:outputField value="{!task.description}" />
+            </apex:column>
+
+        </apex:dataTable>
+    </apex:pageBlock>
+
+    <br />
+    <br />
+    <apex:outPutLabel value="{!$Label.Label_No_Message_Found}"
+        rendered="{!IF(taskList.size >0,false,true)}" />
+
+
+</apex:page>

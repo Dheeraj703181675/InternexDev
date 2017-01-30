@@ -1,0 +1,8 @@
+Dear {!Contact.Name},
+
+This is a confirmation that dispute {!Dispute__c.Name} in the amount of {!Dispute__c.Amount__c} has been updated in our system and is being researched by customer service. 
+
+Thanks,
+{!User.Name}
+{!User.Email}
+{!User.Phone}

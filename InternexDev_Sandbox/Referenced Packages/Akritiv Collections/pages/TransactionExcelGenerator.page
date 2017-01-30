@@ -1,0 +1,62 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/*
+ * Page is used to generate Excel sheet data containing transaction detail 
+ * when user click in Export button on 
+ * related Transaction tab at Account detail page.
+ */ 
+-->
+<apex:page controller="akritiv.TransactionExcelGenerator" showHeader="{!showHeader}"
+    sidebar="{!sidebar}" id="pg"
+    contentType="{!contentType}"  cache="true" expires="1"  standardStylesheets="false">
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            
+            <style> 
+        br {mso-data-placement:same-cell;}  <!-- MSFT style causes Excel to treat <br/> as soft carriage return 'ALT-ENTER' when constructing cells from SFDC HTML output -->
+    </style>
+            
+            <style>
+                body { font-family: "Chrysanthi Unicode ","Apple Symbols","Times New Roman", "Arial Unicode MS";} 
+            </style>
+        </head> 
+    <apex:pageBlock id="pageBlck" rendered="{!IF(limitReached, FALSE, TRUE)}">
+        <br />
+
+        <table border="1" style="font-family:Arial Unicode MS" >
+            <apex:repeat value="{!accDetails}" var="data">
+                <tr>
+                    <apex:repeat value="{!data}" var="item">
+                        <td style="font-weight : bold;font-family:Arial Unicode MS">{!item}</td>
+                    </apex:repeat>
+                </tr>
+            </apex:repeat>
+        </table>
+        <br />
+        <br />
+        <br />
+        <apex:repeat value="{!lstTransactions}" var="lstTrans">
+            <table border="1" style="font-family:Arial Unicode MS">
+                <apex:repeat value="{!lstTrans}" var="trans">
+                    <tr>
+                        <apex:repeat value="{!trans}" var="item">
+                            <td style="font-family:Arial Unicode MS">{!item}</td>
+                        </apex:repeat>
+                    </tr>
+                </apex:repeat>
+            </table>
+        </apex:repeat>
+    </apex:pageBlock>
+    <apex:pageBlock id="pageBlck1" rendered="{!IF(limitReached, TRUE,FALSE)}">
+        <apex:pagemessages ></apex:pagemessages>
+    </apex:pageBlock>
+
+</apex:page>

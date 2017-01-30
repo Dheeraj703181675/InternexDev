@@ -1,0 +1,131 @@
+<apex:page standardController="akritivtlm__Conversation__c" extensions="akritivtlm.HDEditPriorityCtrl" id="myPage" sidebar="false" showHeader="false">
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__editRec, '/editResource/editjs.js')}"/>
+<apex:form id="frm">
+<script> 
+    function DateValidation(){
+        var mydate="";
+        var duedate="";
+        var Priority="";
+        var followupdate="";
+
+        Priority=document.getElementById('myPage:frm:MPB:EditPriorfieldsPB:repeat1:0:userval').value;   
+        duedate = document.getElementById('myPage:frm:MPB:EditPriorfieldsPB:repeat1:1:userval').value;
+        //followupdate=document.getElementById('myPage:frm:MPB:EditPriorfieldsPB:repeat1:2:userval').value;
+
+        var today = new Date();
+        today=FormDate(today);
+        if(Priority!=null && Priority !=''){
+            if(duedate !=null && !duedate==''){
+                duedate=FormDate(duedate);
+                if(duedate<= today) {
+                    alert("Please select Due Date greater than today's date");
+                    return false;
+                }else{
+                    if(followupdate !=null && followupdate!=''){
+                        followupdate=FormDate(followupdate);
+                        if(followupdate>=duedate){
+                            alert("Please select Followupdate less than Due date ");
+                            return false;
+                        }else if(followupdate<= today){
+                            alert("Please select Follow Up Date greater than today's date");
+                            return false;
+                        }else{
+                            return true;
+                        }
+                    }else{
+                        return true;
+                    }
+                }
+            }else{
+                alert("please select Duedate");
+                return false;                           
+            }                           
+            return true;
+        }
+        else{
+            alert("please select Priority");
+            return false;
+        }
+    }  
+    function FormDate(EnteredDate){
+        var EnteredDate=new Date(EnteredDate);
+        var month = EnteredDate.getMonth();
+        var day = EnteredDate.getDate();
+        month = month + 1;
+        month = month + "";
+        if (month.length == 1){
+            month = "0" + month;
+        }
+        day = day + "";
+        if (day.length == 1){
+            day = "0" + day;
+        }
+        var myDate= month + '/' + day + '/' + EnteredDate.getFullYear();
+        return myDate;
+    }
+</script> 
+<style>
+    html{
+        scrollbar-face-color: #E6E6E6;
+        scrollbar-shadow-color: #E6E6E6;
+        scrollbar-highlight-color:#E6E6E6;
+        scrollbar-3dlight-color: #ADADAD;
+        scrollbar-darkshadow-color: #ADADAD;
+        scrollbar-track-color: #ADADAD;
+        scrollbar-arrow-color: #000000;
+        }
+</style>
+<apex:outputPanel id="opCloseId">
+    <script>
+        function closeWin(){
+            if({!windowClose}){
+                if({!isPriorityChanged}){
+                    returnValue = 'Priority is changed for conversation {!conversation.Name}.';
+                }else{
+                    returnValue = 'Conversation {!conversation.Name} updated successfully.';
+                }
+                window.parent.displayMessageAndClosePopUp("info",returnValue,"editPriorityWin");
+            }
+        }
+    </script>
+</apex:outputPanel> 
+
+<apex:pageBlock id="MPB">       
+    <apex:pageBlockButtons id="pageBlockButtons1" location="top" >
+        <apex:actionStatus id="saveStatus1">
+            <apex:facet name="stop">
+                <apex:commandButton action="{!UpdatePriority}" onClick="if(!DateValidation()){return};disabling();" id="SubmitButton1" value="{!$Label.Update}" oncomplete="closeWin();" reRender="opCloseId"/> 
+            </apex:facet>
+            <apex:facet name="start">
+                <apex:commandButton value="{!$Label.Update}..." disabled="true" status="saveStatus1"/>
+            </apex:facet>
+        </apex:actionStatus>
+    </apex:pageBlockButtons>
+    <apex:pageBlockButtons id="pageBlockButtons2" location="bottom" >
+        <apex:actionStatus id="saveStatus1">
+            <apex:facet name="stop">
+                <apex:commandButton action="{!UpdatePriority}" onClick="if(!DateValidation()){return};disabling();" id="SubmitButton1" value="{!$Label.Update}" oncomplete="closeWin();" reRender="opCloseId"/> 
+            </apex:facet>
+            <apex:facet name="start">
+                <apex:commandButton value="{!$Label.Update}..." disabled="true" status="saveStatus1"/>
+            </apex:facet>
+        </apex:actionStatus>
+    </apex:pageBlockButtons>
+
+    <apex:actionRegion id="Priority">
+        <apex:pageBlockSection columns="1" id="EditPriorfieldsPB" >
+            <!--
+            <apex:repeat id="repeat1" value="{!$ObjectType.Conversation__c.FieldSets.EditPriority}" var="stdR0">
+                <apex:inputfield id="userval" value="{!conversation[stdR0]}" required="{!OR(stdR0.required, stdR0.dbrequired)}" rendered="true"/>
+            </apex:repeat>
+            --> 
+            <apex:repeat id="repeat1" value="{!EditPriorityList}" var="stdR0">
+                <apex:inputfield id="userval" value="{!conversation[stdR0]}" required="{!OR(stdR0.required, stdR0.dbrequired)}" rendered="true"/>
+            </apex:repeat>
+        </apex:pageBlockSection>
+    </apex:actionRegion>
+
+</apex:pageBlock>
+</apex:form>
+</apex:page>

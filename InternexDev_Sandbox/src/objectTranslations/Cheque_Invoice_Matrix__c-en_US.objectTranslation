@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Cheque Invoice Matrix</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Cheque Invoice Matrix</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+    </fields>
+    <fields>
+        <label><!-- Applied Balance --></label>
+        <name>Applied_Balance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cheque --></label>
+        <name>Cheque__c</name>
+        <relationshipLabel><!-- Cheque Invoice Matrix --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Invoice Amount --></label>
+        <name>Invoice_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice  Balance --></label>
+        <name>Invoice_Balance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice Days Past Due --></label>
+        <name>Invoice_Days_Past_Due__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice Due Date --></label>
+        <name>Invoice_Due_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- PDC Amount --></label>
+        <name>PDC_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- PDC Bank Name --></label>
+        <name>PDC_Bank_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- PDC Date --></label>
+        <name>PDC_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- PDC Received --></label>
+        <name>PDC_Received__c</name>
+    </fields>
+    <fields>
+        <label><!-- PDC --></label>
+        <name>PDC__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales District --></label>
+        <name>Sales_District__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transaction --></label>
+        <name>Transaction__c</name>
+        <relationshipLabel><!-- Cheque Invoice Matrix --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Cheque Invoice Matrix Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

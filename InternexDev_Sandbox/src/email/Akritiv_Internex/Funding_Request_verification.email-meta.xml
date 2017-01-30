@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Funding Request verification</name>
+    <style>none</style>
+    <subject>Akritiv Prod: Approval Required: Funding Request ({!Case.CaseNumber})</subject>
+    <textOnly>{!UPPER(Case.Client_Name__c)}  ({!Case.Client_Account__c}) made a draw request! Your approval is required.
+Funding Request ID: {!Case.CaseNumber}
+Due Date: {!Case.CreatedDate}
+Priority: Urgent</textOnly>
+    <type>custom</type>
+</EmailTemplate>

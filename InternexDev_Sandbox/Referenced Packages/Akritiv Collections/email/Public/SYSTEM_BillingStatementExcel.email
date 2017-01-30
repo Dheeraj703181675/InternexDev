@@ -1,0 +1,198 @@
+<html>
+<head>
+<style>
+table#TxTableStyle {
+    background-color:#FFFFFF;
+    border: solid #000 3px;
+}
+</style>
+</head>
+  <body>
+    <table id="mainTable" border="0" width="94%">
+       <tr>
+         <td width="32%"><img src="{!Organization.Logo}" alt="{!Organization.Name}" width="200" height="55" />
+ </td>
+         <td width="15%"> </td>
+         <td width="53%"> </td>
+       </tr>
+
+       <tr>
+         <td><br/></td>
+       </tr>
+       <tr>
+         <td width="32%"> 
+         <table width="367" border="0">
+        <tr>
+          <td width="361"> {!Organization.Name} </td>
+        </tr>
+        <tr>
+          <td> {!Organization.Street} </td>
+        </tr>
+        <tr>
+          <td> {!Organization.City}, {!Organization.State} {!Organization.PostalCode} </td>
+        </tr>
+        <tr>
+          <td> {!Organization.Country} </td>
+        </tr>
+      </table>
+         
+         </td>
+         <td width="15%"> </td>
+         <td width="53%" colspan="2">
+
+           <table>
+             <tr>
+               <td>
+                  <b>Phone:</b>
+               </td>
+               <td>
+                 {!Organization.Phone}
+               </td>
+             </tr>
+
+             <tr>
+               <td>
+                  <b>Fax:</b>
+               </td>
+               <td>
+               {!Account.OwnerFax}
+               </td>
+             </tr>
+           </table>
+
+         </td>
+       </tr>
+       <tr>
+         <td width="32%"> </td>
+         <td width="15%"> </td>
+         <td width="53%">
+         </td>
+       </tr>
+
+       <tr>
+         <td><br/></td>
+       </tr>
+       <tr>
+         <td width="32%"><h2><i> Statement</i> </h2></td>
+         <td width="15%"></td>
+         <td width="53%"></td>
+
+       </tr>
+       <tr>
+         <td width="32%"></td>
+         <td width="15%"></td>
+         <td width="53%" colspan="2" rowspan="3"><table>
+           <tr>
+             <td width="722">
+             <table width="726">
+        <tr>
+          <td width="54"><b>BillTo:</b></td>
+          <td width="660"> {!Account.Name}</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td> {!Account.BillingStreet} </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td> {!Account.BillingCity}, {!Account.BillingState} {!Account.BillingPostalCode} </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td> {!Account.BillingCountry} </td>
+        </tr>
+      </table>
+             </td>
+           </tr>
+         </table></td>
+       </tr>
+       <tr>
+
+         <td colspan="2">
+           <table>
+             <tr>
+               <td width="90" align="left">
+                  <b>Date :</b>
+               </td>
+               <td width="217" align="left">
+                 {!Date.Today}
+               </td>
+
+             </tr>
+             <tr>
+               <td align="left">
+                  <b>Customer # :</b>
+               </td>
+               <td align="left">
+                 {!Account.AccountNumber}
+               </td>
+             </tr>
+
+           </table> 
+         </td>
+       </tr>
+
+       <tr>
+         <td><br/></td>
+       </tr>
+       <tr>
+
+         <td colspan="5">{!Transactions.Summary}</td>
+         
+       </tr>
+<tr><td colspan="5" align="right">Total : <b>{!Transactions.TotalBalance}</b></td></tr>
+       <tr>
+         <td><br/></td>
+       </tr>
+       <tr>
+
+         <td colspan="2"><b>Reminder : </b> Please include the customer # {!Account.AccountNumber} on your check.</td>
+       </tr>
+       <tr>
+         <td colspan="2"><b>Terms : </b>{!Account.Terms_Key__c} days from invoice date.</td>
+       </tr>
+       <tr>
+
+         <td><br/></td>
+       </tr>
+       <tr>
+        <td colspan="3">
+	  <table width="1323" border="0">
+	   <tbody>
+	    <tr>
+	     <td style="background-color: #bbbbbb;" colspan="3">
+             <pre><span style="color: #000000;"><strong>REMITTANCE </strong></span></pre>
+
+	     </td>
+	    </tr>
+	    <tr>
+	     <td width="227" align="left"><b>Customer Name:</b></td>
+	     <td width="1086" align="left">{!Account.Name}</td>
+	    </tr>
+	    <tr>
+
+	     <td align="left"><b>Customer #:</b></td>
+	     <td align="left">{!Account.AccountNumber}</td>
+	    </tr>
+	    <tr>
+	     <td align="left"><b>Date:</b></td>
+	     <td align="left">{!Date.Today}</td>
+	    </tr>
+
+	    <tr>
+	     <td align="left"><b>Amount Due:</b></td>
+	     <td align="left">{!Transactions.TotalBalance}</td>
+	    </tr>
+	    <tr>
+	     <td align="left"><b>Amount Enclosed:</b></td>
+	     <td align="left">&nbsp;</td>
+
+	    </tr>
+	  </tbody>
+	  </table>
+        </td>
+       </tr>
+
+    </table>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>SampleExcelTemplate</name>
+    <style>none</style>
+    <subject>SampleTest</subject>
+    <textOnly>Remit Payments To:	
+	{!Organization.Name}	
+	{!Organization.Street}, {!Organization.City},		
+	US
+	Property &amp; Casualty
+		
+	{!Organization.State}, {!Organization.Country},
+	{!Organization.PostalCode}
+		
+	Credit
+	&amp; Collections
+						
+	
+	Phone: {!Organization.Phone}
+	
+			
+	Terms: Net 30
+		
+	
+	TAX I.D.# 58-0506554
+	
+		
+	Client Name:
+	
+	
+	{!Account.Name}
+	
+	
+	
+	Program#:
+	
+	
+	{!Account.AccountNumber}
+	
+	
+	{!Transactions.Summary}
+	
+	
+	Total
+	
+	
+	{!Transactions.TotalBalance}
+	
+	
+		
+	Please include the Branch and Invoice Number on
+	the payment remittance</textOnly>
+    <type>custom</type>
+</EmailTemplate>

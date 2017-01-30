@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Invoice_Limit__c</fullName>
+        <externalId>false</externalId>
+        <label>Ineligibles Limit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>No_of_Days_to_add_Invoice_Date__c</fullName>
+        <description>No of Days to add Invoice Date for Invoice Ineligible Type 1 Calculations</description>
+        <externalId>false</externalId>
+        <label>No of Days to add Invoice Date</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_of_Days_to_add_Invoice_Due_Date__c</fullName>
+        <description>No of Days to add Invoice Due Date for Invoice Ineligible Type 1 Calculations</description>
+        <externalId>false</externalId>
+        <label>No of Days to add Invoice Due Date</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Ineligible Percentage Limit</label>
+    <visibility>Public</visibility>
+</CustomObject>

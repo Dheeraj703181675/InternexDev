@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>For_Contact_Customer__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>For Contact Customer</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>For_Dispute__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>For Dispute</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>For_Promise_to_Pay__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>For Promise to Pay</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Locale_Supported__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Support Multilingual Templates</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Email Template Filter Configuration</label>
+    <visibility>Public</visibility>
+</CustomObject>

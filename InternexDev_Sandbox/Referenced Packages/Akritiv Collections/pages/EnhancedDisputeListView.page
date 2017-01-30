@@ -1,0 +1,836 @@
+<!--
+ /*
+  *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+  *This software is the confidential and proprietary information
+  *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+  *disclose or use Confidential Information without the express written
+  *agreement of Akritiv Technologies, Inc.
+  */
+-->
+<!--
+/*
+ * This page displays Disputes of given account under "Disputes" tab 
+ * on account detail page.
+ */
+-->
+<apex:page standardController="Account" tabstyle="Account" Extensions="akritiv.EnhancedDisputeListViewController" id="pgDp" showHeader="false" sidebar="false" >
+
+<style type="text/css">
+ /*       .billing {border-collapse:collapse;padding:0px; border:1px solid gray; font-family:verdana;}
+        .billing th {
+        
+        //color: #4f6b72;
+        background-color:#E6EAE9;
+        border:1px solid gray;
+        
+        text-align: left;
+        padding: 6px 6px 6px 3px;
+        
+        }
+        .billing .odd {background-color:#EEE;}
+        .billing .even{background-color:#FFF;}
+        .billing td{
+            text-align:left; 
+            width:auto; 
+            border: solid 1px gray; 
+            padding-left: 3px;
+            padding-right: 3px; 
+            white-space:nowrap;
+         }
+*/
+</style>
+
+
+
+ <script type="text/javascript">
+     var isPageLoad_Dispute = true;
+     var showEditWin = null;
+     var dpId ='';
+     var dispTotalBalance = 0.00; 
+     var totalSelectedDispute = 0;
+     var filtercurrency_Dispute = new Array();
+     var allcurrency_Dispute = new Array();
+     var allBalance_Dispute = new Array();
+     var newArr_Dispute = new Array(); 
+    function chkvalue_Dispute(TransId)
+        {
+         
+          dpId='';
+         //open dialog box 
+          dpId = TransId ;
+          document.getElementById("{!$Component.pgDp.dpform.dpblock:inputtext1}").value='';
+          document.getElementById("{!$Component.pgDp.dpform.dpblock:inputtext2}").value='';
+          addNotes_Dispute();
+             return false;
+
+        }     
+         function startProcess_Dispute(){
+      
+           document.getElementById("{!$Component.acdetailpage.accpgb.loadingdetail}").style.display = 'block'; 
+           document.getElementById('filter').style.display = 'block'; 
+
+       }
+       
+       function endProcess_Dispute(){
+       
+           document.getElementById("{!$Component.acdetailpage.accpgb.loadingdetail}").style.display = 'none';
+           document.getElementById('filter').style.display = 'none';
+       } 
+
+      function addNotes_Dispute(){
+                var inputElem = document.getElementsByTagName("input");
+        
+        var c = 0;
+        for(var i=0; i<inputElem.length; i++){
+        
+            
+            if(inputElem[i].id.indexOf("selectedDp")!=-1 ){
+            
+                        
+                        if(inputElem[i].checked ==true){
+                          c++;
+                        }
+                           
+           }
+        
+        }
+        
+        if ( c == 0 ) {
+        
+            alert('{!$Label.Message_No_Selected_Disputes}');
+            return;
+        }
+
+            document.getElementById('dialog2').style.visibility = 'visible';
+              return false;
+       
+            }
+        function close_Dispute_fn(){
+        
+            document.getElementById('dialog2').style.visibility = 'hidden';
+            return false;
+            }
+
+         
+      function closeEditWindow_Dispute() 
+          {
+              if(showEditWin)
+                  showEditWin.close();
+          }
+              
+        function trim_Dispute(str, chars) 
+        { 
+            return ltrim_Dispute(rtrim_Dispute(str, chars), chars); 
+        } 
+        
+        function ltrim_Dispute(str, chars) 
+        { 
+            chars = chars || "\\s"; 
+            return str.replace(new RegExp("^[" + chars + "]+", "g"), ""); 
+        } 
+        
+        function rtrim_Dispute(str, chars) 
+        { 
+            chars = chars || "\\s"; 
+            return str.replace(new RegExp("[" + chars + "]+$", "g"), ""); 
+        } 
+      
+      function saveData_Dispute()
+          { 
+             var isTitle = document.getElementById("{!$Component.pgDp.dpform.dpblock:inputtext1}").value ;
+             isTitle = trim_Dispute(isTitle) ;
+            document.getElementById('dialog2').style.visibility = 'hidden';
+
+             if(isTitle !=null && isTitle !=''){
+              
+             //*  YUIShowLoading();
+             startProcess_Dispute();
+               updateNote_Dispute(dpId);
+             }
+             return false;
+          }
+          
+      function reloadWindow()
+          {
+              location.href = location.href;
+          }
+      function checkAll_Dispute(selectAll)
+          {
+           filtercurrency_Dispute = new Array();
+           allcurrency_Dispute = new Array();
+           allBalance_Dispute = new Array();
+           totalSelectedDispute = 0;
+           newArr_Dispute = new Array(); 
+             var inputElem = document.getElementsByTagName("input");
+             
+           dispTotalBalance = 0.00; 
+            
+             for(var i=0; i<inputElem.length; i++)
+                {
+                    if(inputElem[i].id.indexOf("selectedDp")!=-1){
+                        inputElem[i].checked = selectAll.checked;
+                        if(selectAll.checked ==true)
+                            getBalance_Dispute(inputElem[i]);
+                    }
+                    if(selectAll.checked == false){
+                           var tr = inputElem[i].parentNode.parentNode;
+                           tr.style.backgroundColor =  "";
+                     }
+                }
+                
+                if(selectAll.checked == false) { 
+                    dispTotalBalance = 0.00; 
+                    totalSelectedDispute = 0;
+                   document.getElementById('dispTotalBalance').innerHTML = dispTotalBalance.toString();
+                   document.getElementById('totalSelectedDispute').innerHTML = totalSelectedDispute.toString();
+                 }
+                
+          }  
+        
+     
+     function refreshbalance_Dispute() {
+          refershbal_Dispute();
+     }
+     
+    function changeListView_Dispute(){
+        dispTotalBalance = 0.00;
+        totalSelectedDispute = 0;
+       //* YUIShowLoading();
+       startProcess_Dispute();
+        changeList_Dispute();
+    }
+    function changeRecPerPage_Dispute(){
+      dispTotalBalance = 0.00;
+      totalSelectedDispute = 0;
+     //* YUIShowLoading();
+     startProcess_Dispute();
+      changeRec_Dispute();
+    }
+    function refershPage_Dispute(isdel){
+        dispTotalBalance = 0.00;
+        totalSelectedDispute = 0;
+        //instead of using below line we use next line to prevent dom injection
+        //var  str = window.location.href.split('&');
+        var  str = encodeURI(window.location.href).split('%26');
+        window.location.href = str[0];
+    }
+    function nextpg_Dispute(){
+       dispTotalBalance = 0.00;
+       totalSelectedDispute = 0;
+      //* YUIShowLoading();
+      startProcess_Dispute();
+        nextpage_Dispute();
+        return false;
+    }
+    function firstpg_Dispute(){
+       dispTotalBalance = 0.00;
+       totalSelectedDispute = 0;
+      //* YUIShowLoading();
+      startProcess_Dispute();
+        firstpage_Dispute();
+        return false;
+    }
+    function lastpg_Dispute(){
+        dispTotalBalance = 0.00;
+        totalSelectedDispute = 0;
+       //* YUIShowLoading();
+       startProcess_Dispute();
+        lastpage_Dispute();
+        return false;
+    }
+    function prevpg_Dispute(){
+        dispTotalBalance = 0.00;
+        totalSelectedDispute = 0;
+       //* YUIShowLoading();
+       startProcess_Dispute();
+        previouspage_Dispute();
+        return false;
+    }
+    function deleteList_Dispute(){
+        dispTotalBalance = 0.00;
+        totalSelectedDispute = 0;
+        //* YUIShowLoading();
+        startProcess_Dispute();
+        delList_Dispute();
+        return false;
+    }
+   
+ function  sortToDoData_Dispute(e, columnNo){
+    var ctrlPressed=0;
+     
+    if (parseInt(navigator.appVersion)>3) {
+          var evt = navigator.appName=="Netscape" ? e:event;
+            if (navigator.appName=="Netscape" && parseInt(navigator.appVersion)==4) {
+           // NETSCAPE 4 CODE
+           var mString =(e.modifiers+32).toString(2).substring(3,6);
+           //shiftPressed=(mString.charAt(0)=="1");
+           ctrlPressed =(mString.charAt(1)=="1");
+           //altPressed  =(mString.charAt(2)=="1");
+          }
+          else {
+           // NEWER BROWSERS [CROSS-PLATFORM]
+           //shiftPressed =evt.shiftKey;
+           //altPressed  =evt.altKey;
+            ctrlPressed =evt.ctrlKey;
+          }
+          if (ctrlPressed) {
+            dispTotalBalance = 0.00;
+            totalSelectedDispute = 0;
+          //*  YUIShowLoading();
+            startProcess_Dispute();
+            sortSecondaryColData_Dispute(columnNo);
+          }
+          else {
+            dispTotalBalance = 0.00;
+            totalSelectedDispute = 0;
+           //* YUIShowLoading();
+           startProcess_Dispute();
+            sortColData_Dispute(columnNo);
+          }
+    }
+ }
+ 
+  function round_decimals_Dispute(original_number, decimals) {
+    var result1 = original_number * Math.pow(10, decimals)
+    var result2 = Math.round(result1)
+    var result3 = result2 / Math.pow(10, decimals)
+    return pad_with_zeros_Dispute(result3, decimals)
+}
+
+ function pad_with_zeros_Dispute(rounded_value, decimal_places) {
+
+    // Convert the number to a string
+    var value_string = rounded_value.toString()
+    
+    // Locate the decimal point
+    var decimal_location = value_string.indexOf(".")
+
+    // Is there a decimal point?
+    if (decimal_location == -1) {
+        
+        // If no, then all decimal places will be padded with 0s
+        decimal_part_length = 0
+        
+        // If decimal_places is greater than zero, tack on a decimal point
+        value_string += decimal_places > 0 ? "." : ""
+    }
+    else {
+
+        // If yes, then only the extra decimal places will be padded with 0s
+        decimal_part_length = value_string.length - decimal_location - 1
+    }
+    
+    // Calculate the number of decimal places that need to be padded with 0s
+    var pad_total = decimal_places - decimal_part_length
+    
+    if (pad_total > 0) {
+        
+        // Pad the string with 0s
+        for (var counter = 1; counter <= pad_total; counter++) 
+            value_string += "0"
+        }
+    return value_string
+} 
+
+function CurrencyFormatted_Dispute(amount)
+{
+
+    var separator ='.'; 
+    
+    //alert(separator); 
+    var i = parseFloat(amount);
+    if(isNaN(i)) { i = 0.00; }
+    var minus = '';
+    if(i < 0) { minus = '-'; }
+    i = Math.abs(i);
+    i = parseInt((i + .005) * 100);
+    i = i / 100;
+    //alert('i ' + i);
+    s = new String(i);
+    if(s.indexOf(separator) < 0) 
+    { 
+    s += separator + '00';
+    //alert('s ' + s);
+     
+    }
+    if(s.indexOf(separator) == (s.length - 2)) 
+    { 
+    s += '0';
+    //alert('s 2 :  ' + s);
+     
+    }
+    s = minus + s;
+    //alert('s 3 : ' + s);
+    
+    return s;
+}
+
+function CommaFormatted_Dispute(amount, locale)
+{   
+//  alert(amount + ' : ' + locale);
+    
+    //default for en_US
+    var delimiter = ',';
+    var separator = '.';
+    
+    //for brazil 
+    if(locale == 'pt_BR')
+    {
+        //alert('locale is pt br');
+        delimiter = '.'; // replace comma if desired
+        separator = ',';
+    }
+    
+    var a = amount.split('.',2)
+    var d = a[1];
+    var i = parseInt(a[0]);
+    if(isNaN(i)) { return ''; }
+    var minus = '';
+    if(i < 0) { minus = '-'; }
+    i = Math.abs(i);
+    var n = new String(i);
+    var a = [];
+    while(n.length > 3)
+    {
+        var nn = n.substr(n.length-3);
+        a.unshift(nn);
+        n = n.substr(0,n.length-3);
+    }
+    if(n.length > 0) { a.unshift(n); }
+    n = a.join(delimiter);
+    if(d.length < 1) { amount = n; }
+    else { amount = n + separator + d; }
+    amount = minus + amount;
+    return amount;
+}
+
+ 
+ 
+ function  getBalance_Dispute(checkBoxObj){
+      
+      var tr = checkBoxObj.parentNode.parentNode;
+      tr.style.backgroundColor = (checkBoxObj.checked) ? "#DBF2F7" : "";
+      
+      var dpLocale = document.getElementById("{!$Component.pgDp.dpform.dpblock.localeKey_Dispute}");
+     // alert (dpLocale.value); 
+        var checboxId = checkBoxObj.id ;
+        var hiddenElem =checboxId.replace('selectedDp','dpBalance'); //checboxId.substring(0,checboxId.length -8) ;
+       
+        var  hiddenElemId =hiddenElem;  //hiddenElem + 'dpBalance';
+        var hiddenElementVal = document.getElementById(hiddenElemId).innerHTML;
+        filtercurrency_Dispute = hiddenElementVal.split(' ');
+        
+       
+        allcurrencybal = 0.00;
+        
+      if(checkBoxObj.checked == false){
+           
+            filtercurrency_Dispute[1] =( - 1 * parseFloat(filtercurrency_Dispute[1])) + '';
+
+        }
+        if ( allcurrency_Dispute.length == 0 ){
+        
+            allcurrency_Dispute.push( filtercurrency_Dispute[0]);
+            allBalance_Dispute.push(parseFloat(filtercurrency_Dispute[1]));
+        } else {
+        
+       // alert(allcurrency_Dispute.length);
+        var found = false;
+        var locat = -1;
+        for(var i = 0; i < allcurrency_Dispute.length; i++){
+        
+            if(filtercurrency_Dispute [0] == allcurrency_Dispute[i]){ 
+            
+                found  = true;
+                locat = i;
+                
+                
+            } 
+           
+         }
+         
+         if (found){
+         
+             allBalance_Dispute[locat] = allBalance_Dispute[locat ] + parseFloat(filtercurrency_Dispute[1]);
+             
+             
+         } else {
+         
+             allcurrency_Dispute.push(filtercurrency_Dispute[0]);
+             allBalance_Dispute.push(parseFloat(filtercurrency_Dispute[1]));
+         }
+        }
+             
+        
+       var v1 = '';
+       for(var i = 0; i < allcurrency_Dispute.length; i++){
+       
+           if(allcurrency_Dispute.length == 1){
+            
+                v1 = v1+ ' ' + allcurrency_Dispute[ i] + ' : ' + round_decimals_Dispute(allBalance_Dispute[i],2);
+           }
+           else{
+                v1 = v1+ ' ' + allcurrency_Dispute[ i] + ' : ' + round_decimals_Dispute(allBalance_Dispute[i],2)+ ' , ';
+           }     
+        }
+        
+        if(v1.substr(v1.length-1,v1.length)==','){
+            v1 =v1.substr(0,v1.length-1);
+        }
+        
+        if(checkBoxObj.checked ==true){
+        //add balance
+        totalSelectedDispute = totalSelectedDispute +1;
+           // totalBalance = totalBalance + parseFloat(hiddenElementVal) ;
+            //document.getElementById('disputeTotalBalance').innerHTML = CommaFormatted_Dispute(CurrencyFormatted_Dispute(round_decimals_Dispute(totalBalance,2)), dpLocale).toString() ;
+             document.getElementById('dispTotalBalance').innerHTML = v1;
+             document.getElementById('totalSelectedDispute').innerHTML = totalSelectedDispute;
+        }else{
+        //subtract balance
+          // totalBalance = totalBalance - parseFloat(hiddenElementVal) ;
+           //document.getElementById('disputeTotalBalance').innerHTML =CommaFormatted_Dispute(CurrencyFormatted_Dispute(round_decimals_Dispute(totalBalance,2)), dpLocale).toString() ;
+           totalSelectedDispute = totalSelectedDispute - 1;
+           document.getElementById('dispTotalBalance').innerHTML = v1;
+           document.getElementById('totalSelectedDispute').innerHTML = totalSelectedDispute;
+        }
+        
+ }
+ 
+ function clearArray_Disp(){
+     filtercurrency_Dispute = new Array();
+     allcurrency_Dispute = new Array();
+     allBalance_Dispute = new Array();
+     newArr_Dispute = new Array();
+     
+     dispTotalBalance = 0.00;
+     totalSelectedDispute = 0;
+     document.getElementById('dispTotalBalance').innerHTML = '0.00';
+     document.getElementById('totalSelectedDispute').innerHTML = '0';
+     return false;
+     
+     
+ } 
+    
+</script>  
+<body class="yui-skin-sam">
+<apex:form id="dpform" >
+
+<apex:pageMessages id="pgmsg" />
+<!--* <c:Base_Comp_YUI_ModalLoader /> -->
+
+ <!-- * <apex:actionFunction action="{!sortData}" name="sortColData_Dispute"  oncomplete="YUIHideLoading();" rerender="dptable,panel_dp2,balanceSection"> -->
+   <apex:actionFunction action="{!sortData}" name="sortColData_Dispute" rerender="dptable,panel_dp2,balanceSection" oncomplete="clearArray_Disp();endProcess_Dispute();">
+                <apex:param name="sortField" assignTo="{!columnToSort}" value="" />
+  </apex:actionFunction>
+  
+<!-- * <apex:actionFunction action="{!secondarySortData}" name="sortSecondaryColData_Dispute"  oncomplete="YUIHideLoading();" rerender="dptable,panel_dp2,balanceSection"> -->
+   <apex:actionFunction action="{!secondarySortData}" name="sortSecondaryColData_Dispute" rerender="dptable,panel_dp2,balanceSection" oncomplete="clearArray_Disp();endProcess_Dispute();"> 
+                <apex:param name="sortField" assignTo="{!secondaryColumnToSort}" value="" />
+  </apex:actionFunction>
+ 
+<!-- * <apex:actionFunction name="updateNote_Dispute" action="{!updateNote}" id="afUpdateData"  reRender="dptable,balanceSection,pgmsg" oncomplete="YUIHideLoading();" > -->
+  <apex:actionFunction name="updateNote_Dispute" action="{!updateNote}" id="afUpdateData"  reRender="dptable,balanceSection,pgmsg" oncomplete="clearArray_Disp();endProcess_Dispute();"> 
+                <apex:param name="value1" value="" assignTo="{!TransId}"/>
+  </apex:actionFunction>
+ 
+  <!--  <apex:actionFunction name="getTotalBalance" action="{!addBalance}" id="afAddBalance" reRender="balanceSection,pgmsg" status="loadingStatus"/>
+  -->
+  
+<!-- *  <apex:actionFunction name="delList_Dispute"  action="{!deleteListView}"  rerender="pgmsg"   oncomplete="YUIHideLoading();refershPage_Dispute('{!isViewDeleted}');" />  -->
+  <apex:actionFunction name="delList_Dispute"  action="{!deleteListView}"  rerender="pgmsg"   oncomplete="clearArray_Disp();refershPage_Dispute('{!isViewDeleted}');endProcess_Dispute();" />  
+  <apex:actionFunction name="refershbal_Dispute"  reRender="balanceSection" /> 
+
+<!-- *       
+  <apex:actionFunction name="nextpage_Dispute" action="{!next}" reRender="panel_dp2,dptable,balanceSection" oncomplete="YUIHideLoading();"  />  
+  <apex:actionFunction name="firstpage_Dispute" action="{!first}" reRender="panel_dp2,dptable,balanceSection" oncomplete="YUIHideLoading();"  />  
+  <apex:actionFunction name="lastpage_Dispute" action="{!last}" reRender="panel_dp2,dptable,balanceSection"  oncomplete="YUIHideLoading();" />
+  <apex:actionFunction name="previouspage_Dispute" action="{!previous}" reRender="panel_dp2,ldptable,balanceSection" oncomplete="YUIHideLoading();"  />                                    
+  
+  <apex:actionFunction name="changeList_Dispute" action="{!changeListView}" reRender="panel_dp2,dptable,balanceSection" oncomplete="YUIHideLoading();"  />
+  <apex:actionFunction name="changeRec_Dispute" action="{!changeRecPerPage}" reRender="panel_dp2,dptable,balanceSection" oncomplete="YUIHideLoading();" />
+ 
+  <apex:actionFunction name="handleCloseDisputes" action="{!getFilteredTx}" rerender="dptable,panel_dp2,balanceSection" oncomplete="YUIHideLoading();" />
+-->
+
+  
+  <apex:actionFunction name="nextpage_Dispute" action="{!next}" reRender="panel_dp2,dptable,balanceSection"  oncomplete="clearArray_Disp();endProcess_Dispute();"/>  
+  <apex:actionFunction name="firstpage_Dispute" action="{!first}" reRender="panel_dp2,dptable,balanceSection" oncomplete="clearArray_Disp();endProcess_Dispute();"/>  
+  <apex:actionFunction name="lastpage_Dispute" action="{!last}" reRender="panel_dp2,dptable,balanceSection"  oncomplete="clearArray_Disp();endProcess_Dispute();"/>
+  <apex:actionFunction name="previouspage_Dispute" action="{!previous}" reRender="panel_dp2,dptable,balanceSection" oncomplete="clearArray_Disp();endProcess_Dispute();"/>                                    
+  
+  <apex:actionFunction name="changeList_Dispute" action="{!changeListView}" reRender="panel_dp2,dptable,balanceSection"  oncomplete="clearArray_Disp();endProcess_Dispute();"/>
+  <apex:actionFunction name="changeRec_Dispute" action="{!changeRecPerPage}" reRender="panel_dp2,dptable,balanceSection" oncomplete="clearArray_Disp();endProcess_Dispute();"/>
+ 
+  <apex:actionFunction name="handleCloseDisputes" action="{!getFilteredTx}" rerender="dptable,panel_dp2,balanceSection" oncomplete="clearArray_Disp();endProcess_Dispute();"/>
+  
+    
+
+
+  <apex:pageBlock title="" id="dpblock"  >
+
+  
+        <apex:inputHidden id="localeKey_Dispute" value="{!locale}" />
+  
+        <apex:outputPanel id="dpPanel1" >
+
+        <apex:outputLabel value="{!$Label.Label_View}"></apex:outputLabel>&nbsp;&nbsp;
+        <apex:selectList onchange="changeListView_Dispute();" size="1"  value="{!selectedList}" title="{!$Label.Label_Choose_a_ListView}"> 
+        <apex:selectOptions value="{!listViewOptions}"/>
+        </apex:selectList>  &nbsp;&nbsp;
+   
+        <apex:commandLink value="{!$Label.Label_Create_View}" action="{!newListView}"/> &nbsp;&nbsp;
+        <apex:commandLink id="editbtn" value="{!$Label.Label_Edit}"  action="{!editListView}" rerender="pgmsg"  /> &nbsp;&nbsp;
+        <apex:commandLink value="{!$Label.Label_Delete}" onclick="if(!confirm('{!$Label.Message_Are_You_Sure}')) return false;else return deleteList_Dispute();"  /> 
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        
+        <br/>
+
+     <!--       <apex:outputLabel value="{!$Label.Label_Include}" />
+            
+        <!-- *    <apex:inputCheckbox value="{!showCloseDisputes}" id="disputedTx"
+                    onClick="YUIShowLoading();handleCloseDisputes();" /> 
+             <apex:inputCheckbox value="{!showCloseDisputes}" id="disputedTx"
+                    onClick="handleCloseDisputes();startProcess_Dispute();" />
+            <apex:outputLabel value="{!$Label.Label_Closed_Disputes}" for="disputedTx" />&nbsp;&nbsp;&nbsp;&nbsp; -->
+   
+        <br/><br/>
+        
+        <apex:commandButton value="{!$Label.Label_Add_Notes}" onclick="chkvalue_Dispute('');return false;" />
+      
+       </apex:outputPanel>
+        <div id="dialog2" style="visibility:hidden; position: absolute;border:#CCC medium solid;background-color:white;width:400px;" align="center" >
+            <div class="hd" id="hed1" Style="background-color:#3D77CB;color:white;font-weight:bold;height:20px;text-align:left;padding-left:3px;padding-top:2px;">Note</div> 
+                <div class="bd" id="body1" > 
+                    <table width="100%" ><tr><td>
+                        <label for="title" > {!$Label.Label_Title} </label></td>
+                        <td ><apex:inputText style="width:200px;" value="{!notes}" id="inputtext1"  maxlength="80" />
+                        </td></tr><tr><td >
+                        <label for="Description" >{!$Label.Label_Body} </label></td>
+                         <td><apex:inputTextArea style="width:200px;height:100px;" value="{!noteBody}" id="inputtext2"  />
+                        </td></tr><tr><td></td>
+                        <td ><apex:commandButton value="{!$Label.Label_Save}"  onclick="saveData_Dispute();"  id="savebtn" oncomplete="closeWindow();"  />
+                        <apex:commandButton value="{!$Label.Label_Cancel}"  onclick="return close_Dispute_fn();"   />
+            
+                    </td></tr>  
+                </table>
+        </div></div> 
+       
+        <br/><br/>
+        
+        <apex:outputPanel id="panel_dp2" >
+        <table><tr><td>
+         <a href="#"><img src="{!URLFOR($Resource.iconset, 'iconset/3_37.png')}" onClick=" if('{!dpPageNumber}'!=1) return firstpg_Dispute(); else return false;"   title="{!$Label.Label_First}" /></a>&nbsp;
+         </td><td><a href="#"><img src="{!URLFOR($Resource.iconset, 'iconset/3_31.png')}" onClick="if('{!hasPrevious}'=='true') return prevpg_Dispute();else return false;"   title="{!$Label.Label_Previous}" /></a>&nbsp;
+         </td><td><apex:outPutLabel value="{!pageDetailDispute}" /> &nbsp;
+         </td><td><a href="#"><img src="{!URLFOR($Resource.iconset, 'iconset/3_30.png')}"  onClick="if('{!hasNext}'=='true') return nextpg_Dispute(); else return false;"    title="{!$Label.Label_Next}" /></a>&nbsp;
+         </td><td><a href="#"><img src="{!URLFOR($Resource.iconset, 'iconset/3_36.png')}" onClick="if('{!hasNext}'=='true') return lastpg_Dispute();else return false;"  title="{!$Label.Label_Last}" /></a>&nbsp;
+         
+         </td>
+         <td>&nbsp;&nbsp;&nbsp;</td><td><apex:outputLabel value="{!$Label.Label_Total_Records}" />&nbsp;&nbsp;<apex:outputLabel value="{!displayTotalRec}" />
+         </td>
+         <td>&nbsp;&nbsp;&nbsp;</td><td><apex:outputLabel value="{!$Label.Label_Records_Page}"></apex:outputLabel>&nbsp;&nbsp;
+            </td><td><apex:selectList onchange="changeRecPerPage_Dispute();" size="1"  value="{!disputeRecPerPage}" title="{!$Label.Label_Choose_Record_per_Page}"> 
+             <apex:selectOptions value="{!recPerPageOptions}"/>
+             </apex:selectList> 
+         </td>
+         </tr></table>
+         <apex:actionStatus startStyle="font-weight:Bold;color:#cc0000" startText="{!$Label.Label_Please_Wait}" stopText="" id="loadingStatus"  />
+        
+       </apex:outPutPanel>
+       
+         <br/>
+        <apex:outputPanel id="dptable" >
+      
+            <table style="border-collapse:collapse;padding:0px; border:1px solid gray; font-family:verdana;">
+
+                <thead >
+                <tr >
+                <th style="background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;">
+                     <apex:inputCheckbox id="chk_Dispute" selected="false" onclick="checkAll_Dispute(this);" />
+                </th>
+                    <apex:variable value="{!0}" var="count"/>
+                <apex:repeat value="{!lstOfLabels}" var="list">
+                    <apex:variable value="{!count + 1}" var="count"/>
+                    
+                <th valign="top" style="{! IF(list.fieldType = 'Schema.DisplayType.CURRENCY' || list.fieldType = 'Schema.DisplayType.DOUBLE' ,'background-color:#E6EAE9;border:1px solid gray;text-align: right;padding: 6px 6px 6px 3px;','background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;')}">
+                    <apex:outputLink rendered="{! IF(OR(list.fieldType = 'TEXTAREA',list.fieldType = 'Schema.DisplayType.TEXTAREA'),'false','true')}" value="javascript:void(0);" onclick="sortToDoData_Dispute(event, {!count});" >
+                        <B>{!list.fieldValue}</B>
+                    </apex:outputLink>
+                    <apex:outputText rendered="{! IF(OR(list.fieldType = 'TEXTAREA',list.fieldType = 'Schema.DisplayType.TEXTAREA'),'true','false')}">{!list.fieldValue}</apex:outputText>
+                    <img src="{!IF(columnToSort = count ,IF(isAsc = true, '/img/sort_asc_arrow.gif','/img/sort_desc_arrow.gif'),'/s.gif')}" />
+                    <img height="12" width="12" src="{!IF(secondaryColumnToSort = count ,IF(secondaryOrderType = 'ASC', URLFOR($Resource.iconset, 'iconset/3_33.png'), URLFOR($Resource.iconset, 'iconset/3_32.png')),'/s.gif')}" />
+                
+                </th>    
+               <!-- <th valign="top" style="{! IF(list.fieldType = 'Schema.DisplayType.CURRENCY' || list.fieldType = 'Schema.DisplayType.DOUBLE' ,'background-color:#E6EAE9;border:1px solid gray;text-align: right;padding: 6px 6px 6px 3px;','background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;')}">
+                    <apex:outputLink value="javascript:void(0);" onclick="sortToDoData_Dispute(event, {!count});"  rendered="{! IF(list.fieldType = 'Schema.DisplayType.TEXTAREA','false','true')}"  > 
+                                <B>{!list.fieldValue}</B>
+                    </apex:outputLink>
+                    <apex:outputText rendered="{! IF(list.fieldType = 'Schema.DisplayType.TEXTAREA','true','false')}">{!list.fieldValue}</apex:outputText>
+                    <img src="{!IF(columnToSort = count  ,IF(isAsc == true, '/img/sort_asc_arrow.gif','/img/sort_desc_arrow.gif'),'/s.gif')}"  />
+                    <img height="12" width="12" src="{!IF(secondaryColumnToSort = count  ,IF(secondaryOrderType = 'ASC', URLFOR($Resource.iconset, 'iconset/3_33.png'), URLFOR($Resource.iconset, 'iconset/3_32.png')),'/s.gif')}"  />
+                       
+                </th>-->
+                </apex:repeat>
+                <th valign="top" style="background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;">
+                  <B>{!$Label.Label_Notes}</B>      
+                </th>
+                <th valign="top" style="background-color:#E6EAE9;border:1px solid gray;text-align: left;padding: 6px 6px 6px 3px;">
+                     <B>{!$Label.Label_Note_Date}</B>
+                </th>
+                </tr>
+                </thead>
+                
+                <tbody align="left">
+               <!-- <tr>
+                    <td colspan="{!lstOfLabels.size + 1}">
+                    &nbsp;<br></br>
+                    </td>
+                </tr> -->
+                
+                <apex:repeat value="{!wrapList}" var="nextitem">
+                    
+                    <tr>
+                        <td style=" text-align:left;width:auto;border: solid 1px gray;padding-left: 3px;padding-right: 3px;white-space:nowrap;">
+                         <apex:inputCheckbox value="{!nextitem.selected}" selected="false"  id="selectedDp" onclick="getBalance_Dispute(this);" />
+                    </td>
+                   
+                    <!-- <apex:inputhidden id="txBalance" value="{!nextitem.txBalance}" /> -->
+                      
+                         <apex:repeat value="{!nextitem.txValues}" var="item">
+                             
+                            <td style="{! IF(item.fieldType = 'Schema.DisplayType.CURRENCY' || item.fieldType = 'Schema.DisplayType.DOUBLE' ,'text-align:right;width:auto;border:solid 1px gray;padding-left:3px;padding-right:3px;white-space:nowrap;','text-align:left;width:auto;border: solid 1px gray;padding-left: 3px;padding-right: 3px;white-space:nowrap;')}" > 
+                                <a href="#"><img src="{!URLFOR($Resource.iconset, 'iconset/1_41.png')}" title="{!$Label.Label_Add_Note}" onClick="chkvalue_Dispute('{!JSENCODE(nextitem.transId)}');" style="display: {! IF(OR(item.fieldType = 'notetype1',item.fieldType = 'notetype2'),'inline','none')};" /></a>
+                                <apex:outPutLabel value="{!item.fieldValue}" escape="{!IF(OR(item.fieldType = 'notetype1',item.fieldType = 'Schema.DisplayType.STRING'), false, true)}"> </apex:outPutLabel>
+                            </td>
+                             
+                        </apex:repeat> 
+                    <td  style="display:none;">
+                       <apex:outputlabel id="dpBalance" value="{!nextitem.txBalance}" />
+                    </td>
+                    
+                    </tr>
+                </apex:repeat>
+                </tbody>
+            </table>
+            
+              </apex:outputPanel>
+           
+           
+   
+     
+     
+         <br/>
+         <apex:outPutPanel id="balanceSection" >
+         <apex:pageBlockSection columns="1">
+            <!--  <apex:pageBlockSectionItem dataStyle="text-style:right;"> <b> Total Balance : </b>&nbsp;${!strTotal} </apex:pageBlockSectionItem>  -->
+           <!-- <label  >{!$Label.Label_Total_Balance} {!$Label.Label_CurrencyCode}</label>
+            <label id="disputeTotalBalance" > 0.00 </label>-->
+             <label>{!$Label.Label_Total_Balance} </label>
+              <label id="dispTotalBalance" > 0.00 </label>
+              <br/>
+              <label>{!$Label.Label_Selected_Disputes}</label>
+              <label id="totalSelectedDispute" >0</label>
+
+            
+          </apex:pageBlockSection> 
+         </apex:outPutPanel>
+    </apex:pageBlock> 
+ 
+   
+    
+    
+    
+    
+    </apex:form>
+    </body>     
+     
+    <script type="text/javascript">
+    
+  /* (function() {
+   
+        var Dom = YAHOO.util.Dom,
+        Event = YAHOO.util.Event,
+        editorTab = null,
+        myEditor = null;
+
+         function Init(){
+                //  var Dom = YAHOO.util.Dom, Event = YAHOO.util.Event;
+             
+             
+             //start of dialog
+             YAHOO.namespace("example.container");
+             
+             
+             
+                // Define various event handlers for Dialog
+                var handleSubmit = function() {
+                    
+                };
+                var handleCancel = function() {
+                    this.cancel();
+                };
+                var handleSuccess = function(o) {
+                  
+                };
+                var handleFailure = function(o) {
+                    alert("{!$Label.Label_Submission_failed} " + o.status);
+                };
+               
+                
+                // Instantiate the Dialog
+                YAHOO.example.container.dialog2 = new YAHOO.widget.Dialog("dialog2", 
+                                        { width : "400px",height:"200px",
+                                          fixed
+                                           : true,
+                                          visible : false, 
+                                          constraintoviewport : true
+                                         
+                                        });
+               
+                YAHOO.example.container.dialog2.validate = function() {
+                    var data = this.getData();
+                    if (data.title == "" ) {
+                        alert("{!$Label.Label_Please_add_note}");
+                        return false;
+                    } else {
+                        return true;
+                    }
+                };
+                // Wire up the success and failure handlers
+                YAHOO.example.container.dialog2.callback = { success: handleSuccess,
+                                         failure: handleFailure };
+                
+                // Render the Dialog
+                YAHOO.example.container.dialog2.render();
+             //end of dialog      
+            
+            
+            //
+            
+            }//end of init 
+    
+    YAHOO.util.Event.onDOMReady(Init);
+})();
+    
+    
+    function addNotes_Dispute(){
+        YAHOO.example.container.dialog2.show() ;
+    }
+    
+    function closeWindow_Dispute(){
+         YAHOO.example.container.dialog2.hide();
+         return false; 
+    }*/
+    
+    function fixGridCssInFirefox_Dispute() {
+        var S = document.createElement('style');
+        S.type = 'text/css';
+        var T = '.flexigrid div.hDiv th div {margin:2px;}';
+        T = document.createTextNode(T)
+        S.appendChild(T);
+        document.body.appendChild(S);
+    }
+    
+     </script>
+    
+</apex:page>

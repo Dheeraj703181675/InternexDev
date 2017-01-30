@@ -1,0 +1,50 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+ /*
+  * Page provide the functionality to configure the aging buckets.
+  */
+-->
+<apex:page controller="akritiv.AgingBucketConfiguration">
+
+
+    <apex:sectionHeader title="{!$Label.Label_Aging_Bucket_Configuration}" />
+    <apex:pageMessages />
+
+    <apex:form id="configForm">
+
+        <Apex:pageBlock >
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="{!$Label.Label_Submit}"
+                    rerender="pbTable"
+                    oncomplete="alert('{!$Label.Label_Configuration_has_been_modified}');" />
+            </apex:pageBlockButtons>
+            <apex:pageblockTable value="{!buckets}" var="bucketWrap" id="pbTable">
+                <apex:column headerValue="{!$Label.Label_Bucket_Name}"
+                    value="Bucket {!bucketWrap.index}" />
+                <apex:column headerValue="{!$Label.Label_Bucket_Age}">
+                    <apex:outputPanel >
+                        <apex:inputText maxlength="10" required="true"
+                            disabled="{!bucketWrap.maxRangeDisabled}"
+                            value="{!bucketWrap.maxRange2}" />
+                    </apex:outputPanel>
+                </apex:column>
+                <apex:column headerValue="{!$Label.Label_Bucket_Label}">
+                    <apex:outputPanel >
+                        <apex:inputText required="true"
+                            disabled="{!bucketWrap.maxRangeDisabled}"
+                            value="{!bucketWrap.bucket.label}" />
+                    </apex:outputPanel>
+                </apex:column>
+            </apex:pageblockTable>
+        </Apex:pageBlock>
+    </apex:form>
+
+</apex:page>

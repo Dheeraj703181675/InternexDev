@@ -1,0 +1,50 @@
+<apex:page id="pg" controller="akritivtlm.emailAttachmentSelection" sidebar="false" showHeader="false">
+
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+
+<script>
+    selectedRec = '';
+    function setattachmentid(){
+        selectedRec = '';
+        var allChk = document.getElementsByName("chkAttach");
+        for(var i=0;i<allChk.length;i++) {
+            if(allChk[i].checked){
+                if( selectedRec == '' )
+                    selectedRec = allChk[i].value;
+                else
+                    selectedRec = selectedRec +','+allChk[i].value;
+            }
+        }
+    }
+</script>
+
+<apex:form id="frm">
+    <apex:pageBlock id="pb" title="Select Files" >
+        <apex:pageBlockTable columns="3" value="{!attachmentsList}"  var="attachlist" id="pbtable">
+            <apex:column >
+                <apex:outputPanel rendered="{!IF(primaryDocumentId == attachlist.id,true,false)}" >
+                    <input type = "checkbox" name="chkAttach" value="{!attachlist.id}" checked="checked" />
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(primaryDocumentId == attachlist.id,false,true)}">
+                    <input type = "checkbox" name="chkAttach" value="{!attachlist.id}" />
+                </apex:outputPanel>
+            </apex:column>
+
+            <apex:column value="{!attachlist.Name}"></apex:column>
+            <apex:column value="{!attachlist.BodyLength}"></apex:column>
+        </apex:pageBlockTable>
+
+        <apex:outputPanel id="oppanel">
+            <script>
+                function callaftersave(){
+                    window.parent.setAttachmentIds(selectedRec,"selectAttachment");
+                }
+            </script>
+        </apex:outputPanel>
+        <apex:commandButton value="{!$Label.Label_Save_Close}" oncomplete="callaftersave();" onclick="setattachmentid();" reRender="msgId1,oppanel">
+        </apex:commandButton>
+    </apex:pageBlock>
+</apex:form>
+
+</apex:page>

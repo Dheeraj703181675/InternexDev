@@ -1,0 +1,16 @@
+Dear {!Contact.Name}, 
+
+You dispute has been escalated to a manager.
+
+{!Disputes.summary} 
+
+Account : {!Dispute__c.Account__c} 
+Transaction : {!Dispute__c.Transaction__c} 
+Status : {!Dispute__c.status__c} 
+Owner : {!Dispute__c.Owner__c} 
+Updated By : {!Dispute__c.LastModifiedBy} on {!Dispute__c.LastModifiedDate}. 
+
+Thank you.
+{!User.Name}
+{!User.Email}
+{!User.Phone}

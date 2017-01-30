@@ -1,0 +1,1590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <content>DebtorEdit</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fieldSets>
+        <fullName>Debtor_FieldSets</fullName>
+        <description>Used for Custom lookup field</description>
+        <displayedFields>
+            <field>Client_Product_Counterparty__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Invoice_Amount_Formula__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Ineligibles_Amount_formula__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Eligible_For_Funding__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Dilution__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Funding_Limit__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Gross_Availability__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Net_Availability__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Debtor FieldSets</label>
+    </fieldSets>
+    <fields>
+        <fullName>Actual_Concentration__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(OR(ISNULL(Concentration_Limit__c),ISBLANK(Concentration_Limit__c)),IF(Total_Eligible_AR__c==0,0,(Eligible_AR__c/Total_Eligible_AR__c)* Client_Account__r.Eligible_For_Funding_formula__c), Concentration_Limit__c * Client_Account__r.Eligible_For_Funding_formula__c)</formula>
+        <inlineHelpText>Formula: Eligible for Funding of Client-Account * Concentration Limit</inlineHelpText>
+        <label>Max Concentration</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Actual_Debtor_Concentration__c</fullName>
+        <externalId>false</externalId>
+        <formula>ROUND(IF(Client_Account__r.Eligible_For_Funding_formula__c !=0,(Eligible_For_Funding__c/Client_Account__r.Eligible_For_Funding_formula__c),0),5)</formula>
+        <inlineHelpText>Formula : Debtor Eligible AR / Total Eligible AR (Client-Account)</inlineHelpText>
+        <label>Actual Debtor Concentration</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Adj_Risk_Score__c</fullName>
+        <externalId>false</externalId>
+        <label>Adj Risk Score</label>
+        <picklist>
+            <picklistValues>
+                <fullName>D1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D3</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D4</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D5</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D6</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D7</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D8</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Advance_Rate__c</fullName>
+        <externalId>false</externalId>
+        <formula>(100 -(((Dilution__c *100)*2)+5))/100</formula>
+        <inlineHelpText>Formula: (100 - ((Dilution*2) + 5))%</inlineHelpText>
+        <label>Advance Rate</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Borrowing_Base_Reserve__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Data Source: Grade or Portal</inlineHelpText>
+        <label>Borrowing Base Reserve</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Business_Transaction_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Business Transaction Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>City__c</fullName>
+        <externalId>false</externalId>
+        <label>City</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ClientAccount_External_Foreign_Key__c</fullName>
+        <description>Created for mapping Client account</description>
+        <externalId>true</externalId>
+        <label>ClientAccount External Foreign Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Client_Account__c</fullName>
+        <externalId>false</externalId>
+        <label>Client Account</label>
+        <referenceTo>Client_Account__c</referenceTo>
+        <relationshipLabel>Debtors</relationshipLabel>
+        <relationshipName>Debtors</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Client_Name_for_email_alert__c</fullName>
+        <externalId>false</externalId>
+        <formula>Client_Account__r.Client__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Client Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Client_Product_Counterparty_Uniqueness__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>false</externalId>
+        <label>Client Product Counterparty Uniqueness</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Client_Product_Counterparty__c</fullName>
+        <externalId>false</externalId>
+        <formula>Client_Account__r.Client_Account__c &amp; &apos;-&apos; &amp; Counterparty__r.Name</formula>
+        <label>Client Product Counterparty</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Closed_Invoice_Amounts_12_months__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Closed Invoice Amounts (12 months)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Closed_Invoice_Amounts_1_months__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Closed Invoice Amounts (1 month)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Closed_Invoice_Amounts_3_months__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Closed Invoice Amounts (3 months)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Closed_Invoice_Amounts_6_months__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Closed Invoice Amounts (6 months)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Concentration_Limit__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Data Source: Grade or Portal</inlineHelpText>
+        <label>Concentration Limit (%)</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Contact_Last_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Contact Last Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Contact First Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_Role__c</fullName>
+        <externalId>false</externalId>
+        <label>Contact Role</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contra_Balance__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Contra Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>CounterParty_External_Foreign_Key__c</fullName>
+        <description>Created for mapping the counter party</description>
+        <externalId>true</externalId>
+        <label>CounterParty External Foreign Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Counterparty__c</fullName>
+        <externalId>false</externalId>
+        <label>Debtor</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Debtors</relationshipLabel>
+        <relationshipName>Debtors</relationshipName>
+        <relationshipOrder>1</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Credit_Period__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Data Source: Grade or Portal</inlineHelpText>
+        <label>Credit Period</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Current__c</fullName>
+        <externalId>false</externalId>
+        <label>Current</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>DBA_Count_for_Grade__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>DBA Count for Grade</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DBA_Count_for_Portal__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>DBA Count for Portal</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Days_Beyond_Terms__c</fullName>
+        <externalId>false</externalId>
+        <label>DBT (Paydex)</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Debtor_Adjusted_AR__c</fullName>
+        <externalId>false</externalId>
+        <formula>Eligible_For_Funding__c -(ROUND(IF(Actual_Debtor_Concentration__c &gt; Concentration_Limit__c,((Actual_Debtor_Concentration__c - Concentration_Limit__c)*Client_Account__r.Eligible_For_Funding_formula__c),0),5))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Formula: Eligible AR - Excess Concentration</inlineHelpText>
+        <label>Debtor Adjusted AR</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Debtor_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>TRIM(UPPER(Counterparty__r.Name))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Debtor Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Debtor_Net_Eligible_AR__c</fullName>
+        <externalId>false</externalId>
+        <formula>MIN(Debtor_Adjusted_AR__c,Eligible_AR__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Formula: Minimum(Debtor Adjusted AR, Eligible AR Limit)</inlineHelpText>
+        <label>Debtor Net Eligible AR</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Debtor_Status__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Data Source: Grade or Portal</inlineHelpText>
+        <label>Debtor Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Pending Verification</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Eligible</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ineligible</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Confirm New</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unconfirmed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Dilution_Amount_12_Month__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Dilution Amount (12 Month)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Dilution_Amount_1_Month__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Dilution Amount (1 Month)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Dilution_Amount_3_Month__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Dilution Amount (3 Month)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Dilution_Amount_6_Month__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Dilution Amount (6 Month)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Dilution_Rate_12_months__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF($Setup.BusinessTransactionDate__c.Business_Transaction_Date__c - DATEVALUE(CreatedDate) &gt;= 365, IF(Closed_Invoice_Amounts_12_months__c + Open_Invoice_Dilution_12_Months__c != 0,NULLVALUE((Dilution_Amount_12_Month__c/( Closed_Invoice_Amounts_12_months__c + Open_Invoice_Dilution_12_Months__c)),0),0),Dilution__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Dilution Rate %(12 months)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Dilution_Rate_1_months__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF($Setup.BusinessTransactionDate__c.Business_Transaction_Date__c - DATEVALUE(CreatedDate) &gt;= 30, IF(Closed_Invoice_Amounts_1_months__c + Open_Invoice_Dilution_1_Months__c != 0,NULLVALUE((Dilution_Amount_1_Month__c/( Closed_Invoice_Amounts_1_months__c + Open_Invoice_Dilution_1_Months__c )),0),0),0)</formula>
+        <label>Dilution Rate % (1 months)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Dilution_Rate_3_months__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF($Setup.BusinessTransactionDate__c.Business_Transaction_Date__c - DATEVALUE(CreatedDate) &gt;= 90, IF(Closed_Invoice_Amounts_3_months__c + Open_Invoice_Dilution_3_Months__c != 0,NULLVALUE((Dilution_Amount_3_Month__c/( Closed_Invoice_Amounts_3_months__c + Open_Invoice_Dilution_3_Months__c )),0),0),0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Dilution Rate % (3 months)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Dilution_Rate_6_months__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF($Setup.BusinessTransactionDate__c.Business_Transaction_Date__c - DATEVALUE(CreatedDate) &gt;= 180, IF(Closed_Invoice_Amounts_6_months__c + Open_Invoice_Dilution_6_Months__c != 0,NULLVALUE((Dilution_Amount_6_Month__c/( Closed_Invoice_Amounts_6_months__c + Open_Invoice_Dilution_6_Months__c )), 0),0),0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Dilution Rate % (6 months)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Dilution__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Data Source: Grade or Portal</inlineHelpText>
+        <label>Dilution (%)</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Eligible_AR__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Data Source: Grade or Portal</inlineHelpText>
+        <label>Eligible AR Limit</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Eligible_For_Funding__c</fullName>
+        <externalId>false</externalId>
+        <formula>MAX(0,ROUND((Invoice_Amount__c - Ineligibles_Amount_formula__c),6)- NULLVALUE(Contra_Balance__c, 0))</formula>
+        <inlineHelpText>Formula: MAX(0, Invoice Amount - Ineligible Amount - Contra Balance)</inlineHelpText>
+        <label>Eligible AR</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Excess_Concentration__c</fullName>
+        <externalId>false</externalId>
+        <formula>ROUND(IF(Actual_Debtor_Concentration__c &gt; Concentration_Limit__c,((Actual_Debtor_Concentration__c - Concentration_Limit__c)*Client_Account__r.Eligible_For_Funding_formula__c),0),5)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Formula: If Actual Debtor Concentration &gt; Debtor Concentration Limit then ((Actual Debtor Concentration - Debtor Concentration Limit)*Total Eligible AR(Client-Account) Else 0</inlineHelpText>
+        <label>Excess Concentration</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Flag_for_Debtor_Report__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF($Setup.BusinessTransactionDate__c.Business_Transaction_Date__c - $Setup.Configuration_for_the_Reports__c.Days_to_calculate_for_Debtor_Report__c &gt; DATEVALUE(CreatedDate) ,True,False)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Flag for Debtor Report</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Floor_Suite__c</fullName>
+        <externalId>false</externalId>
+        <label>Floor/Suite</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Funding_Limit__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Data Source: Grade or Portal</inlineHelpText>
+        <label>Funding Limit</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Gross_Availability__c</fullName>
+        <externalId>false</externalId>
+        <formula>ROUND( Advance_Rate__c * MIN(Eligible_For_Funding__c,Actual_Concentration__c),6)</formula>
+        <inlineHelpText>Formula: Advance Rate * Minimum(Eligible For Funding, Max Concentration)</inlineHelpText>
+        <label>Gross Availability</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Industry_DBT__c</fullName>
+        <externalId>false</externalId>
+        <label>Industry DBT (Paydex)</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Utilities</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Accommodation and Food Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Adm.,Support,Waste Mgmt,Remediation Serv</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Agri., Forestry, Fishing and Hunting</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arts, Entertainment, and Recreation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Construction</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Educational Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finance and Insurance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Health Care and Social Assistance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Information</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Manufacturing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mining</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other Services (except Public Admin.)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Prof. Scientific, and Techn. Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Public Administration</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Real Estate Rental and Leasing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Retail Trade</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Transportation and Warehousing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wholesale Trade</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Ineligibles_Amount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Updated from trgonDebtor Trigger.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Formula: Sum of Ineligibles Amount of All Debtors</inlineHelpText>
+        <label>Ineligibles Amount1</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Ineligibles_Amount_formula__c</fullName>
+        <description>Ineligibles Type 2 =  Sum of Balances of Invoices(if Created Date+Credit Period &gt; Global Transaction Date).
+Invoice Derived Percentage = Sum of Balances of Invoices(if Created Date+90 &gt; Global Transaction Date) Divided by Sum of Balances of All Invoices.</description>
+        <externalId>false</externalId>
+        <formula>MAX(Ineligibles_Type2__c, IF(Ineligibles_Derived_Percentage__c &gt;= $Setup.Ineligible_Percentage_Limit__c.Invoice_Limit__c,Invoice_Amount__c,0),Ineligibles_Amount__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Formula: MAX (sum of Ineligibles Type 2 ,IF(Invoice Derived Percentage&gt;=Global Invoice Limit,Invoice Amount,0 ),Ineligibles_Amount)</inlineHelpText>
+        <label>Ineligibles Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Ineligibles_Derived_Percentage__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(Invoice_Amount__c != 0,ROUND(Ineligibles_Type1__c/Invoice_Amount__c,6),0)</formula>
+        <inlineHelpText>Formula: Sum of Balances of Invoices(if Created Date+90 &lt; Global Transaction Date) Divided by Sum of Balances of All Invoices.</inlineHelpText>
+        <label>Ineligibles Derived Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Ineligibles_Type1__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Sum of Balances of All Invoices if (Invoice Created Date + 90) &gt; Global Transaction Date from Invoice AmountWriteOff Trigger.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Formula: Sum of Balances of all Invoices if (Invoice Created Date+90) &gt; Global Transaction Date.</inlineHelpText>
+        <label>Ineligibles Type1</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Ineligibles_Type2__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Sum of Balances of All Invoices if (Invoice Created Date + Credit Period) &gt; Global Transaction Date from Invoice AmountWriteOff Trigger.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Formula: Sum of Balances of all Invoices if (Invoice Created Date+Credit Period) &gt; Global Transaction Date.</inlineHelpText>
+        <label>Ineligibles Type2</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Invoice_Amount_Formula__c</fullName>
+        <description>Created this field to avoid editing in page layout</description>
+        <externalId>false</externalId>
+        <formula>Invoice_Amount__c</formula>
+        <inlineHelpText>Formula : Sum of Balances of All Invoices</inlineHelpText>
+        <label>Invoice Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Invoice_Amount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Formula : Sum of Balances of All Invoices</inlineHelpText>
+        <label>Invoice Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Invoice_Count_Formula__c</fullName>
+        <description>Created this field to Avoid Editing from Pagelayout</description>
+        <externalId>false</externalId>
+        <formula>Invoice_Count__c</formula>
+        <inlineHelpText>Formula: No of Invoices</inlineHelpText>
+        <label>Invoice Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Invoice_Count__c</fullName>
+        <description>Updated from AmountWriteoff Trigger</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Formula: No of Invoices</inlineHelpText>
+        <label>Invoice Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Invoice_Count_for_Sending_Portal__c</fullName>
+        <externalId>false</externalId>
+        <label>Invoice Count for Sending Portal</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Legal_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Legal Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>MP_External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>MP External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Max_Credit_Period__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Data Source: Grade or Portal</inlineHelpText>
+        <label>Max Credit Period</label>
+        <precision>16</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Net_Availability__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF((Debtor_Net_Eligible_AR__c*Advance_Rate__c)-Borrowing_Base_Reserve__c &lt; 0,0,(Debtor_Net_Eligible_AR__c*Advance_Rate__c)-Borrowing_Base_Reserve__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Formula: (Debtor Net Eligible AR*(Advance Rate/100))-Borrowing Base Reserve</inlineHelpText>
+        <label>Net Availability</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Open_Invoice_Dilution_12_Months__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Open Invoice Dilution (12 Months)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Open_Invoice_Dilution_1_Months__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Open Invoice Dilution (1 Month)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Open_Invoice_Dilution_3_Months__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Open Invoice Dilution (3 Months)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Open_Invoice_Dilution_6_Months__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Open Invoice Dilution (6 Months)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Count_to_send_Portal_payments__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Count to send Portal payments</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payment_Count_to_send_Transaction_Grid__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Count to send Transaction Grid</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Phone__c</fullName>
+        <externalId>false</externalId>
+        <label>Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Portal_External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>Portal External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Profile_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>$User.Profile_Name__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Profile Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QB_Customer__c</fullName>
+        <externalId>false</externalId>
+        <label>QB Customer</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Risk_Score_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Risk Score Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Risk_Score__c</fullName>
+        <externalId>false</externalId>
+        <label>Risk Score</label>
+        <picklist>
+            <picklistValues>
+                <fullName>D1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D3</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D4</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D5</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D6</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D7</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D8</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Send_to_Grade__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(AND(ISPICKVAL(Debtor_Status__c,&apos;Pending&apos;),External_Id__c =&apos;&apos;),True,False)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Send to Grade</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Send_to_Portal__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(AND(OR(ISPICKVAL(Debtor_Status__c,&apos;Eligible&apos;),ISPICKVAL(Debtor_Status__c,&apos;Ineligible&apos;)), Sync_with_Portal__c = False),True,False)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Send to Portal</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Source__c</fullName>
+        <externalId>false</externalId>
+        <label>Source</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>State__c</fullName>
+        <externalId>false</externalId>
+        <label>State</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Street_Address__c</fullName>
+        <externalId>false</externalId>
+        <label>Street Address</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Sum_of_Payments_Formula__c</fullName>
+        <description>Created this field to avoid editing from Page layout</description>
+        <externalId>false</externalId>
+        <formula>Sum_of_Payments__c</formula>
+        <inlineHelpText>Formula: Sum of Payments of All Invoices</inlineHelpText>
+        <label>Sum of Payments</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_Payments__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Update from the Transaction(amountWriteoff) Trigger</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Formula: Sum of payments of All Invoices</inlineHelpText>
+        <label>Sum of Payments</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Sync_with_Grade__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Sync with Grade</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sync_with_Market_Place__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Sync with Market Place</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sync_with_Portal__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Sync with Portal</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Tomorrow_date__c</fullName>
+        <externalId>false</externalId>
+        <formula>CreatedDate +1</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Tomorrow date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Total_Eligible_AR__c</fullName>
+        <externalId>false</externalId>
+        <formula>Client_Account__r.Eligible_For_Funding__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Formula: Client Account Eligible For Funding</inlineHelpText>
+        <label>Client Account Eligible For Funding</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>X16_30__c</fullName>
+        <externalId>false</externalId>
+        <label>16-30</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>X1_15__c</fullName>
+        <externalId>false</externalId>
+        <label>1-15</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>X31_60__c</fullName>
+        <externalId>false</externalId>
+        <label>31-60</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>X61_90__c</fullName>
+        <externalId>false</externalId>
+        <label>61-90</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>X90__c</fullName>
+        <externalId>false</externalId>
+        <label>90+</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Zip__c</fullName>
+        <externalId>false</externalId>
+        <label>Zip</label>
+        <length>15</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Debtor</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>Counterparty__c</columns>
+        <columns>NAME</columns>
+        <columns>Client_Account__c</columns>
+        <columns>Invoice_Amount_Formula__c</columns>
+        <columns>Ineligibles_Amount_formula__c</columns>
+        <columns>Eligible_For_Funding__c</columns>
+        <columns>Gross_Availability__c</columns>
+        <columns>Funding_Limit__c</columns>
+        <columns>Net_Availability__c</columns>
+        <columns>Invoice_Count_Formula__c</columns>
+        <columns>Advance_Rate__c</columns>
+        <columns>Dilution__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>External_Id__c</columns>
+        <columns>Portal_External_Id__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All1</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>DA-{00000}</displayFormat>
+        <label>Debtor Account</label>
+        <trackHistory>true</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Debtor Accounts</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Counterparty__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Client_Account__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Invoice_Amount__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Ineligibles_Amount_formula__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Eligible_For_Funding__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Gross_Availability__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Funding_Limit__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Net_Availability__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Invoice_Count_Formula__c</customTabListAdditionalFields>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <lookupDialogsAdditionalFields>Client_Product_Counterparty__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Invoice_Amount__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Ineligibles_Amount__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Eligible_For_Funding__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Dilution__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Funding_Limit__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Gross_Availability__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Net_Availability__c</lookupDialogsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Client_and_Debtor_should_not_be_equal</fullName>
+        <active>true</active>
+        <errorConditionFormula>Client_Account__r.Client__r.CounterParty__c == Counterparty__c</errorConditionFormula>
+        <errorDisplayField>Counterparty__c</errorDisplayField>
+        <errorMessage>Debtor and Client shouldn&apos;t be Equal.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Validation_on_Contra_Balance</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(NOT(ISBLANK(Contra_Balance__c)),Contra_Balance__c &lt; 0)</errorConditionFormula>
+        <errorMessage>Contra Balance must be &gt;= 0</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Send_to_Grade_DBA</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send to Grade DBA</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
+
+var Debtorcount = &apos;{!Debtor__c.DBA_Count_for_Grade__c}&apos;;
+//alert(Debtorcount);
+if(Debtorcount &gt; 0)
+{
+var callResult =sforce.apex.execute(&apos;TPSSF.TPConnectorService&apos;,&apos;SubmitExt&apos;,{sforceObjectType:&apos;Debtor__c&apos;,sforceObjectId:&apos;{!Debtor__c.Id}&apos;,queryString:&apos;&apos;,externalObjectId:&apos;&apos;,action:&apos;sendtogradedba&apos;,profileKey:&apos;akritiv-inernex-dba-name&apos;,profile:&apos;&apos;,userId:&apos;{!$User.Id}&apos;,sessionId:&apos;{!$Api.Session_ID}&apos;,partnerUrl:&apos;{!$Api.Partner_Server_URL_220}&apos;,username:&apos;{!$User.Username}&apos;, event:&apos;&apos;,clientId:&apos;&apos;,additionalData:&apos;&apos;}); 
+
+window.alert(callResult[0]); 
+window.location.reload(); 
+
+/* 
+window.alert(&apos;Under Construction!&apos;); 
+window.location.reload(); 
+*/
+}
+else
+{
+alert(&apos;No DBA Names to Update in Grade.&apos;);
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Send_to_Portal_DBA</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send to Portal DBA</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
+
+var Debtorcount = &apos;{!Debtor__c.DBA_Count_for_Portal__c}&apos;;
+//alert(Debtorcount);
+
+if(Debtorcount &gt; 0)
+{
+var callResult =sforce.apex.execute(&apos;TPSSF.TPConnectorService&apos;,&apos;SubmitExt&apos;,{sforceObjectType:&apos;Debtor__c&apos;,sforceObjectId:&apos;{!Debtor__c.Id}&apos;,queryString:&apos;&apos;,externalObjectId:&apos;&apos;,action:&apos;sendtoportaldba&apos;,profileKey:&apos;akritiv-inernex-dba-name&apos;,profile:&apos;&apos;,userId:&apos;{!$User.Id}&apos;,sessionId:&apos;{!$Api.Session_ID}&apos;,partnerUrl:&apos;{!$Api.Partner_Server_URL_220}&apos;,username:&apos;{!$User.Username}&apos;, event:&apos;&apos;,clientId:&apos;&apos;,additionalData:&apos;&apos;}); 
+
+window.alert(callResult[0]); 
+window.location.reload(); 
+
+/* 
+window.alert(&apos;Under Construction!&apos;); 
+window.location.reload(); 
+*/
+}
+else
+{
+alert(&apos;No DBA Names to Update in Portal.&apos;); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Set_as_Pending</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Set as Pending</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/29.0/connection.js&quot;)} 
+
+var Status = &quot;{!Debtor__c.Debtor_Status__c}&quot;;
+var duns=  &quot;{!Account.Duns_Number__c}&quot;;
+
+if(Status.toUpperCase() == &apos;PENDING VERIFICATION&apos;)
+{
+if(duns == null || duns ==&apos;&apos;)
+{
+alert(&apos;Duns number is required&apos;);
+}
+else
+{
+// identify the record 
+var o = new sforce.SObject(&quot;Debtor__c&quot;);
+ 
+o.id = &quot;{!Debtor__c.Id}&quot;; 
+
+// make the field change 
+o.Debtor_Status__c = &quot;Pending&quot;; 
+
+// save the change 
+sforce.connection.update([o]); 
+
+//refresh the page 
+window.location.reload();
+}
+}
+else
+{
+ alert(&apos;Only Pending verification status can be changed to Pending status&apos;);
+}</url>
+    </webLinks>
+</CustomObject>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>GL Matrix Config</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>GL Matrix Config</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account Type --></label>
+        <name>Account_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank GL Code --></label>
+        <name>Bank_GL_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cost Center --></label>
+        <name>Cost_Center__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Posting Key --></label>
+        <name>Customer_Posting_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Document Type --></label>
+        <name>Document_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Posting Key --></label>
+        <name>Posting_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center --></label>
+        <name>Profit_Center__c</name>
+    </fields>
+    <fields>
+        <label><!-- Special GL Indicator --></label>
+        <name>Special_GL_Indicator__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

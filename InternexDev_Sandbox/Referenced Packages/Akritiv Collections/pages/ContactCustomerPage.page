@@ -1,0 +1,420 @@
+<!--
+ /*
+  *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+  *This software is the confidential and proprietary information
+  *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+  *disclose or use Confidential Information without the express written
+  *agreement of Akritiv Technologies, Inc.
+  */
+-->
+<!--
+ /*
+  *The page provides the functionality to contact/followup a customer
+  *which is one of the major functionality of the application.Page allow
+  *user (mainly Collectors) to contact the customer on some transactions
+  *by email/phone/fax. User can also send an email that can contain pdf/excel
+  *data stating the detail about those transactions. User can also followup
+  *this task (Contact To Customer task) by mentioning some follow-up days on 
+  *the page.
+  */
+-->
+<apex:page controller="akritiv.ContactCustomerController" id="pg"
+    tabstyle="Account" >
+
+    <script src="/soap/ajax/10.0/connection.js" type="text/javascript"></script>
+    <script src="/soap/ajax/10.0/apex.js" type="text/javascript"></script>
+ <script type="text/javascript" src="{!URLFOR($Resource.jquery,'Jquery.js')}"></script>
+
+
+
+   <!-- * 
+   Base_Comp_YUI_ModalLoader /> -->
+
+    <style>
+.headerRow {
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+    padding: 0px;
+}
+      #filter
+{
+    display: block;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-image:url({!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')});
+    background-repeat:no-repeat;
+    background-position:center;
+    background-color: #ffffff;
+    z-index:10;
+    opacity:0.6;
+    filter: alpha(opacity=50);
+}
+
+</style>
+
+
+    <script>
+        // show loading at page load
+      // *  YUIShowLoading();
+    
+        $(window).load(function() {
+        
+    $('#filter').hide();
+    
+  });
+        
+       
+      function startProcess(){
+      
+           document.getElementById("{!$Component.pg.frm.loading}").style.display = 'block'; 
+            
+            document.getElementById('filter').style.display = 'block';
+
+       }
+       
+       function endProcess(){
+       
+           document.getElementById("{!$Component.pg.frm.loading}").style.display = 'none';
+            document.getElementById('filter').style.display = 'none'; 
+       } 
+
+
+    </script>
+
+    <script>
+         function changeListView(){
+            changeList(); 
+            return false;
+         }
+         function checkAttachmentType(){
+           if(document.getElementById("{!$Component.pg.frm.pb.transPbs.sel1.sel3}").value == 'None'){
+               alert('{!$Label.Label_Select_Attachment_Type}');
+           }
+           return false;
+       }
+
+    </script>
+
+    <apex:sectionHeader title="{!$Label.Label_Contact_Customer} {!$Label.Label_For} {!accName}" />
+
+    <apex:form id="frm">
+        <apex:actionFunction id="changefn" name="changeList"
+            action="{!updateUserPreference}" rerender="changefn" />
+            <div id="filter"></div> <apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;z-index:10;"/>
+
+        <apex:pageBlock id="pb">
+
+            <apex:outputPanel id="pageMsgs">
+                <apex:pageMessages ></apex:pageMessages>
+            </apex:outputPanel>
+
+            
+               <!-- * <apex:commandButton value="{!$Label.Label_Execute}"
+                    action="{!execute}" onclick="YUIShowLoading();beforeSubmit();"
+                    rerender="pageMsgs" immediate="false"
+                    oncomplete="YUIHideLoading();" />-->
+                    <apex:pageBlockButtons location="bottom">
+                    <apex:actionStatus id="mySaveStatus1">
+
+                        <apex:facet name="stop">
+                        
+                        <apex:commandButton action="{!execute}" status="mySaveStatus1" value="{!$Label.Label_Execute}" onclick="beforeSubmit();startProcess();" disabled="false" rerender="pageMsgs" oncomplete="endProcess();" immediate="false"/>
+                        
+                        </apex:facet>
+                        
+                        <apex:facet name="start">
+                        
+                        <apex:commandButton action="{!execute}" status="mySaveStatus1" value="{!$Label.Label_Executing}" disabled="true"/> </apex:facet>
+                        
+                        </apex:actionStatus>
+                        
+                    
+          
+          <!--      <apex:commandButton value="{!$Label.Label_Execute}"
+                    action="{!execute}" onclick="beforeSubmit();this.disabled=false;"
+                    rerender="pageMsgs" immediate="false"
+                    oncomplete="" id="button" status="Sending..."/>-->
+                    
+                <apex:commandButton value="{!$Label.Label_Cancel}"
+                    action="{!cancel}" />
+            </apex:pageBlockButtons>
+
+
+            <apex:pageBlockSection title="{!$Label.Label_Transactions}"
+                columns="1" id="transPbs"
+                rendered="{!IF(txList.size>0, TRUE, FALSE)}">
+
+                <table width="100%"
+                    style="border-collapse: collapse; padding: 0px; font-family: verdana;">
+                    <apex:repeat value="{!dynTxList}" var="txWrapper" rows="1">
+
+                        <tr
+                            style="background-color: #E6EAE9; border: 1px solid gray; text-align: left;">
+                            <th width="5%"
+                                style="background-color: #E6EAE9; border: 1px solid gray; text-align: left; padding: 3px 3px 3px 3px;">
+                            <apex:inputCheckbox id="chkUnchkAll" selected="true"
+                                onclick="checkAll(this);" /></th>
+                            <apex:repeat value="{!txWrapper.txFields}" var="fieldHeader">
+                                <th width="{!txWrapper.cellWidth}" class="headerRow"
+                                    style="background-color: #E6EAE9; border: 1px solid gray; text-align: left; padding: 6px 6px 6px 3px;">{!fieldHeader}</th>
+                            </apex:repeat>
+
+                        </tr>
+                    </apex:repeat>
+
+                    <apex:repeat value="{!dynTxList}" var="txWrapper" first="1">
+                        <tr style="border: 1px solid gray; text-align: left;">
+                            <td width="5%"
+                                style="text-align: left; width: auto; border: solid 1px gray; padding-left: 3px; padding-right: 3px;">
+                            <apex:inputCheckbox value="{!txWrapper.selected}" id="selectedTx"
+                                onclick="getSelected(this,'{!JSINHTMLENCODE(txWrapper.txId)}', '{!txWrapper.selected}')" />
+                            </td>
+
+                            <apex:repeat value="{!txWrapper.txFields}" var="fieldValue">
+                                <td width="{!txWrapper.cellWidth}"
+                                    style="text-align: left; width: auto; border: solid 1px gray; padding-left: 3px; padding-right: 3px; white-space: nowrap;"><apex:outputText value="{!fieldValue}" escape="false"/></td>
+                            </apex:repeat>
+                        </tr>
+                    </apex:repeat>
+
+                </table>
+
+
+
+
+                <!--  
+            <apex:pageBlockSection title="{!$Label.Label_Transactions}" columns="1" id="transPbs"
+                rendered="{!IF(txList.size>0, TRUE, FALSE)}">
+                <apex:variable value="{!0}" var="count" />
+                <apex:repeat value="{!dynTxList}" var="lstTrans">
+
+
+                    <table width="100%">
+                        <apex:repeat value="{!lstTrans}" var="trans">
+                            <apex:variable value="{!count + 1}" var="count" />
+                            <tr>
+                                <td><apex:inputCheckbox value="{!trans.selected}" id="selectedTx"
+                                    onclick="getSelected(this,'{!JSINHTMLENCODE(trans.txId)}', '{!trans.selected}')" /></td>
+
+                                <td style="display: block;"><input type="checkbox"
+                                    id="chkUnchkAll" selected="false" onclick="checkAll(this);" />
+                                </td>
+
+                                <apex:repeat value="{!trans.txFields}" var="item">
+                                    <td width="{!trans.cellWidth}"
+                                        class="{! IF(count=1,'headerRow', 'dataCell')}">{!item}</td>
+                                </apex:repeat>
+                            </tr>
+                        </apex:repeat>
+                    </table>
+                </apex:repeat>
+-->
+
+                <!--        <apex:pageBlockTable value="{!txList}" var="twx">
+                    <apex:column >
+                        <apex:facet name="header">
+                            <input type="checkbox" id="chkUnchkAll" selected="false"
+                                onclick="checkAll(this);" />
+                        </apex:facet>
+                        <apex:inputCheckbox value="{!twx.selected}" id="selectedTx"
+                            onclick="getSelected(this,'{!twx.tx.Id}')" />
+                    </apex:column>
+                    <apex:column headerValue="Transaction Number">
+                        <a href="/{!twx.tx.Id}">{!twx.tx.Name}</a>
+                    </apex:column>
+                    <apex:column value="{!twx.tx.Po_Number__c}" />
+                    <apex:column value="{!twx.tx.So_Number__c}" />
+                    <apex:column value="{!twx.tx.Due_Date__c}" />
+                    <apex:column value="{!twx.tx.Amount__c}" />
+                    <apex:column value="{!twx.tx.Balance__c}" />
+                </apex:pageBlockTable>  -->
+                <br />
+
+                <apex:pageBlockSectionItem id="sel1">
+
+                    <apex:outputPanel id="sel2">
+                        <apex:inputCheckbox value="{!attachPDF}" />
+                        <apex:outputLabel value="{!$Label.Label_Attach} " />
+                        <apex:selectList size="1" value="{!selectedType}"
+                            title="{!$Label.Label_Choose_a_Document}" id="sel3">
+                            <apex:selectOptions value="{!attachTypes}" id="selType" />
+                        </apex:selectList>
+                        <apex:commandLink action="{!openTxDetailPage}" target="_blank" 
+                     value="{!$Label.Label_Preview_Document}" onclick="checkAttachmentType();" />
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection columns="1"
+                title="{!$Label.Label_Collection_Rating}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Collection_Rating}" />
+                    <c:Star_Rating_Component updatable="true"
+                        initRating="{!activityRating}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+            <c:Email_Editor supportLocale="{!supportLocale}"
+                accountId="{!accountId}"
+                contactId="{!emailTargetToContactId}" faxId="{!emailTargetToFaxId}"
+                emailCcAddresses="{!ccAddresses}"
+                emailBccAddresses="{!bccAddresses}"
+                emailAddToAddresses="{!addtoAddresses}"
+                copyToSender="{!currUserPref.akritiv__BCC_Emails_To_Me__c}"
+                mailingSubject="{!emailSubject}" emailBody="{!emailTemplateBody}"
+                contactMethod="{!contactMethod}"
+                templatecategory="{!templatecategory}"
+                contactNoteTitle="{!contactNoteTitle}" contactNote="{!contactNote}"
+                emailTemplateId="{!templateIdSelected}"
+                emailAttachmentIds="{!attachmentIds}"
+                selectedTxList="{!transactionsCollectionObject}"
+                listView="{!selectedList}"
+                orgWideEmailAddressId="{!currUserPref.akritiv__Org_Wide_Email__c}"
+                id="emaileditor" />
+
+            <br />
+           
+            <apex:pageBlockSection columns="1">
+                <apex:pageBlockSectionItem id="daysSection" >
+                    <apex:outputLabel value="" />
+                    <apex:outputPanel >
+                        <apex:inputCheckbox value="{!isFollowUp}" />
+                        <apex:outputLabel value="{!$Label.Label_Create_follow_up_after}" />
+                        <apex:inputText size="1" maxlength="4" value="{!followUpDays}" />&nbsp;
+                        <apex:outPutLabel value="{!$Label.Label_Days_With_Note}" />
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem> 
+                
+                
+             <apex:pageBlockSectionItem id="noteSection">
+                <apex:outputLabel >{!$Label.Label_Task_Note_Title}</apex:outputLabel>
+                <apex:outputPanel >
+                    <apex:inputText value="{!NoteFollowupTitle}" style="width:400px"
+                        id="followupNoteTitle" maxlength="80" /> &nbsp;&nbsp;
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+    
+            <apex:pageBlockSectionItem id="commentSection">
+                <apex:outputLabel >{!$Label.Label_Task_Note_Body}</apex:outputLabel>
+                <apex:inputTextArea value="{!comments}" style="width:400px; height:50px;" id="followNotecomment" />
+            </apex:pageBlockSectionItem>
+
+
+            </apex:pageBlockSection>
+
+            <!-- 
+              <apex:pageBlockSection columns="1" >
+                <apex:pageBlockSectionItem id="commentsSection">
+                    <apex:outputLabel >Followup Note</apex:outputLabel>
+                    <apex:inputTextarea id="comments" rows="1" style="width:400px;"
+                        value="{!comments}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+             -->
+
+            <apex:inputHidden id="hiddenkey" value="{!hiddenKey}" />
+            <apex:inputHidden id="hiddenNoteBody" value="{!contactNote}" />
+
+
+        </apex:pageBlock>
+
+        <script>
+        // activate the phone contact method initially
+        var contactMethod = 'Email'; // initially
+         var selectedID = '';
+         
+        init();
+ 
+    function getSelected(obj,id, isselected)
+    { 
+        if(obj.checked)
+        {
+               if(selectedID == ''){
+                    selectedID = id+','; 
+                   
+                }else{
+                    selectedID = selectedID +  id + ',';   
+                }
+        }
+        else
+        {    if(selectedID.match(id))
+                        {
+                            selectedID = selectedID.replace(id,'');
+                            
+                        }  
+                     }
+     
+    }
+ function setConfig(){
+    try{
+    
+ sforce.connection.defaultNamespace = '{!JSENCODE($Setup.akritiv__SysConfig_Singlec__c.akritiv__NameSpace__c
+)}';
+    sforce.connection.sessionId = '{!$Api.Session_ID}';
+    var config = new sforce.SObject("Temp_Object_Holder__c"); 
+    var user = sforce.connection.getUserInfo() ; 
+    var timest = sforce.connection.getServerTimestamp(); 
+    var key = '{!$User.Username}' + timest.timestamp ; 
+    config.Key__c =key ; 
+    config.Value__c = selectedID; 
+   
+    var res = sforce.connection.create([config]); 
+    
+    document.getElementById("pg:frm:pb:hiddenkey").value = key ;
+   
+    }catch (e){
+      //alert(e);
+    }
+    
+ }
+        function init() {
+        
+            selectedID = "{!JSENCODE(selectedTransIds)}" ;
+            
+            if ( document.getElementById('chkUnchkAll') != null ){
+                var keyCheckElem = document.getElementById('chkUnchkAll');            
+                keyCheckElem.checked = true;
+                checkAll(keyCheckElem);
+            }
+        }
+
+        function beforeSubmit() {
+        
+            
+            document.getElementById("pg:frm:pb:hiddenNoteBody").value = document.getElementById('pg:frm:pb:emaileditor:emailComp:notesec:sib:contactNote').value ;
+            setConfig();
+            
+        }
+        
+        function checkAll(selectAll) {
+           if(selectAll.checked ){
+                  
+                    selectedID = "{!JSENCODE(selectedTransIds)}" ;
+                }
+                else{
+                    selectedID ='';
+                
+                }
+            
+            var inputElem = document.getElementsByTagName("input");
+            for(var i=0; i<inputElem.length; i++){
+                if(inputElem[i].id.indexOf("selectedTx")!=-1)
+                inputElem[i].checked = selectAll.checked;
+            }
+                
+        }  
+
+    </script>
+    </apex:form>
+
+    <script>
+    // Hide loading whn page completely loaded
+   //* YUIHideLoading();
+</script>
+
+
+</apex:page>

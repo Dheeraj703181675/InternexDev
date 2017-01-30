@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Store configuration parameter for WebCash upload</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Adjusted_Against_AP_Account_Key__c</fullName>
+        <externalId>false</externalId>
+        <label>Adjusted Against AP Account Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bad_Debt_Account_Key__c</fullName>
+        <externalId>false</externalId>
+        <label>Bad Debt Account Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bank_Charges_Account_Key__c</fullName>
+        <externalId>false</externalId>
+        <label>Bank Charges Account Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Date_Format__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Format</label>
+        <length>15</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description_Column_Text__c</fullName>
+        <externalId>false</externalId>
+        <label>Description Column Text</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LD_Write_Off_Account_Key__c</fullName>
+        <externalId>false</externalId>
+        <label>LD Write Off Account Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payment_History_Fields__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment History Fields</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Refund_Acccount_Key__c</fullName>
+        <externalId>false</externalId>
+        <label>Refund Acccount Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Small_Amount_WriteOff_CurrencyCode__c</fullName>
+        <externalId>false</externalId>
+        <label>Small Amount WriteOff CurrencyCode</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Small_Amount_Write_Back_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Small Amount Write Back Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Small_Amount_Write_off_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Small Amount Write off Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Small_Amount_write_off_Account_Key__c</fullName>
+        <externalId>false</externalId>
+        <label>Small Amount write off Account Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Suspense_Acccount_Key__c</fullName>
+        <externalId>false</externalId>
+        <label>Suspense Acccount Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TDS_Account_Key__c</fullName>
+        <externalId>false</externalId>
+        <label>TDS Account Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TDS_Write_off_Account_Key__c</fullName>
+        <externalId>false</externalId>
+        <label>TDS Write off Account Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Write_Back_Account_Key__c</fullName>
+        <externalId>false</externalId>
+        <label>Write Back Account Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Write_off_Account_Key__c</fullName>
+        <externalId>false</externalId>
+        <label>Write off Account Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>WebCash Configuration</label>
+    <visibility>Public</visibility>
+</CustomObject>

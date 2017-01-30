@@ -1,0 +1,148 @@
+<apex:page id="pageId" controller="akritivtlm.HDClassificationQuery" showHeader="false" sidebar="false" tabStyle="akritivtlm__Conversation__c">
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+
+<style>
+    html{
+        scrollbar-face-color: #E6E6E6;
+        scrollbar-shadow-color: #E6E6E6;
+        scrollbar-highlight-color:#E6E6E6;
+        scrollbar-3dlight-color: #ADADAD;
+        scrollbar-darkshadow-color: #ADADAD;
+        scrollbar-track-color: #ADADAD;
+        scrollbar-arrow-color: #000000;
+        }
+    #filter
+    {
+        display: block;
+        position: fixed;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-repeat:no-repeat;
+        background-position:center;
+        background-color: #ffffff;
+        z-index:10;
+        opacity:0.6;
+        filter: alpha(opacity=50);
+    }
+    
+    .messageblock{
+        font-size:11px;
+        border-radius: 4px;
+        border-color: #c00;
+        background-color: #ffc;
+        border-style: solid;
+        border-width: 1px;
+        color: #000;
+    }
+</style>
+<script>
+    function startProcessForEdit(){
+       document.getElementById("{!$Component.pageId.frmId.loading}").style.display = 'block';       
+       document.getElementById('filter').style.display = 'block';
+    }
+    
+    function endProcessForEdit(){
+       document.getElementById("{!$Component.pageId.frmId.loading}").style.display = 'none';
+       document.getElementById('filter').style.display = 'none'; 
+    }
+    
+    function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+
+    function closeMessage() {
+        $('#messagebox').hide();   
+    }
+
+    function displayMessage(type,msg,interval) {
+        var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:50%;margin: 0 auto;margin-top: 5px;">'+
+                '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+                '</div>';
+        if(document.getElementById('messagebox') != null && document.getElementById('messagebox') != undefined) {
+                document.getElementById('messagebox').innerHTML = m;
+                animateMessageBox('messagebox',interval);
+        }
+        animateMessageBox('messagebox',interval);
+    }
+</script>
+
+<apex:outputpanel id="messagepanel" style="Display:None">
+    <apex:messages id="msg1"  style="Display:None" />
+    <script>
+        if(document.getElementById('{!$Component.msg1}') != null && document.getElementById('{!$Component.msg1}') != undefined) {
+        var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('li');
+        var msg='';
+        for(var i=0;i<obj.length;i++) {
+            if(i==0) 
+            msg += '<br />';
+            msg += obj[i].innerHTML + '<br />';
+        }
+        if(msg != '') {
+           //displayMessage('error',msg,10000);
+           setTimeout(function(){displayMessage('error',msg,10000);},1000);
+        }
+    }
+    </script>
+</apex:outputpanel>
+<div id="messagebox" style="z-index:10 !important;position:fixed !important;width:100% !important;top:30%;left:0%;" ></div>
+
+<apex:outputPanel id="OPClose">
+    <script>
+        if({!windowClose}){
+            var returnValue = 'Field(s) updated successfully.';
+            window.parent.displayMessageAndClosePopUp('info',returnValue,'classificationQueryWin');
+        }
+    </script>  
+</apex:outputPanel>
+
+<apex:form id="frmId" rendered="{!form_render}" >
+
+    <div style="display:none;visibility:hidden;">
+        <apex:inputHidden >
+            <apex:inputField id="conversationMailBoxDisplayName" value="{!convObj.akritivtlm__Mail_Box_Display_Name__c}" rendered="true" />
+            <apex:inputField id="childObjProcess" value="{!queryClassification[implNameSpace+'Process__c']}" />
+            <apex:inputField id="childObjCountry" value="{!queryClassification[implNameSpace+'Country__c']}" />
+            <apex:repeat id="repeat2" value="{!fieldListApi}" var="f" >
+                <apex:inputField value="{!queryClassification[f]}" />
+            </apex:repeat>
+        </apex:inputHidden>
+    </div>
+
+    <!-- for providing loading -->
+    <div id="filter" style= "display:none;"></div> 
+    <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+    <!-- for providing loading -->
+
+    <apex:pageblock title="{!IF(queryClassificationLst.size == 1,convObj.name,'')}" >
+        <apex:pageblockButtons >
+            <apex:actionStatus id="saveStatus1">
+                <apex:facet name="stop">
+                    <apex:commandButton id="cmdBtn" action="{!btnClick}" onclick="startProcessForEdit();" value="{!$Label.Label_Submit}" oncomplete="endProcessForEdit();" rerender="messagepanel,OPClose"/>
+                </apex:facet>
+                <apex:facet name="start">
+                    <apex:commandButton value="{!$Label.Label_Submit}..." disabled="true" status="saveStatus1"/>
+                </apex:facet>
+            </apex:actionStatus>
+            <apex:actionStatus id="saveStatus2">
+                <apex:facet name="stop">
+                    <apex:commandButton id="cancelBtn" value="{!$Label.Label_Close}" onclick="window.parent.Ext.getCmp('classificationQueryWin').close();"/>
+                </apex:facet>
+                <apex:facet name="start">
+                    <apex:commandButton value="{!$Label.Label_Close}..." disabled="true" status="saveStatus2"/>
+                </apex:facet>
+            </apex:actionStatus>
+        </apex:pageblockButtons>
+        
+        <apex:pageblockSection >
+            <apex:repeat id="repeat2" value="{!fldList}" var="f" >
+                <apex:inputField id="inFld1" value="{!queryClassification[f.fieldName]}" required="{!f.isMandatory}" />
+            </apex:repeat>
+        </apex:pageblockSection>
+    </apex:pageblock>
+</apex:form>
+
+</apex:page>

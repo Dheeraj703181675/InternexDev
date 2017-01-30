@@ -1,0 +1,73 @@
+<!--
+/*
+ *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ *This software is the confidential and proprietary information
+ *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ *disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+    /*
+     *The page is related to Customer Portal.This page will be used by a
+     *customer portal user to make contact with the owner of the account.
+     */
+-->
+<apex:page controller="akritiv.PortalContactCSRController">
+
+    <apex:outputPanel id="OP">
+        <script>
+       var res = '{!isSuccess}';
+       if(res == 'true')
+       {
+         alert('{!$Label.Label_Thank_for_inquiry}') ;
+         location.href = encodeURI('{!JSENCODE($Page.akritiv__AccountDetailPage)}' + '?id=' + '{!JSENCODE(currUserAccountId)}');
+       }
+    </script>
+    </apex:outputPanel>
+
+    <apex:sectionHeader title="{!$Label.Label_Contact_CSR}" subtitle="{!$Label.Label_Send_Mail}" />
+    <apex:form >
+
+        <apex:pageBlock mode="Edit">
+
+            <apex:pageMessages id="validationMsg">
+            </apex:pageMessages>
+
+            <apex:pageBlockButtons >
+                <apex:commandButton value="{!$Label.Label_Send}" action="{!redirectToEmailPage}"
+                    reRender="OP,validationMsg" />
+                <apex:commandButton value="{!$Label.Label_Cancel}" action="{!Cancel}" />
+            </apex:pageBlockButtons>
+
+            <apex:pageBlockSection columns="1">
+                <!--                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="To:" />
+                    <apex:outputLabel value="{!defaultMail}"/>
+                </apex:pageBlockSectionItem>
+-->
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Subject_Colon}" />
+                    <apex:inputText maxlength="69" value="{!emailSubject}"
+                        style="width:400px;" />
+                </apex:pageBlockSectionItem>
+
+
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Message_Colon}" />
+                    <apex:inputTextarea rows="10" cols="90" value="{!emailBody}"
+                        style="width:400px;" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+        </apex:pageBlock>
+
+    </apex:form>
+</apex:page>

@@ -1,0 +1,78 @@
+<!--
+ /*
+  *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+  *This software is the confidential and proprietary information
+  *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+  *disclose or use Confidential Information without the express written
+  *agreement of Akritiv Technologies, Inc.
+  */
+-->
+<!--
+    /*
+     *Page to run aging calculation, Data load batch job.
+     */
+-->
+<apex:page Controller="akritiv.DataLoadBatchController"
+    tabStyle="akritiv__Data_Load_Batch__c">
+
+    <script>
+        var timer;
+        
+        function startRefreshTimer() {
+            timer=setInterval("updateTransaction()",400);
+        }
+    </script>
+
+    <apex:sectionHeader title="{!$Label.Label_Data_Batch_Edit}"
+        subtitle="{!$Label.Label_New_Data_Load_Batch}" />
+    <apex:form >
+        <apex:pageBlock title="{!$Label.Label_Data_Batch_Edit}">
+            <apex:actionFunction name="updateTransaction"
+                action="{!executeSingleTransaction}"
+                reRender="executeBtn, progressStatus, updateInfo"
+                oncomplete="continueUpdateTx();" />
+
+            <apex:pageMessages >
+            </apex:pageMessages>
+            <apex:actionStatus startStyle="font-weight:Bold;color:#cc0000"
+                startText="{!$Label.Label_Please_Wait}" stopText="" id="loadStatus" />
+
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.Label_Start_Batch}" action="{!startExecution}"
+                    oncomplete="updateTransaction();"
+                    disabled="{!IF(enableBtn = true, false, true)}" id="executeBtn" />
+            </apex:pageBlockButtons>
+
+            <apex:pageBlockSection columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Source_System}" />
+                    <apex:inputText value="{!sourceSystem}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Batch_Number}" />
+                    <apex:inputText value="{!batchNumber}" />
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Status}" />
+                    <apex:outputText value="{!IF(enableBtn = true,'Completed','In progress')}"
+                        id="progressStatus" />
+                </apex:pageBlockSectionItem>
+                <apex:outputPanel id="updateInfo">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="{!$Label.Label_Total_Trans_updated_colon}{!txUpdated}" />
+                        <script>
+                 
+                 function continueUpdateTx() {
+                     if('{!enableBtn}' == 'false') {
+                         updateTransaction();
+                     }
+                 }
+             </script>
+                    </apex:pageBlockSectionItem>
+                </apex:outputPanel>
+
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

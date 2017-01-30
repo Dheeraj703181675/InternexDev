@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email template for broken promise to pay.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Broken Promise</name>
+    <style>none</style>
+    <subject>Payment not received for {!Account.Name}</subject>
+    <textOnly>Dear {!Contact.Name},
+Our records indicate that we have not received your payment as promised in our previous conversation. If you already have sent a payment please disregard this email otherwise send the payment as soon as possible.
+{!User.Name},
+Phone:{!User.Phone},
+Fax:{!User.Fax},
+Remit to:
+Wire Info:</textOnly>
+    <type>custom</type>
+</EmailTemplate>

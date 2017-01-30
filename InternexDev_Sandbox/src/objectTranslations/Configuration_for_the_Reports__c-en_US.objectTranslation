@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Configuration for the Reports</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Configuration for the Reports</value>
+    </caseValues>
+    <fields>
+        <label><!-- Days to Calculate for Client Maturing --></label>
+        <name>Days_to_Calculate_for_Client_Maturing__c</name>
+    </fields>
+    <fields>
+        <label><!-- Days to Calculate for Payments Report --></label>
+        <name>Days_to_Calculate_for_Payments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Days to calculate for Debtor Report --></label>
+        <name>Days_to_calculate_for_Debtor_Report__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+</head>
+<style>
+	table td {
+		
+		vertical-align:top;
+	}
+</style>
+<body>
+  		<br />
+        	<div style="font-family:Arial, Helvetica, sans-serif;font-size:16px;font-weight:bolder;color:#56c240">Notification From Akritiv</div>
+        <br />
+
+        <table style="background-color:#336799;color:#FFF;border:#00045a medium solid;font-family:Arial, Helvetica, sans-serif;font-size:14px;width:700px">
+            <tr >
+                <td width="177" style="font-weight:bolder;">Organization Name</td>
+                <td width="12" style="font-weight:bold;">:</td>
+                <td width="489" style="font-weight:bold;color:#eae835">{!organizationname}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold">Date</td>
+                <td style="font-weight:bold">:</td>
+                <td>{!notificationdate}</td>
+            </tr>
+                     
+
+        </table>
+        <br />
+        <div style="font-family:Arial, Helvetica, sans-serif;font-size:14px;font-weight:bolder">PARTICULARS</div>
+        <br />
+        
+         <table style="background-color:#fcffd2;color:#000;border:#dbb138 medium solid;font-family:Arial, Helvetica, sans-serif;font-size:12px;width:700px;vertical-align:top" cellpadding="5">
+           
+          <!--  <tr>
+                <td width="170" style="font-weight:bold">Batch Job</td>
+                <td width="4" style="font-weight:bold">:</td>
+                <td width="480" >Closing Transactions</td>
+            </tr> -->
+            
+            <tr>
+                <td width="345" style="font-weight:bold">Risk Factor Limit</td>
+                <td width="6" style="font-weight:bold">:</td>
+                <td width="303" >{!riskfactorlimit}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold">Balance Open</td>
+                <td style="font-weight:bold">:</td>
+                <td >{!balanceopen}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold">Balance To be Closed</td>
+                <td style="font-weight:bold">:</td>
+                <td>{!balancetobeclosed}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold">Auto close process aborted due to Auto Close Risk Factor</td>
+                <td style="font-weight:bold">:</td>
+                <td style="color:#06761b;font-weight:bold;vertical-align:top;">{!actualfactor} > {!batchautocloseriskratio}</td>
+            </tr>
+            
+        </table>
+        
+        
+         <br />
+        <div style="font-family:Arial, Helvetica, sans-serif;font-size:14px;font-weight:bolder">IT</div>
+        <br />
+        
+         <table style="background-color:#fcffd2;color:#000;border:#dbb138 medium solid;font-family:Arial, Helvetica, sans-serif;font-size:12px;width:700px;vertical-align:top" cellpadding="5">
+           <tr>
+                <td width="103" style="font-weight:bold">Batch#</td>
+                <td width="4" style="font-weight:bold">:</td>
+                <td width="547" >{!batchnumber}</td>
+            </tr>
+            
+            <tr>
+                <td style="font-weight:bold">Source system#</td>
+                <td style="font-weight:bold">:</td>
+                <td>{!sourcesystem}</td>
+            </tr>            
+
+        </table>
+</body>
+
+</html>

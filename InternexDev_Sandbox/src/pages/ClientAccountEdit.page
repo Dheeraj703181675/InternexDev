@@ -1,0 +1,115 @@
+<apex:page standardController="Client_Account__c" action="{!if($Profile.Name !='System Administrator', null, URLFOR($Action.Client_Account__c.edit, Client_Account__c.Id, [retURL=URLFOR($Action.Client_Account__c.View, Client_Account__c.Id)],true))}">
+<apex:form >
+    <apex:sectionHeader title="Client Account Edit" subtitle="{!Client_Account__c.Name}"/>
+    <apex:pageBlock title="Client Account Edit">
+    <apex:pagemessages ></apex:pagemessages>
+      <apex:pageBlockButtons >
+            <apex:commandButton value="Save" action="{!Save}"/>
+            <apex:commandButton value="Cancel" action="{!cancel}"/>
+      </apex:pageBlockButtons>
+      <apex:pageBlockSection title="Information" collapsible="false">
+          <apex:outputField value="{!Client_Account__c.Name}"/>
+          <apex:outputField value="{!Client_Account__c.Status__c}"/>
+          <apex:outputField value="{!Client_Account__c.Client__c}"/>
+          <apex:outputField value="{!Client_Account__c.Default_Reason__c}"/>
+          <apex:outputField value="{!Client_Account__c.Product__c}"/>
+          <apex:outputField value="{!Client_Account__c.Watch_List__c}"/>
+          
+          <apex:outputField value="{!Client_Account__c.Application_Number__c}"/>
+          <apex:outputField value="{!Client_Account__c.Method__c}"/>
+          <apex:outputField value="{!Client_Account__c.Funding_Limit__c}"/>
+          <apex:outputField value="{!Client_Account__c.Index__c}"/>
+          <apex:outputField value="{!Client_Account__c.Commitment__c}"/>
+          <apex:outputField value="{!Client_Account__c.Rate_Type__c}"/>
+          
+          <apex:outputField value="{!Client_Account__c.Commitment_rate__c}"/>
+          <apex:outputField value="{!Client_Account__c.Index_Value__c}"/>
+          <apex:outputField value="{!Client_Account__c.Borrowing_Base_Reserve__c}"/>
+          <apex:outputField value="{!Client_Account__c.Spread__c}"/>
+          <apex:outputField value="{!Client_Account__c.IUF_Reserve_Amount__c}"/>
+          <apex:outputField value="{!Client_Account__c.Rate__c}"/>
+
+          <apex:outputField value="{!Client_Account__c.IUF_Reserve_Retained__c}"/>
+          <apex:outputField value="{!Client_Account__c.Non_performing_asset__c}"/>
+          <apex:outputField value="{!Client_Account__c.Additional_IUF_Required__c}"/>
+          <apex:outputField value="{!Client_Account__c.Non_Accrual_Date__c}"/>
+          <apex:outputField value="{!Client_Account__c.Sum_of_Origination_Fees__c}"/>
+          <apex:outputField value="{!Client_Account__c.LOC_Percent__c}"/>
+          
+          <apex:outputField value="{!Client_Account__c.Sum_of_Draw_Fees__c}"/>
+          <apex:outputField value="{!Client_Account__c.Funding_Request_Count__c}"/>
+          <apex:outputField value="{!Client_Account__c.Interest_Due__c}"/>
+          <apex:outputField value="{!Client_Account__c.Actual_Interest_Initiation_Date__c}"/>
+          <apex:outputField value="{!Client_Account__c.UL_Fee_Due__c}"/>
+          <apex:outputField value="{!Client_Account__c.Interest_Initiation_Date__c}"/>
+          
+          <apex:outputField value="{!Client_Account__c.Interest_Due_Since__c}"/>
+          <apex:outputField value="{!Client_Account__c.Maturity_Date__c}"/>
+          <apex:outputField value="{!Client_Account__c.UL_Fee_Due_Since__c}"/>
+          <apex:outputField value="{!Client_Account__c.Renewal_Date__c}"/>
+          <apex:outputField value="{!Client_Account__c.Uncapped_Borrowing_Base__c}"/>
+          <apex:outputField value="{!Client_Account__c.Renewal_Approval_Date__c}"/>
+
+          
+      </apex:pageBlockSection>
+      <apex:pageBlockSection title="Partner Information">
+          <apex:outputField value="{!Client_Account__c.Partner__c}"/>
+          <apex:outputField value="{!Client_Account__c.Partner_Origination_Fee__c}"/>
+          <apex:outputField value="{!Client_Account__c.Partner_Name__c}"/>
+          <apex:outputField value="{!Client_Account__c.Partner_Origination_Fee_Amount__c}"/>
+          <apex:outputField value="{!Client_Account__c.Partner_Type__c}"/>
+          <apex:outputField value="{!Client_Account__c.Partner_Draw_Fee__c}"/>
+          <apex:outputField value="{!Client_Account__c.Partner_CRM_ID__c}"/>
+          <apex:outputField value="{!Client_Account__c.Partner_Draw_Fee_Amount__c}"/>
+      </apex:pageBlockSection>
+      <apex:pageBlockSection title="Invoice aging bucket (After Due Date)">
+          <apex:outputField value="{!Client_Account__c.Current__c}"/>
+          <apex:outputField value="{!Client_Account__c.X31_60__c}"/>
+          <apex:outputField value="{!Client_Account__c.X1_15__c}"/>
+          <apex:outputField value="{!Client_Account__c.X61_90__c}"/>
+          <apex:outputField value="{!Client_Account__c.X16_30__c}"/>
+          <apex:outputField value="{!Client_Account__c.X90__c}"/>
+      </apex:pageBlockSection>
+      <apex:pageBlockSection title="Account Payable">
+          <apex:inputField value="{!Client_Account__c.AP_Current__c}"/>
+          <apex:inputField value="{!Client_Account__c.AP_31_60__c}"/>
+          <apex:inputField value="{!Client_Account__c.AP_1_15__c}"/>
+          <apex:inputField value="{!Client_Account__c.AP_61_90__c}"/>
+          <apex:inputField value="{!Client_Account__c.AP_16_30__c}"/>
+          <apex:inputField value="{!Client_Account__c.AP_90__c}"/>
+      </apex:pageBlockSection>
+       <apex:pageBlockSection title="Financial Information">
+          <apex:outputField value="{!Client_Account__c.Invoice_Amount__c}"/>
+          <apex:outputField value="{!Client_Account__c.FIU_Outstanding__c}"/>
+          <apex:outputField value="{!Client_Account__c.Ineligibles_Amount_formula__c}"/>
+          <apex:outputField value="{!Client_Account__c.Sum_of_Net_Availability__c}"/>
+          <apex:outputField value="{!Client_Account__c.Eligible_For_Funding_formula__c}"/>
+          <apex:outputField value="{!Client_Account__c.Borrowing_Base__c}"/>
+          <apex:outputField value="{!Client_Account__c.MinCommitmentAmount__c}"/>
+          <apex:outputField value="{!Client_Account__c.Net_Availability__c}"/>
+          <apex:outputField value="{!Client_Account__c.Payment_balance__c}"/>
+          <apex:outputField value="{!Client_Account__c.Debtor_Count__c}"/>
+      </apex:pageBlockSection>
+      <apex:pageBlockSection title="Fee Details">
+          <apex:outputField value="{!Client_Account__c.Minimum_Origination_Fee__c}"/>
+          <apex:outputField value="{!Client_Account__c.Minimum_Drawal_Fee__c}"/>
+          <apex:outputField value="{!Client_Account__c.Origination_Fee_Percentage__c}"/>
+          <apex:outputField value="{!Client_Account__c.Drawal_Fee_Percentage__c}"/>
+      </apex:pageBlockSection>
+      <apex:pageBlockSection title="Integration">
+          <apex:outputField value="{!Client_Account__c.External_Id__c}"/>
+          <apex:outputField value="{!Client_Account__c.Sync_with_Grade__c}"/>
+          <apex:outputField value="{!Client_Account__c.External_Req_Id__c}"/>
+          <apex:outputField value="{!Client_Account__c.Sync_with_Portal__c}"/>
+          <apex:outputField value="{!Client_Account__c.Portal_External_Id__c}"/>
+          <apex:outputField value="{!Client_Account__c.Sync_with_Market_Place__c}"/>
+          <apex:outputField value="{!Client_Account__c.MP_External_Id__c}"/>
+          <apex:outputField value="{!Client_Account__c.Source__c}"/>
+          <apex:outputField value="{!Client_Account__c.Primary_Contact_External_ID__c}"/>
+          <apex:outputField value="{!Client_Account__c.Secondary_Contact_External_Id__c}"/>
+      </apex:pageBlockSection>
+   </apex:pageBlock>
+   <apex:pageBlock >
+   </apex:pageBlock>
+</apex:form>
+</apex:page>

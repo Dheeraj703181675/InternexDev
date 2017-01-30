@@ -1,0 +1,26 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/*
+ * Page is related to the customer portal and it does set 
+ * the account as home page for the customer portal user 
+ * instead of native home page.
+ */
+-->
+<apex:page controller="akritiv.SetPortalAccountTab"
+    action="{!goToAccountDetailPage}">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+            {!$Label.Label_Only_for_portal_user}
+        </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

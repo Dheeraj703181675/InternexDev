@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>LoadWebCash Object Mapping</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>LoadWebCash Object Mapping</value>
+    </caseValues>
+    <fields>
+        <label><!-- Data Type --></label>
+        <name>Data_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Load Object API Name --></label>
+        <name>Load_Object_API_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Required --></label>
+        <name>Required__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sequence --></label>
+        <name>Sequence__c</name>
+    </fields>
+    <fields>
+        <label><!-- WebCash Object API --></label>
+        <name>WebCash_Object_API__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>17.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>*** Date Forward Batch Job ***
+The job forward all the date type data for the transactions by mentioned days as input value.</description>
+    <label>CalculateDatePage</label>
+</ApexPage>

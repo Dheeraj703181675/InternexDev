@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- From --></label>
+        <name>From__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notification Type --></label>
+        <name>Notification_Type__c</name>
+        <picklistValues>
+            <masterLabel>Account Management</masterLabel>
+            <translation><!-- Account Management --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Payments</masterLabel>
+            <translation><!-- Payments --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Portal External ID --></label>
+        <name>Portal_External_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- To --></label>
+        <name>To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Activity Category --></label>
+        <name>akritiv__Activity_Category__c</name>
+        <picklistValues>
+            <masterLabel>Contact</masterLabel>
+            <translation><!-- Contact --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Auto Dunning Error --></label>
+        <name>akritiv__Auto_Dunning_Error__c</name>
+    </fields>
+    <fields>
+        <label><!-- Close --></label>
+        <name>akritiv__Close__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact Level --></label>
+        <name>akritiv__Contact_Level__c</name>
+        <picklistValues>
+            <masterLabel>Account</masterLabel>
+            <translation><!-- Account --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transaction</masterLabel>
+            <translation><!-- Transaction --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Contact Method --></label>
+        <name>akritiv__Contact_Method__c</name>
+        <picklistValues>
+            <masterLabel>Email</masterLabel>
+            <translation><!-- Email --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fax</masterLabel>
+            <translation><!-- Fax --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phone</masterLabel>
+            <translation><!-- Phone --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Print</masterLabel>
+            <translation><!-- Print --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Contact Type --></label>
+        <name>akritiv__Contact_Type__c</name>
+        <picklistValues>
+            <masterLabel>Billing</masterLabel>
+            <translation><!-- Billing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dispute</masterLabel>
+            <translation><!-- Dispute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Follow-up</masterLabel>
+            <translation><!-- Follow-up --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Promise To Pay</masterLabel>
+            <translation><!-- Promise To Pay --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Dunning Error Fix URL --></label>
+        <name>akritiv__Dunning_Error_Fix_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dunning Status --></label>
+        <name>akritiv__Dunning_Status__c</name>
+        <picklistValues>
+            <masterLabel>Done</masterLabel>
+            <translation><!-- Done --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Notes --></label>
+        <name>akritiv__Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Collection Rating --></label>
+        <name>akritiv__Rating__c</name>
+        <picklistValues>
+            <masterLabel>Excellent</masterLabel>
+            <translation><!-- Excellent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fair</masterLabel>
+            <translation><!-- Fair --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Good</masterLabel>
+            <translation><!-- Good --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Great</masterLabel>
+            <translation><!-- Great --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Poor</masterLabel>
+            <translation><!-- Poor --></translation>
+        </picklistValues>
+    </fields>
+</CustomObjectTranslation>

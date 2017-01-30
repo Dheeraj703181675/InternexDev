@@ -1,0 +1,4273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Access_Denied</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Access Denied</shortDescription>
+        <value>Access Denied</value>
+    </labels>
+    <labels>
+        <fullName>AttachmentNotFound</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AttachmentNotFound</shortDescription>
+        <value>Attachment Not Found</value>
+    </labels>
+    <labels>
+        <fullName>Error_Account_s_Undisputed_Balance_Is_Less_Then_Or_Equal_to_Zero</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account\&apos;s Undisputed Balance Is Less Then Or Equal to Zero</shortDescription>
+        <value>Account\&apos;s Undisputed Balance Is Less Then Or Equal to Zero</value>
+    </labels>
+    <labels>
+        <fullName>Error_Accounts_default_contact_is_not_specified</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Accounts default contact is not specified</shortDescription>
+        <value>Accounts default contact is not specified</value>
+    </labels>
+    <labels>
+        <fullName>Error_Accounts_s_Default_Contact_Email_Not_Found</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Accounts\&apos;s Default Contact Email Not Found</shortDescription>
+        <value>Accounts\&apos;s Default Contact Email Not Found</value>
+    </labels>
+    <labels>
+        <fullName>Error_Dunning_Email_Template_Not_Found</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dunning Email Template Not Found</shortDescription>
+        <value>Dunning Email Template Not Found</value>
+    </labels>
+    <labels>
+        <fullName>Error_Total_Balance_is_0</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Total Balance is &lt; 0</shortDescription>
+        <value>Total Balance is &lt; 0</value>
+    </labels>
+    <labels>
+        <fullName>Format_1234_xyz_com</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Format: 1234@xyz.com</shortDescription>
+        <value>format: 1234@xyz.com</value>
+    </labels>
+    <labels>
+        <fullName>Label_1_Poor</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>1 - Poor</shortDescription>
+        <value>1 - Poor</value>
+    </labels>
+    <labels>
+        <fullName>Label_2_Fair</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>2 - Fair</shortDescription>
+        <value>2 - Fair</value>
+    </labels>
+    <labels>
+        <fullName>Label_3_Good</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>3 - Good</shortDescription>
+        <value>3 - Good</value>
+    </labels>
+    <labels>
+        <fullName>Label_4_Very_Good</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>4 - Very Good</shortDescription>
+        <value>4 - Very Good</value>
+    </labels>
+    <labels>
+        <fullName>Label_5_Excellent</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>5 - Excellent</shortDescription>
+        <value>5 - Excellent</value>
+    </labels>
+    <labels>
+        <fullName>Label_AMEX</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AMEX</shortDescription>
+        <value>AMEX</value>
+    </labels>
+    <labels>
+        <fullName>Label_AMOUNT_Caps</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AMOUNT Caps</shortDescription>
+        <value>AMOUNT</value>
+    </labels>
+    <labels>
+        <fullName>Label_About</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>About</shortDescription>
+        <value>About</value>
+    </labels>
+    <labels>
+        <fullName>Label_Accoounts_s_Default_Contact_Email_Not_Found</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Accoounts\&apos;s Default Contact Email Not Found</shortDescription>
+        <value>Accoounts\&apos;s Default Contact Email Not Found</value>
+    </labels>
+    <labels>
+        <fullName>Label_Account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account</shortDescription>
+        <value>Account</value>
+    </labels>
+    <labels>
+        <fullName>Label_AccountDetails</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Details</shortDescription>
+        <value>Account Details</value>
+    </labels>
+    <labels>
+        <fullName>Label_AccountNotSpecified</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AccountNotSpecified</shortDescription>
+        <value>Task\&apos;s Account is not specified</value>
+    </labels>
+    <labels>
+        <fullName>Label_Account_Assignment_Rules</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Assignment Rules</shortDescription>
+        <value>Account Assignment Rules</value>
+    </labels>
+    <labels>
+        <fullName>Label_Account_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Colon</shortDescription>
+        <value>Account :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Account_Health</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Health</shortDescription>
+        <value>Account Health</value>
+    </labels>
+    <labels>
+        <fullName>Label_Account_Mass_Transfer_Accounts</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Mass Transfer Accounts</shortDescription>
+        <value>Account Mass Transfer Accounts</value>
+    </labels>
+    <labels>
+        <fullName>Label_Account_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Name</shortDescription>
+        <value>Account Name</value>
+    </labels>
+    <labels>
+        <fullName>Label_Account_Number</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Number</shortDescription>
+        <value>Account Number</value>
+    </labels>
+    <labels>
+        <fullName>Label_Account_Owner</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Owner</shortDescription>
+        <value>Account Owner</value>
+    </labels>
+    <labels>
+        <fullName>Label_Account_Transactions</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Transactions</shortDescription>
+        <value>Account Transactions</value>
+    </labels>
+    <labels>
+        <fullName>Label_Account_type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account type</shortDescription>
+        <value>Account type</value>
+    </labels>
+    <labels>
+        <fullName>Label_Activity_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Activity Date</shortDescription>
+        <value>Activity Date</value>
+    </labels>
+    <labels>
+        <fullName>Label_Activity_History</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Activity History</shortDescription>
+        <value>Activity History</value>
+    </labels>
+    <labels>
+        <fullName>Label_Add</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add</shortDescription>
+        <value>Add</value>
+    </labels>
+    <labels>
+        <fullName>Label_AddTransactionNote</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddTransactionNote</shortDescription>
+        <value>AddTransactionNote</value>
+    </labels>
+    <labels>
+        <fullName>Label_Add_Account_Note</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add Account Note</shortDescription>
+        <value>Add Account Note</value>
+    </labels>
+    <labels>
+        <fullName>Label_Add_New_Note</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add New Note</shortDescription>
+        <value>Add New Note</value>
+    </labels>
+    <labels>
+        <fullName>Label_Add_Note</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add Note</shortDescription>
+        <value>Add Note</value>
+    </labels>
+    <labels>
+        <fullName>Label_Add_Note_Body</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add Note Body</shortDescription>
+        <value>Add Note Body</value>
+    </labels>
+    <labels>
+        <fullName>Label_Add_Notes</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add Notes</shortDescription>
+        <value>Add Notes</value>
+    </labels>
+    <labels>
+        <fullName>Label_Add_Task</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add Task</shortDescription>
+        <value>Add Task</value>
+    </labels>
+    <labels>
+        <fullName>Label_Add_To_Note</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add_To_Note</shortDescription>
+        <value>Add To Note</value>
+    </labels>
+    <labels>
+        <fullName>Label_Add_User</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add User</shortDescription>
+        <value>Add User</value>
+    </labels>
+    <labels>
+        <fullName>Label_Additional_To</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Additional To</shortDescription>
+        <value>Additional To:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Additional_To_InterFAX</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Additional To: InterFAX</shortDescription>
+        <value>Additional To: FAX</value>
+    </labels>
+    <labels>
+        <fullName>Label_Admin_Console</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Admin Console</shortDescription>
+        <value>Admin Console</value>
+    </labels>
+    <labels>
+        <fullName>Label_Aging_Bucket_Configuration</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Aging Bucket Configuration</shortDescription>
+        <value>Aging Bucket Configuration</value>
+    </labels>
+    <labels>
+        <fullName>Label_Aging_Detail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Aging Detail</shortDescription>
+        <value>Aging Detail</value>
+    </labels>
+    <labels>
+        <fullName>Label_All</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>All</shortDescription>
+        <value>All</value>
+    </labels>
+    <labels>
+        <fullName>Label_All_Closed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>All Closed</shortDescription>
+        <value>All Closed</value>
+    </labels>
+    <labels>
+        <fullName>Label_All_Open_Tasks</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>All Open Tasks</shortDescription>
+        <value>All Open Tasks :</value>
+    </labels>
+    <labels>
+        <fullName>Label_All_Remaning_Open</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>All Remaning Open</shortDescription>
+        <value>All Remaning Open</value>
+    </labels>
+    <labels>
+        <fullName>Label_Amount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Amount</shortDescription>
+        <value>Amount</value>
+    </labels>
+    <labels>
+        <fullName>Label_And</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>And</shortDescription>
+        <value>AND</value>
+    </labels>
+    <labels>
+        <fullName>Label_Applied_Amount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Applied Amount</shortDescription>
+        <value>Applied Amount</value>
+    </labels>
+    <labels>
+        <fullName>Label_Applied_Balance</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Applied Balance</shortDescription>
+        <value>Applied Balance</value>
+    </labels>
+    <labels>
+        <fullName>Label_Applied_balance_can_not_exeed_payment_amount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Applied balance can not exeed payment amount.</shortDescription>
+        <value>Applied balance can not exeed payment amount.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Apply_Payment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Apply Payment</shortDescription>
+        <value>Apply Payment</value>
+    </labels>
+    <labels>
+        <fullName>Label_Are_you_sure_you_want_to_close_selected_tasks</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Are you sure you want to close selected tasks?</shortDescription>
+        <value>Are you sure you want to close selected tasks?</value>
+    </labels>
+    <labels>
+        <fullName>Label_Assign</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Assign</shortDescription>
+        <value>Assign</value>
+    </labels>
+    <labels>
+        <fullName>Label_Attach</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Attach</shortDescription>
+        <value>Attach:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Attach_File</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Attach File</shortDescription>
+        <value>Attach File From Local Machine</value>
+    </labels>
+    <labels>
+        <fullName>Label_Attach_Files</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Attach Files</shortDescription>
+        <value>Attach Files</value>
+    </labels>
+    <labels>
+        <fullName>Label_Attach_PDF_for_selected_documents</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Attach PDF for selected documents</shortDescription>
+        <value>Attach PDF for selected documents</value>
+    </labels>
+    <labels>
+        <fullName>Label_Attachment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Attachment</shortDescription>
+        <value>Attachment</value>
+    </labels>
+    <labels>
+        <fullName>Label_Auto_Dunning_Is_Completed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Auto Dunning Is Completed</shortDescription>
+        <value>Auto Dunning Is Completed. You Can Close this window.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Auto_Dunning_Job</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Auto Dunning Job</shortDescription>
+        <value>Auto Dunning Job</value>
+    </labels>
+    <labels>
+        <fullName>Label_Available_Attached_Files</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Available Attached Files</shortDescription>
+        <value>Available Attached Files</value>
+    </labels>
+    <labels>
+        <fullName>Label_Available_Items</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Available Items</shortDescription>
+        <value>Available Items</value>
+    </labels>
+    <labels>
+        <fullName>Label_Available_to_all</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Available to all?</shortDescription>
+        <value>Available to all?:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Average</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Average</shortDescription>
+        <value>Average</value>
+    </labels>
+    <labels>
+        <fullName>Label_Average_3_4</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Average: 3.4</shortDescription>
+        <value>Average: 3.4</value>
+    </labels>
+    <labels>
+        <fullName>Label_Avg_DPD_Range1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Avg DPD Range1</shortDescription>
+        <value>Avg DPD Range1</value>
+    </labels>
+    <labels>
+        <fullName>Label_Avg_DPD_Range2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Avg DPD Range2</shortDescription>
+        <value>Avg DPD Range2</value>
+    </labels>
+    <labels>
+        <fullName>Label_BCC</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCC</shortDescription>
+        <value>BCC</value>
+    </labels>
+    <labels>
+        <fullName>Label_Balance</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Balance</shortDescription>
+        <value>Balance</value>
+    </labels>
+    <labels>
+        <fullName>Label_Batch_Aging_Calculations</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Batch Aging Calculations</shortDescription>
+        <value>Batch Aging Calculations</value>
+    </labels>
+    <labels>
+        <fullName>Label_Batch_Jobs</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Batch Jobs</shortDescription>
+        <value>Batch Jobs</value>
+    </labels>
+    <labels>
+        <fullName>Label_Batch_Notify_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Batch Notify Email</shortDescription>
+        <value>Batch Job Notification Email</value>
+    </labels>
+    <labels>
+        <fullName>Label_Batch_Number</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Batch Number</shortDescription>
+        <value>Batch Number</value>
+    </labels>
+    <labels>
+        <fullName>Label_Bill_To</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Bill To</shortDescription>
+        <value>Bill To</value>
+    </labels>
+    <labels>
+        <fullName>Label_Bill_To_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Bill To:</shortDescription>
+        <value>Bill To:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Billing_PDF_Rows_In_First_Page</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Billing PDF Rows In First Page</shortDescription>
+        <value>Billing PDF Rows In First Page</value>
+    </labels>
+    <labels>
+        <fullName>Label_Billing_PDF_Rows_Subsequent</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Billing PDF Rows Subsequent</shortDescription>
+        <value>Billing PDF Rows in Subsequent Pages</value>
+    </labels>
+    <labels>
+        <fullName>Label_Billing_Stat_Excel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Billing Stat Excel</shortDescription>
+        <value>Billing Statement Excel page</value>
+    </labels>
+    <labels>
+        <fullName>Label_Billing_Stat_Excel_Temp</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Billing Stat Excel Temp</shortDescription>
+        <value>Billing Statement Excel Template</value>
+    </labels>
+    <labels>
+        <fullName>Label_Billing_Stat_PDF</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Billing Stat PDF</shortDescription>
+        <value>Billing Statement PDF page</value>
+    </labels>
+    <labels>
+        <fullName>Label_Billing_Stat_Pdf_Temp</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Billing Stat Pdf Temp</shortDescription>
+        <value>Billing Statement Pdf Template</value>
+    </labels>
+    <labels>
+        <fullName>Label_Body</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Body</shortDescription>
+        <value>Body</value>
+    </labels>
+    <labels>
+        <fullName>Label_Bucket1_30</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>1-30</shortDescription>
+        <value>1-30</value>
+    </labels>
+    <labels>
+        <fullName>Label_Bucket31_60</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>31-60</shortDescription>
+        <value>31-60</value>
+    </labels>
+    <labels>
+        <fullName>Label_Bucket61_90</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>61-90</shortDescription>
+        <value>61-90</value>
+    </labels>
+    <labels>
+        <fullName>Label_Bucket91_180</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>91-180</shortDescription>
+        <value>91-180</value>
+    </labels>
+    <labels>
+        <fullName>Label_Bucket_Age</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Bucket Age</shortDescription>
+        <value>Bucket Age</value>
+    </labels>
+    <labels>
+        <fullName>Label_Bucket_Label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Bucket Label</shortDescription>
+        <value>Bucket Label</value>
+    </labels>
+    <labels>
+        <fullName>Label_Bucket_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Bucket Name</shortDescription>
+        <value>Bucket Name</value>
+    </labels>
+    <labels>
+        <fullName>Label_Bucket_Over_180</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Over 180</shortDescription>
+        <value>Over 180</value>
+    </labels>
+    <labels>
+        <fullName>Label_Business</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Business</shortDescription>
+        <value>Business</value>
+    </labels>
+    <labels>
+        <fullName>Label_CC</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CC</shortDescription>
+        <value>CC</value>
+    </labels>
+    <labels>
+        <fullName>Label_Calendar</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Calendar</shortDescription>
+        <value>Calendar</value>
+    </labels>
+    <labels>
+        <fullName>Label_Call</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Call</shortDescription>
+        <value>Call</value>
+    </labels>
+    <labels>
+        <fullName>Label_Call_Back</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Call Back</shortDescription>
+        <value>Call Back</value>
+    </labels>
+    <labels>
+        <fullName>Label_Call_Result_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Call Result Colon</shortDescription>
+        <value>Call Result:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Call_has_been_set_up</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Call has been set up</shortDescription>
+        <value>Call has been set up</value>
+    </labels>
+    <labels>
+        <fullName>Label_Cancel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>Label_Check</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Check</shortDescription>
+        <value>Check#</value>
+    </labels>
+    <labels>
+        <fullName>Label_Check_Writer_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Check Writer Name</shortDescription>
+        <value>Check Writer Name</value>
+    </labels>
+    <labels>
+        <fullName>Label_Cheque</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cheque</shortDescription>
+        <value>Cheque</value>
+    </labels>
+    <labels>
+        <fullName>Label_Child_Accounts</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Child Accounts</shortDescription>
+        <value>Child Accounts</value>
+    </labels>
+    <labels>
+        <fullName>Label_Choose_Aging_bucket</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Choose Aging bucket</shortDescription>
+        <value>Choose Aging bucket</value>
+    </labels>
+    <labels>
+        <fullName>Label_Choose_Record_per_Page</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Choose Record per Page</shortDescription>
+        <value>Choose Record per Page</value>
+    </labels>
+    <labels>
+        <fullName>Label_Choose_a_Document</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Choose a Document</shortDescription>
+        <value>Choose a Document</value>
+    </labels>
+    <labels>
+        <fullName>Label_Choose_a_ListView</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Choose a ListView</shortDescription>
+        <value>Choose a ListView</value>
+    </labels>
+    <labels>
+        <fullName>Label_Close</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Close</shortDescription>
+        <value>Close</value>
+    </labels>
+    <labels>
+        <fullName>Label_Close_Dispute</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Close Dispute</shortDescription>
+        <value>Close Dispute</value>
+    </labels>
+    <labels>
+        <fullName>Label_Close_Window</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Close Window</shortDescription>
+        <value>Close Window</value>
+    </labels>
+    <labels>
+        <fullName>Label_Closed_Disputes</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Closed Disputes</shortDescription>
+        <value>Closed Disputes</value>
+    </labels>
+    <labels>
+        <fullName>Label_Closed_Transaction</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Closed Transaction</shortDescription>
+        <value>Closed Transaction</value>
+    </labels>
+    <labels>
+        <fullName>Label_Closest_Match_Transactions</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Closest Match Transactions</shortDescription>
+        <value>Closest Match Transactions</value>
+    </labels>
+    <labels>
+        <fullName>Label_Collection_Rating</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Collection Rating</shortDescription>
+        <value>Collection Rating</value>
+    </labels>
+    <labels>
+        <fullName>Label_Comments_Special_Inst</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Comments Special Inst</shortDescription>
+        <value>Comments or Special Instructions</value>
+    </labels>
+    <labels>
+        <fullName>Label_Complete_GO_TO_Next</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Complete &amp; GO TO Next</shortDescription>
+        <value>Complete &amp; GO TO Next</value>
+    </labels>
+    <labels>
+        <fullName>Label_Completed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Completed</shortDescription>
+        <value>Completed</value>
+    </labels>
+    <labels>
+        <fullName>Label_Completed_Task</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Completed Task</shortDescription>
+        <value>Completed Task</value>
+    </labels>
+    <labels>
+        <fullName>Label_Configuration_has_been_modified</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Configuration has been modified.</shortDescription>
+        <value>Configuration has been modified.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Confirm_Payment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Confirm Payment</shortDescription>
+        <value>Confirm Payment</value>
+    </labels>
+    <labels>
+        <fullName>Label_Contact</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact</shortDescription>
+        <value>Contact</value>
+    </labels>
+    <labels>
+        <fullName>Label_ContactCustomLookup</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ContactCustomLookup</shortDescription>
+        <value>ContactCustomLookup</value>
+    </labels>
+    <labels>
+        <fullName>Label_ContactNotSpecified</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ContactNotSpecified</shortDescription>
+        <value>Accounts default contact is not specified</value>
+    </labels>
+    <labels>
+        <fullName>Label_Contact_CSR</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact CSR</shortDescription>
+        <value>Contact CSR</value>
+    </labels>
+    <labels>
+        <fullName>Label_Contact_CSR_History</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact CSR History</shortDescription>
+        <value>Contact CSR History</value>
+    </labels>
+    <labels>
+        <fullName>Label_Contact_Called</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact Called</shortDescription>
+        <value>Contact Called</value>
+    </labels>
+    <labels>
+        <fullName>Label_Contact_Customer</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact Customer</shortDescription>
+        <value>Contact Customer</value>
+    </labels>
+    <labels>
+        <fullName>Label_Contact_Details</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact Details</shortDescription>
+        <value>Contact Details</value>
+    </labels>
+    <labels>
+        <fullName>Label_Contact_Lookup</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact Lookup</shortDescription>
+        <value>Contact Lookup</value>
+    </labels>
+    <labels>
+        <fullName>Label_Contact_Lookup_Help_Text</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact Lookup Help Text</shortDescription>
+        <value>Contact Lookup Help Text</value>
+    </labels>
+    <labels>
+        <fullName>Label_Contact_Method</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact Method</shortDescription>
+        <value>Contact Method</value>
+    </labels>
+    <labels>
+        <fullName>Label_Contact_Method_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact Method Colon</shortDescription>
+        <value>Contact Method :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Contact_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact Name</shortDescription>
+        <value>Contact Name</value>
+    </labels>
+    <labels>
+        <fullName>Label_Contact_Risk_Range1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact Risk Range1</shortDescription>
+        <value>Contact Risk Range1</value>
+    </labels>
+    <labels>
+        <fullName>Label_Contact_Risk_Range2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact Risk Range2</shortDescription>
+        <value>Contact Risk Range2</value>
+    </labels>
+    <labels>
+        <fullName>Label_Contact_Type_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact Type Colon</shortDescription>
+        <value>Contact Type :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Contact_email_not_found</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact email not found</shortDescription>
+        <value>Contact email not found</value>
+    </labels>
+    <labels>
+        <fullName>Label_Create</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create</shortDescription>
+        <value>Create</value>
+    </labels>
+    <labels>
+        <fullName>Label_Create_Dispute</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create Dispute</shortDescription>
+        <value>Create Dispute</value>
+    </labels>
+    <labels>
+        <fullName>Label_Create_Dispute_Lines</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Create_Dispute_Lines</shortDescription>
+        <value>Create Dispute Lines</value>
+    </labels>
+    <labels>
+        <fullName>Label_Create_Dispute_for_Transaction</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create Dispute for Transaction</shortDescription>
+        <value>Create Dispute for Transaction</value>
+    </labels>
+    <labels>
+        <fullName>Label_Create_Disputes</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create Disputes</shortDescription>
+        <value>Create Disputes</value>
+    </labels>
+    <labels>
+        <fullName>Label_Create_Disputes_For_Account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create Disputes For Account</shortDescription>
+        <value>Create Disputes For Account</value>
+    </labels>
+    <labels>
+        <fullName>Label_Create_View</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create View</shortDescription>
+        <value>Create View</value>
+    </labels>
+    <labels>
+        <fullName>Label_Create_follow_up_after</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create follow-up after</shortDescription>
+        <value>Create follow-up after</value>
+    </labels>
+    <labels>
+        <fullName>Label_Created_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Created Date</shortDescription>
+        <value>Created Date</value>
+    </labels>
+    <labels>
+        <fullName>Label_Creating</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Creating...</shortDescription>
+        <value>Creating...</value>
+    </labels>
+    <labels>
+        <fullName>Label_Credit_Debit_Card</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Credit/Debit Card</shortDescription>
+        <value>Credit/Debit Card</value>
+    </labels>
+    <labels>
+        <fullName>Label_Credit_Range1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Credit Range1</shortDescription>
+        <value>Credit Range1</value>
+    </labels>
+    <labels>
+        <fullName>Label_Credit_Range2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Credit Range2</shortDescription>
+        <value>Credit Range2</value>
+    </labels>
+    <labels>
+        <fullName>Label_CurrencyCode</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CurrencyCode</shortDescription>
+        <value>$</value>
+    </labels>
+    <labels>
+        <fullName>Label_Currency_Codes</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Currency Codes</shortDescription>
+        <value>Currency Codes</value>
+    </labels>
+    <labels>
+        <fullName>Label_Current</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Current</shortDescription>
+        <value>Current</value>
+    </labels>
+    <labels>
+        <fullName>Label_Custom_ListView</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Custom ListView</shortDescription>
+        <value>Custom ListView</value>
+    </labels>
+    <labels>
+        <fullName>Label_Custom_Match_Transactions</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Custom Match Transactions</shortDescription>
+        <value>Custom Match Transactions</value>
+    </labels>
+    <labels>
+        <fullName>Label_Custom_Setting</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Custom Setting</shortDescription>
+        <value>Custom Setting</value>
+    </labels>
+    <labels>
+        <fullName>Label_Custom_Setting_Properly</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Custom Setting Properly</shortDescription>
+        <value>Please configure Custom Setting Properly</value>
+    </labels>
+    <labels>
+        <fullName>Label_Customer</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Customer#</shortDescription>
+        <value>Customer#</value>
+    </labels>
+    <labels>
+        <fullName>Label_Customer_Name_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Customer Name Colon</shortDescription>
+        <value>Customer Name :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Customer_Rating</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Customer Rating</shortDescription>
+        <value>Customer Rating</value>
+    </labels>
+    <labels>
+        <fullName>Label_Customize</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Customize</shortDescription>
+        <value>Customize</value>
+    </labels>
+    <labels>
+        <fullName>Label_DESCRIPTION_Caps</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DESCRIPTION Caps</shortDescription>
+        <value>DESCRIPTION</value>
+    </labels>
+    <labels>
+        <fullName>Label_Data_Batch_Edit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Data Batch Edit</shortDescription>
+        <value>Data Load Batch Edit</value>
+    </labels>
+    <labels>
+        <fullName>Label_Data_Load_Inputs</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Data Load Inputs</shortDescription>
+        <value>Data Load Inputs</value>
+    </labels>
+    <labels>
+        <fullName>Label_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Date</shortDescription>
+        <value>Date</value>
+    </labels>
+    <labels>
+        <fullName>Label_DateTime_Format</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DateTime Format</shortDescription>
+        <value>For date/time fields, enter the value in following format: 05/12/2011 10:31 PM</value>
+    </labels>
+    <labels>
+        <fullName>Label_Date_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Date Colon</shortDescription>
+        <value>Date:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Date_Format_is_Invalid_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Date Format is Invalid Message</shortDescription>
+        <value>Date Format is Invalid.Enter Date in YYYY-MM-DD format.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Date_Forward</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Date Forward</shortDescription>
+        <value>Batch Job: Date Forward Batch Job</value>
+    </labels>
+    <labels>
+        <fullName>Label_Date_format</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Date format</shortDescription>
+        <value>For date fields, enter the value in following format: 05/12/2011</value>
+    </labels>
+    <labels>
+        <fullName>Label_Days_Past_Due</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Days Past Due</shortDescription>
+        <value>Days Past Due</value>
+    </labels>
+    <labels>
+        <fullName>Label_Days_To_Fwd</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Days To Fwd</shortDescription>
+        <value>Days To Forward:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Days_With_Note</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>days with note</shortDescription>
+        <value>days with note</value>
+    </labels>
+    <labels>
+        <fullName>Label_Default</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Default</shortDescription>
+        <value>Default</value>
+    </labels>
+    <labels>
+        <fullName>Label_Default_Contact_not_found_on_this_account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Default Contact not found on this account</shortDescription>
+        <value>Default Contact not found on this account</value>
+    </labels>
+    <labels>
+        <fullName>Label_Delete</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete</shortDescription>
+        <value>Delete</value>
+    </labels>
+    <labels>
+        <fullName>Label_Description</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Description</shortDescription>
+        <value>Description</value>
+    </labels>
+    <labels>
+        <fullName>Label_Discover</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Discover</shortDescription>
+        <value>Discover</value>
+    </labels>
+    <labels>
+        <fullName>Label_Dispute</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dispute</shortDescription>
+        <value>Dispute </value>
+    </labels>
+    <labels>
+        <fullName>Label_Dispute_Amount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dispute Amount</shortDescription>
+        <value>Dispute Amount</value>
+    </labels>
+    <labels>
+        <fullName>Label_Dispute_Created</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dispute Created</shortDescription>
+        <value>Dispute Created</value>
+    </labels>
+    <labels>
+        <fullName>Label_Dispute_Data_Load_Inputs</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dispute Data Load Inputs</shortDescription>
+        <value>Dispute Data Load Inputs</value>
+    </labels>
+    <labels>
+        <fullName>Label_Dispute_Details</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dispute Details</shortDescription>
+        <value>Dispute Details</value>
+    </labels>
+    <labels>
+        <fullName>Label_Dispute_Lines_Created</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Create Dispute Line</shortDescription>
+        <value>Dispute Lines created</value>
+    </labels>
+    <labels>
+        <fullName>Label_Dispute_Note</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dispute Note</shortDescription>
+        <value>Dispute Note</value>
+    </labels>
+    <labels>
+        <fullName>Label_Dispute_Owner_and_Status</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dispute Owner and Status</shortDescription>
+        <value>Dispute Owner and Status</value>
+    </labels>
+    <labels>
+        <fullName>Label_Dispute_Sub_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dispute Sub Type</shortDescription>
+        <value>Dispute Sub Type</value>
+    </labels>
+    <labels>
+        <fullName>Label_Dispute_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dispute Type</shortDescription>
+        <value>Dispute Type</value>
+    </labels>
+    <labels>
+        <fullName>Label_Dispute_s_Created</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dispute(s) Created</shortDescription>
+        <value>Dispute(s) Created</value>
+    </labels>
+    <labels>
+        <fullName>Label_Disputes</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Disputes</shortDescription>
+        <value>Disputes</value>
+    </labels>
+    <labels>
+        <fullName>Label_Do_Not_Close_Window_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Do Not Close Window Message</shortDescription>
+        <value>Do Not Close Window while Process Is being executed...</value>
+    </labels>
+    <labels>
+        <fullName>Label_Done</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Done</shortDescription>
+        <value>Done</value>
+    </labels>
+    <labels>
+        <fullName>Label_Down</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Down</shortDescription>
+        <value>Down</value>
+    </labels>
+    <labels>
+        <fullName>Label_Due_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Due Date</shortDescription>
+        <value>Due Date</value>
+    </labels>
+    <labels>
+        <fullName>Label_Dunning_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dunning Error</shortDescription>
+        <value>Dunning Error</value>
+    </labels>
+    <labels>
+        <fullName>Label_Edit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Edit</shortDescription>
+        <value>Edit</value>
+    </labels>
+    <labels>
+        <fullName>Label_Edit_Aging_buckets</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Edit Aging buckets</shortDescription>
+        <value>Edit Aging buckets</value>
+    </labels>
+    <labels>
+        <fullName>Label_Edit_Contact</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Edit Contact</shortDescription>
+        <value>Update Contact</value>
+    </labels>
+    <labels>
+        <fullName>Label_Edit_Note</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Edit Note</shortDescription>
+        <value>Edit Note</value>
+    </labels>
+    <labels>
+        <fullName>Label_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email</shortDescription>
+        <value>Email</value>
+    </labels>
+    <labels>
+        <fullName>Label_EmailFaxNotFound</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EmailFaxNotFound</shortDescription>
+        <value>Email or Fax Number Not Found</value>
+    </labels>
+    <labels>
+        <fullName>Label_Email_And_Script_Templates</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email And Script Templates</shortDescription>
+        <value>Email And Script Templates</value>
+    </labels>
+    <labels>
+        <fullName>Label_Email_Body_Can_not_be_blank</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Body Can not be blank</shortDescription>
+        <value>Email Body Can not be blank</value>
+    </labels>
+    <labels>
+        <fullName>Label_Email_Section</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Section</shortDescription>
+        <value>Email Section</value>
+    </labels>
+    <labels>
+        <fullName>Label_Email_Sent</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Sent:</shortDescription>
+        <value>Email Sent:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Email_Subject</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Subject</shortDescription>
+        <value>Email Subject</value>
+    </labels>
+    <labels>
+        <fullName>Label_Email_Subject_Required</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Subject Required</shortDescription>
+        <value>Email Subject Required</value>
+    </labels>
+    <labels>
+        <fullName>Label_Email_Template</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Template</shortDescription>
+        <value>Email Template</value>
+    </labels>
+    <labels>
+        <fullName>Label_Enable_Invoice_PDF</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Enable Invoice PDF</shortDescription>
+        <value>Enable Invoice PDF</value>
+    </labels>
+    <labels>
+        <fullName>Label_Enter_Note_Body</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Enter Note Body</shortDescription>
+        <value>Enter Note Body</value>
+    </labels>
+    <labels>
+        <fullName>Label_Entered_value_is_Invalid</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Entered value is Invalid.</shortDescription>
+        <value>Entered value is Invalid.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Entered_value_is_Invalid_Value_must_be_True_or_False</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Entered value is Invalid.Value must be True or False.</shortDescription>
+        <value>Entered value is Invalid.Value must be True or False.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Equal_To</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Equal To</shortDescription>
+        <value>Equal To</value>
+    </labels>
+    <labels>
+        <fullName>Label_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error</shortDescription>
+        <value>Error:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Error_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error:</shortDescription>
+        <value>Error:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Error_Fix_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error Fix URL</shortDescription>
+        <value>Error Fix URL</value>
+    </labels>
+    <labels>
+        <fullName>Label_Error_Task</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error Task</shortDescription>
+        <value>Error Task</value>
+    </labels>
+    <labels>
+        <fullName>Label_Error_while_processing_request</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error while processing request:</shortDescription>
+        <value>Error while processing request:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Exact_Match_Transactions</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Exact Match Transactions</shortDescription>
+        <value>Exact Match Transactions</value>
+    </labels>
+    <labels>
+        <fullName>Label_Exception</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Exception</shortDescription>
+        <value>Exception</value>
+    </labels>
+    <labels>
+        <fullName>Label_Exception_occurred_message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Exception occurred message</shortDescription>
+        <value>Exception occurred while processing your request:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Execute</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Execute</shortDescription>
+        <value>Execute</value>
+    </labels>
+    <labels>
+        <fullName>Label_Executing</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Executing</shortDescription>
+        <value>Executing...</value>
+    </labels>
+    <labels>
+        <fullName>Label_Exp_Month</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Exp Month</shortDescription>
+        <value>Exp Month</value>
+    </labels>
+    <labels>
+        <fullName>Label_Exp_Year</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Exp Year</shortDescription>
+        <value>Exp Year</value>
+    </labels>
+    <labels>
+        <fullName>Label_Export_All</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Export All</shortDescription>
+        <value>Export All</value>
+    </labels>
+    <labels>
+        <fullName>Label_Export_Selected</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Export Selected</shortDescription>
+        <value>Export Selected</value>
+    </labels>
+    <labels>
+        <fullName>Label_Exporting_view</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Exporting this view is not possible due to large amount of data being accessed.</shortDescription>
+        <value>Exporting this view is not possible due to large amount of data being accessed. Please either change view filter, select fewer rows to export or use reporting functionality to extract the data required.</value>
+    </labels>
+    <labels>
+        <fullName>Label_F_O_B_POINT</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>F.O.B. POINT</shortDescription>
+        <value>F.O.B. POINT</value>
+    </labels>
+    <labels>
+        <fullName>Label_Fax</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fax</shortDescription>
+        <value>Fax</value>
+    </labels>
+    <labels>
+        <fullName>Label_FaxNotFound</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FaxNotFound</shortDescription>
+        <value>Fax Number Not Found</value>
+    </labels>
+    <labels>
+        <fullName>Label_Fax_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fax Colon</shortDescription>
+        <value>Fax:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Fax_Field_Or_interFax_is_Not_Configure</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fax Field Or interFax is Not Configure</shortDescription>
+        <value>Fax Field Or interFax is Not Configure</value>
+    </labels>
+    <labels>
+        <fullName>Label_Fax_Gateway_is_not_configured</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fax Gateway is not configured</shortDescription>
+        <value>Fax Gateway is not configured</value>
+    </labels>
+    <labels>
+        <fullName>Label_Fax_Not_Configure</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fax Not Configure</shortDescription>
+        <value>Fax Not Configure</value>
+    </labels>
+    <labels>
+        <fullName>Label_Fax_Section</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fax Section</shortDescription>
+        <value>Fax Section</value>
+    </labels>
+    <labels>
+        <fullName>Label_Field</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Field</shortDescription>
+        <value>Field</value>
+    </labels>
+    <labels>
+        <fullName>Label_File</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>File</shortDescription>
+        <value>File</value>
+    </labels>
+    <labels>
+        <fullName>Label_Filter</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Filter</shortDescription>
+        <value>Filter</value>
+    </labels>
+    <labels>
+        <fullName>Label_Filter_Criteria</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Filter Criteria</shortDescription>
+        <value>Filter Criteria :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Filter_Line_Items</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Filter Line Items</shortDescription>
+        <value>Filter Line Items</value>
+    </labels>
+    <labels>
+        <fullName>Label_Filter_Options</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Filter Options</shortDescription>
+        <value>Filter By Additional Fields (Optional):</value>
+    </labels>
+    <labels>
+        <fullName>Label_Find_accounts_criteria</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Find accounts criteria:</shortDescription>
+        <value>Find accounts that match the following criteria:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Find_and_Transfer</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Find and Transfer</shortDescription>
+        <value>Find and Transfer</value>
+    </labels>
+    <labels>
+        <fullName>Label_Finish</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Finish</shortDescription>
+        <value>Finish</value>
+    </labels>
+    <labels>
+        <fullName>Label_First</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>First</shortDescription>
+        <value>First</value>
+    </labels>
+    <labels>
+        <fullName>Label_Fix_This</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fix  This</shortDescription>
+        <value>Fix  This</value>
+    </labels>
+    <labels>
+        <fullName>Label_Follow_up</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Follow-up</shortDescription>
+        <value>Follow-up</value>
+    </labels>
+    <labels>
+        <fullName>Label_For</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>for</shortDescription>
+        <value>for</value>
+    </labels>
+    <labels>
+        <fullName>Label_Formate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Format</shortDescription>
+        <value>format: +[countrycode][areacode][phonenumber] e.g. +12125553333, or +442079876543</value>
+    </labels>
+    <labels>
+        <fullName>Label_From</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>From</shortDescription>
+        <value>From</value>
+    </labels>
+    <labels>
+        <fullName>Label_GO_TO_Next</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>GO TO Next</shortDescription>
+        <value>GO TO Next</value>
+    </labels>
+    <labels>
+        <fullName>Label_General_Detail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>General Detail</shortDescription>
+        <value>General Detail</value>
+    </labels>
+    <labels>
+        <fullName>Label_GenerateDispute</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>GenerateDispute</shortDescription>
+        <value>GenerateDispute</value>
+    </labels>
+    <labels>
+        <fullName>Label_Go</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Go!</shortDescription>
+        <value>Go!</value>
+    </labels>
+    <labels>
+        <fullName>Label_Go_Back</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Go Back</shortDescription>
+        <value>Go Back</value>
+    </labels>
+    <labels>
+        <fullName>Label_Go_To_Account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Go To Account</shortDescription>
+        <value>Go To Account</value>
+    </labels>
+    <labels>
+        <fullName>Label_Go_To_Payment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Go To Payment</shortDescription>
+        <value>Go To Payment</value>
+    </labels>
+    <labels>
+        <fullName>Label_Go_Without_Sign</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Go</shortDescription>
+        <value>Go</value>
+    </labels>
+    <labels>
+        <fullName>Label_Greater_Then</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Greater Than</shortDescription>
+        <value>Greater Than</value>
+    </labels>
+    <labels>
+        <fullName>Label_Greater_Then_or_Equals_To</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Greater Than or Equals To</shortDescription>
+        <value>Greater Than or Equals To</value>
+    </labels>
+    <labels>
+        <fullName>Label_High_Past_Due_Invoice</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>High Past Due Invoice</shortDescription>
+        <value>High Past Due Invoice</value>
+    </labels>
+    <labels>
+        <fullName>Label_High_Past_Due_Range1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>High Past Due Range1</shortDescription>
+        <value>High Past Due Range1</value>
+    </labels>
+    <labels>
+        <fullName>Label_High_Past_Due_Range2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>High Past Due Range2</shortDescription>
+        <value>High Past Due Range2</value>
+    </labels>
+    <labels>
+        <fullName>Label_High_Priority</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>High Priority</shortDescription>
+        <value>High Priority</value>
+    </labels>
+    <labels>
+        <fullName>Label_ID_Format_is_Invalid_Enter_Valid_ID</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ID Format is Invalid. Enter Valid ID</shortDescription>
+        <value>ID Format is Invalid. Enter Valid ID</value>
+    </labels>
+    <labels>
+        <fullName>Label_INVOICE</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>INVOICE</shortDescription>
+        <value>INVOICE</value>
+    </labels>
+    <labels>
+        <fullName>Label_IT_Management</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IT Management</shortDescription>
+        <value>IT Management</value>
+    </labels>
+    <labels>
+        <fullName>Label_In_Progress</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>In Progress</shortDescription>
+        <value>In Progress</value>
+    </labels>
+    <labels>
+        <fullName>Label_Include</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Include</shortDescription>
+        <value>Include</value>
+    </labels>
+    <labels>
+        <fullName>Label_Include_me_in_BCC</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Include me in BCC</shortDescription>
+        <value>Include me in BCC</value>
+    </labels>
+    <labels>
+        <fullName>Label_Invalid_ADDTO_Address</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Additional To</shortDescription>
+        <value>Invalid Additional To Address</value>
+    </labels>
+    <labels>
+        <fullName>Label_Invalid_BCC_Address</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid BCC Address </shortDescription>
+        <value>Invalid BCC Address </value>
+    </labels>
+    <labels>
+        <fullName>Label_Invalid_CC_Address</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid CC  Address</shortDescription>
+        <value>Invalid CC  Address</value>
+    </labels>
+    <labels>
+        <fullName>Label_Invalid_Fax_Address</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Fax Address</shortDescription>
+        <value>Invalid Fax Address</value>
+    </labels>
+    <labels>
+        <fullName>Label_Invoice_No</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invoice#</shortDescription>
+        <value>Invoice#</value>
+    </labels>
+    <labels>
+        <fullName>Label_Invoice_PDF_Templates</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invoice PDF Templates</shortDescription>
+        <value>Invoice PDF Templates</value>
+    </labels>
+    <labels>
+        <fullName>Label_Item</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Item#</shortDescription>
+        <value>Item#</value>
+    </labels>
+    <labels>
+        <fullName>Label_Job_Status</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Job Status</shortDescription>
+        <value>Job Status</value>
+    </labels>
+    <labels>
+        <fullName>Label_Last</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Last</shortDescription>
+        <value>Last</value>
+    </labels>
+    <labels>
+        <fullName>Label_Last_Agging_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Last Agging Date</shortDescription>
+        <value>Last Agging Date</value>
+    </labels>
+    <labels>
+        <fullName>Label_Last_Agging_Run</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Last Agging Run</shortDescription>
+        <value>Last Agging Run</value>
+    </labels>
+    <labels>
+        <fullName>Label_Last_Modification_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Last Modification Date</shortDescription>
+        <value>Last Modification Date</value>
+    </labels>
+    <labels>
+        <fullName>Label_Left_A_Msg</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Left A Msg</shortDescription>
+        <value>Left A Message</value>
+    </labels>
+    <labels>
+        <fullName>Label_Less_Then</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Less Than</shortDescription>
+        <value>Less Than</value>
+    </labels>
+    <labels>
+        <fullName>Label_Less_Then_or_Equals_To</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Less Than or Equals To</shortDescription>
+        <value>Less Than or Equals To</value>
+    </labels>
+    <labels>
+        <fullName>Label_Like</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Like</shortDescription>
+        <value>Like</value>
+    </labels>
+    <labels>
+        <fullName>Label_Line_Item</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Line Item</shortDescription>
+        <value>Line Item</value>
+    </labels>
+    <labels>
+        <fullName>Label_Line_Total</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Line Total</shortDescription>
+        <value>Line Total</value>
+    </labels>
+    <labels>
+        <fullName>Label_List_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>List Name</shortDescription>
+        <value>List Name:</value>
+    </labels>
+    <labels>
+        <fullName>Label_List_None</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>None</shortDescription>
+        <value>--None--</value>
+    </labels>
+    <labels>
+        <fullName>Label_List_View</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>List View</shortDescription>
+        <value>List View</value>
+    </labels>
+    <labels>
+        <fullName>Label_List_View_Date_Help</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>List View Date Help</shortDescription>
+        <value>Date Format should be yyyy-MM-dd e.g [2010-08-01]</value>
+    </labels>
+    <labels>
+        <fullName>Label_Locale</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Locale</shortDescription>
+        <value>Locale</value>
+    </labels>
+    <labels>
+        <fullName>Label_Low_Priority</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Low Priority</shortDescription>
+        <value>Low Priority</value>
+    </labels>
+    <labels>
+        <fullName>Label_Make_checks_payable</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Make checks payable</shortDescription>
+        <value>Make all checks payable to Your Company Name</value>
+    </labels>
+    <labels>
+        <fullName>Label_Mark_As_Read</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mark As Read</shortDescription>
+        <value>Mark As Read</value>
+    </labels>
+    <labels>
+        <fullName>Label_Mark_Reserve</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mark Reserve</shortDescription>
+        <value>Mark Reserve</value>
+    </labels>
+    <labels>
+        <fullName>Label_Mark_for_Reserve_Detail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mark for Reserve Detail</shortDescription>
+        <value>Mark for Reserve Details</value>
+    </labels>
+    <labels>
+        <fullName>Label_Mass_Delete_Transaction</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mass Delete Transaction</shortDescription>
+        <value>Mass Delete Transaction</value>
+    </labels>
+    <labels>
+        <fullName>Label_Mass_Transfer_Account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mass Transfer Account</shortDescription>
+        <value>Mass Transfer Accounts</value>
+    </labels>
+    <labels>
+        <fullName>Label_Mass_Transfer_Accounts</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mass Transfer Accounts</shortDescription>
+        <value>Mass Transfer Accounts</value>
+    </labels>
+    <labels>
+        <fullName>Label_Master_Card</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Master Card</shortDescription>
+        <value>Master Card</value>
+    </labels>
+    <labels>
+        <fullName>Label_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Message</shortDescription>
+        <value>Message</value>
+    </labels>
+    <labels>
+        <fullName>Label_Message_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Message Colon</shortDescription>
+        <value>Message:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Monitor_Jobs</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Monitor Jobs</shortDescription>
+        <value>Monitor Jobs</value>
+    </labels>
+    <labels>
+        <fullName>Label_NOTE_TITLE_IS_REQUIRED_FIELD</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NOTE TITLE IS REQUIRED FIELD</shortDescription>
+        <value>NOTE TITLE IS REQUIRED FIELD</value>
+    </labels>
+    <labels>
+        <fullName>Label_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Name</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>Label_Name_Space</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Name Space</shortDescription>
+        <value>Name Space</value>
+    </labels>
+    <labels>
+        <fullName>Label_New</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>New</shortDescription>
+        <value>New</value>
+    </labels>
+    <labels>
+        <fullName>Label_New_Contact</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>New Contact</shortDescription>
+        <value>New Contact</value>
+    </labels>
+    <labels>
+        <fullName>Label_New_Data_Load_Batch</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>New Data Load Batch</shortDescription>
+        <value>New Data Load Batch</value>
+    </labels>
+    <labels>
+        <fullName>Label_New_Messages</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>New Messages</shortDescription>
+        <value>New Messages</value>
+    </labels>
+    <labels>
+        <fullName>Label_Next</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Next</shortDescription>
+        <value>Next</value>
+    </labels>
+    <labels>
+        <fullName>Label_Next_Follow_up_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Next Follow up Date</shortDescription>
+        <value>Next Follow up Date</value>
+    </labels>
+    <labels>
+        <fullName>Label_Next_Follow_up_Task</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Next Follow up Task</shortDescription>
+        <value>Next Follow up Task</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_Files_Attached</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Files Attached</shortDescription>
+        <value>No Files Attached</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_Message_Found</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Message Found</shortDescription>
+        <value>No Message Found</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_Permission_To_Del</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Permission To Del</shortDescription>
+        <value>User has no permission to delete this view</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_Rating</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Rating</shortDescription>
+        <value>No Rating</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_Records_Found</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Records Found</shortDescription>
+        <value>No Records Found</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_record_found_with_closest_match</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No record found with closest match.</shortDescription>
+        <value>No record found with closest match.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_record_found_with_exact_match</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No record found with exact match.</shortDescription>
+        <value>No record found with exact match.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_record_found_with_oldest_match</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No record found with oldest match.</shortDescription>
+        <value>No record found with oldest match.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Normal</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Normal</shortDescription>
+        <value>Normal</value>
+    </labels>
+    <labels>
+        <fullName>Label_Normal_Priority</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Normal Priority</shortDescription>
+        <value>Normal Priority</value>
+    </labels>
+    <labels>
+        <fullName>Label_NotOpenTx</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NotOpenTx</shortDescription>
+        <value>&apos;Task\&apos;s Account doesn\&apos;t have any Open Transaction</value>
+    </labels>
+    <labels>
+        <fullName>Label_Not_Completed_Task</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Not Completed Task</shortDescription>
+        <value>Not Completed Task</value>
+    </labels>
+    <labels>
+        <fullName>Label_Not_Equal_To</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Not Equal To</shortDescription>
+        <value>Not Equal To</value>
+    </labels>
+    <labels>
+        <fullName>Label_Not_Started</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Not Started</shortDescription>
+        <value>Not Started</value>
+    </labels>
+    <labels>
+        <fullName>Label_Note</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Note</shortDescription>
+        <value>Note :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Note_Body</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Note Body</shortDescription>
+        <value>Note Body</value>
+    </labels>
+    <labels>
+        <fullName>Label_Note_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Note Date</shortDescription>
+        <value>Note Date</value>
+    </labels>
+    <labels>
+        <fullName>Label_Note_Title</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Note Title</shortDescription>
+        <value>Note Title</value>
+    </labels>
+    <labels>
+        <fullName>Label_Note_title_Required</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Note title Required</shortDescription>
+        <value>Note title Required</value>
+    </labels>
+    <labels>
+        <fullName>Label_Notes</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Notes</shortDescription>
+        <value>Notes</value>
+    </labels>
+    <labels>
+        <fullName>Label_Number</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Number</shortDescription>
+        <value>Number</value>
+    </labels>
+    <labels>
+        <fullName>Label_Number_Of_Days</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Number Of Days</shortDescription>
+        <value>Number Of Days</value>
+    </labels>
+    <labels>
+        <fullName>Label_Of</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>of</shortDescription>
+        <value>of</value>
+    </labels>
+    <labels>
+        <fullName>Label_Ok</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ok</shortDescription>
+        <value>Ok</value>
+    </labels>
+    <labels>
+        <fullName>Label_Oldest_Age_Range1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Oldest Age Range1</shortDescription>
+        <value>Oldest Age Range 1</value>
+    </labels>
+    <labels>
+        <fullName>Label_Oldest_Age_Range2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Oldest Age Range2</shortDescription>
+        <value>Oldest Age Range 2</value>
+    </labels>
+    <labels>
+        <fullName>Label_Oldest_Match_Transactions</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Oldest Match Transactions</shortDescription>
+        <value>Oldest Match Transactions</value>
+    </labels>
+    <labels>
+        <fullName>Label_Only_for_portal_user</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Only for portal user</shortDescription>
+        <value>Only for portal user.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Open_Activities</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Open Activities</shortDescription>
+        <value>Open Activities</value>
+    </labels>
+    <labels>
+        <fullName>Label_Open_Transaction</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Open Transaction</shortDescription>
+        <value>Open Transaction</value>
+    </labels>
+    <labels>
+        <fullName>Label_Or</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Or</shortDescription>
+        <value>OR</value>
+    </labels>
+    <labels>
+        <fullName>Label_Org_Logo</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Org Logo</shortDescription>
+        <value>Org Logo</value>
+    </labels>
+    <labels>
+        <fullName>Label_PO_Number</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PO Number</shortDescription>
+        <value>PO Number</value>
+    </labels>
+    <labels>
+        <fullName>Label_P_O_NUMBER</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>P.O. NUMBER</shortDescription>
+        <value>P.O. NUMBER</value>
+    </labels>
+    <labels>
+        <fullName>Label_Page</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page</shortDescription>
+        <value>Page</value>
+    </labels>
+    <labels>
+        <fullName>Label_Parent</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Parent #</shortDescription>
+        <value>Parent #</value>
+    </labels>
+    <labels>
+        <fullName>Label_Payment_Amount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Payment Amount</shortDescription>
+        <value>Payment Amount</value>
+    </labels>
+    <labels>
+        <fullName>Label_Payment_Failed_Due_To</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Payment Failed Due To ..</shortDescription>
+        <value>Payment Failed Due To ..</value>
+    </labels>
+    <labels>
+        <fullName>Label_Payment_Failed_Pleae_check_your_details</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Payment Failed. Pleae check your details</shortDescription>
+        <value>Payment Failed. Pleae check your details</value>
+    </labels>
+    <labels>
+        <fullName>Label_Payment_Information</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Payment Information</shortDescription>
+        <value>Payment Information</value>
+    </labels>
+    <labels>
+        <fullName>Label_Payment_Sent_Successfully</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Payment Sent Successfully.</shortDescription>
+        <value>Payment Sent Successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Payment_Summary</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Payment Summary</shortDescription>
+        <value>Payment Summary</value>
+    </labels>
+    <labels>
+        <fullName>Label_Payment_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Payment Type</shortDescription>
+        <value>Payment Type</value>
+    </labels>
+    <labels>
+        <fullName>Label_Payment_Type_Details</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Payment Type Details</shortDescription>
+        <value>Payment Type Details</value>
+    </labels>
+    <labels>
+        <fullName>Label_Percent_Disputed_Range1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Percent Disputed Range1</shortDescription>
+        <value>Percent Disputed Range1</value>
+    </labels>
+    <labels>
+        <fullName>Label_Percent_Disputed_Range2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Percent Disputed Range2</shortDescription>
+        <value>Percent Disputed Range2</value>
+    </labels>
+    <labels>
+        <fullName>Label_Perform_Only_on_Followup_Tasks</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Perform Only on Followup Tasks</shortDescription>
+        <value>Sorry, You can perform only on followup tasks that have not completed yet !</value>
+    </labels>
+    <labels>
+        <fullName>Label_Personal</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Personal</shortDescription>
+        <value>Personal</value>
+    </labels>
+    <labels>
+        <fullName>Label_Phone</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Phone</shortDescription>
+        <value>Phone</value>
+    </labels>
+    <labels>
+        <fullName>Label_Phone_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Phone Colon</shortDescription>
+        <value>Phone:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Phone_Section</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Phone Section</shortDescription>
+        <value>Phone Section</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Enter_Account_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Enter Account Name</shortDescription>
+        <value>Please Enter Account Name</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Enter_Fax_Number</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Enter Fax Number</shortDescription>
+        <value>Please Enter Fax Number</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Enter_proper_Date_for</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Enter proper Date for</shortDescription>
+        <value>Please Enter proper Date for</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_Attachment_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select Attachment Type</shortDescription>
+        <value>Please Select Attachment Type from Drop Down.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_Attachment_Type_from_Drop_Down</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select Attachment Type from Drop Down.</shortDescription>
+        <value>Please Select Attachment Type from Drop Down.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_Filter_Criteria_Properly</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select Filter Criteria Properly</shortDescription>
+        <value>Please Select Filter Criteria Properly</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_Only_10_Invoice</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select Only 10 Invoice</shortDescription>
+        <value>Please Select Only 10 Invoice</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_Trans</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select Trans</shortDescription>
+        <value>Please Select Transaction</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_User_to_Assign</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select User to Assign</shortDescription>
+        <value>Please Select User to Assign</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_a_Contact_To_whom_you_want_to_Send</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select a Contact To whom you want to Send</shortDescription>
+        <value>Please Select a Contact To whom you want to Send</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_atleast_one_task</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select atleast one task</shortDescription>
+        <value>Please Select atleast one task</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Wait</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please wait...</shortDescription>
+        <value>Please wait...</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Wait_Loading</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Wait. Loading...</shortDescription>
+        <value>Please Wait. Loading...</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_add_note</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please add note</shortDescription>
+        <value>Please add note.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_confirm_the_payment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please confirm the payment amount of $</shortDescription>
+        <value>Please confirm the payment amount of $</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_enter_Form_Type_for</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please enter Form Type for</shortDescription>
+        <value>Please enter Form Type for</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_enter_valid_Reserved_Balance</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please enter valid Reserved Balance.</shortDescription>
+        <value>Please enter valid Reserved Balance.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_enter_valid_promised_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please enter valid promised Date</shortDescription>
+        <value>Please enter valid promised Date</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_enter_valid_promised_amount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please enter valid promised amount</shortDescription>
+        <value>Please enter valid promised amount</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_fill_in_the</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please fill in the</shortDescription>
+        <value>Please fill in the</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_fill_in_the_Routing_Transit_Field</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please fill in the Routing/Transit Field</shortDescription>
+        <value>Please fill in the Routing/Transit Field</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_select_From_and_To_user</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select From and To user.</shortDescription>
+        <value>Please select From and To user.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_select_From_and_To_user_and_filter_Condition</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select From and To user and filter Condition.</shortDescription>
+        <value>Please select From and To user and filter Condition.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_select_From_user</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select From user.</shortDescription>
+        <value>Please select From user.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_select_To_user</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select To user.</shortDescription>
+        <value>Please select To user.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_select_appropriate_Operator</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select appropriate Operator.</shortDescription>
+        <value>Please select appropriate Operator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_select_atleast_one_Account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select atleast one Account</shortDescription>
+        <value>Please select atleast one Account</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_select_operator_for</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select operator for</shortDescription>
+        <value>Please select operator for</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_use_correct_format_in_filter_values</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please use correct format in filter values</shortDescription>
+        <value>Please use correct format in filter values</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_use_proper_Filter</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please use proper Filter</shortDescription>
+        <value>Please use proper Filter.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Populate_Task_Level_Field</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Populate Task Level Field</shortDescription>
+        <value>Populate Task Level Field</value>
+    </labels>
+    <labels>
+        <fullName>Label_Portfolio_Treatment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Portfolio Treatment</shortDescription>
+        <value>Portfolio Treatment</value>
+    </labels>
+    <labels>
+        <fullName>Label_Preferences</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Preferences</shortDescription>
+        <value>Preferences</value>
+    </labels>
+    <labels>
+        <fullName>Label_Preview</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Preview</shortDescription>
+        <value>Preview</value>
+    </labels>
+    <labels>
+        <fullName>Label_Preview_Attachment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Preview Attachment</shortDescription>
+        <value>Preview Attachment</value>
+    </labels>
+    <labels>
+        <fullName>Label_Preview_Document</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Preview Document</shortDescription>
+        <value>Preview Document</value>
+    </labels>
+    <labels>
+        <fullName>Label_Previous</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Previous</shortDescription>
+        <value>Previous</value>
+    </labels>
+    <labels>
+        <fullName>Label_Price_Each</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Price Each</shortDescription>
+        <value>Price Each</value>
+    </labels>
+    <labels>
+        <fullName>Label_Print</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Print</shortDescription>
+        <value>Print</value>
+    </labels>
+    <labels>
+        <fullName>Label_Print_Section</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Print Section</shortDescription>
+        <value>Print Section</value>
+    </labels>
+    <labels>
+        <fullName>Label_Priority</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Priority</shortDescription>
+        <value>Priority</value>
+    </labels>
+    <labels>
+        <fullName>Label_Priority_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Priority Colon</shortDescription>
+        <value>Priority :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Process_Task</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Process Task</shortDescription>
+        <value>Process Task</value>
+    </labels>
+    <labels>
+        <fullName>Label_Process_completed_message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Process completed message</shortDescription>
+        <value>Process has been completed. Now you can close this window.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Progress</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Progress</shortDescription>
+        <value>Progress</value>
+    </labels>
+    <labels>
+        <fullName>Label_Progress_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Progress Colon</shortDescription>
+        <value>Progress :</value>
+    </labels>
+    <labels>
+        <fullName>Label_PromiseToPay</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PromiseToPay</shortDescription>
+        <value>PromiseToPay</value>
+    </labels>
+    <labels>
+        <fullName>Label_Promise_Amount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Promise Amount</shortDescription>
+        <value>Promise Amount</value>
+    </labels>
+    <labels>
+        <fullName>Label_Promise_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Promise Date</shortDescription>
+        <value>Promise Date</value>
+    </labels>
+    <labels>
+        <fullName>Label_Promise_To_Pay</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Promise To Pay</shortDescription>
+        <value>Promise To Pay</value>
+    </labels>
+    <labels>
+        <fullName>Label_Purge_Old_Closed_Transactions</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Purge Old Closed Transactions</shortDescription>
+        <value>Purge Old Closed Transactions</value>
+    </labels>
+    <labels>
+        <fullName>Label_QUANTITY</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>QUANTITY</shortDescription>
+        <value>QUANTITY</value>
+    </labels>
+    <labels>
+        <fullName>Label_Qty</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Qty</shortDescription>
+        <value>Qty</value>
+    </labels>
+    <labels>
+        <fullName>Label_Query_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Query Error</shortDescription>
+        <value>Query Error:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Quick_Filter</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Quick Filter</shortDescription>
+        <value>Quick Filter :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Rating</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Rating</shortDescription>
+        <value>Rating</value>
+    </labels>
+    <labels>
+        <fullName>Label_Rating_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Rating:</shortDescription>
+        <value>Rating:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Re_Evaluation_Process_Completed_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Re Evaluation Process Completed Message</shortDescription>
+        <value>Re Evaluation Process Completed...!!.,Click On FINISH To Close Window.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Reason_Code</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reason Code</shortDescription>
+        <value>Reason Code</value>
+    </labels>
+    <labels>
+        <fullName>Label_Records_Page</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Records/Page</shortDescription>
+        <value>Records/Page</value>
+    </labels>
+    <labels>
+        <fullName>Label_RelatedTransactions</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Related Transactions Tab</shortDescription>
+        <value>Related Transactions</value>
+    </labels>
+    <labels>
+        <fullName>Label_Related_Objects</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Related Objects</shortDescription>
+        <value>Related Objects</value>
+    </labels>
+    <labels>
+        <fullName>Label_Remove</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Remove</shortDescription>
+        <value>Remove</value>
+    </labels>
+    <labels>
+        <fullName>Label_Reply</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reply</shortDescription>
+        <value>Reply</value>
+    </labels>
+    <labels>
+        <fullName>Label_Reserve</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reserve</shortDescription>
+        <value>Reserve</value>
+    </labels>
+    <labels>
+        <fullName>Label_Reserved_Balance</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reserved Balance</shortDescription>
+        <value>Reserved Balance</value>
+    </labels>
+    <labels>
+        <fullName>Label_Reserved_Balance_cannot_be_greater_than_Transaction_Balance</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reserved Balance cannot be greater than Transaction Balance.</shortDescription>
+        <value>Reserved Balance cannot be greater than Transaction Balance.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Reserved_Reason_Code</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reserved Reason Code</shortDescription>
+        <value>Reserved Reason Code</value>
+    </labels>
+    <labels>
+        <fullName>Label_Resolution_Code</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Resolution Code</shortDescription>
+        <value>Resolution Code</value>
+    </labels>
+    <labels>
+        <fullName>Label_Results</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Results</shortDescription>
+        <value>Results</value>
+    </labels>
+    <labels>
+        <fullName>Label_Risk_Config</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Risk Config</shortDescription>
+        <value>Risk Config</value>
+    </labels>
+    <labels>
+        <fullName>Label_Risk_Detail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Risk Detail</shortDescription>
+        <value>Risk Detail</value>
+    </labels>
+    <labels>
+        <fullName>Label_Routing_Transit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Routing\Transit</shortDescription>
+        <value>Routing\Transit</value>
+    </labels>
+    <labels>
+        <fullName>Label_Run</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Run</shortDescription>
+        <value>Run</value>
+    </labels>
+    <labels>
+        <fullName>Label_SALESPERSON</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SALESPERSON</shortDescription>
+        <value>SALESPERSON</value>
+    </labels>
+    <labels>
+        <fullName>Label_SALES_TAX</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SALES TAX</shortDescription>
+        <value>SALES TAX</value>
+    </labels>
+    <labels>
+        <fullName>Label_SHIPPING_HANDLLING</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SHIPPING &amp; HANDLLING</shortDescription>
+        <value>SHIPPING &amp; HANDLLING</value>
+    </labels>
+    <labels>
+        <fullName>Label_SHIP_DATE</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SHIP DATE</shortDescription>
+        <value>SHIP DATE</value>
+    </labels>
+    <labels>
+        <fullName>Label_SHIP_VIA</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SHIP VIA</shortDescription>
+        <value>SHIP VIA</value>
+    </labels>
+    <labels>
+        <fullName>Label_SUBTOTAL_Caps</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SUBTOTAL Caps</shortDescription>
+        <value>SUBTOTAL</value>
+    </labels>
+    <labels>
+        <fullName>Label_Save</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>Label_Save_List_View</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save &amp; List View</shortDescription>
+        <value>Save &amp; List View</value>
+    </labels>
+    <labels>
+        <fullName>Label_Saving</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Saving</shortDescription>
+        <value>Saving</value>
+    </labels>
+    <labels>
+        <fullName>Label_Search</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Search</shortDescription>
+        <value>Search</value>
+    </labels>
+    <labels>
+        <fullName>Label_Search_Account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Search Account</shortDescription>
+        <value>Search Account</value>
+    </labels>
+    <labels>
+        <fullName>Label_Search_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Search:</shortDescription>
+        <value>Search:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Search_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Search Message</shortDescription>
+        <value>&quot;&quot;Type full word or partial word you want to search on&quot;&quot;&quot;&quot;</value>
+    </labels>
+    <labels>
+        <fullName>Label_Search_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Search Name:</shortDescription>
+        <value>Search Name:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Select_Aging_Bucket</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Aging Bucket</shortDescription>
+        <value>Select Aging Bucket</value>
+    </labels>
+    <labels>
+        <fullName>Label_Select_Attachment_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Attachment Type</shortDescription>
+        <value>Please select Attachment Type from Drop Down.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Select_Child_Account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Child Account</shortDescription>
+        <value>Select Child Account</value>
+    </labels>
+    <labels>
+        <fullName>Label_Selected_Disputes</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Selected Disputes</shortDescription>
+        <value>Selected Disputes:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Selected_Items</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Selected Items</shortDescription>
+        <value>Selected Items</value>
+    </labels>
+    <labels>
+        <fullName>Label_Selected_Items_Updated_Successfully</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Selected Items Updated Successfully</shortDescription>
+        <value>Selected Items Updated Successfully</value>
+    </labels>
+    <labels>
+        <fullName>Label_Selected_Transactions</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Selected Transactions</shortDescription>
+        <value>Selected Transactions:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Send</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Send</shortDescription>
+        <value>Send</value>
+    </labels>
+    <labels>
+        <fullName>Label_SendIM</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SendIM</shortDescription>
+        <value>SendIM</value>
+    </labels>
+    <labels>
+        <fullName>Label_Send_Ack</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Send Ack</shortDescription>
+        <value>Send Acknowledgement</value>
+    </labels>
+    <labels>
+        <fullName>Label_Send_Billing_Statement</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Send Billing Statement for Account</shortDescription>
+        <value>Send Billing Statement for Account</value>
+    </labels>
+    <labels>
+        <fullName>Label_Send_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Send Email</shortDescription>
+        <value>Send Email</value>
+    </labels>
+    <labels>
+        <fullName>Label_Send_Mail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Send Mail</shortDescription>
+        <value>Send Mail</value>
+    </labels>
+    <labels>
+        <fullName>Label_Sent_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sent Email</shortDescription>
+        <value>Sent Email</value>
+    </labels>
+    <labels>
+        <fullName>Label_Sent_Now_you_can_close_this_window</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sent.Now you can close this window.</shortDescription>
+        <value>Sent.Now you can close this window.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Seprated_By_Comma</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>You can use &quot;or&quot; filters by entering multiple items in the third column, separa</shortDescription>
+        <value>You can use &quot;or&quot; filters by entering multiple items in the third column, separated by commas.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Ship_To</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ship To</shortDescription>
+        <value>Ship To</value>
+    </labels>
+    <labels>
+        <fullName>Label_Ship_To_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ship To:</shortDescription>
+        <value>Ship To:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Show_Attachments</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Show Attachments</shortDescription>
+        <value>Show Attachments</value>
+    </labels>
+    <labels>
+        <fullName>Label_Show_notes_on</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Show notes on</shortDescription>
+        <value>Show notes on:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Source_System</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Source System</shortDescription>
+        <value>Source System</value>
+    </labels>
+    <labels>
+        <fullName>Label_Start_Aging_Calculation_Job</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Start Aging Calculation Job</shortDescription>
+        <value>Start Aging Calculation Job</value>
+    </labels>
+    <labels>
+        <fullName>Label_Start_Average_DPD_Calculation_Job</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Start Average DPD Calculation Job</shortDescription>
+        <value>Start Average DPD Calculation Job</value>
+    </labels>
+    <labels>
+        <fullName>Label_Start_Batch</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Start Batch</shortDescription>
+        <value>Start Batch</value>
+    </labels>
+    <labels>
+        <fullName>Label_Start_Data_Load_Job</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Start Data Load Job</shortDescription>
+        <value>Start Data Load Job</value>
+    </labels>
+    <labels>
+        <fullName>Label_Start_Parent_Child_Aging_Calc_Job</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Start Parent Child Aging Calc Job</shortDescription>
+        <value>Start Parent Child Aging Calculation Job</value>
+    </labels>
+    <labels>
+        <fullName>Label_Start_Working</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Start Working</shortDescription>
+        <value>Start Working</value>
+    </labels>
+    <labels>
+        <fullName>Label_StatPDF</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>StatPDF</shortDescription>
+        <value>Statement PDF</value>
+    </labels>
+    <labels>
+        <fullName>Label_StatSpreadsheet</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>StatSpreadsheet</shortDescription>
+        <value>Statement Spreadsheet</value>
+    </labels>
+    <labels>
+        <fullName>Label_Status</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Status</shortDescription>
+        <value>Status</value>
+    </labels>
+    <labels>
+        <fullName>Label_Status_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Status :</shortDescription>
+        <value>Status :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Status_for_Acc_Transfer</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Status for Acc Transfer</shortDescription>
+        <value>Please Wait... Accounts are being transfered.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Stop</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Stop</shortDescription>
+        <value>Stop</value>
+    </labels>
+    <labels>
+        <fullName>Label_Strategy</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Strategy</shortDescription>
+        <value>Strategy</value>
+    </labels>
+    <labels>
+        <fullName>Label_Sub_Reason_Code</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sub Reason Code</shortDescription>
+        <value>Sub Reason Code</value>
+    </labels>
+    <labels>
+        <fullName>Label_Subject</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Subject</shortDescription>
+        <value>Subject</value>
+    </labels>
+    <labels>
+        <fullName>Label_SubjectNotMatchTemplate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SubjectNotMatchTemplate</shortDescription>
+        <value>Subject Does not match any email template</value>
+    </labels>
+    <labels>
+        <fullName>Label_Subject_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Subject Colon</shortDescription>
+        <value>Subject :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Subject_required</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Subject required</shortDescription>
+        <value>Subject required</value>
+    </labels>
+    <labels>
+        <fullName>Label_Submission_failed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Submission failed</shortDescription>
+        <value>Submission failed:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Submit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Submit</shortDescription>
+        <value>Submit</value>
+    </labels>
+    <labels>
+        <fullName>Label_Submit_rating</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Submit rating</shortDescription>
+        <value>Submit rating</value>
+    </labels>
+    <labels>
+        <fullName>Label_SumAndDetailsPDF</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SumAndDetailsPDF</shortDescription>
+        <value>Summary And Details PDF</value>
+    </labels>
+    <labels>
+        <fullName>Label_SumPDF</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SumPDF</shortDescription>
+        <value>Summary PDF</value>
+    </labels>
+    <labels>
+        <fullName>Label_Summary</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Summary</shortDescription>
+        <value>Summary</value>
+    </labels>
+    <labels>
+        <fullName>Label_System_Administration</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>System Administration</shortDescription>
+        <value>System Administration</value>
+    </labels>
+    <labels>
+        <fullName>Label_System_Config</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>System Config</shortDescription>
+        <value>System Config</value>
+    </labels>
+    <labels>
+        <fullName>Label_TERMS</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TERMS</shortDescription>
+        <value>TERMS</value>
+    </labels>
+    <labels>
+        <fullName>Label_THANK_YOU_FOR</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>THANK YOU FOR</shortDescription>
+        <value>THANK YOU FOR YOUR BUSINESS!</value>
+    </labels>
+    <labels>
+        <fullName>Label_TOTAL_AMOUNT_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TOTAL AMOUNT:</shortDescription>
+        <value>TOTAL AMOUNT:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Take_Payment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Take Payment</shortDescription>
+        <value>Take Payment</value>
+    </labels>
+    <labels>
+        <fullName>Label_Take_Payment_For</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Take Payment For</shortDescription>
+        <value>Take Payment For</value>
+    </labels>
+    <labels>
+        <fullName>Label_Task</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Task</shortDescription>
+        <value>Task</value>
+    </labels>
+    <labels>
+        <fullName>Label_Task_Note_Body</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Task Note Body</shortDescription>
+        <value>Task Note Body</value>
+    </labels>
+    <labels>
+        <fullName>Label_Task_Note_Title</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Task Note Title</shortDescription>
+        <value>Task Note Title</value>
+    </labels>
+    <labels>
+        <fullName>Label_Tasks_Are_Not_Close_Due_To</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Tasks Are Not Close Due To</shortDescription>
+        <value>Tasks Are Not Close Due To :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Tasks_Processed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Tasks Processed :</shortDescription>
+        <value>Tasks Processed :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Thank_for_inquiry</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Thank for your enquiry. Will get back to you soon</shortDescription>
+        <value>Thank for your enquiry. Will get back to you soon</value>
+    </labels>
+    <labels>
+        <fullName>Label_The_Statement_sent_to_the_customer_via_Dunning</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>The Statement sent to the customer via Dunning</shortDescription>
+        <value>The Statement sent to the customer via Dunning</value>
+    </labels>
+    <labels>
+        <fullName>Label_The_hierarchy_displays</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>The hierarchy displays the first 250 accounts. Additional accounts are not displ</shortDescription>
+        <value>The hierarchy displays the first 250 accounts. Additional accounts are not displayed.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Title</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Title</shortDescription>
+        <value>Title:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Title_Without_Sign</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Title Without Sign</shortDescription>
+        <value>Title</value>
+    </labels>
+    <labels>
+        <fullName>Label_To</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>To</shortDescription>
+        <value>To</value>
+    </labels>
+    <labels>
+        <fullName>Label_Total</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Total</shortDescription>
+        <value>Total</value>
+    </labels>
+    <labels>
+        <fullName>Label_TotalBalZero</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TotalBalZero</shortDescription>
+        <value>Total Balance is = 0</value>
+    </labels>
+    <labels>
+        <fullName>Label_Total_AR</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Total AR</shortDescription>
+        <value>Total AR</value>
+    </labels>
+    <labels>
+        <fullName>Label_Total_Accounts_updated</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Total Accounts updated:</shortDescription>
+        <value>Total Accounts updated:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Total_Balance</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Total Balance</shortDescription>
+        <value>Total Balance:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Total_Colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Total:</shortDescription>
+        <value>Total:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Total_Disputed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Total Disputed</shortDescription>
+        <value>Total Disputed</value>
+    </labels>
+    <labels>
+        <fullName>Label_Total_Promised</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Total Promised</shortDescription>
+        <value>Total Promised</value>
+    </labels>
+    <labels>
+        <fullName>Label_Total_Records</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Total Records</shortDescription>
+        <value>Total Records:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Total_Trans_updated_colon</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Total Trans updated colon</shortDescription>
+        <value>Total Transaction updated:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Trans_Amount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Trans Amount</shortDescription>
+        <value>Transaction Amount</value>
+    </labels>
+    <labels>
+        <fullName>Label_Trans_Balance</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Trans Balance</shortDescription>
+        <value>Transaction Balance</value>
+    </labels>
+    <labels>
+        <fullName>Label_Trans_Invoice_PDF</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Trans Invoice PDF</shortDescription>
+        <value>Transaction Invoice PDF Page</value>
+    </labels>
+    <labels>
+        <fullName>Label_Trans_Number</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Trans Number</shortDescription>
+        <value>Transaction Number</value>
+    </labels>
+    <labels>
+        <fullName>Label_Transaction</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Transaction</shortDescription>
+        <value>Transaction</value>
+    </labels>
+    <labels>
+        <fullName>Label_Transaction_Amount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Transaction Amount</shortDescription>
+        <value>Transaction Amount</value>
+    </labels>
+    <labels>
+        <fullName>Label_Transaction_Detail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Transaction Detail</shortDescription>
+        <value>Transaction Detail</value>
+    </labels>
+    <labels>
+        <fullName>Label_Transaction_Number</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Transaction Number</shortDescription>
+        <value>Transaction Number</value>
+    </labels>
+    <labels>
+        <fullName>Label_Transactions</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Transactions</shortDescription>
+        <value>Transactions</value>
+    </labels>
+    <labels>
+        <fullName>Label_Transfer_from</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Transfer from</shortDescription>
+        <value>Transfer from</value>
+    </labels>
+    <labels>
+        <fullName>Label_Transfer_to</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Transfer to</shortDescription>
+        <value>Transfer to</value>
+    </labels>
+    <labels>
+        <fullName>Label_Tx_Number</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Tx Number</shortDescription>
+        <value>Tx Number</value>
+    </labels>
+    <labels>
+        <fullName>Label_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Type</shortDescription>
+        <value>Type</value>
+    </labels>
+    <labels>
+        <fullName>Label_UNIT_PRICE</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UNIT PRICE</shortDescription>
+        <value>UNIT PRICE</value>
+    </labels>
+    <labels>
+        <fullName>Label_Unapplied_Balance</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Unapplied Balance</shortDescription>
+        <value>Unapplied Balance</value>
+    </labels>
+    <labels>
+        <fullName>Label_UndisputedBalLessThen0</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UndisputedBalLessThen0</shortDescription>
+        <value>Account\&apos;s Undisputed Balance Is Less Then Zero.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Up</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Up</shortDescription>
+        <value>Up</value>
+    </labels>
+    <labels>
+        <fullName>Label_Update</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Update</shortDescription>
+        <value>Update</value>
+    </labels>
+    <labels>
+        <fullName>Label_Update_Contact</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Update Contact</shortDescription>
+        <value>Update Contact</value>
+    </labels>
+    <labels>
+        <fullName>Label_Update_Dispute</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Update Dispute</shortDescription>
+        <value>Update Dispute</value>
+    </labels>
+    <labels>
+        <fullName>Label_Update_Of_Selected_Items_Failed_Please_Try_Again</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Update Of Selected Items Failed.Please Try Again.</shortDescription>
+        <value>Update Of Selected Items Failed.Please Try Again.</value>
+    </labels>
+    <labels>
+        <fullName>Label_User_Management</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>User Management</shortDescription>
+        <value>User Management</value>
+    </labels>
+    <labels>
+        <fullName>Label_User_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>User Name</shortDescription>
+        <value>User Name</value>
+    </labels>
+    <labels>
+        <fullName>Label_User_Search</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>User Search</shortDescription>
+        <value>User Search</value>
+    </labels>
+    <labels>
+        <fullName>Label_VISA</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VISA</shortDescription>
+        <value>VISA</value>
+    </labels>
+    <labels>
+        <fullName>Label_View</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>View</shortDescription>
+        <value>View</value>
+    </labels>
+    <labels>
+        <fullName>Label_View_Attachment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>View Attachment</shortDescription>
+        <value>View Attachment</value>
+    </labels>
+    <labels>
+        <fullName>Label_Was_Able_To_Connect</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Was Able To Connect</shortDescription>
+        <value>Was Able To Connect</value>
+    </labels>
+    <labels>
+        <fullName>Label_With</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>with</shortDescription>
+        <value>with</value>
+    </labels>
+    <labels>
+        <fullName>Label_With_Credit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>With Credit</shortDescription>
+        <value>With Credit</value>
+    </labels>
+    <labels>
+        <fullName>Label_With_Disputed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>With Disputed</shortDescription>
+        <value>With Disputed</value>
+    </labels>
+    <labels>
+        <fullName>Label_With_Promised</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>With Promised</shortDescription>
+        <value>With Promised</value>
+    </labels>
+    <labels>
+        <fullName>Label_Workflows</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Workflows</shortDescription>
+        <value>Workflows</value>
+    </labels>
+    <labels>
+        <fullName>Label_You_are_not_authorized</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>You are not authorized to use credit/debit card for amount more than</shortDescription>
+        <value>You are not authorized to use credit/debit card for amount more than</value>
+    </labels>
+    <labels>
+        <fullName>Label_You_should_first_make_risk_conf</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>You should first make risk configuration!</shortDescription>
+        <value>You should first make risk configuration!</value>
+    </labels>
+    <labels>
+        <fullName>Label_You_should_first_make_system_conf</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>You should first make system configuration!</shortDescription>
+        <value>You should first make system configuration!</value>
+    </labels>
+    <labels>
+        <fullName>Label_amount_exceeded</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>amount exceeded</shortDescription>
+        <value>amount has exceeded the balance</value>
+    </labels>
+    <labels>
+        <fullName>Label_any_questions</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>any questions</shortDescription>
+        <value>If you have any questions concerning this invoice, contact Name, Phone Number, E-mail Address</value>
+    </labels>
+    <labels>
+        <fullName>Label_by</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>by</shortDescription>
+        <value>by</value>
+    </labels>
+    <labels>
+        <fullName>Label_displays_500</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>displays 500</shortDescription>
+        <value>The hierarchy displays the first 500 accounts. Additional accounts are not displayed.</value>
+    </labels>
+    <labels>
+        <fullName>Label_disputes_created_with_total_of</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>- disputes created with total of</shortDescription>
+        <value>- disputes created with total of</value>
+    </labels>
+    <labels>
+        <fullName>Label_enter_only_one_for</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>enter only one \&apos;.\&apos; for</shortDescription>
+        <value>Please enter only one \&apos;.\&apos; for</value>
+    </labels>
+    <labels>
+        <fullName>Label_loadingStatus</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>loadingStatus</shortDescription>
+        <value>loadingStatus</value>
+    </labels>
+    <labels>
+        <fullName>Label_numeric_value_for</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>numeric value for</shortDescription>
+        <value>Please enter numeric value for</value>
+    </labels>
+    <labels>
+        <fullName>Label_select_atleast_one_Record</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>select atleast one Record</shortDescription>
+        <value>Please select atleast one Record</value>
+    </labels>
+    <labels>
+        <fullName>Label_valid_length_of_value_for</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>valid length of value for</shortDescription>
+        <value>Please enter valid length of value for</value>
+    </labels>
+    <labels>
+        <fullName>Lable_AddAccountNote</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddAccountNote</shortDescription>
+        <value>AddAccountNote</value>
+    </labels>
+    <labels>
+        <fullName>Lable_Apply_Payment_Sign</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Apply Payment#</shortDescription>
+        <value>Apply Payment#</value>
+    </labels>
+    <labels>
+        <fullName>Lable_None</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>--None--</shortDescription>
+        <value>--None--</value>
+    </labels>
+    <labels>
+        <fullName>Lable_ReEvaluateAutoDunningProcess</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ReEvaluateAutoDunningProcess</shortDescription>
+        <value>ReEvaluateAutoDunningProcess</value>
+    </labels>
+    <labels>
+        <fullName>Lable_SO_Number</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SO Number</shortDescription>
+        <value>SO Number</value>
+    </labels>
+    <labels>
+        <fullName>Message_Are_You_Sure</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Are you sure</shortDescription>
+        <value>Are you sure ?</value>
+    </labels>
+    <labels>
+        <fullName>Message_Create_Dispute1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create Dispute</shortDescription>
+        <value>- disputes created with total of</value>
+    </labels>
+    <labels>
+        <fullName>Message_Create_Dispute_Line</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Create Dispute Line</shortDescription>
+        <value>- dispute lines created with total of</value>
+    </labels>
+    <labels>
+        <fullName>Message_Delete_System_Default_View</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete System Default View</shortDescription>
+        <value>Sorry !! Cannot delete system default view</value>
+    </labels>
+    <labels>
+        <fullName>Message_Delete_System_Generated_View</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete System Generated View</shortDescription>
+        <value>Sorry !! Cannot delete system generated view</value>
+    </labels>
+    <labels>
+        <fullName>Message_Edit_Sys_Custom_List_View</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Edit System Custom List View</shortDescription>
+        <value>This is a System View. Sorry only Administrator can edit System View.</value>
+    </labels>
+    <labels>
+        <fullName>Message_Edit_System_Generated_View</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Edit System Generated View</shortDescription>
+        <value>Sorry !! Cannot edit system generated view</value>
+    </labels>
+    <labels>
+        <fullName>Message_Empty_Subject</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Empty Subject</shortDescription>
+        <value>Subject should not be empty!</value>
+    </labels>
+    <labels>
+        <fullName>Message_Empty_Title</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Empty Title</shortDescription>
+        <value>Title should not be empty!</value>
+    </labels>
+    <labels>
+        <fullName>Message_Enter_List_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Enter List Name</shortDescription>
+        <value>Enter List Name</value>
+    </labels>
+    <labels>
+        <fullName>Message_Invalid_Follow_Up_Days</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid follow up days</shortDescription>
+        <value>Invalid follow up days</value>
+    </labels>
+    <labels>
+        <fullName>Message_List_Aready_Exist</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>List Aready Exist</shortDescription>
+        <value>List Aready Exists</value>
+    </labels>
+    <labels>
+        <fullName>Message_No_Changes_Change_Option</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Changes.Change Option</shortDescription>
+        <value>No new changes. Please change one or more options and try again</value>
+    </labels>
+    <labels>
+        <fullName>Message_No_Fields_Selected</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Fields Selected</shortDescription>
+        <value>No Fields Selected</value>
+    </labels>
+    <labels>
+        <fullName>Message_No_Selected_Disputes</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Selected Disputes</shortDescription>
+        <value>No disputes are selected. Please select one or more dispute and try again..</value>
+    </labels>
+    <labels>
+        <fullName>Message_No_Selected_Transactions</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Selected Transactions</shortDescription>
+        <value>No transactions are selected. Please select one or more transaction and try again..</value>
+    </labels>
+    <labels>
+        <fullName>Message_Refresh_Dispute_List</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Refresh Dispute List</shortDescription>
+        <value>Update is complete , please refresh dispute list.</value>
+    </labels>
+    <labels>
+        <fullName>Message_Required_Email_Subject</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required Email Subject</shortDescription>
+        <value>Email subject is required</value>
+    </labels>
+    <labels>
+        <fullName>Message_Select_File_To_Attach</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select File To Attach</shortDescription>
+        <value>Please select a file to attach</value>
+    </labels>
+    <labels>
+        <fullName>Message_Select_Target_Contact</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Target Contact</shortDescription>
+        <value>Please select a target contact</value>
+    </labels>
+    <labels>
+        <fullName>Message_Selected_Fields_exceeded</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Selected Fields exceeded</shortDescription>
+        <value>Selected fields exceeded limit of 40</value>
+    </labels>
+    <labels>
+        <fullName>Message_Set_Configuration_Template</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Set Configuration Template</shortDescription>
+        <value>Please set configuration template first</value>
+    </labels>
+    <labels>
+        <fullName>Message_Valid_Dispute_Amount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Valid Dispute Amount</shortDescription>
+        <value>Please enter valid Dispute Amount.</value>
+    </labels>
+    <labels>
+        <fullName>Message_dollars</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>dollars</shortDescription>
+        <value>dollars</value>
+    </labels>
+    <labels>
+        <fullName>Note_created_By</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Note created By</shortDescription>
+        <value>Note created By</value>
+    </labels>
+    <labels>
+        <fullName>Note_created_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Note created Date</shortDescription>
+        <value>Note created Date</value>
+    </labels>
+    <labels>
+        <fullName>Update_All</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Update All</shortDescription>
+        <value>Update All</value>
+    </labels>
+</CustomLabels>

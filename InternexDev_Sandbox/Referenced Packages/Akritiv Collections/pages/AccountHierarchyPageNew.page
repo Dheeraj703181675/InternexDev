@@ -1,0 +1,87 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+ -->
+<apex:page standardController="Account" tabStyle="Account" showHeader="false" sidebar="false" extensions="akritiv.SearchAccountForHierarchy" id="pg"> 
+   <script>
+                     
+        function startSplash() {
+            //var divObj = document.getElementById('splashDiv');
+            document.getElementById('splashDiv').style.display="block";
+            //alert('start');
+        }
+        function checkAll(sel) {
+            var inputElem = document.getElementsByTagName("input");
+            var i;
+            for(i=0 ; i < inputElem.length ; i++){
+                if(inputElem[i].id.indexOf("selected") != -1){
+                    inputElem[i].checked = sel.checked;
+                }
+            }
+        } 
+
+      
+        
+        function endSplash(){
+            //var divObj = document.getElementById('splashDiv');
+            document.getElementById('splashDiv').style.display="none";
+        }
+   </script>
+   <apex:form >
+    <div align="center"> 
+        <apex:commandButton action="{!exportToExcel}" value="{!$Label.Label_Export_All}" />
+        </div>
+    </apex:form>
+   <apex:pageMessages id="msgs1"></apex:pageMessages>
+        <apex:outputPanel id="comp">
+            <c:AccountHierarchyTree currentId="{!Account.id}" id="component" />
+        </apex:outputPanel>
+    <div>
+        <apex:form title="{!$Label.Label_Search_Account}" id="frm">
+            
+            <apex:pageBlock id="pgblock">
+               
+            <apex:actionStatus id="splashStatus" onstart="startSplash();" onstop="endSplash(); "/>
+                <apex:pageMessages id="msgs"></apex:pageMessages>
+                <table>
+                    <tr>
+                        <td> <b>{!$Label.Label_Search_Name}</b></td>
+                        <td> <apex:inputText value="{!searchedString}"/> </td> 
+                        <td> <apex:commandButton value="{!$Label.Label_Go_Without_Sign}" action="{!fetchedAccounts}" status="splashStatus" reRender="msgs,searchedrecords"/></td>
+                        <td> <apex:commandButton value="{!$Label.Label_Add}" action="{!assignParent}" reRender="msgs,searchedrecords,comp" status="splashStatus"/> </td>
+                        <td> <div id="splashDiv" style="display:none;color:red;font-weight:bold;padding-bottom:4px;border: 0px;">
+                              {!$Label.Label_Please_Wait_Loading}
+                            </div>
+                        </td>
+                    </tr>
+                 </table>
+               
+   
+                <apex:outputPanel id="searchedrecords" style="">
+                    <apex:pageblockTable value="{!accWrapper}" var="sfn">
+                        <apex:column >
+                              <apex:facet name="header">
+                                   <input type="Checkbox" name="chkAll" onclick="checkAll(this);" id="chkAll"/>
+                              </apex:facet>
+                                  <apex:inputCheckbox value="{!sfn.selectedAcc}" id="selected">
+                              </apex:inputCheckbox>
+                        </apex:column>
+                
+                      <apex:column headervalue="{!$Label.Label_Parent}" value="{!sfn.searchedAccount.Parent.AccountNumber}" />
+                      <apex:column headervalue="{!$Label.Label_Account_Number}">
+                          <apex:outputLink value="/{!sfn.searchedAccount.Id}" target="_blank">{!sfn.searchedAccount.AccountNumber}</apex:outputLink>
+                      </apex:column>
+                      <apex:column headervalue="{!$Label.Label_Account_Name}" value="{!sfn.searchedAccount.Name}" />
+                      <apex:column headervalue="{!$Label.Label_Total_AR}" value="{!sfn.searchedAccount.akritiv__Total_AR__c}" />
+                     
+                   </apex:pageblockTable> 
+                </apex:outputPanel>
+            </apex:pageblock>
+       </apex:form>  
+  </div> 
+</apex:page>

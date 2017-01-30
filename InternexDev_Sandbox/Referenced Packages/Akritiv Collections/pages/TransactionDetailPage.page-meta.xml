@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>21.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Page to override standard transaction detail page. Will contain
+1) Transaction Detail Page
+2) Notes search functionality</description>
+    <label>TransactionDetailPage</label>
+</ApexPage>

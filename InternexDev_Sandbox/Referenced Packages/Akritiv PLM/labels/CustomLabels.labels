@@ -1,0 +1,2427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Add_Comment_Btn</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For HDComments</shortDescription>
+        <value>Add Comments</value>
+    </labels>
+    <labels>
+        <fullName>Assign_to_logged_in_user</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Assign to logged in user</shortDescription>
+        <value>Assign to logged in user</value>
+    </labels>
+    <labels>
+        <fullName>Attach_Btn</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For HD Upload File</shortDescription>
+        <value>Attach File</value>
+    </labels>
+    <labels>
+        <fullName>CallBack_Information</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CallBack Information</shortDescription>
+        <value>CallBack Information</value>
+    </labels>
+    <labels>
+        <fullName>Cancel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>Change_MailBox</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For HD Edit Case</shortDescription>
+        <value>Change Mail Box of case no#</value>
+    </labels>
+    <labels>
+        <fullName>Change_Procees_Confirm</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For Edit Case</shortDescription>
+        <value>Changing process will overwrite existing classification Query. Do u want to continue?</value>
+    </labels>
+    <labels>
+        <fullName>Change_Process_Btn</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For HD Edit Case</shortDescription>
+        <value>Change Process</value>
+    </labels>
+    <labels>
+        <fullName>Change_Sender</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For HD Edit Case</shortDescription>
+        <value>Change Sender for case no#</value>
+    </labels>
+    <labels>
+        <fullName>Change_Sender_Btn</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For HD Edit Case</shortDescription>
+        <value>Change Sender</value>
+    </labels>
+    <labels>
+        <fullName>Classification_Query</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Classification Query</shortDescription>
+        <value>Classification Query</value>
+    </labels>
+    <labels>
+        <fullName>Close_Btn</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Close Button</shortDescription>
+        <value>Close</value>
+    </labels>
+    <labels>
+        <fullName>Commented_By</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For HDComments</shortDescription>
+        <value>Commented By</value>
+    </labels>
+    <labels>
+        <fullName>Commented_On</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For HDComments</shortDescription>
+        <value>Commented On</value>
+    </labels>
+    <labels>
+        <fullName>Comments</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For HD Upload File</shortDescription>
+        <value>Comments</value>
+    </labels>
+    <labels>
+        <fullName>Create</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create</shortDescription>
+        <value>Create</value>
+    </labels>
+    <labels>
+        <fullName>Create_Case</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create Case</shortDescription>
+        <value>Create Case</value>
+    </labels>
+    <labels>
+        <fullName>Create_and_Close</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create and Close</shortDescription>
+        <value>Create and Close</value>
+    </labels>
+    <labels>
+        <fullName>Customer_Information</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Customer Information</shortDescription>
+        <value>Customer Information</value>
+    </labels>
+    <labels>
+        <fullName>Description</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For HD Upload File</shortDescription>
+        <value>Description</value>
+    </labels>
+    <labels>
+        <fullName>Enter_valid_completion_mail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Enter valid completion mail</shortDescription>
+        <value>Please enter valid Completion email address</value>
+    </labels>
+    <labels>
+        <fullName>Enter_valid_rejection_mail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Enter valid rejection mail</shortDescription>
+        <value>Please enter valid Rejection email address</value>
+    </labels>
+    <labels>
+        <fullName>ExtObjErrLabel</fullName>
+        <categories>Error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ExtObjErrLabel</shortDescription>
+        <value>Does not match with the master database</value>
+    </labels>
+    <labels>
+        <fullName>File</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For HD Upload File</shortDescription>
+        <value>File</value>
+    </labels>
+    <labels>
+        <fullName>File_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For HD Upload File</shortDescription>
+        <value>File Name</value>
+    </labels>
+    <labels>
+        <fullName>Go</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Go</shortDescription>
+        <value>Go</value>
+    </labels>
+    <labels>
+        <fullName>Hookup_External_Page_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Hookup External Page URL</shortDescription>
+        <value>Search</value>
+    </labels>
+    <labels>
+        <fullName>Label_0_byte_file_size_not_attached</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>0 byte file size not attached</shortDescription>
+        <value>0 byte file size not attached</value>
+    </labels>
+    <labels>
+        <fullName>Label_1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>1.</shortDescription>
+        <value>1.</value>
+    </labels>
+    <labels>
+        <fullName>Label_2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>2.</shortDescription>
+        <value>2.</value>
+    </labels>
+    <labels>
+        <fullName>Label_3</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>3.</shortDescription>
+        <value>3.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Action</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Action</shortDescription>
+        <value>Action</value>
+    </labels>
+    <labels>
+        <fullName>Label_Add_Attachment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add Attachment</shortDescription>
+        <value>Add Attachment</value>
+    </labels>
+    <labels>
+        <fullName>Label_Add_Contacts</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add Contacts</shortDescription>
+        <value>Add Contacts</value>
+    </labels>
+    <labels>
+        <fullName>Label_Add_More</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Add More</shortDescription>
+        <value>Add More</value>
+    </labels>
+    <labels>
+        <fullName>Label_Add_Note_Body</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add Note Body</shortDescription>
+        <value>Add Note Body</value>
+    </labels>
+    <labels>
+        <fullName>Label_Additional_CC</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Additional CC</shortDescription>
+        <value>Additional CC</value>
+    </labels>
+    <labels>
+        <fullName>Label_Additional_Fields</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Additional Fields</shortDescription>
+        <value>Additional Fields</value>
+    </labels>
+    <labels>
+        <fullName>Label_Address_Fields</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Address Fields</shortDescription>
+        <value>Address Fields</value>
+    </labels>
+    <labels>
+        <fullName>Label_All_cases_are_in_Closed_state_Please_select_valid_conversations</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label All cases are in Closed state. Please select valid conversations.</shortDescription>
+        <value>All cases are in Closed state. Please select valid conversations.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Allowed_Attachment_format</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Allowed Attachment format :</shortDescription>
+        <value>Allowed Additional Attachment format :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Allowed_Attachment_format_is_are</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Allowed Additional Attachment format is/are :</shortDescription>
+        <value>Allowed Additional Attachment format is/are :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Allowed_Primary_Attachment_format</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Allowed Primary Attachment format :</shortDescription>
+        <value>Allowed Primary Attachment format :</value>
+    </labels>
+    <labels>
+        <fullName>Label_AppLogic_record</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AppLogic record</shortDescription>
+        <value>AppLogic record</value>
+    </labels>
+    <labels>
+        <fullName>Label_AppLogic_record_for_HDCQ</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AppLogic record for \&apos;HDCQ\&apos;</shortDescription>
+        <value>AppLogic record for &apos;HDCQ&apos; not defined or its fieldName not defined. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_AppLogic_record_for_HDCaseDuplicacyDFS_Child</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AppLogic record for \&apos;HDCaseDuplicacyDFS_Child\&apos;</shortDescription>
+        <value>AppLogic record for &apos;HDCaseDuplicacyDFS_Child&apos; not defined or its fieldName not defined. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_AppLogic_record_for_HDCaseDuplicacyDFS_Conv</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AppLogic record for \&apos;HDCaseDuplicacyDFS_Conv\&apos;</shortDescription>
+        <value>AppLogic record for &apos;HDCaseDuplicacyDFS_Conv&apos; not defined or its fieldName not defined. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Applogic_Approvalprocess_record_not_available</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Applogic Approvalprocess record not available</shortDescription>
+        <value>Applogic Approvalprocess record not available. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Applogic_FromEmailConfig_record_not_available</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Applogic FromEmailConfig record not available</shortDescription>
+        <value>Applogic FromEmailConfig record not available. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Applogic_StateTransition_record</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Applogic StateTransition record</shortDescription>
+        <value>Applogic StateTransition record</value>
+    </labels>
+    <labels>
+        <fullName>Label_ApprovalProcessReplyEmailService_with_set_Htmlbody</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ApprovalProcessReplyEmailService with set Htmlbody</shortDescription>
+        <value>This the Approval Process email. you reply with one of these words in the first line of the email message: APPROVE, APPROVED, YES, REJECT, REJECTED, NO If replying via email, you can also add comments on the second line. Comments will be stored with the approval request in Salesforce CRM.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Approval_Detail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approval Detail</shortDescription>
+        <value>Approval Detail</value>
+    </labels>
+    <labels>
+        <fullName>Label_Approval_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approval Email</shortDescription>
+        <value>Approval Email</value>
+    </labels>
+    <labels>
+        <fullName>Label_Approval_History</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approval History</shortDescription>
+        <value>Approval History</value>
+    </labels>
+    <labels>
+        <fullName>Label_Approval_History_not_found_for_selected_Record</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approval History not found for selected Record.</shortDescription>
+        <value>Approval History not found for selected Record.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Approval_Level</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approval Level</shortDescription>
+        <value>Approval Level</value>
+    </labels>
+    <labels>
+        <fullName>Label_Approval_Page_Link</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approval Page Link</shortDescription>
+        <value>Approval Page Link not set in Global Configuration custom setting. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Approval_Process</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approval Process</shortDescription>
+        <value>Approval Process</value>
+    </labels>
+    <labels>
+        <fullName>Label_Approval_Process_is_already_Submitted</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approval Process is already Submitted</shortDescription>
+        <value>Approval Process is already Submitted.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Approval_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approval Type</shortDescription>
+        <value>Approval Type</value>
+    </labels>
+    <labels>
+        <fullName>Label_Approval_process_has_not_been_initiated</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approval process has not been initiated</shortDescription>
+        <value>Approval process has not been initiated. Please select the appropriate field(s) for triggering the approval process.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Approvalprocess_not_available</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approvalprocess not available</shortDescription>
+        <value>.Approvalprocess not available. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Approve</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Approve</shortDescription>
+        <value>Approve</value>
+    </labels>
+    <labels>
+        <fullName>Label_Approver_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approver Email</shortDescription>
+        <value>Approver Email</value>
+    </labels>
+    <labels>
+        <fullName>Label_Approver_Matrix_Not_Configure</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Approver Matrix Not Configure</shortDescription>
+        <value>Approver Matrix Not Configure.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Approver_and_Escalation_should_be_different_for_Approval_Level</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approver and Escalation should be different for Approval Level</shortDescription>
+        <value>Approver and Escalation should be different for Approval Level</value>
+    </labels>
+    <labels>
+        <fullName>Label_Assignee</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Assignee</shortDescription>
+        <value>Assignee</value>
+    </labels>
+    <labels>
+        <fullName>Label_Atleast_one_QC_Parameter</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Atleast one QC Parameter</shortDescription>
+        <value>Atleast one QC Parameter should be filled before proceeding to reject at QC step.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Attach_File</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Attach File</shortDescription>
+        <value>Attach File</value>
+    </labels>
+    <labels>
+        <fullName>Label_Attach_Files</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Attach_Files</shortDescription>
+        <value>Attach_Files</value>
+    </labels>
+    <labels>
+        <fullName>Label_Attach_a_file</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Attach a file`</shortDescription>
+        <value>Attach a file</value>
+    </labels>
+    <labels>
+        <fullName>Label_Attachment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Attachment</shortDescription>
+        <value>Attachment</value>
+    </labels>
+    <labels>
+        <fullName>Label_Attachment_File_To_Tracker</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Attachment File To Tracker</shortDescription>
+        <value>Attachment File To Tracker</value>
+    </labels>
+    <labels>
+        <fullName>Label_Attachment_deleted_successfully</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Attachment deleted successfully</shortDescription>
+        <value>Attachment deleted successfully</value>
+    </labels>
+    <labels>
+        <fullName>Label_Attachment_uploaded_successfully</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Attachment uploaded successfully</shortDescription>
+        <value>Attachment uploaded successfully</value>
+    </labels>
+    <labels>
+        <fullName>Label_Attachments</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Attachments</shortDescription>
+        <value>Attachments</value>
+    </labels>
+    <labels>
+        <fullName>Label_BCC</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCC</shortDescription>
+        <value>BCC</value>
+    </labels>
+    <labels>
+        <fullName>Label_Blacklisted_document_extension_s_is_are</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Blacklisted document extension/s is/are</shortDescription>
+        <value>Blacklisted document extension/s is/are :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Block1_Field1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Block1 Field1</shortDescription>
+        <value>Delivery No</value>
+    </labels>
+    <labels>
+        <fullName>Label_Block1_Field2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Block1 Field2</shortDescription>
+        <value>Order No</value>
+    </labels>
+    <labels>
+        <fullName>Label_Block2_Field1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Block2 Field1</shortDescription>
+        <value>Vat Rate</value>
+    </labels>
+    <labels>
+        <fullName>Label_Block2_Field2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Block2 Field2</shortDescription>
+        <value>Net Value</value>
+    </labels>
+    <labels>
+        <fullName>Label_Block2_Field3</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Block2 Field3</shortDescription>
+        <value>Vat Value</value>
+    </labels>
+    <labels>
+        <fullName>Label_Bulk_State_Chnage_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Bulk State Chnage Error</shortDescription>
+        <value>You don&apos;t have edit permission</value>
+    </labels>
+    <labels>
+        <fullName>Label_CC</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CC</shortDescription>
+        <value>CC</value>
+    </labels>
+    <labels>
+        <fullName>Label_CC_Address</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CC Address</shortDescription>
+        <value>CC Address</value>
+    </labels>
+    <labels>
+        <fullName>Label_Cancel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>Label_Case_Creation_Fields</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Case Creation Fields</shortDescription>
+        <value>Case Creation Fields</value>
+    </labels>
+    <labels>
+        <fullName>Label_Case_Detail_of</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Case Detail of</shortDescription>
+        <value>Case Detail of</value>
+    </labels>
+    <labels>
+        <fullName>Label_Case_Details</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Case Details</shortDescription>
+        <value>Case Details</value>
+    </labels>
+    <labels>
+        <fullName>Label_Case_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Case Id</shortDescription>
+        <value>Case Id</value>
+    </labels>
+    <labels>
+        <fullName>Label_Case_Subject</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Case Subject</shortDescription>
+        <value>Case Subject</value>
+    </labels>
+    <labels>
+        <fullName>Label_Case_is_Submitted_for_Approval</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Case is Submitted for Approval</shortDescription>
+        <value>Case is Submitted for Approval.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Case_rights_are_Delegated_to_the_chosen_user_s_successfully</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Case rights are Delegated to the chosen user/s successfully</shortDescription>
+        <value>Case rights are Delegated to the chosen user/s successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Case_rights_are_revoked_from_the_chosen_user_s_successfully</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Case rights are revoked from the chosen user/s successfully</shortDescription>
+        <value>Case rights are revoked from the chosen user/s successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Choose_whether_this_is_a_Primary_Document</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Choose whether this is a Primary Document</shortDescription>
+        <value>Choose whether this is a Primary Document</value>
+    </labels>
+    <labels>
+        <fullName>Label_Classification_Queries</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Classification Queries</shortDescription>
+        <value>Classification Queries</value>
+    </labels>
+    <labels>
+        <fullName>Label_Click_the_Attach_File_button_Repeat_steps_1_and_2_to_attach_multiple_files</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Click the &quot;Attach File&quot; button. Repeat steps 1 and 2 to attach multiple files.</shortDescription>
+        <value>Click the &quot;Attach File&quot; button. Repeat steps 1 and 2 to attach multiple files.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Close</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Close</shortDescription>
+        <value>Close</value>
+    </labels>
+    <labels>
+        <fullName>Label_Close_Case</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Close Case</shortDescription>
+        <value>Close Case of</value>
+    </labels>
+    <labels>
+        <fullName>Label_Close_Reason</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Close Reason :</shortDescription>
+        <value>Close Reason :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Closure_Fields</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Closure Fields</shortDescription>
+        <value>Closure Fields</value>
+    </labels>
+    <labels>
+        <fullName>Label_Comment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Comments</shortDescription>
+        <value>Comments</value>
+    </labels>
+    <labels>
+        <fullName>Label_Compare</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Compare</shortDescription>
+        <value>Compare</value>
+    </labels>
+    <labels>
+        <fullName>Label_Compare_Result</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Compare Result</shortDescription>
+        <value>Comparison Result</value>
+    </labels>
+    <labels>
+        <fullName>Label_Completion_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Completion Date</shortDescription>
+        <value>Completion Date</value>
+    </labels>
+    <labels>
+        <fullName>Label_Configured_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Configured Email</shortDescription>
+        <value>Configured Email</value>
+    </labels>
+    <labels>
+        <fullName>Label_Conversation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Conversation</shortDescription>
+        <value>Conversation</value>
+    </labels>
+    <labels>
+        <fullName>Label_Conversation_Fields</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Conversation Fields</shortDescription>
+        <value>Conversation Fields</value>
+    </labels>
+    <labels>
+        <fullName>Label_Created_By</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Created By</shortDescription>
+        <value>Created By</value>
+    </labels>
+    <labels>
+        <fullName>Label_Created_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Created Date</shortDescription>
+        <value>Created Date</value>
+    </labels>
+    <labels>
+        <fullName>Label_Creation_Date_From</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Creation Date From</shortDescription>
+        <value>Creation Date From:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Creation_Date_To</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Creation Date To</shortDescription>
+        <value>Creation Date To:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Current_State</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Current State</shortDescription>
+        <value>Current State</value>
+    </labels>
+    <labels>
+        <fullName>Label_DFS_not_available</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DFS not available</shortDescription>
+        <value>.DFS not available. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Delivery_Detail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Delivery Detail</shortDescription>
+        <value>Delivery Detail</value>
+    </labels>
+    <labels>
+        <fullName>Label_Dont_Have_Edit_Permission</fullName>
+        <categories>Error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Dont Have Edit Permission</shortDescription>
+        <value>You don&apos;t have edit permission</value>
+    </labels>
+    <labels>
+        <fullName>Label_Dot_Please_contact_your_Administrator</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dot Please contact your Administrator.</shortDescription>
+        <value>. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Edit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Edit</shortDescription>
+        <value>Edit</value>
+    </labels>
+    <labels>
+        <fullName>Label_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email</shortDescription>
+        <value>Email</value>
+    </labels>
+    <labels>
+        <fullName>Label_Email_Section</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Section</shortDescription>
+        <value>Email Section</value>
+    </labels>
+    <labels>
+        <fullName>Label_Email_Subject</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Subject</shortDescription>
+        <value>Email Subject</value>
+    </labels>
+    <labels>
+        <fullName>Label_Email_Template</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Template</shortDescription>
+        <value>Email Template</value>
+    </labels>
+    <labels>
+        <fullName>Label_Enter_Comments_for_case_closure</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Enter Comments for case closure</shortDescription>
+        <value>Enter Comments for case closure</value>
+    </labels>
+    <labels>
+        <fullName>Label_Enter_Email_ids_to_be_CCed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Enter Email ids to be CCed</shortDescription>
+        <value>Enter Email ids to be CCed</value>
+    </labels>
+    <labels>
+        <fullName>Label_Entry_date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Entry date</shortDescription>
+        <value>Entry date</value>
+    </labels>
+    <labels>
+        <fullName>Label_Error_Occured</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error Occured :</shortDescription>
+        <value>Error Occured :</value>
+    </labels>
+    <labels>
+        <fullName>Label_Error_during_execution</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error during execution</shortDescription>
+        <value>Error during execution, Interaction(s) not moved.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Error_uploading_attachment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error uploading attachment</shortDescription>
+        <value>Error uploading attachment</value>
+    </labels>
+    <labels>
+        <fullName>Label_Esc</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Esc</shortDescription>
+        <value>ESC</value>
+    </labels>
+    <labels>
+        <fullName>Label_Esc_Matches_with_To_Address</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Esc Matches with To Address</shortDescription>
+        <value>Esc Matches with To Address</value>
+    </labels>
+    <labels>
+        <fullName>Label_Escalation_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Escalation Email</shortDescription>
+        <value>Escalation Email</value>
+    </labels>
+    <labels>
+        <fullName>Label_Esclation_MailID</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Esclation MailID</shortDescription>
+        <value>Esclation MailID</value>
+    </labels>
+    <labels>
+        <fullName>Label_ExportCSV</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ExportCSV</shortDescription>
+        <value>Export CSV</value>
+    </labels>
+    <labels>
+        <fullName>Label_FV_not_available</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FV not available</shortDescription>
+        <value>.FV not available. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Failed_QC_Parameters</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Failed QC Parameters</shortDescription>
+        <value>Failed QC Parameters</value>
+    </labels>
+    <labels>
+        <fullName>Label_Fax_Section</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fax Section</shortDescription>
+        <value>Fax Section</value>
+    </labels>
+    <labels>
+        <fullName>Label_Field_Labels</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Field Labels</shortDescription>
+        <value>Field Labels</value>
+    </labels>
+    <labels>
+        <fullName>Label_Fields</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Fields</shortDescription>
+        <value>Fields</value>
+    </labels>
+    <labels>
+        <fullName>Label_File</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>File</shortDescription>
+        <value>File</value>
+    </labels>
+    <labels>
+        <fullName>Label_File_Size_should_be_less_than_5_MB</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>File Size should be less than 5 MB</shortDescription>
+        <value>File Size should be less than 5 MB</value>
+    </labels>
+    <labels>
+        <fullName>Label_File_size_exceeded</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>for file size exceed in add attachment</shortDescription>
+        <value>The attached file size exceeds more then 5MB. Please choose approriate file.</value>
+    </labels>
+    <labels>
+        <fullName>Label_First</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>First</shortDescription>
+        <value>First</value>
+    </labels>
+    <labels>
+        <fullName>Label_From</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>From</shortDescription>
+        <value>From</value>
+    </labels>
+    <labels>
+        <fullName>Label_From_Date_should_smaller_then_To_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>From Date should smaller then To Date</shortDescription>
+        <value>To date should be greater then from date.</value>
+    </labels>
+    <labels>
+        <fullName>Label_From_date_should_be_greater_then_today</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>From date should be greater then today</shortDescription>
+        <value>From date should not be future date.</value>
+    </labels>
+    <labels>
+        <fullName>Label_General_Detail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>General Detail</shortDescription>
+        <value>General Detail</value>
+    </labels>
+    <labels>
+        <fullName>Label_Global_Configuration_HD_setting</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Global Configuration HD setting</shortDescription>
+        <value>Global Configuration HD setting for HD_Attachment_Extension not setted. Please contact your administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Global_Configuration_custom_setting</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Global Configuration custom setting</shortDescription>
+        <value>Global Configuration custom setting is not set. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Go</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Go!</shortDescription>
+        <value>Go!</value>
+    </labels>
+    <labels>
+        <fullName>Label_Go_to_list</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Go to list »</shortDescription>
+        <value>Go to list »</value>
+    </labels>
+    <labels>
+        <fullName>Label_Header_Fields</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Header Fields</shortDescription>
+        <value>Header Fields</value>
+    </labels>
+    <labels>
+        <fullName>Label_History_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label History Name</shortDescription>
+        <value>History Name</value>
+    </labels>
+    <labels>
+        <fullName>Label_If_this_file_is_a_Primary_Document_please_select_the_checkbox</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>If this file is a Primary Document, please select the checkbox</shortDescription>
+        <value>If this file is a Primary Document, please select the checkbox</value>
+    </labels>
+    <labels>
+        <fullName>Label_ImageHeight_not_available</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ImageHeight not available</shortDescription>
+        <value>ImageHeight not available. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_ImageWidth_not_available</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ImageWidth not available</shortDescription>
+        <value>.ImageWidth not available. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_In_QCParameterVisibility_Custom_setting_record</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>In QCParameterVisibility Custom setting record</shortDescription>
+        <value>In QCParameterVisibility Custom setting record</value>
+    </labels>
+    <labels>
+        <fullName>Label_Include_me_in_BCC</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Include me in BCC</shortDescription>
+        <value>Include me in BCC</value>
+    </labels>
+    <labels>
+        <fullName>Label_Incorrect_URL_Please_Try_Again</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Incorrect URL. Please Try Again.</shortDescription>
+        <value>Incorrect URL. Please Try Again.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Information</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Information</shortDescription>
+        <value>Information</value>
+    </labels>
+    <labels>
+        <fullName>Label_Information_Only</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Information Only</shortDescription>
+        <value>Information Only</value>
+    </labels>
+    <labels>
+        <fullName>Label_Interaction_Fields</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interaction Fields</shortDescription>
+        <value>Interaction Details</value>
+    </labels>
+    <labels>
+        <fullName>Label_Interaction_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Interaction Name</shortDescription>
+        <value>Interaction Name</value>
+    </labels>
+    <labels>
+        <fullName>Label_Interaction_Sub_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Interaction Sub Type</shortDescription>
+        <value>Interaction Sub Type</value>
+    </labels>
+    <labels>
+        <fullName>Label_Interaction_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Interaction Type</shortDescription>
+        <value>Interaction Type</value>
+    </labels>
+    <labels>
+        <fullName>Label_Interaction_s_was_moved_successfully</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interaction(s) was moved successfully.</shortDescription>
+        <value>Interaction(s) was moved successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Interaction_s_was_were_moved_successfully</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interaction/s was/were moved successfully.</shortDescription>
+        <value>Interaction/s was/were moved successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Interactions_of</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interactions of</shortDescription>
+        <value>Interactions of</value>
+    </labels>
+    <labels>
+        <fullName>Label_Invalid_field</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Invalid field</shortDescription>
+        <value>Invalid field</value>
+    </labels>
+    <labels>
+        <fullName>Label_Invalid_id_field_in_the_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid id field in the URL.</shortDescription>
+        <value>Invalid id field in the URL.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Last</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Last</shortDescription>
+        <value>Last</value>
+    </labels>
+    <labels>
+        <fullName>Label_Logical_Name_has_not_been_defined_for_the_Application</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Logical Name has not been defined for the Application</shortDescription>
+        <value>Logical Name has not been defined for the Application</value>
+    </labels>
+    <labels>
+        <fullName>Label_Mail_Room_History_Detail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mail Room History Detail</shortDescription>
+        <value>Mailroom Accuracy Report</value>
+    </labels>
+    <labels>
+        <fullName>Label_MakeAvailable_not_availabl</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MakeAvailable not availabl</shortDescription>
+        <value>.MakeAvailable not available. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Mark_Case_as_Duplicate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mark Case as Duplicate</shortDescription>
+        <value>Mark Case as Duplicate</value>
+    </labels>
+    <labels>
+        <fullName>Label_Mode</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Mode</shortDescription>
+        <value>Mode</value>
+    </labels>
+    <labels>
+        <fullName>Label_Move_Interaction</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Move Interaction</shortDescription>
+        <value>Move Interaction</value>
+    </labels>
+    <labels>
+        <fullName>Label_NONE</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>-- NONE --</shortDescription>
+        <value>-- NONE --</value>
+    </labels>
+    <labels>
+        <fullName>Label_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Name</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>Label_New_Tracker</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label New Tracker</shortDescription>
+        <value>New Tracker</value>
+    </labels>
+    <labels>
+        <fullName>Label_Next</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Next</shortDescription>
+        <value>Next</value>
+    </labels>
+    <labels>
+        <fullName>Label_No</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No</shortDescription>
+        <value>No</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_AppLogic_record_for</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label No AppLogic record for</shortDescription>
+        <value>No AppLogic record for</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_Data_Found</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Data Found</shortDescription>
+        <value>No Data Found.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_Edit_Permission</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Edit Permission</shortDescription>
+        <value>No Edit Permission : Please contact the administrator for permissions</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_FieldName_for_EmailTemplates_record_set_in_AppLogic_custom_setting</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No FieldName for EmailTemplates record set in AppLogic custom setting</shortDescription>
+        <value>No FieldName for EmailTemplates record set in AppLogic custom setting. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_Files_Attached</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Files Attached</shortDescription>
+        <value>No Files Attached</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_Global_Configuration_custom_setting_initialized</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Global Configuration custom setting initialized</shortDescription>
+        <value>No Global Configuration custom setting initialized. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_ListView_link_set_in_Global_Configuration</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No ListView link set in Global Configuration</shortDescription>
+        <value>No ListView link set in Global Configuration custom setting. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_Of_Days</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label No Of Days</shortDescription>
+        <value>No Of Days</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_OrgWide_Address_Found</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No OrgWide Address Found</shortDescription>
+        <value>No OrgWide Address Found</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_Process_Permission</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label No Process Permission</shortDescription>
+        <value>You have not permission to QC On Selected Case</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_QueryClassification_object_set_on_User_Please_contact_your_Administrat</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label No QueryClassification object set on User. Please contact your Administrat</shortDescription>
+        <value>No QueryClassification object set on User. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_Reject_Permission</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Reject Permission</shortDescription>
+        <value>No reject permission for this record.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_View_Link</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No View Link</shortDescription>
+        <value>No View Link set in Global Configuration custom setting. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_conversation_Id_in_the_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No conversation Id in the URL</shortDescription>
+        <value>No conversation Id in the URL. Please try again.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_conversation_selected</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No conversation selected</shortDescription>
+        <value>No conversation selected. Please select one.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_editLink</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No editLink</shortDescription>
+        <value>No editLink set in the Global Configuration custom setting. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_fieldset_named</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No fieldset named</shortDescription>
+        <value>No fieldset named</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_global_configuration_Allowed_Attachment_Format</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No global configuration Allowed_Attachment_Format</shortDescription>
+        <value>No global configuration custom setting for &apos;Allowed_Attachment_Format&apos; set. Please contact your administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_global_configuration_Allowed_Primary_Format</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No global configuration Allowed Primary Format</shortDescription>
+        <value>No global configuration custom setting for &apos;Allowed_Primary_Format&apos; set. Please contact your administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_global_configuration_custom_setting</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No global configuration custom setting</shortDescription>
+        <value>No global configuration custom setting initialized. Please contact your administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_id_field_in_the_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No id field in the URL.</shortDescription>
+        <value>No id field in the URL.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_interaction_Id_In_URL_Please_Close_Window_and_try_again</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label No interaction Id In URL Please Close Window and try again</shortDescription>
+        <value>No interaction Id In URL Please Close Window and try again.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_interaction_s_selected_to_move</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No interaction(s) selected to move.</shortDescription>
+        <value>No interaction(s) selected to move.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_list_View_link</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No list View link</shortDescription>
+        <value>No list View link set in Global Configuration custom setting. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_record_value_for</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No record value for</shortDescription>
+        <value>No record value for</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_record_value_for_EmailTemplates_defined_in_AppLogic_custom_setting</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No record value for EmailTemplates defined in AppLogic custom setting</shortDescription>
+        <value>No record value for EmailTemplates defined in AppLogic custom setting. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_record_value_for_Namespace_specified_in_Global_Configuration_HD_custom</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label No record value for Namespace specified in Global_Configuration_HD custom</shortDescription>
+        <value>No record value for Namespace specified in Global_Configuration_HD custom setting.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_records_to_display</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No records to display</shortDescription>
+        <value>No records to display</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_searchCriteria_selected</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No searchCriteria selected.</shortDescription>
+        <value>No &apos;search criteria&apos; selected.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_searchResult</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No search result</shortDescription>
+        <value>No records found matching the given criteria.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_value_for_HDCaseDuplicacy</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No value for HDCaseDuplicacy</shortDescription>
+        <value>No value for HDCaseDuplicacy defined in AppLogic custom setting.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_value_for_HDMoveInteraction</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No value for HDMoveInteraction</shortDescription>
+        <value>No value for HDMoveInteraction defined in AppLogic custom setting.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_value_in_Email_Boxes_c_custom_setting_for</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label No value in Email_Boxes__c custom setting for</shortDescription>
+        <value>No value in Email_Boxes__c custom setting for</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_value_in_FieldCodeValueMapping</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No value in FieldCodeValueMapping</shortDescription>
+        <value>No value in FieldCodeValueMapping. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_value_in_Field_Code_Value_Mapping</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No value in Field Code Value Mapping</shortDescription>
+        <value>No value in Field Code Value Mapping custom setting for Object Code. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_No_value_in_Global_Configuration</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No value in Global Configuration</shortDescription>
+        <value>No value in Global Configuration New custom setting. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_NoteAttachment_not_available</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NoteAttachment not available</shortDescription>
+        <value>.NoteAttachment not available. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Note_Body</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Note Body</shortDescription>
+        <value>Note Body</value>
+    </labels>
+    <labels>
+        <fullName>Label_Notes_And_Attachments</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Notes And Attachments</shortDescription>
+        <value>Notes &amp; Attachments</value>
+    </labels>
+    <labels>
+        <fullName>Label_OK</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ok</shortDescription>
+        <value>Ok</value>
+    </labels>
+    <labels>
+        <fullName>Label_Organization_Contact</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Organization Contact</shortDescription>
+        <value>Organization Contact</value>
+    </labels>
+    <labels>
+        <fullName>Label_Organization_User</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Organization User</shortDescription>
+        <value>Organization User</value>
+    </labels>
+    <labels>
+        <fullName>Label_PendingReason</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Pending Reason</shortDescription>
+        <value>Pending Reason</value>
+    </labels>
+    <labels>
+        <fullName>Label_Pending_Reason</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Pending Reason</shortDescription>
+        <value>Pending Reason</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Enter_Email_Body</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Enter Email Body.</shortDescription>
+        <value>Please Enter Email Body.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Enter_Email_Subject</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Enter Email Subject.</shortDescription>
+        <value>Please Enter Email Subject.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Enter_Escalation_mailId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Enter Escalation mailId</shortDescription>
+        <value>Please Enter Escalation mailId</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Enter_To_mailId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Enter To mailId</shortDescription>
+        <value>Please Enter To mailId</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_Approval_Level</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select Approval Level.</shortDescription>
+        <value>Please Select Approval Level.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_Approval_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select Approval Type.</shortDescription>
+        <value>Please Select Approval Type.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_Approver_for_Approval_Level</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select Approver for Approval Level</shortDescription>
+        <value>Please Select Approver for Approval Level</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_Close_Reason</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select Close Reason</shortDescription>
+        <value>Please Select Close Reason</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_Email_to_Move</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select Email to Move</shortDescription>
+        <value>Please Select Email to Move</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_Escalation_for_Approval_Level</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select Escalation for Approval Level</shortDescription>
+        <value>Please Select Escalation for Approval Level</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_Reopen_Reason</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select Reopen Reason</shortDescription>
+        <value>Please Select Reopen Reason</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_To_Email_Address</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select To Email Address</shortDescription>
+        <value>Please Select To Email Address</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_file_for_Upload</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select file for Upload</shortDescription>
+        <value>Please Select file for Upload</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Select_valid_file_for_Upload</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Select valid file for Upload</shortDescription>
+        <value>Please Select valid file for Upload</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Validate_CC_Mail_Address</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Validate CC Mail Address</shortDescription>
+        <value>Please Validate CC Mail Address</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Validate_Escalation_Mail_Address</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Validate Escalation Mail Address</shortDescription>
+        <value>Please Validate Escalation Mail Address</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_Validate_To_Mail_Address</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Validate To Mail Address</shortDescription>
+        <value>Please Validate To Mail Address</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_choose_a_valid_File_type_to_be_attached_as_a_Primary_Document</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please choose a valid File type to be attached as a Primary Document.</shortDescription>
+        <value>Please choose a valid File type to be attached as a Primary Document.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_contact_your_Administrator</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please contact your Administrator.</shortDescription>
+        <value>Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_enter_from_date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please enter from date</shortDescription>
+        <value>Please enter from date.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_enter_to_date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please enter to date</shortDescription>
+        <value>Please enter to date.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_enter_valid_date_range</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Please enter valid date range</shortDescription>
+        <value>Please enter valid date Range</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_enter_value_for</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Please enter value for</shortDescription>
+        <value>Please enter value for</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_enter_value_for_Current_State_Field</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please enter value for \&apos;Current State\&apos; Field.</shortDescription>
+        <value>Please enter value for &apos;Current State&apos; Field.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_enter_value_for_From_Field</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please enter value for \&apos;From\&apos; Field.</shortDescription>
+        <value>Please enter value for &apos;From&apos; Field.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_enter_value_for_Pending_Reason</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please enter value for Pending Reason.</shortDescription>
+        <value>Please enter value for Pending Reason.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_enter_value_for_To_Field</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please enter value for &apos;To&apos; Field.</shortDescription>
+        <value>Please enter value for &apos;To&apos; Field.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_select_Email_Template</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select Email Template</shortDescription>
+        <value>Please select Email Template</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_select_From_Date_and_To_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select From Date and To Date</shortDescription>
+        <value>Please select From Date and To Date.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_select_Pending_Reason</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select Pending Reason</shortDescription>
+        <value>Please select Pending Reason</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_select_valid_Reject_Reason</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select valid Reject Reason</shortDescription>
+        <value>Please select valid Reject Reason</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_select_valid_email_id_for_Sender_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Please select valid email id for Sender Email</shortDescription>
+        <value>Please select valid email id for Sender Email.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_select_valid_email_id_for_approval_level</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select valid email id for approval level</shortDescription>
+        <value>Please select valid email id for approval level</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_select_valid_file</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select valid file.</shortDescription>
+        <value>Please select valid file.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_specify_a_file_to_upload</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please specify a file to upload</shortDescription>
+        <value>Please specify a file to upload. Type in the path to the file, or use the &quot;Browse&quot; button to locate it in your local file system.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_try_again</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please try again.</shortDescription>
+        <value>. Please try again.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_upload_a_valid_document</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please upload a valid document.</shortDescription>
+        <value>Please upload a valid document.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Please_upload_valid_file</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please upload valid file</shortDescription>
+        <value>Please upload valid file</value>
+    </labels>
+    <labels>
+        <fullName>Label_Prev</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Prev</shortDescription>
+        <value>Prev</value>
+    </labels>
+    <labels>
+        <fullName>Label_Print_Section</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Print Section</shortDescription>
+        <value>Print Section</value>
+    </labels>
+    <labels>
+        <fullName>Label_Processing_Fields</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Processing Fields</shortDescription>
+        <value>Processing Fields</value>
+    </labels>
+    <labels>
+        <fullName>Label_QCRejectValidation_not_available</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>QCRejectValidation not available</shortDescription>
+        <value>.QCRejectValidation not available. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_QCV_not_available</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>QCV not available</shortDescription>
+        <value>.QCV not available. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_QCV_not_available_for_object</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>QCV  not available for object</shortDescription>
+        <value>.QCV  not available for object</value>
+    </labels>
+    <labels>
+        <fullName>Label_QC_Fields</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label QC Fields</shortDescription>
+        <value>QC Fields</value>
+    </labels>
+    <labels>
+        <fullName>Label_Recall_Approval_Request</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Recall Approval Request</shortDescription>
+        <value>Recall Approval Request</value>
+    </labels>
+    <labels>
+        <fullName>Label_Record_NewQC_of_QCParameterVisibility_required_for_object</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Record NewQC of QCParameterVisibility required for object</shortDescription>
+        <value>Record NewQC of QCParameterVisibility required for object</value>
+    </labels>
+    <labels>
+        <fullName>Label_Record_QCV_of_QCParameterVisibility_required_for_object</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Record QCV of QCParameterVisibility required for object</shortDescription>
+        <value>Record QCV of QCParameterVisibility required for object</value>
+    </labels>
+    <labels>
+        <fullName>Label_Record_for_AppLogic</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Record for AppLogic</shortDescription>
+        <value>Record for AppLogic</value>
+    </labels>
+    <labels>
+        <fullName>Label_Record_for_AppLogic_HistoryCompareDetail_not_available</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Record for AppLogic HistoryCompareDetail not available</shortDescription>
+        <value>Record for AppLogic HistoryCompareDetail not available.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Reject</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Reject</shortDescription>
+        <value>Reject</value>
+    </labels>
+    <labels>
+        <fullName>Label_Reopen_Case</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reopen Case</shortDescription>
+        <value>Reopen Case</value>
+    </labels>
+    <labels>
+        <fullName>Label_Reopen_Reason</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reopen Reason :</shortDescription>
+        <value>Reopen Reason</value>
+    </labels>
+    <labels>
+        <fullName>Label_Reopen_Successfully</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reopen Successfully.</shortDescription>
+        <value>Reopen Successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Save</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Save</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>Label_Save_And_Close</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Save And Close</shortDescription>
+        <value>Save &amp; Close</value>
+    </labels>
+    <labels>
+        <fullName>Label_Save_Close</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save &amp; Close</shortDescription>
+        <value>Save &amp; Close</value>
+    </labels>
+    <labels>
+        <fullName>Label_Save_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save Email</shortDescription>
+        <value>Save Email</value>
+    </labels>
+    <labels>
+        <fullName>Label_Search</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Search</shortDescription>
+        <value>Search</value>
+    </labels>
+    <labels>
+        <fullName>Label_Search_And_Compare_Case_for_Duplicity</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Search And Compare Case for Duplicity</shortDescription>
+        <value>Search And Compare Case for Duplicity</value>
+    </labels>
+    <labels>
+        <fullName>Label_Select_Case_to_mark_as_Duplicate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Case to mark as Duplicate:</shortDescription>
+        <value>Select Case to mark as Duplicate:</value>
+    </labels>
+    <labels>
+        <fullName>Label_Select_Files</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Select Files</shortDescription>
+        <value>Select Files</value>
+    </labels>
+    <labels>
+        <fullName>Label_Select_the_File_to_be_attached</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select the File to be attached</shortDescription>
+        <value>Select the File to be attached</value>
+    </labels>
+    <labels>
+        <fullName>Label_Send</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Send</shortDescription>
+        <value>Send</value>
+    </labels>
+    <labels>
+        <fullName>Label_Send_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Send Email</shortDescription>
+        <value>Send Email</value>
+    </labels>
+    <labels>
+        <fullName>Label_Send_Email_And_Close</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Send Email And Close</shortDescription>
+        <value>Send Email And Close</value>
+    </labels>
+    <labels>
+        <fullName>Label_Sender_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Sender Email</shortDescription>
+        <value>Sender Email</value>
+    </labels>
+    <labels>
+        <fullName>Label_Sender_Email_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sender Email Id</shortDescription>
+        <value>Sender Email Id</value>
+    </labels>
+    <labels>
+        <fullName>Label_Sender_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Sender Name</shortDescription>
+        <value>Sender Name</value>
+    </labels>
+    <labels>
+        <fullName>Label_Show_more</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Show more »</shortDescription>
+        <value>Show more »</value>
+    </labels>
+    <labels>
+        <fullName>Label_Size_in_Byte</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Size in Byte</shortDescription>
+        <value>Size in Byte</value>
+    </labels>
+    <labels>
+        <fullName>Label_Status</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Status</shortDescription>
+        <value>Status</value>
+    </labels>
+    <labels>
+        <fullName>Label_Subject</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Subject</shortDescription>
+        <value>Subject</value>
+    </labels>
+    <labels>
+        <fullName>Label_Submit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Submit</shortDescription>
+        <value>Submit</value>
+    </labels>
+    <labels>
+        <fullName>Label_Submit_For_Approval</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Submit For Approval</shortDescription>
+        <value>Submit For Approval</value>
+    </labels>
+    <labels>
+        <fullName>Label_TO</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TO</shortDescription>
+        <value>TO</value>
+    </labels>
+    <labels>
+        <fullName>Label_Template</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Template:</shortDescription>
+        <value>Template:</value>
+    </labels>
+    <labels>
+        <fullName>Label_There_is_some_Internal_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>There is some Internal Error</shortDescription>
+        <value>There is some Internal Error.Please Try Again</value>
+    </labels>
+    <labels>
+        <fullName>Label_To_Address</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>To Address</shortDescription>
+        <value>To Address</value>
+    </labels>
+    <labels>
+        <fullName>Label_To_Email_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>To Email Id</shortDescription>
+        <value>To Email Id</value>
+    </labels>
+    <labels>
+        <fullName>Label_To_date_should_be_greater_then_today</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>To date should be greater then today</shortDescription>
+        <value>To date should not future date.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Tracker_History</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Tracker History</shortDescription>
+        <value>Tracker History</value>
+    </labels>
+    <labels>
+        <fullName>Label_Tracker_is_Not_in_Proper_State_Please_refresh_page</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Tracker is Not in Proper State. Please refresh page.</shortDescription>
+        <value>Tracker is Not in Proper State. Please refresh page.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Tracker_not_exists_with_id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Tracker not exists with id</shortDescription>
+        <value>Tracker not exists with id</value>
+    </labels>
+    <labels>
+        <fullName>Label_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Type</shortDescription>
+        <value>Type</value>
+    </labels>
+    <labels>
+        <fullName>Label_Type_the_path_of_the_file_or_click_the_Browse_button_to_find_the_file</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Type the path of the file or click the Browse button to find the file.</shortDescription>
+        <value>Type the path of the file or click the Browse button to find the file.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Unreached_Mail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Unreached Mail</shortDescription>
+        <value>Unreached Mail</value>
+    </labels>
+    <labels>
+        <fullName>Label_Update</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Update</shortDescription>
+        <value>Update</value>
+    </labels>
+    <labels>
+        <fullName>Label_User_Information</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>User Information</shortDescription>
+        <value>User Information</value>
+    </labels>
+    <labels>
+        <fullName>Label_Vat_Detail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Vat Detail</shortDescription>
+        <value>Vat Detail</value>
+    </labels>
+    <labels>
+        <fullName>Label_When_the_upload_is_complete_the_file_will_appear_below</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>(When the upload is complete, the file will appear below)</shortDescription>
+        <value>(When the upload is complete, the file will appear below)</value>
+    </labels>
+    <labels>
+        <fullName>Label_Wrongly_Formed_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wrongly Formed URL</shortDescription>
+        <value>Wrongly Formed URL. Please try again</value>
+    </labels>
+    <labels>
+        <fullName>Label_You_can_use_as_a_wildcard_next_to_other_characters_to_improve_your_sea</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label You can use &quot;*&quot; as a wildcard next to other characters to improve your sea</shortDescription>
+        <value>You can use &quot;*&quot; as a wildcard next to other characters to improve your search results.</value>
+    </labels>
+    <labels>
+        <fullName>Label_You_must_change_the_value_of</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>You must change the value of</shortDescription>
+        <value>You must change the value of</value>
+    </labels>
+    <labels>
+        <fullName>Label_Your_specimen_object_is_not_configured</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Your specimen object is not configured</shortDescription>
+        <value>Your specimen object is not configured.</value>
+    </labels>
+    <labels>
+        <fullName>Label_attachment_has_been_uploaded_as_a_Non_Primary_document</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>attachment has been uploaded as a Non-Primary document.</shortDescription>
+        <value>attachment has been uploaded as a &apos;Non-Primary&apos; document.</value>
+    </labels>
+    <labels>
+        <fullName>Label_attachment_has_been_uploaded_as_a_Primary_document</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label attachment has been uploaded as a Primary document</shortDescription>
+        <value>Attachment has been uploaded as a Primary document</value>
+    </labels>
+    <labels>
+        <fullName>Label_closed_successfully</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>closed successfully.</shortDescription>
+        <value>closed successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Label_configured_in_AppLogic_custom_setting_for</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label configured in AppLogic custom setting for</shortDescription>
+        <value>configured in AppLogic custom setting for</value>
+    </labels>
+    <labels>
+        <fullName>Label_defined_in_FieldCodeValueMapping_custom_setting</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>defined in FieldCodeValueMapping custom setting</shortDescription>
+        <value>defined in FieldCodeValueMapping custom setting. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_found_on_object</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>found on object</shortDescription>
+        <value>found on object</value>
+    </labels>
+    <labels>
+        <fullName>Label_in_FieldCodeValueMapping_custom_setting</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label in FieldCodeValueMapping custom setting.</shortDescription>
+        <value>in FieldCodeValueMapping custom setting.</value>
+    </labels>
+    <labels>
+        <fullName>Label_in_email_boxes_custom_setting</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label in email boxes custom setting</shortDescription>
+        <value>in email boxes custom setting</value>
+    </labels>
+    <labels>
+        <fullName>Label_is_not_yet_entered</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label is not yet entered.</shortDescription>
+        <value>is not yet entered.</value>
+    </labels>
+    <labels>
+        <fullName>Label_named_document_already_exists_Please_choose_a_different_document</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label named document already exists</shortDescription>
+        <value>named document already exists.Please choose a different document.</value>
+    </labels>
+    <labels>
+        <fullName>Label_not_defined_or_its_fieldName_not_defined</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label not defined or its fieldName not defined.</shortDescription>
+        <value>not defined or its fieldName not defined.</value>
+    </labels>
+    <labels>
+        <fullName>Label_record_in_EmailAttributesConfig_custom_setting_defined</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>record in EmailAttributesConfig custom setting defined</shortDescription>
+        <value>record in EmailAttributesConfig custom setting defined. Please contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Label_will_be_moved_to</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>will be moved to</shortDescription>
+        <value>will be moved to</value>
+    </labels>
+    <labels>
+        <fullName>Label_you_can_not_close_this_case_as_mandatory_fields_for</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label you can not close this case as mandatory fields for</shortDescription>
+        <value>You can not close this case as mandatory fields for</value>
+    </labels>
+    <labels>
+        <fullName>Lable_CC_Email_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CC Email Id</shortDescription>
+        <value>CC Email Id</value>
+    </labels>
+    <labels>
+        <fullName>Process_Mapping</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Process Mapping</shortDescription>
+        <value>Process Mapping</value>
+    </labels>
+    <labels>
+        <fullName>Reply_is_not_mapped_with_current_approval_process</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reply is not mapped with current approval process.</shortDescription>
+        <value>Reply is not mapped with current approval process.</value>
+    </labels>
+    <labels>
+        <fullName>Reset</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reset</shortDescription>
+        <value>Reset</value>
+    </labels>
+    <labels>
+        <fullName>Sender_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For HD Edit Case</shortDescription>
+        <value>Sender Email Id</value>
+    </labels>
+    <labels>
+        <fullName>Size</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For HD Upload File</shortDescription>
+        <value>Size</value>
+    </labels>
+    <labels>
+        <fullName>Update</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Update</shortDescription>
+        <value>Update</value>
+    </labels>
+    <labels>
+        <fullName>Update_Priority_Duedate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Update Priority/Duedate</shortDescription>
+        <value>Update Priority/Duedate</value>
+    </labels>
+    <labels>
+        <fullName>Upload_Btn</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For HD Upload File</shortDescription>
+        <value>Upload Files</value>
+    </labels>
+    <labels>
+        <fullName>Upload_File</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For HD Upload File</shortDescription>
+        <value>Upload File</value>
+    </labels>
+    <labels>
+        <fullName>label_record_updated_succesfully</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Record updated successfully</shortDescription>
+        <value>Record updated successfully.</value>
+    </labels>
+</CustomLabels>

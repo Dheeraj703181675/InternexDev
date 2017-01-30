@@ -1,0 +1,17 @@
+<apex:page controller="Batchesexecution">
+ <apex:form >
+ <apex:pageBlock title="Batches Execution">
+     <apex:pageBlockSection columns="2">
+        <apex:pageBlockSection columns="3">
+          <b>Bussiness Transaction Date:(MM/DD/YYYY)</b><apex:outputText value="{0,date,MM/dd/YYYY}"> <apex:param value="{!$Setup.BusinessTransactionDate__c.Business_Transaction_Date__c}" /> </apex:outputText>
+          <apex:commandButton value="Interest Calculations" action="{!InterestCalculation}"/>
+        </apex:pageBlockSection>
+     </apex:pageBlockSection>
+ <!--    <apex:pageBlockSection columns="2">
+      <apex:pageBlockSection columns="3">
+      <b>  Borrowing Base Calculations: </b><apex:commandButton value="Borrowing Base Calculations" action="{!BorrowingBaseCalculations}"/>
+       </apex:pageBlockSection>
+     </apex:pageBlockSection>-->
+ </apex:pageBlock>
+ </apex:form>
+</apex:page>

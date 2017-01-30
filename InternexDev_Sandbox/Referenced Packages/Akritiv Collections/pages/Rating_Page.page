@@ -1,0 +1,36 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/*
+ * This page was supposed to be inline on account detail page. 
+ * But Due to the issue (inline page not appearing on subscriber org) 
+ * the page is now not in use.
+ */
+-->
+<apex:page standardController="Account" standardStylesheets="true"
+    showHeader="false" sidebar="false" label="{!$Label.Label_Account_Health}">
+    <style>
+body {
+    background-color: #F3F3EC;
+}
+</style>
+
+    <apex:form >
+        <apex:outputPanel rendered="{!IF(AND(Account.Rating_Sum__c >0,Account.Rating_Count__c >0), true, false)}">
+            <c:Star_Rating_Component updatable="false"
+                initRating="{!(Account.akritiv__Rating_Sum__c/ Account.akritiv__Rating_Count__c)}" />
+        </apex:outputPanel>
+
+        <apex:outputPanel rendered="{!IF(AND(Account.Rating_Sum__c >0,Account.Rating_Count__c >0), false, true)}">
+            <apex:outputText style="color:#000000;" value="{!$Label.Label_No_Rating}" />
+        </apex:outputPanel>
+
+    </apex:form>
+</apex:page>

@@ -1,0 +1,210 @@
+<apex:page id="pageId" standardController="akritivtlm__QueryClassification__c" extensions="akritivtlm.HDReassignCtrl" showHeader="false" sidebar="false" tabStyle="akritivtlm__Conversation__c">
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__editRec, '/editResource/editjs.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__editRec,'/editResource/editstyle.css')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+
+<style>
+.messageblock{
+    font-size:11px;
+    border-radius: 4px;
+    border-color: #c00;
+    background-color: #ffc;
+    border-style: solid;
+    border-width: 1px;
+    color: #000;
+}
+</style>
+<script>
+function startProcess(){
+   document.getElementById("pageId:formId:loading").style.display = 'block';       
+   document.getElementById('filter').style.display = 'block';
+}
+function endProcess(){
+   document.getElementById("pageId:formId:loading").style.display = 'none';
+   document.getElementById('filter').style.display = 'none';
+}
+function selected(selectOption){
+    if( selectOption.value == 'User'){
+        userSelect();
+    }
+    else{
+        resetSelect();
+    }
+}
+function reassignFun(){
+    var newOwner = document.getElementById('pageId:formId:pgBlckId:pdBlckSecId:pgBlckSecItem2:selectList2');
+    if(newOwner != null && newOwner.value != null && newOwner.value != ''){
+        var val = newOwner.value;
+        reAssignAction(val);
+    }else{
+        displayMessage('error','Select User: Value Required. Please Select a User to Reassign.',10000);
+        endProcess();
+    }
+}
+function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+function closeMessage() {
+    $('#messageboxId').hide();   
+}
+function displayMessage(type,msg,interval) {
+    var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:50%;margin: 0 auto;margin-top: 5px;">'+
+            '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+            '</div>';
+    document.getElementById('messageboxId').innerHTML = m;
+    animateMessageBox('messageboxId',interval);
+}
+
+function selectUserClicked(from,to){
+    var obj1 = document.getElementById(from);
+    if(obj1.selectedIndex == -1) {
+        alert('Please Select User to move.');
+    } else {
+        var arr = new Array();
+        var len = obj1.length;
+        for(var i=len-1; i>=0; i--) {
+            if(obj1.options[i].selected) {
+                arr.push(obj1.options[i].value);
+                obj1.remove(i);
+            }
+        }
+        //add to deselectUser select
+        var obj2 = document.getElementById(to);
+        var len1 = arr.length;
+        var len2 = obj2.length;
+        for(var i=0; i < len1; i++) {
+            var option = document.createElement("option");
+            option.text = arr[i];
+            obj2.add(option);
+        }
+    }
+}
+function delegateSubmitClicked(){
+    var obj1 = document.getElementById('multiPickList');
+    var len = obj1.length;
+    var str = '';
+    for(var i=0; i < len; i++) {
+        str += obj1.options[i].value + ',';
+    }
+    var obj2 = document.getElementById('multiPickList1');
+    var len1 = obj2.length;
+    var str1 = '';
+    for(var i=0; i < len1; i++) {
+        str1 += obj2.options[i].value + ',';
+    }
+    delegateSubmitActionFunction(str,str1);
+}
+</script>
+<div id="messageboxId" style="z-index:10 !important;position:fixed !important;width:50% !important;top:30%;left:20%;" ></div>
+<apex:outputpanel id="messagepanel" style="Display:None">
+    <apex:messages id="msg1"  style="Display:None" />
+    <script>
+        if(document.getElementById('{!$Component.msg1}') != null && document.getElementById('{!$Component.msg1}') != undefined) {
+            var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('li');
+            var msg='';
+            for(var i=0;i<obj.length;i++) {
+                if(i==0) 
+                msg += '<br />';
+                msg += obj[i].innerHTML + '<br />';
+            }
+            if(msg != '') {
+                displayMessage('error',msg,10000);
+            }
+        }
+    </script>
+</apex:outputpanel>
+<apex:outputPanel id="closeOP" >
+    <script>
+        if({!closeFlag}){
+            var returnValue;
+            var closeCaseMsg = '{!JSENCODE(allClosedCaseMsg)}';
+            if( closeCaseMsg != null && closeCaseMsg != '')
+                returnValue = closeCaseMsg;
+            else
+                returnValue = 'Case reassigned Successfully.';
+            window.parent.displayMessageAndClosePopUp("info",returnValue,"reassignWin");
+        }
+    </script>
+</apex:outputPanel>
+
+<apex:form id="formId">
+    <!-- for providing loading -->
+    <div id="filter" style= "display:none;"></div> 
+    <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+    <!-- for providing loading -->
+
+    <apex:actionFunction id="resetSelect" name="resetSelect" action="{!resetSelected}" oncomplete="endProcess();" reRender="toBeRerenderedOP,userQueueOutputPanel,messagepanel" immediate="true"/>
+    <apex:actionFunction id="userSelect" name="userSelect" action="{!userSelected}" oncomplete="endProcess();" reRender="toBeRerenderedOP,userQueueOutputPanel,messagepanel" immediate="true"/>
+    <apex:actionFunction id="reassignAction" name="reAssignAction" action="{!changeOwner}" oncomplete="endProcess();" reRender="messagepanel,closeOP">
+        <apex:param name="firstParam" value="" assignTo="{!newOwner}"/>
+    </apex:actionFunction>
+    <apex:actionFunction id="delegateSubmitActionFunction" name="delegateSubmitActionFunction" action="{!delegateSubmit}" oncomplete="endProcess();" reRender="pgBlckSec2,messagepanel,closeOP" immediate="true">
+        <apex:param name="firstParam" value="" assignTo="{!selectUser}"/>
+        <apex:param name="secondParam" value="" assignTo="{!deselectUser}"/>
+    </apex:actionFunction>
+
+    <apex:pageBlock id="pgBlckId" rendered="{!showReassignSection}">
+        <apex:pageblockButtons >
+            <apex:commandButton id="cmdBtn1" value="Reassign" onclick="startProcess();reassignFun();return false;" />
+        </apex:pageblockButtons>
+        <apex:pageblocksection id="pdBlckSecId" columns="1">
+            <apex:pageBlockSectionItem id="pgBlckSecItem1">
+                <apex:outputLabel for="selectList1" value="Select"></apex:outputLabel>
+                <apex:outputPanel styleClass="requiredInput" layout="block">
+                    <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+                    <apex:selectList id="selectList1" multiselect="false" size="1" onchange="startProcess();selected(this);" required="true">
+                        <apex:selectOption itemLabel="--None--" itemValue=""></apex:selectOption>
+                        <apex:selectOption itemLabel="User" itemValue="User"></apex:selectOption>
+                    </apex:selectList>
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem id="pgBlckSecItem2">
+                <apex:outputPanel id="toBeRerenderedOP">
+                    <apex:outputLabel id="selectList2Label" for="selectList2" value="Select to Reassign" rendered="{!IF(userRender,true,false)}"></apex:outputLabel>
+                </apex:outputPanel>
+
+                <apex:outputPanel id="userQueueOutputPanel">
+                    <!--<apex:outputLabel for="selectList2" value="Select to Reassign" rendered="{!userRender}"></apex:outputLabel>
+                    --><apex:outputPanel styleClass="requiredInput" layout="block">
+                        <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+                        <apex:selectList id="selectList2" multiselect="false" size="1" rendered="{!userRender}" required="true" >
+                            <apex:selectOptions value="{!users}"></apex:selectOptions>
+                        </apex:selectList>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+        </apex:pageblocksection>
+    </apex:pageBlock>
+
+    <apex:pageBlock id="pgBlckId2" rendered="{!showDelegateSection}">
+        <apex:pageblockButtons >
+            <apex:commandButton id="delegateBtn" value="Submit" onclick="startProcess();delegateSubmitClicked();return false;"/>
+        </apex:pageblockButtons>
+        <apex:pageBlockSection id="pgBlckSec2" title="Delegate/Revoke Rights" columns="4">
+            <apex:outputPanel id="delegateOP">
+                <select id="multiPickList" multiple="multiple" size="5" style="width:200px !important;overflow-x:scroll !important;overflow-y:scroll !important;">
+                    <optgroup label="Select User to Delegate" style="background-color:#6986DB;font-style:normal;border: 2px solid #FFFFFF">
+                        <apex:repeat value="{!selectUserList}" var="v">
+                            <option value="{!v}" style="background-color:white;border-style:none;overflow:hidden;word-wrap:break-word;width:100% !important;">{!v}</option>
+                        </apex:repeat>
+                    </optgroup>
+                </select>
+            </apex:outputPanel>
+
+            <apex:commandButton id="selectUser" value=">>" onClick="selectUserClicked('multiPickList','multiPickList1');return false;" immediate="true" />
+            <apex:commandButton id="deselectUser" value="<<" onClick="selectUserClicked('multiPickList1','multiPickList');return false;" immediate="true" />
+            <apex:outputPanel id="revokeOP">
+                <select id="multiPickList1" multiple="multiple" size="5" style="width:200px !important;overflow-x:scroll !important;overflow-y:scroll !important;">
+                    <optgroup label="Select User to Revoke" style="background-color:#6986DB;font-style:normal;border: 2px solid #FFFFFF">
+                        <apex:repeat value="{!deselectUserList}" var="v">
+                            <option value="{!v}" style="background-color:white;border-style:none;overflow:hidden;word-wrap:break-word;width:100% !important;">{!v}</option>
+                        </apex:repeat>
+                    </optgroup>
+                </select>
+            </apex:outputPanel>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

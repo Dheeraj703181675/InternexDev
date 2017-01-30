@@ -1,0 +1,28 @@
+<div style="width:600px; float:center; background:#EEEEEE; padding:10px; border: 3px #CCCCCC solid; font-family:Verdana;">
+<img src="{!Organization.Logo}" alt="{!Organization.Name}"/>
+<hr/>
+Good morning {!Contact.Name},<br/><br/>
+We appreciate and value your business. Thank you for allowing {!Organization.Name} the opportunity to serve your needs.
+<br/><br/>
+A review of our records indicates there is an open balance on your account. Attached is the details of this balance.
+<br/><br/>
+We request that you review your file and process the open balance for payment. If it has been paid, please provide payment information.
+<br/><br/>
+When issuing payment, please include the invoice number on the payment remittance advice. Payment remittance should be addressed and mailed to:
+<br/><br/>
+{!Organization.Address}
+<br/><br/>
+Should you have any questions, we are available to discuss and answer any invoice concerns. Our contact information is as follows:
+<br/><br/>
+Phone: {!Account.OwnerEmail}<br/>
+Email: {!Account.Owner}
+<br/><br>
+Thank you for your assistance in resolving this matter.
+<br/><br/>
+Sincerely,
+{!Account.Owner}<br/>
+{!Organization.Name}
+Credit & Collections
+</div>
+<div style="width:600px; float:center; background:#CCCCCC; padding:10px; border: 3px #CCCCCC solid; font-family:Verdana; text-align:center; ">
+{!Organization.Name}<br> {!Organization.Address} | {!Organization.Phone}

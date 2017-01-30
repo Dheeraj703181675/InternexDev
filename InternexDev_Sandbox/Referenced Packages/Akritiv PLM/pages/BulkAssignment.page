@@ -1,0 +1,245 @@
+<apex:page id="bulkPage" sidebar="false" standardController="akritivtlm__AP_Tracker__c" extensions="akritivtlm.BulkAssignmentParentController">
+<script type="text/javascript" src="https://c.ap1.visual.force.com/EXT/ext-3.2.2/ext.js"/>
+<link rel="stylesheet" type="text/css" href="https://c.ap1.visual.force.com/EXT/ext-3.2.2/resources/css/ext-all.css"/>
+<link rel="stylesheet" type="text/css" href="https://c.ap1.visual.force.com/EXT/ext-3.2.2/resources/css/xtheme-gray.css"/>
+
+<script type="text/javascript">
+
+    function getSelectedCases(){
+         var error = '';
+         var selectedUser = document.getElementById('selectUser').options[document.getElementById('selectUser').selectedIndex].value;
+         var records = Ext.getCmp("summaryGrid").getSelectionModel().getSelections();
+         var TrackerIds = '';
+         for(var i=0; i<records.length; i++) {
+            var rec = records[i];
+            TrackerIds += rec.get("Tracker_Id__c");
+            if(i!=(records.length - 1)){
+                TrackerIds += ",";
+            }
+         }
+         if(TrackerIds == '') {
+             error = "1. Please Select Atleast 1 Case" ;
+         }if(selectedUser == ''){
+             error += "\n2. Please Select one User To Assign";
+         }
+         if(error !=''){
+             alert(error);
+         }else {
+             //console.log(TrackerIds);
+             updateRecords1(TrackerIds,selectedUser);
+             getCases();
+         }
+         
+    }
+    function getCases(){
+       var CaseId = document.getElementById('bulkPage:bulkForm:bulkPageBlock:CaseId').value;
+       var Process = document.getElementById('bulkPage:bulkForm:bulkPageBlock:Process').options[document.getElementById("bulkPage:bulkForm:bulkPageBlock:Process").selectedIndex].value;
+       var WorkType = document.getElementById('bulkPage:bulkForm:bulkPageBlock:WorkType').options[document.getElementById("bulkPage:bulkForm:bulkPageBlock:WorkType").selectedIndex].value;
+       var DocType =  document.getElementById('bulkPage:bulkForm:bulkPageBlock:DocType').options[document.getElementById("bulkPage:bulkForm:bulkPageBlock:DocType").selectedIndex].value;
+       var CurrentState = document.getElementById('bulkPage:bulkForm:bulkPageBlock:CurrentState').options[document.getElementById("bulkPage:bulkForm:bulkPageBlock:CurrentState").selectedIndex].value;
+       var userSelect = document.getElementById('bulkPage:bulkForm:bulkPageBlock:userSelect').options[document.getElementById("bulkPage:bulkForm:bulkPageBlock:userSelect").selectedIndex].text;
+       var gridObj = Ext.getCmp('summaryGrid');
+       var store = gridObj.getStore();
+       store.setBaseParam('CaseId',CaseId);
+       store.setBaseParam('Process',Process );
+       store.setBaseParam('WorkType',WorkType );
+       store.setBaseParam('DocumentType',DocType );
+       store.setBaseParam('CurrentState',CurrentState);
+       if (userSelect == '--None--'){
+       }else{
+           store.setBaseParam('userSelect',userSelect);
+       }
+       store.load({params: {start : 0 , limit:10}});
+    }
+    Ext.onReady(function(){
+        //document.getElementById('dataGrid').innerHTML = '';
+        var userComboTD = document.getElementById("userComboTD");
+        var select = userComboTD.getElementsByTagName("select")[0];
+        var pageSize =10;
+        var searchCheckBx = new Ext.grid.CheckboxSelectionModel({
+             singleSelect : false,
+             dataIndex : 'checkBoxCol'
+        });
+        var storeFields=[
+                {name : 'Name'},
+                {name : 'Process__c'},
+                {name : 'Current_State__c'},
+                {name : 'Worktype__c'},
+                {name : 'Document_Type__c'},
+                {name : 'Location__c'},
+                //{name : 'Document_Number__c'},
+                //{name : 'Invoice_Date__c'},
+                //{name : 'Customer_Name__c'},
+                //{name : 'Vendor_Name__c'},
+                {name : 'Tracker_Id__c'}
+            ];
+         gridStore = new Ext.data.JsonStore({
+            root: 'data',
+            idProperty: 'gsId',
+            totalProperty: 'totalCount',
+            remoteSort: true,
+            fields: storeFields,
+            viewConfig : {
+                forceFit: true,
+                scrollOffset : 0
+            },
+            successProperty: 'success',        
+            proxy : new Ext.data.HttpProxy({
+                url : 'extBulkAssignment'
+            })
+        });
+         grid =  new Ext.grid.GridPanel({
+            id : 'summaryGrid',
+            title : 'Upload Information',
+            store:gridStore,
+            selModel :searchCheckBx,
+           // sm:searchCheckBx,
+            viewConfig : {
+                forceFit: true
+            },
+            loadMask: true,
+            height : 400,
+            autoWidth: true,
+            columns: [
+                searchCheckBx,
+                {
+                    header     : 'Case Id',
+                    sortable : true,
+                    dataIndex: 'Name'
+                },  
+                {
+                    header     : 'Process',
+                    sortable : true,
+                    dataIndex: 'Process__c'
+                },
+                {
+                    header     : 'Tracker ID',
+                    sortable : true,
+                    hidden :true,
+                    dataIndex: 'Tracker_Id__c'
+                },
+                {
+                    header     : 'Current State',
+                    sortable : false,
+                    dataIndex: 'Current_State__c'
+                },
+                {
+                    header     : 'Work Type',
+                    sortable : false,
+                    dataIndex: 'Worktype__c'
+                },  
+                {
+                    header     : 'Document Type',
+                    sortable : false,
+                    dataIndex: 'Document_Type__c'
+                },
+                {
+                    header     : 'Location',
+                    sortable : false,
+                    dataIndex: 'Location__c'
+                }
+                /*{
+                    header     : 'Document Number',
+                    sortable : false,
+                    dataIndex: 'Document_Number__c'
+                },
+                {
+                    header     : 'Invoice Date',
+                    sortable : false,
+                    dataIndex: 'Invoice_Date__c'
+                },
+                {
+                    header     : 'Customer Name',
+                    sortable : false,
+                    dataIndex: 'Customer_Name__c'
+                },
+                {
+                    header     : 'Vendor Number',
+                    sortable : false,
+                    dataIndex: 'Vendor_No__c'
+                }*/
+                
+            ],
+            bbar: new Ext.PagingToolbar({   
+                items :[
+                    '-',
+                    'Assign To : ',
+                    '<select id="selectUser">'+select.innerHTML+'</select>',
+                    '<input type="button" value="Go" onclick="getSelectedCases();return false;"/>'
+                ],   
+                store: gridStore,      
+                pageSize: 10,
+                emptyMsg: '',        
+                displayInfo: true,
+                displayMsg:'Displaying records {0} - {1} of {2}'
+        }),
+            
+        renderTo: 'dataGrid'
+        }); 
+            
+        //gridStore.load({params:{start:0, limit:10}});
+    });
+</script>
+<style type="text/css">
+.td-padding {
+    padding-right:10px;
+ }
+</style>
+     <apex:form id="bulkForm">
+         <apex:pageBlock id="bulkPageBlock">
+          <apex:actionFunction action="{!updateRecords}"  name="updateRecords1" reRender="bulkPageBlock">
+         <apex:param name="firstParam"  assignTo="{!TrackerIds}" value=""/>
+         <apex:param name="secoundParam" assignTo="{!SelectedUserId}" value=""/>
+     </apex:actionFunction>
+            <table witdth="100%">
+                <tbody>
+                    <tr>
+                        <td class="td-padding">
+                            <apex:outputLabel for="CaseId" value="Case Id"></apex:outputLabel>
+                        </td>
+                        <td class="td-padding">
+                            <apex:inputText id="CaseId" />
+                        </td>
+                        <td class="td-padding">
+                            <apex:outputLabel for="Process" value="Process"></apex:outputLabel>
+                        </td>
+                        <td class="td-padding">
+                            <apex:inputField value="{!akritivtlm__AP_Tracker__c.akritivtlm__Process__c}" id="Process" />
+                        </td>
+                        <td class="td-padding">
+                            <apex:outputLabel for="WorkType" value="Work Type"></apex:outputLabel>
+                        </td>
+                        <td class="td-padding">
+                            <apex:inputField value="{!akritivtlm__AP_Tracker__c.akritivtlm__Worktype__c}" id="WorkType" />
+                        </td>
+                        <td class="td-padding">
+                            <apex:outputLabel for="DocType" value="Document Type"></apex:outputLabel>
+                        </td>
+                        <td class="td-padding">
+                            <apex:inputField value="{!akritivtlm__AP_Tracker__c.akritivtlm__Document_Type__c}" id="DocType" />
+                        </td>
+                        <td class="td-padding">
+                            <apex:outputLabel for="CurrentState" value="Current State"></apex:outputLabel>
+                        </td>
+                        <td class="td-padding">
+                            <apex:inputField value="{!akritivtlm__AP_Tracker__c.akritivtlm__Current_State__c}" id="CurrentState" />
+                        </td>
+                        <td class="td-padding">
+                            <apex:outputLabel for="userSelect" value="Users"></apex:outputLabel>
+                        </td>
+                        <td id="userComboTD" class="td-padding">
+                            <apex:selectList size="1" id="userSelect" value="{!userSelect}">
+                             <apex:selectOptions value="{!getUserCombo}"/>
+                             </apex:selectList>
+                        </td>
+                        <td class="td-padding">
+                            <input id="searchCase" type="button" value="Search" onclick="getCases();"/>
+                        </td>
+                       
+                    </tr>
+                </tbody>
+            </table>
+         </apex:pageBlock>
+         <div id="dataGrid"></div>
+     </apex:form>
+</apex:page>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>WF_REM</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>WF_REM</value>
+    </caseValues>
+    <fields>
+        <label><!-- Invoice Name --></label>
+        <name>Invoice_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Overflow sequence qualifier (REM01B) --></label>
+        <name>Overflow_sequence_qualifier__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Action code (REM12) --></label>
+        <name>Payment_Action_code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record ID --></label>
+        <name>Record_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 1 (REM14) --></label>
+        <name>Reference_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 1 qualifier/description(REM13) --></label>
+        <name>Reference_1_qualifier_description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 2 (REM16) --></label>
+        <name>Reference_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 2 qualifier/description(REM15) --></label>
+        <name>Reference_2_qualifier_description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 3(REM18) --></label>
+        <name>Reference_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 3 qualifier/description(REM17) --></label>
+        <name>Reference_3_qualifier_description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 4 (REM20) --></label>
+        <name>Reference_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference 4 qualifier/description(REM19) --></label>
+        <name>Reference_4_qualifier_description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance Custom Amount 2 (REM22) --></label>
+        <name>Remittance_Custom_Amount_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance Custom Amount 3(REM23) --></label>
+        <name>Remittance_Custom_Amount_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance Custom Amount 4(REM24) --></label>
+        <name>Remittance_Custom_Amount_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance Custom Amount 5(REM25) --></label>
+        <name>Remittance_Custom_Amount_5__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance amount due (REM07) --></label>
+        <name>Remittance_amount_due__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance custom amount1(REM21) --></label>
+        <name>Remittance_custom_amount1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance custom date(REM26) --></label>
+        <name>Remittance_custom_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance date (REM09) --></label>
+        <name>Remittance_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance discount amount (REM06) --></label>
+        <name>Remittance_discount_amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance gross amount(REM05) --></label>
+        <name>Remittance_gross_amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance gross amount formula --></label>
+        <name>Remittance_gross_amount_formula__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance late amount (REM08) --></label>
+        <name>Remittance_late_amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance net amount paid(REM04) --></label>
+        <name>Remittance_net_amount_paid__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance net amount paid formula --></label>
+        <name>Remittance_net_amount_paid_formula__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance qualifier description(REM02) --></label>
+        <name>Remittance_qualifier_description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance reference (REM03) --></label>
+        <name>Remittance_reference__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remittance sequence number(REM01A) --></label>
+        <name>Remittance_sequence_number__c</name>
+    </fields>
+    <fields>
+        <label><!-- WF_RMH --></label>
+        <name>WF_RMH__c</name>
+        <relationshipLabel><!-- WF_REM --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- other remittance qualifier(REM10) --></label>
+        <name>other_remittance_qualifier__c</name>
+    </fields>
+    <fields>
+        <label><!-- other remittance reference (REM11) --></label>
+        <name>other_remittance_reference__c</name>
+    </fields>
+    <layouts>
+        <layout>WF_REM Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

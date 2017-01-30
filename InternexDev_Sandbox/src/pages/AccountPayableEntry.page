@@ -1,0 +1,142 @@
+<apex:page controller="AccountPayableEntry" id="pg">
+<apex:form id="frm">
+    <apex:pageBlock title="Search Client-Account" id="pb">
+        <apex:pageBlockSection id="pbs1">
+            <apex:pageBlockSection id="pbs2">
+                <apex:inputField value="{!Invoice.Client_Acc__c}" required="false"/> 
+                <apex:commandButton value="Search" action="{!search}" reRender="op,op2" status="loading"/>
+                  <apex:actionStatus onstart="startLoading();" onstop="endLoading();" id="loading"/>
+            </apex:pageBlockSection>
+       </apex:pageBlockSection>
+       <apex:outputPanel id="op">
+       <apex:pageMessages id="pagemessage"></apex:pageMessages>
+       <apex:pageBlock title="Client-Account Accoung Payable Section" rendered="{!showSection}" id="pb1">
+           <apex:pageBlockButtons location="Top">
+               <apex:commandButton value="Client-Account Save" action="{!CA_Save}" status="loading" reRender="pb1"/>
+           </apex:pageBlockButtons>
+           <apex:pageBlockSection id="pbs3">
+           
+              <apex:outputField value="{!CA.Name}"/>
+              <apex:outputField value="{!CA.Status__c}"/>
+              <apex:outputField value="{!CA.Client__c}"/>
+              <apex:outputField value="{!CA.Product__c}"/>
+              <apex:inputField value="{!CA.AP_Current__c}"/>
+              <apex:inputField value="{!CA.AP_31_60__c}"/>
+              <apex:inputField value="{!CA.AP_1_15__c}"/>
+              <apex:inputField value="{!CA.AP_61_90__c}"/>
+              <apex:inputField value="{!CA.AP_16_30__c}"/>
+              <apex:inputField value="{!CA.AP_90__c}"/>
+           </apex:pageBlockSection>
+           </apex:pageBlock>
+       </apex:outputPanel>
+
+       <apex:outputPanel id="op2" >
+          <apex:pageBlock title="Debtor Information" rendered="{!IF(Debtorwraplist.size > 0,true,false)}" id="pb2">
+             <apex:pageBlockButtons location="Top">
+               <apex:commandButton value="Debtor Save" action="{!deb_Save}" reRender="pbt" status="loading"  onclick="if(!checkDebtorlist('{!Debtorwraplist.size}'))return false;"/>
+             </apex:pageBlockButtons>                
+              <apex:pageBlockTable value="{!Debtorwraplist}" var="DW" id="pbt">
+                   <apex:column ><apex:inputCheckbox value="{!DW.check}" onclick="ModifyDebtor('{!Debtorwraplist.size}','{!DW.rowCount}');" id="chk"/></apex:column> <!-- <apex:facet name="header"><apex:inputCheckbox onclick="checkall(this,'chk')" id="hchk"/></apex:facet> -->
+                   <apex:column headerValue="Debtor"><apex:outputLink value="/{!DW.debtor.Id}">{!DW.debtor.Name}</apex:outputLink></apex:column>
+                   <apex:column headerValue="Debtor Name" value="{!DW.debtor.Client_Product_Counterparty__c }"/>
+                   <apex:column headerValue="Contra Balance"><apex:inputField value="{!DW.debtor.Contra_Balance__c}" id="dbcb"/></apex:column>
+                   <apex:column headerValue="Debtor Adjusted AR" value="{!DW.debtor.Debtor_Adjusted_AR__c}"/>
+                   <apex:column headerValue="Debtor Net Eligible AR" value="{!DW.debtor.Debtor_Net_Eligible_AR__c}"/>
+                   <apex:column headerValue="Debtor Net Availability" value="{!DW.debtor.Net_Availability__c}"/>
+                </apex:pageBlockTable>
+        </apex:pageBlock>
+
+       </apex:outputPanel>
+    </apex:pageBlock>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+    function checkDebtorlist(rowcount)
+    {
+        //    alert(rowcount);
+        var Count = 0;
+        var isNoneChecked = true;
+        for ( var i=0; i< rowcount ; i++){
+      //  alert('pg:frm:pb:pb2:pbt:'+i+':chk');
+            if( document.getElementById('pg:frm:pb:pb2:pbt:'+i+':chk').checked == true)
+            {
+                isNoneChecked = false;
+            }
+        }
+          if(isNoneChecked == true){
+            alert('Please select atlease One Debtor.');
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    
+    function ModifyDebtor(rowcount,rownumber)
+    {
+   // alert(rownumber);
+        if( document.getElementById('pg:frm:pb:pb2:pbt:'+rownumber+':chk').checked == true)
+         {
+              var contrbal = document.getElementById('pg:frm:pb:pb2:pbt:'+rownumber+':dbcb').value;
+             if(contrbal == '')
+               contrbal = parseFloat(contrbal || 0);
+            //   alert(contrbal);
+             document.getElementById('pg:frm:pb:pb2:pbt:'+rownumber+':dbcb').value = contrbal;
+             document.getElementById('pg:frm:pb:pb2:pbt:'+rownumber+':dbcb').disabled = true;
+         }
+         else
+         {
+             document.getElementById('pg:frm:pb:pb2:pbt:'+rownumber+':dbcb').disabled = false;
+         }
+    }
+    
+   /*      function checkall(obj,receivedInputID){
+            var inputCheckBox = document.getElementsByTagName("input");                  
+            for(var i=0; i<inputCheckBox.length; i++){          
+                if(inputCheckBox[i].id.indexOf(receivedInputID)!=-1){                                     
+                    inputCheckBox[i].checked = obj.checked;
+                }
+            }
+        } 
+    */    
+        function startLoading(){
+            $('#load_scrl').css('top', $(document).scrollTop() + 200);
+            $('.loadingBox').show();
+        }
+        function endLoading(){
+             $('.loadingBox').hide();
+             $("[id$=hchk]").prop("checked",false); 
+         }
+    </script>
+    <div id="load_scrl" class="loadingBox loader" style="display:none"> </div>
+    <div class="loadingBox overlay"> </div>
+      <style>
+          .overlay {
+            display: none;
+            height: 100%;
+            left: 0;
+            position: fixed;
+            top: 0;
+            opacity: 0.3;
+            -moz-opacity: 0.3;
+            width: 100%;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+            filter: alpha(opacity=30);
+            background: #000;
+            -khtml-opacity: 0.3;
+            z-index: 1000;
+        }
+        .loader {
+            background: url('/img/loading32.gif') scroll no-repeat 0 0;
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            left: 50%;
+        }
+       body .bPageBlock .pbBody .green .pbSubheader{
+                background-color:#c0c0c0;
+        }
+  </style>
+</apex:form>
+</apex:page>

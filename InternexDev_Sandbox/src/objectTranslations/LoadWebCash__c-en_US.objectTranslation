@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>LoadWebCash</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>LoadWebCashes</value>
+    </caseValues>
+    <fields>
+        <label><!-- Batch Number --></label>
+        <name>Batch_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Check Amount --></label>
+        <name>Check_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Check Number --></label>
+        <name>Check_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Company Name --></label>
+        <name>Company_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Company Number --></label>
+        <name>Company_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- DD Account # --></label>
+        <name>DD_Account__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deposit Date --></label>
+        <name>Deposit_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- File Batch Number --></label>
+        <name>File_Batch_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- File Number --></label>
+        <name>File_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice Amount --></label>
+        <name>Invoice_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice Number --></label>
+        <name>Invoice_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Item Number --></label>
+        <name>Item_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Load key --></label>
+        <name>Load_key__c</name>
+    </fields>
+    <fields>
+        <label><!-- LockBox Number --></label>
+        <name>LockBox_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lockbox Site --></label>
+        <name>Lockbox_Site__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remitter Name --></label>
+        <name>Remitter_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transit Routing # --></label>
+        <name>Transit_Routing__c</name>
+    </fields>
+    <fields>
+        <label><!-- isProcessed --></label>
+        <name>isProcessed__c</name>
+    </fields>
+    <layouts>
+        <layout>LoadWebCash Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

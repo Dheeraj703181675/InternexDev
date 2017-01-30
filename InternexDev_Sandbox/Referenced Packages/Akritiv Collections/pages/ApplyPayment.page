@@ -1,0 +1,143 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/* 
+ * Page is used to suggest and to apply the payment amount to the
+ * related unpaid transactions with the account. Page suggest the
+ * transactions to which the payment can be applied.
+ */
+-->
+<apex:page standardController="akritiv__Payment__c"
+    extensions="akritiv.ApplyPaymentController" sidebar="false" showHeader="false"
+    id="pg">
+    <apex:form >
+        <apex:sectionHeader title="{!$Label.Lable_Apply_Payment_Sign}{!payment.Name}" />
+        <apex:actionFunction name="refreshAmountSummary"
+            action="{!calculateSummary}" rerender="PbsSummary" status="statusMsg" />
+        <apex:pageBlock >
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="{!$Label.Label_Apply_Payment}" action="{!applyPayment}"
+                    rerender="pg, JScript" oncomplete="refreshParentAndClose();" />
+                <apex:actionstatus id="statusMsg" startText="{!$Label.Label_Please_Wait}"
+                    startStyle="font-weight:Bold;color:#cc0000" />
+            </apex:pageBlockButtons>
+
+            <apex:pageBlockSection columns="1" id="PbsSummary">
+                <apex:pageBlockSectionItem id="PbsiTotalAppliedBal">
+                    <apex:outputLabel value="{!$Label.Label_Applied_Balance}" />
+                    <apex:outputText value="{!totalAppliedBalance}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="PbsiTotalUnappliedBal">
+                    <apex:outputLabel value="{!$Label.Label_Unapplied_Balance}" />
+                    <apex:outputText value="{!totalUnappliedBalance}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Payment_Amount}" />
+                    <apex:outputText value="{!payment.akritiv__Amount__c}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="{!$Label.Label_Exact_Match_Transactions}">
+                <apex:pageBlockTable value="{!exactMatchTxs}" var="twx"
+                    rendered="{!IF(exactMatchTxs.size>0,TRUE, FALSE)}">
+                    <apex:column >
+                        <apex:inputCheckbox value="{!twx.selected}" id="selectedTx"
+                            onclick="refreshAmountSummary();" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:outputText value="{!twx.tx.akritiv__Indicator_Icons__c}" escape="false"/>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Invoice_No}">
+                        <apex:outputLink value="/{!twx.tx.Id}">{!twx.tx.Name}</apex:outputLink>
+                    </apex:column>
+                    <apex:column value="{!twx.tx.akritiv__Amount__c}" width="150px" />
+                    <apex:column value="{!twx.tx.akritiv__Undisputed_Balance__c}" />
+                    <apex:column value="{!twx.tx.akritiv__Days_Past_Due__c}" />
+                    <apex:column headerValue="{!$Label.Label_Applied_Amount}">
+                        <apex:inputText value="{!twx.appliedAmount}"
+                            style="text-align:right;" />
+                    </apex:column>
+                </apex:pageBlockTable>
+                <apex:outputText value="{!$Label.Label_No_record_found_with_exact_match}"
+                    rendered="{!IF(exactMatchTxs.size>0,FALSE, TRUE)}" />
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="{!$Label.Label_Closest_Match_Transactions}">
+                <apex:pageBlockTable value="{!closestMatchTxs}" var="twx"
+                    rendered="{!IF(closestMatchTxs.size>0,TRUE, FALSE)}">
+                    <apex:column >
+                        <apex:inputCheckbox value="{!twx.selected}" id="selectedTx"
+                            onclick="refreshAmountSummary();" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:outputText value="{!twx.tx.akritiv__Indicator_Icons__c}" escape="false"/>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Invoice_No}">
+                        <apex:outputLink value="/{!twx.tx.Id}">{!twx.tx.Name}</apex:outputLink>
+                    </apex:column>
+                    <apex:column value="{!twx.tx.akritiv__Amount__c}" width="150px" />
+                    <apex:column value="{!twx.tx.akritiv__Undisputed_Balance__c}" />
+                    <apex:column value="{!twx.tx.akritiv__Days_Past_Due__c}" />
+                    <apex:column headerValue="{!$Label.Label_Applied_Amount}">
+                        <apex:inputText value="{!twx.appliedAmount}"
+                            style="text-align:right;" />
+                    </apex:column>
+                </apex:pageBlockTable>
+                <apex:outputText value="{!$Label.Label_No_record_found_with_closest_match}"
+                    rendered="{!IF(closestMatchTxs.size>0,FALSE, TRUE)}" />
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="{!$Label.Label_Oldest_Match_Transactions}">
+                <apex:pageBlockTable value="{!oldestMatchTxs}" var="twx"
+                    rendered="{!IF(oldestMatchTxs.size>0,TRUE, FALSE)}">
+                    <apex:column >
+                        <apex:inputCheckbox value="{!twx.selected}" id="selectedTx"
+                            onclick="refreshAmountSummary();" />
+                    </apex:column>
+                    <apex:column >
+                     
+                         <apex:outputText value="{!twx.tx.akritiv__Indicator_Icons__c}" escape="false" />
+                          
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Invoice_No}">
+                        <apex:outputLink value="/{!twx.tx.Id}">{!twx.tx.Name}</apex:outputLink>
+                    </apex:column>
+                    <apex:column value="{!twx.tx.akritiv__Amount__c}" width="150px" />
+                    <apex:column value="{!twx.tx.akritiv__Undisputed_Balance__c}" />
+                    <apex:column value="{!twx.tx.akritiv__Days_Past_Due__c}" />
+                    <apex:column headerValue="{!$Label.Label_Applied_Amount}">
+                        <apex:inputText value="{!twx.appliedAmount}"
+                            style="text-align:right;" />
+                    </apex:column>
+                </apex:pageBlockTable>
+                <apex:outputText value="{!$Label.Label_No_record_found_with_oldest_match}"
+                    rendered="{!IF(oldestMatchTxs.size>0,FALSE, TRUE)}" />
+            </apex:pageBlockSection>
+
+             <apex:pageBlockSection title="{!$Label.Label_Custom_Match_Transactions}">
+              
+            </apex:pageBlockSection>
+
+        </apex:pageBlock>
+
+        <apex:outputPanel id="JScript">
+            <script>
+        function refreshParentAndClose() {
+            //alert('{!ifPageHasErrors}');
+            //if('{!ifPageHasErrors}' == 'false') {
+                window.opener.location.href='/{!payment.Id}';
+                window.close();
+            //}
+        }
+    </script>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

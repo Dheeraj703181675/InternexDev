@@ -1,0 +1,425 @@
+<HEAD>
+<style>
+@page { size:landscape;@bottom-right {content: "Page " counter(page);}}
+.billing {solid 1px black;padding:0px;border-collapse: collapse; font-family:verdana;}
+.billing th, .billing td{text-align:center; border: solid 1px black; padding:3px 5px; white-space:nowrap;}
+.billing th {font-weight:bolder; text-align:center; background-color:#DAA;}
+.billing .odd {background-color:#BBE;}
+.billing .even{background-color:#FCF;}
+</style>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<P><BR><BR>
+</P>
+<TABLE WIDTH=100% BORDER=0 CELLPADDING=2 CELLSPACING=0>
+	<COL WIDTH=34*>
+	<COL WIDTH=14*>
+	<COL WIDTH=53*>
+	<COL WIDTH=42*>
+	<COL WIDTH=28*>
+	<COL WIDTH=29*>
+	<COL WIDTH=32*>
+	<COL WIDTH=24*>
+	<TR>
+		<TD COLSPAN=8 WIDTH=100% HEIGHT=17>
+			<P ALIGN=CENTER STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding: 0.02in 0in">
+			{!Date.Today}</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=13% HEIGHT=17>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=5%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=21%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=16%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=11%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12% SDNUM="1033;0;&quot;$&quot;#,##0.00_);[RED]\(&quot;$&quot;#,##0.00\)">
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=9% SDNUM="1033;0;&quot;$&quot;#,##0.00_);[RED]\(&quot;$&quot;#,##0.00\)">
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD ROWSPAN=3 COLSPAN=3 WIDTH=39%>
+			<P><img src="{!Organization.Logo}" alt="{!Organization.Name}" width="200" height="55" /></P>
+		</TD>
+		<TD WIDTH=16%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=11%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD COLSPAN=2 WIDTH=24%>
+			<P ALIGN=LEFT>Remit Payments To:</P>
+		</TD>
+		<TD WIDTH=9%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=16%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=11%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD COLSPAN=3 WIDTH=33%>
+			<P ALIGN=LEFT>{!Organization.Name}</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=16%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=11%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD COLSPAN=3 WIDTH=33%>
+			<P ALIGN=LEFT>{!Organization.Street}, {!Organization.City},</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD COLSPAN=3 WIDTH=39% HEIGHT=17>
+			<P ALIGN=CENTER><FONT SIZE=2><FONT FACE="Arial, sans-serif"><SPAN STYLE="font-style: normal"><SPAN STYLE="font-weight: normal"><SPAN STYLE="text-decoration: none">US
+			Property &amp; Casualty</SPAN></SPAN></SPAN></FONT></FONT></P>
+		</TD>
+		<TD WIDTH=16%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=11%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD COLSPAN=3 WIDTH=33%>
+			<P ALIGN=LEFT>{!Organization.State},  {!Organization.Country},
+			{!Organization.PostalCode}</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD COLSPAN=3 WIDTH=39% HEIGHT=17>
+			<P ALIGN=CENTER><FONT FACE="Arial, sans-serif"><SPAN STYLE="font-weight: normal"><FONT SIZE=2><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-style: normal">Credit
+			&amp; Collections</SPAN></SPAN></FONT></SPAN></FONT></P>
+		</TD>
+		<TD WIDTH=16%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=11%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD COLSPAN=2 WIDTH=22%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD COLSPAN=3 WIDTH=39% HEIGHT=17>
+			<P ALIGN=CENTER>Phone: {!Organization.Phone}</P>
+		</TD>
+		<TD WIDTH=16%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=11%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD COLSPAN=3 WIDTH=33%>
+			<P ALIGN=LEFT>Terms: Net 30</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD COLSPAN=3 WIDTH=39% HEIGHT=17>
+			<P ALIGN=CENTER><BR>
+			</P>
+		</TD>
+		<TD WIDTH=16%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=11%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD COLSPAN=3 WIDTH=33%>
+			<P ALIGN=LEFT>TAX I.D.# 58-0506554</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=13% HEIGHT=17>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=5%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=21%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=16%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=11%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12% SDNUM="1033;0;&quot;$&quot;#,##0.00_);[RED]\(&quot;$&quot;#,##0.00\)">
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=9% SDNUM="1033;0;&quot;$&quot;#,##0.00_);[RED]\(&quot;$&quot;#,##0.00\)">
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=13% HEIGHT=17>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=5%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=21%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=16%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=11%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=9%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=13% HEIGHT=17>
+			<P ALIGN=CENTER>Client Name:</P>
+		</TD>
+		<TD COLSPAN=2 WIDTH=26%>
+			<P ALIGN=LEFT>{!Account.Name}</P>
+		</TD>
+		<TD WIDTH=16%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=11%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12% SDNUM="1033;0;&quot;$&quot;#,##0.00_);[RED]\(&quot;$&quot;#,##0.00\)">
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=9% SDNUM="1033;0;&quot;$&quot;#,##0.00_);[RED]\(&quot;$&quot;#,##0.00\)">
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=13% HEIGHT=17>
+			<P ALIGN=CENTER>Program#:</P>
+		</TD>
+		<TD WIDTH=5%>
+			<P ALIGN=LEFT>{!Account.AccountNumber}</P>
+		</TD>
+		<TD WIDTH=21%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=16%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=11%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12% SDNUM="1033;0;&quot;$&quot;#,##0.00_);[RED]\(&quot;$&quot;#,##0.00\)">
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=9% SDNUM="1033;0;&quot;$&quot;#,##0.00_);[RED]\(&quot;$&quot;#,##0.00\)">
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=13% HEIGHT=17>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=5%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=21%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=16%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=11%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12% SDNUM="1033;0;&quot;$&quot;#,##0.00_);[RED]\(&quot;$&quot;#,##0.00\)">
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=9% SDNUM="1033;0;&quot;$&quot;#,##0.00_);[RED]\(&quot;$&quot;#,##0.00\)">
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD COLSPAN=8 WIDTH=100% HEIGHT=17>
+			<P ALIGN=CENTER>{!Transactions.Summary}</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=13% HEIGHT=17>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=5%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=21%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=16%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=11%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P ALIGN=RIGHT><B>Total</B></P>
+		</TD>
+		<TD WIDTH=9%>
+			<P>{!Transactions.TotalBalance}</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=13% HEIGHT=17>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=5%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=21%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=16%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=11%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12% SDNUM="1033;0;&quot;$&quot;#,##0.00_);[RED]\(&quot;$&quot;#,##0.00\)">
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=9% SDNUM="1033;0;&quot;$&quot;#,##0.00_);[RED]\(&quot;$&quot;#,##0.00\)">
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD COLSPAN=8 WIDTH=100% HEIGHT=17>
+			<P ALIGN=CENTER>Please include the Branch and Invoice Number on
+			the payment remittance 
+			</P>
+		</TD>
+	</TR>
+</TABLE>
+<P><BR><BR>
+</P>
+</BODY>

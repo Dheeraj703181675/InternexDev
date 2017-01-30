@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Pending Invoices for Debtor</name>
+    <style>none</style>
+    <subject>Akritiv Prod: Review new customer&apos;s invoices</subject>
+    <textOnly>{!UPPER(Debtor__c.Counterparty__c)} ({!Debtor__c.Name}) has been underwritten. Please take action on pending invoices.
+Due Date: {!Debtor__c.LastModifiedDate}
+Priority: Urgent</textOnly>
+    <type>custom</type>
+</EmailTemplate>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Cheque</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Cheques</value>
+    </caseValues>
+    <fields>
+        <label><!-- Customer Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Cheques --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Bank Name --></label>
+        <name>Bank_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Batch # --></label>
+        <name>Batch_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Instrument Amount --></label>
+        <name>Cheque_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Instrument Comments --></label>
+        <name>Cheque_Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Instrument Due Date --></label>
+        <name>Cheque_Due_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cheque Key --></label>
+        <name>Cheque_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Instrument Received Date --></label>
+        <name>Cheque_Received_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Instrument Status --></label>
+        <name>Cheque_Status__c</name>
+        <picklistValues>
+            <masterLabel>Bounced</masterLabel>
+            <translation><!-- Bounced --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Funds Received &amp; Applied</masterLabel>
+            <translation><!-- Funds Received &amp; Applied --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Funds Received &amp; Unapplied</masterLabel>
+            <translation><!-- Funds Received &amp; Unapplied --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Received &amp; Banked</masterLabel>
+            <translation><!-- Received &amp; Banked --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Received &amp; Sent for Banking</masterLabel>
+            <translation><!-- Received &amp; Sent for Banking --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Received But Not Banked</masterLabel>
+            <translation><!-- Received But Not Banked --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Returned To Customer</masterLabel>
+            <translation><!-- Returned To Customer --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Customer Bank Account # --></label>
+        <name>Customer_Bank_Account_No__c</name>
+    </fields>
+    <fields>
+        <label><!-- DD Routing# --></label>
+        <name>DD_Routing__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deposit Date --></label>
+        <name>Deposit_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deposit Slip # --></label>
+        <name>Deposit_Slip__c</name>
+    </fields>
+    <fields>
+        <label><!-- IFSC Code --></label>
+        <name>IFSC_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Instrument Type --></label>
+        <name>Instrument_Type__c</name>
+        <picklistValues>
+            <masterLabel>CHEQUE</masterLabel>
+            <translation><!-- CHEQUE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DD</masterLabel>
+            <translation><!-- DD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PO</masterLabel>
+            <translation><!-- PO --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- IsPaymentCreated --></label>
+        <name>IsPaymentCreated__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsTransactionSelected --></label>
+        <name>IsTransactionSelected__c</name>
+    </fields>
+    <fields>
+        <label><!-- MICR --></label>
+        <name>MICR__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payable At --></label>
+        <name>Payable_At__c</name>
+        <picklistValues>
+            <masterLabel>Local</masterLabel>
+            <translation><!-- Local --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Out Station</masterLabel>
+            <translation><!-- Out Station --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Selected Cheque Amount --></label>
+        <name>Selected_Cheque_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Suggested Customer Account --></label>
+        <name>Suggested_Customer_Account__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Applied --></label>
+        <name>Total_Applied__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Selected Cheque Amount --></label>
+        <name>Total_Selected_Cheque_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Value Date --></label>
+        <name>Value_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Web Cash --></label>
+        <name>Web_Cash__c</name>
+        <relationshipLabel><!-- Checks --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Check Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Cheque Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Instrument Number can&apos;t be less than 6 digits --></errorMessage>
+        <name>The_Instrument_Number_should_be_6_Digits</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- New_Cheque --></label>
+        <name>New_Cheque</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Select_Invoice --></label>
+        <name>Select_Invoice</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Select_Invoice_For_Cheque --></label>
+        <name>Select_Invoice_For_Cheque</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Update_Cheque_Status --></label>
+        <name>Update_Cheque_Status</name>
+    </webLinks>
+</CustomObjectTranslation>

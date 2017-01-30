@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- From --></label>
+        <name>From__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notification Type --></label>
+        <name>Notification_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Portal External ID --></label>
+        <name>Portal_External_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- To --></label>
+        <name>To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Activity Category --></label>
+        <name>akritiv__Activity_Category__c</name>
+    </fields>
+    <fields>
+        <label><!-- Auto Dunning Error --></label>
+        <name>akritiv__Auto_Dunning_Error__c</name>
+    </fields>
+    <fields>
+        <label><!-- Close --></label>
+        <name>akritiv__Close__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact Level --></label>
+        <name>akritiv__Contact_Level__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact Method --></label>
+        <name>akritiv__Contact_Method__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact Type --></label>
+        <name>akritiv__Contact_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dunning Error Fix URL --></label>
+        <name>akritiv__Dunning_Error_Fix_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dunning Status --></label>
+        <name>akritiv__Dunning_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notes --></label>
+        <name>akritiv__Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Collection Rating --></label>
+        <name>akritiv__Rating__c</name>
+    </fields>
+    <quickActions>
+        <label><!-- Defer --></label>
+        <name>Defer</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Defer_0 --></label>
+        <name>Defer_0</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Defer_1 --></label>
+        <name>Defer_1</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- EditDescription --></label>
+        <name>EditDescription</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- EditDescription_0 --></label>
+        <name>EditDescription_0</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- EditDescription_1 --></label>
+        <name>EditDescription_1</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- UpdatePriority --></label>
+        <name>UpdatePriority</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- UpdatePriority_0 --></label>
+        <name>UpdatePriority_0</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- UpdatePriority_1 --></label>
+        <name>UpdatePriority_1</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- UpdateStatus --></label>
+        <name>UpdateStatus</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- UpdateStatus_0 --></label>
+        <name>UpdateStatus_0</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- UpdateStatus_1 --></label>
+        <name>UpdateStatus_1</name>
+    </quickActions>
+    <webLinks>
+        <label><!-- Assign --></label>
+        <name>akritiv__Assign</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Close --></label>
+        <name>akritiv__Close</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Contact_Customer --></label>
+        <name>akritiv__Contact_Customer</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Execute --></label>
+        <name>akritiv__Execute</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Perform --></label>
+        <name>akritiv__Perform</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Re_Evaluate_Auto_Dunning --></label>
+        <name>akritiv__Re_Evaluate_Auto_Dunning</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Start_Working --></label>
+        <name>akritiv__Start_Working</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Update_Task --></label>
+        <name>akritiv__Update_Task</name>
+    </webLinks>
+</CustomObjectTranslation>

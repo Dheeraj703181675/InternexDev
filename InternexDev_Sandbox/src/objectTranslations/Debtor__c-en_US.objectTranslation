@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Debtor</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Debtor Accounts</value>
+    </caseValues>
+    <fields>
+        <help><!-- Formula: Eligible for Funding of Client-Account * Concentration Limit --></help>
+        <label><!-- Max Concentration --></label>
+        <name>Actual_Concentration__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula : Debtor Eligible AR / Total Eligible AR (Client-Account) --></help>
+        <label><!-- Actual Debtor Concentration --></label>
+        <name>Actual_Debtor_Concentration__c</name>
+    </fields>
+    <fields>
+        <label><!-- Adj Risk Score --></label>
+        <name>Adj_Risk_Score__c</name>
+        <picklistValues>
+            <masterLabel>D1</masterLabel>
+            <translation><!-- D1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D2</masterLabel>
+            <translation><!-- D2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D3</masterLabel>
+            <translation><!-- D3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D4</masterLabel>
+            <translation><!-- D4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D5</masterLabel>
+            <translation><!-- D5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D6</masterLabel>
+            <translation><!-- D6 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D7</masterLabel>
+            <translation><!-- D7 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D8</masterLabel>
+            <translation><!-- D8 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Formula: (100 - ((Dilution*2) + 5))% --></help>
+        <label><!-- Advance Rate --></label>
+        <name>Advance_Rate__c</name>
+    </fields>
+    <fields>
+        <help><!-- Data Source: Grade or Portal --></help>
+        <label><!-- Borrowing Base Reserve --></label>
+        <name>Borrowing_Base_Reserve__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business Transaction Date --></label>
+        <name>Business_Transaction_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- City --></label>
+        <name>City__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClientAccount External Foreign Key --></label>
+        <name>ClientAccount_External_Foreign_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Account --></label>
+        <name>Client_Account__c</name>
+        <relationshipLabel><!-- Debtors --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Client Name --></label>
+        <name>Client_Name_for_email_alert__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Product Counterparty Uniqueness --></label>
+        <name>Client_Product_Counterparty_Uniqueness__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Product Counterparty --></label>
+        <name>Client_Product_Counterparty__c</name>
+    </fields>
+    <fields>
+        <label><!-- Closed Invoice Amounts (12 months) --></label>
+        <name>Closed_Invoice_Amounts_12_months__c</name>
+    </fields>
+    <fields>
+        <label><!-- Closed Invoice Amounts (1 month) --></label>
+        <name>Closed_Invoice_Amounts_1_months__c</name>
+    </fields>
+    <fields>
+        <label><!-- Closed Invoice Amounts (3 months) --></label>
+        <name>Closed_Invoice_Amounts_3_months__c</name>
+    </fields>
+    <fields>
+        <label><!-- Closed Invoice Amounts (6 months) --></label>
+        <name>Closed_Invoice_Amounts_6_months__c</name>
+    </fields>
+    <fields>
+        <help><!-- Data Source: Grade or Portal --></help>
+        <label><!-- Concentration Limit (%) --></label>
+        <name>Concentration_Limit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact Last Name --></label>
+        <name>Contact_Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact First Name --></label>
+        <name>Contact_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact Role --></label>
+        <name>Contact_Role__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contra Balance --></label>
+        <name>Contra_Balance__c</name>
+    </fields>
+    <fields>
+        <label><!-- CounterParty External Foreign Key --></label>
+        <name>CounterParty_External_Foreign_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Debtor --></label>
+        <name>Counterparty__c</name>
+        <relationshipLabel><!-- Debtors --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Data Source: Grade or Portal --></help>
+        <label><!-- Credit Period --></label>
+        <name>Credit_Period__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current --></label>
+        <name>Current__c</name>
+    </fields>
+    <fields>
+        <label><!-- DBA Count for Grade --></label>
+        <name>DBA_Count_for_Grade__c</name>
+    </fields>
+    <fields>
+        <label><!-- DBA Count for Portal --></label>
+        <name>DBA_Count_for_Portal__c</name>
+    </fields>
+    <fields>
+        <label><!-- DBT (Paydex) --></label>
+        <name>Days_Beyond_Terms__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: Eligible AR - Excess Concentration --></help>
+        <label><!-- Debtor Adjusted AR --></label>
+        <name>Debtor_Adjusted_AR__c</name>
+    </fields>
+    <fields>
+        <label><!-- Debtor Name --></label>
+        <name>Debtor_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: Minimum(Debtor Adjusted AR, Eligible AR Limit) --></help>
+        <label><!-- Debtor Net Eligible AR --></label>
+        <name>Debtor_Net_Eligible_AR__c</name>
+    </fields>
+    <fields>
+        <help><!-- Data Source: Grade or Portal --></help>
+        <label><!-- Debtor Status --></label>
+        <name>Debtor_Status__c</name>
+        <picklistValues>
+            <masterLabel>Confirm New</masterLabel>
+            <translation><!-- Confirm New --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Eligible</masterLabel>
+            <translation><!-- Eligible --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ineligible</masterLabel>
+            <translation><!-- Ineligible --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending Verification</masterLabel>
+            <translation><!-- Pending Verification --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unconfirmed</masterLabel>
+            <translation><!-- Unconfirmed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Dilution Amount (12 Month) --></label>
+        <name>Dilution_Amount_12_Month__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dilution Amount (1 Month) --></label>
+        <name>Dilution_Amount_1_Month__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dilution Amount (3 Month) --></label>
+        <name>Dilution_Amount_3_Month__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dilution Amount (6 Month) --></label>
+        <name>Dilution_Amount_6_Month__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dilution Rate %(12 months) --></label>
+        <name>Dilution_Rate_12_months__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dilution Rate % (1 months) --></label>
+        <name>Dilution_Rate_1_months__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dilution Rate % (3 months) --></label>
+        <name>Dilution_Rate_3_months__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dilution Rate % (6 months) --></label>
+        <name>Dilution_Rate_6_months__c</name>
+    </fields>
+    <fields>
+        <help><!-- Data Source: Grade or Portal --></help>
+        <label><!-- Dilution (%) --></label>
+        <name>Dilution__c</name>
+    </fields>
+    <fields>
+        <help><!-- Data Source: Grade or Portal --></help>
+        <label><!-- Eligible AR Limit --></label>
+        <name>Eligible_AR__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: MAX(0, Invoice Amount - Ineligible Amount - Contra Balance) --></help>
+        <label><!-- Eligible AR --></label>
+        <name>Eligible_For_Funding__c</name>
+    </fields>
+    <fields>
+        <label><!-- Email --></label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: If Actual Debtor Concentration &gt; Debtor Concentration Limit then ((Actual Debtor Concentration - Debtor Concentration Limit)*Total Eligible AR(Client-Account) Else 0 --></help>
+        <label><!-- Excess Concentration --></label>
+        <name>Excess_Concentration__c</name>
+    </fields>
+    <fields>
+        <label><!-- External Id --></label>
+        <name>External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Flag for Debtor Report --></label>
+        <name>Flag_for_Debtor_Report__c</name>
+    </fields>
+    <fields>
+        <label><!-- Floor/Suite --></label>
+        <name>Floor_Suite__c</name>
+    </fields>
+    <fields>
+        <help><!-- Data Source: Grade or Portal --></help>
+        <label><!-- Funding Limit --></label>
+        <name>Funding_Limit__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: Advance Rate * Minimum(Eligible For Funding, Max Concentration) --></help>
+        <label><!-- Gross Availability --></label>
+        <name>Gross_Availability__c</name>
+    </fields>
+    <fields>
+        <label><!-- Industry DBT (Paydex) --></label>
+        <name>Industry_DBT__c</name>
+        <picklistValues>
+            <masterLabel>Accommodation and Food Services</masterLabel>
+            <translation><!-- Accommodation and Food Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Adm.,Support,Waste Mgmt,Remediation Serv</masterLabel>
+            <translation><!-- Adm.,Support,Waste Mgmt,Remediation Serv --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Agri., Forestry, Fishing and Hunting</masterLabel>
+            <translation><!-- Agri., Forestry, Fishing and Hunting --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arts, Entertainment, and Recreation</masterLabel>
+            <translation><!-- Arts, Entertainment, and Recreation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Construction</masterLabel>
+            <translation><!-- Construction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Educational Services</masterLabel>
+            <translation><!-- Educational Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Finance and Insurance</masterLabel>
+            <translation><!-- Finance and Insurance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health Care and Social Assistance</masterLabel>
+            <translation><!-- Health Care and Social Assistance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Information</masterLabel>
+            <translation><!-- Information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manufacturing</masterLabel>
+            <translation><!-- Manufacturing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mining</masterLabel>
+            <translation><!-- Mining --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other Services (except Public Admin.)</masterLabel>
+            <translation><!-- Other Services (except Public Admin.) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prof. Scientific, and Techn. Services</masterLabel>
+            <translation><!-- Prof. Scientific, and Techn. Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Public Administration</masterLabel>
+            <translation><!-- Public Administration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Real Estate Rental and Leasing</masterLabel>
+            <translation><!-- Real Estate Rental and Leasing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Retail Trade</masterLabel>
+            <translation><!-- Retail Trade --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transportation and Warehousing</masterLabel>
+            <translation><!-- Transportation and Warehousing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Utilities</masterLabel>
+            <translation><!-- Utilities --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wholesale Trade</masterLabel>
+            <translation><!-- Wholesale Trade --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Formula: Sum of Ineligibles Amount of All Debtors --></help>
+        <label><!-- Ineligibles Amount1 --></label>
+        <name>Ineligibles_Amount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: MAX (sum of Ineligibles Type 2 ,IF(Invoice Derived Percentage&gt;=Global Invoice Limit,Invoice Amount,0 ),Ineligibles_Amount) --></help>
+        <label><!-- Ineligibles Amount --></label>
+        <name>Ineligibles_Amount_formula__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: Sum of Balances of Invoices(if Created Date+90 &lt; Global Transaction Date) Divided by Sum of Balances of All Invoices. --></help>
+        <label><!-- Ineligibles Derived Percentage --></label>
+        <name>Ineligibles_Derived_Percentage__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: Sum of Balances of all Invoices if (Invoice Created Date+90) &gt; Global Transaction Date. --></help>
+        <label><!-- Ineligibles Type1 --></label>
+        <name>Ineligibles_Type1__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: Sum of Balances of all Invoices if (Invoice Created Date+Credit Period) &gt; Global Transaction Date. --></help>
+        <label><!-- Ineligibles Type2 --></label>
+        <name>Ineligibles_Type2__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula : Sum of Balances of All Invoices --></help>
+        <label><!-- Invoice Amount --></label>
+        <name>Invoice_Amount_Formula__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula : Sum of Balances of All Invoices --></help>
+        <label><!-- Invoice Amount --></label>
+        <name>Invoice_Amount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: No of Invoices --></help>
+        <label><!-- Invoice Count --></label>
+        <name>Invoice_Count_Formula__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: No of Invoices --></help>
+        <label><!-- Invoice Count --></label>
+        <name>Invoice_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice Count for Sending Portal --></label>
+        <name>Invoice_Count_for_Sending_Portal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Legal Name --></label>
+        <name>Legal_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- MP External Id --></label>
+        <name>MP_External_Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Data Source: Grade or Portal --></help>
+        <label><!-- Max Credit Period --></label>
+        <name>Max_Credit_Period__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: (Debtor Net Eligible AR*(Advance Rate/100))-Borrowing Base Reserve --></help>
+        <label><!-- Net Availability --></label>
+        <name>Net_Availability__c</name>
+    </fields>
+    <fields>
+        <label><!-- Open Invoice Dilution (12 Months) --></label>
+        <name>Open_Invoice_Dilution_12_Months__c</name>
+    </fields>
+    <fields>
+        <label><!-- Open Invoice Dilution (1 Month) --></label>
+        <name>Open_Invoice_Dilution_1_Months__c</name>
+    </fields>
+    <fields>
+        <label><!-- Open Invoice Dilution (3 Months) --></label>
+        <name>Open_Invoice_Dilution_3_Months__c</name>
+    </fields>
+    <fields>
+        <label><!-- Open Invoice Dilution (6 Months) --></label>
+        <name>Open_Invoice_Dilution_6_Months__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Count to send Portal payments --></label>
+        <name>Payment_Count_to_send_Portal_payments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Count to send Transaction Grid --></label>
+        <name>Payment_Count_to_send_Transaction_Grid__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phone --></label>
+        <name>Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Portal External Id --></label>
+        <name>Portal_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profile Name --></label>
+        <name>Profile_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- QB Customer --></label>
+        <name>QB_Customer__c</name>
+    </fields>
+    <fields>
+        <label><!-- Risk Score Date --></label>
+        <name>Risk_Score_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Risk Score --></label>
+        <name>Risk_Score__c</name>
+        <picklistValues>
+            <masterLabel>D1</masterLabel>
+            <translation><!-- D1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D2</masterLabel>
+            <translation><!-- D2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D3</masterLabel>
+            <translation><!-- D3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D4</masterLabel>
+            <translation><!-- D4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D5</masterLabel>
+            <translation><!-- D5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D6</masterLabel>
+            <translation><!-- D6 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D7</masterLabel>
+            <translation><!-- D7 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D8</masterLabel>
+            <translation><!-- D8 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Send to Grade --></label>
+        <name>Send_to_Grade__c</name>
+    </fields>
+    <fields>
+        <label><!-- Send to Portal --></label>
+        <name>Send_to_Portal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Source --></label>
+        <name>Source__c</name>
+    </fields>
+    <fields>
+        <label><!-- State --></label>
+        <name>State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Street Address --></label>
+        <name>Street_Address__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: Sum of Payments of All Invoices --></help>
+        <label><!-- Sum of Payments --></label>
+        <name>Sum_of_Payments_Formula__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: Sum of payments of All Invoices --></help>
+        <label><!-- Sum of Payments --></label>
+        <name>Sum_of_Payments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Grade --></label>
+        <name>Sync_with_Grade__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Market Place --></label>
+        <name>Sync_with_Market_Place__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Portal --></label>
+        <name>Sync_with_Portal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tomorrow date --></label>
+        <name>Tomorrow_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: Client Account Eligible For Funding --></help>
+        <label><!-- Client Account Eligible For Funding --></label>
+        <name>Total_Eligible_AR__c</name>
+    </fields>
+    <fields>
+        <label><!-- 16-30 --></label>
+        <name>X16_30__c</name>
+    </fields>
+    <fields>
+        <label><!-- 1-15 --></label>
+        <name>X1_15__c</name>
+    </fields>
+    <fields>
+        <label><!-- 31-60 --></label>
+        <name>X31_60__c</name>
+    </fields>
+    <fields>
+        <label><!-- 61-90 --></label>
+        <name>X61_90__c</name>
+    </fields>
+    <fields>
+        <label><!-- 90+ --></label>
+        <name>X90__c</name>
+    </fields>
+    <fields>
+        <label><!-- Zip --></label>
+        <name>Zip__c</name>
+    </fields>
+    <layouts>
+        <layout>InterNex AM Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Debtor Information --></label>
+            <section>Debtor Information</section>
+        </sections>
+        <sections>
+            <label><!-- Dilution Information --></label>
+            <section>Dilution Information</section>
+        </sections>
+        <sections>
+            <label><!-- Financial Information --></label>
+            <section>Financial Information</section>
+        </sections>
+        <sections>
+            <label><!-- Integration --></label>
+            <section>Integration</section>
+        </sections>
+        <sections>
+            <label><!-- Invoice aging bucket (After Due Date) --></label>
+            <section>Invoice aging bucket (After Due Date)</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>InterNex-Admin Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Debtor Information --></label>
+            <section>Debtor Information</section>
+        </sections>
+        <sections>
+            <label><!-- Dilution Information --></label>
+            <section>Dilution Information</section>
+        </sections>
+        <sections>
+            <label><!-- Financial Information --></label>
+            <section>Financial Information</section>
+        </sections>
+        <sections>
+            <label><!-- Integration --></label>
+            <section>Integration</section>
+        </sections>
+        <sections>
+            <label><!-- Invoice aging bucket (After Due Date) --></label>
+            <section>Invoice aging bucket (After Due Date)</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Sys-Admin Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Debtor Information --></label>
+            <section>Debtor Information</section>
+        </sections>
+        <sections>
+            <label><!-- Dilution Information --></label>
+            <section>Dilution Information</section>
+        </sections>
+        <sections>
+            <label><!-- Financial Information --></label>
+            <section>Financial Information</section>
+        </sections>
+        <sections>
+            <label><!-- Integration --></label>
+            <section>Integration</section>
+        </sections>
+        <sections>
+            <label><!-- Invoice aging bucket (After Due Date) --></label>
+            <section>Invoice aging bucket (After Due Date)</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Debtor and Client shouldn&apos;t be Equal. --></errorMessage>
+        <name>Client_and_Debtor_should_not_be_equal</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Contra Balance must be &gt;= 0 --></errorMessage>
+        <name>Validation_on_Contra_Balance</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Send_to_Grade_DBA --></label>
+        <name>Send_to_Grade_DBA</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_to_Portal_DBA --></label>
+        <name>Send_to_Portal_DBA</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Set_as_Pending --></label>
+        <name>Set_as_Pending</name>
+    </webLinks>
+    <workflowTasks>
+        <name>New_Customer_Identified</name>
+        <subject><!-- New Customer Identified --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Pending_Invoices</name>
+        <subject><!-- Pending Invoices --></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

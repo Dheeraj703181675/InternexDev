@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>20.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Display Notes Tab on account detail page.
+The tab have the functionality to search for notes related to account and transaction. Additionally It has multiple filter criteria to search for the notes.</description>
+    <label>NotesView</label>
+</ApexPage>

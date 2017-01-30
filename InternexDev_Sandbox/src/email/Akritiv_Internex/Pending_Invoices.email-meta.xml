@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Pending Invoices Batch</name>
+    <style>none</style>
+    <subject>Akritiv Prod: Approval Required: Invoice Import</subject>
+    <textOnly>There are pending invoices for  {!Upper(WebCash_Load_Batch__c.Client_Name__c)} ({!WebCash_Load_Batch__c.Client_Account_Name__c}) – please take action.
+Batch ID: {!WebCash_Load_Batch__c.Name}
+Due Date: {!WebCash_Load_Batch__c.Tomorrow_date__c}
+Priority: Urgent</textOnly>
+    <type>custom</type>
+</EmailTemplate>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Drawal_Fee_Percentage__c</fullName>
+        <externalId>false</externalId>
+        <label>Draw Fee Percentage</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Minimum_Drawal_Fee__c</fullName>
+        <externalId>false</externalId>
+        <label>Minimum Draw Fee</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Minimum_Origination_Fee__c</fullName>
+        <externalId>false</externalId>
+        <label>Minimum Origination Fee</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Origination_Fee_Percentage__c</fullName>
+        <externalId>false</externalId>
+        <label>Origination Fee Percentage</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <label>Fee</label>
+    <visibility>Public</visibility>
+</CustomObject>

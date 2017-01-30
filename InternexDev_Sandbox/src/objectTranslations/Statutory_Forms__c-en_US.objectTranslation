@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Statutory Form</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Statutory Forms</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Statutory Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Form Collectible Amount --></label>
+        <name>Form_Collectible_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form Comments --></label>
+        <name>Form_Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form Days Past Due --></label>
+        <name>Form_Days_Past_Due__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form Due Date --></label>
+        <name>Form_Due_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form Receipt Date --></label>
+        <name>Form_Receipt_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form Received --></label>
+        <name>Form_Received__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form Required --></label>
+        <name>Form_Required__c</name>
+        <picklistValues>
+            <masterLabel>NO</masterLabel>
+            <translation><!-- NO --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>YES</masterLabel>
+            <translation><!-- YES --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Statutory Form Required --></label>
+        <name>Statutory_Form_Required__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transaction --></label>
+        <name>Transaction__c</name>
+        <relationshipLabel><!-- Statutory Forms --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Statutory Form Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

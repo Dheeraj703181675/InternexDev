@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>17.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>GenerateStatementPage is used to get the output of an email template in form of a pdf file or a excel data sheet. Which can be sent as an attachment with the email for sending billing statement at transaction level.
+The page can be called from ContactCustomer page when user click on Preview link to visit the pdf/excel data or when sending attachment with an email.</description>
+    <label>GenerateStatementPage</label>
+</ApexPage>

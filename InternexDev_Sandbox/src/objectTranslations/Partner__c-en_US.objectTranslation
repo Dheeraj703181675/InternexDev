@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Partner</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Partners</value>
+    </caseValues>
+    <fields>
+        <label><!-- CRM ID --></label>
+        <name>CRM_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: Sum of Partner Draw Fees of All Client-Accounts --></help>
+        <label><!-- Sum of Draw Fees --></label>
+        <name>Sum_of_Draw_Fees__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: Sum of Partner Origination Fees of All Client-Accounts --></help>
+        <label><!-- Sum of Origination Fees --></label>
+        <name>Sum_of_Origination_Fees__c</name>
+    </fields>
+    <layouts>
+        <layout>Partner Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

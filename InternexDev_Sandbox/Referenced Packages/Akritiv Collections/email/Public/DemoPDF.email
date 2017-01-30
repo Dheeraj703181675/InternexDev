@@ -1,0 +1,164 @@
+<head>
+<style>
+@page { size:landscape;@bottom-right {content: "Page " counter(page);}}
+.billing {solid 1px black;padding:0px;border-collapse: collapse; font-family:verdana;}
+.billing th, .billing td{text-align:center; border: solid 1px black; padding:3px 5px; white-space:nowrap;}
+.billing th {font-weight:bolder; text-align:center; background-color:#DDD;}
+.billing .odd {background-color:#EEE;}
+.billing .even{background-color:#FFF;}
+</style>
+</head>
+<body>
+
+<table border="0" width="100%">
+       
+       <tr>
+         <td width="25%"><img src="{!Organization.Logo}" alt="" width="200" height="55" />
+         {!Organization.Name} </td>
+         <td width="25%"> </td>
+         <td width="25%"> </td>
+         <td width="25%" style="font-weight:bold; text-align: center;font-size: 22px; font-family:verdana;" > <b>Statement </b></td>
+         
+       </tr>
+       
+       <tr>
+         <td width="25%"> {!Organization.Street} </td>
+         <td width="25%"> </td>
+         <td width="25%"> </td>
+         <td width="25%" style="text-align: left;" >Customer#      : {!Account.AccountNumber}</td>
+         
+       </tr>
+       
+       <tr>  
+       <td width="25%"> {!Organization.City}, {!Organization.PostalCode} </td>
+         <td width="25%"> </td>
+         <td width="25%"> </td>
+         <td width="25%" style="white-space: nowrap; text-align: left;" >Customer Name :{!Account.Name}</td>
+       </tr>
+         
+       <tr>
+         <td width="25%" colspan="2">
+           <table  >
+             <tr>
+               <td>
+                  Phone:
+               </td>
+               <td>
+                 {!Organization.Phone}
+               </td>
+               <td>
+                  Fax:
+               </td>
+               <td>
+                 {!Organization.Fax}
+               </td>
+             </tr>
+           </table>
+
+         </td>
+		 <td width="25%" > </td>
+         <td width="25%" ><b>Date: </b> {!Date.Today}</td>
+       </tr>
+  
+      <tr>
+<td width="25%"> </td>
+         <td width="25%"> </td>
+         <td width="25%"> </td>
+         <td width="25%" </td>
+</tr>
+       
+    </table>
+
+      
+    <table  width="100%" >
+        <tr>
+			<td align="left" width="10%"><b>Bill To:</b></td>
+			<td width="20%" >{!Account.Name}   </td>
+            <td width="40%"> </td>
+            <td align="right" width="10%"><b>Ship To:</b></td>
+            <td width="20%" >{!Account.Name}   </td>
+		</tr>
+        
+        <tr>
+	        <td align="left" width="10%">
+	        </td>
+	        <td width="20%"> {!Account.BillingStreet} </td>
+	        <td width="40%"> </td>
+	        <td width="10%"></td>
+	        <td align="left"  width="20%">{!Account.BillingStreet}</td>
+        </tr>
+        
+        <tr>
+	        <td align="left" width="10%"></td>
+	        <td width="20%">{!Account.BillingCity}, {!Account.BillingPostalCode} </td>
+	        <td width="40%"> </td>
+	        <td width="10%"></td>
+	        <td align="left"  width="20%"> {!Account.BillingCity}, {!Account.BillingPostalCode} </td>
+	    </tr>
+        
+    </table>
+
+<table width="100%">
+
+<tr><td width="100%" ></td></tr>
+<tr>
+        <td width="100%" colspan="5">{!Transactions.Summary}</td>
+        </tr>
+		<tr>
+		<td colspan="5" align="right">{!Transactions.TotalBalance}</td>
+		</tr>
+       
+<tr>
+         <td><br/></td>
+       </tr>
+	   <tr>
+         <td width="25%" colspan="2"><b>Reminder:</b> Please include the statement number on your check.</td>
+       </tr>
+       
+      <tr>
+         <td width="25%" colspan="2"><b>Terms:</b> Balance due in 30 days.</td>
+       </tr>
+
+       <tr>
+        <td><br/></td>
+       </tr>
+     <tr>
+        <td colspan="3">
+	  <table border="0">
+	   <tbody>
+	    <tr>
+	     <td style="background-color: #bbbbbb;" colspan="3">
+             <pre><span style="color: #000000;"><strong>REMMITANCE </strong></span></pre>
+
+	     </td>
+	    </tr>
+	    <tr>
+	     <td><b>Customer Name:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+	     <td>{!Account.Name}</td>
+	    </tr>
+	    <tr>
+
+	     <td><b>Customer Id:</b></td>
+	     <td>{!Account.AccountNumber}</td>
+	    </tr>
+	    <tr>
+	     <td><b>Date:</b></td>
+	     <td>{!Date.Today}</td>
+	    </tr>
+
+	    <tr>
+	     <td><b>Amount Due:</b></td>
+	     <td>{!Transactions.TotalBalance}</td>
+	    </tr>
+	    <tr>
+	     <td><b>Amount Enclosed:</b></td>
+	     <td>&nbsp;</td>
+
+	    </tr>
+	  </tbody>
+	  </table>
+        </td>
+       </tr>
+</table>
+
+ </body>

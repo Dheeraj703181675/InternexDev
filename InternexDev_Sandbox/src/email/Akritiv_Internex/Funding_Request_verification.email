@@ -1,0 +1,5 @@
+{!UPPER(Case.Client_Name__c)}  ({!Case.Client_Account__c}) made a draw request! Your approval is required.
+<br></br>
+Funding Request ID:  <a href="{!Case.Link}">{!Case.CaseNumber}</a><br>
+Due Date: {!Case.CreatedDate} <br>
+Priority: Urgent

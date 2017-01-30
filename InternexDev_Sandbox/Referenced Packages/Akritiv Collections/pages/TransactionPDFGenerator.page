@@ -1,0 +1,476 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/*
+ * Default page that is used to generate Transaction Detail Pdf page 
+ * or attachment from contact customer page. The page can show 
+ *      1. Only summary for transactions
+ *      2. Summary and details (line items) for transactions
+ */
+--> 
+<apex:page controller="akritiv.ExtendedTransactionPdfGenerator"
+    showHeader="false" sidebar="false" id="pg" standardStylesheets="false"
+    renderAs="PDF">
+
+    <html>
+    <head>
+
+    <style>
+.billing {solid 1px black;
+    padding: 0px;
+    border-collapse: collapse;
+    font-family: verdana;
+    font-family:Arial Unicode MS;
+}
+
+.billing th,.billing td {
+    text-align: center;
+    border: solid 1px black;
+    padding: 3px 5px;
+    white-space: nowrap;
+}
+
+.billing th {
+    font-weight: bolder;
+    text-align: center;
+    background-color: #DDD;
+}
+
+.billing .odd {
+    background-color: #EEE;
+}
+
+.billing .even {
+    background-color: #FFF;
+}
+
+.total td {solid 0px;
+    font-weight: bolder;
+    text-align: right;
+    margin: 10px;
+}
+
+.OrgDetail {solid 0px black;
+    padding: 0px;
+    border-collapse: collapse;
+    font-family: verdana;
+    font-family:Arial Unicode MS;
+}
+
+.OrgDetail td {
+    text-align: center;
+    border: solid 0px black;
+    padding: 3px 5px;
+    white-space: nowrap;
+}
+
+.labels {
+    font-family: courier;
+    font-family:Arial Unicode MS;
+    font-size: 14px;
+    font-weight: bold;
+    color: #660000;
+}
+</style>
+
+    <style>
+@page {
+    size: landscape; @
+    bottom-right {content: "Page " counter(page);
+}
+
+}
+body {
+    font-family: courier;
+    font-family:Arial Unicode MS;
+}
+
+.list {
+    width: 100%;
+}
+</style>
+
+    </head>
+
+    <body>
+    <apex:form >
+        <apex:pageMessages ></apex:pageMessages>
+
+        <apex:pageBlock id="pageBlck"
+            rendered="{!IF(hasErrorMesssages, FALSE, TRUE)}">
+
+            <!-- SUMMARY PDF PAGE STARTS HERE -->
+
+
+            <table border="0" width="100%">
+
+                <tr>
+                    <td width="25%"><img src="{!orglogo}" alt="" width="200" height="55" /> <br/>{!orgSingleObj.Organization_Name__c}</td>
+                    <td width="15%"></td>
+                    <td width="5%"></td>
+                    <td width="25%"
+                        style="font-weight: bold; text-align: center; font-size: 20px;">
+                    <b>{!$Label.Label_INVOICE} </b></td>
+                </tr>
+
+                <tr>
+                    <td width="25%">{!orgSingleObj.Organization_Street__c}</td>
+                    <td width="15%"></td>
+                    <td width="5%"></td>
+                    <td width="25%" style="text-align: left;">{!$Label.Label_Customer}:{!acc.AccountNumber}</td>
+
+                </tr>
+
+                <tr>
+                    <td width="25%">{!orgSingleObj.Organization_City__c},
+                    {!orgSingleObj.Organization_PostalCode__c}</td>
+                    <td width="15%"></td>
+                    <td width="5%"></td>
+                    <td width="25%" style="white-space: nowrap; text-align: left;">{!$Label.Label_Customer_Name_Colon}{!acc.Name}</td>
+                </tr>
+
+                <tr>
+                    <td width="25%" colspan="2">
+                    <table>
+                        <tr>
+                            <td><strong>{!$Label.Label_Phone_Colon}</strong></td>
+                            <td>{!orgSingleObj.Organization_Phone__c}</td>
+                            <td><strong>| {!$Label.Label_Fax}</strong></td>
+                            <td>{!orgSingleObj.Organization_Fax__c}</td>
+                        </tr>
+                    </table>
+
+                    </td>
+                    <td width="5%"></td>
+                    <td width="25%"><apex:outputPanel >
+                        <apex:outputLabel style="white-space:nowrap; text-align:right;">{!$Label.Label_Date}      </apex:outputLabel>
+                        <apex:outputLabel value="{!dt}" />
+                    </apex:outputPanel></td>
+
+                </tr>
+
+            </table>
+
+
+            <br />
+           <table width="100%">
+                <tr>
+                    <td align="left" width="10%"><apex:outPutLabel style="font-weight:bold;font-size:16px;" value="{!$Label.Label_Bill_To}" /></td>
+
+                    <td width="35%"><apex:outputLabel value="{!acc.Name}" /></td>
+
+                    <td width="15%"></td>
+
+                    <td align="left" width="10%"><apex:outPutLabel style="font-weight:bold;font-size:16px;" value="{!$Label.Label_Ship_To}" /></td>
+
+                    <td width="40%"><apex:outputLabel value="{!acc.Name}" /></td>
+                </tr>
+
+                <tr>
+                  <td align="left"></td>
+                  <td><apex:outputLabel value="{!acc.akritiv__Bill_To_Number__c}" /></td>
+                  <td></td>
+                  <td></td>
+                  <td align="left"><apex:outputLabel value="{!acc.akritiv__Bill_To_Number__c}" /></td>
+                </tr>
+                <tr>
+                    <td align="left" width="10%"></td>
+                    <td width="20%"><apex:outputLabel value="{!acc.BillingStreet}" />
+                    </td>
+                    <td width="15%"></td>
+                    <td width="10%"></td>
+                    <td align="left" width="20%"><apex:outputLabel value="{!acc.BillingStreet}" /></td>
+                </tr>
+
+                <tr>
+                    <td align="left" width="10%"></td>
+                    <td width="20%"><apex:outputLabel value="{!acc.BillingCity}, {!acc.BillingState} - {!acc.BillingPostalCode}" /></td>
+                    <td width="15%"></td>
+                    <td width="10%"></td>
+                    <td align="left" width="20%"><apex:outputLabel value="{!acc.BillingCity}, {!acc.BillingState} - {!acc.BillingPostalCode}" /></td>
+                </tr>
+                <tr>
+                          <td align="left"></td>
+                          <td><apex:outputLabel value="{!acc.BillingCountry}" /></td>
+                          <td></td>
+                          <td></td>
+                          <td align="left"><apex:outputLabel value="{!acc.BillingCountry}" /></td>
+                        </tr>
+            </table>
+
+
+            <!-- SUMMARY PDF STARTS HERE -->
+
+
+            <apex:pageBlockSection title="{!$Label.Label_Summary}" />
+            <apex:variable value="{!0}" var="count" />
+            <apex:repeat value="{!SummaryTxs}" var="lstTrans">
+
+                <table border="1" class="billing" width="100%">
+                    <tr>
+                        <apex:repeat value="{!headerList}" var="item">
+                            <th style="text-align: center;">{!item}</th>
+                        </apex:repeat>
+                    </tr>
+
+                    <apex:repeat value="{!lstTrans}" var="trans">
+                        <apex:variable value="{!count + 1}" var="count" />
+                        <tr class="{!IF(MOD(count,2)==0,'odd','even')}">
+                            <apex:repeat value="{!trans}" var="item">
+                                <td style=" font-family:Arial Unicode MS;">  <apex:outputText escape="false" value="{!item}"/></td>
+                            </apex:repeat>
+                        </tr>
+                    </apex:repeat>
+                </table>
+
+            </apex:repeat>
+
+            <table class="total" width="100%">
+                <tr>
+                    <td><apex:outputLabel value="{!$Label.Label_Total}: {!totalBillingBalance}" /></td>
+                </tr>
+            </table>
+
+            <!-- SUMMARY PDF ENDS HERE -->
+
+            <!-- DETAIL PDF PAGES STARTS HERE -->
+            <apex:outputPanel rendered="{!showDetails}">
+                <apex:repeat value="{!ListOfTxWithLineItem}" var="lstTrans">
+                    <div style="page-break-before: always;">
+                    <table border="0" width="100%">
+
+                        <tr>
+                            <td width="25%"><img src="{!orglogo}" alt="" width="200"
+                                height="55" /> {!orgSingleObj.Organization_Name__c}</td>
+                            <td width="25%"></td>
+                            <td width="25%"></td>
+                            <td width="25%"
+                                style="font-weight: bold; text-align: center; font-size: 22px; font-family: verdana;">
+                            <b>{!$Label.Label_INVOICE} </b></td>
+
+                        </tr>
+
+                        <tr>
+                            <td width="25%">{!orgSingleObj.Organization_Street__c}</td>
+                            <td width="25%"></td>
+                            <td width="25%"></td>
+                            <td width="25%"></td>
+                        </tr>
+
+                        <tr>
+                            <td width="25%">{!orgSingleObj.Organization_City__c},
+                            {!orgSingleObj.Organization_PostalCode__c}</td>
+                            <td width="25%"></td>
+                            <td width="25%"></td>
+                            <td width="25%" style="white-space: nowrap; text-align: left;">{!$Label.Label_Invoice_No}
+                            :{!lstTrans.tranObj.Name}</td>
+                        </tr>
+
+                        <tr>
+                            <td width="25%" colspan="2"><table>
+                              <tr>
+                                <td><strong>{!$Label.Label_Phone_Colon}</strong></td>
+                                <td>{!orgSingleObj.Organization_Phone__c}</td>
+                                <td><strong>| {!$Label.Label_Fax}</strong></td>
+                                <td>{!orgSingleObj.Organization_Fax__c}</td>
+                              </tr>
+                          </table></td>
+                            <td width="25%"></td>
+                            <td width="25%"><apex:outputPanel >
+                                <apex:outputLabel style="white-space:nowrap; text-align:right;">{!$Label.Label_Date}</apex:outputLabel>
+                                <apex:outputLabel value="{!dt}" />
+                            </apex:outputPanel></td>
+
+                        </tr>
+
+                    </table>
+
+                    <br />
+                   <table width="100%">
+            
+                  <tr>
+                    <td align="left" width="10%"><apex:outPutLabel style="font-weight:bold;font-size:16px;" value="{!$Label.Label_Bill_To}" /></td>
+
+                    <td width="35%"><apex:outputLabel value="{!acc.Name}" /></td>
+
+                    <td width="15%"></td>
+
+                    <td align="left" width="10%"><apex:outPutLabel style="font-weight:bold;font-size:16px;" value="{!$Label.Label_Ship_To}" /></td>
+
+                    <td width="40%"><apex:outputLabel value="{!acc.Name}" /></td>
+                </tr>
+                
+                <tr>
+                    <td align="left" width="10%"></td>
+                    <td width="20%"><apex:outputLabel value="{!acc.BillingStreet}" />
+                    </td>
+                    <td width="15%"></td>
+                    <td width="10%"></td>
+                    <td align="left" width="20%"><apex:outputLabel value="{!acc.BillingStreet}" /></td>
+                </tr>
+
+                <tr>
+                    <td align="left" width="10%"></td>
+                    <td width="20%"><apex:outputLabel value="{!acc.BillingCity}, {!acc.BillingState} - {!acc.BillingPostalCode}" /></td>
+                    <td width="15%"></td>
+                    <td width="10%"></td>
+                    <td align="left" width="20%"><apex:outputLabel value="{!acc.BillingCity}, {!acc.BillingState} - {!acc.BillingPostalCode}" /></td>
+                </tr>
+                <tr>
+                          <td align="left"></td>
+                          <td><apex:outputLabel value="{!acc.BillingCountry}" /></td>
+                          <td></td>
+                          <td></td>
+                          <td align="left"><apex:outputLabel value="{!acc.BillingCountry}" /></td>
+                        </tr>
+
+                    </table>
+
+
+
+                    <apex:outputPanel style="font-size:16px; font-weight:bold; text-align: left;">
+                        <apex:outputText value="{!$Label.Label_Comments_Special_Inst}">
+                        </apex:outputText>
+                    </apex:outputPanel> 
+                    <table>
+                    <tr><td align="left"></td><td align="left"></td></tr>
+                    </table> 
+                    <apex:pageBlockTable styleclass="billing" border="1" var="item"
+                        value="{!lstTrans.tranObj }" id="pageBlockTableResults"
+                        width="100%">
+
+                        <apex:column >
+                            <apex:facet name="header">{!$Label.Label_SALESPERSON}</apex:facet>
+                            <apex:outputPanel >{!item.Sales_Rep_Name__c }</apex:outputPanel>
+                        </apex:column>
+
+                        <apex:column >
+                           
+                    <apex:facet name="header">{!$Label.Label_P_O_NUMBER}</apex:facet>
+
+                            <apex:outputPanel >{!item.name}</apex:outputPanel>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">{!$Label.Label_SHIP_DATE}</apex:facet>
+                            <apex:outputPanel >
+                                <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                    <apex:param value="{!item.akritiv__Create_Date__c}" />
+                                </apex:outputText>
+                            </apex:outputPanel>
+                        </apex:column>
+
+                        <apex:column >
+                            <apex:facet name="header">{!$Label.Label_SHIP_VIA}</apex:facet>
+                            <apex:outputPanel >{!item.akritiv__Shipment_Method__c}</apex:outputPanel>
+                        </apex:column>
+
+                        <apex:column >
+                            <apex:facet name="header">{!$Label.Label_F_O_B_POINT}</apex:facet>
+                            <apex:outputPanel >{!item.akritiv__Payment_Terms__c}</apex:outputPanel>
+                        </apex:column>
+
+                        <apex:column >
+                            <apex:facet name="header">{!$Label.Label_TERMS}</apex:facet>
+                            <apex:outputPanel >{!item.akritiv__Payment_Terms__c}</apex:outputPanel>
+                        </apex:column>
+
+                        <!--  
+                    <apex:column >
+                        <apex:facet name="header">Due Date</apex:facet>
+                        
+                    <apex:outputPanel >
+                    <apex:outputText value="{0,date,dd'/'MM'/'yyyy}"> 
+                        <apex:param value="{!item.Due_Date__c}" />  
+                    </apex:outputText> 
+                    </apex:outputPanel>
+                       </apex:column>
+                    -->
+
+                    </apex:pageBlockTable>
+
+
+                    <table border="1" class="billing" width="100%">
+                        <tr>
+                            <th style="text-align: center;">{!$Label.Label_QUANTITY}</th>
+                            <th style="text-align: center;">{!$Label.Label_DESCRIPTION_Caps}</th>
+                            <th style="text-align: center;">{!$Label.Label_UNIT_PRICE}</th>
+                            <th style="text-align: center;">{!$Label.Label_AMOUNT_Caps}</th>
+                        </tr>
+                        <apex:repeat value="{!lstTrans.lstLineItems}"
+                            var="nextLineItemObj">
+                            <apex:variable value="{!count + 1}" var="count" />
+                            <tr class="{!IF(MOD(count,2)==0,'odd','even')}">
+                                <td>{!nextLineItemObj.akritiv__Quantity__c}</td>
+                                <td>{!nextLineItemObj.akritiv__Description__c}</td>
+                                <td>{!nextLineItemObj.akritiv__Unit_Price__c}</td>
+                                <td>{!nextLineItemObj.akritiv__Line_Total__c}</td>
+
+
+                            </tr>
+                        </apex:repeat>
+                    </table>
+
+                    <apex:outputPanel >
+
+                        <table width="100%">
+                            <tr>
+
+                                <td align="right" style="padding: 0px 10px 0px 0px" width="85%">
+                                <apex:outPutLabel value="{!$Label.Label_SUBTOTAL_Caps}" /></td>
+                                <td align="left" style="padding: 0px 10px 0px 0px" width="15%">
+                                <apex:outputLabel value="{!lstTrans.subTotalStr}" /></td>
+                            </tr>
+
+                            <!-- <tr>
+                                <td align="right" style="padding: 0px 10px 0px 0px" width="85%">
+                                <apex:outPutLabel value="TAX RATE                 :" /></td>
+                                <td align="left" style="padding: 0px 10px 0px 0px" width="15%">
+                                <apex:outPutLabel value="{!lstTrans.totalStr}" /></td>
+                            </tr>
+                             -->
+                             
+                            <tr>
+                                <td align="right" style="padding: 0px 10px 0px 0px" width="85%">
+                                <apex:outPutLabel value="{!$Label.Label_SALES_TAX}" /></td>
+                                <td align="left" style="padding: 0px 10px 0px 0px" width="15%">
+                                <apex:outPutLabel value="{!lstTrans.salesTaxStr}" /></td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="padding: 0px 10px 0px 0px" width="85%">
+                                <apex:outPutLabel value="{!$Label.Label_SHIPPING_HANDLLING}" /></td>
+                                <td align="left" style="padding: 0px 10px 0px 0px" width="15%">
+                                <apex:outPutLabel value="-" /></td>
+                            </tr>
+                            
+                            <tr>
+                                <td align="right" style="padding: 0px 10px 0px 0px" width="85%">
+                                <apex:outPutLabel value="{!$Label.Label_TOTAL_AMOUNT_Colon}" /></td>
+                                <td align="left" style="padding: 0px 10px 0px 0px" width="15%">
+                                <apex:outPutLabel value="{!lstTrans.totalStr}" /></td>
+                            </tr>
+                            
+                        </table>
+
+                    </apex:outputPanel> <apex:pageBlockSection columns="1">
+                        <apex:outputText style="font-weight:bold; text-align: left;font-size: 16px;"
+                            value="{!$Label.Label_Make_checks_payable}" />
+                        <apex:outputText style="font-weight:bold; text-align: left;font-size: 16px;"
+                            value="{!$Label.Label_any_questions}" />
+                    </apex:pageBlockSection> <apex:pageBlockSection columns="1">
+                        <apex:outputText style="font-weight:bold; text-align: center;font-size: 18px;"
+                            value="{!$Label.Label_THANK_YOU_FOR}" />
+                    </apex:pageBlockSection></div>
+                </apex:repeat>
+            </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+    </body>
+    </html>
+</apex:page>

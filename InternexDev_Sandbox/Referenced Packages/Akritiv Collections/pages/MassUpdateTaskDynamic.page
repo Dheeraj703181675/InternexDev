@@ -1,0 +1,59 @@
+<apex:page controller="akritiv.MassUpdateTaskDynamicController" showHeader="false" sidebar="false" tabstyle="akritiv__Payment__c" >
+    <apex:pageMessages />
+    <header>
+    <style>
+   
+         #filtercomp
+            {
+                display: none;
+                position: fixed;
+                top: 0%;
+                left: 0%;
+                width: 100%;
+                height: 100%;
+                background-color: #ffffff;
+                opacity:0.6;
+                filter: alpha(opacity=50);
+            }
+        </style>
+        
+        <script type="text/javascript">
+            function startProcess(){
+              
+               document.getElementById("{!$Component.loadingcomp}").style.display = 'block'; 
+               document.getElementById('filtercomp').style.display = 'block'; 
+            }
+        </script>
+    </header>
+    <div id="filtercomp"></div><apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loadingcomp" style="display:none;position:fixed;top:50%;left:50%;z-index:10;"/> 
+    <apex:form >
+        
+        <apex:pageBlock >
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Update" action="{!massUpdate}" disabled="{!isDisabledUpdateBtn}" onclick="startProcess();" />
+                <apex:commandButton value="Close" onclick="window.close();" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="2" title="Mass Update Tasks"   id="searchSection" >
+                
+                <apex:repeat value="{!$ObjectType.Task.FieldSets.akritiv__Task_Update_FieldSet}" var="tk">
+                     <apex:inputfield value="{!tskList[tk]}" required="{!tk.Required}"  /> 
+                </apex:repeat>
+                
+                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+         <script type="text/javascript">
+            if({!isDisabledUpdateBtn}) {
+                //window.opener.location.reload();
+               
+                
+                window.opener.location.href = '{!JSENCODE(PARAMNAME)}';
+                self.setInterval(function(){window.close();},1500);
+                
+                //self.close();
+                
+            }
+        </script>  
+    </apex:form>
+</apex:page>

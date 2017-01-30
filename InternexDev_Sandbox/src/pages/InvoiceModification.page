@@ -1,0 +1,302 @@
+<apex:page id="pg" controller="InvoiceModification">
+<apex:form id="frm">
+<apex:pageBlock id="pb1" title="Invoice Modification">
+<apex:pageMessages id="pagemessage"></apex:pageMessages>
+    <apex:pageBlockButtons location="bottom">
+          <apex:commandButton value="Search" action="{!InvoiceSearch}" reRender="pb3,pb2,op,pagemessage" status="loading"/>
+    </apex:pageBlockButtons>
+     <apex:actionStatus onstart="startLoading();" onstop="endLoading();" id="loading"/>
+    <apex:pageBlockSection id="pbs1">
+            <apex:pageBlockSectionItem id="pbst1">
+                <apex:outputLabel value="Operations " id="op1"/>
+                <apex:selectList value="{!operation}" multiselect="false" size="1" onchange="RefreshGrid();" id="Opr">
+                    <apex:selectOption itemValue="None" itemLabel="None"/>
+                    <apex:selectOption itemValue="Modification" itemLabel="Modification"/>
+                    <apex:selectOption itemValue="Write-off" itemLabel="Write-off"/>
+                </apex:selectList>
+            </apex:pageBlockSectionItem>
+        <apex:actionFunction name="RefreshGrid" action="{!InvoiceSearch}" reRender="pb2,pb3,op" status="loading"/>
+    </apex:pageBlockSection>
+    <apex:outputPanel layout="block" styleClass="green">
+    <apex:pageBlockSection id="pbs2" title="Search Invoice">
+        <apex:inputField value="{!Inv.Client_Acc__c}" id="CAid" onchange="RefreshDebtor();"/>
+        <apex:pageBlockSectionItem id="pbsi1">
+            Debtor Account<apex:inputField value="{!Inv.Debtor__c}" id="debtor"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+            From Date <apex:inputField value="{!Inv.Document_Date__c}"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+            To Date <apex:inputField value="{!Inv.Last_Payment_Date__c}"/>
+        </apex:pageBlockSectionItem>
+        <apex:inputField value="{!Inv.akritiv__Amount__c}" required="False"/>
+         <apex:pageBlockSectionItem >
+           Approval Status <apex:selectList value="{!ApprovalStatus}" multiselect="false" size="1">
+             <apex:selectOption itemValue="None" itemLabel="None"/>
+             <apex:selectOption itemValue="Approved" itemLabel="Approved"/>
+             <apex:selectOption itemValue="Pending Approval" itemLabel="Pending Approval"/>
+             <apex:selectOption itemValue="Rejected" itemLabel="Rejected"/> 
+            </apex:selectList>
+          </apex:pageBlockSectionItem> 
+    <!--    <apex:pageBlockSectionItem >
+           Invoice Status <apex:selectList value="{!InvoiceStatus}" multiselect="false" size="1">
+             <apex:selectOption itemValue="None" itemLabel="None"/>
+             <apex:selectOption itemValue="Open" itemLabel="Open"/>
+             <apex:selectOption itemValue="Closed" itemLabel="Closed"/>
+            </apex:selectList>
+          </apex:pageBlockSectionItem> -->
+    </apex:pageBlockSection>
+    </apex:outputPanel>
+</apex:pageBlock>
+<apex:outputPanel id="op">
+<apex:pageBlock id="pb2" rendered="{!IF(operation == 'Modification',True,False)}">
+
+    <apex:pageBlockButtons location="top">
+        <apex:commandButton value="Save" action="{!SaveInvoices}" reRender="op,pb2,pbt1,pagemessage" status="loading" onclick="if(!CheckInvoices('{!Invoicewrapperlist.size}','pb2','pbt1'))return false;"/>
+    </apex:pageBlockButtons>
+
+                   <apex:pageBlockTable value="{!Invoicewrapperlist}" var="Invwrap" id="pbt1" >
+                        
+                          <apex:column ><apex:inputCheckbox value="{!Invwrap.check}" onclick="ModifyInvoice('{!Invoicewrapperlist.size}','{!Invwrap.rowCount}');" id="chk"/></apex:column> <!--<apex:facet name="header"><apex:inputCheckbox onclick="checkall(this,'chk')" id="hchk"/></apex:facet> -->
+                          <apex:column headerValue="Invoice Number" style="width:15%;"><apex:inputField value="{!Invwrap.Invoice.Name}" id="InvName"/></apex:column>
+                    <!--       <apex:column headerValue="Debtor" value="{!Invwrap.Invoice.Debtor__c}"/> -->
+                          <apex:column headerValue="Debtor Account" style="width:15%;"><apex:outputLink value="/{!Invwrap.Invoice.Debtor__c}" >{!Invwrap.Invoice.Debtor__r.Client_Product_Counterparty__c}</apex:outputLink></apex:column>
+                          <apex:column headerValue="Batch Number" value="{!Invwrap.Invoice.akritiv__Batch_Number__c}"/>
+                          <apex:column headerValue="Invoice Date"><apex:inputField value="{!Invwrap.Invoice.akritiv__Create_Date__c}"  id="InvDate"/></apex:column>
+                          <apex:column headerValue="Due Date"><apex:inputField value="{!Invwrap.Invoice.akritiv__Due_Date__c}" id="InvDueDate"/></apex:column>
+                          <apex:column headerValue="Amount" ><apex:inputField value="{!Invwrap.Invoice.akritiv__Amount__c}" required="false" style="width:80%;" id="InvAmount"/></apex:column>
+                          <apex:column headerValue="Balance" ><apex:outputField value="{!Invwrap.Invoice.Balance_Internex__c}" style="width:80%;"/></apex:column> 
+                          <apex:column headerValue="Approval Status" value="{!Invwrap.Invoice.Invoice_Status_Internex__c}"/>
+                          <apex:column headerValue="Invoice Status" value="{!Invwrap.Invoice.Invoice_Status__c }"/>
+                    
+                  </apex:pageBlockTable>
+
+</apex:pageBlock>
+
+<apex:pageBlock id="pb3" rendered="{!IF(operation == 'Write-off',True,False)}">
+
+                   <apex:pageBlockButtons location="top">
+                        <apex:commandButton value="Write-Off" action="{!writeoffinvoices}" reRender="op,pb3,pbt2,pagemessage" status="loading" onclick="if(!CheckInvoices('{!Invoicewrapperlist.size}','pb3','pbt2'))return false;"/>
+                    </apex:pageBlockButtons>
+
+                   <apex:pageBlockTable value="{!Invoicewrapperlist}" var="Invwrap" id="pbt2">
+                        
+                          <apex:column ><apex:inputCheckbox value="{!Invwrap.check}" id="chk" onclick="CheckWriteoFF('{!Invoicewrapperlist.size}','{!Invwrap.rowCount}');"/></apex:column> <!-- <apex:facet name="header"><apex:inputCheckbox onclick="checkall(this,'chk')" id="hchk"/></apex:facet> -->
+                          <apex:column headerValue="Invoice Number" style="width:15%;"><apex:outputLink value="/{!Invwrap.Invoice.Id}" ><apex:outputField value="{!Invwrap.Invoice.Name}"/></apex:outputLink></apex:column>
+                    <!--       <apex:column headerValue="Debtor" value="{!Invwrap.Invoice.Debtor__c}"/> -->
+                          <apex:column headerValue="Debtor" style="width:15%;"><apex:outputLink value="/{!Invwrap.Invoice.Debtor__c}" >{!Invwrap.Invoice.Debtor__r.Client_Product_Counterparty__c}</apex:outputLink></apex:column>
+                          <apex:column headerValue="Batch Number" value="{!Invwrap.Invoice.akritiv__Batch_Number__c}"/>
+                          <apex:column headerValue="Invoice Date"><apex:outputField value="{!Invwrap.Invoice.akritiv__Create_Date__c}"/></apex:column>
+                          <apex:column headerValue="Due Date"><apex:outputField value="{!Invwrap.Invoice.akritiv__Due_Date__c}"/></apex:column>
+                          <apex:column headerValue="Amount"><apex:outputField value="{!Invwrap.Invoice.akritiv__Amount__c}"/></apex:column>
+                          <apex:column headerValue="Balance" ><apex:outputField value="{!Invwrap.Invoice.Balance_Internex__c}" id="Bal"/></apex:column>
+                          <apex:column headerValue="Approval Status" value="{!Invwrap.Invoice.Invoice_Status_Internex__c}"/>
+                          <apex:column headerValue="Invoice Status" value="{!Invwrap.Invoice.Invoice_Status__c }"/>
+                          <apex:column headerValue="Write-Off Amount" id="Woffamount_col"><apex:inputText value="{!Invwrap.Writeoffamount}" id="wofamnt"/></apex:column>
+                  </apex:pageBlockTable>
+
+</apex:pageBlock>
+</apex:outputPanel>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+function RefreshDebtor()
+{
+    document.getElementById('pg:frm:pb1:pbs2:pbsi1:debtor').value = '';
+}
+
+function ModifyInvoice(rowcount,rownumber)
+{
+//alert(rownumber);
+    if( document.getElementById('pg:frm:pb2:pbt1:'+rownumber+':chk').checked == true)
+     {
+         document.getElementById('pg:frm:pb2:pbt1:'+rownumber+':InvName').disabled = true;
+         document.getElementById('pg:frm:pb2:pbt1:'+rownumber+':InvDate').disabled = true;
+         document.getElementById('pg:frm:pb2:pbt1:'+rownumber+':InvDueDate').disabled = true;
+         document.getElementById('pg:frm:pb2:pbt1:'+rownumber+':InvAmount').disabled = true;
+     }
+     else
+     {
+         document.getElementById('pg:frm:pb2:pbt1:'+rownumber+':InvName').disabled = false;
+         document.getElementById('pg:frm:pb2:pbt1:'+rownumber+':InvDate').disabled = false;
+         document.getElementById('pg:frm:pb2:pbt1:'+rownumber+':InvDueDate').disabled = false;
+         document.getElementById('pg:frm:pb2:pbt1:'+rownumber+':InvAmount').disabled = false;
+     }
+}
+function CheckWriteoFF(rowcount,rownumber)
+{
+//alert(rownumber);
+    
+     if( document.getElementById('pg:frm:pb3:pbt2:'+rownumber+':chk').checked == true)
+     {
+      
+        var balStr = document.getElementById('pg:frm:pb3:pbt2:'+rownumber+':Bal').innerHTML;
+        var find = ',';
+        var re = new RegExp(find, 'g');
+        balStr = balStr.replace(re, '').substring(3,balStr.length);
+     //   alert(balStr);
+        var writeoffamnt = document.getElementById('pg:frm:pb3:pbt2:'+rownumber+':wofamnt').value;
+        writeoffamnt = parseFloat(writeoffamnt || 0);
+    //    alert(writeoffamnt);
+        document.getElementById('pg:frm:pb3:pbt2:'+rownumber+':wofamnt').value = balStr;
+ /*       if(writeoffamnt > balStr)
+        {
+            alert('You cannot write off more than available Amount.')
+            document.getElementById('pg:frm:pb3:pbt2:'+rownumber+':chk').checked = false;
+            document.getElementById('pg:frm:pb3:pbt2:'+rownumber+':wofamnt').value = 0;
+            document.getElementById('pg:frm:pb3:pbt2:'+rownumber+':wofamnt').disabled = false;
+        }
+        else if(writeoffamnt == 0.0)
+        {
+            alert('Please enter the Write-Off Amount.');
+            document.getElementById('pg:frm:pb3:pbt2:'+rownumber+':chk').checked = false;
+        } 
+        else */
+            document.getElementById('pg:frm:pb3:pbt2:'+rownumber+':wofamnt').disabled = true;
+            
+     }
+     else
+     {
+         document.getElementById('pg:frm:pb3:pbt2:'+rownumber+':wofamnt').disabled = false;
+         document.getElementById('pg:frm:pb3:pbt2:'+rownumber+':wofamnt').value = 0;
+     }           
+/*
+     for ( var i=0; i< rowcount ; i++)
+     {
+         if( document.getElementById('pg:frm:pb3:pbt2:'+i+':chk').checked == true)
+            {
+                var balStr = document.getElementById('pg:frm:pb3:pbt2:'+i+':Bal').innerHTML;
+                var find = ',';
+                var re = new RegExp(find, 'g');
+                balStr = balStr.replace(re, '').substring(3,balStr.length);
+         //       alert(balStr);
+                if(document.getElementById('pg:frm:pb3:pbt2:'+i+':wofamnt') > balStr )
+                {
+                    alert('You cannot write off more than available Amount.')
+                    document.getElementById('pg:frm:pb3:pbt2:'+i+':chk').checked = false;
+                }
+            }    
+        } */
+}
+
+function CheckInvoices(rowcount,pageblck,table)
+{
+//    alert(rowcount);
+    var Count = 0;
+    var isNoneChecked = true;
+    for ( var i=0; i< rowcount ; i++){
+  //  alert('pg:frm:'+pageblck+':'+table+':'+i+':chk');
+        if( document.getElementById('pg:frm:'+pageblck+':'+table+':'+i+':chk').checked == true)
+        {
+            isNoneChecked = false;
+        }
+    }
+      if(isNoneChecked == true){
+        alert('Please select atlease One Invoice.');
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+/*
+ function checkall(obj,receivedInputID){
+            var inputCheckBox = document.getElementsByTagName("input");                  
+            for(var i=0; i<inputCheckBox.length; i++){          
+                if(inputCheckBox[i].id.indexOf(receivedInputID)!=-1){                                     
+                    inputCheckBox[i].checked = obj.checked;
+                }
+            }
+            
+            
+        }
+  */      
+         function startLoading(){
+            $('#load_scrl').css('top', $(document).scrollTop() + 200);
+            $('.loadingBox').show();
+        }
+        function endLoading(){
+             $('.loadingBox').hide();
+             $("[id$=hchk]").prop("checked",false); 
+         }
+         
+   function openLookup(baseURL, width, modified, searchParam){
+    var originalbaseURL = baseURL;
+    var originalwidth = width;
+    var originalmodified = modified;
+    var originalsearchParam = searchParam;
+
+    var lookupType = baseURL.substr(baseURL.length-3, 3);
+    if (modified == '1') baseURL = baseURL + searchParam;
+
+    var isCustomLookup = false;
+
+    // Following "001" is the lookup type for Account object so change this as per your standard or custom object
+    if(lookupType == "a1u"){
+
+      var urlArr = baseURL.split("&");
+      var txtId = '';
+      if(urlArr.length > 2) {
+        urlArr = urlArr[1].split('=');
+        txtId = urlArr[1];
+      }
+
+      // Following is the url of Custom Lookup page. You need to change that accordingly
+      baseURL = "/apex/CustomLookup?txt=" + txtId;
+
+      // Following is the id of apex:form control "myForm". You need to change that accordingly
+      baseURL = baseURL + "&frm=" + escapeUTF("{!$Component.frm}");
+      if (modified == '1') {
+        baseURL = baseURL + "&lksearch=" + searchParam;
+        baseURL = baseURL + "&CAID=" + document.getElementById('pg:frm:pb1:pbs2:CAid_lkid').value;
+      }
+
+      // Following is the ID of inputField that is the lookup to be customized as custom lookup
+      if(txtId.indexOf('debtor') > -1 ){
+        isCustomLookup = true;
+      }
+    }
+
+
+    if(isCustomLookup == true){
+      openPopup(baseURL, "lookup", 350, 480, "width="+width+",height=480,toolbar=no,status=no,directories=no,menubar=no,resizable=yes,scrollable=no", true);
+    }
+    else {
+      if (modified == '1') originalbaseURL = originalbaseURL + originalsearchParam;
+      openPopup(originalbaseURL, "lookup", 350, 480, "width="+originalwidth+",height=480,toolbar=no,status=no,directories=no,menubar=no,resizable=yes,scrollable=no", true);
+    } 
+  }
+         
+</script>
+   <div id="load_scrl" class="loadingBox loader" style="display:none"> </div>
+    <div class="loadingBox overlay"> </div>
+      <style>
+          .overlay {
+            display: none;
+            height: 100%;
+            left: 0;
+            position: fixed;
+            top: 0;
+            opacity: 0.3;
+            -moz-opacity: 0.3;
+            width: 100%;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+            filter: alpha(opacity=30);
+            background: #000;
+            -khtml-opacity: 0.3;
+            z-index: 1000;
+        }
+        .loader {
+            background: url('/img/loading32.gif') scroll no-repeat 0 0;
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            left: 50%;
+        }
+       body .bPageBlock .pbBody .green .pbSubheader{
+                background-color:#c0c0c0;
+        }
+  </style>
+</apex:form>
+</apex:page>

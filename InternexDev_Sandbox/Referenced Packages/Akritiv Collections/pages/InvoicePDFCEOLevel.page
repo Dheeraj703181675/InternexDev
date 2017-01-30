@@ -1,0 +1,330 @@
+<!--
+ /*
+  *Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+  *This software is the confidential and proprietary information
+  *(Confidential Information) of Akritiv Technologies, Inc.  You shall not
+  *disclose or use Confidential Information without the express written
+  *agreement of Akritiv Technologies, Inc.
+  */
+-->
+<apex:page controller="akritiv.ExtendedTransactionPdfGenerator"
+    showHeader="false" sidebar="false" id="pg" contentType="application/vnd.ms-excel#TransactionList.xls"
+    standardStylesheets="false">
+    <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <style>
+.odd {
+    background-color: #EEE;
+}
+
+.even {
+    background-color: #FFF;
+}
+
+body {
+    font-family: Verdana, Georgia, Serif, "Times New Roman";
+}
+</style>
+
+ <style>
+@page {
+    size: landscape; @
+    bottom-right {content: "Page " counter(page);
+}
+
+}
+body {
+    font-family: courier;
+    font-family:Arial Unicode MS;
+}
+
+.list {
+    width: 100%;
+}
+</style>
+
+
+
+    </head>
+    <!--
+<apex:stylesheet value="{!URLFOR($Resource.pdfcss, resource)}"/>
+ -->
+    <body text="#111111" bgcolor="#FFFFFF">
+    <apex:form style="background-color: #FFFFFF;font-family:Courier New;font-size:8pt;"
+        id="frm">
+
+        <table border="0" width="1107" height="52">
+
+            <tr>
+                <td width="1069" height="1"><apex:image url="{!orglogo}" /></td>
+
+            </tr>
+
+        </table>
+
+        <table border="0" width="1104" height="115">
+
+
+            <tr>
+                <td width="567" height="20" valign="top" colspan="2">
+                {!$Organization.Name}</td>
+                <td width="137" height="20" valign="top"><b></b></td>
+                <td width="461" height="20" valign="top" align="left"></td>
+
+            </tr>
+
+            <tr>
+                <td width="567" height="15" valign="top" colspan="2">
+                {!$Organization.Street}</td>
+                <td width="137" height="15" valign="top"><b></b></td>
+                <td width="461" height="15" valign="top" align="left"></td>
+
+            </tr>
+
+            <tr>
+                <td colspan="2" height="19" valign="top" width="567">
+                {!$Organization.City}, {!$Organization.PostalCode}</td>
+                <td height="19" valign="top" width="137"><b></b></td>
+                <td height="19" valign="top" width="461" align="left">
+                <p align="left"/>
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="2" height="20" valign="top" width="567"><b>Phone:</b>
+                {!$Organization.Phone}<b>&nbsp; |&nbsp; {!$Label.Label_Fax_Colon}</b>
+                {!$Organization.Fax}</td>
+                <td height="19" valign="top" width="11"><b></b></td>
+                <td height="19" valign="top" width="513" align="left">
+                <p align="left"/>
+                </td>
+
+            </tr>
+
+
+
+
+        </table>
+
+        <table border="0" cellpadding="0" width="100%">
+            <tr>
+                <td width="15%" align="left" valign="top"><b>Customer#:</b></td>
+                <td width="85%" align="left" valign="top">{!acc.AccountNumber}</td>
+
+            </tr>
+
+            <tr>
+                <td width="15%" align="left" valign="top"><b>Customer&nbsp;Name:</b></td>
+                <td width="85%" align="left" valign="top">{!acc.Name}</td>
+
+            </tr>
+
+
+        </table>
+
+        <table border="0" cellpadding="0" cellspacing="0"
+            style="border-collapse: collapse" bordercolor="#111111" width="100%">
+            <tr>
+                <td width="70" align="center"><span class="Apple-style-span"
+                    style="border-collapse: separate; color: rgb(0, 0, 0); font-family: Times New Roman; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-border-horizontal-spacing: 0px; -webkit-border-vertical-spacing: 0px; -webkit-text-decorations-in-effect: none; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; font-size: 12pt">
+                <span class="Apple-style-span"
+                    style="text-align: left; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px">
+                {!$Label.Label_Summary}</span></span></td>
+
+                <td width="30%" align="right"><b>{!$Label.Label_Date_Colon}{!dt}</b></td>
+
+
+            </tr>
+        </table>
+
+        <table border="1" cellpadding="0" cellspacing="0"
+            style="border-collapse: collapse" bordercolor="#111111" width="100%"
+            id="AutoNumber2">
+
+            <apex:variable value="{!0}" var="count" />
+            <apex:repeat value="{!SummaryTxs}" var="lstTrans">
+
+                <tr>
+                    <apex:repeat value="{!headerList}" var="item">
+                        <th style="text-align: center;">{!item}</th>
+                    </apex:repeat>
+                </tr>
+
+                <apex:repeat value="{!lstTrans}" var="trans">
+                    <apex:variable value="{!count + 1}" var="count" />
+                    <tr class="{!IF(MOD(count,2)==0,'odd','even')}">
+                        <apex:repeat value="{!trans}" var="item">
+                            <td>{!item}</td>
+                        </apex:repeat>
+                    </tr>
+                </apex:repeat>
+
+
+            </apex:repeat>
+        </table>
+        <table class="total" width="100%">
+            <tr>
+                <td align="right">
+
+                <b><apex:outputLabel value="{!$Label.Label_Total}: {!totalBillingBalance}" /></b></td>
+            </tr>
+        </table>
+
+
+
+
+        <!-- SUMMARY PDF ENDS HERE -->
+
+
+
+
+        <!-- DETAIL PDF PAGES STARTS HERE -->
+
+        <apex:outputPanel rendered="{!showDetails}">
+
+
+            <apex:repeat value="{!ListOfTxWithLineItem}" var="lstTrans">
+                <div style="page-break-before: always;">
+
+
+                <table border="0" width="1176" height="52">
+
+                    <tr>
+                        <td width="443" height="1"><apex:image url="{!orglogo}" /></td>
+                        <td width="695">
+                        <p style="text-align: left"/>
+                        </td>
+
+                    </tr>
+
+                </table>
+
+                <table border="0" width="1176" height="115">
+                    <tr>
+                        <td width="532" height="20" valign="top" colspan="2">
+                        {!$Organization.Name}</td>
+                        <td width="128" height="20" valign="top">&nbsp;</td>
+                        <td width="577" height="20" valign="top">&nbsp;</td>
+
+                    </tr>
+
+                    <tr>
+                        <td width="532" height="15" valign="top" colspan="2">
+                        {!$Organization.Street}</td>
+                        <td width="128" height="15" valign="top"></td>
+                        <td width="577" height="15" valign="top"></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" height="19" valign="top" width="532">
+                        {!$Organization.City}, {!$Organization.PostalCode}</td>
+                        <td height="19" valign="top" width="128">&nbsp;</td>
+                        <td height="19" valign="top" width="577">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" height="20" valign="top" width="532"><b>{!$Label.Label_Phone_Colon}</b>
+                        {!$Organization.Phone}<b>&nbsp; |&nbsp; Fax:</b>
+                        {!$Organization.Fax}</td>
+                        <td height="20" valign="top" width="602" colspan="2">&nbsp;</td>
+                    </tr>
+
+
+
+                </table>
+
+
+
+                <table width="1110">
+                    <tr>
+                        <td width="52"><b>{!$Label.Label_Bill_To_Colon}</b></td>
+                        <td width="405">{!acc.Name}</td>
+                        <td width="56"><b>{!$Label.Label_Ship_To_Colon} </b></td>
+                        <td width="583">{!acc.Name}</td>
+                    </tr>
+                    <tr>
+                        <td width="52">&nbsp;</td>
+                        <td width="405">{!acc.BillingStreet}</td>
+                        <td width="56">&nbsp;</td>
+                        <td width="583">{!acc.BillingStreet}</td>
+                    </tr>
+                    <tr>
+                        <td width="52">&nbsp;</td>
+                        <td width="405">{!acc.BillingCity}</td>
+                        <td width="56">&nbsp;</td>
+                        <td width="583">{!acc.BillingCity}</td>
+                    </tr>
+                    <tr>
+                        <td width="52">&nbsp;</td>
+                        <td width="405">{!acc.BillingPostalCode}</td>
+                        <td width="56">&nbsp;</td>
+                        <td width="583">{!acc.BillingPostalCode}</td>
+                    </tr>
+                    <tr>
+                        <td width="461" colspan="2">&nbsp;</td>
+                        <td width="639" colspan="2">&nbsp;</td>
+                    </tr>
+                </table>
+
+
+
+
+                <table border="1" cellpadding="0" cellspacing="0"
+                    style="border-collapse: collapse" bordercolor="#111111"
+                    width="100%" id="AutoNumber2">
+                    <tr>
+                        <td width="20%" align="center" bgcolor="#C0C0C0"><font
+                            size="5"> <b>{!$Label.Label_Item}</b></font></td>
+                        <td width="20%" align="center" bgcolor="#C0C0C0"><font
+                            size="5"> <b>{!$Label.Label_Description}</b></font></td>
+                        <td width="20%" align="center" bgcolor="#C0C0C0"><font
+                            size="5"> <b>{!$Label.Label_Qty}</b></font></td>
+                        <td width="20%" align="center" bgcolor="#C0C0C0"><font
+                            size="5"> <b>{!$Label.Label_Price_Each}</b></font></td>
+                        <td width="20%" align="center" bgcolor="#C0C0C0"><font
+                            size="5"> <b>{!$Label.Label_Line_Total}</b></font></td>
+                    </tr>
+                    <apex:variable value="{!0}" var="itemtotal" />
+                    <apex:variable value="{!0}" var="countItem" />
+                    <apex:repeat value="{!lstTrans.lstLineItems}" var="nextLineItemObj">
+                        <apex:variable value="{!countItem + 1}" var="countItem" />
+                        <tr class="{!IF(MOD(countItem,2)==0,'odd','even')}">
+
+                            <td width="20%" align="center">
+                            {!nextLineItemObj.Item_Number__c}</td>
+                            <td width="20%" align="center">
+                            {!nextLineItemObj.Description__c}</td>
+                            <td width="20%" align="center">
+                            {!nextLineItemObj.Quantity__c}</td>
+                            <td width="20%" align="center">
+                            ${!nextLineItemObj.Unit_Price__c}</td>
+                            <td width="20%" align="center">$
+                            {!(nextLineItemObj.Line_Total__c)}</td>
+                            <apex:variable value="{!itemtotal + (nextLineItemObj.akritiv__Line_Total__c)}"
+                                var="itemtotal" />
+                        </tr>
+                    </apex:repeat>
+                </table>
+                <table class="total" width="100%">
+                    <tr>
+
+                        <td width="20%" align="center"></td>
+                        <td width="20%" align="center"></td>
+                        <td width="20%" align="center"></td>
+                        <td width="20%" align="center"><b>{!$Label.Label_Total_Colon}</b></td>
+                        <td width="20%" align="center"><b>${!lstTrans.totalStr}</b></td>
+
+
+                    </tr>
+                </table>
+
+
+                </div>
+            </apex:repeat>
+
+        </apex:outputPanel>
+
+    </apex:form>
+    </body>
+    </html>
+</apex:page>

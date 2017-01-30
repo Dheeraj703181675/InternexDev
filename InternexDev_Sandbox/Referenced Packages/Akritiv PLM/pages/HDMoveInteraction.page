@@ -1,0 +1,243 @@
+<apex:page controller="akritivtlm.HDMoveInteractionController" sidebar="false" showHeader="false" id="pageId" tabStyle="akritivtlm__Conversation__c" action="{!tempObjDel}">
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__editRec, '/editResource/editjs.js')}"/>
+<style>
+ html{
+        scrollbar-face-color: #E6E6E6;
+        scrollbar-shadow-color: #E6E6E6;
+        scrollbar-highlight-color:#E6E6E6;
+        scrollbar-3dlight-color: #ADADAD;
+        scrollbar-darkshadow-color: #ADADAD;
+        scrollbar-track-color: #ADADAD;
+        scrollbar-arrow-color: #000000;
+        }
+    #filter{
+        display: block;    position: fixed;
+        top: 0%;    left: 0%;
+        width: 100%;    height: 100%;
+        background-repeat:no-repeat;    background-position:center;    background-color: #ffffff;
+        z-index:10;    opacity:0.6;
+        filter: alpha(opacity=50);
+    }
+</style>
+<script>
+    var SelectChkId='';
+
+    var selectedChkbox;
+    var btnFlag = false;
+    function deSelectOthers(chkBox) {
+        if (chkBox.checked){
+            if ((chkBox != selectedChkbox) && (selectedChkbox != null)) {
+                selectedChkbox.checked = false;
+            }
+            selectedChkbox = chkBox;
+            SelectChkId=chkBox.name;
+            document.getElementById('pageId:formId:selectedItemId').value = SelectChkId;
+            btnFlag = true;
+        }else
+            btnFlag = false;
+        renderingBtn();
+    }
+
+    function btnVisible(){
+        if(btnFlag)
+            return true;
+        else
+            return false;
+        renderingBtn();
+    }
+
+function startProcess(){
+    document.getElementById("{!$Component.pageId.formId.loading}").style.display = 'block';
+    document.getElementById('filter').style.display = 'block';
+}
+
+function endProcess(){
+    document.getElementById("{!$Component.pageId.formId.loading}").style.display = 'none';
+    document.getElementById('filter').style.display = 'none';
+}
+
+</script>
+
+<apex:outputPanel id="closeOP">
+    <script>
+        function closeWindow(){
+            if('{!closeFlag}' == 'true'){
+                var returnValue = 'Interaction(s) moved';
+                window.parent.displayMessageAndClosePopUp("info",returnValue,"moveInteractionWin");
+             }
+                //window.returnValue = 'Interaction(s) moved';
+                //window.close();
+        }
+    </script>
+</apex:outputPanel>
+
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+
+<style>
+    .messageblock{
+        font-size:11px;
+        border-radius: 4px;
+        border-color: #c00;
+        background-color: #ffc;
+        border-style: solid;
+        border-width: 1px;
+        color: #000;
+    }
+</style> 
+
+<script>
+    function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+
+    function closeMessage() {
+        $('#messagebox').hide();   
+    }
+
+    function displayMessage(type,msg,interval) {
+        var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:50%;margin: 0 auto;margin-top: 5px;">'+
+                '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+                '</div>';
+        if(document.getElementById('messagebox') != null && document.getElementById('messagebox') != undefined) {
+                document.getElementById('messagebox').innerHTML = m;
+                animateMessageBox('messagebox',interval);
+        }
+        animateMessageBox('messagebox',interval);
+    }
+</script>
+
+<apex:outputpanel id="messagepanel" style="Display:None">
+    <apex:messages id="msg1"  style="Display:None" />
+    <script>
+        if(document.getElementById('{!$Component.msg1}') != null && document.getElementById('{!$Component.msg1}') != undefined) {
+        var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('li');
+        var msg='';
+        for(var i=0;i<obj.length;i++) {
+            if(i==0) 
+            msg += '<br />';
+            msg += obj[i].innerHTML + '<br />';
+        }
+        if(msg != '') {
+            setTimeout(function(){displayMessage('error',msg,10000);},1000);
+        }
+    }
+    </script>
+</apex:outputpanel>
+
+<!-- <apex:pagemessages id="msg"></apex:pagemessages>  -->
+<div id="messagebox" style="z-index:10 !important;position:fixed !important;width:50% !important;top:30%;left:20%;" ></div>
+
+<apex:form id="formId">
+    
+    <div id="filter" style= "display:none;"></div> 
+    <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+    
+    <apex:actionFunction name="renderingBtn" rerender="mveBtn" />
+    <apex:actionFunction name="delObj" action="{!tempObjDel}" reRender="messagepanel"/>
+    <apex:actionFunction name="onChangeevent" action="{!onChange}" rerender="mainPanel" />
+    <apex:inputHidden > 
+        <apex:inputHidden id="selectedItemId" value="{!selectedConvId}" />
+    </apex:inputHidden>
+
+    <apex:pageBlock id="pbId" title="Search Case To Move Interaction">
+                <apex:selectList value="{!searchCriteria}" multiselect="false" size="1">
+                    <apex:selectOptions value="{!items}"/>
+                </apex:selectList>
+                <apex:outputPanel >
+                    <apex:inputText value="{!searchParam}" onchange="onChangeevent();return false;"/>
+                    
+                    <apex:actionStatus id="saveStatus1">
+                        <apex:facet name="stop">
+                            <apex:commandButton value="{!$Label.Label_Search}" action="{!searchCase}" reRender="mainPanel,messagepanel" onclick="startProcess();disabling();" oncomplete="enabling();endProcess();"/>
+                        </apex:facet>
+                        <apex:facet name="start">
+                            <apex:commandButton value="{!$Label.Label_Search}..." disabled="true" status="saveStatus1"/>
+                        </apex:facet>
+                    </apex:actionStatus>
+                </apex:outputPanel>
+
+        <br/><br/>
+        <apex:outputPanel id="mainPanel">
+            <apex:outputPanel rendered="{!AND(IF(paginater.isAll, false, true), IF(paginater.totalPage == 1, false, true))}">
+                <apex:outputText rendered="{!paginater.showFirst}">
+                    <apex:commandLink action="{!firstPage}" value="First" rerender="mainPanel" onclick="startProcess();" oncomplete="endProcess();"/>
+                </apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:outputText rendered="{!paginater.showPrevious}">
+                    <apex:commandLink action="{!previousPage}" value="Prev" rerender="mainPanel" onclick="startProcess();" oncomplete="endProcess();"/>
+                </apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:repeat value="{!paginater.pageList}" var="pl">
+                    <apex:outputText rendered="{!!pl.isActive}">
+                        <apex:commandLink action="{!updatePage}" rerender="mainPanel" onclick="startProcess();" oncomplete="endProcess();">
+                            {!pl.pageNum}                              
+                            <apex:param name="selectedPage" value="{!pl.pageNum}" assignTo="{!paginater.pageNum}" />
+                        </apex:commandLink>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!pl.isActive}" value="{!pl.pageNum}" />&nbsp;&nbsp;&nbsp;&nbsp;
+                </apex:repeat>&nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:outputText rendered="{!paginater.showNext}">
+                    <apex:commandLink action="{!nextPage}" value="Next" rerender="mainPanel" onclick="startProcess();" oncomplete="endProcess();"/>
+                </apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:outputText rendered="{!paginater.showLast}">
+                    <apex:commandLink action="{!lastPage}" value="Last" rerender="mainPanel" onclick="startProcess();" oncomplete="endProcess();"/>
+                </apex:outputText>
+            </apex:outputPanel>
+            <br/><br/>
+            <apex:outputPanel id="dataPanel">
+                    <apex:pageBlockTable value="{!genericList}" var="searchList" id="pbtResultTabId" columns="3" rendered="{!IF(searchResultList.size>0, true, false)}">
+                        <apex:column style="width:20% !important;">
+                            <input type="checkbox" name="{!searchList.id}" id="checkedone" onclick="return deSelectOthers(this)"/>
+                            <apex:actionSupport event="onclick"  reRender="mveBtn" />
+                            <!-- <apex:inputCheckBox onclick="deSelectOthers(this)"  value="{!searchList.id}"/> -->
+                        </apex:column>
+                        <apex:column headerValue="Case Id" style="width:30% !important;">
+                            <apex:outputText value="{!searchList.Name}" style="width:30% !important;"></apex:outputText>
+                        </apex:column>
+                        <apex:column headerValue="Case Subject" style="width:50% !important;">
+                            <apex:outputText value="{!searchList.akritivtlm__Subject__c}" style="width:50% !important;"></apex:outputText>
+                        </apex:column>
+                    </apex:pageBlockTable>
+            </apex:outputPanel>
+
+            <center>
+                <apex:actionStatus id="saveStatus2">
+                    <apex:facet name="stop">
+                        <apex:commandButton id="mveBtn" value="{!$Label.Label_Move_Interaction}" onclick="startProcess();disabling();" action="{!moveInteraction}" oncomplete="enabling();endProcess();closeWindow();" reRender="closeOP,messagepanel" rendered="{!IF(searchResultList.size>0, true, false)}" style="margin-left:10% !important;"/>
+                    </apex:facet>
+                    <apex:facet name="start">
+                        <apex:commandButton value="{!$Label.Label_Move_Interaction}..." disabled="true" status="saveStatus2"/>
+                    </apex:facet>
+                </apex:actionStatus>
+                <apex:actionStatus id="saveStatus3">
+                    <apex:facet name="stop">
+                        <apex:commandButton id="clsBtn" value="{!$Label.Label_Close}" onclick="disabling();window.parent.Ext.getCmp('moveInteractionWin').close();" style=""/>
+                    </apex:facet>
+                    <apex:facet name="start">
+                        <apex:commandButton value="{!$Label.Label_Close}..." disabled="true" status="saveStatus3"/>
+                    </apex:facet>
+                </apex:actionStatus>
+            </center>
+        </apex:outputPanel>
+
+    </apex:pageBlock>
+</apex:form>
+<script>
+delObj();
+function removeTitle(){
+    var pgBlock = document.getElementsByClassName('pbTitle');
+    if(pgBlock != null && pgBlock.length > 0){
+        for(var i=0;i<pgBlock.length;i++){
+            var pgBlockChild = pgBlock[i].parentNode.childNodes;
+            if(pgBlockChild != null && pgBlockChild.length > 0){
+                for(var j=1;j<pgBlockChild.length;j++){
+                    pgBlockChild[j].parentNode.removeChild(pgBlockChild[j]);
+                }
+            }
+        }
+    }
+}
+removeTitle();
+</script>
+</apex:page>

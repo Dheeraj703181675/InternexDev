@@ -1,0 +1,8 @@
+Dear {!Contact.Name},
+
+You account is over 60 days past due. Please see attached for detail on invoices that are past due.
+
+Thanks,
+{!User.Name}
+{!User.Email}
+{!User.Phone}

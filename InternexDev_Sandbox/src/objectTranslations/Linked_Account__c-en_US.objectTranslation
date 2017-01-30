@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Linked Account</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Linked Accounts</value>
+    </caseValues>
+    <fields>
+        <label><!-- Client --></label>
+        <name>Client__c</name>
+        <relationshipLabel><!-- Linked Accounts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Encryption Key --></label>
+        <name>Encryption_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- LinkedAccountTypeName --></label>
+        <name>LinkedAccountTypeName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Linked Account Type --></label>
+        <name>Linked_Account_Type__c</name>
+        <relationshipLabel><!-- Linked Accounts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Portal External ID --></label>
+        <name>Portal_External_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Access Token Secret --></label>
+        <name>access_token_secret__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consumer Key --></label>
+        <name>consumer_key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consumer Secret --></label>
+        <name>consumer_secret__c</name>
+    </fields>
+    <fields>
+        <label><!-- Oauth Token --></label>
+        <name>oauth_token__c</name>
+    </fields>
+    <fields>
+        <label><!-- Realm ID --></label>
+        <name>realm__c</name>
+    </fields>
+    <layouts>
+        <layout>Linked Account Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,532 @@
+<apex:page id="page" cache="false"  standardController="akritivtlm__AP_Tracker__c" extensions="akritivtlm.TrackerView" tabStyle="akritivtlm__AP_Tracker__c" action="{!createDocument}"   >
+
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__editRec, '/editResource/editstyle.css')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+
+<style>
+    .messageblock{
+        font-size:11px;
+        border-radius: 4px;
+        border-color: #c00;
+        background-color: #ffc;
+        border-style: solid;
+        border-width: 1px;
+        color: #000;
+    }
+</style> 
+
+<script>
+
+function documentinnewtab(){
+
+    var showducument={!$User.Show_Document__c};
+    var showducumentinnewtab={!$User.Show_Document_In_New_Tab__c};
+    var attachmentid='{!invoiceattachid}';
+    var returnurl='{!returnurl}';
+    var urlstring='{!primarypopupurl}';
+    var newwindow;
+    if(!showducument && attachmentid!='' && returnurl!='edit')
+    {
+        if(showducumentinnewtab){
+           var xAxis=0;   
+           if(window.screen.width!=undefined)
+               xAxis = window.screen.width;
+                
+           newwindow=window.open(urlstring+attachmentid,'PrimaryDocument','channelmode=yes,scrollbars=yes,resizable=yes,left='+xAxis);
+           window.onunload=function(){
+               if(newwindow){
+                  newwindow.close();
+               }
+           }
+        }
+    }
+}
+
+
+function removedeletelink(){
+        //IE 8 Compatible Code
+        try {
+            var c=document.getElementById('page:noteslist');
+            var c1=document.querySelectorAll('.actionColumn');
+            
+            var a=document.getElementById('page:noteslist');
+            var a1=document.querySelectorAll('.actionLink');
+    
+            
+            
+            //For Delete Link
+            for (var i=0; i<a1.length; i++)
+            {
+                if(a1[i].innerHTML.indexOf('Del') !== -1){
+                    a1[i].parentNode.removeChild(a1[i]);
+                }
+            }
+            
+            
+            //For Edit Link
+            for (var i=0; i<a1.length; i++)
+            {   
+                if(a1[i].innerHTML.indexOf('Edit') !== -1){
+                    a1[i].parentNode.removeChild(a1[i]);
+                }
+                
+            }
+            //For Replace |
+            for (var i=0; i<c1.length; i++)
+            {
+                var d=c1[i].innerHTML.replace("\|","");
+                c1[i].innerHTML =d;
+                d=c1[i].innerHTML.replace("\|","");
+                c1[i].innerHTML=d;
+            }
+            
+            //For Remove Hyperlink
+            var b=document.getElementById('page:noteslist');
+            var b1=b.getElementsByTagName("a");
+            for (var i=0; i<b1.length; i++)
+            {   
+                if(b1[i].innerHTML.indexOf('View') == -1){
+                    if(b1[i].innerHTML != '') {
+                        var content = b1[i].innerHTML;
+                        b1[i].parentNode.innerHTML = content;
+                    }
+                }
+                
+            }
+        } catch(e) {
+            //alert('exception : ' +e);
+        }
+  
+}
+</script>
+
+<script>
+    function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+
+    function closeMessage() {
+        $('#messagebox').hide();   
+    }
+
+    function displayMessage(type,msg,interval) {
+     var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:50%;margin: 0 auto;margin-top: 5px;">'+
+            '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+            '</div>';
+    if(document.getElementById('messagebox') != null && document.getElementById('messagebox') != undefined) {
+            document.getElementById('messagebox').innerHTML = m;
+            animateMessageBox('messagebox',interval);
+        }
+    animateMessageBox('messagebox',interval);
+}
+</script>
+
+<apex:outputpanel id="messagepanel" style="Display:None">
+    <apex:messages id="msg1"  style="Display:None" />
+    <script>
+
+        if(document.getElementById('{!$Component.msg1}') != null && document.getElementById('{!$Component.msg1}') != undefined) {
+        var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('li');
+        var msg='';
+        for(var i=0;i<obj.length;i++) {
+            if(i==0)    msg += '\n';
+            msg += obj[i].innerHTML + '\n';
+        }
+        if(msg != '') {
+            //setTimeout(function() {displayMessage('error',msg,10000);},1000);
+            alert(msg);
+        }
+    }
+    </script>
+</apex:outputpanel>
+
+<div id="messagebox" style="z-index:10 !important;position:fixed !important;width:50% !important;top:30%;left:20%;" ></div>
+
+<script type="text/javascript">
+       function startProcessForEdit(){
+           document.getElementById("{!$Component.page.frm.loading}").style.display = 'block';       
+           document.getElementById('filter').style.display = 'block';
+       }
+
+       function endProcessForEdit(){
+           document.getElementById("{!$Component.page.frm.loading}").style.display = 'none';
+           document.getElementById('filter').style.display = 'none'; 
+       }
+
+        function callApproveReject(assigneeEmail,status){
+            //to assign value to hidden
+            document.getElementById('{!$Component.page.frm.assignEmail}').value = assigneeEmail;
+            document.getElementById('{!$Component.page.frm.trackerStatus}').value = status;
+            return true;
+        }
+
+        function recallProcess() {
+            recallApprovalProcess();
+        }
+
+        function recallStandardApprovalProcess() {
+            actFuncRecallStandardApprovalProcess();
+        }
+        var win;
+        function openApprovalHistory(histId) {
+            var left = 150;
+            var top = 150;
+            var urlString = '/apex/ApprovalHistory?recordID='+histId;
+            if ( win != undefined && win != null)
+            win.close();
+            win = window.open (urlString ,"ApprovalHistory","toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width=900,height=800, top="+top+",left="+left );
+            return false;
+        }
+
+</script>
+
+<!-- <apex:pagemessages id="msg" />  -->
+<apex:form id="frm" rendered="{!form_render}">
+
+    <!-- for providing loading -->
+    <div id="filter" style= "display:none;"></div> 
+    <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+    <!-- for providing loading -->
+
+    <apex:actionFunction oncomplete="QCvisible();" name="QCvisi" rerender="standardFields" />
+    <apex:actionFunction name="process" action="{!processFV}" rerender="startflds1" />
+    <apex:actionFunction action="{!recallStdApprovalProcess}" name="actFuncRecallStandardApprovalProcess" rerender="histBlock" oncomplete="endProcessForEdit();location.reload();" ></apex:actionFunction> 
+    
+    <apex:actionRegion immediate="true" >
+        <apex:dataTable value="{!childObject}" var="tracker" width="100%"  style="height:100%;">
+            <apex:column style="resize:verticle;width:auto;"  rendered="{!(invoiceattachid != null && invoiceattachid != '' && $User.Show_Document__c)}" >
+                <c:WFpdf_attachment_viewer value="{!invoiceattachid}" name="{!invoiceattachname}" width="{!imageWidth}"  height="{!imageHeight}" objectName="{!childobjectname}"    />
+            </apex:column>
+
+            <apex:column width="100%"  > 
+                <div style="{!IF( (invoiceattachid != null && invoiceattachid != '' && $User.Show_Document__c) , "overflow:auto;height:800px;" , "position:relative;" )}">
+                <apex:pageBlock title="{!childObject['Name']}" id="jobTrackerPageBlock0" >
+                    <!--START : Below two blocks are kept to aid rendering of dependent picklist whose controlling fields are not visible/non editable-->
+                    <div style="display:none;visibility:hidden;">
+
+                        <apex:repeat id="repeat1011" value="{!standardEditableList}" var="stdRO">
+                             <apex:inputHidden >
+                                 <apex:inputField rendered="{!IF(stdRO == childNamespace +'Current_State__c',true,false)}" value="{!childObject[stdRO]}" style="display:none;visibility:hidden;" >
+                                 </apex:inputField>
+                             </apex:inputHidden>
+                        </apex:repeat>
+                    </div>
+                    <!--END : Below two blocks are kept to aid rendering of dependent picklist whose controlling fields are not visible/non editable-->
+
+                    <apex:pageBlockButtons location="both">
+                        <apex:commandButton value="{!$Label.Label_Edit}" action="{!edit1}" reRender="messagepanel,frm" />
+                    </apex:pageBlockButtons>
+
+                    <apex:pageBlockSection columns="{!noofcolums}" title="{!$Label.Label_Case_Details}" id="fieldsPageBlock" collapsible="true" >
+
+                         <apex:repeat id="repeat101" value="{!standardEditableList}" var="stdRO">
+                                <apex:outputField value="{!childObject[stdRO]}" rendered="{!IF(stdRO == childNamespace +'Current_State__c',true,false)}" />   
+                            </apex:repeat>
+             
+                             <apex:repeat id="repeat111" value="{!standardReadOnlyList}" var="stdRO">
+                                <apex:outputField value="{!childObject[stdRO]}" rendered="true" />    
+                            </apex:repeat>
+
+                            <apex:repeat id="repeat1111" value="{!standardTrackerList}" var="stdRO">
+                               <apex:outputField value="{!parentObject[stdRO]}" rendered="true" />    
+                           </apex:repeat>
+
+                    </apex:pageBlockSection>
+                    
+                    
+
+                    <apex:pageBlockSection columns="{!noofcolums}" title="{!$Label.Label_Fields}" id="startflds1" collapsible="true" >
+                        <apex:repeat id="repeat10" value="{!dependentFieldsList}" var="strt">
+                            <apex:outputField value="{!childObject[strt.apiName]}" rendered="{!strt.ouRender}" />
+                        </apex:repeat>
+                        <apex:outputfield id="requestorEmail1" value="{!parentObject.akritivtlm__Requestor_Email_Id__c}" rendered="{!requestorEmail.ouRender}" />
+                    </apex:pageBlockSection>
+                    
+                    <apex:pageBlockSection title="{!$Label.Label_Delivery_Detail}" id="pgBlckSec4" columns="1" rendered="{!showBlock1}">
+                        <apex:pageBlockSectionItem >
+                            <apex:pageblockTable value="{!block1List}" var="v" id="pgBlckTbl1" style="width:100% !important;" >
+                                <apex:column headerValue="{!$Label.Label_Block1_Field1}" style="width:50% !important;">
+                                    <apex:outputfield value="{!childObject[v.delNum]}" id="deliveryNo" />
+                                </apex:column>
+                                <apex:column headerValue="{!$Label.Label_Block1_Field2}" style="width:50% !important;">
+                                    <apex:outputfield value="{!childObject[v.ordNum]}" id="orderNo"  />
+                                </apex:column>
+                            </apex:pageblockTable>
+                      </apex:pageBlockSectionItem>
+                  </apex:pageBlockSection>
+                                        
+                  <apex:pageBlockSection title="{!$Label.Label_Vat_Detail}" id="pgBlckSec5" columns="1" rendered="{!showBlock2}">
+                      <apex:pageBlockSectionItem >
+                          <apex:pageblockTable value="{!block2List}" var="v" id="pgBlckTbl2" style="width:100% !important;" >
+                                <apex:column headerValue="{!$Label.Label_Block2_Field1}" style="width:25% !important;">
+                                    <span style="font-weight: bold !important;">
+                                        <apex:outputfield value="{!childObject[v.vatRate]}" style="font-weight: bold !important;" id="vatRate" styleclass="{!v.vatRate}"  rendered="{!IF(v.orderIndex == 1,true,false)}"  />
+                                            <apex:outputPanel rendered="{!IF(v.orderIndex > 1,true,false)}">
+                                            <span style="font-weight: bold !important;">
+                                                <apex:outputField value="{!childObject[v.vatRate]}" id="vatRate2" styleclass="{!v.vatRate}" rendered="{!IF(v.orderIndex != block2List.size,true,false)}" style="font-weight: bold !important;" />
+                                                <apex:outputText value="Total : " id="vatRate3" styleclass="{!v.vatRate}" rendered="{!IF(v.orderIndex == block2List.size,true,false)}" style="font-weight: bold !important;" />
+                                            </span>
+                                        </apex:outputPanel>
+                                    </span>
+                                </apex:column>
+                                
+                                <apex:column headerValue="{!$Label.Label_Block2_Field2}" style="width:25% !important;">
+                                    <span style="font-weight: bold !important;">
+                                        <apex:outputfield value="{!childObject[v.netValue]}" id="netValue" styleclass="{!v.netValue}" rendered="{!IF(v.orderIndex == 1,true,false)}"  />
+                                            <apex:outputPanel rendered="{!IF(v.orderIndex > 1,true,false)}">
+                                            <span style="font-weight: bold !important;">
+                                                <apex:outputField value="{!childObject[v.netValue]}" id="netValue2" styleclass="{!v.netValue}" rendered="{!IF(v.orderIndex > 1,true,false)}" style="font-weight: bold !important;" />
+                                            </span>
+                                        </apex:outputPanel>
+                                    </span>
+                                </apex:column>
+                                
+                                <apex:column headerValue="{!$Label.Label_Block2_Field3}" style="width:25% !important;">
+                                    <span style="font-weight: bold !important;">
+                                        <apex:outputfield value="{!childObject[v.vatValue]}" id="vatValue" styleclass="{!v.vatValue}" rendered="{!IF(v.orderIndex == 1,true,false)}"  />
+                                            <apex:outputPanel rendered="{!IF(v.orderIndex > 1,true,false)}">
+                                            <span style="font-weight: bold !important;">
+                                                <apex:outputField value="{!childObject[v.vatValue]}" id="vatValue2" styleclass="{!v.vatValue}" rendered="{!IF(v.orderIndex > 1,true,false)}" style="font-weight: bold !important;" />
+                                            </span>
+                                        </apex:outputPanel>
+                                    </span>
+                                </apex:column>
+                                
+                                <apex:column headerValue="" style="width:25% !important;">
+                                    <apex:outputPanel rendered="{!IF(v.orderIndex > 1 && v.orderIndex == block2List.size,true,false)}">
+                                    <span style="font-weight: bold !important;">
+                                        Grand Total : <apex:outputField value="{!childObject[grossTotalField]}" id="vatValue3" styleclass="{!v.vatValue}" rendered="{!IF(v.orderIndex > 1 && v.orderIndex == block2List.size,true,false)}" style="font-weight: bold !important;" />
+                                    </span>
+                                    </apex:outputPanel>
+                                </apex:column>
+                          
+                          </apex:pageblockTable>
+                      </apex:pageBlockSectionItem>
+                  </apex:pageBlockSection>
+                  
+                    <apex:pageBlockSection columns="{!noofcolums}" title="Comment History" id="commenthistoryid" collapsible="true" >
+                        <apex:inputTextarea readonly="true" id="user_commenthistory" value="{!childObject['Comment_History__c']}" rendered="true"  style="overflow: auto;height:80px; width:220px;"/>
+                    </apex:pageBlockSection>
+                    
+                </apex:pageblock>
+            </div>
+        </apex:column>
+    </apex:dataTable>
+
+    <apex:actionFunction action="{!processFV}" name="processFV" rerender="startflds1" immediate="true" >
+         <apex:param name="firstParam" assignTo="{!selectedValue}" value="" />
+    </apex:actionFunction>
+    </apex:actionRegion>
+    
+    <!-- this is for custom approval process -->
+      <apex:actionregion rendered="{!IF(isCustomApprovalProcess && showApprovalBlock,true,false)}" >
+        <!-- for recall approval request -->
+        <apex:actionFunction action="{!recallApprovalProcess}" name="recallApprovalProcess" rerender="histBlock" oncomplete="endProcessForEdit();location.reload();" >
+        </apex:actionFunction> 
+        <!-- for recall approval request -->
+        
+        <apex:inputhidden value="{!assigneeEmail}" id="assignEmail" />
+        <apex:inputhidden value="{!trackerStatus}" id="trackerStatus" />
+       <apex:pageBlock id="histBlock">
+           <apex:facet name="header">
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td class="pbTitle">
+                                <h2 class="mainTitle">{!$Label.Label_Approval_History}</h2>
+                            </td>
+                            <td class="pbButton"  >
+                                <input type="button" class="btn" value="{!$Label.Label_Recall_Approval_Request}" onclick="if(confirm('are you sure ?')){startProcessForEdit();recallProcess();} else {return false;}" style="display:{!IF(trckerHistoryLst.size > 0 && currUserId == submitter,'','none')};" />
+                                <!-- apex:commandButton action="{!recallApprovalProcess}" value="Recall Approval Process" / -->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </apex:facet>
+            <apex:pageBlockSection id="ApprovalProcess" title="{!$Label.Label_Approval_Detail}" columns="1"  collapsible="true" > 
+                
+                <apex:pageBlockTable columns="8" value="{!trckerHistoryLst}" var="trackhistry" title="{!$Label.Label_Approval_Detail}" id="jobtrackerSysInfo" style="width:100% important!">
+                        <apex:column id="buttenlinkid" headerValue="{!$Label.Label_Action}" >
+                            <apex:commandLink value="{!$Label.Label_Approve}" onclick="if(confirm('are you sure ?')){startProcessForEdit();callApproveReject('{!JSENCODE(trackhistry.assignee)}','A');} else {return false;}"  action="{!statusChange}" reRender="histBlock" oncomplete="endProcessForEdit();location.reload();" rendered="{!IF(((trackhistry.status == 'Pending' ) && (prof['Name'] == 'System Administrator' || currUserEmail == trackhistry.assignee || currUserId == submitter)),true,false)}" />
+                            <apex:outputPanel rendered="{!IF(((trackhistry.status == 'Pending' ) && (prof['Name'] == 'System Administrator' || currUserEmail == trackhistry.assignee || currUserId == submitter)),true,false)}" > | </apex:outputPanel> 
+                            <apex:commandLink value="{!$Label.Label_Reject}"  style="padding-left:2px" onclick="if(confirm('are you sure ?')){startProcessForEdit();callApproveReject('{!JSENCODE(trackhistry.assignee)}','R');} else {return false;}" action="{!statusChange}" reRender="histBlock" oncomplete="endProcessForEdit();location.reload();" rendered="{!IF(((trackhistry.status == 'Pending' ) && (prof['Name'] == 'System Administrator' || currUserEmail == trackhistry.assignee || currUserId == submitter)),true,false)}" />
+                        </apex:column> 
+                        <apex:column id="Levelid" headerValue="{!$Label.Label_Approval_Level}" value="{!trackhistry.level}" />
+                        <apex:column id="Entryid" headerValue="Entry Date"><apex:outputLabel value=" {!trackhistry.entryDate}" /></apex:column>
+                        <apex:column id="Statusid" headerValue="{!$Label.Label_Status}" value="{!trackhistry.status}" />
+                        <apex:column id="Assigneeid" headerValue="{!$Label.Label_Assignee}" value="{!trackhistry.assignee}" />
+                        <apex:column id="Compeltionid" headerValue="Completion Date"><apex:outputLabel value=" {!trackhistry.completionDate}" /></apex:column>
+                        <apex:column id="Commentid" headerValue="{!$Label.Label_Comment}" >
+                            <apex:outputPanel rendered="{!IF(trackhistry.status != 'Pending',true,false)}" >{!trackhistry.comments}</apex:outputPanel> 
+                            <apex:inputTextarea rendered="{!IF(((trackhistry.status == 'Pending' ) && (prof.Name == 'System Administrator' || currUserEmail == trackhistry.assignee || currUserId == submitter)),true,false)}" value="{!trackhistry.comments}" rows="1" cols="30" />
+                        </apex:column>
+                        <apex:column id="unreachedMailId" headerValue="{!$Label.Label_Unreached_Mail}" >
+                            <apex:inputCheckbox value="{!trackhistry.unreachedFlag}" disabled="true"/>
+                        </apex:column>
+                 </apex:pageBlockTable>
+            </apex:pageBlockSection> 
+     
+            <apex:pageBlockSection id="ApprovalHistory" title="{!$Label.Label_Approval_History}" columns="1"  collapsible="true" > 
+                <apex:pageBlockTable columns="8" value="{!trckerHistoryDtl}" var="trackhistry" title="{!$Label.Label_Approval_History}" id="jobtrackerSysInfo" style="width:100% important!">
+                    <apex:column headerValue="{!$Label.Label_History_Name}" >
+                        <!-- /{!trackhistry['Id']} -->
+                        <a href="javascript:void(0);" onclick="openApprovalHistory('{!trackhistry['Id']}')" >{!trackhistry['Name']}</a>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Approval_Type}" >
+                        <apex:outputPanel >{!trackhistry[prefix+'Approval_Type__c']}</apex:outputPanel>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Approval_Level}" >
+                        <apex:outputPanel >{!trackhistry[prefix+'Approval_level__c']}</apex:outputPanel>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Status}" >
+                        <apex:outputPanel >{!trackhistry[prefix+'Status__c']}</apex:outputPanel>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Created_Date}" >
+                        <apex:outputLabel value=" {!trackhistry['CreatedDate']}" /> <!-- </apex:outputPanel> -->
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Completion_Date}" >
+                        <apex:outputLabel value=" {!trackhistry['Completion_Date__c']}"/>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_No_Of_Days}" >
+                        <apex:outputPanel >{!trackhistry[prefix+'No_Of_Days__c']}</apex:outputPanel>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Created_By}" value="{!trackhistry['CreatedBy']['Name']}" />            
+                </apex:pageBlockTable>
+            </apex:pageBlockSection> 
+        </apex:pageBlock>
+    </apex:actionregion>
+    <!-- this is for custom approval process -->
+    
+</apex:form>
+
+<!-- 
+<apex:form rendered="{!form_render && visibleflag && QCist.size > 0}" >
+    <apex:pageBlock >
+        <apex:pageBlockSection id="QCparameterBlock" title="Failed QC Parameters" columns="1" rendered="{!visibleflag}">
+            <apex:pageblockTable value="{!QCist}" var="QCs" >
+                <apex:repeat var="f" value="{!QCParameterFields}">
+                    <div style="word-wrap:break-word;width:10%;">
+                        <apex:column headerValue="{!$ObjectType.QC__c.fields[f].label}" >
+                            <apex:outputField value="{!QCs[f]}" />
+                        </apex:column>
+                    </div>
+                </apex:repeat>
+            </apex:pageblockTable>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form>
+ -->
+<!-- this is for QC  -->
+<apex:form rendered="{!form_render && visibleflag && (NOT(newflag) || (QCist.size > 0)) }" >
+    <apex:pageBlock >
+        <apex:pageBlockSection id="QCparameterBlock" title="{!$Label.Label_Failed_QC_Parameters}" columns="2" >
+        <apex:repeat value="{!QCist}"  var="list">
+            <apex:repeat value="{!QCParameterFields}" var="QCprm" >
+                <apex:outputField value="{!list[QCprm]}" />
+            </apex:repeat>
+         </apex:repeat>
+            
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form>
+<!-- this is for QC  -->
+
+<!-- this is for standard approval process  -->
+<apex:relatedList pageSize="10" list="ProcessSteps" subject="{!trackerid}" rendered="{!form_render && IF(NOT(isCustomApprovalProcess) && showApprovalBlock,true,false)}">
+    <apex:facet name="header">
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td class="pbTitle">
+                        <h2 class="mainTitle">{!$Label.Label_Approval_History}</h2>
+                    </td>
+                    <td class="pbButton" style="display:{!IF(isApprovalSubmitted && currUserId == submitter,'','none')};">
+                        <input value="{!$Label.Label_Recall_Approval_Request}" class="btn" name="recallApprovalProcess" onclick="if(confirm('are you sure ?')){startProcessForEdit();recallStandardApprovalProcess(); return true;} else {return false;}" title="{!$Label.Label_Recall_Approval_Request}" type="button" />
+                    </td>
+                <td>&nbsp;
+                </td></tr>
+            </tbody>
+        </table>
+    </apex:facet>
+</apex:relatedList>
+<!-- this is for standard approval process  -->
+
+<c:InteractionListView ObjName="{!childobjectname}" childRecId="{!trackerId}" rendered="{!showinteraction}"  ></c:InteractionListView>
+
+<c:TrackerHistory subject="{!trackerId}"  ChildObjectparameter="{!childobjectname}" rendered="{!IF(form_render && showShowTrackerHistoryBlock,true,false)}"></c:TrackerHistory>  
+<apex:relatedList id="noteslist" list="NotesAndAttachments" subject="{!trackerid}" pageSize="20" rendered="{!form_render && showNotesAndAttachmentBlock}">
+    <apex:facet name="header">
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td class="pbTitle">
+                        <h2 class="mainTitle">{!$Label.Label_Notes_And_Attachments}</h2>
+                    </td>
+                   
+                <td>&nbsp;
+                </td></tr>
+            </tbody>
+        </table>
+    </apex:facet>
+</apex:relatedList>
+
+<!-- ========================Custom Attachment block SFDC==================================== -->
+<!-- apex:form id="linkId1" rendered="{!If(globalConfig.akritivtlm__Enable_Annotation__c,true,false)}">
+
+<apex:inputhidden value="{!sfdcAttId}" id="sfdcAttachId"/>
+<apex:inputhidden value="{!sfdcAttName}" id="sfdcAttachName"/>
+
+<apex:pageBlock title="Attachments" id="AttachmentSfdc">
+    <apex:pageBlockSection columns="1" rendered="{!if(attachmentAnnote != null && attachmentAnnote.size>0,true,false)}">
+        <apex:pageBlockTable var="a" value="{!attachmentAnnote}">
+            <apex:column headerValue="Name" >
+                <apex:commandLink action="{!createAdditionFdfSfdc}" onclick="return createAdditionDocumentsfdc('{!a.Id}','{!a.Name}');" value="View" target="_blank" /> 
+            </apex:column>
+            <apex:column value="{!a.Name}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlockSection>
+
+</apex:pageBlock>
+</apex:form>
+<!-- ========================================================= -->
+
+<!-- =============Annotation pdf========== -->
+<apex:form id="frmDel" rendered="{!If(globalConfig.akritivtlm__Enable_Annotation__c,true,false)}">
+    <!-- for remove document this is commeted as request of praveen (3-Dec-2014) -->
+    <!-- apex:actionFunction action="{!deleteDocument}" name="deleteDocument1" rerender="frmDel" / -->
+    <!-- for remove document this is commeted as request of praveen (3-Dec-2014) -->
+</apex:form>
+<!-- ==================== -->
+<script>
+//removedeletelink();
+// ========Annotation fdf =====
+
+
+var AnnotationEnable = {!globalConfig.akritivtlm__Enable_Annotation__c}
+/*if (AnnotationEnable == true) {
+    deleteDocument1();
+}*/
+/*function createAdditionDocument2(link,name){
+    //alert(link);
+    
+    document.getElementById('{!$Component.page.linkId.attachlinkId}').value = link;
+    document.getElementById('{!$Component.page.linkId.attachNameId}').value = name;
+    return true;
+}*/
+
+/*function createAdditionDocumentsfdc(attId,attName){
+    //alert(link);
+    
+    document.getElementById('{!$Component.page.linkId1.sfdcAttachId}').value = attId;
+    document.getElementById('{!$Component.page.linkId1.sfdcAttachName}').value = attName;
+   
+    return true;
+}*/
+
+documentinnewtab();
+
+
+</script>
+</apex:page>

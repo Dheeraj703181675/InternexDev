@@ -1,0 +1,206 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/*
+ * Page to provide the functionality for adding additional
+ * email-attachments from the email editor component on the pages
+ */
+-->
+<apex:page controller="akritiv.AddEmailAttachmentsController" id="attcnmentpg">
+    <style>
+     #filter{
+            display: none;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index:10;
+            opacity:0.6;
+            filter: alpha(opacity=50);
+        }
+        
+        .homeTab .tertiaryPalette, .individualPalette .homeBlock .tertiaryPalette, .layoutEdit .individualPalette .homeBlock .tertiaryPalette {
+    background-color: #1797c0;
+    border-color: #cfeef8;
+    }
+    </style>
+
+    <script>
+    var totalSelectedAt = 0;
+         function startProcess(){
+         
+       document.getElementById("{!$Component.attcnmentpg.frm1.loadingImge}").style.display = 'block'; 
+       document.getElementById('filter').style.display = 'block'; 
+
+       }
+       
+       function endProcess(){
+       
+       document.getElementById("{!$Component.attcnmentpg.frm1.loadingImge}").style.display = 'none';
+       document.getElementById('filter').style.display = 'none'; 
+
+       } 
+       function checkAll(selectAll){
+            var inputElem = document.getElementsByTagName("input");
+           
+            totalSelectedAt = 0;
+            for( var i=0 ; i < inputElem.length ; i++){
+                if(inputElem[i].id.indexOf("selected") != -1){
+                    inputElem[i].checked = selectAll.checked;
+                     if(selectAll.checked ==true)
+                     getTotalattachedfile(inputElem[i]);
+                }
+            }
+             if(selectAll.checked == false) { 
+                    
+                    totalSelectedAt = 0;
+                   
+                    document.getElementById('TotalSelectedAttch').innerHTML = totalSelectedAt.toString();
+                 }
+        }       
+                     
+        function addAccountsJS(){
+            var j$ = jQuery.noConflict();
+            idString = '';  
+           //   idString = attid;
+            checkBoxElements = j$(".attachCheckbox:checked");
+ 
+           //Find all selected check boxes and add Account Id to comma seperated string 
+            checkBoxElements.each(function(e){
+                idString += j$(this).attr('data-id') + ',';
+                
+            });
+            // alert(idString) 
+        //  if(idString){ //if idString has a value do this
+            //Call Action function above
+          //  alert(idString);
+           
+        
+            addSelectedTransaction(idString);
+         //  }
+           // addSelectedTransaction('');
+            
+        }
+            
+
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"/>
+   
+    <!-- * <c:Base_Comp_YUI_ModalLoader /> -->
+    <apex:form id="frm1">
+        <div id="filter"></div><apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loadingImge" style="display:none;position:fixed;top:50%;left:50%;z-index:10;"/>
+        <apex:pageBlock >
+            <apex:pageMessages />
+
+            <apex:pageBlockButtons location="Bottom">
+                <apex:commandButton value="{!$Label.Label_Attach}"
+                    action="{!addAttachment}" status="loadStatus" />
+                </apex:pageBlockButtons>
+
+            <apex:pageBlockSection title="{!$Label.Label_Attach_File}">
+                <apex:inputFile fileName="{!attach.Name}" value="{!attach.Body}" />
+            </apex:pageBlockSection>
+            <br />
+            <apex:actionStatus startStyle="font-weight:Bold;color:#cc0000"
+                startText="{!$Label.Label_Please_Wait}" stopText="" id="loadStatus" />
+        </apex:pageBlock>
+    </apex:form>
+
+    <apex:form id="frm2">
+        <apex:actionFunction name="removeAttachment"
+            action="{!removeAttachment}" rerender="frm2" status="loadStatus1">
+            <apex:param name="firstParam" assignTo="{!attachmentIdToRemove}"
+                value="" />
+        </apex:actionFunction>
+        <apex:actionFunction name="addSelectedTransaction" action="{!saveAttachments}"
+            oncomplete="top.window.opener.setEmailAttachmentsIds('{!attachmentsIds}', '{!attachmentFileNames}');window.close();" >
+             <apex:param name="attachmentIds" value="" assignTo="{!attachmentIds}"/>
+               </apex:actionFunction>
+              
+       
+        <apex:pageBlock title="{!$Label.Label_Results}">
+            <apex:pageBlockSection columns="1"
+                rendered="{!IF(attachmentsList.size>0, true, false)}">
+                <apex:pageBlockTable var="a" value="{!attachmentsList}">
+                    <apex:column headerValue="{!$Label.Label_File}"
+                        value="{!a.attachmentName}" /> &nbsp; 
+                <apex:column >
+                        <apex:commandLink id="fileAttachment"
+                            onclick="removeAttachment(id); return false;"
+                            value="{!$Label.Label_Remove}" immediate="TRUE" />
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection rendered="{!IF(attachmentsList.size>0, false, true)}">
+                <apex:outputText value="{!$Label.Label_No_Files_Attached}" />
+            </apex:pageBlockSection>
+             <apex:actionStatus startStyle="font-weight:Bold;color:#cc0000"
+                onstart="startProcess();" onstop="endProcess();" id="loadStatus1" />
+        </apex:pageBlock>
+         <apex:pageBlock title="{!$Label.Label_Available_Attached_Files}">
+          <apex:pageBlockButtons location="Bottom" id="pbbt">
+         
+               <apex:commandButton value="{!$Label.Label_Done}"
+                    onclick="addAccountsJS(); return false;" />
+            </apex:pageBlockButtons>
+              <div id="Listattachdiv">
+                    <apex:pageBlockTable value="{!ListAttachmentDisp}" var="item">
+                     
+                        <apex:column >
+                        <apex:facet name="header">
+                             <apex:inputCheckbox onclick="checkAll(this);" />
+                        </apex:facet>      
+                             <input type="checkbox" data-id="{!item.Id}" id="selected"  class="attachCheckbox" onclick="getTotalattachedfile(this);" /> 
+                        <!--     <apex:inputCheckbox value="{!tx.selected}" id="selected" />------->
+                    </apex:column>
+                    <apex:column headerValue="Title">
+                        <apex:outputField value="{!item.Name}"/>
+                    </apex:column>
+                    <apex:column headerValue="Related To">
+                        <apex:outputField value="{!item.Parent.Name}"/>
+                    </apex:column>
+                    <apex:column headerValue="Last Modified">
+                        <apex:outputField value="{!item.LastModifiedDate}"/>
+                    </apex:column> 
+                    <apex:column headerValue="Created By">
+                        <apex:outputField value="{!item.Owner.Name}"/>
+                    </apex:column>
+                       
+                    </apex:pageBlockTable>
+                    
+            </div>
+            <br/>
+           
+            <label>&nbsp;Selected Records:</label>
+              <label id="TotalSelectedAttch" >0</label>
+            </apex:pageBlock>
+             <apex:variable var="cc1" value="{!ListAttachmentDisp.size}" />
+    </apex:form>
+    <script>
+    <apex:variable var="cc1" value="{!ListAttachmentDisp.size}" />
+ 
+         if('{!cc1}' > 5){
+              // alert(document.getElementById("Listattachdiv").style.cssText);
+               document.getElementById("Listattachdiv").style.cssText = "height:200px;overflow:scroll";
+           }
+          function getTotalattachedfile(checkBoxObj){
+          //alert(totalSelectedAt);
+           if(checkBoxObj.checked ==true){
+           totalSelectedAt= totalSelectedAt+1;
+               document.getElementById('TotalSelectedAttch').innerHTML = totalSelectedAt.toString();
+           }else{
+                totalSelectedAt = totalSelectedAt- 1;
+                document.getElementById('TotalSelectedAttch').innerHTML = totalSelectedAt.toString();
+              }
+          }
+    </script>
+</apex:page>

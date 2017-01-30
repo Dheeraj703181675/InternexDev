@@ -1,0 +1,8 @@
+<apex:page showHeader="false">
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+    <script>
+        var openFromField='{!JSENCODE($CurrentPage.parameters.openFrom)}';   
+    </script>
+    <script src="{!$CurrentPage.parameters.resourceURL}"></script>
+    <div id="MainDIV"></div>   
+</apex:page>

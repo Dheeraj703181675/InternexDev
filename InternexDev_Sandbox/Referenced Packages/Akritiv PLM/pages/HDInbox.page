@@ -1,0 +1,1135 @@
+<apex:page standardController="akritivtlm__QueryClassification__c" extensions="akritivtlm.HDInboxController" sidebar="false"  >
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/css/1.10.3/jquery-ui-1.10.3.css')}" />
+
+ 
+    <style>
+    .rolodex .listItemSelected {
+        background-color : rgb(248, 248, 248) !important;
+        border-right-color: rgb(248, 248, 248) !important;
+    }
+    html{
+        scrollbar-face-color: #E6E6E6;
+        scrollbar-shadow-color: #E6E6E6;
+        scrollbar-highlight-color:#E6E6E6;
+        scrollbar-3dlight-color: #ADADAD;
+        scrollbar-darkshadow-color: #ADADAD;
+        scrollbar-track-color: #ADADAD;
+        scrollbar-arrow-color: #000000;
+        }
+        .rolodex{
+            visibility: visible !important;
+        }
+        .x-ie-shadow {
+            width: 100% !important;
+            height: 100% !important;
+            left: 0px !important;
+            top: -3px !important;
+        }
+        .x-shadow{
+            width: 100% !important;
+            height: 100% !important;
+            left: 0px !important;
+            top: -3px !important;
+        }
+        .xsc{
+            height: 719px !important;
+        }
+        .xsmc{
+            width : 1500px !important;
+        }
+        
+        div.x-window div.x-window-br{
+               background-image: url("/img/alohaSkin/overlayBtmLft.png") !important;
+               background-repeat: repeat !important;
+               background-attachment: scroll !important;
+               background-clip: border-box !important;
+               background-origin: padding-box !important;
+               background-size: auto auto !important;
+        }
+        #loadMask
+        {
+            display: block;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            /* background-image:url('{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}'); */
+            background-repeat:no-repeat;
+            background-position:center;
+            background-color: #ffffff;
+            z-index:10;
+            opacity:0.6;
+            filter: alpha(opacity=50);
+        }
+        
+        #loading-curtain-div {
+            height:0px;
+            width:100%;
+            position:absolute;
+            z-index:5;
+            //-webkit-transition: all 0.30s ease-out;
+            //-moz-transition: all 0.30s ease-out;
+        }
+    </style>
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<!-- 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
+ -->
+ 
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.8.3/jquery.min-1.8.3.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.9.2/jquery-ui-1.9.2.js')}"/>
+ 
+<!-- apex:includeScript value="{!URLFOR($Resource.TwitterBootstrap, '/js/bootstrap.min.js')}"/ -->
+
+<!-- Ext Js From Salesforce -->
+
+
+<script>
+    var conversationName='';
+    function CreateAndOpenExtWindow(windowId,windowTitle,width,height,src,parametersStr,fromWhere,action){
+        var width = parseInt(width);
+        var height = parseInt(height);
+        var clientHeight = parseInt(window.parent.document.body.parentElement.clientHeight);
+        if((clientHeight - height) < 30) {
+           height = clientHeight - 100;
+         }       
+        if (!(parametersStr == '' || parametersStr == undefined || parametersStr == null)){
+              src = src + parametersStr;
+        }
+        var panal1 = new Ext.Panel({
+            id          :'panal1',
+            collapsible :false,
+            labelWidth  :80,
+            width   :width+10,
+            height  :height+10,
+            html    :'<iframe name="Panal" style="overflow:auto; width:'+width+'px; height:'+height+'px;" frameborder="0"  src="'+src+'">'
+        });                        
+        var win = new Ext.Window({
+            id : windowId,
+            title: windowTitle,
+            closable:true,
+            model : true,
+            width:width+35,
+            height:height+58,
+            //border:false,
+            resizable: false,
+            plain:true,
+            items:[panal1],
+            listeners:{
+                 'close':function(win){
+                     
+                     if( fromWhere == 'Conv' && (action == 'createCase' || action == 'closeCase' || action == 'reopenCase') ) {
+                         //for conversation
+                         reloadListView('')
+                         getInteractionList('');
+                     } else {
+                         var conversationId=document.getElementById('conversationId').value;
+                         getInteractionList(conversationId);
+                     }
+
+                     
+                          
+                  }
+            }
+        });
+        win.show(this);
+       
+    }
+    function closeMessage() {
+        $('#message').hide();   
+    }
+    
+   
+    
+    function displayMessageAndClosePopUp(type,msg,popUpId) {
+        Ext.getCmp(popUpId).close();
+        //'   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
+        if(msg != null || msg.trim() != ''){
+            var m = '<div class="alert ' + (type != "error" ? "alert-warning" : "alert-error") + ' alert-dismissable" style="width:50%;margin: 0 auto;margin-top: 10px;">'+
+                    '   <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button><strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+                    '</div>';
+            document.getElementById('message').innerHTML = m;
+            //document.getElementById('message').style.display = '';
+            animateMessageBox('message',10000);
+        }
+    }
+
+    function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+    
+    function displayMessage(type,msg,interval) {
+        //'   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
+        var m = '<div class="alert ' + (type != "error" ? "alert-warning" : "alert-error") + ' alert-dismissable" style="width:50%;margin: 0 auto;margin-top: 5px;">'+
+                '   <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button><strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+                '</div>';
+        document.getElementById('message').innerHTML = m;
+        //document.getElementById('message').style.display = '';
+        animateMessageBox('message',interval);
+    }
+
+</script>
+
+    <apex:outPutPanel id="enhancedListCompleted">
+        <script>
+            function setMsgVal(input){
+                document.getElementById('j_id0:msg').value = input;
+            }
+            function getMsgVal(){
+                //alert(document.getElementById('j_id0:msg').value);
+            }
+            
+            function adjustEnhancedListLayout(){
+                if(document.getElementById('conversationId')!=null && document.getElementById('conversationId')!=undefined){
+                    document.getElementById('conversationId').value='';
+                }
+                //alert('adjustEnhancedListLayout called');
+                allDivs = document.getElementsByTagName('DIV');
+                var replaceRolodex=false;
+                for (var i=0;i<allDivs.length ;i++ ){
+                    if(allDivs[i].className=='controls'){
+                        var enhancedListControls=allDivs[i].getElementsByTagName('*');
+                        //enhancedListControls=allDivs[i].getElementsByTagName('*');
+                        for(var j=0;j<enhancedListControls.length;j++){
+                            if('select-one'==enhancedListControls[j].type) {
+                                document.getElementById("enhancedListControls").appendChild(enhancedListControls[j]);
+                                replaceRolodex=true;
+                            }
+                        }
+                        if(document.getElementById("enhancedListControls").childNodes.length>1){
+                            document.getElementById("enhancedListControls").removeChild(document.getElementById("enhancedListControls").childNodes[0]);
+                        }
+                        allDivs[i].style.display='none';
+                        allDivs[i].parentNode.style.display='none';
+                    }
+                }
+                
+                //for assigs select box of view after load page
+                /*if(!isFirstTime && enhancedListControlsMy != null) {
+                    document.getElementById("enhancedListControls").innerHTML = enhancedListControlsMy;
+                    replaceRolodex=true;
+                }*/
+                
+                for (var i=0;i<allDivs.length ;i++ ) {
+                    //if( (allDivs[i].className=='rolodex' && replaceRolodex) || (!isFirstTime && allDivs[i].className=='rolodex')){
+                    if( (allDivs[i].className=='rolodex' && replaceRolodex) ){
+                        //alert('isFirstTime : ' + isFirstTime);
+                        //alert(document.getElementById('convactions').innerHTML);
+                        allDivs[i].innerHTML=document.getElementById('convactions').innerHTML;
+                        allDivs[i].style.visibility = "visible";
+                        //allDivs[i].style("visibility","visible");
+                        document.getElementById('convactions').innerHTML='';
+                        isFirstTime = false;
+                    }
+                }
+                
+                var gridId;
+                var classLinks = Ext.query('.x-grid-panel');
+                    Ext.each(classLinks, function(item,index) {
+                    gridId=item.id;
+                });
+               
+                var me=Ext.getCmp(gridId);
+                var i = 0;
+                while(true){
+                       if(me.getColumnModel().getColumnHeader(i) == "HiddenConvId"){
+                           //alert('i'+i);
+                           break;
+                       }else {
+                           i++;
+                       }
+                }
+                me.getColumnModel().setHidden(i, true);
+                //below code is to hide edit links and check boxs.
+                me.getColumnModel().setHidden(2, true);
+                me.getColumnModel().setHidden(1, true);
+                me.getColumnModel().setHidden(0, true);
+                //edit links and check boxs coment end.
+
+                me.on('rowclick', function(grid, rowIndex, columnIndex, e) {
+                    //console.log(grid, rowIndex, columnIndex, e);
+                    //alert(rowIndex);
+                    i = 0;
+                    while(true){
+                           if(me.getColumnModel().getColumnHeader(i) == "HiddenConvId"){
+                               //alert('i'+i);
+                               break;
+                           }else {
+                               i++;
+                           }
+                    }                   
+                    me.getSelectionModel().selectRow(rowIndex);
+                    var selectedRow=me.getSelectionModel().getSelected();
+                    var dataIndex  = me.getColumnModel().getDataIndex(i);
+                    var convValue = selectedRow.get(dataIndex);
+                    //alert(convValue);
+                    viewInteractions(convValue);
+                }, this);
+            }
+        </script>
+    </apex:outPutPanel>
+    <apex:outPutPanel id="acceptCaseCompleted">
+        <apex:messages id="msg1" style="dispaly:none;" />    
+        <script>
+            if(document.getElementById('{!$Component.msg1}') != null && document.getElementById('{!$Component.msg1}') != undefined) {
+                var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('LI');
+                var msg='';
+                for(var i=0;i<obj.length;i++) {
+                    msg += obj[i].innerHTML + '\n';
+                }
+                if(msg != '') {
+                    displayMessage('info',msg,10000);
+                }
+                document.getElementById('{!$Component.msg1}').innerHTML = '';
+            }
+        </script>
+    </apex:outPutPanel>
+
+<script>
+   
+        function OpenPopUp(inrId,type)
+        {    
+            var $target = $('#bodyTable');
+            //var $height = $target.height() - $('#intTD').height();
+            var $height = $target.height() - 12;
+            //alert(" Total = " + $height + " -> target = " + $target.height() + " intTD = " + $('#intTD').height());
+            $( "#htmlBodydiv").dialog({
+                autoOpen: false,
+                maxWidth: 1200,
+                minWidth:590,
+                minHeight:$height,
+                maxHeight:$height,
+                height:$height,
+                draggable: true,
+                resizable: true,
+                modal: false,
+                show: {
+                    effect: "fade",
+                    duration: 500
+                },
+                hide: {
+                    effect: "fade",
+                    duration: 500
+                },
+                position :{my: "right top", at: "right top", of: $target},
+                title: "Interaction Detail for "+inrId,
+                buttons: [
+                    {
+                        text: "Close",
+                        click: function() {
+                            $( this ).dialog( "close" );
+                        }
+                    }
+                ]
+            });
+         
+            $( "#htmlBodydiv").dialog( "open" );
+            
+            //for hide button
+            //alert(' type : ' + type);
+            if(type == 'Draft') { 
+                resetButtonForDraft(true);
+            } else {
+                resetButtonForDraft(false);
+            }
+           // alert(1);
+            $(".pbTitle").attr("colspan","2");
+            $(".pbTitle").next().remove();
+            var content = $(".pbTitle").html();
+           // alert(1);
+            var e = "<div style=\"display:block; float:left;\">"+content+"</div>";
+           // alert(e);
+          //  alert('e : ' + e);
+            $(".pbTitle").html(e)
+            //e.attr('id', 'firstDiv');
+            content = $(".pbTitle").html();
+           // alert('content : ' + content);
+            //**********Below line commented to remove restore button from interaction layout screen    
+            //$(".pbTitle").html(content + "<div style=\"float:right;\"><img title=\"Restore\" src=\"{!URLFOR($Resource.TwitterBootstrap, '/img/expand.png')}\" height=\"20px\" width=\"20px\" id=\"dialogImgRestoreBtn\" style=\"color:#80AD00;\" />&nbsp;&nbsp;<img title=\"Close\" src=\"{!URLFOR($Resource.TwitterBootstrap, '/img/close_button-512.png')}\" height=\"20px\" width=\"20px\" id=\"dialogImgCloseBtn\" style=\"\" /></div>");
+            //**************Above line commented to remove restore button from interaction layout screen
+            $(".pbTitle").html(content + "<div style=\"float:right;\"><img title=\"Close\" src=\"{!URLFOR($Resource.TwitterBootstrap, '/img/close_button-512.png')}\" height=\"20px\" width=\"20px\" id=\"dialogImgCloseBtn\" style=\"\" /></div>");
+            
+            //for close click
+            $('#dialogImgCloseBtn').click(function(){
+                $('#htmlBodydiv').dialog('close');
+            });
+            $('#dialogImgRestoreBtn').click(function(){
+            
+                /*alert('heigth : ' + $( document ).height());
+                alert('width : ' + $( document ).width());
+                
+                $("#htmlBodydiv").dialog("option", "maxHeight", $( document ).height());
+                $("#htmlBodydiv").dialog("option", "minHeight", $( document ).height());
+                $("#htmlBodydiv").dialog("option", "height", $( document ).height());
+                $("#htmlBodydiv").dialog("option", "minWidth", $( document ).width());
+                $("#htmlBodydiv").dialog("option", "maxWidth", $( document ).width());
+                ("#htmlBodydiv").dialog("position",  {my: "center", at: "center", of: window});*/
+                
+            });
+            
+            
+        }
+    function showMessageBox(){
+        document.getElementById('message-1').style.display='';
+    }
+    function closeMessageBox(){
+        document.getElementById('message-1').style.display='none';
+    }
+    function expandCollapseHeader(flag){
+        if(flag=='Y'){
+            document.getElementById('AppBodyHeader').style.display='none';
+            document.getElementById('collapseHeaderDiv').style.display='none';
+            document.getElementById('expandHeaderDiv').style.display='';
+        }else{
+            document.getElementById('AppBodyHeader').style.display='';
+            document.getElementById('expandHeaderDiv').style.display='none';
+            document.getElementById('collapseHeaderDiv').style.display='';
+        }
+    }
+
+        function viewInteractions(conversationId){
+            document.getElementById('conversationId').value=conversationId;
+            getInteractionList(conversationId);
+        }
+        function acceptCase(){
+            conversationId=document.getElementById('conversationId').value;
+            if(conversationId==''){
+                alert('Please view a conversation first');
+            }else{
+                acceptCaseAction(conversationId);
+            }
+        }
+        function closeCase(){
+            conversationId=document.getElementById('conversationId').value;
+            if(conversationId==''){
+                alert('Please view a conversation first');
+            }else{
+                closeCaseAction(conversationId);
+            }
+        }
+        
+        function openConvPopUp(action){
+        
+            //alert(1);
+             var popUpReturnVal;
+             //alert(document.getElementById('conversationId'));
+             conversationId=document.getElementById('conversationId').value;
+             //var conversationname='{!conversationname}';
+            //alert(conversationname);
+                if(action == 'createCase'){
+                      CreateAndOpenExtWindow('newCaseCreateWin','New Case Creation','1100','650','/apex/HDNewCaseCreation','','Conv',action);
+                    //popUpReturnVal = window.showModalDialog('/apex/HDNewCaseCreation','','dialogWidth:1100px; dialogHeight:650px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                }
+                else if(conversationId!=''){             
+                    if(action == 'uploadFile'){
+                         CreateAndOpenExtWindow('uploadFileWin','Upload File','500','230','/apex/HDUploadFile','?convid='+conversationId,'Conv',action);
+                           //popUpReturnVal = window.showModalDialog('/apex/HDUploadFile?convid='+conversationId,'','dialogWidth:600px; dialogHeight:400px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                     }else if (action == 'viewComments'){
+                         CreateAndOpenExtWindow('commentsWin','Comments','600','350','/apex/HDComments','?convid='+conversationId,'Conv',action);
+                           //popUpReturnVal = window.showModalDialog('/apex/HDComments?convid='+conversationId,'View Commets' + conversationId,'dialogWidth:600px; dialogHeight:400px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                     }else if (action == 'editCase'){
+                         CreateAndOpenExtWindow('editCaseWin','Edit Case','600','290','/apex/HDEditCase','?convid='+conversationId,'Conv',action);
+                           //popUpReturnVal = window.showModalDialog('/apex/HDEditCase?convid='+conversationId,'','dialogWidth:600px; dialogHeight:400px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                     }else if(action == 'editPriority'){
+                         CreateAndOpenExtWindow('editPriorityWin','Edit Priority','500','300','/apex/HDEditPriority','?convid='+conversationId,'Conv',action);
+                           //popUpReturnVal = window.showModalDialog('/apex/HDEditPriority?convid='+conversationId,'','dialogWidth:600px; dialogHeight:400px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                      }else if (action == 'classificationQuery'){
+                         CreateAndOpenExtWindow('classificationQueryWin','Classification Query','700','300','/apex/HDClassificationQuery','?convid='+conversationId,'Conv',action);
+                           //popUpReturnVal = window.showModalDialog('/apex/HDClassificationQuery?convid='+conversationId,'','dialogWidth:1100px; dialogHeight:650px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                     }else if (action == 'caseDetail'){
+                         CreateAndOpenExtWindow('caseDetailWin',conversationName+' Details','1100','520','/apex/HDCaseDetails','?convid='+conversationId,'Conv',action);
+                           //popUpReturnVal = window.showModalDialog('/apex/HDCaseDetails?convid='+conversationId,'','dialogWidth:1100px; dialogHeight:650px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                     }else if (action == 'closeCase'){
+                         CreateAndOpenExtWindow('closeCaseWin','Close Case '+conversationName,'800','370','/apex/HDCloseCase','?convid='+conversationId,'Conv',action);
+                           //popUpReturnVal = window.showModalDialog('/apex/HDCloseCase?convid='+conversationId,'','dialogWidth:1100px; dialogHeight:650px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                     }else if (action == 'reopenCase'){
+                         CreateAndOpenExtWindow('reopenCaseWin','Reopen Case','450','190','/apex/HDReopenCase','?convid='+conversationId,'Conv',action);
+                           //popUpReturnVal = window.showModalDialog('/apex/HDReopenCase?convid='+conversationId,'','dialogWidth:600px; dialogHeight:400px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                     }else if (action == 'composemail'){
+                         CreateAndOpenExtWindow('composeMailWin','Compose Mail','1100','650','/apex/HDComposeMail','?convid='+conversationId+'&fromButton=composeMail','Conv',action);
+                           //popUpReturnVal = window.showModalDialog('/apex/HDReopenCase?convid='+conversationId,'','dialogWidth:600px; dialogHeight:400px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                     }else if (action == 'searchConv'){
+                         CreateAndOpenExtWindow('searchConvWin','Search Conversation Against '+conversationName,'600','400','/apex/HDCaseDuplicacy','?convid='+conversationId,'Conv',action);
+                         //popUpReturnVal = window.showModalDialog('/apex/HDCaseDuplicacy?convid='+conversationId,'','dialogWidth:600px; dialogHeight:400px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                               
+                     }else if (action == 'showhistory'){
+                         CreateAndOpenExtWindow('showhistoryWin','HelpDesk History','600','400','/apex/HDshowhistory','?convid='+conversationId,'Conv',action);
+                     }else if (action == 'acceptCase'){
+                         loading(true);
+                         acceptCaseAction(conversationId);
+                     }else{
+                        //alert("This action not configured");
+                        displayMessage('error','This action not configured',3000);
+                     }
+                     
+                }else{
+                    //alert('Please view a conversation first');
+                    displayMessage('error','Please view a conversation first',3000);
+                }
+                if(popUpReturnVal != null && popUpReturnVal != ''){
+                    //alert('here');
+                    displayMessage('info',popUpReturnVal,10000);
+                    reloadListView('')
+                    getInteractionList('');
+                }
+        }
+        
+        function openIntPopUp(action,MIId){
+            var popUpReturnVal;
+            conversationId=document.getElementById('conversationId').value;
+            interactionId =document.getElementById('interactionId').value;
+                    if(action == 'moveInteraction'){
+                        getMsgVal();
+                        if(MIId != null)
+                            CreateAndOpenExtWindow('moveInteractionWin','Move Interaction','600','400','/apex/HDMoveInteraction','?tempId='+MIId,'Intr',action);
+                            //popUpReturnVal = window.showModalDialog('/apex/HDMoveInteraction?tempId='+MIId,'','dialogWidth:600px; dialogHeight:400px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                     }else if(action == 'replymail'){
+                         CreateAndOpenExtWindow('composeMailWin','Reply Mail','1100','650','/apex/HDComposeMail','?convid='+conversationId+'&fromButton=replyMail&interId='+interactionId,'Intr',action);
+                         //popUpReturnVal = window.showModalDialog('/apex/HDComposeMail?convid='+conversationId+'&fromButton=replyMail&interId='+interactionId,'','dialogWidth:1100px; dialogHeight:650px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                      }else if(action == 'replymailall'){
+                          CreateAndOpenExtWindow('composeMailWin','Reply All Mail','1100','650','/apex/HDComposeMail','?convid='+conversationId+'&fromButton=replyAllMail&interId='+interactionId,'Intr',action);
+                          //popUpReturnVal = window.showModalDialog('/apex/HDComposeMail?convid='+conversationId+'&fromButton=replyAllMail&interId='+interactionId,'','dialogWidth:1100px; dialogHeight:650px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                      }else if(action == 'forwardmail'){
+                          CreateAndOpenExtWindow('composeMailWin','Forward Mail','1100','650','/apex/HDComposeMail','?convid='+conversationId+'&fromButton=forwardMail&interId='+interactionId,'Intr',action);
+                          //popUpReturnVal = window.showModalDialog('/apex/HDComposeMail?convid='+conversationId+'&fromButton=forwardMail&interId='+interactionId,'','dialogWidth:1100px; dialogHeight:650px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                     }else if (action == 'composemail'){
+                         CreateAndOpenExtWindow('composeMailWin','Compose Mail','1100','650','/apex/HDComposeMail','?convid='+conversationId+'&fromButton=composeMail','Intr',action);
+                           //popUpReturnVal = window.showModalDialog('/apex/HDComposeMail?convid='+conversationId+'&fromButton=composeMail','','dialogWidth:1100px; dialogHeight:650px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                     }else if (action == 'refcase'){
+                         CreateAndOpenExtWindow('referCaseCreteWin','Reference Case Creation','1100','650','/apex/HDManualRefCaseCreation','?convid='+conversationId,'Intr',action);
+                         //popUpReturnVal = window.showModalDialog('/apex/HDManualRefCaseCreation?convid='+conversationId,'','dialogWidth:1100px; dialogHeight:650px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                     }else if (action == 'searchConv'){
+                         CreateAndOpenExtWindow('searchConvWin','Search Conversation','600','400','/apex/HDCaseDuplicacy','?convid='+conversationId,'Intr',action);
+                         //popUpReturnVal = window.showModalDialog('/apex/HDCaseDuplicacy?convid='+conversationId,'','dialogWidth:600px; dialogHeight:400px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');                         
+                     }else if (action == 'draft'){
+                         CreateAndOpenExtWindow('composeMailWin','Draft Mail','1100','650','/apex/HDComposeMail','?convid='+conversationId+'&fromButton=draft&interId='+interactionId,'Intr',action);
+                         //popUpReturnVal = window.showModalDialog('/apex/HDComposeMail?convid='+conversationId+'&fromButton=draft&interId='+interactionId,'','dialogWidth:1100px; dialogHeight:650px;center:yes;resizable:no;status:no;scrollbars:no;menubar:no;titlebar:no;toolbar:no;');
+                     }else if (action == 'showhistory'){
+                         CreateAndOpenExtWindow('showhistoryWin','HelpDesk History','1100','650','/apex/HDshowhistory','?convid='+conversationId+'&fromButton=draft&interId='+interactionId,'Intr',action);
+                     }else{
+                        //alert("This action not configured");
+                        displayMessage('error','This action not configured',3000);
+                     }
+                     if(popUpReturnVal != null && popUpReturnVal != '') {
+                         displayMessage('info',popUpReturnVal,10000);
+                         getInteractionList(conversationId)
+                     }
+        }
+        
+        function composeMailWindow(URL) {
+            window.open(URL,'_blank','left=20,top=20,width=1000,height=1000,toolbar=1,resizable=0');
+            return false;
+        }
+        function viewMailBody(interactionId){
+            document.getElementById('interactionId').value=interactionId;
+            getMailBody(interactionId);
+        }
+        function updateIntreactionReadUnread(interactionId,interactionReadUnreadVal){
+            updateIntreactionReadUnreadAction(interactionId,interactionReadUnreadVal);
+        }
+        function markInteractionUnread(interactionId){
+            markInteractionUnreadAction(interactionId);
+        }
+        var mask;
+        function loading(loadingFlag){
+            //alert('j_id0:j_id9:loadingImg');
+            //alert(1);
+            //alert('loadingFlag : ' + loadingFlag);
+            //alert(document.getElementById("j_id0:j_id9:loadingImg"));
+            if(loadingFlag){
+            
+                document.getElementById("loadingImg").style.display = 'block';       
+                document.getElementById('loadMask').style.display = 'block';
+            }else{
+                document.getElementById("loadingImg").style.display = 'none';       
+                document.getElementById('loadMask').style.display = 'none';
+            }
+        }
+        function hideFooter(){
+            allDivs = document.getElementsByTagName('DIV');
+            for (var i=0;i<allDivs.length ;i++ ){
+                if(allDivs[i].className=='bPageFooter noTableFooter'){
+                    allDivs[i].style.display='none';
+                }
+            }
+        }
+        function registerBodyOnLoadFunctions(){
+            hideFooter();
+        }
+       
+        if (window.addEventListener){
+            window.addEventListener('load', registerBodyOnLoadFunctions, false);
+        }
+        else if (window.attachEvent){
+            window.attachEvent('onload', registerBodyOnLoadFunctions);
+        }
+        
+    </script>
+    <apex:outputPanel id="mvscript">
+        <script>
+            function beforeMI(){
+                openIntPopUp('moveInteraction','{!referenceId}');
+            }
+        </script>
+    </apex:outputPanel>
+    <style>
+    *{outline:none;}
+    .ui-dialog-titlebar {margin:-4px !important;}
+    .ui-corner-all, .ui-corner-bottom, .ui-corner-left,.ui-corner-right, .ui-corner-top,.ui-corner-bottom,   .ui-corner-bl {
+        border-bottom-left-radius: 0px !important;
+        border-bottom-right-radius: 0px !important;
+        border-top-left-radius: 0px !important;
+        border-top-right-radius: 0px !important;
+        
+    }
+    .breadgrums{
+        width:220px;
+        padding:0px;
+        border:5px solid gray;
+        margin:0px;
+        background-color:gray;
+    }
+    .column{
+        width:100% !important;
+        vertical-align:top !important;
+        margin-top:-5px;
+    }
+    .column table{
+        width:100% !important;
+        vertical-align:top !important;
+    }
+    .column table tr{
+        valign:top !important;
+    }
+    .column table td{
+        width:50%;
+        max-width:50%;
+        min-width:50%;
+    }
+    .noSidebarCell{
+        padding-top:0px;
+        padding-left:0px;
+        padding-botton:0px;
+        padding-right:0px;
+    }
+    .listViewportWrapper .listViewport .subNav .linkBar {
+        margin-top:0px;
+    }
+    .listViewportWrapper .listViewport .subNav .linkBar {
+        padding-bottom:2px;
+        padding-top:2px;
+    }
+
+    .pbBody iframe{
+        max-height: 100%;
+        min-height: 800px;
+        height: 800px;
+    }
+    .listViewportWrapper{
+        width:auto !important;
+    }
+    #mydiv { 
+      background: #D1DFF0;
+      height: 45px;
+      width:44px;
+      --border: 1px solid; 
+      box-shadow: 3px 3px 3px #777;
+      font-size:9px;
+      margin-left:1px;
+      border-radius:10px;
+      vertical-align:top;
+
+   }
+   #mydiv:hover{
+      background-color: #FFE596;
+      height: 43px;
+      width:42px;
+      cursor:pointer;
+      border: 1px solid lightgrey;
+   }
+   /* These are the styles for the message box. */   
+   .msgbox {
+      position: absolute;
+      top: 1%;
+      left: 1%;
+      width: 98%;
+      background-color: BBB3A8;
+      border: 1px solid #333;
+      color: #fff;
+      font-weight: bold; }
+   .msgbox p {
+      margin: 0;
+      padding: 5px 10px; }
+   .msgbox a.close {
+      float: right;
+      text-decoration: none;
+      font-weight: bold;
+      color: #333;
+      background-color: #fff;
+      border-left: 1px solid #333;
+      border-bottom: 1px solid #333;
+      padding: 0 4px;
+      margin-left: 5px; 
+   }
+   .ui-dialog-titlebar {display:none;}
+   .ui-dialog .ui-dialog-content {overflow:hidden !important; padding: 0em 0em !important;}
+   .ui-dialog-buttonpane {
+     border-width: 0 !important;
+     padding;0px 0px 0px 0px !important;
+    }
+    .ui-dialog-buttonpane button 
+    {
+        margin:0px !important;
+        
+    }
+    .paddingth {
+        padding-top: 2px !important;
+        padding-bottom: 3px !important;
+    }
+    .cssHeaderName{width:10% !important;font-weight:bold !important; background-color:#f9f9f9 !important; border-right: 1px solid #e0e3e5 !important;}
+    .cssHeaderSubject{width:40% !important;font-weight:bold !important; background-color:#f9f9f9 !important; border-right: 1px solid #e0e3e5 !important;}
+    .cssHeaderSenderMail{width:15% !important;font-weight:bold !important; background-color:#f9f9f9 !important; border-right: 1px solid #e0e3e5 !important;}
+    .cssHeaderToMail{width:250px !important;font-weight:bold !important; background-color:#f9f9f9 !important; border-right: 1px solid #e0e3e5 !important;}
+    .cssHeaderCreatedDate{width:15% !important;font-weight:bold !important; background-color:#f9f9f9 !important;}
+    .cssHeaderDummy{width:auto !important;font-weight:bold !important; background-color:#f9f9f9 !important; border-right: 1px solid #e0e3e5 !important;}
+    .cssHeaderEmail{min-width:10px !important;width:10px !important;font-weight:bold !important; background-color:#f9f9f9 !important; border-right: 1px solid #e0e3e5 !important;}
+    .cssHeaderInteraction{min-width:10px !important;width:10px !important;font-weight:bold !important; background-color:#f9f9f9 !important;}
+    .cssHeaderRead{min-width:10px !important;width:10px !important;font-weight:bold !important; background-color:#f9f9f9 !important;}
+    .cssHeaderFyi{min-width:10px !important;width:10px !important; max-width:10px !important;font-weight:bold !important; background-color:#f9f9f9 !important;}
+    .bigger {height : 20px !important; margin : 0px;}
+    
+    .intButton{margin: 0px 0px 0px 0px !important; font-weight: bold !important;
+font-size: 10px !important;font-family: Arial,Helvetica,sans-serif !important;}
+   /* font-weight: bold !important; */
+   
+       
+    </style>
+    <apex:outputPanel id="convname">
+        <script>
+            function populateconvname(){
+            
+                conversationName='{!conversationname}';
+                //alert(conversationName);
+            }
+        </script>
+    </apex:outputPanel>
+    <div id="message" style="z-index:10 !important;position:absolute !important;width:100% !important;top:0 !important;" ></div> <!--  -->
+    <apex:form style="overflow:hidden !important;" >
+        
+        <div id="loadMask" style="display:none;"></div>
+        <img src="{!URLFOR($Resource.TLMIMAGES,'img/loading.gif')}" id="loadingImg" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+        <!-- apex:image url="{!URLFOR($Resource.WFLoadingImage,'LoadingImages/loading.gif')}" id="loadingImg" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" / -->
+        
+        <apex:pagemessages id="msg" ></apex:pagemessages>
+        <apex:actionFunction action="{!getInteractions}" name="getInteractionList" rerender="interactionTable,emailMessageBlock,iconHideShow,convname" status="loading" oncomplete="populateconvname();$('#htmlBodydiv').dialog('close');"> <!-- adjustEnhancedListLayout(); -->
+            <apex:param name="firstParam" assignTo="{!conversationId}" value="" />
+        </apex:actionFunction>
+        <apex:actionFunction action="{!getMailBody}" name="getMailBody" rerender="emailMessageBlock,interactionTable" status="loading" oncomplete="OpenPopUp('{!interaction.Name}','{!interaction.akritivtlm__Interaction_Sub_Type__c}')">
+            <apex:param name="firstParam" assignTo="{!interactionId}" value="" />
+        </apex:actionFunction>
+        <apex:actionFunction action="{!updateIntreactionReadUnread}" name="updateIntreactionReadUnreadAction" rerender="interactionTable" status="loading">
+            <apex:param name="firstParam" assignTo="{!interactionId}" value="" />
+            <apex:param name="readUnreadParam" assignTo="{!interactionReadUnread}" value="" />
+        </apex:actionFunction>
+        <apex:actionFunction action="{!markInteractionUnread}" name="markInteractionUnreadAction" rerender="interactionTable" status="loading">
+            <apex:param name="firstParam" assignTo="{!interactionId}" value="" />
+        </apex:actionFunction>
+        <apex:actionFunction action="{!acceptCase}" name="acceptCaseAction" rerender="left,acceptCaseCompleted" status="acceptCaseActionStatus" oncomplete="loading(false);reloadListView('')" >
+            <apex:param name="firstParam" assignTo="{!conversationId}" value="" />
+        </apex:actionFunction>
+        <apex:actionFunction action="{!closeCase}" name="closeCaseAction" rerender="enhancedlistOutPutPanel,acceptCaseCompleted" status="acceptCaseActionStatus" >
+            <apex:param name="firstParam" assignTo="{!conversationId}" value="" />
+        </apex:actionFunction>
+
+        <apex:actionFunction id="callMI" name="callMI" action="{!callMoveInteraction}" oncomplete="beforeMI();" reRender="mvscript"/>
+
+        <apex:actionStatus id="loading" onstart="loading(true)" onstop="loading(false)" />
+        <apex:actionStatus id="acceptCaseActionStatus"  onstop="showMessageBox()" />
+        <input type="hidden" name="conversationId" id="conversationId" value=""></input>
+        <input type="hidden" name="interactionId" id="interactionId" value=""></input>
+            <!-- <apex:commandButton value="Accept" id="mydiv" onclick="openConvPopUp('acceptCase');" rendered="{!acceptCase}" reRender="msg"  /> -->
+            <!-- div id="convactions" style="margin-left:1%;display:none;" --> 
+            <div id="convactions" style="margin-left:1%;display:none;">
+                <div id="enhancedListControls" style="float:left"></div>
+                <div style="float:left">
+                    <table border="0" cellpadding="0" cellspacing="0" style="width:100% !important;">
+                        <tbody>
+                            <tr>
+                                <td  id="topButtonRow" style="width:90% !important;"> 
+                                    <!-- For accept case -->    
+                                    <input value=" Accept " class="btn bigger" title="Accept" name="acceptCase" id="acceptCase" onclick="openConvPopUp('acceptCase')" type="button" style="" /> <!-- color:#D1CCCC !important -->
+                                    <!-- For accept case -->  
+                                    
+                                    <!-- For editCase -->
+                                    <input value=" Edit Case " class="btn bigger" title="Edit Case" name="editCase" id="editCase" onclick="openConvPopUp('editCase')" type="button" style="" /> <!-- color:#D1CCCC !important -->
+                                    <!-- For editCase -->  
+                                    
+                                    <!-- For uploadFile-->
+                                    <input value=" View Comments " class="btn bigger" title="View Comments" id="viewComments" name="viewComments" onclick="openConvPopUp('viewComments')" type="button" style="" /> <!-- color:#D1CCCC !important -->
+                                    <!-- For uploadFile-->                                    
+                                    
+                                    <!-- For editPriority-->
+                                    <input value=" Edit Priority " class="btn bigger" title="View Comments" id="editPriority" name="editPriority" onclick="openConvPopUp('editPriority')" type="button" style="" /> <!-- color:#D1CCCC !important -->
+                                    <!-- For editPriority-->
+                                    
+                                    <!-- For uploadFile-->
+                                    <input value=" Upload File " class="btn bigger" title="Upload File" id="uploadFile" name="uploadFile" onclick="openConvPopUp('uploadFile')" type="button" style="" /> <!-- color:#D1CCCC !important -->
+                                    <!-- For uploadFile-->
+                                    
+                                    <!-- For classificationQuery-->
+                                    <input value=" Query Classification " class="btn bigger" title="Classification Query" id="classificationQuery" name="classificationQuery" onclick="openConvPopUp('classificationQuery')" type="button" style="" /> <!-- color:#D1CCCC !important -->
+                                    <!-- For classificationQuery-->
+                                    
+                                    <!-- For caseDetail-->
+                                    <input value=" Case Details " class="btn bigger" title="Case Detail" id="caseDetail" name="caseDetail" onclick="openConvPopUp('caseDetail')" type="button" style="" /> <!-- color:#D1CCCC !important -->
+                                    <!-- For caseDetail-->
+                                    
+                                    <!-- For caseDetail-->
+                                    <input value=" Close " class="btn bigger" title="Close" id="closeCase" name="closeCase" onclick="openConvPopUp('closeCase')" type="button" style="" /> <!-- color:#D1CCCC !important -->
+                                    <!-- For caseDetail-->
+                                    
+                                    <!-- For reopenCase-->
+                                    <input value=" Reopen Case " class="btn bigger" title="Reopen Case" id="reopenCase" name="reopenCase" onclick="openConvPopUp('reopenCase')" type="button" style="" /> <!-- color:#D1CCCC !important -->
+                                    <!-- For reopenCase-->
+                                    
+                                    <!-- For composeMail-->
+                                    <input value="Compose Mail" class="btn bigger"  title="Compose Mail" name="composemail" id="composemail" onclick="openConvPopUp('composemail');" type="button" /> 
+                                    <!-- For composeMail-->
+                                    
+                                    <!-- For searchcase-->
+                                    <input value="Compare Case" class="btn bigger"   title="Compare Case" name="searchCase" id="searchCase" onclick="openConvPopUp('searchConv');" type="button" />
+                                    <!-- For searchcase-->
+                                    
+                                    <!-- For History Tracking-->
+                                    <input value="Show History" class="btn bigger"   title="Show history" name="showhistory" id="showhistory" onclick="openConvPopUp('showhistory');" type="button" />
+                                    <!-- For History Tracking-->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="float:right">
+                    <table border="0" cellpadding="0" cellspacing="0" style="width:100% !important;">
+                        <tbody>
+                            <tr>
+                                <td  id="topButtonRow" style="width:90% !important;"> 
+                                    
+                                    <!-- For create case -->
+                                    <apex:outputPanel rendered="{!IF(createCase,true,false)}">
+                                        <input value=" Create Case " class="btn bigger" title="Create Case" name="createCase" onclick="openConvPopUp('createCase')" type="button" style="text-align:right;width:90px;background:url({!URLFOR($Resource.TLMIMAGES,'img/plus.png')}) no-repeat scroll 10px center;background-position:left;" /> <!-- color:#D1CCCC !important -->
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!IF(createCase,false,true)}">
+                                        <input value=" Create Case " disabled="disabled" class="btn bigger" title="Create Case" name="createCase" type="button" style="color:#D1CCCC !important;text-align:right;width:90px;background:url({!URLFOR($Resource.TLMIMAGES,'img/plus.png')}) no-repeat scroll 10px center;background-position:left;" /> 
+                                    </apex:outputPanel>
+                                    <!-- For create case --> 
+                                                                        
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>     
+        
+    </apex:form>
+
+    <div class="column" >
+            
+            <table border="0" bordercolor="red" cellpadding="0" cellspacing="">
+                <tr valign="top">
+                    <td valign="top">
+                    <apex:outputPanel id="enhancedlistOutPutPanel" style="height:70%">
+                        <apex:enhancedlist type="QueryClassification__c" height="370" customizable="false" rowsPerPage="25" id="EmailEnhancedList" oncomplete="adjustEnhancedListLayout();"/>
+                    </apex:outputPanel>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height:200px;" id="intTD"> 
+                            <div style="height:250px;overflow:auto;border:1px solid lightgrey;" >
+                            
+                                <apex:dataTable id="interactionTable" value="{!interactions}"  var="interaction" rowClasses="odd,even"  styleClass="list" >
+                                    <apex:column headerValue="Interaction Id" headerClass="cssHeaderName paddingth" style="width:10% !important;{!IF(interaction.akritivtlm__Is_Unread__c,'font-weight:bold;','font-weight:normal;')}">
+                                        <apex:outputLabel value="{!interaction.Name}" style="width:10% !important;"></apex:outputLabel>
+                                    </apex:column>
+                                    
+                                    <apex:column headerValue="Subject" headerClass="cssHeaderSubject paddingth"  style="width:40% !important;word-wrap: break-word !important;{!IF(interaction.akritivtlm__Is_Unread__c,'font-weight:bold;','font-weight:normal;')}">
+                                        <i><u><apex:outputLabel value="{!interaction.akritivtlm__Subject__c}"></apex:outputLabel></u></i>
+                                    </apex:column>
+                                    
+                                    <apex:column headerValue="View Details" headerClass="cssHeaderFyi paddingth"  style="min-width:10px !important;width:10px !important; max-width:10px !important;text-align: center !important;" >
+                                        <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/fyi.png')}" style="margin-right:10px;" title="FYI Interaction"  rendered="{!IF(interaction.akritivtlm__Is_Info__c,true,false)}"/><!-- url="/resource/1386830803000/fyi" -->
+                                    </apex:column>   
+                                    
+                                    <apex:column headerValue="" headerClass="cssHeaderRead paddingth"  style="min-width:10px !important;width:10px !important; text-align: right !important;" >
+                                        <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/unreadMail.gif')}" style="cursor:pointer;margin-right:10px;" title="Mark as Read" onclick="updateIntreactionReadUnread('{!interaction.Id}','MAR')" rendered="{!IF(interaction.akritivtlm__Is_Unread__c,true,false)}"/>
+                                        <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/readMail.gif')}" style="cursor:pointer;margin-right:10px;" title="Mark as Unread" onclick="updateIntreactionReadUnread('{!interaction.Id}','MAU')" rendered="{!IF(interaction.akritivtlm__Is_Unread__c,false,true)}"/>
+                                    </apex:column>
+                                    
+                                    <apex:column headerValue=""  headerClass="cssHeaderInteraction paddingth" style="min-width:10px !important;width:10px !important; text-align: right !important;" >                                    
+                                        <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/externalInteraction.gif')}" style="margin-right:10px;" title="External"  rendered="{!IF(('Internal'!=interaction.akritivtlm__Mode__c ||''==interaction.akritivtlm__Mode__c),true,false)}"/>
+                                        <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/internalInteraction.gif')}" style="margin-right:10px;" title="Internal"  rendered="{!IF(('Internal'!=interaction.akritivtlm__Mode__c ||''==interaction.akritivtlm__Mode__c),false,true)}"/>
+                                    </apex:column>
+                                    
+                                    <apex:column headerValue="" headerClass="cssHeaderEmail paddingth"  style="min-width:10px !important;width:10px !important; text-align: right !important;" >                                                                        
+                                        <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/draftInteraction.png')}" style="cursor:pointer;margin-right:10px;" title="View Interaction" onclick="viewMailBody('{!interaction.Id}');" rendered="{!IF((interaction.akritivtlm__Interaction_Type__c != null && interaction.akritivtlm__Interaction_Sub_Type__c != '' && interaction.akritivtlm__Interaction_Sub_Type__c == 'Draft'),true,false)}"/>
+                                        <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/fileInteraction.png')}" style="cursor:pointer;margin-right:10px;" title="View Interaction" onclick="viewMailBody('{!interaction.Id}')" rendered="{!IF((interaction.akritivtlm__Interaction_Sub_Type__c != null && interaction.akritivtlm__Interaction_Sub_Type__c != '' && interaction.akritivtlm__Interaction_Sub_Type__c == 'File'),true,false)}"/>
+                                        <apex:image url="/img/emailOutbound.gif" style="cursor:pointer;margin-right:10px;"  title="Outbound Interaction" onclick="viewMailBody('{!interaction.Id}')" rendered="{!IF((interaction.akritivtlm__Interaction_Sub_Type__c == 'Outbound' && interaction.akritivtlm__Interaction_Type__c = 'Manual'),true,false)}" />
+                                        <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/manualInteraction.png')}" style="cursor:pointer;margin-right:10px;" title="Inbound Interaction" onclick="viewMailBody('{!interaction.Id}')" rendered="{!IF((interaction.akritivtlm__Interaction_Sub_Type__c != null &&  interaction.akritivtlm__Interaction_Sub_Type__c != '' && interaction.akritivtlm__Interaction_Sub_Type__c == 'Inbound' && interaction.akritivtlm__Interaction_Type__c = 'Manual'),true,false)}" />
+                                        <apex:image url="/img/emailInbound.gif" style="cursor:pointer;margin-right:10px;"    title="View Interaction" onclick="viewMailBody('{!interaction.Id}')" rendered="{!IF((interaction.akritivtlm__Interaction_Sub_Type__c != null &&  interaction.akritivtlm__Interaction_Sub_Type__c != '' && interaction.akritivtlm__Interaction_Sub_Type__c == 'Inbound' && ( interaction.akritivtlm__Interaction_Type__c = 'Auto' || interaction.akritivtlm__Interaction_Type__c = 'Email')),true,false)}"/>
+                                    </apex:column>
+                                    
+                                    <apex:column headerValue="Sender Email" headerClass="cssHeaderSenderMail paddingth" style="width:15% !important;word-wrap: break-word !important;">
+                                        <apex:outputLabel value="{!interaction.akritivtlm__Sender_Email__c}" style="width:15% !important;word-wrap: break-word !important;{!IF(interaction.akritivtlm__Is_Unread__c,'font-weight:bold;','font-weight:normal;')}" ></apex:outputLabel>
+                                    </apex:column>
+                                    
+                                    <apex:column headerValue="To Email" headerClass="cssHeaderToMail paddingth" style="width:250px !important; height:auto !important;overflow:hidden;word-wrap: break-word !important;">
+                                        <apex:outputLabel value="{!interaction.akritivtlm__Email_To__c}" style="width:250px !important;overflow:hidden;word-wrap: break-word !important;{!IF(interaction.akritivtlm__Is_Unread__c,'font-weight:bold;','font-weight:normal;')}" ></apex:outputLabel>
+                                    </apex:column>
+                                    
+                                    <apex:column headerValue="Created Date" headerClass="cssHeaderCreatedDate paddingth"  style="width:15% !important;word-wrap: break-word !important;{!IF(interaction.akritivtlm__Is_Unread__c,'font-weight:bold;','font-weight:normal;')}">                                    
+                                        <apex:outputLabel value=" {!interaction.CreatedDate}" style="width:15% !important;word-wrap: break-word !important;{!IF(interaction.akritivtlm__Is_Unread__c,'font-weight:bold;','font-weight:normal;')}" ></apex:outputLabel>
+                                    </apex:column>
+                                    
+                                    <apex:column headerClass="cssHeaderDummy paddingth"  style="width:auto !important;">
+                                        &nbsp;
+                                    </apex:column>
+                                  
+                                </apex:dataTable>
+                            </div>
+                      </td>
+                </tr>
+            </table>
+        </div>
+    <div id="htmlBodydiv" style="display:none;overflow-x:auto;">
+     <div style="padding: 0px !important;border: 0px !important;">
+          <apex:pageblock id="emailMessageBlock" title="{!interaction.Name} on {!interaction.CreatedDate}">
+               <!-- apex:facet name="header"  -->
+                    <div id="respond" style="margin-top:7px;margin-left:10px;">
+                        <!-- For reply-->
+                        <apex:outputPanel rendered="{!IF(replyCase,true,false)}">
+                            <input value="Reply" class="btn intButton bigger" title="Reply" name="reply" id="reply" onclick="openIntPopUp('replymail');" type="button" /> 
+                            <input value="Reply all" class="btn intButton bigger"  title="Reply all" name="replyAll" id="replyAll" onclick="openIntPopUp('replymailall');" type="button" /> 
+                            <input value="Forward" class="btn intButton bigger"  title="Forward" name="forward" id="forward" onclick="openIntPopUp('forwardmail');" type="button" /> 
+                            <!-- input value="Compose Mail" class="btn intButton bigger"  title="Compose Mail" name="composemail" id="composemail" onclick="openIntPopUp('composemail');" type="button" / --> 
+                            <input value="Draft" class="btn intButton bigger"  title="Draft" name="draft" id="draft" onclick="openIntPopUp('draft');" type="button" /> 
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!IF(replyCase ,false,true)}">
+                            <input value="Reply" disabled="disabled" class="btn intButton bigger" title="Reply" name="reply" id="reply" style="color:#D1CCCC !important" type="button" /> 
+                            <input value="Reply all" disabled="disabled" class="btn intButton bigger"  title="Reply all" id="replyAll" name="replyAll" style="color:#D1CCCC !important" type="button" /> 
+                            <input value="Forward" disabled="disabled" class="btn intButton bigger"  title="Forward" id="forward" name="forward" style="color:#D1CCCC !important" type="button" /> 
+                            <!-- input value="Compose Mail" disabled="disabled" class="btn intButton bigger"  title="Compose Mail" id="composemail" name="reply" style="color:#D1CCCC !important" type="button" / --> 
+                            <input value="Draft" disabled="disabled" class="btn intButton bigger"  title="Draft" id="draft" name="draft" style="color:#D1CCCC !important" type="button" /> 
+                        </apex:outputPanel>
+                        <!-- For reply-->
+                        
+                        <!-- For move interaction -->
+                        <apex:outputPanel rendered="{!IF(moveInteraction,true,false)}">
+                            <input value="Move Interaction" class="btn intButton bigger"  title="Move Interaction" id="moveInteraction" name="moveInteraction" onclick="callMI();" type="button" /> 
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!IF(moveInteraction,false,true)}">
+                            <input value="Move Interaction" disabled="disabled" class="btn intButton bigger"  title="Move Interaction" id="moveInteraction" name="moveInteraction" style="color:#D1CCCC !important" type="button" /> 
+                        </apex:outputPanel>
+                        <!-- For move interaction -->
+                        
+                        <!-- For refCaseCreate -->
+                        <apex:outputPanel rendered="{!IF(refCaseCreate,true,false)}">
+                            <input value="Ref Case Creation" class="btn intButton bigger"  title="Ref Case Creation" name="refCaseCreate" id="refCaseCreate" onclick="openIntPopUp('refcase');" type="button" /> 
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!IF(refCaseCreate,false,true)}">
+                            <input value="Ref Case Creation" disabled="disabled"  class="btn intButton bigger"  title="Ref Case Creation" name="refCaseCreate" id="refCaseCreate" style="color:#D1CCCC !important" type="button" />                             
+                        </apex:outputPanel>
+                        <!-- For refCaseCreate -->
+                        
+                        <!-- input value="Search Case" class="btn intButton bigger"   title="Search Case" name="searchCase" id="searchCase" onclick="openIntPopUp('searchConv');" type="button" / --> 
+                        
+                    </div>
+                <!-- /apex:facet -->
+                <div style="margin-top:10px;">
+                    <hr style="border: 1px dashed #000;" /> <!--   -->
+                     <!-- apex:pageBlockSection title="Email Details" collapsible="true" columns="1" -->
+                         <apex:outputLabel value="<b>From:&nbsp;</b>{!fromEmail}" escape="false"  style="float:left"/> <br/>
+                         <apex:outputLabel value="<b>To:&nbsp;</b>{!to}" escape="false" /><br/>
+                         <apex:outputLabel value="<b>cc:&nbsp;</b>{!cc}" escape="false" /><br/>
+                         <apex:outputLabel value="<b>Subject:&nbsp;</b>{!subject}" escape="false" /><br/>
+                         <script>document.getElementById('respond').style.display='';</script>
+                         <script>document.getElementById('htmlBodydiv').style.height=340;</script>
+                         
+                         <apex:outputlabel >
+                         	<apex:outputLabel value="<b>Attachment:&nbsp;</b>" escape="false" />
+    							<apex:repeat value="{!attachmentWrapperLst}" var="attwrap" id="AttachmentWrapperID">
+        							
+        							<a href="/servlet/servlet.FileDownload?file={!attwrap.id}" title="Click here to download."  style="text-decoration:none;" target="_blank"> <apex:outputText value="{!attwrap.name} ({!attwrap.description})," />&nbsp;  </a>
+    							</apex:repeat>
+                         </apex:outputlabel>
+                         
+                     <!-- /apex:pageBlockSection -->
+                      <hr style="border: 1px dashed #000;" /> <!--   -->
+                      <div style="margin-top:10px;overflow-y:auto;height:340px;">
+                         <!-- apex:pageBlockSection title="Body" collapsible="true" columns="1" rendered="{!renderMessageBlockDetail}"  -->
+                             <apex:outputText value="{!htmlBody}"  escape="false" />
+                         <!-- /apex:pageBlockSection -->
+                     </div>
+             
+                 </div>
+         </apex:pageBlock>
+          </div>
+    </div>
+    <apex:outputPanel id="iconHideShow">
+        <script>
+            if(!{!isFirstTime}) {
+            
+            	if({!showhistory}) {
+            		//alert('In Show History');
+                    document.getElementById('showhistory').onclick = function() {
+                        openConvPopUp('showhistory');
+                    };
+                    document.getElementById('showhistory').style.color = "black";
+                } else {
+                    document.getElementById('showhistory').onclick = function() {};
+                    document.getElementById('showhistory').style.color = "#D1CCCC";
+                }
+                
+                if({!acceptCase}) {
+                    document.getElementById('acceptCase').onclick = function() {
+                        openConvPopUp('acceptCase');
+                    };
+                    document.getElementById('acceptCase').style.color = "black";
+                } else {
+                    document.getElementById('acceptCase').onclick = function() {};
+                    document.getElementById('acceptCase').style.color = "#D1CCCC";
+                }
+                
+                if({!editCase}) {
+                    document.getElementById('editCase').onclick = function() {
+                        openConvPopUp('editCase');
+                    };
+                    document.getElementById('editCase').style.color = "black";
+                } else {
+                    document.getElementById('editCase').onclick = function() {};
+                    document.getElementById('editCase').style.color = "#D1CCCC";
+                }
+                
+                if({!editPriority}) {
+                    document.getElementById('editPriority').onclick = function() {
+                        openConvPopUp('editPriority');
+                    };
+                    document.getElementById('editPriority').style.color = "black";
+                } else {
+                    document.getElementById('editPriority').onclick = function() {};
+                    document.getElementById('editPriority').style.color = "#D1CCCC";
+                }
+                
+                if({!viewComments}) {
+                    document.getElementById('viewComments').onclick = function() {
+                        openConvPopUp('viewComments');
+                    };
+                    document.getElementById('viewComments').style.color = "black";
+                } else {
+                    document.getElementById('viewComments').onclick = function() {};
+                    document.getElementById('viewComments').style.color = "#D1CCCC";
+                }
+                
+                if({!uploadFile}) {
+                    document.getElementById('uploadFile').onclick = function() {
+                        openConvPopUp('uploadFile');
+                    };
+                    document.getElementById('uploadFile').style.color = "black";
+                } else {
+                    document.getElementById('uploadFile').onclick = function() {};
+                    document.getElementById('uploadFile').style.color = "#D1CCCC";
+                }
+        
+                if({!classificationQuery}) {
+                    document.getElementById('classificationQuery').onclick = function() {
+                        openConvPopUp('classificationQuery');
+                    };
+                    document.getElementById('classificationQuery').style.color = "black";
+                } else {
+                    document.getElementById('classificationQuery').onclick = function() {};
+                    document.getElementById('classificationQuery').style.color = "#D1CCCC";
+                }
+                
+                if({!caseDetail}) {
+                    document.getElementById('caseDetail').onclick = function() {
+                        openConvPopUp('caseDetail');
+                    };
+                    document.getElementById('caseDetail').style.color = "black";
+                } else {
+                    document.getElementById('caseDetail').onclick = function() {};
+                    document.getElementById('caseDetail').style.color = "#D1CCCC";
+                }
+                
+                if({!closeCase}) {
+                    document.getElementById('closeCase').onclick = function() {
+                        openConvPopUp('closeCase');
+                    };
+                    document.getElementById('closeCase').style.color = "black";
+                } else {
+                    document.getElementById('closeCase').onclick = function() {};
+                    document.getElementById('closeCase').style.color = "#D1CCCC";
+                }
+                
+                if({!reopenCase}) {
+                    document.getElementById('reopenCase').onclick = function() {
+                        openConvPopUp('reopenCase');
+                    };
+                    document.getElementById('reopenCase').style.color = "black";
+                } else {
+                    document.getElementById('reopenCase').onclick = function() {};
+                    document.getElementById('reopenCase').style.color = "#D1CCCC";
+                }
+                
+                if({!replyCase}) {
+                    document.getElementById('composemail').onclick = function() {
+                        openConvPopUp('composemail');
+                    };
+                    document.getElementById('composemail').style.color = "black";
+                } else {
+                    document.getElementById('composemail').onclick = function() {};
+                    document.getElementById('composemail').style.color = "#D1CCCC";
+                }
+                
+                
+            }
+            
+            function resetButtonForDraft(flagVal) {
+                
+                if(flagVal) {
+                    //alert(document.getElementById('reply'));
+                    document.getElementById('reply').onclick = function() {};
+                    document.getElementById('reply').style.color = "#D1CCCC";
+                    
+                    document.getElementById('replyAll').onclick = function() {};
+                    document.getElementById('replyAll').style.color = "#D1CCCC";
+                    
+                    document.getElementById('forward').onclick = function() {};
+                    document.getElementById('forward').style.color = "#D1CCCC";
+                    
+                    /*document.getElementById('composemail').onclick = function() {};
+                    document.getElementById('composemail').style.color = "#D1CCCC";*/
+                    
+                    document.getElementById('moveInteraction').onclick = function() {};
+                    document.getElementById('moveInteraction').style.color = "#D1CCCC";
+                    
+                    document.getElementById('refCaseCreate').onclick = function() {};
+                    document.getElementById('refCaseCreate').style.color = "#D1CCCC";
+                    
+                    document.getElementById('draft').onclick = function() {
+                        openIntPopUp('draft');
+                    };
+                    document.getElementById('draft').style.color = "black";
+                } else {
+                    document.getElementById('draft').onclick = function() {};
+                    document.getElementById('draft').style.color = "#D1CCCC";
+                }
+            }
+            function reloadListView(conId) {
+            //alert($('.refreshListButton'));
+                $('.refreshListButton').click();
+                getInteractionList(conId);
+            }                
+        </script>
+    </apex:outputPanel>
+    
+</apex:page>

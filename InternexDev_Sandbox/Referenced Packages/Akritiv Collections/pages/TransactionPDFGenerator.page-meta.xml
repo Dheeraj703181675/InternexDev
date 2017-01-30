@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>17.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Default page that is used to generate Transaction Detail Pdf page or attachment from contact customer page. The page can show 
+1. Only summary for transactions
+2. Summary and details (line items) for transactions</description>
+    <label>TransactionPDFGenerator</label>
+</ApexPage>

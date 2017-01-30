@@ -1,0 +1,109 @@
+<apex:page controller="akritiv.TaskSummaryController" action="{!summarise}" showHeader="false" sidebar="false">
+  <style>
+      .odd {background-color:#EEE;}
+      .even {background-color:#FFF;}
+      .hd {font-weight:bold;background-color:#6CF;color:#FFF;text-align:center;font-size:14px}
+  </style>
+  
+  <script src="/soap/ajax/10.0/connection.js" type="text/javascript"></script>
+  <script src="/soap/ajax/10.0/apex.js" type="text/javascript"></script>
+  
+  <script>    
+ 
+    function openTaskConsole(){
+    
+           var str = "{!JSENCODE(consoleurl)}";
+           var left = (screen.width);
+           var top = (screen.height);
+           var pwidth= (screen.width);
+           var pheight= (screen.height); 
+           
+           var str = "{!JSENCODE(consoleurl)}"+"?key="+f1(); 
+            window.open(str ,"Workbench","toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width="+pwidth+",height="+pheight+", top="+top+",left="+left ); 
+     }
+     
+     function f1(){
+       
+        sforce.connection.defaultNamespace = '{!JSENCODE($Setup.akritiv__SysConfig_Singlec__c.akritiv__NameSpace__c)}';
+         sforce.connection.sessionId = '{!$Api.Session_ID}';
+         
+         var config = new sforce.SObject("Temp_Object_Holder__c");
+         var user = sforce.connection.getUserInfo() ;
+         var timest = sforce.connection.getServerTimestamp();
+         var key = '{!$User.Username}' + timest.timestamp ;
+         config.Key__c =key ; 
+         config.Value__c = "{!JSENCODE(s)}"; 
+         
+         var re= sforce.connection.create([config]); 
+         
+         return key;
+     }
+     
+  </script>
+  
+              
+            
+        <table width="250px" >
+          <tr class="hd">
+            <td>{!$Label.Label_Task}</td>
+            <td>#</td>
+          </tr>
+          <tr class="odd">
+            <td><a href="https://{!packageHostAddress}/007?fcf=00B36000000SGnM&rolodexIndex=-1&page=1" target="_blank">{!$Label.Label_All_Open_Tasks}</a></td>
+            <td>{!openTasks}</td>
+          </tr>
+           <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="odd">
+            <td><a href="https://{!packageHostAddress}/007?fcf=00B36000000SGnN&rolodexIndex=-1&page=1" target="_blank">{!$Label.Label_Email}</a></td>
+            <td>{!emails}</td>
+          </tr>
+          <tr class="odd">
+            <td ><a href="https://{!packageHostAddress}/007?fcf=00B36000000SGnO&rolodexIndex=-1&page=1" target="_blank">{!$Label.Label_Call}</a></td>
+            <td>{!calls}</td>
+          </tr>
+          
+          
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="odd">
+            <td><a href="https://{!packageHostAddress}/007?fcf=00B36000000SGnP&rolodexIndex=-1&page=1" target="_blank">{!$Label.Label_High_Priority}</a></td>
+            <td>{!high}</td>
+          </tr>
+          <tr class="odd">
+            <td ><a href="https://{!packageHostAddress}/007?fcf=00B36000000SGnQ&rolodexIndex=-1&page=1" target="_blank">{!$Label.Label_Normal_Priority}</a></td>
+            <td>{!normal}</td>
+          </tr>
+          <tr class="odd">
+            <td><a href="https://{!packageHostAddress}/007?fcf=00B36000000SGnR&rolodexIndex=-1&page=1" target="_blank">{!$Label.Label_Low_Priority}</a></td>
+            <td>{!low}</td>
+          </tr>
+          
+          <tr >
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          
+          <tr class="odd">
+            <td><a href="https://{!packageHostAddress}/007?fcf=00B36000000SGnS&rolodexIndex=-1&page=1" target="_blank">{!$Label.Label_Not_Started}</a></td>
+            <td>{!notstarted}</td>
+          </tr>
+          <tr class="odd">
+            <td><a href="https://{!packageHostAddress}/007?fcf=00B36000000SGnT&rolodexIndex=-1&page=1" target="_blank">{!$Label.Label_In_Progress}</a></td>
+            <td>{!inprogress}</td>
+          </tr>
+        </table>
+  
+     
+  
+  <apex:form >
+  <div align="center">
+      <apex:commandButton reRender="" value="{!$Label.Label_Start_Working}"  onclick="javascript:openTaskConsole()"/>
+  </div>
+  </apex:form>
+  
+</apex:page>

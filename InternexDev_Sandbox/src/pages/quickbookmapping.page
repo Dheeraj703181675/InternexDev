@@ -1,0 +1,237 @@
+<apex:page controller="QuickBookMapping" id="pg">
+    <div id="load_scrl" class="loadingBox loader" style="display:none"> </div>
+    <div class="loadingBox overlay"> </div>
+      <style>
+          .overlay {
+            display: none;
+            height: 100%;
+            left: 0;
+            position: fixed;
+            top: 0;
+            opacity: 0.3;
+            -moz-opacity: 0.3;
+            width: 100%;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+            filter: alpha(opacity=30);
+            background: #000;
+            -khtml-opacity: 0.3;
+            z-index: 1000;
+        }
+        .loader {
+            background: url('/img/loading32.gif') scroll no-repeat 0 0;
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            left: 50%;
+        }
+  </style>
+      
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+      <script type="text/javascript">
+     
+      function startLoading(){
+            $('#load_scrl').css('top', $(document).scrollTop() + 200);
+            $('.loadingBox').show();
+        }
+        function endLoading(){
+             $('.loadingBox').hide();
+        }
+        </script>
+<script>
+    function ChkDuplicateDebtor(rowNum,v)
+    {
+  //      alert(rowNum);alert(v);
+        var Detr = document.getElementById('pg:frm:pgb:pbt:'+rowNum+':Debtor').value;
+ //        alert(Detr);
+        if(Detr == '')
+        {
+            alert('Please Select the Debtor');
+            return false;
+        }
+        for(var i=0; i < v; i++)
+        {
+            if(document.getElementById('pg:frm:pgb:pbt:'+i+':chk').checked == true)
+            {
+                if(i == rowNum)
+                {
+                    document.getElementById('pg:frm:pgb:pbt:'+rowNum+':Debtor').disabled = true;
+                    document.getElementById('pg:frm:pgb:pbt:'+rowNum+':Debtor_lkwgt').style.display = "none";
+                    document.getElementById('pg:frm:pgb:pbt:'+rowNum+':Btn').style.visibility = 'hidden';
+
+                //    break;
+                }
+                else
+                { 
+                    if(document.getElementById('pg:frm:pgb:pbt:'+i+':Debtor').value == Detr)
+                    {
+                        alert('You Can not Select the Same Debtor.');
+                        document.getElementById('pg:frm:pgb:pbt:'+rowNum+':Debtor').value = null;
+                        document.getElementById('pg:frm:pgb:pbt:'+rowNum+':chk').checked = false;
+                        document.getElementById('pg:frm:pgb:pbt:'+rowNum+':Debtor').disabled = false;
+                        document.getElementById('pg:frm:pgb:pbt:'+rowNum+':Debtor_lkwgt').style.display = "inline";
+                        document.getElementById('pg:frm:pgb:pbt:'+rowNum+':Btn').style.visibility = 'visible';
+                     //   break;
+                    }
+                    else
+                    {
+                        if(i == rowNum)
+                        {
+                            document.getElementById('pg:frm:pgb:pbt:'+rowNum+':Debtor').disabled = true;
+                            document.getElementById('pg:frm:pgb:pbt:'+rowNum+':Debtor_lkwgt').style.display = "none";
+                            document.getElementById('pg:frm:pgb:pbt:'+rowNum+':Btn').style.visibility = 'hidden';
+                            break;
+                        }
+                    }
+                } 
+            }
+            else
+            {
+                if(i == rowNum)
+                {
+                    document.getElementById('pg:frm:pgb:pbt:'+rowNum+':Debtor').disabled = false;
+                    document.getElementById('pg:frm:pgb:pbt:'+rowNum+':Debtor_lkwgt').style.display = "inline";
+                    document.getElementById('pg:frm:pgb:pbt:'+rowNum+':Btn').style.visibility = 'visible';
+                    break;
+                }
+            }
+            
+        }
+        return true;        
+    }
+    function disableSelectedDebtor(v)
+    {
+        //   alert(v);
+        for(var i=0; i < v; i++)
+        {
+            if(document.getElementById('pg:frm:pgb:pbt:'+i+':Debtor').value != '' && document.getElementById('pg:frm:pgb:pbt:'+i+':chk').checked == true)
+            {
+//                 document.getElementById('pg:frm:pgb:pbt:'+i+':chk').checked = true;
+                 document.getElementById('pg:frm:pgb:pbt:'+i+':Debtor').disabled = true;
+                 document.getElementById('pg:frm:pgb:pbt:'+i+':Debtor_lkwgt').style.display = "none";
+                 document.getElementById('pg:frm:pgb:pbt:'+i+':Btn').style.visibility = 'hidden';
+             }
+        }
+         return false;
+    }
+ function Debtorchange(rowNum)
+ {
+   //  alert(rowNum);
+             document.getElementById('pg:frm:pgb:pbt:'+rowNum+':debtorName').innerHTML = '';
+ }
+ function sendtoportal(v)
+ {
+ //    alert(v);
+      document.getElementById('pg:frm:hdnQBId').value = v;
+   //   sendingportal();
+ }
+</script>
+    <apex:form id="frm">
+    <apex:inputHidden id="hdnQBId" value="{!QuickbookId}"/>
+    <apex:pageBlock id="pgb1">
+        <apex:pageBlockSection id="pbs" columns="3">
+            <apex:pageBlockSection columns="2">
+              <apex:inputField value="{!Client.Client__c}" required="false"/>
+              <apex:commandButton value="Search" action="{!SearchCustomers}" reRender="op" status="loading"/>
+           </apex:pageBlockSection>
+     </apex:pageBlockSection>
+    </apex:pageBlock>
+   <apex:actionFunction name="RefreshTable" action="{!SearchCustomers}" reRender="op" immediate="true"/> 
+      <apex:pageBlock title="QuickBook Mapping" id="pgb">
+        <apex:pageBlockButtons location="Top">
+            <apex:commandButton value="Match Debtors" action="{!FillDebtor}" reRender="op" status="loading" oncomplete="return disableSelectedDebtor('{!CustomerwrapList.size}')"/>
+            <apex:commandButton value="Apply" action="{!ApplyCustomers}" reRender="op,pbt" status="loading"/>
+            <apex:actionStatus onstart="startLoading();" onstop="endLoading();" id="loading"/> 
+        </apex:pageBlockButtons>
+        <apex:outputPanel id="op" title="QuickBook Customer">
+            <apex:pageBlockTable value="{!CustomerwrapList}" var="CW" title="QuickBook Customer" id="pbt">
+                <apex:column ><apex:inputCheckbox value="{!CW.Check}" id="chk" onclick="return ChkDuplicateDebtor('{!CW.rowCount}','{!CustomerwrapList.size}');"/></apex:column>
+                <apex:column headerValue="QB Id" value="{!CW.QBC.QuickBook_ID__c}" style="width:5%;"/>
+                <apex:column headerValue="Name" style="width:10%;"><apex:outputLink value="/{!CW.QBC.ID}">{!CW.QBC.DisplayName__c}</apex:outputLink></apex:column>
+                <apex:column headerValue="Email" value="{!CW.QBC.Primary_Email__c}" style="width:10%;"/>
+                <apex:column headerValue="Phone" value="{!CW.QBC.Primary_Phone_Number__c}" style="width:10%;"/>
+                <apex:column headerValue="Balance" value="{!CW.QBC.Balance__c}"/> 
+                <apex:column headerValue="QB Created Time" value="{!CW.QBC.QB_CreateTime__c}" style="width:10%;"/>
+                <apex:column headerValue="QB SynchToken" value="{!CW.QBC.SyncToken__c}" style="width:5%;"/> 
+                <apex:column headerValue="Portal ID" value="{!CW.QBC.Portal_External_ID__c}" style="width:5%;"/>
+                <apex:column headerValue="Active" value="{!CW.QBC.Active__c}" style="width:5%;"/>
+                <apex:column headerValue="Debtor"><apex:outputPanel ><apex:inputField value="{!CW.QBC.Debtor__c}" id="Debtor" onchange="Debtorchange('{!CW.rowCount}');"/><br/><apex:outputText value="{!CW.DebtorName}" style="font-weight:bold;" id="debtorName"/></apex:outputPanel></apex:column>
+                <apex:column ><apex:commandButton value="Send to Portal" id="Btn" onclick="sendtoportal('{!CW.QBC.ID}')" action="{!SendtoPortal}" status="loading" reRender="op,pbt" rendered="{!IF(CW.QBC.Portal_External_ID__c==Null,True,False)}" oncomplete="RefreshTable();"/></apex:column>
+                
+            </apex:pageBlockTable>
+            
+    <apex:actionFunction name="cfirst" action="{!first}" status="fetchStatus" reRender="op,pbt"/>        
+    <apex:actionFunction name="clast" action="{!last}" status="fetchStatus" reRender="op,pbt"/>        
+    <apex:actionFunction name="cnext" action="{!next}" status="fetchStatus" reRender="op,pbt"/>        
+    <apex:actionFunction name="cprevious" action="{!previous}" status="fetchStatus" reRender="op,pbt"/>
+    <apex:actionFunction name="changeLimit" action="{!changeLimit}" status="fetchStatus" reRender="op,pbt"/>        
+ 
+           <table>
+             <tr>
+                 <td>
+                   <apex:outputText >{!(pageNumber * size)+1-size}-{!IF((pageNumber * size)>noOfRecords, noOfRecords,(pageNumber * size))} of {!noOfRecords}</apex:outputText>
+                    <span>                
+                        <apex:selectList value="{!limits}" size="1" onchange="changeLimit();">                    
+                        <apex:selectOption itemLabel="20" itemValue="20"/>
+                        <apex:selectOption itemLabel="50" itemValue="50"/>                
+                        </apex:selectList>
+                       <apex:outputPanel style="color:#4AA02C;font-weight:bold">
+                           <apex:actionStatus id="fetchStatus" startText="Fetching..." stopText=""/>
+                       </apex:outputPanel>            
+                    </span> 
+                 </td>
+                 <td align="center">
+                     <apex:outputPanel layout="block" id="userpagingpnl">
+                      <div style="width:750px;">                             
+                       <span style="margin: 0 200px;">     
+                        <span style="margin: 0 3px;">                    
+                            <apex:outputPanel rendered="{!hasPrevious}">                        
+                            <img src="/s.gif" onclick="cfirst();return false;" style="cursor:pointer; cursor:hand; background-image: url('/img/paginationArrows.gif');background-position: 0 1px;background-repeat: no-repeat; height: 10px;width: 9px;"/>                    
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!!hasPrevious}">                        
+                            <img src="/s.gif" style="cursor:text; background-image: url('/img/paginationArrows.gif');background-position: 0 -10px;background-repeat: no-repeat; height: 10px;width: 9px;"/>                    
+                            </apex:outputPanel>   
+                        </span> 
+                        <span style="margin: 0 3px;">
+                            <apex:outputPanel rendered="{!hasPrevious}">                        
+                            <img class="prev" src="/s.gif" onclick="cprevious();return false;" style="cursor:pointer; cursor:hand;background-image: url('/img/paginationArrows.gif'); background-position: -10px 1px;background-repeat: no-repeat;height: 10px;margin: 0; padding: 0;width: 9px;"/>
+                            <apex:outputLabel value="Previous"  style="cursor:pointer; cursor:hand;" onclick="cprevious();return false;"/>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!!hasPrevious}">                        
+                            <img src="/s.gif" style="cursor:text; background-image: url('/img/paginationArrows.gif');background-position: -10px -10px;background-repeat: no-repeat;height: 10px;margin: 0;padding: 0;width: 9px;"/>                        
+                            <apex:outputLabel value="Previous"  style="cursor:text; color: #A8A8A8"/>                    
+                            </apex:outputPanel> 
+                        </span>    
+                        <span style="margin: 0 3px;">                    
+                            <apex:outputPanel rendered="{!hasNext}">                        
+                            <apex:outputLabel value="Next" style="cursor:pointer; cursor:hand;" onclick="cnext();return false;"/>                        
+                            <img src="/s.gif" onclick="cnext();return false;" style="cursor:pointer; cursor:hand; background-image: url('/img/paginationArrows.gif');background-position: -17px 1px; background-repeat: no-repeat;height: 10px; width: 9px;"/>                    
+                            </apex:outputPanel> 
+                            <apex:outputPanel rendered="{!!hasNext}">                        
+                            <apex:outputLabel value="Next" style="cursor:text; color: #A8A8A8"/>                        
+                            <img src="/s.gif" style="cursor:text; background-image: url('/img/paginationArrows.gif');background-position: -17px -10px;background-repeat: no-repeat;height: 10px;width: 9px;"/>                    
+                            </apex:outputPanel>                   
+                        </span>                
+                        <span style="margin: 0 3px;">                    
+                            <apex:outputPanel rendered="{!hasNext}">                        
+                            <img src="/s.gif" onclick="clast();return false;" style="cursor:pointer; cursor:hand; background-image: url('/img/paginationArrows.gif'); background-position: -27px 1px;background-repeat: no-repeat;height: 10px;width: 9px;"/>                    
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!!hasNext}">                        
+                            <img src="/s.gif" style="cursor:text; background-image: url('/img/paginationArrows.gif');background-position: -27px -10px;background-repeat: no-repeat;height: 10px;width: 9px; "/>                    
+                            </apex:outputPanel>                       
+                        </span>               
+                    </span>
+                    <span style="margin: 0 -80px;">                
+                        <apex:outputLabel value="Page "/>                
+                        <apex:outputLabel id="userpageNo" value="{!pageNumber}"/><apex:outputLabel value=" of {!totalPage}"/>
+                    </span>  
+                    
+                    </div>    
+                    </apex:outputPanel>
+                </td>
+             </tr>
+             </table>  
+            
+           </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

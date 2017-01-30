@@ -1,0 +1,327 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<apex:page docType="html-5.0" standardController="Account"
+    extensions="akritiv.TransactionListViewGenerator" tabStyle="akritiv__Transaction__c"
+    id="customExportContractPage">
+    <Style>
+    #filter{
+            display: none;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index:10;
+            opacity:0.6;
+            filter: alpha(opacity=50);
+        }
+    </Style>
+    <script language="javascript" src="{!$Resource.DualDropDown}"
+        type="text/javascript"></script>
+    <script type="text/javascript">
+    
+     function startProcess(){
+       //alert('teststartprocess');
+        document.getElementById("{!$Component.customExportContractPage.pageBlockCustomExport.formCustomExportContract.loadingdetail}").style.display = 'block'; 
+        document.getElementById('filter').style.display = 'block';
+    }
+
+      
+       
+       function endProcess(){
+       //alert('testEndProcess');
+       document.getElementById("{!$Component.customExportContractPage.pageBlockCustomExport.formCustomExportContract.loadingdetail}").style.display = 'none';
+       document.getElementById('filter').style.display = 'none'; 
+
+       } 
+    showIsPrimaryOnPage = false;  
+    
+    function hideElements()
+        {
+            
+            var obj = document.getElementById("customExportContractPage:pageBlockCustomExport:formCustomExportContract:pbsCustomExportContract:pageBlockSectionItem3:ddlFieldList:ctrlDualDropDownList:lblPrimaryMessage");
+            if(obj != null)
+                {
+                    obj.style.display = "none";
+                }
+        } 
+
+    function setSelectedList()
+        {   
+           
+            var lstSelected = getMultiSelectedValues("customExportContractPage:pageBlockCustomExport:formCustomExportContract:pbsCustomExportContract:pageBlockSectionItem3:ddlFieldList:ctrlDualDropDownList:lstSelectedItems");
+            var listName = document.getElementById('customExportContractPage:pageBlockCustomExport:formCustomExportContract:listdiv:listdivItem:listName').value;
+            var hidSelected = document.getElementById("customExportContractPage:pageBlockCustomExport:formCustomExportContract:pbsCustomExportContract:pageBlockSectionItem3:selectedHidden");
+            hidSelected.value = lstSelected;
+           var list = document.getElementById("customExportContractPage:pageBlockCustomExport:formCustomExportContract:pbsCustomExportContract:pageBlockSectionItem1:savedList");
+           
+           if(listName == null || listName == ''  )
+               {  
+                    checkValidtion(listName,'');
+                    return false;
+               }
+            
+            exportCon(hidSelected.value);
+            
+            //alert('successfully added ');
+            return false;
+        }
+        
+    function setSelectedFieldSection()
+        {
+           //* YUIShowLoading();
+            setValue(document.getElementById('customExportContractPage:pageBlockCustomExport:formCustomExportContract:pbsCustomExportContract:pageBlockSectionItem1:savedList').value);
+            return false;
+        }
+        
+   
+   
+  
+    function redirectToSearchPage()
+        {   
+            window.location.href = '';
+            return false;
+        }
+    
+    function redirectToSamePage()
+        {
+            window.location.reload();
+        }        
+        
+</script>
+
+    <apex:pageBlock mode="edit" id="pageBlockCustomExport"
+        title="{!$Label.Label_Custom_ListView}">
+        <apex:form id="formCustomExportContract">
+        <div id="filter"></div>
+        <apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loadingdetail" style="display:none;position:fixed;top:50%;left:50%;z-index:10;"/> 
+           <!--* <c:Base_Comp_YUI_ModalLoader id="YUILoader" />-->
+
+
+            <apex:actionFunction action="{!getTransactionFieldsTypeFilter1}" name="getTypeOfSelectedFilter1" reRender="filter1outputpanel1" oncomplete="endProcess();"/>
+            <apex:actionFunction action="{!getTransactionFieldsTypeFilter2}" name="getTypeOfSelectedFilter2" reRender="filter1outputpanel2" oncomplete="endProcess();"/>
+            <apex:actionFunction action="{!getTransactionFieldsTypeFilter3}" name="getTypeOfSelectedFilter3" reRender="filter1outputpanel3" oncomplete="endProcess();"/>
+            <apex:actionFunction action="{!getTransactionFieldsTypeFilter4}" name="getTypeOfSelectedFilter4" reRender="filter1outputpanel4" oncomplete="endProcess();"/>
+            <apex:actionFunction action="{!getTransactionFieldsTypeFilter5}" name="getTypeOfSelectedFilter5" reRender="filter1outputpanel5" oncomplete="endProcess();"/>
+            
+            <apex:actionFunction action="{!checkValidation}"
+                name="checkValidtion" reRender="exception">
+                <apex:param name="param1" value="" assignTo="{!selectedListName}" />
+                <apex:param name="param2" value=""
+                    assignTo="{!commaSeperatedSelectedFields}" />
+            </apex:actionFunction>
+
+            <apex:actionFunction id="actionFunctionExportContract"
+                name="exportCon" action="{!save}" reRender="exception">
+                <apex:param name="param1" value=""
+                    assignTo="{!commaSeperatedSelectedFields}" />
+
+            </apex:actionFunction>
+
+            <apex:pageBlockSection id="exception" columns="1">
+                <apex:pagemessages />
+            </apex:pageBlockSection>
+            <br />
+            <br />
+
+
+            <apex:pageBlockSection id="listdiv" columns="1">
+                <apex:pageBlockSectionItem id="listdivItem">
+                    <apex:outputLabel value="{!$Label.Label_List_Name}"></apex:outputLabel>
+                    <apex:inputField value="{!listViewObj.Name}" id="listName" />
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem id="IsGlobal" rendered="{!isSysAdmin}">
+                    <apex:outputLabel value="{!$Label.Label_Available_to_all}"></apex:outputLabel>
+                    <apex:inputField value="{!listViewObj.akritiv__Is_Global__c}" id="global" />
+                </apex:pageBlockSectionItem>
+
+            </apex:pageBlockSection>
+
+
+            <apex:pageBlockSection id="pbsCustomExportContract">
+                <apex:pageBlockSectionItem id="pageBlockSectionItem1">
+
+                </apex:pageBlockSectionItem>
+
+
+                <apex:pageBlockSectionItem />
+                <apex:pageBlockSectionItem />
+                <apex:pageBlockSectionItem />
+                <apex:pageBlockSectionItem id="pageBlockSectionItem3">
+                    <apex:inputHidden value="{!commaSeperatedSelectedFields}"
+                        id="selectedHidden" />
+                    <c:Base_Comp_DualDropdownList id="ddlFieldList"
+                        ItemsList="{!defaultFieldList}"
+                        SelectedItemsList="{!selectedFieldList}" listBoxwidth="230" />
+                </apex:pageBlockSectionItem>
+
+
+
+
+
+                <script language="javascript">
+              //  hideElements();
+            </script>
+            </apex:pageBlockSection>
+
+            <apex:outputPanel id="filterCriteria">
+                <b><apex:outputLabel value="{!$Label.Label_Filter_Criteria}"></apex:outputLabel></b>
+                <br/>
+                <br/>
+                
+               <!--<ul>
+                    <li>{!$Label.Label_List_View_Date_Help}</li>
+                </ul>-->
+            </apex:outputPanel>
+
+            <apex:outputPanel id="filter1outputpanel1">
+                <b> <apex:outputLabel value="{!$Label.Label_Filter}"></apex:outputLabel></b>
+                <apex:selectList value="{!selectedFilterfield1}" multiselect="false"
+                    size="1" onchange="getTypeOfSelectedFilter1();startProcess();">
+
+
+
+
+                    <apex:selectOptions value="{!transactionFields}" />
+
+                </apex:selectList>
+
+                <apex:selectList value="{!selectedFilterOp1}" multiselect="false"
+                    size="1">
+
+                    <apex:selectOptions value="{!operators}" />
+
+                </apex:selectList>
+                
+                <apex:inputText value="{!filterByValue1}" id="filtervalue1" rendered="{!notShowPicker}" />
+                <apex:inputText value="{!filterByValue1}" id="demo1" onfocus="DatePicker.pickDate(false, this , false);" rendered="{!showPicker}" />
+
+                <apex:selectList value="{!selectCondition1}" multiselect="false"
+                    size="1">
+
+                    <apex:selectOptions value="{!condition}" />
+
+                </apex:selectList>
+            </apex:outputPanel>
+            <br></br>
+            <apex:outputPanel id="filter1outputpanel2">
+                <b> <apex:outputLabel value="{!$Label.Label_Filter}"></apex:outputLabel></b>
+                <apex:selectList value="{!selectedFilterfield2}" multiselect="false"
+                    size="1" onchange="getTypeOfSelectedFilter2();startProcess();" >
+
+                    <apex:selectOptions value="{!transactionFields}" />
+
+                </apex:selectList>
+
+                <apex:selectList value="{!selectedFilterOp2}" multiselect="false"
+                    size="1">
+
+                    <apex:selectOptions value="{!operators}" />
+
+                </apex:selectList>
+
+                <apex:inputText value="{!filterByValue2}" id="filtervalue2" rendered="{!notShowPicker}"/>
+                <apex:inputText value="{!filterByValue2}" id="demo2" onfocus="DatePicker.pickDate(false, this , false);" rendered="{!showPicker}" />
+                <apex:selectList value="{!selectCondition2}" multiselect="false"
+                    size="1">
+
+                    <apex:selectOptions value="{!condition}" />
+
+                </apex:selectList>
+            </apex:outputPanel>
+            <br></br>
+            <apex:outputPanel id="filter1outputpanel3">
+                <b> <apex:outputLabel value="{!$Label.Label_Filter}"></apex:outputLabel></b>
+                <apex:selectList value="{!selectedFilterfield3}" multiselect="false"
+                    size="1" onchange="getTypeOfSelectedFilter3();startProcess();">
+
+                    <apex:selectOptions value="{!transactionFields}" />
+
+                </apex:selectList>
+
+                <apex:selectList value="{!selectedFilterOp3}" multiselect="false"
+                    size="1">
+
+                    <apex:selectOptions value="{!operators}" />
+
+                </apex:selectList>
+
+                <apex:inputText value="{!filterByValue3}" id="filtervalue3" rendered="{!notShowPicker}"/>
+                <apex:inputText value="{!filterByValue3}" id="demo3" onfocus="DatePicker.pickDate(false, this , false);" rendered="{!showPicker}" />
+                <apex:selectList value="{!selectCondition3}" multiselect="false"
+                    size="1">
+
+                    <apex:selectOptions value="{!condition}" />
+
+                </apex:selectList>
+            </apex:outputPanel>
+            <br></br>
+            <apex:outputPanel id="filter1outputpanel4">
+                <b> <apex:outputLabel value="{!$Label.Label_Filter}"></apex:outputLabel></b>
+                <apex:selectList value="{!selectedFilterfield4}" multiselect="false"
+                    size="1" onchange="getTypeOfSelectedFilter4();startProcess();">
+
+                    <apex:selectOptions value="{!transactionFields}" />
+
+                </apex:selectList>
+
+                <apex:selectList value="{!selectedFilterOp4}" multiselect="false"
+                    size="1">
+
+                    <apex:selectOptions value="{!operators}" />
+
+                </apex:selectList>
+
+                <apex:inputText value="{!filterByValue4}" id="filtervalue4" rendered="{!notShowPicker}"/>
+                <apex:inputText value="{!filterByValue4}" id="demo4" onfocus="DatePicker.pickDate(false, this , false);" rendered="{!showPicker}" />
+                <apex:selectList value="{!selectCondition4}" multiselect="false"
+                    size="1">
+
+                    <apex:selectOptions value="{!condition}" />
+
+                </apex:selectList>
+            </apex:outputPanel>
+            <br></br>
+            <apex:outputPanel id="filter1outputpanel5">
+                <b> <apex:outputLabel value="{!$Label.Label_Filter}"></apex:outputLabel></b>
+                <apex:selectList value="{!selectedFilterfield5}" multiselect="false"
+                    size="1" onchange="getTypeOfSelectedFilter5();startProcess();" >
+
+                    <apex:selectOptions value="{!transactionFields}" />
+
+                </apex:selectList>
+
+                <apex:selectList value="{!selectedFilterOp5}" multiselect="false"
+                    size="1">
+
+                    <apex:selectOptions value="{!operators}" />
+
+                </apex:selectList>
+
+                <apex:inputText value="{!filterByValue5}" id="filtervalue5" rendered="{!notShowPicker}" />
+                <apex:inputText value="{!filterByValue5}" id="demo5" onfocus="DatePicker.pickDate(false, this , false);" rendered="{!showPicker}" />
+            </apex:outputPanel>
+
+
+            <br></br>
+            <apex:outputPanel id="olinkCustomExport">
+                <table>
+                    <tr>
+                        <td><label> </label></td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <apex:commandButton value="{!$Label.Label_Save_List_View}" onclick="return setSelectedList();" />
+                        <apex:commandButton value="{!$Label.Label_Cancel}" action="{!showListView}" /></td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>

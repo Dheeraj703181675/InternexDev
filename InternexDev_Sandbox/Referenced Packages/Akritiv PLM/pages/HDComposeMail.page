@@ -1,0 +1,927 @@
+<apex:page id="pageId" controller="akritivtlm.HDComposeMailController" showHeader="false" sidebar="false" tabStyle="akritivtlm__Conversation__c">
+<script type="text/javascript" src="{!URLFOR($Resource.WFTinyMce, 'tiny_mce/tiny_mce.js')}"></script> 
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__editRec, '/editResource/editjs.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__editRec,'/editResource/editstyle.css')}"/>
+
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__EXT, '/js/ext.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__EXT,'/css/ext-all.css')}"/>
+
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__select2, '/resources/webjars/select2/3.4.1/select2.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__select2, '/resources/webjars/select2/3.4.1/select2.css')}"/>
+ 
+<style>
+    html{
+        scrollbar-face-color: #E6E6E6;
+        scrollbar-shadow-color: #E6E6E6;
+        scrollbar-highlight-color:#E6E6E6;
+        scrollbar-3dlight-color: #ADADAD;
+        scrollbar-darkshadow-color: #ADADAD;
+        scrollbar-track-color: #ADADAD;
+        scrollbar-arrow-color: #000000;
+        }
+    .messageblock{
+        font-size:11px;
+        border-radius: 4px;
+        border-color: #c00;
+        background-color: #ffc;
+        border-style: solid;
+        border-width: 1px;
+        color: #000;
+    }
+</style> 
+
+<script>
+	function getInternetExplorerVersion()
+	{
+	  	var rv = -1;
+	  	if (navigator.appName == 'Microsoft Internet Explorer')
+	  	{
+	    	var ua = navigator.userAgent;
+	    	var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+	   		if (re.exec(ua) != null)
+	      		rv = parseFloat( RegExp.$1 );
+	  	}
+	  	else if (navigator.appName == 'Netscape')
+	  	{
+	    	var ua = navigator.userAgent;
+	    	var re  = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
+	    	if (re.exec(ua) != null)
+	      		rv = parseFloat( RegExp.$1 );
+	  	}
+	  	return rv;
+	}
+
+	var version=getInternetExplorerVersion();
+
+	var onLoadFlag = true;
+	
+	function startProcessForEdit(){
+	   document.getElementById("{!$Component.pageId.formId.loading}").style.display = 'block';       
+	   document.getElementById('filter').style.display = 'block';
+	}
+	
+	function endProcessForEdit(){
+	   document.getElementById("{!$Component.pageId.formId.loading}").style.display = 'none';
+	   document.getElementById('filter').style.display = 'none'; 
+	}
+
+    function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+
+    function closeMessage() {
+        $('#messagebox').hide();   
+    }
+
+    function displayMessage(type,msg,interval) {
+     var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:50%;margin: 0 auto;margin-top: 5px;">'+
+            '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+            '</div>';
+    if(document.getElementById('messagebox') != null && document.getElementById('messagebox') != undefined) {
+            document.getElementById('messagebox').innerHTML = m;
+            animateMessageBox('messagebox',interval);
+        }
+    animateMessageBox('messagebox',interval);
+}
+</script>
+
+<apex:outputpanel id="messagepanel" style="Display:None" >
+    <apex:messages id="msg1"  style="Display:None" />
+    <script>
+        if(document.getElementById('{!$Component.msg1}') != null && document.getElementById('{!$Component.msg1}') != undefined) {
+        var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('li');
+        var msg='';
+        for(var i=0;i<obj.length;i++) {
+            if(i==0) 
+            msg += '<br />';
+            msg += obj[i].innerHTML + '<br />';
+        }
+        if(msg != '') {
+            setTimeout(function() {displayMessage('error',msg,10000);},1000);
+        }
+    }
+    </script>
+</apex:outputpanel>
+
+<style type="text/css">
+   .labelCol {
+      text-align: left !important;
+      width: 10% !important;
+      max-width: 10% !important;
+      white-space: nowrap;
+  }
+  .customPageBlockStyle {
+      border-top-width: 0px !important;
+      margin-bottom: 0px !important;
+      border-bottom: 0px !important;
+  }
+  #filter
+    {
+    display: block;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    /* background-image:url('{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}'); */
+    background-repeat:no-repeat;
+    background-position:center;
+    background-color: #ffffff;
+    z-index:10;
+    opacity:0.6;
+    filter: alpha(opacity=50);
+    }
+</style>
+
+<script>
+var stateId;
+var pendingRes;
+var infoField;
+var scriptPId;
+var penResScript;
+var stateScript;
+var attch;
+
+function checkDisableFlag(disableFlag){
+    /*if(disableFlag){
+        setTimeout(function(){
+            infoChecked();
+            endProcessForEdit();
+        },3000);
+    }else{
+        setTimeout(function(){
+            infoUnchecked();
+            endProcessForEdit();
+        },3000);
+    }*/
+    infoFieldchanged();
+}
+/*
+function infoChecked(){
+    document.getElementById(pendingRes).selectedIndex = 0;
+    document.getElementById(pendingRes).disabled = 'disabled';
+    document.getElementById(stateId).selectedIndex = 0;
+    document.getElementById(stateId).disabled = 'disabled';
+    document.getElementById(infoField).checked = true;
+    document.getElementById(resRecId).checked = false;
+    document.getElementById(resRecId).disabled = 'disabled';
+}
+function infoUnchecked(){
+    document.getElementById(infoField).checked = false;
+    document.getElementById(stateId).disabled = false;
+    document.getElementById(stateId).selectedIndex = 0;
+    document.getElementById(pendingRes).disabled = false;
+    document.getElementById(pendingRes).selectedIndex = 0;
+    document.getElementById(resRecId).disabled = false;
+}
+*/
+function isToDisableChanged(){
+    if( {!isToDisable} ){
+        document.getElementById(pendingRes).selectedIndex = 0;
+        document.getElementById(pendingRes).disabled = true;
+        document.getElementById(pendingRes).disabled = 'disabled';
+        document.getElementById(pendingRes).setAttribute("disabled",true);
+    }else{
+        document.getElementById(pendingRes).selectedIndex = 0;
+        document.getElementById(pendingRes).disabled = false;
+        document.getElementById(pendingRes).removeAttribute("disabled");
+    }
+}
+function resRecievedFlag(checkedStatus){
+    if(checkedStatus){
+        setTimeout(function(){
+            document.getElementById(infoField).checked = false;
+            document.getElementById(infoField).disabled = 'disabled';
+            document.getElementById(stateId).disabled = false;
+            document.getElementById(pendingRes).disabled = false;
+            endProcessForEdit();
+        },1000);
+    }else{
+        setTimeout(function(){
+            document.getElementById(infoField).disabled = false;
+            document.getElementById(resRecId).disabled = 'disabled';
+            endProcessForEdit();
+        },1000);
+    }
+}
+
+var resRecId;
+var stateChangedCalled = false;
+function stateChange(){
+    stateChangedCalled = true;
+    document.getElementById(pendingRes).setAttribute('style','width : 60% !important;') ;
+    var toCompare = document.getElementById(stateId).value;
+    var temp = '{!JSENCODE(resReceived)}';
+    var checkFlag = document.getElementById(resRecId).checked;
+    //if(toCompare != '' && temp.indexOf(toCompare) > -1){    //temp.contains(toCompare)
+    if(toCompare != '' && toCompare == '{!resReceived}'){
+        document.getElementById(resRecId).checked = false;
+        startProcessForEdit();
+        resRecFieldchanged();
+        document.getElementById(resRecId).disabled = 'disabled';
+        resRecievedFlag(false);
+    }
+    else{
+        document.getElementById(resRecId).disabled = false;
+        document.getElementById(resRecId).removeAttribute('disabled');
+    }
+    if(document.getElementById(stateId).selectedIndex == 0 && !document.getElementById(infoField).checked ){
+        document.getElementById(resRecId).checked = checkFlag;
+        document.getElementById(resRecId).disabled = false;
+        resRecievedFlag(checkFlag);
+    }
+}
+
+function buttonClick(btn){
+    btnClick1(btn);
+    removeScript();
+}
+
+var selectedChkbox;
+function deSelectOthers(chkBox) {
+    if (chkBox.checked){
+        if(document.getElementById('pageId:formId:selectedItemId').value != null)
+            document.getElementById('pageId:formId:selectedItemId').value += chkBox.name + ',';
+    }
+}
+
+function changeTemplate(val,emailBody){
+    if ( document.getElementById(val).value != null && document.getElementById(val).value != '' )
+        getTemplateValue(document.getElementById(val).value,emailBody);
+    else{
+        //alert('Please select a template');
+        endProcessForEdit();
+        setTimeout(function() {displayMessage('error','Please select a template',10000);},1000);
+    }
+}
+
+var conversationName='';
+function CreateAndOpenExtWindow(windowId,windowTitle,width,height,src,parametersStr,fromWhere,action){
+    var width = parseInt(width);
+    var height = parseInt(height);
+    var clientHeight = parseInt(window.parent.document.body.parentElement.clientHeight);
+    if((clientHeight - height) < 30) {
+       height = clientHeight - 100;
+     }       
+    if (!(parametersStr == '' || parametersStr == undefined || parametersStr == null)){
+          src = src + parametersStr;
+    }
+    var panal1 = new Ext.Panel({
+        id          :'panal1',
+        collapsible :false,
+        labelWidth  :80,
+        width   :width+10,
+        height  :height+10,
+        html    :'<iframe name="Panal" style="overflow:auto; width:'+width+'px; height:'+height+'px;" frameborder="0"  src="'+src+'">'
+    });                        
+    var win = new Ext.Window({
+        id : windowId,
+        title: windowTitle,
+        closable:true,
+        model : true,
+        width:width+35,
+        height:height+58,
+        //border:false,
+        resizable: false,
+        plain:true,
+        items:[panal1],
+        listeners:{
+             'close':function(win){
+              }
+        }
+    });
+    win.show(this);
+}
+
+function displayMessageAndClosePopUp(type,msg,popUpId) {
+    Ext.getCmp(popUpId).close();
+    startProcessForEdit();
+    rerenPgBlckTbl(msg);
+}
+    
+tinyMCE.init({
+    // General options
+    mode : "exact",
+    elements: "tinymceEditor,tinymceEditorfax,tinymceEditorprint",
+    theme : "advanced",
+    theme_advanced_path : false ,
+    plugins : "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,spellchecker,iespell",
+    browser_spellcheck : true,
+    gecko_spellcheck: true,
+
+    onchange_callback : "myCustomOnChangeHandler",
+
+    // Theme options
+    theme_advanced_buttons1: "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",  
+    theme_advanced_buttons2: "cut,copy,paste,|,search,replace,|,bullist,numlist,|,undo,redo,|,insertdate,inserttime,preview,|,forecolor,backcolor,|,sub,sup,|,spellchecker,iespell",                                     
+    //theme_advanced_buttons3: "",
+    spellchecker_languages : "+English=en,Swedish=sv",
+    // theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak",
+    theme_advanced_toolbar_location : "top",
+    theme_advanced_toolbar_align : "left",
+    theme_advanced_statusbar_location : "bottom",
+    theme_advanced_resizing : true,
+    //new config added for enter taking more brs
+    forced_root_block:false,
+    force_p_newlines:false,
+    remove_linebreaks:false,
+    force_br_newlines:true,
+    remove_trailing_nbsp:false,
+    verify_html:true,
+    theme_advanced_resizing:false,
+    convert_newlines_to_brs: false,
+    //end for enter config
+
+    // Replace values for the template plugin
+    template_replace_values : {
+        username : "Some User",
+        staffid : "991234"
+    },
+
+    setup : function(ed) {
+      ed.onPostRender.add(function(ed, cm) {
+          //setTimeout(function(){document.getElementById(pendingRes).style.width = '60% !important';},2000);
+          setTimeout(function(){document.getElementById(pendingRes).setAttribute('style','width : 60% !important;') ;},2000);
+      });
+    }
+}
+);
+var hiddenMailBody;
+function setTemplateBody(){
+    var innerHtml = ''+document.getElementById(hiddenMailBody).value;
+    if(version=="11")
+    {
+    	endProcessForEdit();
+    }
+    tinyMCE.get('tinymceEditor').setContent(innerHtml);
+}
+
+function myCustomOnChangeHandler(tinyMCEInstance) {
+    //var editorContent = tinyMCE.get('tinymceEditor').getContent();
+    var editorContent = tinyMCE.get('tinymceEditor').getContent({format : 'raw'});
+    document.getElementById(hiddenMailBody).value = editorContent;
+    return;
+}
+
+
+function addContBtnClk(){
+    var val = document.getElementById('pageId:formId:selectedItemId').value;
+    addContactButtonClick(val);
+    document.getElementById('pageId:formId:selectedItemId').value = '';
+    removeScript();
+}
+
+function removeScript(){
+    var ele = document.getElementById(scriptPId);
+    var par;
+    if(ele != null){
+        par = ele.parentNode;
+    }
+    if(par != null)
+        par.style.display = 'none';
+
+    ele = document.getElementById(stateScript);
+    if(ele != null)
+        par = ele.parentNode;
+    if(par != null)
+        par.style.display = 'none';
+
+    ele = document.getElementById(penResScript);
+    if(ele != null)
+        par = ele.parentNode;
+    if(par != null)
+        par.style.display = 'none';
+}
+
+var popUpReturnVal;
+function openAddAttachment(){
+    CreateAndOpenExtWindow('HDAddAttachment', 'Add Attachment' , '600' , '225' , '/apex/HDAddAttachment?id={!conversationId}','','','');
+}
+function rerenderPageTable(){
+    //calling action function to just rerender the pageBlockTable to show the attachments.
+    startProcessForEdit();
+    rerenPgBlckTbl();
+}
+
+</script>
+<apex:outputPanel id="closeOP">
+    <script>
+        function closeWindow(){
+            if('{!closeFlag}' == 'true'){
+                window.parent.Ext.getCmp('composeMailWin').close();
+            }
+        }
+    </script>
+</apex:outputPanel>
+
+<div id="messagebox" style="z-index:10 !important;position:fixed !important;width:50% !important;top:30%;left:20%;" ></div>
+
+<script>
+function closeMessage1(){
+    $('#stdInfoMsgDiv').hide();   
+}
+</script>
+
+<apex:outputpanel id="stdInfoMsgOp"  ><!--  rendered="{!IF(stdInfoMsg == null , false, true)}" -->
+    <div id="stdInfoMsgDiv" class="alert messageblock alert-warning alert-dismissable" style="z-index:10 !important;position:fixed !important;top:30%;left:30%;width:30% !important;margin: 0 auto;margin-top: 5px;display:{!IF(JSENCODE(stdInfoMsg) == null , 'none', '')} !important;">
+        <img src="/img/msg_icons/info24.png" width="16" height="16" />
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage1();">&times;</button>
+        <strong><b>Info</b></strong>
+        <div id="stinfoMsg">{!HTMLENCODE(stdInfoMsg)}</div>
+    </div>
+</apex:outputpanel>
+
+<apex:form id="formId">
+    <!-- for providing loading -->
+    <div id="filter" style= "display:none;"></div> 
+    <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+    <!-- for providing loading -->
+
+    <script>startProcessForEdit();</script>
+
+    <div style="display:none;visibility:hidden;">
+        <apex:inputHidden >
+            <apex:inputHidden id="selectedItemId" value="{!selectedContId}" />
+            <apex:inputField id="convMailBoxDisplayName" value="{!objConversation.akritivtlm__Mail_Box_Display_Name__c}" />
+        </apex:inputHidden>
+    </div>
+
+    <apex:actionFunction name="rerenderMessageBox" reRender="messagepanel" immediate="true" />
+    <apex:actionFunction name="rerenPgBlckTbl" action="{!gettingAttachment}" oncomplete="endProcessForEdit();" reRender="attachmentId" immediate="true">
+        <apex:param name="attachmentParam" assignTo="{!attachmentidlist}" value=""/>
+    </apex:actionFunction>
+    <apex:actionFunction name="btnClick1" action="{!buttonClick}" oncomplete="endProcessForEdit();" reRender="searchOP,messagepanel">
+        <apex:param name="firstParam" assignTo="{!btnClick}" value=""/>
+    </apex:actionFunction>
+    <apex:actionFunction name="closeBtnClick" action="{!closeBtnClk}" rerender="searchOP" oncomplete="removeScript();endProcessForEdit();" />
+    <apex:actionFunction name="addContactButtonClick" action="{!addContacts}" rerender="searchOP,mailPbs2" oncomplete="removeScript();endProcessForEdit();">
+        <apex:param name="param" assignTo="{!selectedContId}" value=""/>
+    </apex:actionFunction>
+    <apex:actionFunction name="enableStatusReason" reRender="pgBlckSec1" immediate="true" oncomplete=""></apex:actionFunction>
+    <apex:actionFunction name="removeAttachment" action="{!removeAttachment}" oncomplete="endProcessForEdit();" reRender="attachmentId,stdInfoMsgOp,messagepanel">
+        <apex:param name="firstParam" assignTo="{!attachmentNameToRemove}" value="" />
+    </apex:actionFunction>
+
+    <apex:actionFunction id="infoFieldchanged" name="infoFieldchanged" action="{!checkInfoField}" reRender="pgBlckSec1,mailPbs2,selectOptionOP" oncomplete="endProcessForEdit();" >
+    </apex:actionFunction>
+    <apex:actionFunction id="resRecFieldchanged" name="resRecFieldchanged" action="{!checkResRecField}" reRender="mailPbs2,selectOptionOP" oncomplete="endProcessForEdit();" >
+    </apex:actionFunction>
+
+    <apex:pageBlock id="pgBlck1" title="{!fromButtonTitle}" >
+        <div style="padding-left:300px;">
+            <apex:pageBlockButtons location="top">
+                <apex:actionStatus id="saveStatus1">
+                    <apex:facet name="stop">
+                        <apex:commandButton action="{!sendEmail}" oncomplete="enabling();endProcessForEdit();closeWindow();" onclick="startProcessForEdit();disabling();" value="{!$Label.Label_Send_Email}" reRender="closeOP,messagepanel,selectOptionOP"/><!--closeOP,formId,pgBlck1,msg-->
+                    </apex:facet>
+                    <apex:facet name="start">
+                        <apex:commandButton value="{!$Label.Label_Send_Email}..." disabled="true" status="saveStatus1"/>
+                    </apex:facet>
+                </apex:actionStatus>
+                <apex:actionStatus id="saveStatus2">
+                    <apex:facet name="stop">
+                        <apex:commandButton action="{!saveEmail}" oncomplete="enabling();endProcessForEdit();closeWindow();" onclick="startProcessForEdit();disabling();" value="{!$Label.Label_Save_Email}" reRender="closeOP,messagepanel,selectOptionOP"/>
+                    </apex:facet>
+                    <apex:facet name="start">
+                        <apex:commandButton value="{!$Label.Label_Save_Email}..." disabled="true" status="saveStatus2"/>
+                    </apex:facet>
+                </apex:actionStatus>
+            </apex:pageBlockButtons>
+        </div>
+        <apex:pageblockSection id="pgBlckSec1" showHeader="true" collapsible="false" title="{!$Label.Label_Header_Fields}" >
+            <apex:inputCheckbox label="{!$Label.Label_Information_Only}" style="padding-left:0px;" value="{!objInteraction.akritivtlm__Is_Info__c}" id="infoId" onclick="startProcessForEdit();checkDisableFlag(this.checked);" /> <!-- selected="IF(this.checked==false,TRUE,FALSE)"  onchange="callDummy();return false;" onclick="checkDisableFlag({!disableState});"  selected="{!IF({!disableState}==false,TRUE,FALSE)}"-->
+            <apex:inputCheckbox id="responseReceivedId" style="padding-left:0px;" value="{!objInteraction.akritivtlm__Is_Response_Required__c}" onclick="startProcessForEdit();resRecFieldchanged();" />
+            <apex:inputField style="padding-left:0px;width:60% !important;" value="{!objConversation.akritivtlm__Priority__c}" />
+            <apex:outputText value="{!objConversation.Name}"></apex:outputText>
+            <!-- <apex:inputField id="followUpDateId" style="padding-left:0px;width:60% !important;" value="{!objConversation.Follow_Up_Date__c}" /> -->
+            <apex:inputField id="inputChannel" value="{!objConversation.akritivtlm__Input_Channel__c}" style="width:60% !important;"/>
+
+            <apex:pageBlockSectionItem id="statePgBlckSec">
+            <apex:outputLabel value="{!$Label.Label_Current_State}" for="stateId"/>
+            <apex:outputPanel styleClass="requiredInput" layout="block">
+                <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+                <apex:inputField value="{!objConversation.akritivtlm__State__c}" id="stateId" onchange="stateChange();return false;" style="width:60% !important;" />
+            </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+
+            <apex:pageBlockSectionItem id="penResPgBlckSec">
+            <apex:outputLabel value="{!$Label.Label_Pending_Reason}" for="pendingReason"/>
+            <apex:outputPanel styleClass="requiredInput" layout="block">
+                <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+                <apex:inputField style="padding-left:0px;width:60% !important;" value="{!objConversation.akritivtlm__Pending_Reason__c}" id="pendingReason" />
+            </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+
+            <apex:outputPanel id="stateScript">
+                <script>
+                    resRecId = '{!$Component.responseReceivedId}';
+                    infoField = '{!$Component.infoId}';
+                    if( '{!JSENCODE(fromButton)}' != 'Draft' && '{!JSENCODE(fromButton)}' != 'draft' ){
+                        //document.getElementById('{!$Component.followUpDateId}').value = '';
+                        document.getElementById(resRecId).checked = false;
+                    }
+                    stateId = '{!$Component.statePgBlckSec.stateId}';
+                    document.getElementById('{!$Component.inputChannel}').disabled = true;
+                    stateScript = '{!$Component.stateScript}';
+                    setTimeout(function(){
+                        if( {!isToDisable} ){
+                            if( !onLoadFlag ) {
+                                document.getElementById(stateId).selectedIndex = 0;
+                                document.getElementById(stateId).setAttribute("disabled",true);
+                                document.getElementById(resRecId).setAttribute("disabled",true);
+                                document.getElementById(infoField).removeAttribute("disabled");
+                            }
+                        }else{
+                            if( !onLoadFlag ) {
+                                document.getElementById(resRecId).removeAttribute("disabled");
+                                if ( {!objInteraction.akritivtlm__Is_Response_Required__c} ){
+                                    document.getElementById(infoField).setAttribute("disabled",true);
+                                    document.getElementById(resRecId).checked = true;
+                                }else{
+                                    document.getElementById(infoField).removeAttribute("disabled");
+                                }
+                                if(!stateChangedCalled){
+                                    if ( {!objInteraction.akritivtlm__Is_Info__c} ){
+                                    document.getElementById(stateId).selectedIndex = 0;
+                                    }
+                                    document.getElementById(stateId).removeAttribute("disabled");
+                                }else{
+                                    stateChangedCalled = false;
+                                }
+                            }
+                        }
+                    },1000);
+                </script>
+            </apex:outputPanel>
+            <apex:outputPanel id="penResScript">
+                <script>
+                    pendingRes = '{!$Component.penResPgBlckSec.pendingReason}';
+                    penResScript = '{!$Component.penResScript}';
+                    if( !onLoadFlag && ('{!JSENCODE(fromButton)}' != 'Draft' && '{!JSENCODE(fromButton)}' != 'draft') ) {
+                        setTimeout(function(){
+                            document.getElementById(pendingRes).setAttribute('style','width : 60% !important;');
+                        },1000);
+                    }
+                    setTimeout(function(){
+                        if( {!isToDisable} ){
+                            document.getElementById(pendingRes).selectedIndex = 0;
+                            document.getElementById(pendingRes).setAttribute("disabled",true);
+                        }else{
+                            if(!stateChangedCalled){
+                                if ( {!objInteraction.akritivtlm__Is_Info__c} ){
+                                    document.getElementById(pendingRes).selectedIndex = 0;
+                                }
+                                document.getElementById(pendingRes).removeAttribute("disabled");
+                            }else{
+                                stateChangedCalled = false;
+                            }
+                        }
+                    },1000);
+                </script>
+            </apex:outputPanel>
+        </apex:pageblockSection>
+
+        <apex:outputPanel id="searchOP">
+            <apex:pageBlockSection columns="1" id="searchPgBlck" rendered="{!searchFlag}" >
+                <apex:outputPanel rendered="{!AND(IF(paginater.isAll, false, true), IF(paginater.totalPage == 1, false, true))}">
+                    <apex:outputText rendered="{!paginater.showFirst}">
+                        <apex:commandLink action="{!firstPage}" value="{!$Label.Label_First}" rerender="searchOP" immediate="true"/>
+                    </apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:outputText rendered="{!paginater.showPrevious}">
+                        <apex:commandLink action="{!previousPage}" value="{!$Label.Label_Prev}" rerender="searchOP" immediate="true"/>
+                    </apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:repeat value="{!paginater.pageList}" var="pl">
+                        <apex:outputText rendered="{!!pl.isActive}">
+                            <apex:commandLink action="{!updatePage}" rerender="searchOP" immediate="true">
+                                {!pl.pageNum}                              
+                                <apex:param name="selectedPage" value="{!pl.pageNum}" assignTo="{!paginater.pageNum}" />
+                            </apex:commandLink>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!pl.isActive}" value="{!pl.pageNum}" />&nbsp;&nbsp;&nbsp;&nbsp;
+                    </apex:repeat>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:outputText rendered="{!paginater.showNext}">
+                        <apex:commandLink action="{!nextPage}" value="{!$Label.Label_Next}" rerender="searchOP" immediate="true"/>
+                    </apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:outputText rendered="{!paginater.showLast}">
+                        <apex:commandLink action="{!lastPage}" value="{!$Label.Label_Last}" rerender="searchOP" immediate="true"/>
+                    </apex:outputText>
+                </apex:outputPanel>
+                <!--  
+                <apex:pageBlockTable value="{!genericList}" var="searchList" id="pbtResultTabId">
+                    <apex:column >
+                        <input type="checkbox" name="{!searchList.Id}" id="checkedone" onclick="return deSelectOthers(this)"/>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Name}">
+                        <apex:outputText value="{!searchList.Name}"></apex:outputText>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.Label_Email}">
+                        <apex:outputText value="{!searchList.Email}"></apex:outputText>
+                    </apex:column>
+                </apex:pageBlockTable>
+                -->
+                
+                 <apex:pageBlockTable value="{!genericList}" var="searchList" id="pbtResultTabId">
+                    <apex:column >
+                        <input type="checkbox" name="{!searchList.Id}" id="checkedone" onclick="return deSelectOthers(this)"/>
+                    </apex:column>
+                    <apex:repeat id="pbtResultRepId" value="{!configFieldsLabelMap}" var="configfield">
+                        <apex:column headerValue="{!configFieldsLabelMap[configfield]}">
+                            <apex:outputField value="{!searchList[configfield]}" rendered="true" />  
+                        </apex:column> 
+                    </apex:repeat>
+                </apex:pageBlockTable>
+                
+                
+                <apex:outputPanel >
+                <apex:commandButton id="addBtn" value="{!$Label.Label_Add_Contacts}" onclick="startProcessForEdit();addContBtnClk();return false;" style="margin-left:225px;"/>
+                <apex:commandButton id="closeBtn" value="{!$Label.Label_Close}" onclick="startProcessForEdit();closeBtnClick();return false;" style="margin-left:225px;"/>
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+        </apex:outputPanel>
+   
+        <apex:pageBlockSection columns="2" id="mailPbs2" collapsible="false" title="{!$Label.Label_Address_Fields}">
+            <apex:pageBlockSectionItem id="fromSi">
+                <apex:commandButton id="fromButton" title="{!$Label.Label_From}" value="{!$Label.Label_From}...">:</apex:commandButton>
+                <apex:outputPanel styleClass="requiredInput" layout="block">
+                    <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+                    <apex:inputField id="fromField" style="width:60% !important;" value="{!objInteraction.akritivtlm__Sender_Email__c}"/>
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+            <apex:outputPanel id="scriptPanelId">
+                <script>
+                    document.getElementById('{!$Component.fromSi.fromButton}').disabled = true;
+                    document.getElementById('{!$Component.fromSi.fromField}').disabled = 'disabled';
+                    scriptPId = '{!$Component.scriptPanelId}';
+                </script>
+            </apex:outputPanel>
+
+            <apex:pageBlockSectionItem id="toS1">
+                <apex:commandButton id="toButton" title="{!$Label.Label_TO}" value="{!$Label.Label_TO}..." onclick="startProcessForEdit();buttonClick('To');return false;">:</apex:commandButton>
+                <apex:outputPanel styleClass="requiredInput" layout="block">
+                    <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+                    <apex:inputField styleClass="AutoCompleteID" id="toAddresses" style="width:60% !important;" value="{!objInteraction.akritivtlm__Email_To__c}" onchange="buttonClick('To.');return false;" />
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+<br/>
+            <apex:pageBlockSectionItem id="ccSi">
+                <apex:commandButton id="ccButton" title="{!$Label.Label_CC}" value="{!$Label.Label_CC}..." onclick="startProcessForEdit();buttonClick('Cc');return false;" >:</apex:commandButton>
+                <apex:inputField styleClass="AutoCompleteID" id="ccAddresses" style="width:60% !important;" value="{!objInteraction.akritivtlm__Email_Cc__c}" onchange="buttonClick('Cc.');return false;"/>
+            </apex:pageBlockSectionItem>
+<br/>
+            <apex:pageBlockSectionItem id="bccSi">
+                <apex:commandButton id="bccButton" title="{!$Label.Label_BCC}" value="{!$Label.Label_BCC}..." onclick="startProcessForEdit();buttonClick('Bcc');return false;" >:</apex:commandButton>
+                <apex:inputField styleClass="AutoCompleteID"  id="bccAddresses" style="width:60% !important;" value="{!objInteraction.akritivtlm__Email_Bcc__c}" onchange="buttonClick('Bcc.');return false;"/>
+            </apex:pageBlockSectionItem>
+<br />
+            <apex:pageBlockSectionItem id="escSi" dataStyleClass="escMail" labelStyleClass="escMail" rendered="{!showEscMail}" >
+                <apex:commandButton id="escButton" title="{!$Label.Label_Esc}" value="{!$Label.Label_Esc}..." onclick="startProcessForEdit();buttonClick('ESC');return false;" >:</apex:commandButton>
+                <apex:inputField styleClass="AutoCompleteID" id="escAddresses" style="width:60% !important;" value="{!objInteraction.akritivtlm__Email_Esc__c}" onchange="buttonClick('ESC.');return false;"/>
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+
+    <apex:pageBlockSection id="pgBlckSec3" collapsible="false" title="{!$Label.Label_Additional_Fields}" columns="2">
+        <apex:inputField id="emailSubject" value="{!objInteraction.akritivtlm__Subject__c}" label="Subject" style="width:60% !important;" />
+        <br/>
+        <apex:pageblockSectionItem >
+            <apex:outputLabel styleClass="labelCol" style="padding-left:0px !important;font-weight:bold !important;" value="{!$Label.Label_Attach_a_file}"></apex:outputLabel>
+            <apex:commandButton value="{!$Label.Label_Add_Attachment}" onclick="openAddAttachment();return false;"/>
+        </apex:pageblockSectionItem>
+        <br/>
+        <apex:pageblockSectionItem id="attachmentSi">
+            <br/>
+            <apex:outputpanel id="attachmentId" >
+                <apex:pageBlockTable id="pageBlockTable1" value="{!attachmentList}" var="attList" rendered="{!IF(attachmentList != null && attachmentList.size>0, true, false)}" style="width:25%;">
+                    <apex:column >
+                        <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/deleteImage.png')}" style="width:16px !important;height:16px !important;cursor:pointer;margin-right:5px;" onclick="startProcessForEdit();removeAttachment('{!JSENCODE(attList.id)}')" title="Delete" id="fileAttachment" />
+                    </apex:column>
+                    <apex:column >
+                        <!-- <apex:outputText value="{!attList.Name}"></apex:outputText> -->
+                        <apex:commandLink value="{!attList.Name}" onclick="window.open('/servlet/servlet.FileDownload?file={!JSENCODE(attList.id)}','_blank');return false;" reRender="messagepanel" />
+                    </apex:column>
+                </apex:pageBlockTable>
+                <apex:outputpanel id="scriptOP">
+                    <script>
+                        var pgBlckTbl = document.getElementById('{!$Component.pageBlockTable1}');
+                        if(pgBlckTbl != null){
+                            var thead = pgBlckTbl.getElementsByTagName('thead');
+                            //this is to remove the header of page block table
+                            if(thead != null){
+                                thead[0].style.display = 'none';
+                            }
+                        }
+                        attch = '{!$Component.attachmentId}';
+                        if(document.getElementById(attch).parentNode.parentNode.style.display == 'none'){
+                            document.getElementById(attch).parentNode.parentNode.style.display = '';
+                        }
+                        var flag = {!IF(attachmentList != null && attachmentList.size>0, true, false)};
+                        if(!flag)
+                            document.getElementById('{!$Component.scriptOP}').parentNode.parentNode.parentNode.style.display = 'none';
+                        else
+                            document.getElementById('{!$Component.scriptOP}').parentNode.parentNode.parentNode.style.display = '';
+                        var scriptId = '{!$Component.scriptOP}';
+                    </script>
+                </apex:outputpanel>
+            </apex:outputpanel>
+        </apex:pageblockSectionItem>
+
+        <br/>
+        <apex:pageBlockSectionItem id="templateSi">
+            <apex:outputLabel styleClass="labelCol" style="padding-left:0px !important;padding-right:12% !important;" >{!$Label.Label_Template}</apex:outputLabel>
+            <apex:outputPanel layout="block">
+                <apex:selectList id="selectList1" multiselect="false" size="1" >
+                    <apex:selectOptions value="{!emailTemplates}"></apex:selectOptions>
+                    <apex:selectOptions value="{!emailTemplates1}"></apex:selectOptions>
+                    <apex:selectOptions value="{!emailTemplates2}"></apex:selectOptions>
+                </apex:selectList>
+                <apex:commandButton value="Add Template" onclick="startProcessForEdit();changeTemplate('{!$Component.selectList1}',$('#tinymceEditor_ifr').contents().find('body').html());return false;" rerender="messagepanel"/>
+                <apex:actionregion >
+                    <apex:actionFunction name="getTemplateValue" action="{!changeTemplate}" reRender="templateBodyText,messagepanel,selectOptionOP" oncomplete="setTemplateBody();endProcessForEdit();">
+                        <apex:param name="templateIDParam" assignTo="{!selectedTemplateId}" value="" />
+                        <apex:param name="emailBodyParam" assignTo="{!emailTemplateBody}" value="" />
+                    </apex:actionFunction>
+                </apex:actionregion>
+            </apex:outputPanel>
+        </apex:pageBlockSectionItem>
+        <br/>
+        
+        <apex:pageBlockSectionItem id="templateBodySi" >
+            <apex:outputPanel id="templateBodyText">
+                <apex:inputHidden value="{!emailTemplateBody}" id="hiddenEmailBody" />
+                <script>
+                    hiddenMailBody = '{!$Component.hiddenEmailBody}';
+                </script>
+            </apex:outputPanel>
+            <textarea id="tinymceEditor" name="tinymceEditor" rows="25" cols="80" style="width: 160%" >{!emailTemplateBody}</textarea>                        <!-- add an onchange event to update custom message-->
+        </apex:pageBlockSectionItem>
+        
+    </apex:pageBlockSection>
+
+    <div style="padding-left:300px;">
+        <apex:pageBlockButtons location="bottom">
+            <apex:actionStatus id="saveStatus1">
+                <apex:facet name="stop">
+                    <apex:commandButton action="{!sendEmail}" oncomplete="enabling();endProcessForEdit();closeWindow();" onclick="startProcessForEdit();disabling();" value="{!$Label.Label_Send_Email}" reRender="closeOP,messagepanel"/>
+                </apex:facet>
+                <apex:facet name="start">
+                    <apex:commandButton value="{!$Label.Label_Send_Email}..." disabled="true" status="saveStatus1"/>
+                </apex:facet>
+            </apex:actionStatus>
+            <apex:actionStatus id="saveStatus2">
+                <apex:facet name="stop">
+                    <apex:commandButton action="{!saveEmail}" oncomplete="enabling();endProcessForEdit();closeWindow();" onclick="startProcessForEdit();disabling();" value="{!$Label.Label_Save_Email}" reRender="closeOP,messagepanel"/>
+                </apex:facet>
+                <apex:facet name="start">
+                    <apex:commandButton value="{!$Label.Label_Save_Email}..." disabled="true" status="saveStatus2"/>
+                </apex:facet>
+            </apex:actionStatus>
+        </apex:pageBlockButtons>
+    </div>
+</apex:pageBlock>
+</apex:form>
+
+<script>
+/* Commented here to avoid null object error and move this code to the end of the page
+// By Ashish 28-5-2015
+if(document.getElementById(infoField).checked == true){
+    //disableStatusReason();
+    infoFieldchanged();
+}else if(document.getElementById(resRecId).checked == true){
+    resRecFieldchanged();
+}*/
+
+if({!closeFlag} == true){
+    window.close();
+}
+
+removeScript();
+
+if(!flag && scriptId != null){
+    document.getElementById(scriptId).parentNode.parentNode.parentNode.style.display = 'none';
+}
+else{
+    document.getElementById(scriptId).parentNode.parentNode.parentNode.style.display = '';
+}
+
+if( '{!JSENCODE(fromButton)}' != 'Draft' && '{!JSENCODE(fromButton)}' != 'draft' ){
+    setTimeout(function(){
+        startProcessForEdit();
+        document.getElementById(pendingRes).setAttribute('style','width : 60% !important;');
+        //checkDisableFlag(undefined);
+        if( {!isToDisable} ){
+            document.getElementById(stateId).selectedIndex = 0;
+            document.getElementById(pendingRes).selectedIndex = 0;
+        }else{
+            document.getElementById(stateId).selectedIndex = 0;
+            document.getElementById(pendingRes).selectedIndex = 0;
+        }
+        onLoadFlag = false;
+        endProcessForEdit();
+    },2000);
+}else{
+    setTimeout(function(){
+        startProcessForEdit();
+        document.getElementById(pendingRes).setAttribute('style','width : 60% !important;');
+        stateChange();
+        onLoadFlag = false;
+        endProcessForEdit();
+    },2000);
+}
+
+</script>
+
+<apex:outputPanel id="selectOptionOP">
+        <script>
+            var itemsTo=[];
+            var ele;
+            var toLstOnPage = {!toLst};
+            for(var i=0; i < toLstOnPage.length ; i++){
+                itemsTo.push({ id: toLstOnPage[i], tag: toLstOnPage[i] });
+            }
+            var itemsCc = [];
+            toLstOnPage = {!ccLst};
+            for(var i=0; i < toLstOnPage.length ; i++){
+                itemsCc.push({ id: toLstOnPage[i], tag: toLstOnPage[i] });
+            }
+    
+            var itemsBcc=[];
+            toLstOnPage = {!bccLst};
+            for(var i=0; i < toLstOnPage.length ; i++){
+                itemsBcc.push({ id: toLstOnPage[i], tag: toLstOnPage[i] });
+            }
+            
+            
+            var itemsesc=[];
+            toLstOnPage = {!escLst};
+            for(var i=0; i < toLstOnPage.length ; i++){
+                itemsesc.push({ id: toLstOnPage[i], tag: toLstOnPage[i] });
+            }
+            
+            try{
+                $(".AutoCompleteID").select2({
+                    data : { 
+                             results : [],
+                             text : 'tag'
+                           },
+                    multiple: true,
+                    initSelection: function (element, callback) {
+                        var value = $(element).val();
+                        if (value != ''){
+                            var val = value.split(',');
+                            data = {results: []};
+                            for(var i =0 ; i < val.length ; i++){
+                                data.results.push({ id: val[i], text: val[i] });
+                            }
+                            callback(data.results);
+                        }
+                    },
+                    query: function (query) {
+                        var data = {results: []};
+                        if(query.term.length > 0){
+                            data.results.push({id: query.term, text: query.term });
+                        }
+                        var dataValues;
+                        var idOfElement = $(query.element).attr('Id').toString();
+                        if(idOfElement.indexOf('toAddresses') > 0 ){
+                            dataValues = itemsTo;
+                        }else if(idOfElement.indexOf('bccAddresses') > 0 ){
+                            dataValues = itemsBcc;
+                        }else if(idOfElement.indexOf('ccAddresses') > 0 ){
+                            dataValues = itemsCc;
+                        }else if(idOfElement.indexOf('escAddresses') > 0 ){
+                            dataValues = itemsesc;
+                        }
+                        $.each(dataValues, function(){
+                            //here this means the element of "items"
+                            if(query.term.length == 0 || this.tag.toUpperCase().indexOf(query.term.toUpperCase()) >= 0 ){
+                                data.results.push({id: this.id, text: this.tag });
+                            }
+                        });
+                        query.callback(data);
+                    },
+                    //Allow manually entered text in drop down.
+                    createSearchChoice:function(term, data) {
+                        if ( $(data).filter( function() {
+                            return this.text.localeCompare(term)===0;
+                        }).length===0) {
+                            return {id:term, text:term};
+                        }
+                    }
+                }).select2();
+            }catch(e){
+                //console.log('----exception----'+e);
+            }
+        </script>
+    </apex:outputPanel> 
+<script>
+if(document.getElementById(infoField).checked == true){
+    //disableStatusReason();
+    //alert('called');
+    infoFieldchanged();
+}else if(document.getElementById(resRecId).checked == true){
+    resRecFieldchanged();
+}
+</script>
+</apex:page>

@@ -1,0 +1,36 @@
+<apex:page showHeader="false" sidebar="false" controller="akritiv.CommonAddNote" >
+
+<script>
+     function refreshWindow()
+     {
+       try
+       {  
+             window.opener.location.href = '{!JSENCODE(location)}' ;
+             window.close() ;
+          
+       }
+       catch(es)
+       {
+          alert(es) ;
+       }
+     
+     }
+     
+  </script>
+  
+   <apex:form >
+      <apex:pageBlock >
+          <apex:pageBlockButtons location="bottom">
+              <apex:commandButton value="{!$Label.Label_Save}" action="{!savenote}" oncomplete="refreshWindow()" />
+              <apex:commandButton value="{!$Label.Label_Cancel}" action="{!cancel}" oncomplete="refreshWindow()"/>
+          </apex:pageBlockButtons>
+          <apex:pageBlockSection columns="2">
+              <apex:pageBlockSectionItem >
+                  <apex:outputLabel > {!$Label.Label_Note}</apex:outputLabel>
+                  <apex:inputtextarea id="dispnote" cols="70" rows="10" value="{!commonNote}" ></apex:inputtextarea>
+              </apex:pageBlockSectionItem>                           
+          </apex:pageBlockSection>
+      </apex:pageBlock>
+  </apex:form>
+
+</apex:page>

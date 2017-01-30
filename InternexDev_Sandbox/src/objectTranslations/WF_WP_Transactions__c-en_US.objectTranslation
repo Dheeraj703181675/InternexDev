@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>WF WP Transactions</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>WF WP Transactions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Action --></label>
+        <name>Action__c</name>
+    </fields>
+    <fields>
+        <label><!-- Batch --></label>
+        <name>Batch__c</name>
+    </fields>
+    <fields>
+        <label><!-- Check Account Number --></label>
+        <name>Check_Account_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Check Amount --></label>
+        <name>Check_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Check Date --></label>
+        <name>Check_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Check RTN --></label>
+        <name>Check_RTN__c</name>
+    </fields>
+    <fields>
+        <label><!-- Custom Data --></label>
+        <name>Custom_Data__c</name>
+    </fields>
+    <fields>
+        <label><!-- DepositDate LockboxNo Batch Transaction --></label>
+        <name>DepositDate_LockboxNo_Batch_Transaction__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deposit date --></label>
+        <name>Deposit_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Depository Account --></label>
+        <name>Depository_Account__c</name>
+    </fields>
+    <fields>
+        <label><!-- Front image file --></label>
+        <name>Front_image_file__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice Number --></label>
+        <name>Invoice_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice amount --></label>
+        <name>Invoice_amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lockbox no --></label>
+        <name>Lockbox_no__c</name>
+    </fields>
+    <fields>
+        <label><!-- Matching string for Image mapping --></label>
+        <name>Matching_string_for_Image_mapping__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rear Image File --></label>
+        <name>Rear_Image_File__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record Type --></label>
+        <name>Record_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remitter Name --></label>
+        <name>Remitter_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sequence Number --></label>
+        <name>Sequence_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Serial Number --></label>
+        <name>Serial_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Site ID --></label>
+        <name>Site_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transaction Number --></label>
+        <name>Transaction_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- WF Envelope --></label>
+        <name>WF_Envelope__c</name>
+        <relationshipLabel><!-- WF WP Transactions --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>WF WP Transactions Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,44 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/* GenerateAccountStatementPage is used to get the output of 
+ * an email template in form of a pdf file or a excel data sheet.
+ * Which can be sent as an attachment with the email for sending 
+ * billing statement at account level.
+ */
+-->
+<apex:page controller="akritiv.SendBillingStatementController"
+    showHeader="false" sidebar="false" renderAs="{!renderAsPDF}"
+    contenttype="application/vnd.ms-excel#BillingStatement.xls"
+    cache="true" expires="1" standardStylesheets="false">
+
+    <html>
+       <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style>
+                @page {
+                /* Landscape orientation */
+                size:landscape;
+                 @top-right {
+                    content: " Page : " counter(page) " of " counter(pages);
+                    }
+            }
+             body { font-family: "Chrysanthi Unicode ","Apple Symbols","Times New Roman", "Arial Unicode MS";
+             font-size:11px;} 
+            </style>
+        </head>
+    <body>
+    
+    <apex:outputText escape="false" value="{!statementTemplateStr}" id="templateOutput" style="font-size:13px;font-family: Arial Unicode MS !important; " />
+  
+    
+    </body>
+    </html>
+</apex:page>

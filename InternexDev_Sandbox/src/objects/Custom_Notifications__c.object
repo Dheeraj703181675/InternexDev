@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Action__c</fullName>
+        <externalId>false</externalId>
+        <label>Action</label>
+        <length>255</length>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Body__c</fullName>
+        <defaultValue>&apos;Internex&apos;</defaultValue>
+        <externalId>false</externalId>
+        <label>Body</label>
+        <length>5000</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>7</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CA_Portal_Id__c</fullName>
+        <externalId>false</externalId>
+        <formula>Client_Account__r.Portal_External_Id__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>CA Portal ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Client_Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Client Account</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Client_Account__c.Client__c</field>
+                <operation>equals</operation>
+                <valueField>$Source.Client_Name__c</valueField>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Client_Account__c</referenceTo>
+        <relationshipLabel>Custom Notifications</relationshipLabel>
+        <relationshipName>Custom_Notifications</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Client_Name__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Client Name</label>
+        <referenceTo>akritiv__Brand__c</referenceTo>
+        <relationshipLabel>Custom Notifications</relationshipLabel>
+        <relationshipName>Custom_Notifications</relationshipName>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Date_Received__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Received</label>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>From__c</fullName>
+        <externalId>false</externalId>
+        <label>From</label>
+        <length>255</length>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Notification_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Notification Type</label>
+        <length>255</length>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Portal_External_ID__c</fullName>
+        <externalId>true</externalId>
+        <label>Portal External ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Subject__c</fullName>
+        <externalId>false</externalId>
+        <label>Subject</label>
+        <length>255</length>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>To__c</fullName>
+        <externalId>false</externalId>
+        <label>To</label>
+        <length>255</length>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Custom Notification</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Action__c</columns>
+        <columns>Notification_Type__c</columns>
+        <columns>From__c</columns>
+        <columns>To__c</columns>
+        <columns>Date_Received__c</columns>
+        <columns>Client_Name__c</columns>
+        <columns>Subject__c</columns>
+        <columns>Portal_External_ID__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>CN-{000000000}</displayFormat>
+        <label>Custom Notification No</label>
+        <trackHistory>true</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Custom Notifications</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Notification_Type__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Subject__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>From__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>To__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Date_Received__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Client_Name__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Action__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Portal_External_ID__c</customTabListAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <webLinks>
+        <fullName>Send_to_Portal</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send to Portal</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
+
+
+var callResult =sforce.apex.execute(&apos;TPSSF.TPConnectorService&apos;,&apos;SubmitExt&apos;,{sforceObjectType:&apos;Custom_Notifications__c&apos;,sforceObjectId:&apos;{!Custom_Notifications__c.Id}&apos;,queryString:&apos;&apos;,externalObjectId:&apos;&apos;,action:&apos;sendtoportal&apos;,profileKey:&apos;akritiv-internex-custom-notifications&apos;,profile:&apos;&apos;,userId:&apos;{!$User.Id}&apos;,sessionId:&apos;{!$Api.Session_ID}&apos;,partnerUrl:&apos;{!$Api.Partner_Server_URL_220}&apos;,username:&apos;{!$User.Username}&apos;, event:&apos;&apos;,clientId:&apos;&apos;,additionalData:&apos;&apos;}); 
+
+
+window.alert(callResult[0]); 
+window.location.reload(); 
+
+/* 
+window.alert(&apos;Under Construction!&apos;); 
+window.location.reload(); 
+*/</url>
+    </webLinks>
+</CustomObject>

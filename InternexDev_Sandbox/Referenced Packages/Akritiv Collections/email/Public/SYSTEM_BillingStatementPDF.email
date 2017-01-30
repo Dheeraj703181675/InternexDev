@@ -1,0 +1,176 @@
+<head>
+<style>
+@page { size:landscape;@bottom-right {content: "Page " counter(page);}}
+.billing {padding:0px;border-collapse: collapse; font-family:verdana; solid}
+.billing th, .billing td{text-align:center; border: solid 1px black; padding:3px 5px; white-space:nowrap;}
+.billing th {font-weight:bolder; text-align:center; background-color:#DDD;}
+.billing .odd {background-color:#EEE;}
+.billing .even{background-color:#FFF;}
+</style>
+</head>
+<body>
+
+
+<table border="0" width="1176" height="52">
+       
+       <tr>
+         <td width="443" height="1"> <img src="{!Organization.Logo}" alt="{!Organization.Name}" width="200" height="55" /></td>
+         <td width="695" style="font-weight:bold; text-align: center;font-size: 22px; font-family:verdana;" height="1" valign="bottom"> 
+         <p style="text-align: left">STATEMENT</td>
+         
+       </tr>
+</table>
+
+<table border="0" width="1176" height="115">
+       
+              
+       <tr>
+         <td height="20" valign="top" colspan="2"> {!Organization.Name} </td>
+         <td width="230" height="20" valign="top"> 
+         <b>Customer #: </b></td>
+         <td width="531" height="20" valign="top">{!Account.AccountNumber}</td>
+         
+       </tr>
+       
+       <tr>  
+       <td height="15" valign="top" colspan="2"> {!Organization.Street} </td>
+         <td width="230" height="15" valign="top"> 
+         <b>Customer Name:</b></td>
+         <td width="531" height="15" valign="top"> 
+         <span class="Apple-style-span" style="border-collapse: separate; color: rgb(0, 0, 0); font-family: Times New Roman; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-border-horizontal-spacing: 0px; -webkit-border-vertical-spacing: 0px; -webkit-text-decorations-in-effect: none; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; font-size: 12pt">
+         <span class="Apple-style-span" style="text-align: left; white-space: nowrap; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px">
+         {!Account.Name}</span></span></td>
+       </tr>
+         
+       <tr>
+               <td colspan="2" height="19" valign="top">
+                  {!Organization.City}, {!Organization.State} &nbsp; {!Organization.PostalCode}
+   </td>
+               <td height="19" valign="top" width="230">
+                  <b>Date:</b></td>
+               <td height="19" valign="top" width="531">
+                  <span class="Apple-style-span" style="border-collapse: separate; color: rgb(0, 0, 0); font-family: Times New Roman; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-border-horizontal-spacing: 0px; -webkit-border-vertical-spacing: 0px; -webkit-text-decorations-in-effect: none; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; font-size: 12pt">
+                  <span class="Apple-style-span" style="-webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px; ">
+                  {!Date.Today}</span></span></td>
+             </tr>
+       <tr>
+               <td colspan="2" height="20" valign="top">
+                  <b>Phone:</b>
+           {!Organization.Phone} |&nbsp;
+           		  <b>Fax:</b> 
+                  {!Account.OwnerFax}
+     </td>
+               <td height="20" valign="top" colspan="2">&nbsp;
+                  </td>
+               </tr>
+       <tr>
+               <td colspan="4" height="3" valign="top"  >
+                  <hr color="black" size="1" align="right"></td>
+               </tr>
+  
+             
+    </table>
+
+   <table  width="1110">
+     <tr>
+       <td width="66" ><b>Bill To:</b></td>
+       <td width="481" >
+       <span class="Apple-style-span" style="border-collapse: separate; color: rgb(0, 0, 0); font-family: Times New Roman; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-border-horizontal-spacing: 0px; -webkit-border-vertical-spacing: 0px; -webkit-text-decorations-in-effect: none; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; font-size: 12pt">
+       <span class="Apple-style-span" style="-webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px; ">
+       {!Account.Name}</span></span></td>
+       <td width="270">&nbsp;</td>
+       <td width="273">&nbsp;</td>
+     </tr>
+     <tr>
+       <td width="66">&nbsp;</td>
+       <td width="481">
+       <span class="Apple-style-span" style="border-collapse: separate; color: rgb(0, 0, 0); font-family: Times New Roman; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-border-horizontal-spacing: 0px; -webkit-border-vertical-spacing: 0px; -webkit-text-decorations-in-effect: none; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; font-size: 12pt">
+       <span class="Apple-style-span" style="-webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px; ">
+       {!Account.BillingStreet}</span></span></td>
+       <td width="270">&nbsp;
+       </td>
+       <td width="273">&nbsp;</td>
+     </tr>
+     <tr>
+       <td width="66">&nbsp;</td>
+       <td width="481">
+       <span class="Apple-style-span" style="border-collapse: separate; color: rgb(0, 0, 0); font-family: Times New Roman; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-border-horizontal-spacing: 0px; -webkit-border-vertical-spacing: 0px; -webkit-text-decorations-in-effect: none; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; font-size: 12pt">
+       <span class="Apple-style-span" style="-webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px; ">
+       {!Account.BillingCity}, {!Account.BillingState} {!Account.BillingPostalCode}</span></span></td>
+       <td width="270">&nbsp;
+       </td>
+       <td width="273">&nbsp;</td>
+     </tr>
+     <tr>
+       <td colspan="2">&nbsp;</td>
+       <td colspan="2">&nbsp;
+       </td>
+     </tr>
+   </table>   
+<table width="942">
+
+<tr><td width="75" ></td></tr>
+<tr>
+        <td width="1053">{!Transactions.Summary}</td>
+  </tr>
+      
+<tr>
+        <td width="1053">
+        <p align="right">
+        <b>Total :&nbsp;&nbsp; </b>{!Transactions.TotalBalance}</td>
+  </tr>
+      
+</table>
+<table width="997">
+	   <tr>
+         <td width="75"><b>Reminder:</b></td>
+         <td width="1029">Please include customer # <b>{!Account.AccountNumber}</b> on your check.</td>
+       </tr>
+       
+	   <tr>
+         <td width="75"><b>Terms:</b></td>
+         <td width="1029">{!Account.Terms_Key__c} days from invoice date.</td>
+       </tr>
+       
+     <tr>
+        <td colspan="2" width="1108">&nbsp;
+	  </td>
+       </tr>
+     <tr>
+        <td colspan="2" width="1108">
+	  <table border="0" height="102" width="1106">
+	   <tbody>
+	    <tr>
+	     <td height="22" bgcolor="#DDDDDD" colspan="2"><span style="color: #000000;"><strong>
+         REMITTANCE</strong></span></td>
+	    </tr>
+	    <tr>
+	     <td height="1" width="134"><b>Customer Name:</b></td>
+	     <td height="1" width="962" align="left" valign="top">{!Account.Name}</td>
+	    </tr>
+	    <tr>
+
+	     <td height="19" width="134"><b>Customer #:</b></td>
+	     <td height="19" width="962" align="left" valign="top">{!Account.AccountNumber}</td>
+	    </tr>
+	    <tr>
+	     <td height="19" width="134"><b>Date:</b></td>
+	     <td height="19" width="962" align="left" valign="top">{!Date.Today}</td>
+	    </tr>
+
+	    <tr>
+	     <td height="19" width="134"><b>Amount Due: </b></td>
+	     <td height="19" width="962" align="left" valign="top">{!Transactions.TotalBalance}</td>
+	    </tr>
+	    <tr>
+	     <td height="19" width="134"><b>Amount Enclosed:</b></td>
+	     <td height="19" width="962" align="left" valign="top">&nbsp;</td>
+
+	    </tr>
+	  </tbody>
+	  </table>
+        </td>
+       </tr>
+</table>
+
+ </body>

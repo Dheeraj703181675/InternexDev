@@ -1,0 +1,9 @@
+Dear {!Contact.Name}, 
+
+Dispute related to your account #  {!Account.AccountNumber} has been closed.
+
+
+Thank you.
+{!User.Name}
+{!User.Email}
+{!User.Phone}

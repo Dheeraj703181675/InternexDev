@@ -1,0 +1,63 @@
+<apex:page controller="akritivtlm.CustomLookUpController" sidebar="false" showHeader="false">
+    <script>
+        function callParentFunc(mail) {
+            window.opener.document.getElementById('{!JSENCODE(componentId)}').value = mail;
+            window.close();
+        }
+        
+        function refreshList() {
+            var searchText = document.getElementById('lksrch').value;
+            //alert(searchText);
+            actionRefreshList(searchText);
+        }
+    </script>
+    <apex:form id="fm" >
+    
+        <apex:actionFunction name="actionRefreshList" rerender="blk" action="{!actionRefreshList}"  oncomplete="endProcessForEdit();">
+            <apex:param assignTo="{!searchText}" name="level" value=""/> 
+        </apex:actionFunction>
+        
+        <body class="hasMotif lookupTab  LookupSearchFrame  brandNoBgrImg">
+            <div class="lookup">
+                <div class="bPageTitle">
+                    <div class="ptBody secondaryPalette">
+                        <div class="content">
+                            <img title="" class="pageTitleIcon" alt="" src="/s.gif" /><h1>Email Lookup</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="pBody">
+                    <input type="text" value="" size="20" placeholder="{!$Label.Label_Search}..." name="lksrch" maxlength="80" id="lksrch" />
+                    <input type="button" title="{!$Label.Label_Go}" name="go" class="btn" value=" Go! " onclick="refreshList();" />
+                    <div class="bDescription">{!$Label.Label_You_can_use_as_a_wildcard_next_to_other_characters_to_improve_your_sea}</div>
+                </div>
+            </div>
+        </body>
+ 
+        <apex:pageBlock id="blk">
+            <apex:pageblockSection id="configuredDetail" title="{!$Label.Label_Configured_Email}" columns="2">
+                <apex:pageblocktable value="{!configEmailGUI}" var="mail" columns="1">
+                   <apex:column headerValue="Email" >
+                        <a href="javascript:void(0);" onclick="callParentFunc('{!JSENCODE(mail.email)}')" >{!JSENCODE(mail.name)}</a>
+                    </apex:column>
+                </apex:pageblocktable>
+            </apex:pageblockSection> 
+
+            <apex:pageblockSection id="contactDetail" title="{!$Label.Label_Organization_Contact}" columns="2">
+                <apex:pageblocktable value="{!configContactGUI}" var="mail" columns="1">
+                    <apex:column headerValue="Email" >
+                        <a href="javascript:void(0);" onclick="callParentFunc('{!JSENCODE(mail.email)}')" >{!JSENCODE(mail.name)}</a>
+                    </apex:column>
+                </apex:pageblocktable>
+            </apex:pageblockSection> 
+
+            <apex:pageblockSection id="userDetail" title="{!$Label.Label_Organization_User}" columns="2">
+                <apex:pageblocktable value="{!configUserGUI}" var="mail" columns="1">
+                    <apex:column headerValue="Email" >
+                        <a href="javascript:void(0);" onclick="callParentFunc('{!JSENCODE(mail.email)}')" >{!JSENCODE(mail.name)}</a>
+                    </apex:column>
+                </apex:pageblocktable>
+            </apex:pageblockSection> 
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

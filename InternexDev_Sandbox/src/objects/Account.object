@@ -1,0 +1,4601 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>CallHighlightAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EmailHighlightAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EnableCustomerPortalUser</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ListClean</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>RequestUpdate</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ViewCustomerPortalUser</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>WebsiteHighlightAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <fieldSets>
+        <fullName>akritiv__Bucket_Details</fullName>
+        <description>Akritiv Bucket Details</description>
+        <displayedFields>
+            <field>akritiv__Total_AR__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Total_Past_Due__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Age0__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Age1__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Age2__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Age3__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Age4__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Age5__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Akritiv Bucket Details</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>akritiv__General_Detail</fullName>
+        <description>Akritiv In Detail Page</description>
+        <displayedFields>
+            <field>Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>AccountNumber</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Account_Key__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Business_Unit__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Bill_To_Number__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>BillingStreet</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>BillingCity</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>BillingPostalCode</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>BillingState</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>BillingCountry</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Akritiv General Detail</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>akritiv__Risk_Set</fullName>
+        <description>Akritiv Risk Set</description>
+        <displayedFields>
+            <field>akritiv__DPD_Mean__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Avg_DPD_Risk__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__DPD_Std_Dev__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Last_Contact_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Last_Contact_Method__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Last_Contact_Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Contact_Risk__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Lead_Tx__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Oldest_DPD__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Aging_Risk__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Total_Promised__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Total_Disputed__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Percent_Disputed__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__Percent_Disputed_Risk__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__High_Past_Due_Tx__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__High_Past_Due_DPD__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>akritiv__High_Past_Due_Risk__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Akritiv Risk Set</label>
+    </fieldSets>
+    <fields>
+        <fullName>AccountNumber</fullName>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>AccountSource</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Advertisement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Employee Referral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>External Referral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Public Relations</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Seminar - Internal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Seminar - Partner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Trade Show</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Web</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Word of mouth</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Account_C_Form_Collectible_Amount__c</fullName>
+        <description>Sum of all C-Form Collectible Amounts of all the transactions of an Account, where C-Form required is &apos;YES&apos;</description>
+        <externalId>false</externalId>
+        <label>Account C-Form Collectible Amount</label>
+        <summaryFilterItems>
+            <field>akritiv__Transaction__c.akritiv__Amount__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </summaryFilterItems>
+        <summaryFilterItems>
+            <field>akritiv__Transaction__c.Tax_Category__c</field>
+            <operation>equals</operation>
+            <value>A2</value>
+        </summaryFilterItems>
+        <summaryForeignKey>akritiv__Transaction__c.akritiv__Account__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Account_Clerk_Code_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Account Clerk Code Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_H_Form_Collectible_Amount__c</fullName>
+        <description>Sum of all H-Form Collectible Amounts of all the transactions of an Account, where H-Form required is &apos;YES&apos;</description>
+        <externalId>false</externalId>
+        <label>Account H-Form Collectible Amount</label>
+        <summarizedField>akritiv__Transaction__c.H_Form_Collectible_Amount__c</summarizedField>
+        <summaryFilterItems>
+            <field>akritiv__Transaction__c.akritiv__Amount__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </summaryFilterItems>
+        <summaryFilterItems>
+            <field>akritiv__Transaction__c.H_Form_Required__c</field>
+            <operation>equals</operation>
+            <value>YES</value>
+        </summaryFilterItems>
+        <summaryForeignKey>akritiv__Transaction__c.akritiv__Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Account_I_Form_Collectible_Amount__c</fullName>
+        <description>Sum of all I-Form Collectible Amounts of all the transactions of an Account, where I-Form required is &apos;YES&apos;</description>
+        <externalId>false</externalId>
+        <label>Account I-Form Collectible Amount</label>
+        <summarizedField>akritiv__Transaction__c.I_Form_Collectible_Amount__c</summarizedField>
+        <summaryFilterItems>
+            <field>akritiv__Transaction__c.akritiv__Amount__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </summaryFilterItems>
+        <summaryFilterItems>
+            <field>akritiv__Transaction__c.I_Form_Required__c</field>
+            <operation>equals</operation>
+            <value>YES</value>
+        </summaryFilterItems>
+        <summaryForeignKey>akritiv__Transaction__c.akritiv__Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Account_Legal_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Counterparty Legal Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Account Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Payer_Terms__c</fullName>
+        <externalId>false</externalId>
+        <label>Account Payer Terms</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Payment_Terms_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Account Payment Terms Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Segment__c</fullName>
+        <externalId>false</externalId>
+        <label>Account Segment</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Key Account</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Govt Account</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Channel Partner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Regular</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unassigned</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Internal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>System Integrators</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Account_TDS_Collectible__c</fullName>
+        <description>Sum of all TDS Collectible Amounts of all the Transactions of an Account, where TDS required is &apos;YES&apos;</description>
+        <externalId>false</externalId>
+        <label>Account TDS Collectible</label>
+        <summarizedField>akritiv__Transaction__c.TDS_Amount__c</summarizedField>
+        <summaryFilterItems>
+            <field>akritiv__Transaction__c.akritiv__Amount__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </summaryFilterItems>
+        <summaryFilterItems>
+            <field>akritiv__Transaction__c.TDS_Required__c</field>
+            <operation>equals</operation>
+            <value>YES</value>
+        </summaryFilterItems>
+        <summaryForeignKey>akritiv__Transaction__c.akritiv__Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Account_name_Uniqueness__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>false</externalId>
+        <label>Account name Uniqueness</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Accounting_Clerk_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>Accounting Clerk Code</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Address1__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.akritiv__Address1__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Address1</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Address2__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.akritiv__Address2__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Address2</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Address3__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.akritiv__Address3__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Address3</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Address4__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.akritiv__Address4__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Address4</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Address5__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.akritiv__Address5__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Address5</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Adj_Fraud_Score__c</fullName>
+        <externalId>false</externalId>
+        <label>Adj Fraud Score</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Adj_Risk_Score__c</fullName>
+        <externalId>false</externalId>
+        <label>Adj Risk Score</label>
+        <picklist>
+            <picklistValues>
+                <fullName>1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Akritiv_Contact_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Akritiv Contact Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Email</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Akritiv_Contact_Fax__c</fullName>
+        <externalId>false</externalId>
+        <label>Akritiv Contact Fax</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Akritiv_Contact_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Akritiv Contact Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Akritiv_Contact_Phone__c</fullName>
+        <externalId>false</externalId>
+        <label>Akritiv Contact Phone</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Akritiv_Contact_Title__c</fullName>
+        <externalId>false</externalId>
+        <label>Akritiv Contact Title</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AnnualRevenue</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>BillingAddress</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Billing_Currency__c</fullName>
+        <externalId>false</externalId>
+        <label>Billing Currency</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Billing_Floor__c</fullName>
+        <externalId>false</externalId>
+        <label>Billing Floor</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BrandLogo__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.akritiv__Brand_Logo__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>BrandLogo</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Brand__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Business Unit</label>
+        <referenceTo>akritiv__Brand__c</referenceTo>
+        <relationshipLabel>Accounts</relationshipLabel>
+        <relationshipName>Accounts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Business_Transaction_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Business Transaction Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Cash_Call_Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Cash Call Comments</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Check__c</fullName>
+        <externalId>false</externalId>
+        <label>Check #</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Child_Credit_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Child Credit Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Child_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Child Number</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>City__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.City__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>City</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Comments</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Code</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Count__c</fullName>
+        <externalId>false</externalId>
+        <label>Count</label>
+        <summaryFilterItems>
+            <field>akritiv__Transaction__c.akritiv__Balance__c</field>
+            <operation>notEqual</operation>
+            <value>0</value>
+        </summaryFilterItems>
+        <summaryForeignKey>akritiv__Transaction__c.akritiv__Account__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Country__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.Country__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Country</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Credit_Block__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Credit Block</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Credit_Period__c</fullName>
+        <externalId>false</externalId>
+        <label>Credit Period</label>
+        <length>120</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Credit_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Credit Status</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrencyIsoCode</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Customer_Bank_Account_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Customer Bank Account Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Rating__c</fullName>
+        <externalId>false</externalId>
+        <label>Customer Rating</label>
+        <picklist>
+            <picklistValues>
+                <fullName>A - Excellent Customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>B - Good Customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>C - Average Risky Customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D - Very Risky Customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Customer_Rating_comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Customer Rating comments</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Visit_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Customer Visit Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Customer_Visit_Planned_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Customer Visit Planned Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Customer_Visit__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Customer Visit</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DBT_Paydex__c</fullName>
+        <externalId>false</externalId>
+        <label>DBT (Paydex)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>D_B_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>D&amp;B Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>D_B_Limit__c</fullName>
+        <externalId>false</externalId>
+        <label>D&amp;B  Limit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>D_B_Risk_Score_Range__c</fullName>
+        <externalId>false</externalId>
+        <label>D&amp;B Risk Score Range</label>
+        <length>120</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>D_B_Risk_Score__c</fullName>
+        <externalId>false</externalId>
+        <label>D&amp;B Risk Score</label>
+        <length>120</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Date_Opened__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Opened</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Delivery_Block_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Delivery Block Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Delivery_Block__c</fullName>
+        <externalId>false</externalId>
+        <label>Delivery Block</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Destination_Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Destination Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Accounts</relationshipLabel>
+        <relationshipName>Accounts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Discount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Discount %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Division__c</fullName>
+        <externalId>false</externalId>
+        <label>Division</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Dunning_Language__c</fullName>
+        <externalId>false</externalId>
+        <label>Dunning Language</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Dunning_clerk__c</fullName>
+        <externalId>false</externalId>
+        <label>Dunning clerk</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Duns_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Duns Number</label>
+        <length>9</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Duns__c</fullName>
+        <externalId>false</externalId>
+        <label>Duns #</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Personal Contact Email</label>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <type>Email</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Fax</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Final_Forecast__c</fullName>
+        <externalId>false</externalId>
+        <formula>if ( OR( User_Forecast__c = 0.00, ISNULL(User_Forecast__c)),System_Forecast__c,User_Forecast__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Final Forecast</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Foreign_Account__c</fullName>
+        <externalId>false</externalId>
+        <label>Foreign Account</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fraud_Score_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Fraud Score Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Fraud_Score__c</fullName>
+        <externalId>false</externalId>
+        <label>Fraud Score</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Funding_Limit__c</fullName>
+        <externalId>false</externalId>
+        <label>Funding Limit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Indemnities__c</fullName>
+        <externalId>false</externalId>
+        <label>Indemnities</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Industry</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Agriculture</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Apparel</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Banking</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Biotechnology</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Chemicals</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Construction</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Consulting</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Electronics</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Energy</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Engineering</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Entertainment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Environmental</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Food &amp; Beverage</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Government</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Healthcare</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hospitality</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Insurance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Machinery</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Manufacturing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Media</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not For Profit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Recreation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Retail</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Technology</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Telecommunications</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Transportation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Utilities</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Industry_DBT_Paydex__c</fullName>
+        <externalId>false</externalId>
+        <label>Industry DBT (Paydex)</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Utilities</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Accommodation and Food Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Adm.,Support,Waste Mgmt,Remediation Serv</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Agri., Forestry, Fishing and Hunting</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arts, Entertainment, and Recreation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Construction</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Educational Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finance and Insurance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Health Care and Social Assistance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Information</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Manufacturing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mining</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other Services (except Public Admin.)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Prof. Scientific, and Techn. Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Public Administration</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Real Estate Rental and Leasing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Retail Trade</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Transportation and Warehousing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wholesale Trade</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Jigsaw</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Last_Auto_Dunning_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Auto Dunning Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Last_Dunning_Sent_on__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Dunning Sent on</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>MP_External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>MP External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Max_Credit_Period__c</fullName>
+        <externalId>false</externalId>
+        <label>Max Credit Period</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Missing_Key__c</fullName>
+        <description>Concatenation of “Transit Routing #” and the “DD Account #&quot; to be used for matching records in Web Cash file in case account number not available</description>
+        <externalId>false</externalId>
+        <label>Missing Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NACIS_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>NAICS Industry Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NACIS_Desc__c</fullName>
+        <externalId>false</externalId>
+        <label>NAICS Industry Desc</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name</fullName>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>NumberOfEmployees</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Office_Phone__c</fullName>
+        <externalId>false</externalId>
+        <label>Office Phone</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>OnHold__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>OnHold</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Order_Block_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Order Block Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Order_Block__c</fullName>
+        <externalId>false</externalId>
+        <label>Order Block</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Stat_Form_Collectible_Amount__c</fullName>
+        <description>Sum of Collectible Amounts of all the Stat Forms on the Account other than the H &amp; I Forms</description>
+        <externalId>false</externalId>
+        <label>Other Stat Form Collectible Amount</label>
+        <summarizedField>Statutory_Forms__c.Form_Collectible_Amount__c</summarizedField>
+        <summaryFilterItems>
+            <field>Statutory_Forms__c.Form_Collectible_Amount__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Statutory_Forms__c.Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Other__c</fullName>
+        <externalId>false</externalId>
+        <label>Other</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Override_Risk_Level__c</fullName>
+        <externalId>false</externalId>
+        <label>Override Risk Level</label>
+        <picklist>
+            <picklistValues>
+                <fullName>A - Excellent Customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>B - Good Customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>C - Average Risky Customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D - Very Risky Customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Override_Sales_District__c</fullName>
+        <externalId>false</externalId>
+        <label>Override Sales District</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Override_Sales_Region__c</fullName>
+        <externalId>false</externalId>
+        <label>Override Sales Region</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <trackHistory>true</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Ownership</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Public</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Private</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Subsidiary</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>PAN_TAN__c</fullName>
+        <externalId>false</externalId>
+        <label>PAN/ TAN</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PC_Total_AR__c</fullName>
+        <externalId>false</externalId>
+        <formula>akritiv__PC_Current__c + akritiv__PC_1_30__c + akritiv__PC_31_60__c + akritiv__PC_61_90__c + akritiv__PC_91_180__c +  akritiv__PC_Over_180__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>PC-Total AR</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PC_Total_Past_Due__c</fullName>
+        <externalId>false</externalId>
+        <formula>akritiv__PC_1_30__c + akritiv__PC_31_60__c + akritiv__PC_61_90__c + akritiv__PC_91_180__c + akritiv__PC_Over_180__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>PC - Total Past Due</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ParentId</fullName>
+        <trackHistory>false</trackHistory>
+        <type>Hierarchy</type>
+    </fields>
+    <fields>
+        <fullName>Parent_Credit_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Parent Credit Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Parent_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Parent Number</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payer_Fax__c</fullName>
+        <externalId>false</externalId>
+        <label>Payer Fax</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payer_Phone__c</fullName>
+        <externalId>false</externalId>
+        <label>Payer Phone</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payer_To_City__c</fullName>
+        <externalId>false</externalId>
+        <label>Payer To City</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payer_To_Country_Desc__c</fullName>
+        <externalId>false</externalId>
+        <label>Payer To Country Desc</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payer_To_Country__c</fullName>
+        <externalId>false</externalId>
+        <label>Payer To Country</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payer_To_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Payer To Name</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payer_To_State_Desc__c</fullName>
+        <externalId>false</externalId>
+        <label>Payer To State Desc</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payer_To_State__c</fullName>
+        <externalId>false</externalId>
+        <label>Payer To State</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payer_To_Zip__c</fullName>
+        <externalId>false</externalId>
+        <label>Payer To Zip</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Phone</fullName>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Portal_Client_Account_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Portal Client-Account ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Portal_Debtor_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Portal Debtor ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Portal_External_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>Portal External ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Previous_System_Forecast__c</fullName>
+        <externalId>false</externalId>
+        <label>Previous System Forecast</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Previous_User_Forecast__c</fullName>
+        <externalId>false</externalId>
+        <label>Previous User Forecast</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Principals__c</fullName>
+        <externalId>false</externalId>
+        <label>Principals</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Profile_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>$User.Profile_Name__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Profile Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quarter__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(OR(MONTH(Today())= 4,MONTH(Today())= 5,MONTH(Today())= 6), &apos;First&apos;, 
+IF(OR(MONTH(Today())= 7,MONTH(Today())= 8,MONTH(Today())= 9), &apos;Second&apos;, 
+IF(OR(MONTH(Today())= 10,MONTH(Today())= 2,MONTH(Today())= 3), &apos;Third&apos;, &apos;Fourth&apos;)))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Quarter</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Rating</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Hot</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Warm</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cold</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Recon__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Recon</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Remit_ABA__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.Remit_ABA__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Remit ABA</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Remit_Account__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.Remit_Account__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Remit Account</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Remit_Address__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.Remit_Address__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Remit Address</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Remit_Bank__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.Remit_Bank__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Remit Bank</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Remit_Email__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.Remit_Email__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Remit Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Remit_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.Remit_Name__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Remit Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Remit_PO_Box__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.Remit_PO_Box__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Remit PO Box</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Remit_Zip__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.Remit_Zip__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Remit Zip</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Risk_Level__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(AND(ISBLANK(TEXT(Override_Risk_Level__c)),OR(AND(akritiv__Base_Total_AR__c &gt; 0, X60_DPD__c &gt; 0.50, X90_DPD__c &lt; 0.50), Total_Cheques_Bounced__c = 1)), &quot;C - Average Risky Customer&quot;,     
+IF(AND(ISBLANK(TEXT(Override_Risk_Level__c)),OR(AND(akritiv__Base_Total_AR__c &gt; 0, X90_DPD__c  &gt; 0.50), Total_Cheques_Bounced__c &gt; 1)), &quot;D - Very Risky Customer&quot;,
+IF(NOT(ISBLANK(TEXT(Override_Risk_Level__c))),TEXT(Override_Risk_Level__c),&quot;&quot;)))</formula>
+        <label>Risk Level</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Risk_Score_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Risk Score Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Risk_Score__c</fullName>
+        <externalId>false</externalId>
+        <label>Risk Score</label>
+        <picklist>
+            <picklistValues>
+                <fullName>1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Risk_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Risk Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAP_Sales_District__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( ISBLANK( Override_Sales_District__c  ),  Sales_District__c  , Override_Sales_District__c)</formula>
+        <label>Sales District</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_District_Non_SAP__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( ISBLANK( Override_Sales_District__c ), Sales_District__c , Override_Sales_District__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales District</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_District__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Sales District</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Office_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Sales Office Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Office__c</fullName>
+        <externalId>false</externalId>
+        <label>Sales Office</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Region1__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( ISBLANK( Override_Sales_Region__c  ),  Sales_Region__c  , Override_Sales_Region__c)</formula>
+        <label>Sales Region</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Region_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Sales Region Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Region__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Sales Region</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ShippingAddress</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Sic</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>SicDesc</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Site</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Sold_Box__c</fullName>
+        <externalId>false</externalId>
+        <label>Sold Box</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sold_Fax__c</fullName>
+        <externalId>false</externalId>
+        <label>Sold Fax</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sold_Phone__c</fullName>
+        <externalId>false</externalId>
+        <label>Sold Phone</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sold_To_City__c</fullName>
+        <externalId>false</externalId>
+        <label>Sold To City</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sold_To_Country_Desc__c</fullName>
+        <externalId>false</externalId>
+        <label>Sold To Country Desc</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sold_To_Country__c</fullName>
+        <externalId>false</externalId>
+        <label>Sold To Country</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sold_To_State_Desc__c</fullName>
+        <externalId>false</externalId>
+        <label>Sold To State Desc</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sold_To_State__c</fullName>
+        <externalId>false</externalId>
+        <label>Sold To State</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sold_To_Zip__c</fullName>
+        <externalId>false</externalId>
+        <label>Sold To Zip</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>State__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.State__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>State</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sync_with_Grade__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Sync with Grade</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sync_with_Market_Place__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Sync with Market Place</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sync_with_Portal__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Sync with Portal</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>System_Forecast__c</fullName>
+        <externalId>false</externalId>
+        <label>System Forecast</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TickerSymbol</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Title__c</fullName>
+        <externalId>false</externalId>
+        <label>Title</label>
+        <length>5</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Advance__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Advance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Applied__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Applied</label>
+        <summarizedField>akritiv__Payment__c.akritiv__Applied_Amount__c</summarizedField>
+        <summaryForeignKey>akritiv__Payment__c.akritiv__Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Cheques_Bounced__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Cheques Bounced</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Type</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Analyst</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Competitor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Integrator</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Investor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Press</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Prospect</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Reseller</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Ultimate_Credit_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Ultimate Credit Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>User_Forecast__c</fullName>
+        <externalId>false</externalId>
+        <label>User Forecast</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VAT_Form_Risk_Le__c</fullName>
+        <externalId>false</externalId>
+        <label>VAT Form Risk Level</label>
+        <picklist>
+            <picklistValues>
+                <fullName>A - Excellent Customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>B - Good Customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>C - Average Risky Customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D - Very Risky Customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Website</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>X60_DPD__c</fullName>
+        <externalId>false</externalId>
+        <formula>( akritiv__Age3__c +  akritiv__Age4__c +  akritiv_Age5__c +  akritiv_Age6__c )/   akritiv__Base_Total_AR__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>% &gt;60 DPD</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>X90_DPD__c</fullName>
+        <externalId>false</externalId>
+        <formula>( akritiv__Age4__c +  akritiv_Age5__c +  akritiv_Age6__c )/  akritiv__Base_Total_AR__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>% &gt; 90 DPD</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ZIP_Code__c</fullName>
+        <externalId>false</externalId>
+        <formula>Brand__r.ZIP_Code__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>ZIP Code</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv_Age5__c</fullName>
+        <externalId>false</externalId>
+        <label>181-365</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv_Age6__c</fullName>
+        <externalId>false</externalId>
+        <label>Over 365</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Account_Key__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <defaultValue>TEXT(0)</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>true</externalId>
+        <label>Account Key</label>
+        <length>80</length>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Account_Type__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Account Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Age0__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Current</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Age1__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>1-30</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Age2__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>31-60</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Age3__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>61-90</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Age4__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>91-180</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Age5__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Over 180</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Aging_Risk__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(NULLVALUE($Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Oldest_Age_Range_1__c,0)=0, IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16), 
+
+IF(NULLVALUE($Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Oldest_Age_Range_2__c ,0)=0, IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16) , 
+
+IF(NULLVALUE(akritiv__Oldest_DPD__c,0) =0,IMAGE(&quot;/img/samples/flag_green.gif&quot;,&quot;green&quot;, 16, 16 ) ,
+IF( akritiv__Oldest_DPD__c  &lt;$Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Oldest_Age_Range_1__c , IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16), IF( akritiv__Oldest_DPD__c  &lt; $Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Oldest_Age_Range_2__c , IMAGE(&quot;/img/samples/flag_yellow.gif&quot;, &quot;yellow&quot;, 16, 16) ,  IMAGE(&quot;/img/samples/flag_red.gif&quot;, &quot;red&quot;, 16, 16)  )) )
+
+))</formula>
+        <label>Oldest Age Risk</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Amount_Over_Credit_Limit__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>akritiv__Total_AR__c -  akritiv__Credit_Limit__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Amount Over Credit Limit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Auto_Dunning_Enabled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Auto Dunning Enabled</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Auto_Dunning_Error__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Auto Dunning Error</description>
+        <externalId>false</externalId>
+        <label>Auto Dunning Error</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Auto_Dunning_Status__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Auto Dunning Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Not Started</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Auto Dunning Error</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Avg_DPD_Risk__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(NULLVALUE($Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Avg_DPD_Range1__c  ,0)=0, IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16),  
+
+IF(NULLVALUE($Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Avg_DPD_Range2__c  ,0)=0, IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16) , 
+
+IF( IF(NULLVALUE(akritiv__DPD_Mean__c ,0)=0, 0,akritiv__DPD_Mean__c )=0,IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16), 
+IF(akritiv__DPD_Mean__c  &lt;  $Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Avg_DPD_Range1__c , IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16), IF( akritiv__DPD_Mean__c  &lt;  $Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Avg_DPD_Range2__c , IMAGE(&quot;/img/samples/flag_yellow.gif&quot;, &quot;yellow&quot;, 16, 16) , IMAGE(&quot;/img/samples/flag_red.gif&quot;, &quot;red&quot;, 16, 16) )) )  
+
+ ) )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Avg DPD Risk</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Base_Total_AR__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Base Total AR</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Base_Total_Past_Due__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Base Total Past Due</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Batch_Number__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Batch #</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Bill_To_Number__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Bill To#</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Bucket_Links__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>HYPERLINK( &quot; /&quot;+Id+&quot;?tabsel=2&amp;bucket=0&quot; , &quot;Current&quot; , &quot;_self&quot;) &amp; &quot; | &quot; &amp; HYPERLINK( &quot; /&quot;+Id+&quot;?tabsel=2&amp;bucket=1&quot;, &quot;1-&quot;+ TEXT( $Setup.akritiv__BucketConfig_Singlec__c.akritiv__Age1__c ), &quot;_self&quot;) &amp; &quot; | &quot; &amp; HYPERLINK( &quot; /&quot;+Id+&quot;?tabsel=2&amp;bucket=2&quot;, TEXT( $Setup.akritiv__BucketConfig_Singlec__c.akritiv__Age1__c+1 )+&quot;-&quot;+ TEXT( $Setup.akritiv__BucketConfig_Singlec__c.akritiv__Age2__c ) , &quot;_self&quot;) &amp; &quot; | &quot; &amp; HYPERLINK( &quot; /&quot;+Id+&quot;?tabsel=2&amp;bucket=3&quot;, TEXT( $Setup.akritiv__BucketConfig_Singlec__c.akritiv__Age2__c+1 )+ &quot;-&quot; + TEXT( $Setup.akritiv__BucketConfig_Singlec__c.akritiv__Age3__c ), &quot;_self&quot;) &amp; &quot; | &quot; &amp; HYPERLINK( &quot; /&quot;+Id+&quot;?tabsel=2&amp;bucket=4&quot;, TEXT( $Setup.akritiv__BucketConfig_Singlec__c.akritiv__Age3__c+1 )+ &quot;-&quot;+TEXT( $Setup.akritiv__BucketConfig_Singlec__c.akritiv__Age4__c ), &quot;_self&quot;) &amp; &quot; | &quot; &amp; HYPERLINK( &quot; /&quot;+Id+&quot;?tabsel=2&amp;bucket=5&quot;,
+ &quot;Over &quot; + TEXT( $Setup.akritiv__BucketConfig_Singlec__c.akritiv__Age4__c ) , &quot;_self&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Bucket Links</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Business_Unit__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Business Unit</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Collections_Confidence__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(NULLVALUE(akritiv__Rating_Count__c,0)==0,&quot;No Rating&quot;, 
+CASE(ROUND(akritiv__Rating_Sum__c / akritiv__Rating_Count__c, 0),
+1, IMAGE(&quot;/img/samples/stars_100.gif&quot;,&quot;Poor&quot;),
+2, IMAGE(&quot;/img/samples/stars_200.gif&quot;,&quot;Fair&quot;),
+3, IMAGE(&quot;/img/samples/stars_300.gif&quot;,&quot;Good&quot;),
+4, IMAGE(&quot;/img/samples/stars_400.gif&quot;,&quot;Great&quot;),
+5, IMAGE(&quot;/img/samples/stars_500.gif&quot;,&quot;Excellent&quot;),
+IMAGE(&quot;/img/samples/stars_000.gif&quot;,&quot;Poor&quot;)
+))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Collection Rating</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Contact_Risk__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(NULLVALUE($Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Contact_Risk_Range1__c ,0)=0, IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16), 
+
+IF(NULLVALUE($Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Contact_Risk_Range2__c ,0)=0, IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16) , 
+
+IF(ISNULL(akritiv__Last_Contact_Date__c ),IMAGE(&quot;/img/samples/flag_red.gif&quot;, &quot;red&quot;, 16, 16),
+IF(Today() - akritiv__Last_Contact_Date__c  &lt; $Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Contact_Risk_Range1__c , IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16), IF( Today() - akritiv__Last_Contact_Date__c   &lt; $Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Contact_Risk_Range2__c, IMAGE(&quot;/img/samples/flag_yellow.gif&quot;, &quot;yellow&quot;, 16, 16) ,  IMAGE(&quot;/img/samples/flag_red.gif&quot;, &quot;red&quot;, 16, 16)  )) )
+
+))</formula>
+        <label>Contact Risk</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Credit_Limit__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Credit Limit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Credit_Remaining__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>akritiv__Credit_Limit__c - akritiv__Total_AR__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Credit Remaining</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Credit_Risk__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(NULLVALUE($Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Credit_Range1__c  ,0)=0, IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16),  
+IF(NULLVALUE($Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Credit_Range2__c   ,0)=0, IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16) , 
+
+IF(NULLVALUE( akritiv__Credit_Limit__c,0) = 0 , IMAGE(&quot;/img/samples/flag_red.gif&quot;, &quot;red&quot;, 16, 16), 
+IF( (akritiv__Total_AR__c / akritiv__Credit_Limit__c)*100 &lt; $Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Credit_Range1__c, IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16), 
+IF( (akritiv__Total_AR__c / akritiv__Credit_Limit__c)*100 &lt; $Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Credit_Range2__c  , IMAGE(&quot;/img/samples/flag_yellow.gif&quot;, &quot;yellow&quot;, 16, 16), 
+IMAGE(&quot;/img/samples/flag_red.gif&quot;, &quot;red&quot;, 16, 16) 
+)))
+
+))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Credit Risk</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Credit_Utilization__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Green Yellow Red bar for credit utlization</description>
+        <externalId>false</externalId>
+        <formula>IF( akritiv__Total_AR__c &gt;=0 , 
+
+
+IF( NULLVALUE(akritiv__Credit_Limit__c,0)=0 ,
+
+	 IMAGE($Setup.akritiv__SysConfig_Singlec__c.akritiv__IconsetURL__c+&quot;/gray.gif&quot;,&quot;&quot;,16,1), 
+	 IF( akritiv__Total_AR__c/akritiv__Credit_Limit__c &lt;= 1.0, 
+			IMAGE($Setup.akritiv__SysConfig_Singlec__c.akritiv__IconsetURL__c+&quot;/gray.gif&quot;, &quot;&quot;, 16,FLOOR(akritiv__Total_AR__c/akritiv__Credit_Limit__c*80))&amp;IMAGE(&quot;/img/samples/color_green.gif&quot;, &quot;green&quot;, 16, FLOOR(80 - akritiv__Total_AR__c/akritiv__Credit_Limit__c*80))&amp;IMAGE(&quot;/s.gif&quot;, &quot;&quot;, 16, 80),
+			IF( akritiv__Total_AR__c/akritiv__Credit_Limit__c &gt; 1.0, 
+				IMAGE($Setup.akritiv__SysConfig_Singlec__c.akritiv__IconsetURL__c+&quot;/gray.gif&quot;, &quot;&quot;, 16, 80)&amp;IMAGE(&quot;/img/samples/color_red.gif&quot;, &quot;&quot;, 16, MIN(FLOOR(akritiv__Total_AR__c/akritiv__Credit_Limit__c*80-80),80))&amp;IMAGE($Setup.akritiv__SysConfig_Singlec__c.akritiv__IconsetURL__c+&quot;/gray.gif&quot;, &quot;&quot;, 16, FLOOR(160-akritiv__Total_AR__c/akritiv__Credit_Limit__c*80)),
+				&apos;&apos;
+			)
+     )
+ )
+ 
+ , 
+ 
+ 
+ IF( NULLVALUE(akritiv__Credit_Limit__c,0)=0 ,
+
+	 IMAGE($Setup.akritiv__SysConfig_Singlec__c.akritiv__IconsetURL__c+&quot;/gray.gif&quot;,&quot;&quot;,16,1), 
+	 
+	 IMAGE($Setup.akritiv__SysConfig_Singlec__c.akritiv__IconsetURL__c+&quot;/gray.gif&quot;, &quot;&quot;, 16,FLOOR(0/akritiv__Credit_Limit__c*80))&amp;IMAGE(&quot;/img/samples/color_green.gif&quot;, &quot;green&quot;, 16, FLOOR(0/akritiv__Credit_Limit__c*80))&amp;IMAGE(&quot;/s.gif&quot;, &quot;&quot;, 16, 80)
+			
+     )
+ 
+ 
+ )</formula>
+        <label>Credit Utilization</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__DPD_Mean__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Average DPD</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__DPD_Std_Dev__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Variance in DPD</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__DPD__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Days Past Due</description>
+        <externalId>false</externalId>
+        <label>Account DPD</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Daily_Notes__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Latest Notes</label>
+        <length>131072</length>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>akritiv__Days_Since_Contact__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>(Today() -  akritiv__Last_Contact_Date__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days Since Contact</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Dunning_Error_Fix_URL__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Dunning_Error_Fix_URL</description>
+        <externalId>false</externalId>
+        <label>Dunning_Error_Fix_URL</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__High_Past_Due_Bal__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>akritiv__High_Past_Due_Tx__r.akritiv__Balance__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Highest Past Due Bal</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__High_Past_Due_DPD__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>TODAY() -  akritiv__High_Past_Due_Tx__r.akritiv__Due_Date__c</formula>
+        <label>Highest Past Due DPD</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__High_Past_Due_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>akritiv__High_Past_Due_Tx__r.akritiv__Due_Date__c</formula>
+        <label>Highest Past Due Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__High_Past_Due_Risk__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(ISNULL($Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__High_Past_Due_Range1__c), IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16), 
+
+IF(ISNULL($Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__High_Past_Due_Range2__c ), IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16) , 
+
+IF(NULLVALUE(akritiv__High_Past_Due_Bal__c,0) = 0 ,IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16),
+IF( akritiv__High_Past_Due_Bal__c  &lt; $Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__High_Past_Due_Range1__c , IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16), IF( akritiv__High_Past_Due_Bal__c  &lt; $Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__High_Past_Due_Range2__c , IMAGE(&quot;/img/samples/flag_yellow.gif&quot;, &quot;yellow&quot;, 16, 16) ,  IMAGE(&quot;/img/samples/flag_red.gif&quot;, &quot;red&quot;, 16, 16)  )) )
+
+))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Highest Past Due Risk</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__High_Past_Due_Tx__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>High Past Due Inv</label>
+        <referenceTo>akritiv__Transaction__c</referenceTo>
+        <relationshipLabel>Accounts (High_Past_Due_Tx)</relationshipLabel>
+        <relationshipName>High_Past_Due_Tx_Accounts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Initial_Credit_App__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Initial Credit App</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Last_Contact_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Last Contact Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Last_Contact_Method__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Last Contact Method</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Fax</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Print</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Last_Contact_Type__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Last Contact Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Dispute</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Follow-up</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Promise To Pay</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Last_Credit_Review_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Last Credit Review Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Last_Payment_Amount__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Last Payment Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Last_Payment_Received__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Last Payment Received</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Lead_Tx__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Oldest Invoice</label>
+        <referenceTo>akritiv__Transaction__c</referenceTo>
+        <relationshipLabel>Accounts</relationshipLabel>
+        <relationshipName>Lead_Tx_Accounts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Locale__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Locale</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Arabic (Egypt)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arabic (Jordan)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arabic (Kuwait)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arabic (Lebanon)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arabic (Saudi Arabia)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arabic (United Arab Emirates)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Armenian (Armenia)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bulgarian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bulgarian (Bulgaria)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Catalan</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Catalan (Spain,Euro)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Catalan (Spain)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Chinese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Chinese (China)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Chinese (Hong Kong)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Chinese (Taiwan)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Croatian (Croatia)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Czech</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Czech (Czech Republic)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Danish</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Danish (Denmark)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dutch</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dutch (Belgium)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dutch (Netherlands)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dutch (Suriname)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (Australia)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (Barbados)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (Bermuda)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (Canada)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (Ghana)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (India)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (Indonesia)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (Ireland,Euro)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (Ireland)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (Malaysia)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (New Zealand)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (Nigeria)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (Philippines)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (Singapore)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (South Africa)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (United Kingdom)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English (United States)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Estonian (Estonia)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finnish</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finnish (Finland,Euro)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finnish (Finland)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>French</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>French (Belgium)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>French (Canada)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>French (France,Euro)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>French (France)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>French (Luxembourg)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>French (Monaco)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>French (Switzerland)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Georgian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Georgian (Georgia)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>German</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>German (Austria,Euro)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>German (Austria)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>German (Germany,Euro)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>German (Germany)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>German (Luxembourg,Euro)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>German (Luxembourg)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>German (Switzerland)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Greek</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Greek (Greece)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hebrew</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hebrew (Israel)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hungarian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Icelandic (Iceland)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Indonesian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Italian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Italian (Italy)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Italian (Switzerland)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Japanese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Japanese (Japan)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Kazakh (Kazakhstan)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Khmer (Cambodia)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Korean</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Korean (South Korea)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Latvian (Latvia)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lithuanian (Lithuania)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Malay (Malaysia)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Norwegian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Norwegian (Norway)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Polish</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Portuguese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Portuguese (Angola)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Portuguese (Brazil)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Portuguese (Portugal)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Romanian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Romanian (Romania)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Russian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Russian (Russia)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Serbian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Serbian (Bosnia and Herzegovina)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Serbian (Latin)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Serbian (Latin) (Bosnia and Herzegovina)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Serbian (Latin) (Serbia and Montenegro)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Serbian (Serbia and Montenegro)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Slovak</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Slovak (Slovakia)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Slovenian (Slovenia)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Argentina)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Bolivia)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Chile)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Colombia)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Costa Rica)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Dominican Republic)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Ecuador)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (El Salvador)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Guatemala)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Honduras)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Mexico)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Panama)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Paraguay)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Peru)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Puerto Rico)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Spain,Euro)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Spain)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Uruguay)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish (Venezuela)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Swedish</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Swedish (Sweden)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tagalog</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tagalog (Philippines)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Thai</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Thai (Thailand)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Turkish</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ukrainian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ukrainian (Ukraine)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Urdu (Pakistan)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Vietnamese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Vietnamese (Vietnam)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arabic (Bahrain)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Net_Collectible__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>akritiv__Total_AR__c - akritiv__Age0__c -akritiv__Total_Disputed__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Net Collectible</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Note_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Note Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Notes__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <length>131072</length>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>akritiv__Oldest_Bal__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>akritiv__Lead_Tx__r.akritiv__Balance__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Oldest Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Oldest_DPD__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>akritiv__Lead_Tx__r.akritiv__Days_Past_Due__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Oldest Invoice DPD</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Oldest_Due_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>akritiv__Lead_Tx__r.akritiv__Due_Date__c</formula>
+        <label>Oldest Due Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__PC_1_30__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>PC [1-30]</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__PC_31_60__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>PC [31-60]</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__PC_61_90__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>PC [61-90]</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__PC_91_180__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>PC [91-180]</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__PC_Current__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>PC [Current]</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__PC_Over_180__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>PC [Over 180]</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__PC_Total_AR_Local__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>PC [Total AR (Local)]</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__PC_Total_Past_Due_Local__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>PC [Total Past Due (Local)]</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Percent_Credit_Utilized__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(NULLVALUE(akritiv__Credit_Limit__c,0)=0, 0, akritiv__Total_AR__c/akritiv__Credit_Limit__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>% Credit Utilized</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Percent_Disputed_Risk__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(NULLVALUE($Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Percent_Disputed_Range1__c ,0)=0, IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16), 
+
+IF(NULLVALUE($Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Percent_Disputed_Range2__c ,0)=0, IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16) , 
+
+IF(NULLVALUE(akritiv__Percent_Disputed__c,0) =0,IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16) ,
+IF( akritiv__Percent_Disputed__c   * 100 &lt; $Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Percent_Disputed_Range1__c , IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;green&quot;, 16, 16), IF( akritiv__Percent_Disputed__c  * 100 &lt;  $Setup.akritiv__Risk_Configuration_Singlec__c.akritiv__Percent_Disputed_Range2__c  , IMAGE(&quot;/img/samples/flag_yellow.gif&quot;, &quot;yellow&quot;, 16, 16) ,  IMAGE(&quot;/img/samples/flag_red.gif&quot;, &quot;red&quot;, 16, 16)  )) )
+
+))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>% Disputed Risk</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Percent_Disputed__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(NULLVALUE(akritiv__Total_AR__c,0)=0, 0, if(NULLVALUE(akritiv__Total_Disputed__c,0)=0 ,0 ,akritiv__Total_Disputed__c / akritiv__Total_AR__c) )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>% Disputed</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Rating_Count__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Number of rating related activities for the account.</description>
+        <externalId>false</externalId>
+        <label>Rating Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Rating_Sum__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Sum of all the ratings for the account</description>
+        <externalId>false</externalId>
+        <label>Rating Sum</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Source__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Source</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Sticky_Note_Level__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Sticky Note Level</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Normal</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>High</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Sticky_Note__c</fullName>
+        <defaultValue>&apos;Add Account Note&apos;</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Sticky Note</label>
+        <length>131072</length>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>akritiv__Terms_Key__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Terms</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>akritiv__Token__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Token</label>
+        <referenceTo>akritiv__PaymentToken__c</referenceTo>
+        <relationshipLabel>Accounts</relationshipLabel>
+        <relationshipName>Accounts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Total_AR__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Total Account receivables. Sum of balance of all invoices under this account</description>
+        <externalId>false</externalId>
+        <label>Total AR</label>
+        <summarizedField>akritiv__Transaction__c.akritiv__Balance__c</summarizedField>
+        <summaryForeignKey>akritiv__Transaction__c.akritiv__Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Total_Disputed__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Sum of all the disputes under this account.</description>
+        <externalId>false</externalId>
+        <label>Total Disputed</label>
+        <summarizedField>akritiv__Dispute__c.akritiv__Balance__c</summarizedField>
+        <summaryForeignKey>akritiv__Dispute__c.akritiv__Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Total_Past_Due__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Total Past Due</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>akritiv__Total_Promised__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Total promised at account level with promise amount rollup</description>
+        <externalId>false</externalId>
+        <label>Total Promised</label>
+        <summarizedField>akritiv__Transaction__c.akritiv__Promised_Amount__c</summarizedField>
+        <summaryForeignKey>akritiv__Transaction__c.akritiv__Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <listViews>
+        <fullName>AllAccounts</fullName>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Account_Legal_Name__c</columns>
+        <columns>Email__c</columns>
+        <columns>ACCOUNT.PHONE1</columns>
+        <columns>PAN_TAN__c</columns>
+        <columns>NACIS_Code__c</columns>
+        <columns>akritiv__Source__c</columns>
+        <columns>ACCOUNT.CREATED_DATE</columns>
+        <columns>ACCOUNT.LAST_UPDATE</columns>
+        <columns>UPDATEDBY_USER.ALIAS</columns>
+        <columns>External_Id__c</columns>
+        <columns>Portal_External_ID__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All CounterPartys</label>
+    </listViews>
+    <searchLayouts>
+        <customTabListAdditionalFields>ACCOUNT.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Account_Legal_Name__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Email__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ACCOUNT.PHONE1</customTabListAdditionalFields>
+        <customTabListAdditionalFields>PAN_TAN__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>NACIS_Code__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>akritiv__Source__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ACCOUNT.CREATED_DATE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ACCOUNT.LAST_UPDATE</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>ACCOUNT.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ACCOUNT.SITE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CORE.USERS.ALIAS</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ACCOUNT.TYPE</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ACCOUNT.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ACCOUNT.SITE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CORE.USERS.ALIAS</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ACCOUNT.TYPE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ACCOUNT.PHONE1</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Office_Phone__c</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>ACCOUNT.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ACCOUNT.SITE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ACCOUNT.PHONE1</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Account_Number_Validation</fullName>
+        <active>false</active>
+        <errorConditionFormula>LEN(AccountNumber)&lt; 5</errorConditionFormula>
+        <errorDisplayField>AccountNumber</errorDisplayField>
+        <errorMessage>Account number minimum length should be 5 characters.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Billing_State_Validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(NOT(ISBLANK(BillingState)),OR(LEN(BillingState)&gt;2 ,OR(LEN(SUBSTITUTE(BillingState,&apos;,&apos;,NULL)) != 2,IF(FIND(SUBSTITUTE(BillingState,&apos;,&apos;,NULL), &apos;AL,AK,AZ,AR,CA,CO,CT,DE,DC,FL,GA,HI,ID,IL,IN,IA,KS,KY,LA,ME,MD,MA,MI,MN,MS,MO,MT,NE,NV,NH,NJ,NM,NY,NC,ND,OH,OK,OR,PA,RI,SC,SD,TN,TX,UT,VT,VA,WA,WV,WI,WY&apos;) != 0,False,True))))</errorConditionFormula>
+        <errorDisplayField>BillingState</errorDisplayField>
+        <errorMessage>Please enter Valid state ISO codes of USA.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Billing_Street_Validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>LEN( BillingStreet )&gt; 80</errorConditionFormula>
+        <errorDisplayField>BillingStreet</errorDisplayField>
+        <errorMessage>Billing Street maximum length should be 80 characters.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Duns_number_only_Alpha_Numeric</fullName>
+        <active>true</active>
+        <errorConditionFormula>And(not(ISBLANK(Duns_Number__c)),NOT( 
+AND( 
+LEN ( Duns_Number__c ) = 9, 
+REGEX( Duns_Number__c , &quot;[a-zA-Z0-9]+&quot;) 
+) 
+))</errorConditionFormula>
+        <errorDisplayField>Duns_Number__c</errorDisplayField>
+        <errorMessage>Duns Number should be Alpha numeric and length should be 9 characters</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Pan_Tan_Only_Numeric</fullName>
+        <active>true</active>
+        <description>Not(And(REGEX(PAN_TAN__c, &quot;\\D*?(\\d\\D*?){9}&quot;),REGEX(PAN_TAN__c, &quot;[0-9]*$&quot;),Not(CONTAINS( PAN_TAN__c, &apos;000000000&apos;))))</description>
+        <errorConditionFormula>And(Not( ISBLANK(PAN_TAN__c) ),Not(And(REGEX(PAN_TAN__c, &quot;\\D*?(\\d\\D*?){9}&quot;),REGEX(PAN_TAN__c, &quot;[0-9]*$&quot;),Not(CONTAINS( PAN_TAN__c, &apos;000000000&apos;)))))</errorConditionFormula>
+        <errorDisplayField>PAN_TAN__c</errorDisplayField>
+        <errorMessage>Tax Payer ID should be numeric and 9 digits</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Zip_Code_Validation_in_USA_Format</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(NOT(ISBLANK(BillingPostalCode)),OR(AND(Not(LEN(BillingPostalCode) = 5),Not(LEN(BillingPostalCode) = 10)),AND(LEN(BillingPostalCode) = 10,NOT(REGEX( BillingPostalCode , &quot;[0-9]{5}-[0-9]{4}&quot;))),AND(LEN(BillingPostalCode) = 5,NOT(REGEX( BillingPostalCode , &quot;[0-9]{5}&quot;)))))</errorConditionFormula>
+        <errorDisplayField>BillingPostalCode</errorDisplayField>
+        <errorMessage>Please enter the Zip Code in the format &quot;99999-9999&quot; or &quot;99999&quot;</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>AltavistaNews</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>true</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>true</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Altavista News</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>true</showsLocation>
+        <showsStatus>true</showsStatus>
+        <url>http://news.altavista.com/search?nc=0&amp;q={!Account_Name}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Attach_C_Form</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Attach VAT Form</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var accId = &apos;{!Account.Id}&apos;;
+
+var loc2 = document.location; 
+
+
+var urlString = &apos;https://&apos;+ loc2.host.replace(&apos;akritiv.&apos;,&apos;c.&apos;)+&apos;/apex/SearchInvoicePage?accId=&apos; +accId; 
+
+window.location.href = urlString;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Attach_TDS</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Attach TDS</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var accId = &apos;{!Account.Id}&apos;;
+
+var loc2 = document.location;
+
+
+var urlString = &apos;https://&apos;+ loc2.host.replace(&apos;akritiv.&apos;,&apos;c.&apos;)+&apos;/apex/SearchInvoicePage?accId=&apos; +accId+&apos;&amp;TDS=true&apos;;
+
+window.location.href = urlString;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Cash_Console</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Cash Console</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var accountId = &apos;{!Account.Id}&apos;;
+
+var UrlLoc = window.location;
+var strHost = UrlLoc.host;
+var strProtocol = UrlLoc.protocol;
+
+strHost = strHost.replace(&quot;akritiv.&quot;,&quot;c.&quot;); 
+
+var urlString = strProtocol +&apos;//&apos;+strHost+&apos;/apex/PaymentAdjust?AccId=&apos;+ accountId;
+
+window.open (urlString ,&quot;_self&quot;,&quot;status=1,scrollbars=1,width=650,height=410&quot;);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Forecast</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Forecast</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var accountId = &apos;{!Account.Id}&apos;;
+
+var UrlLoc = window.location;
+var strHost = UrlLoc.host;
+var strProtocol = UrlLoc.protocol;
+
+strHost = strHost.replace(&quot;akritiv.&quot;,&quot;c.&quot;);
+
+//strHost = strHost.replace(&quot;akritiv&quot;,&quot;c&quot;);
+
+var urlString = strProtocol +&apos;//&apos;+strHost+&apos;/apex/ForecastAccountPage?aid=&apos;+ accountId+ &apos;&amp;location=&apos; + UrlLoc;
+//alert(urlString);
+window.open (urlString ,&quot;ForecastAccountPage&quot;,&quot;status=1,scrollbars=1,width=650,height=410&quot;);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>GoogleMaps</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Google Maps</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>http://maps.google.com/maps?f=q&amp;hl=en&amp;q={!Account_BillingStreet}+{!Account_BillingCity}+{!Account_BillingState}&amp;om=1</url>
+    </webLinks>
+    <webLinks>
+        <fullName>GoogleNews</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Google News</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>http://www.google.com/news?&amp;q={!Account_Name}&amp;btnG=Search+News</url>
+    </webLinks>
+    <webLinks>
+        <fullName>GoogleSearch</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Google Search</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>http://www.google.com/search?q={!Account_Name}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>HooversProfile</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Hoovers Profile</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>http://search.hoovers.com/cgi-bin/hol_search?which=company&amp;query_string={!Account_Name}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>YahooMaps</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>true</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>true</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Yahoo Maps</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>true</showsLocation>
+        <showsStatus>true</showsStatus>
+        <url>http://maps.yahoo.com/py/maps.py?cn={!Account_BillingCountry}&amp;csz={!Account_BillingCity}+{!Account_BillingState}+{!Account_BillingPostalCode}+&amp;addr={!Account_BillingAddress}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>akritiv__AccountHierarchy</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Hierarchy</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var loc = window.location.href ;
+var loc2 = document.location;
+var left = (screen.width/2)-(800/2);
+var top = (screen.height/2)-(600/2);
+var urlString1 = &apos;/apex/AccountHierarchyPageNew?id={!Account.Id}&amp;location=&apos; + loc;
+window.open (urlString1);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>akritiv__Account_Add_Note</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Add Note</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var accountid= &apos;{!Account.Id}&apos;; 
+var loc = window.location.href ; 
+var loc2 = document.location; 
+
+var urlString = &apos;/apex/akritiv__CommonAddNote?page=Account&amp;accid=&apos;+ accountid+ &apos;&amp;location=&apos; + loc ; 
+
+
+var left = (screen.width); 
+var top = (screen.height); 
+
+var t = 0; 
+var l = 0; 
+
+window.open (urlString,&quot;{!$Label.akritiv__Lable_AddAccountNote}&quot;,&quot;toolbar=0,location=0, directories=0, status=0, menubar=0,width=550,height=250,scrollbars=1&quot;);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>akritiv__Billing</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>true</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>true</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Billing</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>true</showsLocation>
+        <showsStatus>true</showsStatus>
+        <url>http://www.genwatt.com/genwatt/billing.htm?actname={!Account.Name}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>akritiv__Contact_CSR</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Contact CSR</masterLabel>
+        <openType>sidebar</openType>
+        <page>akritiv__PortalContactCSR</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>akritiv__Download_Statement</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>page</linkType>
+        <masterLabel>Download Statement</masterLabel>
+        <openType>newWindow</openType>
+        <page>akritiv__PortalDownloadBillingStatement</page>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+    </webLinks>
+    <webLinks>
+        <fullName>akritiv__Execute</fullName>
+        <availability>online</availability>
+        <description>Execute : Auto Dunning</description>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Execute</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>/*
+* Copyright (c) 2009-2010 Akritiv Technologies, Inc. All Rights Reserved.
+* This software is the confidential and proprietary information
+* (Confidential Information) of Akritiv Technologies, Inc. You shall not
+* disclose or use Confidential Information without the express written
+* agreement of Akritiv Technologies, Inc.
+*/
+
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/apex.js&quot;)}
+
+
+sforce.connection.defaultNamespace = &apos;{!$Setup.akritiv__SysConfig_Singlec__c.akritiv__NameSpace__c}&apos;;
+
+/*
+Gets the list of selected records and prepares a URL to update the suppliers and their related information
+*/
+
+//Fetch the list
+var records = {!GETRECORDIDS($ObjectType.Account)};
+var strIDs=&apos;&apos;;
+
+
+/*
+Check if the user has selected at least one record and display a message
+*/
+
+
+
+if (records[0] == null)
+{
+alert(&apos;{!$Label.akritiv__Label_Please_select_atleast_one_Account}&apos;);
+}
+else
+{
+
+for (var n=0; n&lt;records.length; n++)
+{
+if(strIDs == &apos;&apos;)
+strIDs = records[n];
+else
+strIDs = strIDs + &quot;,&quot; + records[n];
+}
+
+if(strIDs !=null &amp;&amp; strIDs !=&apos;&apos;){
+
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;;
+var config = new sforce.SObject(&quot;Temp_Object_Holder__c&quot;);
+var user = sforce.connection.getUserInfo() ;
+var timest = sforce.connection.getServerTimestamp();
+var key = &apos;{!$User.Username}&apos; + timest.timestamp ;
+config.Key__c =key ;
+config.Value__c = strIDs;
+var res = sforce.connection.create([config]);
+
+var loc = window.location.href ;
+
+var urlString = &apos;/apex/akritiv__AutomaticDuningHelperAccount?key=&apos;+ key + &apos;&amp;location=&apos; + loc ;
+
+
+var left = (screen.width)-650;
+var top = (screen.height)-450;
+
+window.open (urlString ,&quot;ProcessingAccountTasks&quot;,&quot;toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width=650,height=450, top=&quot;+top+&quot;,left=&quot;+left );
+
+}
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>akritiv__QN</fullName>
+        <availability>online</availability>
+        <description>To send IM about the object to the users</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>QN</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var accountId = &apos;{!Account.Id}&apos;;
+var urlString = &apos;/apex/SendIMAboutObject?objIds=&apos;+ accountId+&apos;&amp;objtype=Account&apos;;
+window.open (urlString ,&quot;{!$Label.akritiv__Label_SendIM}&quot;,&quot;status=1,scrollbars=1,width=400,height=400&quot;);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>akritiv__Re_Evaluate_Auto_Dunning</fullName>
+        <availability>online</availability>
+        <description>Re Evaluate Auto Dunning</description>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Re Evaluate Auto Dunning</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>/*
+* Copyright (c) 2009-2010 Akritiv Technologies, Inc. All Rights Reserved.
+* This software is the confidential and proprietary information
+* (Confidential Information) of Akritiv Technologies, Inc. You shall not
+* disclose or use Confidential Information without the express written
+* agreement of Akritiv Technologies, Inc.
+*/
+
+
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/apex.js&quot;)}
+
+
+sforce.connection.defaultNamespace = &apos;{!$Setup.akritiv__SysConfig_Singlec__c.akritiv__NameSpace__c}&apos;;
+
+/*
+Gets the list of selected records and prepares a URL to update the suppliers and their related information
+*/
+
+//Fetch the list
+var records = {!GETRECORDIDS($ObjectType.Account)};
+var strIDs=&apos;&apos;;
+
+
+/*
+Check if the user has selected at least one record and display a message
+*/
+
+
+
+if (records[0] == null)
+{
+alert(&apos;{!$Label.akritiv__Label_Please_select_atleast_one_Account}&apos;);
+}
+else
+{
+
+for (var n=0; n&lt;records.length; n++)
+{
+if(strIDs == &apos;&apos;)
+strIDs = records[n];
+else
+strIDs = strIDs + &quot;,&quot; + records[n];
+}
+
+if(strIDs !=null &amp;&amp; strIDs !=&apos;&apos;){
+
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;;
+var config = new sforce.SObject(&quot;Temp_Object_Holder__c&quot;);
+var user = sforce.connection.getUserInfo() ;
+var timest = sforce.connection.getServerTimestamp();
+var key = &apos;{!$User.Username}&apos; + timest.timestamp ;
+config.Key__c =key ;
+config.Value__c = strIDs;
+var res = sforce.connection.create([config]);
+
+var loc = window.location.href ;
+var urlString = &apos;/apex/akritiv__AutomaticReevaluateAccount?key=&apos;+ key + &apos;&amp;location=&apos; + loc ;
+
+var left = 150;
+var top = 150;
+
+window.open (urlString ,&quot;{!$Label.akritiv__Lable_ReEvaluateAutoDunningProcess}&quot;,&quot;toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width=400,height=100, top=&quot;+top+&quot;,left=&quot;+left );
+
+}
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>akritiv__Send_Statement</fullName>
+        <availability>online</availability>
+        <description>Button will redirect the user to send billing statements page. Functionality is provided on account level.</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send Statement</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/apex.js&quot;)} 
+
+sforce.connection.defaultNamespace = &apos;{!$Setup.akritiv__SysConfig_Singlec__c.akritiv__NameSpace__c}&apos;;
+var accountId = &apos;{!Account.Id}&apos;;
+var urlString = &apos;/apex/SendBillingStatement?accId=&apos;+ accountId;
+window. location.href = urlString;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>akritiv__Sub_Accounts</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Sub Accounts</masterLabel>
+        <openType>sidebar</openType>
+        <page>akritiv__AccountHierarchyPage</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>akritiv__View_Line_Items</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>View Line Items</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var accountId = &apos;{!Account.Id}&apos;;
+var accountName = &apos;{!Account.Name}&apos;;
+//alert(accountName);
+var hostName = window.location.hostname + &apos;/&apos;;
+
+window.open(&apos;https://&apos;+hostName.replace(&apos;akritiv&apos;,&apos;c&apos;)+ &apos;apex/akritiv__ViewLineItems?accid=&apos;+ accountId + &apos;&amp;accName=&apos;+accountName,&apos;_blank&apos;);</url>
+    </webLinks>
+</CustomObject>

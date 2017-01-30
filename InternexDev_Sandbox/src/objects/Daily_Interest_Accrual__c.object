@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Active__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Active</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Applied__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Applied</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Business_Transaction_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Business Transaction Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Client_Account__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASESAFEID(Monthly_Interest_Application__r.Client_Account__c)</formula>
+        <label>Client Account</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Commitment_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(Business_Transaction_Date__c &gt;= Date__c ,Funding_Limit__c *  Commitment__c,0)</formula>
+        <inlineHelpText>Min Utilization (%) * Client Funding Limit</inlineHelpText>
+        <label>Min Utilization Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Commitment_Fee__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(FIU_Outstanding__c &lt; 0, Funding_Limit__c ,IF(FIU_Outstanding__c &lt;= MinCommitmentAmount__c,Funding_Limit__c -  Commitment_Amount__c,IF(FIU_Outstanding__c &gt; Funding_Limit__c,0,IF(FIU_Outstanding__c &gt; 	MinCommitmentAmount__c,Funding_Limit__c - FIU_Outstanding__c ,0))))</formula>
+        <label>Unused Line Amount for UL fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Commitment__c</fullName>
+        <externalId>false</externalId>
+        <label>Min Utilization (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Commitment_fee_acc__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(Business_Transaction_Date__c &gt;= Date__c,ROUND((Funding_Limit__c-Prin_for_intt__c)*Commitment_rate__c*(1/(No_of_Days__c*100)),6),0)</formula>
+        <label>UL Fee Accrued</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Commitment_rate__c</fullName>
+        <externalId>false</externalId>
+        <label>Unused Line Rate</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Current_IUF_Retained__c</fullName>
+        <description>Used for storing the value in IUF table. Not using any where and its keep changing its value which is correct.</description>
+        <externalId>false</externalId>
+        <formula>Monthly_Interest_Application__r.Client_Account__r.IUF_Reserve_Retained__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Current IUF Retained</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Date</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Eligible_For_Funding__c</fullName>
+        <externalId>false</externalId>
+        <label>Eligible For Funding</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FIU_Outstanding_Formula__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( Business_Transaction_Date__c &gt;=  Date__c , FIU_Outstanding__c ,0)</formula>
+        <label>FIU Outstanding ( Derived )</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FIU_Outstanding__c</fullName>
+        <externalId>false</externalId>
+        <label>Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Flag_for_Last_Day_of_the_Month__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( Date__c == Last_Day_of_the_Month__c ,True,False)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Flag for Last Day of the Month</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Funding_Limit__c</fullName>
+        <externalId>false</externalId>
+        <label>Funding Limit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Gross_Availability__c</fullName>
+        <externalId>false</externalId>
+        <label>Gross Availability</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Ineligibles_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Ineligibles Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Interest_Base_Rate__c</fullName>
+        <externalId>false</externalId>
+        <label>Interest Base Rate</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Interest_Base__c</fullName>
+        <externalId>false</externalId>
+        <label>Interest Base</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Citi Prime</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Internex base</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>LIBOR</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>WS Prime</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Interest_Rate_Applied__c</fullName>
+        <externalId>false</externalId>
+        <formula>Interest_Base_Rate__c +  Interest_Spread__c</formula>
+        <label>Interest Rate Applied</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Interest_Spread__c</fullName>
+        <externalId>false</externalId>
+        <label>Interest Spread</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Interest__c</fullName>
+        <externalId>false</externalId>
+        <formula>ROUND(( Prin_for_intt__c *  Interest_Rate_Applied__c*100 *(1/(No_of_Days__c* 100))),6)</formula>
+        <label>Interest Accrued</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Invoice_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Invoice Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Last_Day_of_the_Month__c</fullName>
+        <externalId>false</externalId>
+        <formula>DATE( 
+CASE(MONTH(Business_Transaction_Date__c), 12, YEAR(Business_Transaction_Date__c) + 1, YEAR(Business_Transaction_Date__c)), 
+CASE(MONTH(Business_Transaction_Date__c), 12, 1, MONTH(Business_Transaction_Date__c) +1), 
+1 
+) - 1</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Last Day of the Month</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Method__c</fullName>
+        <externalId>false</externalId>
+        <label>Method</label>
+        <picklist>
+            <picklistValues>
+                <fullName>30 / 360</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ACTUAL / 360</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ACTUAL / ACTUAL</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>MinCommitmentAmount__c</fullName>
+        <description>Getting Updated from Interest Calculation batch</description>
+        <externalId>false</externalId>
+        <label>Min Utilization Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Monthly_Interest_Application__c</fullName>
+        <externalId>false</externalId>
+        <label>Monthly Interest Application</label>
+        <referenceTo>Monthly_Interest_Application__c</referenceTo>
+        <relationshipLabel>Daily Interest Accruals</relationshipLabel>
+        <relationshipName>Daily_Interest_Accruals</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Monthly_Interest__c</fullName>
+        <externalId>false</externalId>
+        <formula>Monthly_Interest_Application__r.Interest__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Monthly Interest</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Net_Availability__c</fullName>
+        <externalId>false</externalId>
+        <label>Net Availability</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_of_Days__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISPICKVAL( Method__c, &apos;ACTUAL / 360&apos;),360,IF(ISPICKVAL(Method__c, &apos;ACTUAL / ACTUAL&apos;),IF(
+OR( 
+  MOD( YEAR( Date__c ), 400 ) = 0, 
+  AND( 
+   MOD( YEAR( Date__c ), 4 ) = 0,
+    MOD( YEAR( Date__c ), 100 ) != 0
+  )
+),366,365),360))</formula>
+        <label>No of Days</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Non_performing_asset__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Non-Accrual</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Prin_for_intt__c</fullName>
+        <externalId>false</externalId>
+        <formula>MAX( FIU_Outstanding_Formula__c ,Commitment_Amount__c)</formula>
+        <label>Principal for interest</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Daily Interest Accrual</label>
+    <nameField>
+        <displayFormat>DI-{00000}</displayFormat>
+        <label>Daily Interest Accrual Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Daily Interest Accruals</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

@@ -1,0 +1,10 @@
+Dear {!Contact.Name},
+<br/>
+<br/>
+Our records indicate that we have not received your payment as promised in our previous conversation. If you already have sent a payment please disregard this email otherwise send the payment as soon as possible.
+<br/>
+<br/>
+Very truly yours, <br/>
+{!User.Name} <br/>
+{!User.Email}<br/>
+{!User.Phone} <br/>

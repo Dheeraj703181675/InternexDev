@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>WebCash Configuration</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>WebCash Configuration</value>
+    </caseValues>
+    <fields>
+        <label><!-- Adjusted Against AP Account Key --></label>
+        <name>Adjusted_Against_AP_Account_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bad Debt Account Key --></label>
+        <name>Bad_Debt_Account_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Charges Account Key --></label>
+        <name>Bank_Charges_Account_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Format --></label>
+        <name>Date_Format__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description Column Text --></label>
+        <name>Description_Column_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- LD Write Off Account Key --></label>
+        <name>LD_Write_Off_Account_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment History Fields --></label>
+        <name>Payment_History_Fields__c</name>
+    </fields>
+    <fields>
+        <label><!-- Refund Acccount Key --></label>
+        <name>Refund_Acccount_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Small Amount WriteOff CurrencyCode --></label>
+        <name>Small_Amount_WriteOff_CurrencyCode__c</name>
+    </fields>
+    <fields>
+        <label><!-- Small Amount Write Back Amount --></label>
+        <name>Small_Amount_Write_Back_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Small Amount Write off Amount --></label>
+        <name>Small_Amount_Write_off_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Small Amount write off Account Key --></label>
+        <name>Small_Amount_write_off_Account_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Suspense Acccount Key --></label>
+        <name>Suspense_Acccount_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- TDS Account Key --></label>
+        <name>TDS_Account_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- TDS Write off Account Key --></label>
+        <name>TDS_Write_off_Account_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Write Back Account Key --></label>
+        <name>Write_Back_Account_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Write off Account Key --></label>
+        <name>Write_off_Account_Key__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

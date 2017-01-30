@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Fee</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Fee</value>
+    </caseValues>
+    <fields>
+        <label><!-- Draw Fee Percentage --></label>
+        <name>Drawal_Fee_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Minimum Draw Fee --></label>
+        <name>Minimum_Drawal_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Minimum Origination Fee --></label>
+        <name>Minimum_Origination_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Origination Fee Percentage --></label>
+        <name>Origination_Fee_Percentage__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

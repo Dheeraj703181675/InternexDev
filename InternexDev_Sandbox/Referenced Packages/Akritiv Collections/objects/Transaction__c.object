@@ -1,0 +1,1871 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <content>TransactionDetailPage</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fieldSets>
+        <fullName>General_Detail</fullName>
+        <description>Akritiv General Detail</description>
+        <displayedFields>
+            <field>Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Create_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Close_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Amount__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Balance__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Due_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Days_Past_Due__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Disputed_Amount__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Promised_Amount__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Bucket__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Akritiv General Detail</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>Mass_Update_Transaction_fields</fullName>
+        <description>Mass Update Transaction fields</description>
+        <displayedFields>
+            <field>Payment_Terms__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Business_Unit__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Reason_Code__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Sub_Reason_Code__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Notes__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Mass Update Transaction fields</label>
+    </fieldSets>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Transactions</relationshipLabel>
+        <relationshipName>Transactions</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Aging_Group__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(
+            (  Days_Past_Due__c    &lt;= 0 ),
+             
+              &apos;Not Yet Due&apos; ,
+
+                IF(  
+                       (   Days_Past_Due__c    &lt;= 30  ),
+                       &apos;0-30 Past Due&apos; ,
+                         IF(  
+                                   (   Days_Past_Due__c    &lt;= 60  ),
+                                    &apos;31-60 Past Due&apos; ,
+                        
+                                     IF(  
+                                                (   Days_Past_Due__c    &lt;= 90  ),
+                                               &apos;61-90 Past Due&apos; ,
+                                                IF(  
+                                                        (   Days_Past_Due__c    &lt;= 120  ),
+                                                            &apos;91-120 Past Due&apos; ,
+                                                            IF(  
+                                                                     (   Days_Past_Due__c    &lt;= 150  ),
+                                                                          &apos;121-150 Past Due&apos; ,
+                                                                          IF(  
+                                                                                          (   Days_Past_Due__c    &lt;= 180  ),
+                                                                                            &apos;151-180 Past Due&apos; ,
+                                                                                             IF(  
+                                                                                                       (   Days_Past_Due__c    &gt; 180  ),
+                                                                                                       &apos;181+ Past Due&apos; , &apos;&apos;
+                                                                                            
+
+                                                                                              )
+
+                                                                             )
+
+                                                             )
+
+                                               )
+                                                                 
+                                      )
+                            )
+
+                )
+
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Aging Group</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Amount_Without_Sign__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>ABS(Amount__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Amount Without Sign</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Amount__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Amount</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Balance_Without_Sign__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>ABS(Balance__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Balance Without Sign</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Balance__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Balance</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Base_Balance__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Base Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Batch_Number__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Batch#</label>
+        <length>80</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bill_To_Address__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Bill To Address</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bill_To_City__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Bill To City</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bill_To_Country__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Bill To Country</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bill_To_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Bill To Name</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bill_To_Number__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Bill To#</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bill_To_Postal_Code__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Bill To Postal Code</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bill_To_State__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Bill To State</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bucket__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF( Days_Past_Due__c &lt;=0, &quot;Current&quot;,  
+IF(Days_Past_Due__c &lt;=( $Setup.BucketConfig_Singlec__c.Age1__c ), 
+&quot;1-&quot;+ TEXT( $Setup.BucketConfig_Singlec__c.Age1__c ) , 
+IF(Days_Past_Due__c &lt;=( $Setup.BucketConfig_Singlec__c.Age2__c ), 
+TEXT( $Setup.BucketConfig_Singlec__c.Age1__c+1 )+&quot;-&quot;+ TEXT( $Setup.BucketConfig_Singlec__c.Age2__c ) ,
+IF(Days_Past_Due__c &lt;=( $Setup.BucketConfig_Singlec__c.Age3__c ), 
+TEXT( $Setup.BucketConfig_Singlec__c.Age2__c+1 )+&quot;-&quot;+ TEXT( $Setup.BucketConfig_Singlec__c.Age3__c ) , 
+IF(Days_Past_Due__c &lt;=( $Setup.BucketConfig_Singlec__c.Age4__c ), 
+TEXT( $Setup.BucketConfig_Singlec__c.Age3__c+1 )+ &quot;-&quot;+TEXT( $Setup.BucketConfig_Singlec__c.Age4__c ), 
+&quot;Over &quot; +TEXT( $Setup.BucketConfig_Singlec__c.Age4__c )
+)))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Bucket</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Business_Unit__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Business Unit</label>
+        <length>80</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Buyer_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Buyer Name</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Buyer_Number__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Buyer #</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Close_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Close Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Collection_Stage__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF( Days_Past_Due__c &lt; 40, IMAGE(&quot;/img/samples/color_green.gif&quot;, &quot;green&quot;, 16, MAX(Days_Past_Due__c,5)), 
+IF(Days_Past_Due__c &lt; 80, IMAGE(&quot;/img/samples/color_green.gif&quot;, &quot;green&quot;, 16, 40)&amp; IMAGE(&quot;/img/samples/color_yellow.gif&quot;, &quot;yellow&quot;, 16, Days_Past_Due__c-40), 
+IMAGE(&quot;/img/samples/color_green.gif&quot;, &quot;green&quot;, 16,40)&amp; IMAGE(&quot;/img/samples/color_yellow.gif&quot;, &quot;yellow&quot;, 16, 40)&amp; IMAGE(&quot;/img/samples/color_red.gif&quot;, &quot;red&quot;, 16, MIN(Days_Past_Due__c-80,60)) 
+))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Collection Stage</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Create_Broken_Promise_Note__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Create Broken Promise Note</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Create_Date__c</fullName>
+        <defaultValue>Today()</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Create Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>DPD_x_Amount__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Days Past Due multiplied by Amount</description>
+        <externalId>false</externalId>
+        <formula>Days_Past_Due__c * Amount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Used to calculate weighted average days past due amounts.</inlineHelpText>
+        <label>DPD x Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Daily_Notes__c</fullName>
+        <deprecated>false</deprecated>
+        <description>129,000</description>
+        <externalId>false</externalId>
+        <label>Latest Notes</label>
+        <length>131072</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Days_Past_Due__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(Balance__c ==0,  Close_Date__c  -  Due_Date__c, TODAY()   - Due_Date__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days Past Due</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Disputed_Amount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Disputed Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Due_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Here &quot;Due Date&quot; is populated from Portal file upload or by manual creation process</inlineHelpText>
+        <label>Due Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>First_Review_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>First Review Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Freight__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Freight</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Indicator_Icons__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(Disputed_Amount__c != 0 &amp;&amp; NOT(ISNULL(Disputed_Amount__c)) , IMAGE($Setup.SysConfig_Singlec__c.IconsetURL__c+&quot;/2_24.png&quot;, &quot;Disputed&quot;, 14, 14),&apos;&apos;) &amp;
+IF(NOT(ISNULL(Promised_Amount__c)) &amp;&amp; Promised_Amount__c != 0 &amp;&amp;  Promise_Date__c &gt;=  TODAY() , IMAGE($Setup.SysConfig_Singlec__c.IconsetURL__c+&quot;/2_22.png&quot;, &quot;Promised&quot;, 14, 14),&apos;&apos;)&amp;
+IF(NOT(ISNULL(Promised_Amount__c)) &amp;&amp; Promised_Amount__c != 0 &amp;&amp;  Promise_Date__c &lt;  TODAY() , IMAGE($Setup.SysConfig_Singlec__c.IconsetURL__c+&quot;/2_25.png&quot;, &quot;Broken Promise&quot;, 14, 14),&apos;&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Flags</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Last_Batch_Job_ID__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Last Batch Job ID</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Last_Contact_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Last Contact Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Last_Contacted_By__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Last Contacted By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Transactions1</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Next_Follow_up_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Next Follow up Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Next_Follow_up_Task__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Next Follow up Task</label>
+        <picklist>
+            <picklistValues>
+                <fullName>First Reminder</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Note_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Note Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <length>131072</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Id__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>This field is reference to Id field of Opportunity</description>
+        <externalId>false</externalId>
+        <label>Opportunity Id</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Transactions</relationshipLabel>
+        <relationshipName>Transactions</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Revenue__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Opportunity Revenue</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>PDF__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&apos;/apex/PortalTransactionPdf?id=&apos; &amp;Id, IMAGE($Setup.SysConfig_Singlec__c.IconsetURL__c+&quot;/1_1.png&quot;, &quot;PDF&quot;, 14, 14)
+,&quot;_new&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>PDF</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payment_Terms_Description__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Payment Terms Description</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payment_Terms__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Payment Terms</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Po_Number__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>PO#</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Promise_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Promise Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Promised_Amount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Promised Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Promised_Target_Balance__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Balance - Promise Amount [set by Promise to Pay Screen]</description>
+        <externalId>false</externalId>
+        <label>Promised Target Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Reason_Code__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reason Code</label>
+        <picklist>
+            <picklistValues>
+                <fullName>1 - Service Call</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2 - Query - Site</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3 - Query - SSC</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4 - Payment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5 - Credit Note</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6 - Payment Query</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7 - Write Off</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8 - Legal Proceedings</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9 - Insolvency</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Reserved_Balance__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reserved Balance</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Reserved_By__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reserved By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Transactions2</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Reserved_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reserved Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Reserved_Reason_Code__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reserved Reason Code</label>
+        <picklist>
+            <picklistValues>
+                <fullName>No Reason</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Sales_Rep_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Sales Rep Name</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Ship_To_Address__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Ship To Address</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Ship_To_City__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Ship To City</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Ship_To_Country__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Ship To Country</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Ship_To_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Ship To Name</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Ship_To_Number__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Ship To#</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Ship_To_Postal_Code__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Ship To Postal Code</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Ship_To_State__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Ship To State</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Shipment_Method__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Shipment Method</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>So_Number__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>SO#</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Source_System__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Source System</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Disputed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Promised</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unpaid</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Contacted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Action</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Sub_Reason_Code__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Sub Reason Code</label>
+        <picklist>
+            <controllingField>Reason_Code__c</controllingField>
+            <picklistValues>
+                <fullName>11 - Message left</fullName>
+                <default>false</default>
+                <controllingFieldValues>1 - Service Call</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12 - Status awaited</fullName>
+                <default>false</default>
+                <controllingFieldValues>1 - Service Call</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>13 - Backup/Copy Inv Sent</fullName>
+                <default>false</default>
+                <controllingFieldValues>1 - Service Call</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>14 - Invoice Approved</fullName>
+                <default>false</default>
+                <controllingFieldValues>1 - Service Call</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>15 - Invoice Receipt Confirmation</fullName>
+                <default>false</default>
+                <controllingFieldValues>1 - Service Call</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>16 - No response</fullName>
+                <default>false</default>
+                <controllingFieldValues>1 - Service Call</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>17 - Inv reviewed, no action rqd</fullName>
+                <default>false</default>
+                <controllingFieldValues>1 - Service Call</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>21 - Invoice Backup Required</fullName>
+                <default>false</default>
+                <controllingFieldValues>2 - Query - Site</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>22 - Query with invoice detail</fullName>
+                <default>false</default>
+                <controllingFieldValues>2 - Query - Site</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>23 - Service Issue</fullName>
+                <default>false</default>
+                <controllingFieldValues>2 - Query - Site</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>24 - Customer contact details required</fullName>
+                <default>false</default>
+                <controllingFieldValues>2 - Query - Site</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>25 - Credit Note confirmed by site but not raised</fullName>
+                <default>false</default>
+                <controllingFieldValues>2 - Query - Site</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>26 - Site asked not to Chase</fullName>
+                <default>false</default>
+                <controllingFieldValues>2 - Query - Site</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>31 - Backup rqd from business</fullName>
+                <default>false</default>
+                <controllingFieldValues>3 - Query - SSC</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>32 - Query - site to respond</fullName>
+                <default>false</default>
+                <controllingFieldValues>3 - Query - SSC</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>33 - Service Issue - Site to respond</fullName>
+                <default>false</default>
+                <controllingFieldValues>3 - Query - SSC</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>34 - Contact details required from Site</fullName>
+                <default>false</default>
+                <controllingFieldValues>3 - Query - SSC</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>35 - Issue resolved - SSC to chase</fullName>
+                <default>false</default>
+                <controllingFieldValues>3 - Query - SSC</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>36 - Customer refuses/cannot pay - site to respond</fullName>
+                <default>false</default>
+                <controllingFieldValues>3 - Query - SSC</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>37 - Conditional Payment/Offset</fullName>
+                <default>false</default>
+                <controllingFieldValues>3 - Query - SSC</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>41 - Promise of payment</fullName>
+                <default>false</default>
+                <controllingFieldValues>4 - Payment</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>51 - Credit Note Requested - at Site</fullName>
+                <default>false</default>
+                <controllingFieldValues>5 - Credit Note</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>52 - Credit Note - Query at Site</fullName>
+                <default>false</default>
+                <controllingFieldValues>5 - Credit Note</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>53 - Credit Note - resolved</fullName>
+                <default>false</default>
+                <controllingFieldValues>5 - Credit Note</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>61 - Paid - Trace</fullName>
+                <default>false</default>
+                <controllingFieldValues>6 - Payment Query</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>62 - Short Payment</fullName>
+                <default>false</default>
+                <controllingFieldValues>6 - Payment Query</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>63 - Duplicate Payment</fullName>
+                <default>false</default>
+                <controllingFieldValues>6 - Payment Query</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>64 - Exch Diff</fullName>
+                <default>false</default>
+                <controllingFieldValues>6 - Payment Query</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>65 - Offset</fullName>
+                <default>false</default>
+                <controllingFieldValues>6 - Payment Query</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>66 - Payment made in error</fullName>
+                <default>false</default>
+                <controllingFieldValues>6 - Payment Query</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>71 - Write off requested</fullName>
+                <default>false</default>
+                <controllingFieldValues>7 - Write Off</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>72 - Write off approved/resolved</fullName>
+                <default>false</default>
+                <controllingFieldValues>7 - Write Off</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>81 - Legal Proceedings - Passed to site</fullName>
+                <default>false</default>
+                <controllingFieldValues>8 - Legal Proceedings</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>82 - Legal Proceedings - Instigated</fullName>
+                <default>false</default>
+                <controllingFieldValues>8 - Legal Proceedings</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>91 - Liquidation</fullName>
+                <default>false</default>
+                <controllingFieldValues>9 - Insolvency</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>92 - Administration</fullName>
+                <default>false</default>
+                <controllingFieldValues>9 - Insolvency</controllingFieldValues>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Subtotal__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Subtotal</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Tax_Exempt__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Tax Exempt</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Tax__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Tax</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Transaction_Code__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Transaction Code</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Transaction_Key__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <externalId>true</externalId>
+        <label>Transaction Key</label>
+        <length>120</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Undisputed_Balance__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>Balance__c -  Disputed_Amount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Undisputed Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <label>Transaction</label>
+    <nameField>
+        <label>Invoice#</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Transactions</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Debtor__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Batch_Number__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Create_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Invoice_Due_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Amount__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Balance_Internex__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Invoice_Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Invoice_Status_Internex__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Portal_External_Id__c</customTabListAdditionalFields>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <lookupDialogsAdditionalFields>Account__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Amount__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Balance__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Days_Past_Due__c</lookupDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>Account__c</searchFilterFields>
+        <searchFilterFields>Amount__c</searchFilterFields>
+        <searchFilterFields>Balance__c</searchFilterFields>
+        <searchFilterFields>Days_Past_Due__c</searchFilterFields>
+        <searchResultsAdditionalFields>Account__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>So_Number__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Po_Number__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Amount__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Balance__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Bill_To_Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Bill_To_Number__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Days_Past_Due__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Due_Date__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <webLinks>
+        <fullName>Add_Note</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Add Note</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var urlIdStr;
+var locationURL = window.location.href;
+var s1 = locationURL.substring(locationURL.indexOf(&apos;=&apos;)+1);
+var splitAccId = s1.substring(0,15);
+urlIdStr = &apos;/002/e?parent_id=&apos; + splitAccId + &apos;&amp;retURL=/&apos; + splitAccId ;
+window.location.href = urlIdStr ;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Contact_Customer</fullName>
+        <availability>online</availability>
+        <description>Contact customer at transaction level</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Contact Customer</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var urlIdStr;
+var locationURL = window.location.href;
+var hostName = window.location.hostname + &apos;/&apos;;
+var s1 = &apos;&apos;;
+if( locationURL.indexOf(&apos;id=&apos;) != -1 ){
+	s1 = locationURL.substring( locationURL.indexOf(&apos;id=&apos;)+3 , locationURL.indexOf(&apos;id=&apos;) + 18 );
+	//is an account
+	if(s1.indexOf(&apos;001&apos;) == 0)
+	{
+		urlIdStr = &apos;accId=&apos; + s1;
+	}
+	else
+	{
+		var taskId = &apos;&apos;; 
+		if( locationURL.indexOf(&apos;taskId=&apos;) != -1 ){
+			   taskId = locationURL.substring( locationURL.indexOf(&apos;taskId=&apos;) + 7 , locationURL.indexOf(&apos;taskId=&apos;) + 22 );
+			   urlIdStr = &apos;txId=&apos;+ s1+ &apos;&amp;taskId=&apos; + taskId ;
+		}else{
+			   urlIdStr = &apos;txId=&apos;+ s1;
+		}
+	}
+}else{
+	s1 = locationURL.substring( locationURL.indexOf(hostName ) + hostName.length , locationURL.indexOf(hostName ) + hostName.length + 15);
+	if(s1.indexOf(&apos;001&apos;) == 0)
+	{
+		urlIdStr = &apos;accId=&apos; + s1;
+	}
+	else
+	{
+		var taskId = &apos;&apos;; 
+		if( locationURL.indexOf(&apos;taskId=&apos;) != -1 ){
+			   taskId = locationURL.substring( locationURL.indexOf(&apos;taskId=&apos;) + 7 , locationURL.indexOf(&apos;taskId=&apos;) + 22 );
+			   urlIdStr = &apos;txId=&apos;+ s1+ &apos;&amp;taskId=&apos; + taskId ;
+		}else{
+			   urlIdStr = &apos;txId=&apos;+ s1;
+		}
+	}
+}
+window.location.href = &apos;/apex/ContactCustomerPage?&apos; + urlIdStr +&apos;&amp;orderby=name&amp;ordertype=desc&apos;;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Create_Dispute</fullName>
+        <availability>online</availability>
+        <description>Create a dispute for trasnaction</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Create Dispute</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var urlIdStr; 
+var locationURL = window.location.href; 
+var hostName = window.location.hostname + &apos;/&apos;; 
+var s1 = &apos;&apos;; 
+if( locationURL.indexOf(&apos;id=&apos;) != -1 ){ 
+s1 = locationURL.substring( locationURL.indexOf(&apos;id=&apos;)+3 , locationURL.indexOf(&apos;id=&apos;) + 18 ); 
+//is an account 
+if(s1.indexOf(&apos;001&apos;) == 0) 
+{ 
+urlIdStr = &apos;accId=&apos; + s1; 
+} 
+else 
+{ 
+var taskId = &apos;&apos;; 
+if( locationURL.indexOf(&apos;taskId=&apos;) != -1 ){ 
+taskId = locationURL.substring( locationURL.indexOf(&apos;taskId=&apos;) + 7 , locationURL.indexOf(&apos;taskId=&apos;) + 22 ); 
+urlIdStr = &apos;txId=&apos;+ s1+ &apos;&amp;taskId=&apos; + taskId ; 
+}else{ 
+urlIdStr = &apos;txId=&apos;+ s1; 
+} 
+} 
+}else{ 
+s1 = locationURL.substring( locationURL.indexOf(hostName ) + hostName.length , locationURL.indexOf(hostName ) + hostName.length + 15); 
+if(s1.indexOf(&apos;001&apos;) == 0) 
+{ 
+urlIdStr = &apos;accId=&apos; + s1; 
+} 
+else 
+{ 
+var taskId = &apos;&apos;; 
+if( locationURL.indexOf(&apos;taskId=&apos;) != -1 ){ 
+taskId = locationURL.substring( locationURL.indexOf(&apos;taskId=&apos;) + 7 , locationURL.indexOf(&apos;taskId=&apos;) + 22 ); 
+urlIdStr = &apos;txId=&apos;+ s1+ &apos;&amp;taskId=&apos; + taskId ; 
+}else{ 
+urlIdStr = &apos;txId=&apos;+ s1; 
+} 
+} 
+} 
+location.href = &quot;/apex/GenerateTransactionDisputes?&quot; + urlIdStr +&apos;&amp;orderby=name&amp;ordertype=desc&apos;;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Create_Dispute_Portal</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Create Dispute</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var urlIdStr;
+var locationURL = window.location.href;
+var s1 = &apos;&apos;;
+
+if( locationURL.indexOf(&apos;id=&apos;) != -1 ){
+s1 = locationURL.substring( locationURL.indexOf(&apos;id=&apos;)+3 , locationURL.indexOf(&apos;id=&apos;) + 18 );
+}
+
+//is an account
+if(s1.startsWith(&apos;001&apos;))
+{
+urlIdStr = &apos;accId=&apos; + s1;
+
+}
+else
+{
+var taskId = &apos;&apos;;
+if( locationURL.indexOf(&apos;taskId=&apos;) != -1 ){
+taskId = locationURL.substring( locationURL.indexOf(&apos;taskId=&apos;) + 7 , locationURL.indexOf(&apos;taskId=&apos;) + 22 );
+urlIdStr = &apos;txId=&apos;+ s1+ &apos;&amp;taskId=&apos; + taskId ;
+}else{
+urlIdStr = &apos;txId=&apos;+ s1;
+}
+} 
+location.href = &quot;/apex/PortalGenerateTransactionDisputesPage?&quot; + urlIdStr ;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Enhanced_List_View</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Enhanced List View</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>// Rajeev 14/09/2009 Original 
+// 
+
+/* 
+Gets the list of selected records and prepares a URL to update the suppliers and their related information
+*/ 
+
+//Fetch the list 
+var records = {!GETRECORDIDS($ObjectType.Transaction__c)}; 
+var strIDs=&apos;&apos;; 
+
+/* 
+Check if the user has selected at least one record and display a message declared in Custom Labels -&gt; Label_NoSuppliersSelected 
+*/ 
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/apex.js&quot;)} 
+
+if (records[0] == null) 
+{ 
+alert(&apos;No record is selected &apos;); 
+} 
+else 
+{ 
+for (var n=0; n&lt;records.length; n++) 
+{ 
+if(strIDs == &apos;&apos;) 
+strIDs = &quot;&apos;&quot;+records[n]+&quot;&apos;&quot;; 
+else 
+strIDs = strIDs + &quot;,&apos;&quot; + records[n]+&quot;&apos;&quot;; 
+} 
+
+var retUrl = location.href; 
+retUrl = retUrl.substring(retUrl.indexOf(&apos;.com&apos;) + 4) 
+//Redirect to the export page 
+location.href = &quot;/apex/CustomExportList?transactionIds=&quot; + strIDs ; 
+
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Mark_Reserve</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Mark Reserve</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var urlIdStr;
+var locationURL = window.location.href;
+var s1 = locationURL.substring(locationURL.indexOf(&apos;=&apos;)+1);
+var s2 = s1.substring(0,15);
+
+//is an account
+if(s2.startsWith(&apos;001&apos;))
+{
+urlIdStr = &apos;accId=&apos; + s2;
+}
+else
+{
+urlIdStr = &apos;txId=&apos;+ s2;
+}
+location.href = &quot;/apex/MarkReservePage?&quot; + urlIdStr ;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Mass_Update_Transaction</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Mass Update Transaction</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)} 
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;; 
+
+var records = {!GETRECORDIDS($ObjectType.Transaction__c)}; 
+
+
+if (records[0] == null) { 
+alert(&apos;No record is selected&apos;); 
+}else{
+var strIDs = &apos;&apos;;
+for (var n=0; n&lt;records.length; n++)
+{
+if(strIDs == &apos;&apos;)
+strIDs = records[n];
+else
+strIDs = strIDs + &quot;,&quot; + records[n];
+}
+
+if(strIDs !=null &amp;&amp; strIDs !=&apos;&apos;){
+
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;;
+var config = new sforce.SObject(&quot;akritiv__Temp_Object_Holder__c&quot;);
+var user = sforce.connection.getUserInfo() ;
+var timest = sforce.connection.getServerTimestamp();
+var key = &apos;{!$User.Username}&apos; + timest.timestamp ;
+config.akritiv__Key__c =key ;
+config.akritiv__Value__c = strIDs;
+
+var res = sforce.connection.create([config]);
+
+var UrlLoc = window.location; 
+var strHost = UrlLoc.host; 
+var strProtocol = UrlLoc.protocol; 
+strHost = strHost.replace(&quot;akritiv.&quot;,&quot;c.&quot;); 
+var loc = window.location.href ; 
+
+var urlString = strProtocol +&apos;//&apos;+strHost+&apos;/apex/akritiv__MassUpdateTransactionPage?key=&apos;+ key+ &apos;&amp;location=&apos; + loc; 
+
+
+var left = (screen.width/2)-400; 
+var top = (screen.height/2)-300; 
+
+
+window.open (urlString,&quot;CloseTask&quot;,&quot;toolbar=0,location=0, directories=0, status=0, menubar=0, scrollbars=1,resizable=no , closable = 0 ,width=800,height=600,top=&quot;+top+&quot;,left=&quot;+left); 
+}
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>New_Dispute</fullName>
+        <availability>online</availability>
+        <description>Create a dispute for selected transactions</description>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Create Dispute</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>/* 
+Gets the list of selected records and paepares a URL with selected transaction ids. 
+@todo this needs to be optimized with standard set controller
+*/ 
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)} 
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;;
+sforce.connection.defaultNamespace = &apos;{!$Setup.SysConfig__c.NameSpace__c}&apos;;
+
+var records = {!GETRECORDIDS($ObjectType.Transaction__c)}; 
+var strIDs=&apos;&apos;; 
+var accId = &apos;{!Account.Id}&apos;;
+var key;
+/* 
+Check if the user has selected at least one record and display a message declared in Custom Labels -&gt; Label_NoTransactionSelected 
+*/ 
+
+if (records[0] == null) { 
+	alert(&apos;No record is selected &apos;); 
+} 
+else { 
+	for (var n=0; n&lt;records.length; n++) { 
+		if(strIDs == &apos;&apos;) 
+		strIDs = records[n]; 
+		else 
+		strIDs = strIDs + &quot;,&quot; + records[n]; 
+	} 
+	try{
+		var config = new sforce.SObject(&quot;Temp_Object_Holder__c&quot;); 
+		var user = sforce.connection.getUserInfo() ; 
+		var timest = sforce.connection.getServerTimestamp(); 
+		key = &apos;{!$User.Username}&apos; + timest.timestamp ; 
+		config.Key__c =key; 
+		config.Value__c = strIDs; 
+		var res = sforce.connection.create([config]);
+	}
+	catch(e) {
+		alert(&apos;Exception:&apos;+e);
+	}
+    
+	//Redirect to the Create Dispute page 
+	location.href = &quot;/apex/GenerateTransactionDisputes?txIds=&quot; + key + &quot;&amp;accId=&quot; +accId ;
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Promise_To_Pay</fullName>
+        <availability>online</availability>
+        <description>Promise at transaction level</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Promise To Pay</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var urlIdStr; 
+var locationURL = window.location.href; 
+var hostName = window.location.hostname + &apos;/&apos;; 
+var s1 = &apos;&apos;; 
+if( locationURL.indexOf(&apos;id=&apos;) != -1 ){ 
+s1 = locationURL.substring( locationURL.indexOf(&apos;id=&apos;)+3 , locationURL.indexOf(&apos;id=&apos;) + 18 ); 
+//is an account 
+if(s1.indexOf(&apos;001&apos;) == 0) 
+{ 
+urlIdStr = &apos;accId=&apos; + s1; 
+} 
+else 
+{ 
+var taskId = &apos;&apos;; 
+if( locationURL.indexOf(&apos;taskId=&apos;) != -1 ){ 
+taskId = locationURL.substring( locationURL.indexOf(&apos;taskId=&apos;) + 7 , locationURL.indexOf(&apos;taskId=&apos;) + 22 ); 
+urlIdStr = &apos;txId=&apos;+ s1+ &apos;&amp;taskId=&apos; + taskId ; 
+}else{ 
+urlIdStr = &apos;txId=&apos;+ s1; 
+} 
+} 
+}else{ 
+s1 = locationURL.substring( locationURL.indexOf(hostName ) + hostName.length , locationURL.indexOf(hostName ) + hostName.length + 15); 
+if(s1.indexOf(&apos;001&apos;) == 0) 
+{ 
+urlIdStr = &apos;accId=&apos; + s1; 
+} 
+else 
+{ 
+var taskId = &apos;&apos;; 
+if( locationURL.indexOf(&apos;taskId=&apos;) != -1 ){ 
+taskId = locationURL.substring( locationURL.indexOf(&apos;taskId=&apos;) + 7 , locationURL.indexOf(&apos;taskId=&apos;) + 22 ); 
+urlIdStr = &apos;txId=&apos;+ s1+ &apos;&amp;taskId=&apos; + taskId ; 
+}else{ 
+urlIdStr = &apos;txId=&apos;+ s1; 
+} 
+} 
+} 
+window.location.href = &apos;/apex/CustomerPromiseToPay?&apos; + urlIdStr +&apos;&amp;orderby=name&amp;ordertype=desc&apos; ;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>QN</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>QN</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)} 
+
+sforce.connection.defaultNamespace = &apos;{!$Setup.SysConfig__c.NameSpace__c}&apos;;
+var txId = &apos;{!Transaction__c.Id}&apos;; 
+var urlString = &apos;/apex/SendIMAboutObject?objIds=&apos;+txId+&apos;&amp;objtype=Transaction__c&apos;; 
+window.open (urlString ,&quot;SendIM&quot;,&quot;status=1,scrollbars=1,width=400,height=400&quot;);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Take_Payment</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Take Payment</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>var urlIdStr; 
+var locationURL = window.location.href; 
+var s1 = locationURL.substring(locationURL.indexOf(&apos;=&apos;)+1); 
+var s2 = s1.substring(0,15); 
+
+//is an account 
+if(s2.startsWith(&apos;001&apos;)) 
+{ 
+urlIdStr = &apos;accId=&apos; + s2; 
+
+} 
+else 
+{ 
+urlIdStr = &apos;txId=&apos;+ s2; 
+
+} 
+
+window.location.href = &apos;/apex/TakePayment?&apos; + urlIdStr +&apos;&amp;orderby=name&amp;ordertype=desc&apos;;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Transaction_Add_Note</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Add Note</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var transactionid= &apos;{!Transaction__c.Id}&apos;; 
+var loc = window.location.href ; 
+var loc2 = document.location; 
+
+var urlString =&apos;/apex/CommonAddNote?page=Transaction&amp;trxId=&apos;+ transactionid+ &apos;&amp;location=&apos; + loc ; 
+
+
+var left = (screen.width); 
+var top = (screen.height); 
+
+var t = 0; 
+var l = 0; 
+
+window.open (urlString,&quot;{!$Label.Label_AddTransactionNote}&quot;,&quot;toolbar=0,location=0, directories=0, status=0, menubar=0,width=550,height=250,scrollbars=1&quot;);</url>
+    </webLinks>
+</CustomObject>

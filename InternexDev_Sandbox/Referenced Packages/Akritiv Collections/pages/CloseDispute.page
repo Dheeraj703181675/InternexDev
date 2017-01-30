@@ -1,0 +1,85 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/*
+ * Page provides the functionality to close the dispute. Page provides the 
+ * provision to close the dispute with proper resolution code 
+ * and customer rating.
+ */
+-->
+<apex:page controller="akritiv.CloseDisputeController" showHeader="false"
+    sidebar="false" id="pg">
+
+    <script language="JavaScript">
+ function refreshWindow()
+ {
+   try
+   {
+       window.opener.location.href = '/{!URLENCODE(objectIds)}';
+       window.close();
+   }
+   catch(es)
+   {
+      alert(es) ;
+   }
+ }
+</script>
+
+    <apex:sectionHeader title="{!$Label.Label_Close_Dispute}" />
+    <apex:form id="frm">
+        <apex:pageMessages ></apex:pageMessages>
+        <apex:pageBlock id="pb">
+            <apex:inputHidden value="{!objectIds}" id="hiddenDisputeId" />
+
+            <apex:pageBlockButtons >
+                <apex:commandButton value="{!$Label.Label_Close}"
+                    action="{!closeDispute}" oncomplete="refreshWindow();" />
+                <apex:commandButton value="{!$Label.Label_Cancel}"
+                    onclick="window.close();" />
+            </apex:pageBlockButtons>
+
+            <apex:pageBlockSection columns="1"
+                title="{!$Label.Label_Customer_Rating}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Collection_Rating}" />
+                    <c:Star_Rating_Component updatable="true"
+                        initRating="{!activityRating}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+            <apex:pageblockSection columns="1"
+                title="{!$Label.Label_Close_Dispute}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputlabel value="{!$Label.Label_Resolution_Code}" />
+                    <apex:selectList value="{!selectedResolutionCode}" size="1"
+                        id="resCode" multiselect="false">
+                        <apex:selectOptions value="{!resolutionCodes}"></apex:selectOptions>
+                    </apex:selectList>
+
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.Label_Note_Title}" />
+                    <apex:inputText style="width:300px" value="{!noteTitle}"
+                        id="noteTitle" maxlength="80" />
+                </apex:pageBlockSectionItem>
+
+
+                <apex:pageBlockSectionItem id="sib">
+                    <apex:outputLabel value="{!$Label.Label_Note_Body}" />
+                    <apex:inputTextArea value="{!noteBody}"
+                        style="width:300px; height:100px;" id="noteBody" />
+                </apex:pageBlockSectionItem>
+
+            </apex:pageblockSection>
+        </apex:pageBlock>
+    </apex:form>
+
+</apex:page>

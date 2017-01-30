@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>17.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>This is an inline page to show all the transaction associated
+                with the task (follow-up task, contact customer , promise to pay
+                or dispute creation task). Everytime when the task is created
+                using code it also create a Transaction_Activity__c record to
+                maintain the transactions that are the part of contact/followup
+                task.</description>
+    <label>ActivityTransactions</label>
+</ApexPage>

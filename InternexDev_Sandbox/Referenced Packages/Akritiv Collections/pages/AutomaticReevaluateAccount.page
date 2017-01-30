@@ -1,0 +1,28 @@
+<apex:page controller="akritiv.AutomaticDuningHelperAccount" sidebar="false" showHeader="false" id="pg"  >  
+    <script>
+     window.onload=function(){
+    callprepareTasks();};
+        function refreshWindow()
+        {
+            try
+            {
+                window.opener.location.href = '{!JSENCODE(location)}' ;
+                
+                window.close() ;
+            
+            }
+            catch(es)
+            {
+                alert(es) ;
+            }
+        }
+    </script>
+    <apex:form id="frm">
+    <apex:actionFunction name="callprepareTasks" action="{!save}" reRender="msg"/>  
+        <apex:pageBlock id="pb">
+            <apex:commandButton id="Finish" value="{!$Label.Label_Finish}"  onclick="refreshWindow();"/>
+            
+            <apex:pageMessages id="msg"></apex:pageMessages>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

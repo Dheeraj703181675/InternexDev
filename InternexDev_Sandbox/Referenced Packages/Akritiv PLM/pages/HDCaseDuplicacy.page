@@ -1,0 +1,287 @@
+<apex:page id="pageId" controller="akritivtlm.HDCaseDuplicacyController" sidebar="false" showHeader="false" tabStyle="akritivtlm__Conversation__c">
+
+<apex:stylesheet value="{!URLFOR($Resource.akritivtlm__TwitterBootstrap, '/css/custom-style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.akritivtlm__Jquery, '/Jquery/js/1.7.2/jquery-1.7.2-min.js')}"/>
+
+<style>
+    html{
+        scrollbar-face-color: #E6E6E6;
+        scrollbar-shadow-color: #E6E6E6;
+        scrollbar-highlight-color:#E6E6E6;
+        scrollbar-3dlight-color: #ADADAD;
+        scrollbar-darkshadow-color: #ADADAD;
+        scrollbar-track-color: #ADADAD;
+        scrollbar-arrow-color: #000000;
+        }
+    .messageblock{
+        font-size:11px;
+        border-radius: 4px;
+        border-color: #c00;
+        background-color: #ffc;
+        border-style: solid;
+        border-width: 1px;
+        color: #000;
+    }
+</style> 
+
+<script>
+    function animateMessageBox(_element,interval) {
+        $('#'+_element).hide(); 
+        $('#'+_element).fadeIn('fast', function () { });
+    }
+
+    function closeMessage() {
+        $('#messagebox').hide();   
+    }
+
+    function displayMessage(type,msg,interval) {
+        var m = '<div class="alert ' + (type != "error" ? "alert-warning messageblock" : "alert-error messageblock") + ' alert-dismissable" style=" width:50%;margin: 0 auto;margin-top: 5px;">'+
+                '<img src="'+ (type != "error" ? "/img/msg_icons/info24.png" : "/img/msg_icons/error24.png") +'" /> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="closeMessage();">&times;</button> <strong><b>' + (type != "error" ? "Info" : "Error") + '!</b></strong> '+msg+
+                '</div>';
+        if(document.getElementById('messagebox') != null && document.getElementById('messagebox') != undefined) {
+                document.getElementById('messagebox').innerHTML = m;
+                animateMessageBox('messagebox',interval);
+            }
+        animateMessageBox('messagebox',interval);
+    }
+</script>
+
+<apex:outputpanel id="messagepanel" style="Display:None">
+    <apex:messages id="msg1"  style="Display:None" />
+    <script>
+        if(document.getElementById('{!$Component.msg1}') != null && document.getElementById('{!$Component.msg1}') != undefined) {
+            var obj = document.getElementById('{!$Component.msg1}').getElementsByTagName('li');
+            var msg='';
+            for(var i=0;i<obj.length;i++) {
+                if(i==0) 
+                msg += '<br />';
+                msg += obj[i].innerHTML + '<br />';
+            }
+            if(msg != '') {
+                setTimeout(function(){displayMessage('error',msg,10000);},1000);
+            }
+        }
+    </script>
+</apex:outputpanel>
+
+
+<style>
+    #filter
+    {
+        display: block;    position: fixed;
+        top: 0%;    left: 0%;
+        width: 100%;    height: 100%;
+        background-repeat:no-repeat;    background-position:center;    background-color: #ffffff;
+        z-index:10;    opacity:0.6;
+        filter: alpha(opacity=50);
+    }
+</style>
+    <script>
+        function deSelectOthers(obj) {
+            var allChk = document.getElementsByName('chkBtn');
+            for(var i=0;i<allChk.length;i++) {
+                if(obj != allChk[i])
+                    allChk[i].checked = false;
+            }
+            if(obj.checked) {
+                obj.checked = true;
+                document.getElementById('pageId:frm:pbId:selectedConvId').value = obj.value;
+            } else {
+                document.getElementById('pageId:frm:pbId:selectedConvId').value = '';
+            }
+        }
+
+        var selectOptionId;
+        function duplicateMarked(input){
+            document.getElementById('pageId:frm:compareResult:duplicateConvId').value = input.value;
+        }
+        var selectRadioId;
+        function startProcessForEdit(){
+           document.getElementById("{!$Component.pageId.frm.loading}").style.display = 'block';       
+           document.getElementById('filter').style.display = 'block';
+        }
+        
+        function endProcessForEdit(){
+           document.getElementById("{!$Component.pageId.frm.loading}").style.display = 'none';
+           document.getElementById('filter').style.display = 'none'; 
+        }
+    </script>
+    <apex:outputPanel id="jsop">
+        <script>
+            function markDuplicate(){
+                var chosen = document.getElementById('pageId:frm:compareResult:duplicateConvId').value;
+                var notchosen;
+                if(chosen == '{!JSENCODE(conversationObj.Id)}'){
+                    chosen = '{!JSENCODE(conversationObj.Name)}';
+                    notchosen = '{!JSENCODE(conversationObj2.Name)}';
+                }else{
+                    chosen = '{!JSENCODE(conversationObj2.Name)}';
+                    notchosen = '{!JSENCODE(conversationObj.Name)}';
+                }
+                var r = confirm('{!$Label.Label_Interactions_of} '+chosen+' {!$Label.Label_will_be_moved_to} '+notchosen);
+                if(r)
+                    moveInteraction();
+                else
+                    endProcessForEdit();
+            }
+            function closeWindow(){
+                if({!closeFlag}){
+                    var returnValue = 'All Interactions moved successfully.';
+                    window.parent.displayMessageAndClosePopUp("info",returnValue,"searchConvWin");
+                }
+            }
+        </script>
+    </apex:outputPanel>
+    
+    <div id="messagebox" style="z-index:10 !important;position:fixed !important;width:50% !important;top:30%;left:20%;" ></div>
+    
+    
+    <apex:form id="frm">
+        <!-- for providing loading -->
+        <div id="filter" style= "display:none;"></div> 
+        <apex:image url="{!URLFOR($Resource.akritivtlm__TLMIMAGES,'img/loading.gif')}" id="loading" style="display:none;position:fixed;top:50%;left:50%;z-index:10;" />
+        <!-- for providing loading -->
+
+        <apex:actionFunction name="onChangeevent" action="{!onChange}" rerender="mainPanel" />
+        <apex:pageblock id="pbId" title="{!$Label.Label_Search_And_Compare_Case_for_Duplicity}"> 
+                    <apex:selectList value="{!searchCriteria}" multiselect="false" size="1">
+                        <apex:selectOptions value="{!items}"/>
+                    </apex:selectList>
+                    <apex:outputPanel >
+                        <apex:inputText value="{!searchParam}" onchange="onChangeevent();return false;"/>
+                        
+                        <apex:actionStatus id="saveStatus1">
+                            <apex:facet name="stop">
+                                <apex:commandButton value="{!$Label.Label_Search}" action="{!searchCase}" reRender="mainPanel,compareResult,cmprResAction,messagepanel" onclick="startProcessForEdit();" oncomplete="endProcessForEdit();"/><!--rerender=opSearchResultId,-->
+                            </apex:facet>
+                            <apex:facet name="start">
+                                <apex:commandButton value="{!$Label.Label_Search}..." disabled="true" status="saveStatus1"/>
+                            </apex:facet>
+                        </apex:actionStatus>
+                    </apex:outputPanel>
+            <br/><br/>
+            <apex:outputPanel id="mainPanel">
+            <apex:outputPanel rendered="{!AND(IF(paginater.isAll, false, true), IF(paginater.totalPage == 1, false, true))}">
+                <apex:outputText rendered="{!paginater.showFirst}">
+                    <apex:commandLink action="{!firstPage}" value="{!$Label.Label_First}" rerender="mainPanel" onclick="startProcessForEdit();" oncomplete="endProcessForEdit();"/>
+                </apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:outputText rendered="{!paginater.showPrevious}">
+                    <apex:commandLink action="{!previousPage}" value="{!$Label.Label_Prev}" rerender="mainPanel" onclick="startProcessForEdit();" oncomplete="endProcessForEdit();"/>
+                </apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:repeat value="{!paginater.pageList}" var="pl">
+                    <apex:outputText rendered="{!!pl.isActive}">
+                        <apex:commandLink action="{!updatePage}" rerender="mainPanel" onclick="startProcessForEdit();" oncomplete="endProcessForEdit();">
+                            {!pl.pageNum}                              
+                            <apex:param name="selectedPage" value="{!pl.pageNum}" assignTo="{!paginater.pageNum}" />
+                        </apex:commandLink>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!pl.isActive}" value="{!pl.pageNum}" />&nbsp;&nbsp;&nbsp;&nbsp;
+                </apex:repeat>&nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:outputText rendered="{!paginater.showNext}">
+                    <apex:commandLink action="{!nextPage}" value="{!$Label.Label_Next}" rerender="mainPanel" onclick="startProcessForEdit();" oncomplete="endProcessForEdit();"/>
+                </apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:outputText rendered="{!paginater.showLast}">
+                    <apex:commandLink action="{!lastPage}" value="{!$Label.Label_Last}" rerender="mainPanel" onclick="startProcessForEdit();" oncomplete="endProcessForEdit();"/>
+                </apex:outputText>
+            </apex:outputPanel>
+            <br/><br/>
+            <apex:outputPanel id="dataPanel">
+                <apex:inputHidden id="selectedConvId" value="{!selectedConvId}" />
+                    <apex:pageBlockTable value="{!genericList}" var="searchList" id="pbtResultTabId" rendered="{!IF( genericList!=null && genericList.size>0, true, false)}">
+                        <apex:column >
+                            <input type="checkbox" name="chkBtn" id="checkedone" onchange="return deSelectOthers(this)" value="{!searchList.Id}"/>
+                            <apex:actionSupport event="onclick"  reRender="mveBtn" />
+                        </apex:column>
+                        <apex:column headerValue="{!$Label.Label_Case_Id}">
+                            <apex:outputText value="{!searchList.Name}"></apex:outputText>
+                        </apex:column>
+                        <apex:column headerValue="{!$Label.Label_Case_Subject}">
+                            <apex:outputText value="{!searchList.akritivtlm__Subject__c}"></apex:outputText>
+                        </apex:column>
+                    </apex:pageBlockTable>
+
+                <apex:actionStatus id="saveStatus2">
+                    <apex:facet name="stop">
+                        <apex:commandButton id="cmpBtn" value="{!$Label.Label_Compare}" action="{!compare}" style="margin-left:225px;" onclick="startProcessForEdit();" oncomplete="removeTitle();endProcessForEdit();" rendered="{!IF(genericList!=null && genericList.size>0, true, false)}" reRender="cmprResAction,jsop,messagepanel" />
+                    </apex:facet>
+                    <apex:facet name="start">
+                        <apex:commandButton value="{!$Label.Label_Compare}..." disabled="true" status="saveStatus2"/>
+                    </apex:facet>
+                </apex:actionStatus>
+            </apex:outputPanel>
+        </apex:outputPanel>
+        </apex:pageblock>
+        
+        <apex:outputPanel id="cmprResAction" >
+        <apex:pageblock id="compareResult" title="{!$Label.Label_Compare_Result} of {!conversationObj.Name} and {!conversationObj2.Name} "  rendered="{!compareresultflag}">
+            <apex:inputHidden id="duplicateConvId" value="{!duplicateConvId}" />
+            <apex:actionFunction id="actionFunction1" name="moveInteraction" action="{!moveInteraction}" oncomplete="endProcessForEdit();closeWindow();" reRender="jsop,messagepanel"/>
+            <apex:outputPanel id="opcompareResult">
+                <apex:pageblocktable id="pgBlckTbl1" value="{!fldLst}" var="fld">
+                    <apex:column width="20%">
+                        <apex:facet name="header">{!$Label.Label_Field_Labels}</apex:facet>
+                                {!fld.fldLabel}
+                    </apex:column>
+                    <apex:column width="40%">
+                        <apex:facet name="header">{!conversationObj['Name']}</apex:facet>
+                                {!conversationObj[fld.apiName]}
+                    </apex:column>
+                    <apex:column width="40%">
+                        <apex:facet name="header">{!conversationObj2['Name']}</apex:facet>
+                                {!conversationObj2[fld.apiName]}
+                    </apex:column>
+                </apex:pageblocktable>
+                <br/>
+                <apex:pageblocktable id="pgBlckTbl2" value="{!qcFldLst}" var="fld">
+                    <apex:column width="20%">
+                        <apex:facet name="header">{!$Label.Label_Field_Labels}</apex:facet>
+                                {!fld.fldLabel}
+                    </apex:column>
+                    <apex:column width="40%">
+                        <apex:facet name="header">{!queryClassification['Name']}</apex:facet>
+                                {!queryClassification[fld.apiName]}
+                    </apex:column>
+                    <apex:column width="40%">
+                        <apex:facet name="header">{!queryClassification2['Name']}</apex:facet>
+                                {!queryClassification2[fld.apiName]}
+                    </apex:column>
+                </apex:pageblocktable>
+            </apex:outputPanel>
+            <br/>
+            <apex:selectRadio id="selectRadio1" value="{!selectedConv}" legendText="{!$Label.Label_Select_Case_to_mark_as_Duplicate}" onchange="duplicateMarked(this);">
+                <apex:selectOptions id="selectOptions1" value="{!selectItems}"></apex:selectOptions>
+            </apex:selectRadio>
+            <script>
+                selectRadioId = '{!$Component.selectRadio1}';
+                selectOptionId = '{!$Component.selectOptions1}';
+            </script>
+            <center>
+            <apex:actionStatus id="saveStatus3">
+                <apex:facet name="stop">
+                    <apex:commandButton id="confirmDuplicateBtn" value="{!$Label.Label_Mark_Case_as_Duplicate}" onclick="startProcessForEdit();markDuplicate(); return false;" reRender="messagepanel"/>
+                </apex:facet>
+                <apex:facet name="start">
+                    <apex:commandButton value="{!$Label.Label_Mark_Case_as_Duplicate}..." disabled="true" status="saveStatus3"/>
+                </apex:facet>
+            </apex:actionStatus>
+            </center>
+        </apex:pageblock>
+        </apex:outputPanel>
+    </apex:form>
+<script>
+function removeTitle(){
+    var pgBlock = document.querySelectorAll('.pbTitle');
+    if(pgBlock != null && pgBlock.length > 0){
+        for(var i=0;i<pgBlock.length;i++){
+            var pgBlockChild = pgBlock[i].parentNode.childNodes;
+            if(pgBlockChild != null && pgBlockChild.length > 0){
+                for(var j=1;j<pgBlockChild.length;j++){
+                    pgBlockChild[j].parentNode.removeChild(pgBlockChild[j]);
+                }
+            }
+        }
+    }
+}
+removeTitle();
+</script>
+</apex:page>

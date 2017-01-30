@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>18.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Page used to see the email content in proper formatting that has been send when contacted the customer.
+    Page will be inlined into the task detail page.</description>
+    <label>Task Comment</label>
+</ApexPage>

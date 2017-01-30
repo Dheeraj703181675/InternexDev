@@ -1,0 +1,60 @@
+<apex:page controller="WebCashUploadStatusController">
+<script>
+
+        window.onload = function()
+                {
+                  
+                      startRefreshTimer(); 
+                  
+                };
+        var timer;
+        function startRefreshTimer() {
+           
+           timer = setInterval("refreshStatus()",5000);
+           
+        }
+        
+        function refreshStatus() {  
+        
+           //call server      
+            checkJobStatus();
+                 
+                 
+        }   
+        
+    </script>
+       <apex:image url="{!URLFOR($Resource.akritiv__LoadingImage,'ajax-loader(4).gif')}" id="loadingdetail" style="display:block;position:fixed;top:50%;left:50%;z-index:10;"/>
+  <apex:form id="frm">
+  <apex:actionFunction name="checkJobStatus"
+            action="{!refreshJobStatus}" rerender="frm" />
+       
+            
+   <apex:pageBlock title="Status" id="txpblock" >   
+   
+   
+            <apex:pageBlockTable value="{!wculst}" var="w">
+                
+                <apex:column headerValue="Batch#">
+                    <apex:outputText value="{!w.Name}"/>
+                </apex:column>
+                
+                <apex:column headerValue="Status">
+                    <apex:outputText value="{!w.Status__c}"/>
+                </apex:column>
+                
+                <apex:column headerValue="">
+                    <apex:outputText value="{!w.Current_Job_Message__c}"/>
+                </apex:column>
+            </apex:pageBlockTable>
+   
+           
+    </apex:pageBlock>
+    <apex:pageBlock title="Note" >
+        <apex:outputText value="(1) You can close this window anytime."/> 
+        <br/> <br/>
+        <apex:outputText value="(2) Upon completion of the Webcash load, you shall be notified via Email with a link to the Webcash batch loaded in Akritiv. ."/>         
+    </apex:pageBlock>
+    
+    </apex:form> 
+  
+</apex:page>

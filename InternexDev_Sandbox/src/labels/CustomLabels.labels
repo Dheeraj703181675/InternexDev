@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account #</shortDescription>
+        <value>Account #</value>
+    </labels>
+    <labels>
+        <fullName>Account_Key</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Account Key :</shortDescription>
+        <value>Account Key :</value>
+    </labels>
+    <labels>
+        <fullName>Account_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Name :</shortDescription>
+        <value>Account Name :</value>
+    </labels>
+    <labels>
+        <fullName>Applied_Amount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Applied Amount</shortDescription>
+        <value>Applied Amount</value>
+    </labels>
+    <labels>
+        <fullName>Apply_Payment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Apply Payment</shortDescription>
+        <value>Apply Payment</value>
+    </labels>
+    <labels>
+        <fullName>Back_Out</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Back Out</shortDescription>
+        <value>Back Out</value>
+    </labels>
+    <labels>
+        <fullName>Balance</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Balance :</shortDescription>
+        <value>Balance :</value>
+    </labels>
+    <labels>
+        <fullName>Comments</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Comments</shortDescription>
+        <value>Comments</value>
+    </labels>
+    <labels>
+        <fullName>Due_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Due Date</shortDescription>
+        <value>Due Date</value>
+    </labels>
+    <labels>
+        <fullName>Invoice</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invoice</shortDescription>
+        <value>Invoice</value>
+    </labels>
+    <labels>
+        <fullName>Invoice_Details</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invoice Details</shortDescription>
+        <value>Invoice Details</value>
+    </labels>
+    <labels>
+        <fullName>Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Name</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>Payment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Payment</shortDescription>
+        <value>Payment</value>
+    </labels>
+    <labels>
+        <fullName>Payment_Details</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Payment Details</shortDescription>
+        <value>Payment Details</value>
+    </labels>
+    <labels>
+        <fullName>Payment_Line_Details</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Payment Line Details</shortDescription>
+        <value>Payment Line Details</value>
+    </labels>
+    <labels>
+        <fullName>Please_enter_AML_Ticket</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please enter AML Ticket #</shortDescription>
+        <value>Please enter AML Ticket #</value>
+    </labels>
+    <labels>
+        <fullName>Please_enter_comments</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please enter comments</shortDescription>
+        <value>Please enter comments</value>
+    </labels>
+    <labels>
+        <fullName>Please_enter_valid_Applied_amount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please enter valid Applied amount</shortDescription>
+        <value>Please enter valid Applied amount</value>
+    </labels>
+    <labels>
+        <fullName>Please_select_at_least_one_payment_for_Initiate_AML</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select at least one payment for Initiate AML</shortDescription>
+        <value>Please select at least one payment for Initiate AML</value>
+    </labels>
+    <labels>
+        <fullName>Please_select_at_least_one_payment_for_Initiate_Refund</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select at least one payment for Initiate Refund</shortDescription>
+        <value>Please select at least one payment for Initiate Refund</value>
+    </labels>
+    <labels>
+        <fullName>Please_select_atleast_one_Payment_Line</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select atleast one Payment Line</shortDescription>
+        <value>Please select atleast one Payment Line</value>
+    </labels>
+    <labels>
+        <fullName>Please_select_atleast_one_invoice</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select atleast one invoice</shortDescription>
+        <value>Please select atleast one invoice</value>
+    </labels>
+    <labels>
+        <fullName>Please_select_destination_account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select destination account</shortDescription>
+        <value>Please select destination account</value>
+    </labels>
+    <labels>
+        <fullName>Please_select_payment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select payment</shortDescription>
+        <value>Please select payment</value>
+    </labels>
+    <labels>
+        <fullName>Raise_AML_Workflow</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Raise AML Workflow</shortDescription>
+        <value>Raise AML Workflow</value>
+    </labels>
+    <labels>
+        <fullName>Raise_Refund_Workflow</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Raise Refund Workflow</shortDescription>
+        <value>Raise Refund Workflow</value>
+    </labels>
+    <labels>
+        <fullName>Reason_Code</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reason Code</shortDescription>
+        <value>Reason Code</value>
+    </labels>
+    <labels>
+        <fullName>Reverse</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reverse</shortDescription>
+        <value>Reverse</value>
+    </labels>
+    <labels>
+        <fullName>Save</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>Show_Invoices</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Show Invoices</shortDescription>
+        <value>Show Invoices</value>
+    </labels>
+    <labels>
+        <fullName>Show_Payment_Lines</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Show Payment Lines</shortDescription>
+        <value>Show Payment Lines</value>
+    </labels>
+    <labels>
+        <fullName>Transaction_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Transaction Type :</shortDescription>
+        <value>Transaction Type :</value>
+    </labels>
+    <labels>
+        <fullName>Transfer</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Transfer</shortDescription>
+        <value>Transfer</value>
+    </labels>
+    <labels>
+        <fullName>WebCash_Invalid_Value</fullName>
+        <categories>Error Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>WebCash Invalid Value</shortDescription>
+        <value>Invalid Value for</value>
+    </labels>
+    <labels>
+        <fullName>Write_Off</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Write Off</shortDescription>
+        <value>Write Off</value>
+    </labels>
+    <labels>
+        <fullName>Write_Off_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Write Off Type :</shortDescription>
+        <value>Write Off Type :</value>
+    </labels>
+</CustomLabels>

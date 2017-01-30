@@ -1,0 +1,163 @@
+<apex:page controller="akritiv.MassTransferAccountController" id="pg">
+    <script>
+        function searchUser(lookupId){
+            
+             lookupwindow = window.open('/apex/UserSearchPage?lookupid='+lookupId.id,'mywindow','width=750,height=600,resizable=no,toolbar=no, menubar=no,top=100,left=300,scrollbars=yes')
+        }
+        function SetUserLink(actId,actName){
+        
+            document.getElementById('pg:fm:pb:uname1').value = actName;
+            
+            document.getElementById('pg:fm:pb:u1Id').value = actId;
+            
+        }
+        function SetUserLink2(actId,actName){
+        
+            document.getElementById('pg:fm:pb:uname2').value = actName;
+            
+            document.getElementById('pg:fm:pb:u2Id').value = actId;
+            
+        }
+        //function startSplash() {
+        //    var divObj = document.getElementById('splashDiv');
+        //    divObj.style.display='block';
+        //}
+       // function endSplash(){
+       //     document.getElementById('splashDiv').style.display='none';
+       // }
+        
+         
+        var timer;
+        
+        function startRefreshTimer() {
+            
+            document.getElementById('pg:fm:pb:jobStatus').value= '';
+            var timer = setInterval("refreshStatus()",2000);
+        }
+        
+        function refreshStatus() {
+            checkJobStatus();
+            
+            
+            var statusValue = document.getElementById('{!$Component.fm.pb.jobStatus}').value;
+            
+            
+            if(statusValue == 'Completed'){
+            
+                clearInterval(timer);
+            }
+            increamentPBar();
+        
+        }
+        
+        function increamentPBar() {
+        
+            var progressValue = document.getElementById('{!$Component.fm.pb.progress}').value;
+            //alert('----'+progressValue);
+            if(progressValue == 'undefined'){
+                progressValue = 0;
+            }
+            //var pbt;
+            // pbt.set('value', parseInt(progressValue));
+            // alert('pbt'+pbt);
+        }
+    </script>
+
+    <apex:form id="fm">
+         <apex:actionFunction name="checkJobStatus"
+            action="{!refreshJobStatus}" rerender="JobStatusPanel,pbButtons" />
+         <apex:pageBlock id="pb" title="{!$Label.Label_Mass_Transfer_Account}"> 
+            <br></br>
+            <apex:pageMessages id="msg"/>
+            <apex:pageblockButtons location="bottom">
+                <apex:outputPanel id="pbButtons">
+                  <apex:commandButton value="{!$Label.Label_Find_and_Transfer}" action="{!searchSelectedaccount}" oncomplete="startRefreshTimer();" disabled="{!IF(isInProgress ,TRUE, FALSE)}" reRender="msg,accDetailPanelId,JobStatusPanel"/>
+                </apex:outputPanel>
+                
+            </apex:pageblockButtons>
+            <apex:actionStatus onstart="startSplash();" onstop="endSplash();" id="splashStatus"/>
+            <apex:outputLabel >{!$Label.Label_Transfer_from} &nbsp;&nbsp; </apex:outputLabel>
+            <apex:InputText value="{!u1Name}" id="uname1"/>&nbsp;
+            <apex:Image value="{!$Resource.akritiv__LookupIcon2}" id="img1" onclick="searchUser(this);" style="cursor:pointer;"></apex:Image><br/><br/>
+            <apex:inputhidden id="u1Id" value="{!U1Id}" />
+            <apex:outputLabel >{!$Label.Label_Transfer_to}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</apex:outputLabel>
+            <apex:InputText value="{!u2Name}" required="false" id="uname2"/>&nbsp;
+            <apex:inputhidden id="u2Id" value="{!U2Id}"/>
+            <apex:Image value="{!$Resource.akritiv__LookupIcon2}" onclick="searchUser(this);" id="img2" style="cursor:pointer;"></apex:Image>
+            <br/>
+            <br/>
+            <apex:outputLabel id="fake">
+                {!$Label.Label_Find_accounts_criteria}
+            </apex:outputLabel>
+            <table id="moreFilterTable" style="display:block;">
+                <apex:repeat value="{!moreFilterWrapperList}" var="mFw" >
+                    <tr>        
+                        <td valign="top">
+                            <apex:selectList value="{!mFw.selectedaccountCustomFields}" size="1" style="width:130px;"  id="spcf">
+                                <apex:selectOptions value="{!mFw.accountCustomFields}" />
+                            </apex:selectList>&nbsp;
+                        </td>
+                        <td valign="top" id="spfc" style="display:block;">
+                            <apex:selectList value="{!mFw.selectedCondition1}" size="1" style="width:130px;"  id="con1">
+                                <apex:selectOptions value="{!mFw.accountCustomFieldsCondition}" /> 
+                            </apex:selectList>&nbsp;
+                        </td>
+                        <td valign="top">
+                            <apex:inputText id="txt2" value="{!mFw.strequals}"/>&nbsp;
+                        </td>
+                        <td>
+                            <apex:outputLabel value="{!mFw.displayAnd}"></apex:outputLabel>
+                        </td>
+                    </tr>
+                </apex:repeat>
+            </table>
+            <apex:outputLabel >
+                {!$Label.Label_Filter_Options}
+            </apex:outputLabel>
+            <ul> 
+                <li>
+                    {!$Label.Label_Seprated_By_Comma}
+                </li>
+                <li>
+                    {!$Label.Label_Date_format}
+               </li>
+                <li>
+                    {!$Label.Label_DateTime_Format}
+                </li>
+            </ul>
+            <br/>
+            <apex:outputPanel id="JobStatusPanel">
+                <apex:outputLabel id="splashDiv" rendered="{!isInProgress}" style="color:red;font-weight:bold;padding-bottom:4px;border: 0px;text-align:center;">
+                    {!$Label.Label_Status_for_Acc_Transfer}
+              </apex:outputLabel><br/>
+                <apex:outputLabel style="font-weight:bold;padding-bottom:4px;border: 0px;"> {!$Label.Label_Progress_Colon} </apex:outputLabel>
+                <apex:outputText id="progress" value=" {!progress}%" ></apex:outputText>
+                
+                <apex:inputHidden value="{!aaj.Status}" id="jobStatus" />
+            </apex:outputPanel>
+            <br/><br/>
+            <apex:outputPanel id="accDetailPanelId" >
+                <apex:pageBlockTable value="{!accList}" var="acc" id="accdetailId">
+                     <apex:column headerValue="{!$Label.Label_Account_Name}">
+                            <apex:outputText value="{!acc.Name}"/>                         
+                     </apex:column>                                                          
+                     <apex:column headerValue="{!$Label.Label_Total_AR}">
+                            <apex:outputText value="{0, number,##,###,###.##}" >
+                                <apex:param value="{!acc.akritiv__Total_AR__c}"/>   
+                            </apex:outputText>                      
+                     </apex:column> 
+                     <apex:column headerValue="{!$Label.Label_Days_Past_Due}">
+                            <apex:outputText value="{0, number,##,###,###.##}">
+                                <apex:param value="{!acc.akritiv__DPD__c}"/>                         
+                            </apex:outputText>
+                     </apex:column>
+                      <apex:column headerValue="{!$Label.Label_Account_Owner}">
+                            <apex:outputText value="{!acc.Owner.Name}"/>                         
+                     </apex:column> 
+                </apex:pageBlockTable><br/><br/><br/>
+            </apex:outputPanel>
+            
+          
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

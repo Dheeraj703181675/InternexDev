@@ -1,0 +1,32 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ *
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<apex:page controller="akritiv.ContactCustomerController" renderAs="pdf">
+    <table border="1">
+        <tr>
+            <TH>{!$Label.Label_Tx_Number}</TH>
+            <TH>{!$Label.Label_PO_Number}</TH>
+            <TH>{!$Label.Lable_SO_Number}</TH>
+            <TH>{!$Label.Label_Due_Date}</TH>
+            <TH>{!$Label.Label_Amount}</TH>
+            <TH>{!$Label.Label_Balance}</TH>
+        </tr>
+        <apex:repeat value="{!selectedTxs}" var="tx">
+            <tr>
+                <td>{!tx.Name}</td>
+                <td>{!tx.akritiv__Po_Number__c}</td>
+                <td>{!tx.akritiv__So_Number__c}</td>
+                <td>{!tx.akritiv__Due_Date__c}</td>
+                <td>{!tx.akritiv__Amount__c}</td>
+                <td>{!tx.akritiv__Balance__c}</td>
+            </tr>
+        </apex:repeat>
+    </table>
+</apex:page>

@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Disputes</relationshipLabel>
+        <relationshipName>Disputes</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Amount_Without_Sign__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>ABS( Amount__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Amount Without Sign</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Amount__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Dispute Amount</description>
+        <externalId>false</externalId>
+        <label>Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Balance_Without_Sign__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>ABS( Balance__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Balance Without Sign</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Balance__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF( ISPICKVAL(status__c ,&quot;Closed&quot;),0, Amount__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Batch_Number__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Batch#</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Close_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Close Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Daily_Notes__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Latest Notes</label>
+        <length>131072</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Days_To_Identify__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>DATEVALUE( CreatedDate ) - Transaction__r.Create_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days To Identify</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Days_To_Resolve__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>Close_Date__c - DATEVALUE(CreatedDate)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days To Resolve</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Note_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Note Date</description>
+        <externalId>false</externalId>
+        <label>Note Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <length>131072</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Owner__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Person who owns the dispute currently</description>
+        <externalId>false</externalId>
+        <label>Owner</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Disputes</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Reason_Code__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>TEXT(Transaction__r.Reason_Code__c)</formula>
+        <label>Reason Code</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Recent_Note__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Recent Note</label>
+        <length>131072</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Resolution_Code__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Reason for closing dispute.</description>
+        <externalId>false</externalId>
+        <label>Resolution Code</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Paid</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Credit Issued</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rebill</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Customer Goodwill</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Payment Plan</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Promised</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Quote Error</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Invoice Reserved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Irresolvable</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Legal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Out of Business</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Write-off</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bankruptcy</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Auto</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Sub_Reason_Code__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>TEXT(Transaction__r.Sub_Reason_Code__c )</formula>
+        <label>Sub Reason Code</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sub_Type__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Sub Type</label>
+        <picklist>
+            <controllingField>Type__c</controllingField>
+            <picklistValues>
+                <fullName>Duplicate Charge</fullName>
+                <default>false</default>
+                <controllingFieldValues>Billing</controllingFieldValues>
+                <controllingFieldValues>Other</controllingFieldValues>
+                <controllingFieldValues>Product Quality</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finance Charges</fullName>
+                <default>false</default>
+                <controllingFieldValues>Billing</controllingFieldValues>
+                <controllingFieldValues>Other</controllingFieldValues>
+                <controllingFieldValues>Product Quality</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Duplicate Credit</fullName>
+                <default>false</default>
+                <controllingFieldValues>Billing</controllingFieldValues>
+                <controllingFieldValues>Other</controllingFieldValues>
+                <controllingFieldValues>Product Quality</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lift Gear</fullName>
+                <default>false</default>
+                <controllingFieldValues>Accounts Receivable</controllingFieldValues>
+                <controllingFieldValues>Billing</controllingFieldValues>
+                <controllingFieldValues>Other</controllingFieldValues>
+                <controllingFieldValues>Product Quality</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wrong Customer</fullName>
+                <default>false</default>
+                <controllingFieldValues>Accounts Receivable</controllingFieldValues>
+                <controllingFieldValues>Billing</controllingFieldValues>
+                <controllingFieldValues>Other</controllingFieldValues>
+                <controllingFieldValues>Product Quality</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Backcharge</fullName>
+                <default>false</default>
+                <controllingFieldValues>Billing</controllingFieldValues>
+                <controllingFieldValues>Other</controllingFieldValues>
+                <controllingFieldValues>Product Quality</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Damaged Product</fullName>
+                <default>false</default>
+                <controllingFieldValues>Billing</controllingFieldValues>
+                <controllingFieldValues>Other</controllingFieldValues>
+                <controllingFieldValues>Product Quality</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Warranty</fullName>
+                <default>false</default>
+                <controllingFieldValues>Billing</controllingFieldValues>
+                <controllingFieldValues>Other</controllingFieldValues>
+                <controllingFieldValues>Product Quality</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unidentified</fullName>
+                <default>false</default>
+                <controllingFieldValues>Accounts Receivable</controllingFieldValues>
+                <controllingFieldValues>Billing</controllingFieldValues>
+                <controllingFieldValues>Other</controllingFieldValues>
+                <controllingFieldValues>Product Quality</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wrong Product</fullName>
+                <default>false</default>
+                <controllingFieldValues>Billing</controllingFieldValues>
+                <controllingFieldValues>Other</controllingFieldValues>
+                <controllingFieldValues>Product Quality</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wrong Quantity</fullName>
+                <default>false</default>
+                <controllingFieldValues>Accounts Receivable</controllingFieldValues>
+                <controllingFieldValues>Billing</controllingFieldValues>
+                <controllingFieldValues>Other</controllingFieldValues>
+                <controllingFieldValues>Product Quality</controllingFieldValues>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Transaction__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Transaction</label>
+        <referenceTo>Transaction__c</referenceTo>
+        <relationshipLabel>Disputes</relationshipLabel>
+        <relationshipName>Disputes</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Accounts Receivable</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Billing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Product Quality</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>status__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assigned</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unassigned</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Reopened</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <label>Dispute</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>Account__c</columns>
+        <columns>Amount__c</columns>
+        <columns>NAME</columns>
+        <columns>Owner__c</columns>
+        <columns>status__c</columns>
+        <columns>Transaction__c</columns>
+        <columns>Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>D{000000}</displayFormat>
+        <label>Dispute Number</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Disputes</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Account__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Amount__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Owner__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Transaction__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Type__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATED_DATE</customTabListAdditionalFields>
+        <listViewButtons>Update_Dispute</listViewButtons>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchResultsAdditionalFields>Account__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Amount__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Owner__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Transaction__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATEDBY_USER</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <webLinks>
+        <fullName>Add_Note</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>page</linkType>
+        <masterLabel>Add Note</masterLabel>
+        <openType>replace</openType>
+        <page>PortalAddNotes</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>Close</fullName>
+        <availability>online</availability>
+        <description>close a dispute</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Close</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/16.0/connection.js&quot;)}
+sforce.connection.defaultNamespace = &apos;{!$Setup.SysConfig_Singlec__c.NameSpace__c}&apos;;
+
+  var result = sforce.connection.query(&quot;SELECT name , Resolution_Code__c , status__c , Balance__c , Amount__c  from  Dispute__c WHERE Id = &apos;{!Dispute__c.Id}&apos; &quot;) ;
+
+  var  records = result.getArray(&quot;records&quot;); 
+
+  if(records[0].status__c == &apos;Closed&apos;)
+  {
+      var answer = confirm (&quot;Are you sure you want to reopen dispute &quot; + records[0].Name + &quot;  with balance &quot;+ records[0].Balance__c +&quot;.&quot;) ;
+      if (answer)
+      {
+          var disputeRec = new sforce.SObject(&quot;Dispute__c&quot;); 
+                disputeRec.Id = &apos;{!Dispute__c.Id}&apos; ;
+                disputeRec.status__c = &quot;Reopened&quot; ;
+         var updateResult = sforce.connection.update([disputeRec]);
+         window.location.href = &apos;/&apos; + &apos;{!Dispute__c.Id}&apos; ;
+      }
+  }
+ else
+ {
+        var selectedRs = records[0].Resolution_Code__c ;
+        var dispId = &apos;{!Dispute__c.Id}&apos;; 
+        var urlString = &apos;/apex/akritiv__CloseDispute?objIds=&apos;+ dispId+&apos;&amp;objtype=Dispute__c&apos;+&apos;&amp;selectedRc=&apos;+selectedRs ; 
+        window.open (urlString ,&quot;Close_Dispute&quot;,&quot;status=1,scrollbars=1,width=500,height=400&quot;);
+ }</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Create_Dispute</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Create Dispute</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>var urlIdStr; 
+var locationURL = window.location.href; 
+var hostName = window.location.hostname + &apos;/&apos;; 
+var s1 = &apos;&apos;; 
+if( locationURL.indexOf(&apos;id=&apos;) != -1 ){ 
+s1 = locationURL.substring( locationURL.indexOf(&apos;id=&apos;)+3 , locationURL.indexOf(&apos;id=&apos;) + 18 ); 
+//is an account 
+if(s1.indexOf(&apos;001&apos;) == 0) 
+{ 
+urlIdStr = &apos;accId=&apos; + s1; 
+} 
+else 
+{ 
+var taskId = &apos;&apos;; 
+if( locationURL.indexOf(&apos;taskId=&apos;) != -1 ){ 
+taskId = locationURL.substring( locationURL.indexOf(&apos;taskId=&apos;) + 7 , locationURL.indexOf(&apos;taskId=&apos;) + 22 ); 
+urlIdStr = &apos;txId=&apos;+ s1+ &apos;&amp;taskId=&apos; + taskId ; 
+}else{ 
+urlIdStr = &apos;txId=&apos;+ s1; 
+} 
+} 
+}else{ 
+s1 = locationURL.substring( locationURL.indexOf(hostName ) + hostName.length , locationURL.indexOf(hostName ) + hostName.length + 15); 
+if(s1.indexOf(&apos;001&apos;) == 0) 
+{ 
+urlIdStr = &apos;accId=&apos; + s1; 
+} 
+else 
+{ 
+var taskId = &apos;&apos;; 
+if( locationURL.indexOf(&apos;taskId=&apos;) != -1 ){ 
+taskId = locationURL.substring( locationURL.indexOf(&apos;taskId=&apos;) + 7 , locationURL.indexOf(&apos;taskId=&apos;) + 22 ); 
+urlIdStr = &apos;txId=&apos;+ s1+ &apos;&amp;taskId=&apos; + taskId ; 
+}else{ 
+urlIdStr = &apos;txId=&apos;+ s1; 
+} 
+} 
+} 
+location.href =  &quot;/apex/GenerateTransactionDisputes?&quot; + urlIdStr + &quot;&amp;retUrl=&quot; + &quot;/&quot;+s1+&apos;&amp;orderby=name&amp;ordertype=desc&apos; ;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Dispute_Add_Note</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Add Note</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var disputeid= &apos;{!Dispute__c.Id}&apos;; 
+var loc = window.location.href ; 
+var loc2 = document.location; 
+
+var urlString =&apos;/apex/akritiv__CommonAddNote?page=Dispute&amp;dsId=&apos;+ disputeid+ &apos;&amp;location=&apos; + loc ; 
+
+
+var left = (screen.width); 
+var top = (screen.height); 
+
+var t = 0; 
+var l = 0; 
+
+window.open (urlString,&quot;AddDisputeNote&quot;,&quot;toolbar=0,location=0, directories=0, status=0, menubar=0,width=550,height=250,scrollbars=1&quot;);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>QN</fullName>
+        <availability>online</availability>
+        <description>To send IM to users about the dispute object.</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>QN</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)} 
+sforce.connection.defaultNamespace = &apos;{!$Setup.SysConfig__c.NameSpace__c}&apos;;
+var dispId = &apos;{!Dispute__c.Id}&apos;; 
+var urlString = &apos;/apex/SendIMAboutObject?objIds=&apos;+ dispId+&apos;&amp;objtype=Dispute__c&apos;; 
+window.open (urlString ,&quot;SendIM&quot;,&quot;status=1,scrollbars=1,width=400,height=400&quot;);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Update_Dispute</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Update Dispute</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>// Rajeev 19/11/2009 Original
+//
+
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/apex.js&quot;)}
+
+sforce.connection.defaultNamespace = &apos;{!$Setup.SysConfig_Singlec__c.NameSpace__c}&apos;;
+
+/*
+Gets the list of selected records and prepares a URL to update the suppliers and their related information
+*/
+
+//Fetch the list
+var records = {!GETRECORDIDS($ObjectType.Dispute__c)};
+var strIDs=&apos;&apos;;
+
+/*
+Check if the user has selected at least one record and display a message
+*/
+
+
+if (records[0] == null)
+{
+alert(&apos;Please select atleast one dispute &apos;);
+}
+else
+{
+for (var n=0; n&lt;records.length; n++)
+{
+if(strIDs == &apos;&apos;)
+strIDs = &quot;&apos;&quot;+records[n]+&quot;&apos;&quot;;
+else
+strIDs = strIDs + &quot;,&apos;&quot; + records[n]+&quot;&apos;&quot;;
+}
+
+if(strIDs !=null &amp;&amp; strIDs !=&apos;&apos;){
+sforce.connection.sessionId = &apos;{!$Api.Session_ID}&apos;;
+var config = new sforce.SObject(&quot;Temp_Object_Holder__c&quot;);
+var user = sforce.connection.getUserInfo() ;
+var timest = sforce.connection.getServerTimestamp();
+var key = &apos;{!$User.Username}&apos; + timest.timestamp ;
+config.Key__c =key ;
+config.Value__c = strIDs;
+var res = sforce.connection.create([config]);
+
+var UrlLoc = window.location;
+var strHost = UrlLoc.host;
+var strProtocol = UrlLoc.protocol;
+strHost = strHost.replace(&quot;akritiv.&quot;,&quot;c.&quot;);
+var loc = window.location.href ;
+
+var urlString = strProtocol +&apos;//&apos;+strHost+&apos;/apex/UpdateDispute?key=&apos;+ key+ &apos;&amp;location=&apos; + loc;
+window.open (urlString ,&quot;Update_Dispute&quot;,&quot;status=1,scrollbars=1,width=500,height=400&quot;);
+}
+}</url>
+    </webLinks>
+</CustomObject>

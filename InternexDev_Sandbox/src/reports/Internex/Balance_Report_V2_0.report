@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FIU_Report__c.Created_Time__c</field>
+    </columns>
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>FIU_Report__c.Transaction_Name__c</field>
+    </columns>
+    <columns>
+        <field>FIU_Report__c.Transaction_ID__c</field>
+    </columns>
+    <columns>
+        <field>FIU_Report__c.Opening_FIU_Balance__c</field>
+    </columns>
+    <columns>
+        <field>FIU_Report__c.Funding__c</field>
+    </columns>
+    <columns>
+        <field>FIU_Report__c.Payments__c</field>
+    </columns>
+    <columns>
+        <field>FIU_Report__c.Closing_FIU_Balance__c</field>
+    </columns>
+    <currency>USD</currency>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>FIU_Report__c.Client_Account__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Balance Report_V2.0</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$FIU_Report__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>FIU_Report__c.Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

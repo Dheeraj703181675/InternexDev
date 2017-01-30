@@ -1,0 +1,232 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/* 
+ * *** NEED TO BE DELETED *** The Page can be deleted as this
+ *  account rating part is done through the a component
+ *  "Star_Rating_Component".
+ */
+-->
+<apex:page standardController="Account" showHeader="false">
+    <style type="text/css">
+form.rating {
+    padding: 1em;
+    border: 1px solid #ccc;
+}
+
+.rating {
+    cursor: pointer;
+    clear: both;
+    display: block;
+}
+
+.rating:after {
+    content: '.';
+    display: block;
+    height: 0;
+    width: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.star {
+    float: left;
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    text-indent: -999em;
+    cursor: pointer;
+}
+
+.star,.star a {
+    background: url(http://tw.yimg.com/i/tw/cs/yimg/rating_star_null.gif)
+        no-repeat 0 0px;
+}
+
+.star a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-position: 0 0px;
+}
+
+div.rating div.on a {
+    background-position: 0 -16px;
+}
+
+div.rating div.hover a,div.rating div a:hover {
+    background-position: 0 -32px;
+}
+
+div.notifytext {
+    margin-top: 5px;
+    font-size: .8em;
+    clear: both;
+}
+
+#ratingdiv {
+    height: 35px;
+}
+</style>
+
+    
+ <!-- *   <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/yahoo/yahoo-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/dom/dom-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/event/event-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/connection/connection-min.js')}"></script>
+    <script type="text/javascript"
+        src="{!URLFOR($Resource.YUI2_8, 'YUI2_8/build/animation/animation-min.js')}"></script>
+-->
+
+
+    <div id="ratingdiv">
+    <form id="rating" title="{!$Label.Label_Average_3_4}"><label for="id_rating">{!$Label.Label_Rating_Colon}</label>
+    <!-- Rating Options -->
+    <select name="rating" id="id_rating">
+        <option value="1">{!$Label.Label_1_Poor}</option>
+        <option value="2">{!$Label.Label_2_Fair}</option>
+        <option value="3">{!$Label.Label_3_Good}</option>
+        <option value="4">{!$Label.Label_4_Very_Good}</option>
+        <option value="5">{!$Label.Label_5_Excellent}</option>
+    </select> <input type="submit" value="{!$Label.Label_Submit_rating}" /></form>
+    </div>
+
+    <script>
+    <!-- Rating Function -->
+    var rating = {
+    init: function() {
+    
+        rating.ratingform = document.getElementById('rating')
+        rating.ratingdiv = document.getElementById('ratingdiv')
+        rating.stardiv = document.createElement('div')
+        rating.notifytext = document.createElement('div')
+        rating.average = rating.ratingform.title.split(/:\s*/)[1].split(".")
+        rating.submitted = false
+        rating.make_stardiv()
+    },
+
+    make_stardiv: function() {
+        /* Replaces original form with the star images */
+        
+        YAHOO.util.Dom.setStyle(rating.ratingform, 'display', 'none');
+        YAHOO.util.Dom.addClass(rating.stardiv, 'rating');
+                
+        // make the stars
+        for (var i=1; i<=5; i++) {
+            // first, make a div and then an a-element in it
+            var star = document.createElement('div');
+            star.id = 'star' + i;
+            var a = document.createElement('a');
+            a.href = '#' + i;
+            a.innerHTML = i;
+            YAHOO.util.Dom.addClass(star, 'star');
+            star.appendChild(a);
+            rating.stardiv.appendChild(star);
+
+            // add needed listeners to every star
+            YAHOO.util.Event.addListener(star, 'mouseover', rating.hover_star, i);
+            YAHOO.util.Event.addListener(star, 'mouseout', rating.reset_stars);
+            YAHOO.util.Event.addListener(star, 'click', rating.submit_rating, i);
+        }        
+        rating.ratingdiv.appendChild(rating.stardiv);
+        // show the average
+        rating.reset_stars();
+        // add the statustext div and hide it
+        YAHOO.util.Dom.addClass(rating.notifytext, 'notifytext');
+        YAHOO.util.Dom.setStyle(rating.notifytext, 'opacity', 0);
+        rating.ratingdiv.appendChild(rating.notifytext);
+    },
+    
+    hover_star: function(e, which_star) {
+        /* hovers the selected star plus every star before it */
+        for (var i=1; i<=which_star; i++) {
+            var star = document.getElementById('star' + i);
+            var a = star.firstChild;
+            YAHOO.util.Dom.addClass(star, 'hover');
+            YAHOO.util.Dom.setStyle(a, 'width', '100%');
+        }
+    },
+    
+    reset_stars: function() {
+        /* Resets the status of each star */
+        
+        // if form is not submitted, the number of stars on depends on the 
+        // given average value
+        if (rating.submitted == false) {
+            var stars_on = rating.average[0];
+            if (rating.average[1] >= 0)
+                stars_on = parseInt(rating.average[0]) + 1;
+            var last_star_width = rating.average[1] + '0%';
+        } else {
+            // if the form is submitted, then submitted number stays on
+            var stars_on = rating.submitted;
+            var last_star_width = '100%';
+        }
+
+        // cycle trought 1..5 stars
+        for (var i=1; i<=5; i++) {
+            var star = document.getElementById('star' + i);
+            var a = star.firstChild;
+            
+            // first, reset all stars
+            YAHOO.util.Dom.removeClass(star, 'hover');
+            YAHOO.util.Dom.removeClass(star, 'on');
+
+            // for every star that should be on, turn them on
+            if (i<=stars_on && !YAHOO.util.Dom.hasClass(star, 'on'))
+                YAHOO.util.Dom.addClass(star, 'on');
+
+            // and for the last one, set width if needed
+            if (i == stars_on)
+                YAHOO.util.Dom.setStyle(a, 'width', last_star_width);
+        }
+    },
+    
+    submit_rating: function(e, num) {
+        // If the form has not been submitted yet 
+        // and submission is not in progress
+        if (rating.submitted == false) {
+            rating.submitted = num;
+            // After the form is submitted, instead of old average, show
+            // submitted number of stars selected
+            rating.average = [num, 0];
+            
+            // change the statustext div and show it
+            rating.notifytext.innerHTML = 'Rating is being saved.';
+            var notify_display = new YAHOO.util.Anim(rating.notifytext, { opacity: { to: 1 } }, 0.25, YAHOO.util.Easing.easeIn);
+            notify_display.animate();       
+            
+            // change the rating-value for the form and submit the form
+            var post_to = rating.ratingform.action;
+            rating.ratingform.elements[0].value = num;
+            YAHOO.util.Connect.setForm(rating.ratingform);
+            var c = YAHOO.util.Connect.asyncRequest('POST', post_to + '?xhr=True', rating.ajax_callback);
+        }
+    },
+    
+    ajax_callback: {
+        success: function(o) {
+            // release the form to normal status and change the statustext
+            rating.submitted = false;
+            rating.notifytext.innerHTML = 'Rating saved.';
+        },
+        failure: function(o) { // we shouldn't ever go down this path.
+            alert({!$Label.Label_Error_Colon} + o.status + " " + o.statusText );
+        }
+    }
+}
+YAHOO.util.Event.addListener(window, 'load', rating.init);
+
+</script>
+</apex:page>

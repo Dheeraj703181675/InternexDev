@@ -1,0 +1,1901 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Account C-Form Collectible Amount --></label>
+        <name>Account_C_Form_Collectible_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account Clerk Code Description --></label>
+        <name>Account_Clerk_Code_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account H-Form Collectible Amount --></label>
+        <name>Account_H_Form_Collectible_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account I-Form Collectible Amount --></label>
+        <name>Account_I_Form_Collectible_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Counterparty Legal Name --></label>
+        <name>Account_Legal_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account Name --></label>
+        <name>Account_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account Payer Terms --></label>
+        <name>Account_Payer_Terms__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account Payment Terms Description --></label>
+        <name>Account_Payment_Terms_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account Segment --></label>
+        <name>Account_Segment__c</name>
+        <picklistValues>
+            <masterLabel>Channel Partner</masterLabel>
+            <translation><!-- Channel Partner --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Govt Account</masterLabel>
+            <translation><!-- Govt Account --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Internal</masterLabel>
+            <translation><!-- Internal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Key Account</masterLabel>
+            <translation><!-- Key Account --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Regular</masterLabel>
+            <translation><!-- Regular --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>System Integrators</masterLabel>
+            <translation><!-- System Integrators --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unassigned</masterLabel>
+            <translation><!-- Unassigned --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Account TDS Collectible --></label>
+        <name>Account_TDS_Collectible__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account name Uniqueness --></label>
+        <name>Account_name_Uniqueness__c</name>
+    </fields>
+    <fields>
+        <label><!-- Accounting Clerk Code --></label>
+        <name>Accounting_Clerk_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Address1 --></label>
+        <name>Address1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Address2 --></label>
+        <name>Address2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Address3 --></label>
+        <name>Address3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Address4 --></label>
+        <name>Address4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Address5 --></label>
+        <name>Address5__c</name>
+    </fields>
+    <fields>
+        <label><!-- Adj Fraud Score --></label>
+        <name>Adj_Fraud_Score__c</name>
+    </fields>
+    <fields>
+        <label><!-- Adj Risk Score --></label>
+        <name>Adj_Risk_Score__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6</masterLabel>
+            <translation><!-- 6 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7</masterLabel>
+            <translation><!-- 7 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8</masterLabel>
+            <translation><!-- 8 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Akritiv Contact Email --></label>
+        <name>Akritiv_Contact_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Akritiv Contact Fax --></label>
+        <name>Akritiv_Contact_Fax__c</name>
+    </fields>
+    <fields>
+        <label><!-- Akritiv Contact Name --></label>
+        <name>Akritiv_Contact_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Akritiv Contact Phone --></label>
+        <name>Akritiv_Contact_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Akritiv Contact Title --></label>
+        <name>Akritiv_Contact_Title__c</name>
+    </fields>
+    <fields>
+        <label><!-- Billing Currency --></label>
+        <name>Billing_Currency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Billing Floor --></label>
+        <name>Billing_Floor__c</name>
+    </fields>
+    <fields>
+        <label><!-- BrandLogo --></label>
+        <name>BrandLogo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business Unit --></label>
+        <name>Brand__c</name>
+        <relationshipLabel><!-- Accounts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Business Transaction Date --></label>
+        <name>Business_Transaction_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cash Call Comments --></label>
+        <name>Cash_Call_Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Check # --></label>
+        <name>Check__c</name>
+    </fields>
+    <fields>
+        <label><!-- Child Credit Number --></label>
+        <name>Child_Credit_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Child Number --></label>
+        <name>Child_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- City --></label>
+        <name>City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Comments --></label>
+        <name>Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Company Code --></label>
+        <name>Company_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Count --></label>
+        <name>Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Country --></label>
+        <name>Country__c</name>
+    </fields>
+    <fields>
+        <label><!-- Credit Block --></label>
+        <name>Credit_Block__c</name>
+    </fields>
+    <fields>
+        <label><!-- Credit Period --></label>
+        <name>Credit_Period__c</name>
+    </fields>
+    <fields>
+        <label><!-- Credit Status --></label>
+        <name>Credit_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Bank Account Number --></label>
+        <name>Customer_Bank_Account_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Rating --></label>
+        <name>Customer_Rating__c</name>
+        <picklistValues>
+            <masterLabel>A - Excellent Customer</masterLabel>
+            <translation><!-- A - Excellent Customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B - Good Customer</masterLabel>
+            <translation><!-- B - Good Customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C - Average Risky Customer</masterLabel>
+            <translation><!-- C - Average Risky Customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D - Very Risky Customer</masterLabel>
+            <translation><!-- D - Very Risky Customer --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Customer Rating comments --></label>
+        <name>Customer_Rating_comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Visit Date --></label>
+        <name>Customer_Visit_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Visit Planned Date --></label>
+        <name>Customer_Visit_Planned_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Visit --></label>
+        <name>Customer_Visit__c</name>
+    </fields>
+    <fields>
+        <label><!-- DBT (Paydex) --></label>
+        <name>DBT_Paydex__c</name>
+    </fields>
+    <fields>
+        <label><!-- D&amp;B Date --></label>
+        <name>D_B_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- D&amp;B  Limit --></label>
+        <name>D_B_Limit__c</name>
+    </fields>
+    <fields>
+        <label><!-- D&amp;B Risk Score Range --></label>
+        <name>D_B_Risk_Score_Range__c</name>
+    </fields>
+    <fields>
+        <label><!-- D&amp;B Risk Score --></label>
+        <name>D_B_Risk_Score__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Opened --></label>
+        <name>Date_Opened__c</name>
+    </fields>
+    <fields>
+        <label><!-- Delivery Block Description --></label>
+        <name>Delivery_Block_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Delivery Block --></label>
+        <name>Delivery_Block__c</name>
+    </fields>
+    <fields>
+        <label><!-- Destination Account --></label>
+        <name>Destination_Account__c</name>
+        <relationshipLabel><!-- Accounts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Discount % --></label>
+        <name>Discount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Division --></label>
+        <name>Division__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dunning Language --></label>
+        <name>Dunning_Language__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dunning clerk --></label>
+        <name>Dunning_clerk__c</name>
+    </fields>
+    <fields>
+        <label><!-- Duns Number --></label>
+        <name>Duns_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Duns # --></label>
+        <name>Duns__c</name>
+    </fields>
+    <fields>
+        <label><!-- Personal Contact Email --></label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- External Id --></label>
+        <name>External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Final Forecast --></label>
+        <name>Final_Forecast__c</name>
+    </fields>
+    <fields>
+        <label><!-- Foreign Account --></label>
+        <name>Foreign_Account__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fraud Score Date --></label>
+        <name>Fraud_Score_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fraud Score --></label>
+        <name>Fraud_Score__c</name>
+    </fields>
+    <fields>
+        <label><!-- Funding Limit --></label>
+        <name>Funding_Limit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Indemnities --></label>
+        <name>Indemnities__c</name>
+    </fields>
+    <fields>
+        <label><!-- Industry DBT (Paydex) --></label>
+        <name>Industry_DBT_Paydex__c</name>
+        <picklistValues>
+            <masterLabel>Accommodation and Food Services</masterLabel>
+            <translation><!-- Accommodation and Food Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Adm.,Support,Waste Mgmt,Remediation Serv</masterLabel>
+            <translation><!-- Adm.,Support,Waste Mgmt,Remediation Serv --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Agri., Forestry, Fishing and Hunting</masterLabel>
+            <translation><!-- Agri., Forestry, Fishing and Hunting --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arts, Entertainment, and Recreation</masterLabel>
+            <translation><!-- Arts, Entertainment, and Recreation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Construction</masterLabel>
+            <translation><!-- Construction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Educational Services</masterLabel>
+            <translation><!-- Educational Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Finance and Insurance</masterLabel>
+            <translation><!-- Finance and Insurance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health Care and Social Assistance</masterLabel>
+            <translation><!-- Health Care and Social Assistance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Information</masterLabel>
+            <translation><!-- Information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manufacturing</masterLabel>
+            <translation><!-- Manufacturing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mining</masterLabel>
+            <translation><!-- Mining --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other Services (except Public Admin.)</masterLabel>
+            <translation><!-- Other Services (except Public Admin.) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prof. Scientific, and Techn. Services</masterLabel>
+            <translation><!-- Prof. Scientific, and Techn. Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Public Administration</masterLabel>
+            <translation><!-- Public Administration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Real Estate Rental and Leasing</masterLabel>
+            <translation><!-- Real Estate Rental and Leasing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Retail Trade</masterLabel>
+            <translation><!-- Retail Trade --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transportation and Warehousing</masterLabel>
+            <translation><!-- Transportation and Warehousing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Utilities</masterLabel>
+            <translation><!-- Utilities --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wholesale Trade</masterLabel>
+            <translation><!-- Wholesale Trade --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Last Auto Dunning Date --></label>
+        <name>Last_Auto_Dunning_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Dunning Sent on --></label>
+        <name>Last_Dunning_Sent_on__c</name>
+    </fields>
+    <fields>
+        <label><!-- MP External Id --></label>
+        <name>MP_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Max Credit Period --></label>
+        <name>Max_Credit_Period__c</name>
+    </fields>
+    <fields>
+        <label><!-- Missing Key --></label>
+        <name>Missing_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- NAICS Industry Code --></label>
+        <name>NACIS_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- NAICS Industry Desc --></label>
+        <name>NACIS_Desc__c</name>
+    </fields>
+    <fields>
+        <label><!-- Office Phone --></label>
+        <name>Office_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- OnHold --></label>
+        <name>OnHold__c</name>
+    </fields>
+    <fields>
+        <label><!-- Order Block Description --></label>
+        <name>Order_Block_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Order Block --></label>
+        <name>Order_Block__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Stat Form Collectible Amount --></label>
+        <name>Other_Stat_Form_Collectible_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other --></label>
+        <name>Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Override Risk Level --></label>
+        <name>Override_Risk_Level__c</name>
+        <picklistValues>
+            <masterLabel>A - Excellent Customer</masterLabel>
+            <translation><!-- A - Excellent Customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B - Good Customer</masterLabel>
+            <translation><!-- B - Good Customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C - Average Risky Customer</masterLabel>
+            <translation><!-- C - Average Risky Customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D - Very Risky Customer</masterLabel>
+            <translation><!-- D - Very Risky Customer --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Override Sales District --></label>
+        <name>Override_Sales_District__c</name>
+    </fields>
+    <fields>
+        <label><!-- Override Sales Region --></label>
+        <name>Override_Sales_Region__c</name>
+    </fields>
+    <fields>
+        <label><!-- PAN/ TAN --></label>
+        <name>PAN_TAN__c</name>
+    </fields>
+    <fields>
+        <label><!-- PC-Total AR --></label>
+        <name>PC_Total_AR__c</name>
+    </fields>
+    <fields>
+        <label><!-- PC - Total Past Due --></label>
+        <name>PC_Total_Past_Due__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent Credit Number --></label>
+        <name>Parent_Credit_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent Number --></label>
+        <name>Parent_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payer Fax --></label>
+        <name>Payer_Fax__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payer Phone --></label>
+        <name>Payer_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payer To City --></label>
+        <name>Payer_To_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payer To Country Desc --></label>
+        <name>Payer_To_Country_Desc__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payer To Country --></label>
+        <name>Payer_To_Country__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payer To Name --></label>
+        <name>Payer_To_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payer To State Desc --></label>
+        <name>Payer_To_State_Desc__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payer To State --></label>
+        <name>Payer_To_State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payer To Zip --></label>
+        <name>Payer_To_Zip__c</name>
+    </fields>
+    <fields>
+        <label><!-- Portal Client-Account ID --></label>
+        <name>Portal_Client_Account_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Portal Debtor ID --></label>
+        <name>Portal_Debtor_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Portal External ID --></label>
+        <name>Portal_External_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Previous System Forecast --></label>
+        <name>Previous_System_Forecast__c</name>
+    </fields>
+    <fields>
+        <label><!-- Previous User Forecast --></label>
+        <name>Previous_User_Forecast__c</name>
+    </fields>
+    <fields>
+        <label><!-- Principals --></label>
+        <name>Principals__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profile Name --></label>
+        <name>Profile_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quarter --></label>
+        <name>Quarter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recon --></label>
+        <name>Recon__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remit ABA --></label>
+        <name>Remit_ABA__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remit Account --></label>
+        <name>Remit_Account__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remit Address --></label>
+        <name>Remit_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remit Bank --></label>
+        <name>Remit_Bank__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remit Email --></label>
+        <name>Remit_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remit Name --></label>
+        <name>Remit_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remit PO Box --></label>
+        <name>Remit_PO_Box__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remit Zip --></label>
+        <name>Remit_Zip__c</name>
+    </fields>
+    <fields>
+        <label><!-- Risk Level --></label>
+        <name>Risk_Level__c</name>
+    </fields>
+    <fields>
+        <label><!-- Risk Score Date --></label>
+        <name>Risk_Score_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Risk Score --></label>
+        <name>Risk_Score__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6</masterLabel>
+            <translation><!-- 6 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7</masterLabel>
+            <translation><!-- 7 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8</masterLabel>
+            <translation><!-- 8 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Risk Type --></label>
+        <name>Risk_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales District --></label>
+        <name>SAP_Sales_District__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales District --></label>
+        <name>Sales_District_Non_SAP__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Sales District --></label>
+        <name>Sales_District__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Office Description --></label>
+        <name>Sales_Office_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Office --></label>
+        <name>Sales_Office__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Region --></label>
+        <name>Sales_Region1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Region Description --></label>
+        <name>Sales_Region_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Sales Region --></label>
+        <name>Sales_Region__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold Box --></label>
+        <name>Sold_Box__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold Fax --></label>
+        <name>Sold_Fax__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold Phone --></label>
+        <name>Sold_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold To City --></label>
+        <name>Sold_To_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold To Country Desc --></label>
+        <name>Sold_To_Country_Desc__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold To Country --></label>
+        <name>Sold_To_Country__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold To State Desc --></label>
+        <name>Sold_To_State_Desc__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold To State --></label>
+        <name>Sold_To_State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold To Zip --></label>
+        <name>Sold_To_Zip__c</name>
+    </fields>
+    <fields>
+        <label><!-- State --></label>
+        <name>State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Grade --></label>
+        <name>Sync_with_Grade__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Market Place --></label>
+        <name>Sync_with_Market_Place__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync with Portal --></label>
+        <name>Sync_with_Portal__c</name>
+    </fields>
+    <fields>
+        <label><!-- System Forecast --></label>
+        <name>System_Forecast__c</name>
+    </fields>
+    <fields>
+        <label><!-- Title --></label>
+        <name>Title__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Advance --></label>
+        <name>Total_Advance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Applied --></label>
+        <name>Total_Applied__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Cheques Bounced --></label>
+        <name>Total_Cheques_Bounced__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ultimate Credit Number --></label>
+        <name>Ultimate_Credit_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Forecast --></label>
+        <name>User_Forecast__c</name>
+    </fields>
+    <fields>
+        <label><!-- VAT Form Risk Level --></label>
+        <name>VAT_Form_Risk_Le__c</name>
+        <picklistValues>
+            <masterLabel>A - Excellent Customer</masterLabel>
+            <translation><!-- A - Excellent Customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B - Good Customer</masterLabel>
+            <translation><!-- B - Good Customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C - Average Risky Customer</masterLabel>
+            <translation><!-- C - Average Risky Customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D - Very Risky Customer</masterLabel>
+            <translation><!-- D - Very Risky Customer --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- % &gt;60 DPD --></label>
+        <name>X60_DPD__c</name>
+    </fields>
+    <fields>
+        <label><!-- % &gt; 90 DPD --></label>
+        <name>X90_DPD__c</name>
+    </fields>
+    <fields>
+        <label><!-- ZIP Code --></label>
+        <name>ZIP_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- 181-365 --></label>
+        <name>akritiv_Age5__c</name>
+    </fields>
+    <fields>
+        <label><!-- Over 365 --></label>
+        <name>akritiv_Age6__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account Key --></label>
+        <name>akritiv__Account_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account Type --></label>
+        <name>akritiv__Account_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current --></label>
+        <name>akritiv__Age0__c</name>
+    </fields>
+    <fields>
+        <label><!-- 1-30 --></label>
+        <name>akritiv__Age1__c</name>
+    </fields>
+    <fields>
+        <label><!-- 31-60 --></label>
+        <name>akritiv__Age2__c</name>
+    </fields>
+    <fields>
+        <label><!-- 61-90 --></label>
+        <name>akritiv__Age3__c</name>
+    </fields>
+    <fields>
+        <label><!-- 91-180 --></label>
+        <name>akritiv__Age4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Over 180 --></label>
+        <name>akritiv__Age5__c</name>
+    </fields>
+    <fields>
+        <label><!-- Oldest Age Risk --></label>
+        <name>akritiv__Aging_Risk__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amount Over Credit Limit --></label>
+        <name>akritiv__Amount_Over_Credit_Limit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Auto Dunning Enabled --></label>
+        <name>akritiv__Auto_Dunning_Enabled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Auto Dunning Error --></label>
+        <name>akritiv__Auto_Dunning_Error__c</name>
+    </fields>
+    <fields>
+        <label><!-- Auto Dunning Status --></label>
+        <name>akritiv__Auto_Dunning_Status__c</name>
+        <picklistValues>
+            <masterLabel>Auto Dunning Error</masterLabel>
+            <translation><!-- Auto Dunning Error --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Started</masterLabel>
+            <translation><!-- Not Started --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Avg DPD Risk --></label>
+        <name>akritiv__Avg_DPD_Risk__c</name>
+    </fields>
+    <fields>
+        <label><!-- Base Total AR --></label>
+        <name>akritiv__Base_Total_AR__c</name>
+    </fields>
+    <fields>
+        <label><!-- Base Total Past Due --></label>
+        <name>akritiv__Base_Total_Past_Due__c</name>
+    </fields>
+    <fields>
+        <label><!-- Batch # --></label>
+        <name>akritiv__Batch_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bill To# --></label>
+        <name>akritiv__Bill_To_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bucket Links --></label>
+        <name>akritiv__Bucket_Links__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business Unit --></label>
+        <name>akritiv__Business_Unit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Collection Rating --></label>
+        <name>akritiv__Collections_Confidence__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact Risk --></label>
+        <name>akritiv__Contact_Risk__c</name>
+    </fields>
+    <fields>
+        <label><!-- Credit Limit --></label>
+        <name>akritiv__Credit_Limit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Credit Remaining --></label>
+        <name>akritiv__Credit_Remaining__c</name>
+    </fields>
+    <fields>
+        <label><!-- Credit Risk --></label>
+        <name>akritiv__Credit_Risk__c</name>
+    </fields>
+    <fields>
+        <label><!-- Credit Utilization --></label>
+        <name>akritiv__Credit_Utilization__c</name>
+    </fields>
+    <fields>
+        <label><!-- Average DPD --></label>
+        <name>akritiv__DPD_Mean__c</name>
+    </fields>
+    <fields>
+        <label><!-- Variance in DPD --></label>
+        <name>akritiv__DPD_Std_Dev__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account DPD --></label>
+        <name>akritiv__DPD__c</name>
+    </fields>
+    <fields>
+        <label><!-- Latest Notes --></label>
+        <name>akritiv__Daily_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Days Since Contact --></label>
+        <name>akritiv__Days_Since_Contact__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dunning_Error_Fix_URL --></label>
+        <name>akritiv__Dunning_Error_Fix_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Highest Past Due Bal --></label>
+        <name>akritiv__High_Past_Due_Bal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Highest Past Due DPD --></label>
+        <name>akritiv__High_Past_Due_DPD__c</name>
+    </fields>
+    <fields>
+        <label><!-- Highest Past Due Date --></label>
+        <name>akritiv__High_Past_Due_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Highest Past Due Risk --></label>
+        <name>akritiv__High_Past_Due_Risk__c</name>
+    </fields>
+    <fields>
+        <label><!-- High Past Due Inv --></label>
+        <name>akritiv__High_Past_Due_Tx__c</name>
+        <relationshipLabel><!-- Accounts (High_Past_Due_Tx) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Initial Credit App --></label>
+        <name>akritiv__Initial_Credit_App__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Contact Date --></label>
+        <name>akritiv__Last_Contact_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Contact Method --></label>
+        <name>akritiv__Last_Contact_Method__c</name>
+        <picklistValues>
+            <masterLabel>Email</masterLabel>
+            <translation><!-- Email --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fax</masterLabel>
+            <translation><!-- Fax --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phone</masterLabel>
+            <translation><!-- Phone --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Print</masterLabel>
+            <translation><!-- Print --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Last Contact Type --></label>
+        <name>akritiv__Last_Contact_Type__c</name>
+        <picklistValues>
+            <masterLabel>Dispute</masterLabel>
+            <translation><!-- Dispute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Follow-up</masterLabel>
+            <translation><!-- Follow-up --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Promise To Pay</masterLabel>
+            <translation><!-- Promise To Pay --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Last Credit Review Date --></label>
+        <name>akritiv__Last_Credit_Review_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Payment Amount --></label>
+        <name>akritiv__Last_Payment_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Payment Received --></label>
+        <name>akritiv__Last_Payment_Received__c</name>
+    </fields>
+    <fields>
+        <label><!-- Oldest Invoice --></label>
+        <name>akritiv__Lead_Tx__c</name>
+        <relationshipLabel><!-- Accounts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Locale --></label>
+        <name>akritiv__Locale__c</name>
+        <picklistValues>
+            <masterLabel>Arabic (Bahrain)</masterLabel>
+            <translation><!-- Arabic (Bahrain) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arabic (Egypt)</masterLabel>
+            <translation><!-- Arabic (Egypt) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arabic (Jordan)</masterLabel>
+            <translation><!-- Arabic (Jordan) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arabic (Kuwait)</masterLabel>
+            <translation><!-- Arabic (Kuwait) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arabic (Lebanon)</masterLabel>
+            <translation><!-- Arabic (Lebanon) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arabic (Saudi Arabia)</masterLabel>
+            <translation><!-- Arabic (Saudi Arabia) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arabic (United Arab Emirates)</masterLabel>
+            <translation><!-- Arabic (United Arab Emirates) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Armenian (Armenia)</masterLabel>
+            <translation><!-- Armenian (Armenia) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bulgarian</masterLabel>
+            <translation><!-- Bulgarian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bulgarian (Bulgaria)</masterLabel>
+            <translation><!-- Bulgarian (Bulgaria) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Catalan</masterLabel>
+            <translation><!-- Catalan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Catalan (Spain)</masterLabel>
+            <translation><!-- Catalan (Spain) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Catalan (Spain,Euro)</masterLabel>
+            <translation><!-- Catalan (Spain,Euro) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chinese</masterLabel>
+            <translation><!-- Chinese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chinese (China)</masterLabel>
+            <translation><!-- Chinese (China) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chinese (Hong Kong)</masterLabel>
+            <translation><!-- Chinese (Hong Kong) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chinese (Taiwan)</masterLabel>
+            <translation><!-- Chinese (Taiwan) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Croatian (Croatia)</masterLabel>
+            <translation><!-- Croatian (Croatia) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Czech</masterLabel>
+            <translation><!-- Czech --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Czech (Czech Republic)</masterLabel>
+            <translation><!-- Czech (Czech Republic) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Danish</masterLabel>
+            <translation><!-- Danish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Danish (Denmark)</masterLabel>
+            <translation><!-- Danish (Denmark) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dutch</masterLabel>
+            <translation><!-- Dutch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dutch (Belgium)</masterLabel>
+            <translation><!-- Dutch (Belgium) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dutch (Netherlands)</masterLabel>
+            <translation><!-- Dutch (Netherlands) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dutch (Suriname)</masterLabel>
+            <translation><!-- Dutch (Suriname) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English</masterLabel>
+            <translation><!-- English --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (Australia)</masterLabel>
+            <translation><!-- English (Australia) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (Barbados)</masterLabel>
+            <translation><!-- English (Barbados) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (Bermuda)</masterLabel>
+            <translation><!-- English (Bermuda) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (Canada)</masterLabel>
+            <translation><!-- English (Canada) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (Ghana)</masterLabel>
+            <translation><!-- English (Ghana) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (India)</masterLabel>
+            <translation><!-- English (India) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (Indonesia)</masterLabel>
+            <translation><!-- English (Indonesia) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (Ireland)</masterLabel>
+            <translation><!-- English (Ireland) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (Ireland,Euro)</masterLabel>
+            <translation><!-- English (Ireland,Euro) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (Malaysia)</masterLabel>
+            <translation><!-- English (Malaysia) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (New Zealand)</masterLabel>
+            <translation><!-- English (New Zealand) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (Nigeria)</masterLabel>
+            <translation><!-- English (Nigeria) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (Philippines)</masterLabel>
+            <translation><!-- English (Philippines) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (Singapore)</masterLabel>
+            <translation><!-- English (Singapore) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (South Africa)</masterLabel>
+            <translation><!-- English (South Africa) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (United Kingdom)</masterLabel>
+            <translation><!-- English (United Kingdom) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English (United States)</masterLabel>
+            <translation><!-- English (United States) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Estonian (Estonia)</masterLabel>
+            <translation><!-- Estonian (Estonia) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Finnish</masterLabel>
+            <translation><!-- Finnish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Finnish (Finland)</masterLabel>
+            <translation><!-- Finnish (Finland) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Finnish (Finland,Euro)</masterLabel>
+            <translation><!-- Finnish (Finland,Euro) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>French</masterLabel>
+            <translation><!-- French --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>French (Belgium)</masterLabel>
+            <translation><!-- French (Belgium) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>French (Canada)</masterLabel>
+            <translation><!-- French (Canada) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>French (France)</masterLabel>
+            <translation><!-- French (France) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>French (France,Euro)</masterLabel>
+            <translation><!-- French (France,Euro) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>French (Luxembourg)</masterLabel>
+            <translation><!-- French (Luxembourg) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>French (Monaco)</masterLabel>
+            <translation><!-- French (Monaco) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>French (Switzerland)</masterLabel>
+            <translation><!-- French (Switzerland) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Georgian</masterLabel>
+            <translation><!-- Georgian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Georgian (Georgia)</masterLabel>
+            <translation><!-- Georgian (Georgia) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>German</masterLabel>
+            <translation><!-- German --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>German (Austria)</masterLabel>
+            <translation><!-- German (Austria) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>German (Austria,Euro)</masterLabel>
+            <translation><!-- German (Austria,Euro) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>German (Germany)</masterLabel>
+            <translation><!-- German (Germany) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>German (Germany,Euro)</masterLabel>
+            <translation><!-- German (Germany,Euro) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>German (Luxembourg)</masterLabel>
+            <translation><!-- German (Luxembourg) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>German (Luxembourg,Euro)</masterLabel>
+            <translation><!-- German (Luxembourg,Euro) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>German (Switzerland)</masterLabel>
+            <translation><!-- German (Switzerland) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Greek</masterLabel>
+            <translation><!-- Greek --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Greek (Greece)</masterLabel>
+            <translation><!-- Greek (Greece) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hebrew</masterLabel>
+            <translation><!-- Hebrew --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hebrew (Israel)</masterLabel>
+            <translation><!-- Hebrew (Israel) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hungarian</masterLabel>
+            <translation><!-- Hungarian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Icelandic (Iceland)</masterLabel>
+            <translation><!-- Icelandic (Iceland) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indonesian</masterLabel>
+            <translation><!-- Indonesian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Italian</masterLabel>
+            <translation><!-- Italian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Italian (Italy)</masterLabel>
+            <translation><!-- Italian (Italy) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Italian (Switzerland)</masterLabel>
+            <translation><!-- Italian (Switzerland) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Japanese</masterLabel>
+            <translation><!-- Japanese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Japanese (Japan)</masterLabel>
+            <translation><!-- Japanese (Japan) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Kazakh (Kazakhstan)</masterLabel>
+            <translation><!-- Kazakh (Kazakhstan) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Khmer (Cambodia)</masterLabel>
+            <translation><!-- Khmer (Cambodia) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Korean</masterLabel>
+            <translation><!-- Korean --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Korean (South Korea)</masterLabel>
+            <translation><!-- Korean (South Korea) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Latvian (Latvia)</masterLabel>
+            <translation><!-- Latvian (Latvia) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lithuanian (Lithuania)</masterLabel>
+            <translation><!-- Lithuanian (Lithuania) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Malay (Malaysia)</masterLabel>
+            <translation><!-- Malay (Malaysia) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Norwegian</masterLabel>
+            <translation><!-- Norwegian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Norwegian (Norway)</masterLabel>
+            <translation><!-- Norwegian (Norway) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Polish</masterLabel>
+            <translation><!-- Polish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Portuguese</masterLabel>
+            <translation><!-- Portuguese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Portuguese (Angola)</masterLabel>
+            <translation><!-- Portuguese (Angola) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Portuguese (Brazil)</masterLabel>
+            <translation><!-- Portuguese (Brazil) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Portuguese (Portugal)</masterLabel>
+            <translation><!-- Portuguese (Portugal) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Romanian</masterLabel>
+            <translation><!-- Romanian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Romanian (Romania)</masterLabel>
+            <translation><!-- Romanian (Romania) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Russian</masterLabel>
+            <translation><!-- Russian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Russian (Russia)</masterLabel>
+            <translation><!-- Russian (Russia) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Serbian</masterLabel>
+            <translation><!-- Serbian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Serbian (Bosnia and Herzegovina)</masterLabel>
+            <translation><!-- Serbian (Bosnia and Herzegovina) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Serbian (Latin)</masterLabel>
+            <translation><!-- Serbian (Latin) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Serbian (Latin) (Bosnia and Herzegovina)</masterLabel>
+            <translation><!-- Serbian (Latin) (Bosnia and Herzegovina) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Serbian (Latin) (Serbia and Montenegro)</masterLabel>
+            <translation><!-- Serbian (Latin) (Serbia and Montenegro) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Serbian (Serbia and Montenegro)</masterLabel>
+            <translation><!-- Serbian (Serbia and Montenegro) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Slovak</masterLabel>
+            <translation><!-- Slovak --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Slovak (Slovakia)</masterLabel>
+            <translation><!-- Slovak (Slovakia) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Slovenian (Slovenia)</masterLabel>
+            <translation><!-- Slovenian (Slovenia) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish</masterLabel>
+            <translation><!-- Spanish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Argentina)</masterLabel>
+            <translation><!-- Spanish (Argentina) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Bolivia)</masterLabel>
+            <translation><!-- Spanish (Bolivia) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Chile)</masterLabel>
+            <translation><!-- Spanish (Chile) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Colombia)</masterLabel>
+            <translation><!-- Spanish (Colombia) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Costa Rica)</masterLabel>
+            <translation><!-- Spanish (Costa Rica) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Dominican Republic)</masterLabel>
+            <translation><!-- Spanish (Dominican Republic) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Ecuador)</masterLabel>
+            <translation><!-- Spanish (Ecuador) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (El Salvador)</masterLabel>
+            <translation><!-- Spanish (El Salvador) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Guatemala)</masterLabel>
+            <translation><!-- Spanish (Guatemala) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Honduras)</masterLabel>
+            <translation><!-- Spanish (Honduras) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Mexico)</masterLabel>
+            <translation><!-- Spanish (Mexico) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Panama)</masterLabel>
+            <translation><!-- Spanish (Panama) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Paraguay)</masterLabel>
+            <translation><!-- Spanish (Paraguay) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Peru)</masterLabel>
+            <translation><!-- Spanish (Peru) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Puerto Rico)</masterLabel>
+            <translation><!-- Spanish (Puerto Rico) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Spain)</masterLabel>
+            <translation><!-- Spanish (Spain) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Spain,Euro)</masterLabel>
+            <translation><!-- Spanish (Spain,Euro) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Uruguay)</masterLabel>
+            <translation><!-- Spanish (Uruguay) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish (Venezuela)</masterLabel>
+            <translation><!-- Spanish (Venezuela) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Swedish</masterLabel>
+            <translation><!-- Swedish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Swedish (Sweden)</masterLabel>
+            <translation><!-- Swedish (Sweden) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tagalog</masterLabel>
+            <translation><!-- Tagalog --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tagalog (Philippines)</masterLabel>
+            <translation><!-- Tagalog (Philippines) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Thai</masterLabel>
+            <translation><!-- Thai --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Thai (Thailand)</masterLabel>
+            <translation><!-- Thai (Thailand) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Turkish</masterLabel>
+            <translation><!-- Turkish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ukrainian</masterLabel>
+            <translation><!-- Ukrainian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ukrainian (Ukraine)</masterLabel>
+            <translation><!-- Ukrainian (Ukraine) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Urdu (Pakistan)</masterLabel>
+            <translation><!-- Urdu (Pakistan) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Vietnamese</masterLabel>
+            <translation><!-- Vietnamese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Vietnamese (Vietnam)</masterLabel>
+            <translation><!-- Vietnamese (Vietnam) --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Net Collectible --></label>
+        <name>akritiv__Net_Collectible__c</name>
+    </fields>
+    <fields>
+        <label><!-- Note Date --></label>
+        <name>akritiv__Note_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notes --></label>
+        <name>akritiv__Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Oldest Balance --></label>
+        <name>akritiv__Oldest_Bal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Oldest Invoice DPD --></label>
+        <name>akritiv__Oldest_DPD__c</name>
+    </fields>
+    <fields>
+        <label><!-- Oldest Due Date --></label>
+        <name>akritiv__Oldest_Due_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- PC [1-30] --></label>
+        <name>akritiv__PC_1_30__c</name>
+    </fields>
+    <fields>
+        <label><!-- PC [31-60] --></label>
+        <name>akritiv__PC_31_60__c</name>
+    </fields>
+    <fields>
+        <label><!-- PC [61-90] --></label>
+        <name>akritiv__PC_61_90__c</name>
+    </fields>
+    <fields>
+        <label><!-- PC [91-180] --></label>
+        <name>akritiv__PC_91_180__c</name>
+    </fields>
+    <fields>
+        <label><!-- PC [Current] --></label>
+        <name>akritiv__PC_Current__c</name>
+    </fields>
+    <fields>
+        <label><!-- PC [Over 180] --></label>
+        <name>akritiv__PC_Over_180__c</name>
+    </fields>
+    <fields>
+        <label><!-- PC [Total AR (Local)] --></label>
+        <name>akritiv__PC_Total_AR_Local__c</name>
+    </fields>
+    <fields>
+        <label><!-- PC [Total Past Due (Local)] --></label>
+        <name>akritiv__PC_Total_Past_Due_Local__c</name>
+    </fields>
+    <fields>
+        <label><!-- % Credit Utilized --></label>
+        <name>akritiv__Percent_Credit_Utilized__c</name>
+    </fields>
+    <fields>
+        <label><!-- % Disputed Risk --></label>
+        <name>akritiv__Percent_Disputed_Risk__c</name>
+    </fields>
+    <fields>
+        <label><!-- % Disputed --></label>
+        <name>akritiv__Percent_Disputed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rating Count --></label>
+        <name>akritiv__Rating_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rating Sum --></label>
+        <name>akritiv__Rating_Sum__c</name>
+    </fields>
+    <fields>
+        <label><!-- Source --></label>
+        <name>akritiv__Source__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sticky Note Level --></label>
+        <name>akritiv__Sticky_Note_Level__c</name>
+        <picklistValues>
+            <masterLabel>High</masterLabel>
+            <translation><!-- High --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Low</masterLabel>
+            <translation><!-- Low --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Normal</masterLabel>
+            <translation><!-- Normal --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sticky Note --></label>
+        <name>akritiv__Sticky_Note__c</name>
+    </fields>
+    <fields>
+        <label><!-- Terms --></label>
+        <name>akritiv__Terms_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Token --></label>
+        <name>akritiv__Token__c</name>
+        <relationshipLabel><!-- Accounts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Total AR --></label>
+        <name>akritiv__Total_AR__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Disputed --></label>
+        <name>akritiv__Total_Disputed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Past Due --></label>
+        <name>akritiv__Total_Past_Due__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Promised --></label>
+        <name>akritiv__Total_Promised__c</name>
+    </fields>
+    <layouts>
+        <layout>InterNex AM Layout</layout>
+        <sections>
+            <label><!-- Borrower Risk Rating --></label>
+            <section>Borrower Risk Rating</section>
+        </sections>
+        <sections>
+            <label><!-- Integration --></label>
+            <section>Integration</section>
+        </sections>
+        <sections>
+            <label><!-- Other Information --></label>
+            <section>Other Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>InterNex-Admin Layout</layout>
+        <sections>
+            <label><!-- Borrower Risk Rating --></label>
+            <section>Borrower Risk Rating</section>
+        </sections>
+        <sections>
+            <label><!-- Integration --></label>
+            <section>Integration</section>
+        </sections>
+        <sections>
+            <label><!-- Other Information --></label>
+            <section>Other Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Sys-Admin Layout</layout>
+        <sections>
+            <label><!-- Borrower Risk Rating --></label>
+            <section>Borrower Risk Rating</section>
+        </sections>
+        <sections>
+            <label><!-- Integration --></label>
+            <section>Integration</section>
+        </sections>
+    </layouts>
+    <validationRules>
+        <errorMessage><!-- Account number minimum length should be 5 characters. --></errorMessage>
+        <name>Account_Number_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter Valid state ISO codes of USA. --></errorMessage>
+        <name>Billing_State_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Billing Street maximum length should be 80 characters. --></errorMessage>
+        <name>Billing_Street_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Duns Number should be Alpha numeric and length should be 9 characters --></errorMessage>
+        <name>Duns_number_only_Alpha_Numeric</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Tax Payer ID should be numeric and 9 digits --></errorMessage>
+        <name>Pan_Tan_Only_Numeric</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter the Zip Code in the format &quot;99999-9999&quot; or &quot;99999&quot; --></errorMessage>
+        <name>Zip_Code_Validation_in_USA_Format</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- AltavistaNews --></label>
+        <name>AltavistaNews</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Attach_C_Form --></label>
+        <name>Attach_C_Form</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Attach_TDS --></label>
+        <name>Attach_TDS</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Cash_Console --></label>
+        <name>Cash_Console</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Forecast --></label>
+        <name>Forecast</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleMaps --></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleNews --></label>
+        <name>GoogleNews</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleSearch --></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- HooversProfile --></label>
+        <name>HooversProfile</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- YahooMaps --></label>
+        <name>YahooMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- AccountHierarchy --></label>
+        <name>akritiv__AccountHierarchy</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Account_Add_Note --></label>
+        <name>akritiv__Account_Add_Note</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Billing --></label>
+        <name>akritiv__Billing</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Contact_CSR --></label>
+        <name>akritiv__Contact_CSR</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Download_Statement --></label>
+        <name>akritiv__Download_Statement</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Execute --></label>
+        <name>akritiv__Execute</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- QN --></label>
+        <name>akritiv__QN</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Re_Evaluate_Auto_Dunning --></label>
+        <name>akritiv__Re_Evaluate_Auto_Dunning</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_Statement --></label>
+        <name>akritiv__Send_Statement</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Sub_Accounts --></label>
+        <name>akritiv__Sub_Accounts</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- View_Line_Items --></label>
+        <name>akritiv__View_Line_Items</name>
+    </webLinks>
+</CustomObjectTranslation>

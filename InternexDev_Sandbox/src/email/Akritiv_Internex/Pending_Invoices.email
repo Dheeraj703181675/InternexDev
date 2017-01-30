@@ -1,0 +1,5 @@
+There are pending invoices for  {!Upper(WebCash_Load_Batch__c.Client_Name__c)} ({!WebCash_Load_Batch__c.Client_Account_Name__c}) – please take action.
+<br></br>
+Batch ID: {!WebCash_Load_Batch__c.Name}<br>
+Due Date: {!WebCash_Load_Batch__c.Tomorrow_date__c} <br>
+Priority: Urgent

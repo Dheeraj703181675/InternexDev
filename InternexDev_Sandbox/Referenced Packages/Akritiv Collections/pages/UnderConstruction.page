@@ -1,0 +1,35 @@
+<!--
+/*
+ * Copyright (c) 2009-2010 Akritiv Technologies, Inc.  All Rights Reserved.
+ * This software is the confidential and proprietary information
+ * (Confidential Information) of Akritiv Technologies, Inc.  You shall not
+ * disclose or use Confidential Information without the express written
+ * agreement of Akritiv Technologies, Inc.
+ */
+-->
+<!--
+/*
+ * Default Force.com Under Construction page
+ */
+-->
+<apex:page showHeader="false"
+    title="{!$Label.site.site_under_construction}">
+    <apex:composition template="akritiv__StdExceptionTemplate">
+        <apex:define name="icon">
+            <apex:image url="{!URLFOR($Resource.akritiv__SiteSamples, 'img/tools.gif')}" />
+        </apex:define>
+        <apex:define name="error">
+            <apex:outputText escape="false" styleClass="title"
+                value="{!$Label.site.under_construction}">
+                <apex:param value="{!$Site.CurrentSiteUrl}" />
+            </apex:outputText>
+            <br />
+            <br />
+            <apex:outputText value="{!$Label.site.stay_tuned}" />
+            <apex:outputText escape="false" value=" {!$Label.site.get_in_touch}">
+                <apex:param value="mailto:{!$Site.AdminEmailAddress}" />
+                <apex:param value="{!$Label.site.email_us}" />
+            </apex:outputText>
+        </apex:define>
+    </apex:composition>
+</apex:page>

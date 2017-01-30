@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>18.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Contact Lookup displayed on clicking to, cc and bcc
+
+This page can be opened from pages like C2C(ContactCustomerPage), SendBillingStatementPage , PromiseToPayPage or from GenarateTransactionDisputes page.
+
+Page populate the contact details on parent page by selecting contact details on the page.</description>
+    <label>ContactLookUpView</label>
+</ApexPage>
