@@ -9,6 +9,10 @@
         <value>Pricing</value>
     </caseValues>
     <fields>
+        <label><!-- Active --></label>
+        <name>Active__c</name>
+    </fields>
+    <fields>
         <label><!-- Business Transaction Date --></label>
         <name>Business_Transaction_Date__c</name>
     </fields>
@@ -23,6 +27,10 @@
     <fields>
         <label><!-- Date --></label>
         <name>Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Date --></label>
+        <name>End_Date__c</name>
     </fields>
     <fields>
         <label><!-- External Id --></label>

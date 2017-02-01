@@ -694,6 +694,10 @@
         <name>Send_to_Portal</name>
     </webLinks>
     <webLinks>
+        <label><!-- Send_to_Portal_All --></label>
+        <name>Send_to_Portal_All</name>
+    </webLinks>
+    <webLinks>
         <label><!-- Send_to_Portal_All_Transactions --></label>
         <name>Send_to_Portal_All_Transactions</name>
     </webLinks>
