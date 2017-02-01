@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customButtons>Send_to_Portal_All</customButtons>
     <customButtons>Send_to_Grade</customButtons>
-    <customButtons>Send_to_Portal</customButtons>
     <customButtons>Send_to_MPBE</customButtons>
-    <customButtons>Send_All_Invoices</customButtons>
-    <customButtons>Send_All_Payments_P</customButtons>
-    <customButtons>Send_to_Portal_All_Transactions</customButtons>
     <excludeButtons>ChangeOwnerOne</excludeButtons>
     <excludeButtons>ChangeRecordType</excludeButtons>
     <excludeButtons>Clone</excludeButtons>

@@ -1809,6 +1809,80 @@ alert(&apos;No Debtors to Updated at Portal end.&apos;);
 }</url>
     </webLinks>
     <webLinks>
+        <fullName>Send_to_Portal_All</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send to Portal - All</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
+
+var portalId = &apos;{!Client_Account__c.Portal_External_Id__c}&apos;; 
+var sendtoportal = &apos;{!Client_Account__c.Send_to_Portal__c}&apos;; 
+var DebtorCount_for_sending_Invoice = &apos;{!Client_Account__c.Debtor_Count_for_Invoices__c}&apos;; 
+var Debtorcount_p = &apos;{!Client_Account__c.Debtor_Count_for_Payments_to_Portal__c}&apos;; 
+var Debtorcount_t = &apos;{!Client_Account__c.Debtor_Count_for_Payments_to_Trans_Grid__c}&apos;; 
+
+//alert(sendtoportal); 
+if(portalId != &apos;&apos;) 
+{ 
+//===== To update the Debtors in Portal =========// 
+if(sendtoportal &gt; 0) 
+{ 
+var callResult =sforce.apex.execute(&apos;TPSSF.TPConnectorService&apos;,&apos;SubmitExt&apos;,{sforceObjectType:&apos;Client_Account__c&apos;,sforceObjectId:&apos;{!Client_Account__c.Id}&apos;,queryString:&apos;&apos;,externalObjectId:&apos;&apos;,action:&apos;sendtoportal&apos;,profileKey:&apos;akritiv-internex-client_account__c&apos;,profile:&apos;&apos;,userId:&apos;{!$User.Id}&apos;,sessionId:&apos;{!$Api.Session_ID}&apos;,partnerUrl:&apos;{!$Api.Partner_Server_URL_220}&apos;,username:&apos;{!$User.Username}&apos;, event:&apos;&apos;,clientId:&apos;&apos;,additionalData:&apos;&apos;}); 
+
+window.alert(callResult[0]); 
+
+} 
+else 
+{ 
+alert(&apos;No Debtors to Updated at Portal end.&apos;); 
+} 
+
+//===== To update the Invoice in Portal =========// 
+if(DebtorCount_for_sending_Invoice &gt; 0) 
+{ 
+var callResult =sforce.apex.execute(&apos;TPSSF.TPConnectorService&apos;,&apos;SubmitExt&apos;,{sforceObjectType:&apos;Client_Account__c&apos;,sforceObjectId:&apos;{!Client_Account__c.Id}&apos;,queryString:&apos;&apos;,externalObjectId:&apos;&apos;,action:&apos;sendtoportalAllInvoices&apos;,profileKey:&apos;akritiv-inernex-user-invoices&apos;,profile:&apos;&apos;,userId:&apos;{!$User.Id}&apos;,sessionId:&apos;{!$Api.Session_ID}&apos;,partnerUrl:&apos;{!$Api.Partner_Server_URL_220}&apos;,username:&apos;{!$User.Username}&apos;, event:&apos;&apos;,clientId:&apos;&apos;,additionalData:&apos;&apos;}); 
+window.alert(callResult[0]); 
+} 
+else 
+{ 
+alert(&apos;No Invoice to update in Portal.&apos;); 
+} 
+
+//===== To update the Payments in Portal =========// 
+if(Debtorcount_p &gt; 0) 
+{ 
+var callResult =sforce.apex.execute(&apos;TPSSF.TPConnectorService&apos;,&apos;SubmitExt&apos;,{sforceObjectType:&apos;Client_Account__c&apos;,sforceObjectId:&apos;{!Client_Account__c.Id}&apos;,queryString:&apos;&apos;,externalObjectId:&apos;&apos;,action:&apos;sendtoportalallpayments__p&apos;,profileKey:&apos;akritiv-inernex-user-payments&apos;,profile:&apos;&apos;,userId:&apos;{!$User.Id}&apos;,sessionId:&apos;{!$Api.Session_ID}&apos;,partnerUrl:&apos;{!$Api.Partner_Server_URL_220}&apos;,username:&apos;{!$User.Username}&apos;, event:&apos;&apos;,clientId:&apos;&apos;,additionalData:&apos;&apos;}); 
+window.alert(callResult[0]); 
+} 
+else 
+{ 
+alert(&apos;No Payments to Update in Portal.&apos;); 
+} 
+
+//===== To update the Payments in Portal Transactions =========// 
+if(Debtorcount_t &gt; 0) 
+{ 
+var callResult =sforce.apex.execute(&apos;TPSSF.TPConnectorService&apos;,&apos;SubmitExt&apos;,{sforceObjectType:&apos;Client_Account__c&apos;,sforceObjectId:&apos;{!Client_Account__c.Id}&apos;,queryString:&apos;&apos;,externalObjectId:&apos;&apos;,action:&apos;sendtoportalallpayments&apos;,profileKey:&apos;akritiv-inernex-user-transaction&apos;,profile:&apos;&apos;,userId:&apos;{!$User.Id}&apos;,sessionId:&apos;{!$Api.Session_ID}&apos;,partnerUrl:&apos;{!$Api.Partner_Server_URL_220}&apos;,username:&apos;{!$User.Username}&apos;, event:&apos;&apos;,clientId:&apos;&apos;,additionalData:&apos;&apos;}); 
+window.alert(callResult[0]); 
+} 
+else 
+{ 
+alert(&apos;No Payments to Update in Portal.&apos;); 
+} 
+
+window.location.reload(); 
+
+} 
+else 
+} 
+alert(&apos;Client-Account is not moved to Portal.&apos;); 
+}</url>
+    </webLinks>
+    <webLinks>
         <fullName>Send_to_Portal_All_Transactions</fullName>
         <availability>online</availability>
         <displayType>button</displayType>

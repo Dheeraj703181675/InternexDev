@@ -5364,6 +5364,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Pricing__c.Active__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Pricing__c.Business_Transaction_Date__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -5375,6 +5380,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Pricing__c.Date_Index__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Pricing__c.End_Date__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>

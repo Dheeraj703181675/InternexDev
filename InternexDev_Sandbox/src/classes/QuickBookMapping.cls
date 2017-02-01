@@ -74,6 +74,16 @@ public with sharing class QuickBookMapping {
         {
             try{
             Update QBC_Update_List;
+            
+            List<DBA_Name__c> DBANames_List = new List<DBA_Name__c>();
+            for(QB_Customer__c QBC : QBC_Update_List)
+            {
+                DBA_Name__c DBA = new DBA_Name__c();
+                DBA.Name = QBC.DisplayName__c;
+                DBA.Debtor__c = QBC.Debtor__c; 
+                DBANames_List.add(DBA);
+            }
+                
             List<akritiv__Transaction__c> Invoice_List = new List<akritiv__Transaction__c>();
             system.debug('QB ID==> '+ QB_ID);system.debug('ClientID_set==> '+ ClientID_set);
             List<QB_Invoice__c> QbInvoice_List = [Select id,name,QB_ID__c,Transaction_Date__c,DueDate__c,TotalAmt__c,QB_LastUpdatedTime__c,CustomerRef__c from QB_Invoice__c where CustomerRef__c in : QB_ID and Client_Id__c in : ClientID_set];
@@ -91,12 +101,14 @@ public with sharing class QuickBookMapping {
                 
        //         INV.akritiv__Account__c = QB_INV
                 INV.akritiv__Amount__c = QB_INV.TotalAmt__c;
+                INV.Remaining_Amt_from_Portal__c = QB_INV.TotalAmt__c;
          //       INV.akritiv__Batch_Number__c = 'Batch '+ QB_INV.QB_LastUpdatedTime__c;
                 INV.Document_Type__c = 'IN';
                 INV.QB_Invoice_ID__c =  QB_INV.QB_ID__c;
                 INV.Source__c = 'Quick Books';
                 Invoice_List.add(INV);
             }
+                insert DBANames_List;
                 insert Invoice_List;
             }catch(Exception e){
                 system.debug('Exception e => '+ e);
